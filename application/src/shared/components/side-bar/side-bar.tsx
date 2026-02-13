@@ -19,6 +19,7 @@ import { RouteNames } from "../../router/route-names";
 import { Link as RouterLink } from "react-router-dom";
 import ColorSchemeToggle from "./color-scheme-toggle";
 import UserPane from "./user-pane";
+import EngineeringOutlinedIcon from "@mui/icons-material/EngineeringOutlined";
 
 function Toggler({
   defaultExpanded = false,
@@ -210,6 +211,30 @@ export default function SideBar() {
                     onClick={() => closeSidebar()}
                   >
                     <Typography level="title-sm">Обновление основ</Typography>
+                  </Link>
+                </ListItem>
+                <ListItem role="none">
+                  <Link
+                    component={RouterLink}
+                    to={RouteNames.TUBE_RECORDS_UPLOAD}
+                    color="neutral"
+                    underline="none"
+                    sx={{ display: "flex", gap: 1 }}
+                    onClick={() => closeSidebar()}
+                  >
+                    <Typography level="title-sm">{`Загрузка (Тубы)`}</Typography>
+                  </Link>
+                </ListItem>
+                <ListItem role="none">
+                  <Link
+                    component={RouterLink}
+                    to={RouteNames.TUBES_RECORDS_LIST}
+                    color="neutral"
+                    underline="none"
+                    sx={{ display: "flex", gap: 1 }}
+                    onClick={() => closeSidebar()}
+                  >
+                    <Typography level="title-sm">{`Список (Тубы)`}</Typography>
                   </Link>
                 </ListItem>
               </List>
@@ -479,6 +504,56 @@ export default function SideBar() {
               </ListItemContent>
             </ListItemButton>
           </ListItem>
+
+          <ListItem nested sx={{ display: { xs: "none", sm: "initial" } }}>
+            <Toggler
+              renderToggle={({ open, setOpen }) => (
+                <ListItemButton onClick={() => setOpen(!open)}>
+                  <EngineeringOutlinedIcon />
+                  <ListItemContent>
+                    <Typography level="title-sm">Тубы</Typography>
+                  </ListItemContent>
+                  <KeyboardArrowDownIcon sx={{ transform: open ? "rotate(180deg)" : "none" }} />
+                </ListItemButton>
+              )}
+            >
+              <List sx={{ gap: 0.5 }}>
+                <ListItem>
+                  <ListItemButton role="none">
+                    <ListItemContent>
+                      <Link
+                        component={RouterLink}
+                        to={RouteNames.TUBES_TRESHOLDS}
+                        color="neutral"
+                        underline="none"
+                        sx={{ display: "flex", gap: 1 }}
+                        onClick={() => closeSidebar()}
+                      >
+                        <Typography level="title-sm">Границы</Typography>
+                      </Link>
+                    </ListItemContent>
+                  </ListItemButton>
+                </ListItem>
+                <ListItem>
+                  <ListItemButton role="none">
+                    <ListItemContent>
+                      <Link
+                        component={RouterLink}
+                        to={RouteNames.TUBES_EMPLOYEES}
+                        color="neutral"
+                        underline="none"
+                        sx={{ display: "flex", gap: 1 }}
+                        onClick={() => closeSidebar()}
+                      >
+                        <Typography level="title-sm">Сотрудники</Typography>
+                      </Link>
+                    </ListItemContent>
+                  </ListItemButton>
+                </ListItem>
+              </List>
+            </Toggler>
+          </ListItem>
+
           <ListItem nested sx={{ display: { xs: "none", sm: "initial" } }}>
             <Toggler
               renderToggle={({ open, setOpen }) => (
@@ -564,6 +639,20 @@ export default function SideBar() {
                       onClick={() => closeSidebar()}
                     >
                       <Typography level="title-sm">Пользователи</Typography>
+                    </Link>
+                  </ListItemContent>
+                </ListItem>
+                <ListItem sx={{ mt: 0.5 }} role="none">
+                  <ListItemContent>
+                    <Link
+                      component={RouterLink}
+                      to={RouteNames.TUBES_UPLOAD_PICTURES}
+                      color="neutral"
+                      underline="none"
+                      sx={{ display: "flex", gap: 1 }}
+                      onClick={() => closeSidebar()}
+                    >
+                      <Typography level="title-sm">Загрузка картинок</Typography>
                     </Link>
                   </ListItemContent>
                 </ListItem>

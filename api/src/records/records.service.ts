@@ -421,7 +421,6 @@ export class RecordsService {
           ...dto.rows[index],
           doc_id: doc.id,
         };
-        // console.log(dto);
         const record = await this.createRecord(createDto);
         await this.createRegulation(record, dto.rows[index]);
         await this.createSemiProducts(record, dto.rows[index].semi_product);
@@ -529,7 +528,6 @@ export class RecordsService {
   }
 
   async getRecordsReportsWithFilter(dto: GetRecordReportDto) {
-    console.log(dto);
     let filter = {};
     if (dto.filter.states && dto.filter.states.length > 0) {
       const ids = await this.getRecordsIdsByHistoryTypeIds(dto.filter.states);

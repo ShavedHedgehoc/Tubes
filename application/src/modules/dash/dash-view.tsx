@@ -1,6 +1,6 @@
 import { useShallow } from "zustand/react/shallow";
 import DashCard from "./dash-card";
-import { useDashFilterStore } from "./store/dash-filter-store";
+import { useDashFilterStore } from "./store/use-dash-filter-store";
 import { useCurrentRecords } from "../../shared/api/use-current-records";
 import { SxProps } from "@mui/joy/styles/types";
 import TableLoaderComponent from "../../shared/components/table-loader";

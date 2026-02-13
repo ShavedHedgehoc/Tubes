@@ -12,5 +12,5 @@
   "git.autoRepositoryDetection": "subFolders",
   "editor.formatOnSave": true,
   "prettier.printWidth": 120,
-  "git.ignoreLimitWarning": true
+  "terminal.integrated.sendKeybindingsToShell": true
 }

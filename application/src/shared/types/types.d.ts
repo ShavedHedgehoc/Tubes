@@ -5,6 +5,14 @@ interface TheadProperties {
   value: string;
 }
 
+interface TheadFullHeightProperties {
+  width: number;
+  align?: CanvasTextAlign;
+  rotate?: boolean;
+  padding?: string;
+  value: string;
+}
+
 interface IHistory {
   id: number;
   record_id: number;

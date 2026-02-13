@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import * as React from "react";
 import { Routes, Navigate, Outlet, Route, BrowserRouter } from "react-router-dom";
 import { RouteNames } from "./route-names";
@@ -15,6 +16,10 @@ import { useCheckHealth } from "../api/use-check-health";
 import { useHealthStore } from "../../modules/server-falldown/use-health-store";
 import ServerFalldown from "../../modules/server-falldown/server-falldown";
 import Login from "../../modules/auth/login";
+import { useTubeRanks } from "../api/use-tube-ranks";
+import { useTubeConveyors } from "../api/use-tube-conveyors";
+import { useTubeProducts } from "../api/use-tube-products";
+import { useTubeRondels } from "../api/use-tube-rondels";
 
 const Users = React.lazy(() => import("../../modules/users/users"));
 const Products = React.lazy(() => import("../../modules/records/records"));
@@ -51,6 +56,12 @@ const TraceBatchWeightingsSummaryDetail = React.lazy(
   () => import("../../modules/trace-weighting-summary-detail/trace-batch-weighting-summary-detail")
 );
 const BoilsUpload = React.lazy(() => import("../../modules/boils-upload/boils-upload"));
+const TubeUploadPictures = React.lazy(() => import("../../modules/upload-tube-pictures/upload-tube-pictures"));
+const TubeEmployees = React.lazy(() => import("../../modules/tube-employees/tube-employees"));
+const TubeTresholds = React.lazy(() => import("../../modules/tube-tresholds/tube-tresholds"));
+
+const TubeRecordsList = React.lazy(() => import("../../modules/tube-records-list/tube-records-list"));
+const TubeRecordDetail = React.lazy(() => import("../../modules/tube-record-detail/tube-record-detail"));
 
 export default function AppRouter() {
   const isHealthy = useHealthStore(useShallow((state) => state.isHealthy));
@@ -70,6 +81,10 @@ export default function AppRouter() {
       useProductsHistoryTypes();
       useOccupations();
       useRoles();
+      useTubeRanks();
+      useTubeConveyors();
+      useTubeProducts();
+      useTubeRondels();
       checkAuth();
     }
     if (!accessToken && isHealthy && init) {
@@ -77,6 +92,10 @@ export default function AppRouter() {
       useBoilsHistoryTypes();
       useProductsHistoryTypes();
       useOccupations();
+      useTubeRanks();
+      useTubeConveyors();
+      useTubeProducts();
+      useTubeRondels();
       useRoles();
       return <Login />;
     }
@@ -116,6 +135,7 @@ export default function AppRouter() {
               <Route path={RouteNames.SUMMARY_DETAIL} element={<DocumentDetail />} />
               <Route path={RouteNames.CONVEYORS} element={<Conveyors />} />
               <Route path={RouteNames.BASES_UPDATE} element={<BasesUpload />} />
+              <Route path={RouteNames.TUBES_RECORDS_LIST} element={<TubeRecordsList />} />
             </Route>
             <Route element={<RoleProtectedRoutes role={DbRoles.REPORTS} />}>
               <Route path={RouteNames.BOILS_REPORT} element={<BoilsReport />} />
@@ -124,6 +144,7 @@ export default function AppRouter() {
             <Route element={<RoleProtectedRoutes role={DbRoles.ADMIN} />}>
               <Route path={RouteNames.USERS_LIST} element={<Users />} />
               <Route path={RouteNames.UI_PAGE} element={<UiPage />} />
+              <Route path={RouteNames.TUBES_UPLOAD_PICTURES} element={<TubeUploadPictures />} />
             </Route>
             <Route element={<RoleProtectedRoutes role={DbRoles.TECHNOLOGIST} />}>
               <Route path={RouteNames.CANS_DASH} element={<Cans />} />
@@ -145,6 +166,12 @@ export default function AppRouter() {
               <Route path={RouteNames.TRACE_TRADEMARKS} element={<Trademarks />} />
               <Route path={RouteNames.TRACE_BATCHS} element={<TraceBatchs />} />
               <Route path={RouteNames.TRACE_BATCH_DETAIL} element={<TraceBatchDetail />} />
+            </Route>
+            <Route element={<RoleProtectedRoutes role={DbRoles.TUBES} />}>
+              <Route path={RouteNames.TUBES_TRESHOLDS} element={<TubeTresholds />} />
+              <Route path={RouteNames.TUBES_RECORDS_LIST} element={<TubeRecordsList />} />
+              <Route path={RouteNames.TUBES_EMPLOYEES} element={<TubeEmployees />} />
+              <Route path={RouteNames.TUBES_RECORDS_DETAIL} element={<TubeRecordDetail />} />
             </Route>
             <Route path={RouteNames.FORBIDDEN} element={<Forbidden />} />
           </Route>
