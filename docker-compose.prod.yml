@@ -74,59 +74,6 @@ services:
     networks:
       - postgres
       - general
-
-  # public_api:
-  #   container_name: public_api_container
-  #   build:
-  #     context: .
-  #     dockerfile: docker/public_api/Dockerfile.prod
-  #     args:
-  #       - NODE_ENV=production
-  #   environment:
-  #     DATABASE_URL: postgresql://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@postgres:5432/summary
-  #     POSTGRES_HOST: postgres
-  #     POSTGRES_PORT: "5432"
-  #     POSTGRES_USERNAME: ${POSTGRES_USERNAME}
-  #     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-  #     POSTGRES_DB: "summary"
-  #     PORT: "8000"
-  #     BOT_TOKEN: ${BOT_TOKEN}
-  #     CHAT_ID: ${CHAT_ID}
-  #   depends_on:
-  #     - postgres
-  #   restart: always
-  #   ports:
-  #     - 8000:8000
-  #   networks:
-  #     - postgres
-  #     - general
-
-  public_api:
-    container_name: public_api_container
-    build:
-      context: .
-      dockerfile: docker/public_api_2/Dockerfile.prod
-      args:
-        - NODE_ENV=production
-    environment:
-      DATABASE_URL: postgresql://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@postgres:5432/summary
-      POSTGRES_HOST: postgres
-      POSTGRES_PORT: "5432"
-      POSTGRES_USERNAME: ${POSTGRES_USERNAME}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: "summary"
-      PORT: "8000"
-      BOT_TOKEN: ${BOT_TOKEN}
-      CHAT_ID: ${CHAT_ID}
-    depends_on:
-      - postgres
-    restart: always
-    ports:
-      - 8000:8000
-    networks:
-      - postgres
-      - general
-  
   tubes_api:
     container_name: api_tubes
     build:
@@ -169,24 +116,6 @@ services:
     networks:
       - general
 
-  workstation:
-    container_name: ws_container
-    build:
-      context: .
-      dockerfile: docker/workstation/Dockerfile.prod
-      args:
-        - NODE_ENV=production
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-    depends_on:
-      - api
-    restart: always
-    networks:
-      - general
-
   tubes_dash:
     container_name: tubes_dash
     build:
@@ -204,25 +133,7 @@ services:
     restart: always
     networks:
       - general
-  
-  dash:
-    container_name: dash_container
-    build:
-      context: .
-      dockerfile: docker/dashboard/Dockerfile.prod
-      args:
-        - NODE_ENV=production
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-    depends_on:
-      - api
-    restart: always
-    networks:
-      - general
-
+      
   nginx:
     container_name: nginx_container
     build: ./docker/nginx
@@ -233,15 +144,12 @@ services:
         max-file: "3"
     restart: always
     ports:
-      - "80:80"
-      - "3000:3000" 
-      - "3100:3100"
-      - "5000:5000"
+      - "80:80"      
+      - "3100:3100"      
     networks:
       - general
     depends_on:
-      - app
-      - workstation
+      - app      
 
   nginx-file-server:
     container_name: nginx_file_server_container
