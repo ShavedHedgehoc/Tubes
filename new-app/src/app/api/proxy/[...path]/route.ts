@@ -7,40 +7,37 @@ interface BackendError {
   errors?: Record<string, string[]>; // для ошибок валидации
 }
 
-export async function GET(
+interface RouteContext {
+  params: Promise<{ path: string[] }>;
+}
+
+async function handleProxy(
   request: NextRequest,
-  { params }: { params: Promise<{ path: string[] }> }, // Добавляем Promise
+  params: Promise<{ path: string[] }>,
+  method: string
 ) {
   try {
-    const resolvedParams = await params;
-    const pathArray = resolvedParams.path;
-
-    if (!pathArray) {
-      return NextResponse.json({ error: "Path is required" }, { status: 400 });
-    }
-
-
-
-
-
+    const { path: pathArray } = await params;
+    if (!pathArray) return NextResponse.json({ error: "Path is required" }, { status: 400 });
 
     const path = pathArray.join("/");
     const { searchParams } = new URL(request.url);
-    const backendBaseUrl = externalApiUrl
-      ? (externalApiUrl.endsWith('/') ? externalApiUrl : `${externalApiUrl}/`)
-      : undefined;
-    const targetUrl = new URL(path, backendBaseUrl);
+
+    // Формируем безопасный URL
+    const base = externalApiUrl?.endsWith('/') ? externalApiUrl : `${externalApiUrl}/`;
+    const targetUrl = new URL(path.replace(/^\//, ''), base); // убираем ведущий слеш если есть
     targetUrl.search = searchParams.toString();
 
-    const response = await fetch(targetUrl.toString(), {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        // 'Authorization': request.headers.get('Authorization') || '',
-      },
-    });
-    console.log('FETCHING TO:', targetUrl.toString());
+    const hasBody = ["POST", "PATCH", "PUT"].includes(method);
+    const body = hasBody ? await request.text() : undefined;
 
+    console.log(`[PROXY ${method}]:`, targetUrl.toString());
+
+    const response = await fetch(targetUrl.toString(), {
+      method,
+      headers: { "Content-Type": "application/json" },
+      body,
+    });
     if (!response.ok) {
       const errorData = (await response
         .json()
@@ -64,102 +61,118 @@ export async function GET(
   }
 }
 
-export async function DELETE(
-  request: NextRequest,
-  { params }: { params: Promise<{ path: string[] }> }, // Добавляем Promise
-) {
-  try {
-    const resolvedParams = await params;
-    const pathArray = resolvedParams.path;
+export const GET = (req: NextRequest, ctx: RouteContext) => handleProxy(req, ctx.params, "GET");
+export const POST = (req: NextRequest, ctx: RouteContext) => handleProxy(req, ctx.params, "POST");
+export const DELETE = (req: NextRequest, ctx: RouteContext) => handleProxy(req, ctx.params, "DELETE");
+export const PATCH = (req: NextRequest, ctx: RouteContext) => handleProxy(req, ctx.params, "PATCH");
 
-    if (!pathArray) {
-      return NextResponse.json({ error: "Path is required" }, { status: 400 });
-    }
 
-    const path = pathArray.join("/");
-    const { searchParams } = new URL(request.url);
-    const backendBaseUrl = externalApiUrl;
-    const targetUrl = new URL(path, backendBaseUrl);
-    targetUrl.search = searchParams.toString();
 
-    const response = await fetch(targetUrl.toString(), {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        // 'Authorization': request.headers.get('Authorization') || '',
-      },
-    });
+// export async function GET(
+//   request: NextRequest,
+//   { params }: { params: Promise<{ path: string[] }> }, // Добавляем Promise
+// ) {
+//   try {
+//     const resolvedParams = await params;
+//     const pathArray = resolvedParams.path;
 
-    if (!response.ok) {
-      const errorData = (await response
-        .json()
-        .catch(() => ({}))) as BackendError;
-      const errorMessage =
-        errorData.message || errorData.detail || "Произошла ошибка на сервере";
-      return NextResponse.json(
-        { error: errorMessage, details: errorData },
-        { status: response.status },
-      );
-    }
-    return NextResponse.json({ status: response.status });
-  } catch (error) {
-    console.error("Proxy error:", error);
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 },
-    );
-  }
-}
+//     if (!pathArray) {
+//       return NextResponse.json({ error: "Path is required" }, { status: 400 });
+//     }
 
-export async function PATCH(
-  request: NextRequest,
-  { params }: { params: Promise<{ path: string[] }> }, // Добавляем Promise
-) {
-  try {
-    const resolvedParams = await params;
-    const pathArray = resolvedParams.path;
 
-    if (!pathArray) {
-      return NextResponse.json({ error: "Path is required" }, { status: 400 });
-    }
 
-    const body = await request.json();
 
-    const path = pathArray.join("/");
-    const { searchParams } = new URL(request.url);
-    const backendBaseUrl = externalApiUrl;
-    const targetUrl = new URL(path, backendBaseUrl);
-    targetUrl.search = searchParams.toString();
 
-    const response = await fetch(targetUrl.toString(), {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        // 'Authorization': request.headers.get('Authorization') || '',
-      },
-      body: JSON.stringify(body),
-    });
 
-    if (!response.ok) {
-      const errorData = (await response
-        .json()
-        .catch(() => ({}))) as BackendError;
-      const errorMessage =
-        errorData.message || errorData.detail || "Произошла ошибка на сервере";
-      return NextResponse.json(
-        { error: errorMessage, details: errorData },
-        { status: response.status },
-      );
-    }
-    return NextResponse.json({ status: response.status });
-  } catch (error) {
-    console.error("Proxy error:", error);
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 },
-    );
-  }
-}
+//     const path = pathArray.join("/");
+//     const { searchParams } = new URL(request.url);
+//     const backendBaseUrl = externalApiUrl
+//       ? (externalApiUrl.endsWith('/') ? externalApiUrl : `${externalApiUrl}/`)
+//       : undefined;
+//     const targetUrl = new URL(path, backendBaseUrl);
+//     targetUrl.search = searchParams.toString();
+
+//     const response = await fetch(targetUrl.toString(), {
+//       method: "GET",
+//       headers: {
+//         "Content-Type": "application/json",
+//         // 'Authorization': request.headers.get('Authorization') || '',
+//       },
+//     });
+//     console.log('FETCHING TO:', targetUrl.toString());
+
+//     if (!response.ok) {
+//       const errorData = (await response
+//         .json()
+//         .catch(() => ({}))) as BackendError;
+//       const errorMessage =
+//         errorData.message || errorData.detail || "Произошла ошибка на сервере";
+//       return NextResponse.json(
+//         { error: errorMessage, details: errorData },
+//         { status: response.status },
+//       );
+//     }
+
+//     const data = await response.json();
+//     return NextResponse.json(data);
+//   } catch (error) {
+//     console.error("Proxy error:", error);
+//     return NextResponse.json(
+//       { error: "Internal Server Error" },
+//       { status: 500 },
+//     );
+//   }
+// }
+
+// export async function DELETE(
+//   request: NextRequest,
+//   { params }: { params: Promise<{ path: string[] }> }, // Добавляем Promise
+// ) {
+//   try {
+//     const resolvedParams = await params;
+//     const pathArray = resolvedParams.path;
+
+//     if (!pathArray) {
+//       return NextResponse.json({ error: "Path is required" }, { status: 400 });
+//     }
+
+//     const path = pathArray.join("/");
+//     const { searchParams } = new URL(request.url);
+//     const backendBaseUrl = externalApiUrl
+//       ? (externalApiUrl.endsWith('/') ? externalApiUrl : `${externalApiUrl}/`)
+//       : undefined;
+//     const targetUrl = new URL(path, backendBaseUrl);
+//     targetUrl.search = searchParams.toString();
+
+//     const response = await fetch(targetUrl.toString(), {
+//       method: "DELETE",
+//       headers: {
+//         "Content-Type": "application/json",
+//         // 'Authorization': request.headers.get('Authorization') || '',
+//       },
+//     });
+
+//     if (!response.ok) {
+//       const errorData = (await response
+//         .json()
+//         .catch(() => ({}))) as BackendError;
+//       const errorMessage =
+//         errorData.message || errorData.detail || "Произошла ошибка на сервере";
+//       return NextResponse.json(
+//         { error: errorMessage, details: errorData },
+//         { status: response.status },
+//       );
+//     }
+//     return NextResponse.json({ status: response.status });
+//   } catch (error) {
+//     console.error("Proxy error:", error);
+//     return NextResponse.json(
+//       { error: "Internal Server Error" },
+//       { status: 500 },
+//     );
+//   }
+// }
 
 // export async function PATCH(
 //   request: NextRequest,
@@ -177,7 +190,9 @@ export async function PATCH(
 
 //     const path = pathArray.join("/");
 //     const { searchParams } = new URL(request.url);
-//     const backendBaseUrl = externalApiUrl;
+//     const backendBaseUrl = externalApiUrl
+//       ? (externalApiUrl.endsWith('/') ? externalApiUrl : `${externalApiUrl}/`)
+//       : undefined;
 //     const targetUrl = new URL(path, backendBaseUrl);
 //     targetUrl.search = searchParams.toString();
 
@@ -211,52 +226,54 @@ export async function PATCH(
 //   }
 // }
 
-export async function POST(
-  request: NextRequest,
-  { params }: { params: Promise<{ path: string[] }> },
-) {
-  try {
-    const resolvedParams = await params;
-    const pathArray = resolvedParams.path;
 
-    if (!pathArray) {
-      return NextResponse.json({ error: "Path is required" }, { status: 400 });
-    }
 
-    const body = await request.json();
-    const path = pathArray.join("/");
-    const { searchParams } = new URL(request.url);
-    const targetUrl = new URL(path, externalApiUrl);
-    targetUrl.search = searchParams.toString();
+// export async function POST(
+//   request: NextRequest,
+//   { params }: { params: Promise<{ path: string[] }> },
+// ) {
+//   try {
+//     const resolvedParams = await params;
+//     const pathArray = resolvedParams.path;
 
-    const response = await fetch(targetUrl.toString(), {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body), // Передаем данные дальше
-    });
+//     if (!pathArray) {
+//       return NextResponse.json({ error: "Path is required" }, { status: 400 });
+//     }
 
-    if (!response.ok) {
-      const errorData = (await response
-        .json()
-        .catch(() => ({}))) as BackendError;
-      const errorMessage =
-        errorData.message || errorData.detail || "Произошла ошибка на сервере";
-      return NextResponse.json(
-        { error: errorMessage, details: errorData },
-        { status: response.status },
-      );
-    }
-    const data = await response
-      .json()
-      .catch(() => ({ status: response.status }));
-    return NextResponse.json(data);
-  } catch (error) {
-    console.error("Proxy error:", error);
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 },
-    );
-  }
-}
+//     const body = await request.json();
+//     const path = pathArray.join("/");
+//     const { searchParams } = new URL(request.url);
+//     const targetUrl = new URL(path, externalApiUrl);
+//     targetUrl.search = searchParams.toString();
+
+//     const response = await fetch(targetUrl.toString(), {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(body), // Передаем данные дальше
+//     });
+
+//     if (!response.ok) {
+//       const errorData = (await response
+//         .json()
+//         .catch(() => ({}))) as BackendError;
+//       const errorMessage =
+//         errorData.message || errorData.detail || "Произошла ошибка на сервере";
+//       return NextResponse.json(
+//         { error: errorMessage, details: errorData },
+//         { status: response.status },
+//       );
+//     }
+//     const data = await response
+//       .json()
+//       .catch(() => ({ status: response.status }));
+//     return NextResponse.json(data);
+//   } catch (error) {
+//     console.error("Proxy error:", error);
+//     return NextResponse.json(
+//       { error: "Internal Server Error" },
+//       { status: 500 },
+//     );
+//   }
+// }
