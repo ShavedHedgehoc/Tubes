@@ -1,6 +1,6 @@
 FROM node:20-alpine AS deps
 WORKDIR /new-app
-COPY package.json package-lock.json ./
+COPY ./new-app/package*.json  ./
 RUN npm ci
 
 # 2. Stage: Сборка проекта
