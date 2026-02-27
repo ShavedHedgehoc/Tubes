@@ -5,9 +5,11 @@ RUN npm ci
 
 # 2. Stage: Сборка проекта
 FROM node:20-alpine AS builder
+ARG NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 WORKDIR /new-app
 COPY --from=deps /new-app/node_modules ./node_modules
-COPY . .
+COPY ./new-app .
 # Отключаем телеметрию Next.js во время сборки
 ENV NEXT_TELEMETRY_DISABLED 1
 RUN npm run build

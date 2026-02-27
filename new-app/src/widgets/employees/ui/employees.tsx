@@ -11,7 +11,7 @@ export async function Employees({ props }: { props: EmployeeParams }) {
   );
   const rankListItems = await queryClient.fetchQuery(
     rankApi.ranksQueries.list({ isServer: true }),
-  );
+  ).catch(() => ({ ranks: [] }));
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
