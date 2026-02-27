@@ -117,7 +117,7 @@ services:
       - general
 
   new-app:
-    container-name: new_app_container
+    container_name: new_app_container
     build:
       context: .
       dockerfile: docker/new-app/Dockerfile.prod
