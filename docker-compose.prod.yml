@@ -123,7 +123,7 @@ services:
       dockerfile: docker/new-app/Dockerfile.prod
       args:
         - NODE_ENV=production
-      logging:
+    logging:
       driver: "json-file"
       options:
         max-size: "10m"
