@@ -20,7 +20,7 @@ export class ProductionBoxController {
   //   @ApiQuery({ name: "record_id", required: false, type: Number })
   //   @ApiQuery({ name: "barcode", required: false, type: String })
   getTasks(
-    @Query("summary_id") batch_id?: string
+    @Query("summary_id") summary_id?: string
     // @Query("record_id") record_id?: number,
     // @Query("barcode") barcode?: string
   ) {
