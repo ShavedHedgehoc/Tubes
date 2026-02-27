@@ -122,7 +122,10 @@ services:
       context: .
       dockerfile: docker/new-app/Dockerfile.prod
       args:
-        - NODE_ENV=production   
+        - NODE_ENV=production
+    environment:
+      - NEXT_PUBLIC_API_URL=/api_tubes
+      - INTERNAL_API_URL=http://tubes_api:7100/api_tubes
     logging:
       driver: "json-file"
       options:
@@ -164,7 +167,7 @@ services:
     ports:
       - "80:80"      
       - "3100:3100"    
-      - "3000:3000"  
+      - "3200:3200"  
     networks:
       - general
     depends_on:
