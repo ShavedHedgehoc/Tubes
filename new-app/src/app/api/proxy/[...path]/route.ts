@@ -19,9 +19,16 @@ export async function GET(
       return NextResponse.json({ error: "Path is required" }, { status: 400 });
     }
 
+
+
+
+
+
     const path = pathArray.join("/");
     const { searchParams } = new URL(request.url);
-    const backendBaseUrl = externalApiUrl;
+    const backendBaseUrl = externalApiUrl
+      ? (externalApiUrl.endsWith('/') ? externalApiUrl : `${externalApiUrl}/`)
+      : undefined;
     const targetUrl = new URL(path, backendBaseUrl);
     targetUrl.search = searchParams.toString();
 
