@@ -133,9 +133,6 @@ services:
     restart: always
     networks:
       - general
-    ports:
-      - "3000:3000"
-
 
   tubes_dash:
     container_name: tubes_dash
