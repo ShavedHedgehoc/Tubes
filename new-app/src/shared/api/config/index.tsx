@@ -10,6 +10,11 @@ export const proxyApiUrl = "/api/proxy";
 //     ? "http://tubes_api:7100/api_tubes" // Используем имя сервиса из docker-compose
 // : "/api_tubes";
 
+// export const externalApiUrl = typeof window === 'undefined'
+//     ? process.env.INTERNAL_API_URL
+//     : process.env.NEXT_PUBLIC_API_URL;
+const env = process.env;
+
 export const externalApiUrl = typeof window === 'undefined'
-    ? process.env.INTERNAL_API_URL
-    : process.env.NEXT_PUBLIC_API_URL;
+    ? (env.INTERNAL_API_URL || env.NEXT_PUBLIC_API_URL)
+    : env.NEXT_PUBLIC_API_URL;
