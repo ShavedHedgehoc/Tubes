@@ -123,6 +123,9 @@ services:
       dockerfile: docker/new-app/Dockerfile.prod
       args:
         - NODE_ENV=production
+    environment:
+      - NEXT_PUBLIC_API_URL=/api_tubes
+      - INTERNAL_API_URL=http://tubes_api:7100/api_tubes
     logging:
       driver: "json-file"
       options:
