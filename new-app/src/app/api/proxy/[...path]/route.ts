@@ -32,6 +32,7 @@ export async function GET(
         // 'Authorization': request.headers.get('Authorization') || '',
       },
     });
+    console.log('FETCHING TO:', targetUrl.toString());
 
     if (!response.ok) {
       const errorData = (await response
