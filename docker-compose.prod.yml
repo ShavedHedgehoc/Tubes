@@ -116,7 +116,7 @@ services:
     networks:
       - general
 
-  new-app:
+  new_app:
     container_name: new_app_container
     build:
       context: .
