@@ -10,7 +10,7 @@ import { GetDetailDto } from "./dto/get-detail.dto";
 @ApiTags("Сводки")
 @Controller("summaries")
 export class SummariesController {
-  constructor(private readonly summaryService: SummariesService) {}
+  constructor(private readonly summaryService: SummariesService) { }
 
   @ApiOperation({ summary: "Получить список сводок с параметрами" })
   @Get()
@@ -18,7 +18,11 @@ export class SummariesController {
     return this.summaryService.getSummariesList(query);
   }
 
-  @ApiOperation({ summary: "Получить список сводок с параметрами" })
+  // !!!!!!!!!!!!
+  // Надо добавить ручку для формы редактирования
+
+
+  @ApiOperation({ summary: "Получить детали cводку по id (для подробного отчета)" })
   @Get("detail/:id")
   @UsePipes(new ValidationPipe({ transform: true }))
   getSummaryById(@Param() params: GetDetailDto) {
@@ -36,7 +40,7 @@ export class SummariesController {
   getAvailableSummariesRecordByConveyorId(@Query("conveyor_id") conveyor_id: string) {
     return this.summaryService.getAvailableSummariesRecordByConveyorId(Number(conveyor_id));
   }
-
+  // для приложения
   @ApiOperation({ summary: "Создать записи сводок" })
   @Post()
   bulkCreateSummaries(@Body() dto: CreateSummaryDto) {

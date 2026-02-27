@@ -6,7 +6,7 @@
   "terminal.integrated.defaultProfile.windows": "Command Prompt",
   "explorer.compactFolders": false,
   "explorer.autoReveal": false,
-  "breadcrumbs.enabled": false,
+  "breadcrumbs.enabled": true,
   "workbench.startupEditor": "none",
   "window.commandCenter": false,
   "git.autoRepositoryDetection": "subFolders",

@@ -19,16 +19,24 @@ import { CreateEmployeeDto } from "./dto/create-employee.dto";
 import { DeleteEmployeeDto } from "./dto/delete-employee.dto";
 import { UpdateEmployeeDto } from "./dto/update-employee.dto";
 import { ValidationExceptionFilter } from "src/validation-exception-filter";
+import { GetEmployeeDto } from "./dto/get-employee.dto";
 
 @ApiTags("Сотрудники")
 @Controller("employees")
 export class EmployeesController {
-  constructor(private readonly employeesService: EmployeesService) {}
+  constructor(private readonly employeesService: EmployeesService) { }
   //  used in employee auth
   @ApiOperation({ summary: "Получить сотрудника по штрихкоду" })
   @Get()
   getEmployeeByBarcode(@Query("barcode") barcode: string) {
     return this.employeesService.getEmployeeByBarcode(barcode);
+  }
+
+  @ApiOperation({ summary: "Получить сотрудника по id" })
+  @Get("/by_id/:id")
+  @UsePipes(new ValidationPipe({ transform: true }))
+  getEmployeeById(@Param() params: GetEmployeeDto) {
+    return this.employeesService.getEmployeeById(params.id);
   }
 
   @ApiOperation({ summary: "Получить список сотрудников" })

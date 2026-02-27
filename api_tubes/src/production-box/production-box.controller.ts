@@ -6,7 +6,7 @@ import { CreateProductionBoxDto } from "./dto/create-production-box.dto";
 @ApiTags("Короба продукции")
 @Controller("production-box")
 export class ProductionBoxController {
-  constructor(private readonly productionBoxService: ProductionBoxService) {}
+  constructor(private readonly productionBoxService: ProductionBoxService) { }
 
   @ApiOperation({ summary: "Создать короб" })
   @Post()
@@ -16,14 +16,14 @@ export class ProductionBoxController {
 
   @Get()
   @ApiOperation({ summary: "Получить короба" })
-  @ApiQuery({ name: "batch_id", required: false, type: String })
+  @ApiQuery({ name: "summary_id", required: false, type: String })
   //   @ApiQuery({ name: "record_id", required: false, type: Number })
   //   @ApiQuery({ name: "barcode", required: false, type: String })
   getTasks(
-    @Query("batch_id") batch_id?: string
+    @Query("summary_id") batch_id?: string
     // @Query("record_id") record_id?: number,
     // @Query("barcode") barcode?: string
   ) {
-    return this.productionBoxService.getProductionBoxes({ batch_id: batch_id });
+    return this.productionBoxService.getProductionBoxes({ summary_id: summary_id });
   }
 }

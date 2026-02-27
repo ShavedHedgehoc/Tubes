@@ -14,7 +14,7 @@ export default function PrintContent({
   summaryData: ISummary | null;
   printerData: IPrinter | null;
 }) {
-  const { data, isPending, isSuccess } = useProductionBoxes(summaryData?.data.batch_id ?? null);
+  const { data, isPending, isSuccess } = useProductionBoxes(summaryData?.data.id ?? null);
   if (isPending) return <Loader />;
   if (isSuccess && data && data.length === 0)
     return (

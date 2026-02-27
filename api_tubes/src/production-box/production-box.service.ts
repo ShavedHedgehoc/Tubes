@@ -5,7 +5,7 @@ import { ApiMessages } from "src/resources/api-messages";
 
 @Injectable()
 export class ProductionBoxService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   async createProductionBox(dto: CreateProductionBoxDto) {
     const existsBox = await this.prisma.productionBox.findUnique({ where: { uuid: dto.uuid } });
@@ -14,15 +14,15 @@ export class ProductionBoxService {
     return box;
   }
 
-  async getProductionBoxes({ batch_id }: { batch_id: string | undefined }) {
-    let batchFilter = {};
+  async getProductionBoxes({ summary_id }: { summary_id: string | undefined }) {
+    let summaryFilter = {};
 
-    if (batch_id) {
-      batchFilter = { ...batchFilter, batch_id: Number(batch_id) };
+    if (summary_id) {
+      summaryFilter = { ...summaryFilter, summary_id: Number(summary_id) };
     }
     const boxes = await this.prisma.productionBox.findMany({
       where: {
-        ...batchFilter,
+        ...summaryFilter,
       },
       orderBy: { id: "desc" },
       include: {

@@ -21,6 +21,8 @@ import { PrinterModule } from "./printer/printer.module";
 import { SopModule } from './sop/sop.module';
 import { RanksModule } from './ranks/ranks.module';
 import { TresholdsModule } from './tresholds/tresholds.module';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -44,6 +46,8 @@ import { TresholdsModule } from './tresholds/tresholds.module';
     SopModule,
     RanksModule,
     TresholdsModule,
+    UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

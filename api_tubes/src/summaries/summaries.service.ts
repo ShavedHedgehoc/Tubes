@@ -25,7 +25,7 @@ import { GetSummariesListDto } from "./dto/get-summaries-list.dto";
 
 @Injectable()
 export class SummariesService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   private async checkConveyor(conveyorName: string) {
     const conveyor = await this.prisma.conveyor.findUnique({ where: { name: conveyorName } });
@@ -83,6 +83,7 @@ export class SummariesService {
   }
 
   async getSummariesList(query: GetSummariesListDto) {
+    console.log(query);
     const startDate = new Date(new Date(query.start_date).setHours(0));
     const endDate = new Date(new Date(query.end_date).setHours(23));
 
@@ -90,6 +91,10 @@ export class SummariesService {
 
     if (query.conveyors) {
       filter = { ...filter, conveyor_id: { in: query.conveyors } };
+    }
+    let productFilter = {}
+    if (query.code) {
+      productFilter = { ...productFilter, code: { contains: query.code, mode: "insensitive" } };
     }
 
     if (query.states) {
@@ -106,11 +111,11 @@ export class SummariesService {
     }
 
     const count = await this.prisma.summary.count({
-      where: { AND: [{ date: { gte: startDate } }, { date: { lte: endDate } }, { ...filter }] },
+      where: { AND: [{ date: { gte: startDate } }, { date: { lte: endDate } }, { ...filter }, { product: { ...productFilter } }] },
     });
 
     const summaries = await this.prisma.summary.findMany({
-      where: { AND: [{ date: { gte: startDate } }, { date: { lte: endDate } }, { ...filter }] },
+      where: { AND: [{ date: { gte: startDate } }, { date: { lte: endDate } }, { ...filter }, { product: { ...productFilter } }] },
       include: {
         product: true,
         batch: true,
@@ -253,10 +258,10 @@ export class SummariesService {
           createdAt: item.createdAt,
           consumed_materials: extrusionSpecification.length
             ? await Promise.all(
-                extrusionSpecification.map(
-                  async (it) => await this.getConsumedMaterial({ id: it.material_id, date: item.createdAt })
-                )
+              extrusionSpecification.map(
+                async (it) => await this.getConsumedMaterial({ id: it.material_id, date: item.createdAt })
               )
+            )
             : [],
         };
       })
@@ -292,10 +297,10 @@ export class SummariesService {
           createdAt: item.createdAt,
           consumed_materials: varnishSpecification.length
             ? await Promise.all(
-                varnishSpecification.map(
-                  async (it) => await this.getConsumedMaterial({ id: it.material_id, date: item.createdAt })
-                )
+              varnishSpecification.map(
+                async (it) => await this.getConsumedMaterial({ id: it.material_id, date: item.createdAt })
               )
+            )
             : [],
         };
       })
@@ -343,10 +348,10 @@ export class SummariesService {
           createdAt: item.createdAt,
           consumed_materials: offsetSpecification.length
             ? await Promise.all(
-                offsetSpecification.map(
-                  async (it) => await this.getConsumedMaterial({ id: it.material_id, date: item.createdAt })
-                )
+              offsetSpecification.map(
+                async (it) => await this.getConsumedMaterial({ id: it.material_id, date: item.createdAt })
               )
+            )
             : [],
         };
       })
@@ -379,10 +384,10 @@ export class SummariesService {
           createdAt: item.createdAt,
           consumed_materials: sealantSpecification.length
             ? await Promise.all(
-                sealantSpecification.map(
-                  async (it) => await this.getConsumedMaterial({ id: it.material_id, date: item.createdAt })
-                )
+              sealantSpecification.map(
+                async (it) => await this.getConsumedMaterial({ id: it.material_id, date: item.createdAt })
               )
+            )
             : [],
         };
       })
@@ -727,50 +732,50 @@ export class SummariesService {
 
     const extrusionIdleTime = extrusionParams
       ? await this.prisma.extrusionStatus.aggregate({
-          _sum: {
-            idle_time: true,
-          },
-          where: {
-            idle_time: { not: null },
-            createdAt: { gt: extrusionParams.createdAt },
-          },
-        })
+        _sum: {
+          idle_time: true,
+        },
+        where: {
+          idle_time: { not: null },
+          createdAt: { gt: extrusionParams.createdAt },
+        },
+      })
       : null;
 
     const varnishIdleTime = varnishParams
       ? await this.prisma.varnishStatus.aggregate({
-          _sum: {
-            idle_time: true,
-          },
-          where: {
-            idle_time: { not: null },
-            createdAt: { gt: varnishParams.createdAt },
-          },
-        })
+        _sum: {
+          idle_time: true,
+        },
+        where: {
+          idle_time: { not: null },
+          createdAt: { gt: varnishParams.createdAt },
+        },
+      })
       : null;
 
     const offsetIdleTime = offsetParams
       ? await this.prisma.offsetStatus.aggregate({
-          _sum: {
-            idle_time: true,
-          },
-          where: {
-            idle_time: { not: null },
-            createdAt: { gt: offsetParams.createdAt },
-          },
-        })
+        _sum: {
+          idle_time: true,
+        },
+        where: {
+          idle_time: { not: null },
+          createdAt: { gt: offsetParams.createdAt },
+        },
+      })
       : null;
 
     const sealantIdleTime = sealantParams
       ? await this.prisma.sealantStatus.aggregate({
-          _sum: {
-            idle_time: true,
-          },
-          where: {
-            idle_time: { not: null },
-            createdAt: { gt: sealantParams.createdAt },
-          },
-        })
+        _sum: {
+          idle_time: true,
+        },
+        where: {
+          idle_time: { not: null },
+          createdAt: { gt: sealantParams.createdAt },
+        },
+      })
       : null;
     const extrusion_defects = activeRecord.extrusion_defects.length ? activeRecord.extrusion_defects[0].value : null;
     return {

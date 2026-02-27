@@ -1,6 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { Transform, Type } from "class-transformer";
-import { IsArray, IsDate, IsInt, IsNotEmpty, IsNumber, IsOptional } from "class-validator";
+import { IsArray, IsDate, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 
 export class GetSummariesListDto {
   @ApiProperty({ description: "Дата начала", example: "2025-12-19" })
@@ -14,6 +14,13 @@ export class GetSummariesListDto {
   @IsDate()
   @IsNotEmpty()
   readonly end_date: Date;
+
+  @ApiPropertyOptional({
+    description: "Код",
+  })
+  @IsString()
+  @IsOptional()
+  readonly code?: string;
 
   @ApiPropertyOptional({ description: "Конвейеры" })
   @IsOptional()

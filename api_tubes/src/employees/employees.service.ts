@@ -6,7 +6,7 @@ import { UpdateEmployeeDto } from "./dto/update-employee.dto";
 
 @Injectable()
 export class EmployeesService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   // use in employee auth
   async getEmployeeByBarcode(barcode: string) {
@@ -40,6 +40,16 @@ export class EmployeesService {
     });
     return { employees: employees, total: total };
   }
+
+  async getEmployeeById(employee_id: number) {
+    const employee = await this.prisma.employee.findUnique({
+      where: { id: employee_id },
+    });
+    if (!employee) throw new HttpException("Сотрудник не найден", HttpStatus.NOT_FOUND);
+
+    return employee;
+  }
+
 
   async changeBanned(employee_id: number) {
     const employee = await this.prisma.employee.findUnique({

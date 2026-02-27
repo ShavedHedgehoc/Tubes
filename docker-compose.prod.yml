@@ -116,6 +116,25 @@ services:
     networks:
       - general
 
+  new-app:
+    container-name: new_app_container
+    build:
+      context: .
+      dockerfile: docker/new-app/Dockerfile.prod
+      args:
+        - NODE_ENV=production
+      logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    depends_on:
+      - tubes_api
+    restart: always
+    networks:
+      - general
+
+
   tubes_dash:
     container_name: tubes_dash
     build:
@@ -145,7 +164,8 @@ services:
     restart: always
     ports:
       - "80:80"      
-      - "3100:3100"      
+      - "3100:3100"    
+      - "3000:3000"  
     networks:
       - general
     depends_on:
