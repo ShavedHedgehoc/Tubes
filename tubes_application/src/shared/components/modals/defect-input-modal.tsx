@@ -1,6 +1,15 @@
 import { Dialog, Grid, GridItem, HStack, Heading, Stack, Text, Button } from "@chakra-ui/react";
 import { type DialogOpenChangeDetails } from "@chakra-ui/react";
 
+const BUTTONS = [
+  { label: "C", action: "clear", col: 4 },
+  { label: "<<", action: "slice", col: 8 },
+  { label: "7" }, { label: "8" }, { label: "9" },
+  { label: "4" }, { label: "5" }, { label: "6" },
+  { label: "1" }, { label: "2" }, { label: "3" },
+  { label: "." }, { label: "0" }, { label: "OK", action: "close" },
+];
+
 export interface DefectInputModalProps {
   open: boolean;
   data: string | null | undefined;
@@ -11,25 +20,25 @@ export interface DefectInputModalProps {
   roundData: () => void;
 }
 
-interface AddEntryModalButtonProps {
-  value: string;
-  onClick: (val: string) => void;
-}
+// interface AddEntryModalButtonProps {
+//   value: string;
+//   onClick: (val: string) => void;
+// }
 
-function AddEntryModalButton({ props }: { props: AddEntryModalButtonProps }) {
-  return (
-    <Button
-      size="2xl"
-      width="full"
-      variant="outline"
-      rounded="md"
-      color="fg.subtle"
-      onClick={() => props.onClick(props.value)}
-    >
-      {props.value}
-    </Button>
-  );
-}
+// function AddEntryModalButton({ props }: { props: AddEntryModalButtonProps }) {
+//   return (
+//     <Button
+//       size="2xl"
+//       width="full"
+//       variant="outline"
+//       rounded="md"
+//       color="fg.subtle"
+//       onClick={() => props.onClick(props.value)}
+//     >
+//       {props.value}
+//     </Button>
+//   );
+// }
 
 export default function DefectInputModal(props: DefectInputModalProps) {
   const handleOpenchange = (e: DialogOpenChangeDetails) => {
@@ -37,9 +46,19 @@ export default function DefectInputModal(props: DefectInputModalProps) {
     props.roundData();
   };
 
-  const handleClose = () => {
-    props.setOpen(false);
-    props.roundData();
+  // const handleClose = () => {
+  //   props.setOpen(false);
+  //   props.roundData();
+  // };
+
+  const handleAction = (btn: typeof BUTTONS[0]) => {
+    if (btn.action === "clear") return props.clearData();
+    if (btn.action === "slice") return props.sliceData();
+    if (btn.action === "close") {
+      props.setOpen(false);
+      return props.roundData();
+    }
+    props.changeData(btn.label);
   };
 
   return (
@@ -68,7 +87,19 @@ export default function DefectInputModal(props: DefectInputModalProps) {
 
           <Dialog.Body backgroundColor="bg.panel" rounded="lg">
             <Grid maxH="100%" w="100%" templateRows="repeat(15, 1fr)" templateColumns="repeat(12, 1fr)" gap={2}>
-              <GridItem colSpan={4} rowSpan={3}>
+              {BUTTONS.map((btn) => (
+                <GridItem key={btn.label} colSpan={btn.col ?? 4}>
+                  <Button
+                    size="2xl"
+                    width="full"
+                    variant="outline"
+                    onClick={() => handleAction(btn)}
+                  >
+                    {btn.label}
+                  </Button>
+                </GridItem>
+              ))}
+              {/* <GridItem colSpan={4} rowSpan={3}>
                 <AddEntryModalButton props={{ value: "C", onClick: () => props.clearData() }} />
               </GridItem>
               <GridItem colSpan={8} rowSpan={3}>
@@ -109,7 +140,7 @@ export default function DefectInputModal(props: DefectInputModalProps) {
               </GridItem>
               <GridItem colSpan={4} rowSpan={3}>
                 <AddEntryModalButton props={{ value: "OK", onClick: () => handleClose() }} />
-              </GridItem>
+              </GridItem> */}
             </Grid>
           </Dialog.Body>
         </Dialog.Content>

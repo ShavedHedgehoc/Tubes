@@ -1,10 +1,10 @@
 import {
   ACCEPTED_FILE_TYPES,
-  SummaryUploadDto,
   uploadSummariesFormSchema,
   UploadSummariesFormValues,
   useSummaryUiParams,
 } from "@/entities/summary";
+import type { SummaryUploadDto } from "@/entities/summary";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, useWatch } from "react-hook-form";
 import { useXlsxParser } from "../lib/use-xlsx-parser";

@@ -11,6 +11,15 @@ export default defineConfig({
     tsconfigPaths(),
     // visualizer({ open: true })
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'chakra-ui': ['@chakra-ui/react', '@emotion/react', '@emotion/styled', 'framer-motion'],
+        },
+      },
+    },
+  },
   server: {
     host: true,
     port: 3001,
