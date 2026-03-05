@@ -12,7 +12,7 @@
 # # CMD ["npm", "run", "start:prod"]
 # CMD ["npm", "run", "start:migrate:prod"]
 
-FROM node:18 AS builder
+FROM node:20 AS builder
 
 WORKDIR /api_tubes
 COPY ./api_tubes/package*.json ./

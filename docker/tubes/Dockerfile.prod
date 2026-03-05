@@ -16,7 +16,8 @@
 # COPY --from=build-step /tubes_application/dist /usr/share/nginx/html
 # COPY docker/tubes/nginx.conf /etc/nginx/nginx.conf
 # Stage 1: Сборка
-FROM node:18-alpine as build-step
+# 18=>20
+FROM node:20-alpine as build-step 
 
 WORKDIR /app
 
