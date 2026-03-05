@@ -1,17 +1,18 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
+import type { ExtrusionInputParams } from "./use-extrusion-input-store";
 
-interface BooleanEntryModalStore {
+interface BooleanEntryModalStore<T = string> {
   key: string;
   title: string;
   open: boolean;
-  setKey: (val: string) => void;
+  setKey: (val: T) => void;
   setTitle: (val: string) => void;
   setOpen: (val: boolean) => void;
 }
-export const useExtrusionBooleanEntryModalStore = create<BooleanEntryModalStore>()(
+export const useExtrusionBooleanEntryModalStore = create<BooleanEntryModalStore<ExtrusionInputParams>>()(
   devtools((set) => ({
-    key: "",
+    key: null,
     title: "",
     open: false,
     setKey: (value) => set(() => ({ key: value })),

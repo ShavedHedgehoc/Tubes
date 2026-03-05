@@ -8,7 +8,9 @@ export class ConveyorsService {
 
   // used in dashboard conveyor service
   async getConveyorByName(name: string) {
-    const conveyor = await this.prisma.conveyor.findUnique({ where: { name: name } });
+    const conveyor = await this.prisma.conveyor.findUnique({
+      where: { name: name },
+    });
     return conveyor;
   }
   async getConveyorById(id: number) {
@@ -30,10 +32,26 @@ export class ConveyorsService {
           include: {
             batch: true,
             product: true,
-            extrusion_statuses: { include: { employee: true }, orderBy: { id: "desc" }, take: 1 },
-            varnish_statuses: { include: { employee: true }, orderBy: { id: "desc" }, take: 1 },
-            offset_statuses: { include: { employee: true }, orderBy: { id: "desc" }, take: 1 },
-            sealant_statuses: { include: { employee: true }, orderBy: { id: "desc" }, take: 1 },
+            extrusion_statuses: {
+              include: { employee: true },
+              orderBy: { id: "desc" },
+              take: 1,
+            },
+            varnish_statuses: {
+              include: { employee: true },
+              orderBy: { id: "desc" },
+              take: 1,
+            },
+            offset_statuses: {
+              include: { employee: true },
+              orderBy: { id: "desc" },
+              take: 1,
+            },
+            sealant_statuses: {
+              include: { employee: true },
+              orderBy: { id: "desc" },
+              take: 1,
+            },
           },
         },
       },
@@ -43,8 +61,14 @@ export class ConveyorsService {
         mappedConveyors({
           conveyor: item,
           summary: item.summaries.length ? item.summaries[0] : null,
-          product: item.summaries.length && item.summaries[0].product ? item.summaries[0].product : null,
-          batch: item.summaries.length && item.summaries[0].batch ? item.summaries[0].batch : null,
+          product:
+            item.summaries.length && item.summaries[0].product
+              ? item.summaries[0].product
+              : null,
+          batch:
+            item.summaries.length && item.summaries[0].batch
+              ? item.summaries[0].batch
+              : null,
           extrusion_status:
             item.summaries.length && item.summaries[0].extrusion_statuses.length
               ? item.summaries[0].extrusion_statuses[0]
@@ -85,7 +109,7 @@ export class ConveyorsService {
             item.summaries[0].sealant_statuses[0].employee
               ? item.summaries[0].sealant_statuses[0].employee
               : null,
-        })
+        }),
       ),
     };
   }

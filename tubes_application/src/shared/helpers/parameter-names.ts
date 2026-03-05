@@ -14,6 +14,8 @@ export enum ParameterNames {
   EXTRUSION_TIGHTNESS = "Герметичность",
   EXTRUSION_RONDEL_TYPE = "Тип рондоли",
   EXTRUSION_EXTERNAL_THREAD_QUALITY = "Внешняя резьба",
+  EXTRUSION_TUBE_MARKING = "Маркировка тубы",
+
 
   VARNISH_VARNISH_MACHINE_SPEED = "Скорость лаковой машины", //шт.мин
   VARNISH_TOTAL_AIR_PRESSURE = "Давление воздуха общее", //Бар //float

@@ -195,7 +195,7 @@ export interface TubeRecordDetailDataOffsetParam {
   imprint_quantity_printed_box_6: number | null;
   ink_supply_time: number;
   design_match: boolean;
-  tube_apperarance: boolean;
+  tube_appearance: boolean;
   tube_edge_deformation_lack: boolean;
   aluminium_clearance_lack: boolean;
   drips_lack: boolean;
@@ -453,8 +453,7 @@ export default class TubeRecordsService {
 
   static async getRecordsList(dto: FetchTubeRecordsListDto): Promise<TubeRecordsListResponce> {
     const res = await $apiTubes.get(
-      `/summaries?start_date=${dto.filter.start_date}&end_date=${dto.filter.end_date}&page=${dto.page}&limit=${
-        dto.limit
+      `/summaries?start_date=${dto.filter.start_date}&end_date=${dto.filter.end_date}&page=${dto.page}&limit=${dto.limit
       }&code=${dto.filter.code}${dto.filter.states.map((item) => `&states=${item}`)}${dto.filter.conveyors.map(
         (item) => `&conveyors=${item}`
       )}`

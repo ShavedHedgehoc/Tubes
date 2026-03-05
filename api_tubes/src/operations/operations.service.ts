@@ -5,7 +5,13 @@ import { PrismaService } from "src/prisma/prisma.service";
 export class OperationsService {
   constructor(private prisma: PrismaService) {}
 
-  async getExtrusionOperations({ rank, id }: { rank: string | undefined; id: string | undefined }) {
+  async getExtrusionOperations({
+    rank,
+    id,
+  }: {
+    rank: string | undefined;
+    id: string | undefined;
+  }) {
     let filter = {};
     if (rank) {
       filter = { ...filter, min_rank: { lte: Number(rank) } };
@@ -20,7 +26,13 @@ export class OperationsService {
     return operations;
   }
 
-  async getVarnishOperations({ rank, id }: { rank: string | undefined; id: string | undefined }) {
+  async getVarnishOperations({
+    rank,
+    id,
+  }: {
+    rank: string | undefined;
+    id: string | undefined;
+  }) {
     let filter = {};
     if (rank) {
       filter = { ...filter, min_rank: { lte: Number(rank) } };
@@ -35,7 +47,13 @@ export class OperationsService {
     return operations;
   }
 
-  async getOffsetOperations({ rank, id }: { rank: string | undefined; id: string | undefined }) {
+  async getOffsetOperations({
+    rank,
+    id,
+  }: {
+    rank: string | undefined;
+    id: string | undefined;
+  }) {
     let filter = {};
     if (rank) {
       filter = { ...filter, min_rank: { lte: Number(rank) } };
@@ -50,7 +68,13 @@ export class OperationsService {
     return operations;
   }
 
-  async getSealantOperations({ rank, id }: { rank: string | undefined; id: string | undefined }) {
+  async getSealantOperations({
+    rank,
+    id,
+  }: {
+    rank: string | undefined;
+    id: string | undefined;
+  }) {
     let filter = {};
     if (rank) {
       filter = { ...filter, min_rank: { lte: Number(rank) } };

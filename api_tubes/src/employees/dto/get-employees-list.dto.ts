@@ -1,6 +1,15 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { Transform, Type } from "class-transformer";
-import { IsArray, IsBoolean, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
+import {
+  IsArray,
+  IsBoolean,
+  IsInt,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from "class-validator";
+import { ToNumbersArray } from "src/shared/lib/to-numbers-array.decorator";
 
 export class GetEmployeesListDto {
   @ApiPropertyOptional({
@@ -10,28 +19,18 @@ export class GetEmployeesListDto {
   @IsOptional()
   readonly name?: string;
 
-  @ApiPropertyOptional({
-    description: "Запрет входа",
-  })
+  @ApiPropertyOptional({ description: "Запрет входа" })
   @IsOptional()
+  @ToNumbersArray()
   @IsArray()
   @IsInt({ each: true })
-  @Transform(({ value }) => {
-    const stringArray = Array.isArray(value) ? value : value.split(",");
-    return stringArray.map((item: string) => parseInt(item, 10));
-  })
   readonly banned?: number[];
 
-  @ApiPropertyOptional({
-    description: "Разряды",
-  })
+  @ApiPropertyOptional({ description: "Разряды" })
   @IsOptional()
+  @ToNumbersArray()
   @IsArray()
   @IsInt({ each: true })
-  @Transform(({ value }) => {
-    const stringArray = Array.isArray(value) ? value : value.split(",");
-    return stringArray.map((item: string) => parseInt(item, 10));
-  })
   readonly ranks?: number[];
 
   @ApiProperty({

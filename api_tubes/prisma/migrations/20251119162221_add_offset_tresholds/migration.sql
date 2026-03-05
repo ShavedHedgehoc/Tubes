@@ -18,7 +18,7 @@ CREATE TABLE "offset_params" (
     "imprint_quantity_printed_box_6" INTEGER,
     "ink_supply_time" DOUBLE PRECISION NOT NULL,
     "design_match" BOOLEAN NOT NULL DEFAULT false,
-    "tube_apperarance" BOOLEAN NOT NULL DEFAULT false,
+    "tube_appearance" BOOLEAN NOT NULL DEFAULT false,
     "tube_edge_deformation_lack" BOOLEAN NOT NULL DEFAULT false,
     "aluminium_clearance_lack" BOOLEAN NOT NULL DEFAULT false,
     "drips_lack" BOOLEAN NOT NULL DEFAULT false,

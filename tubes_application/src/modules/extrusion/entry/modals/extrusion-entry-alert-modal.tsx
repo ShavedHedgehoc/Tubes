@@ -1,6 +1,6 @@
 import { useShallow } from "zustand/react/shallow";
 import { useExtrusionEntryAlertModalStore } from "../../store/use-extrusion-entry-alert-modal-store";
-import { useExtrusionInputStore } from "../../store/use-extrusion-input-current-parameters-store";
+import { useExtrusionInputStore } from "../../store/use-extrusion-input-store";
 import { useCreateExtrusionEntry } from "../../use-create-extrusion-entry";
 import { useNavigate } from "react-router-dom";
 import { useExtrusionConveyorStore } from "../../store/use-extrusion-conveyor-store";

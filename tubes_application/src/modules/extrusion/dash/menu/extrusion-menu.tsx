@@ -30,6 +30,7 @@ export default function ExtrusionMenu() {
     operationButtonDisabledCondition,
     pictureButtonDisabledCondition,
     endButtonDisabledCondition,
+    handleOpenParametersClick
   } = useExtrusionMenu();
   const { data: summaryData } = useActiveSummary(extrusionConveyor?.id ?? null);
 
@@ -37,7 +38,7 @@ export default function ExtrusionMenu() {
     title: "Параметры",
     icon: <TbAdjustments />,
     disabled: inputParametersButtonDisabledCondition,
-    action: () => navigate(`${RouteNames.EXTRUSION_ADD_ENTRY_ROOT}/${extrusionConveyor?.name}`),
+    action: () => handleOpenParametersClick(),
   };
 
   const scanMaterilButtonProps: MenuButtonProps = {

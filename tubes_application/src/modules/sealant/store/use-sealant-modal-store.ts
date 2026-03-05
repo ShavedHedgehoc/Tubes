@@ -6,58 +6,21 @@ interface SimplyModalStore {
   setOpen: (val: boolean) => void;
 }
 
-export const useSealantAuthModalStore = create<SimplyModalStore>()(
-  devtools((set) => ({
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-  }))
-);
+const createModalStore = (name: string) =>
+  create<SimplyModalStore>()(
+    devtools(
+      (set) => ({
+        open: false,
+        setOpen: (value) => set({ open: value }),
+      }),
+      { name: `ModalStore/${name}` }
+    )
+  );
 
-export const useSealantLogoutModalStore = create<SimplyModalStore>()(
-  devtools((set) => ({
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-  }))
-);
-
-export const useSealantCloseConfirmModalStore = create<SimplyModalStore>()(
-  devtools((set) => ({
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-  }))
-);
-
-export const useSealantMaterialScanModalStore = create<SimplyModalStore>()(
-  devtools((set) => ({
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-  }))
-);
-
-// export const useSealantCloseSummaryModalStore = create<SimplyModalStore>()(
-//   devtools((set) => ({
-//     open: false,
-//     setOpen: (value) => set(() => ({ open: value })),
-//   }))
-// );
-
-export const useSealantCloseSummaryModalStore = create<SimplyModalStore>()(
-  devtools((set) => ({
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-  }))
-);
-
-export const useSealantDefectInputModalStore = create<SimplyModalStore>()(
-  devtools((set) => ({
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-  }))
-);
-
-export const useSealantBoxConfirmModalStore = create<SimplyModalStore>()(
-  devtools((set) => ({
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-  }))
-);
+export const useSealantAuthModalStore = createModalStore("Auth");
+export const useSealantLogoutModalStore = createModalStore("Logout");
+export const useSealantCloseConfirmModalStore = createModalStore("CloseConfirm");
+export const useSealantMaterialScanModalStore = createModalStore("MaterialScan");
+export const useSealantCloseSummaryModalStore = createModalStore("CloseSummary");
+export const useSealantDefectInputModalStore = createModalStore("DefectInput");
+export const useSealantBoxConfirmModalStore = createModalStore("BoxConfirm");

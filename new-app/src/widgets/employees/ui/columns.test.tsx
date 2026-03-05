@@ -1,9 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import { vi, describe, it, expect } from "vitest";
 
-import { EmployeeEntity } from "@/entities/employee/model/types";
-import { columns } from "../../../../widgets/employees/ui/columns";
+
+
 import { CellContext, ColumnDef, Row } from "@tanstack/react-table";
+import { EmployeeEntity } from "@/entities/employee";
+import { columns } from "./columns";
 
 // 1. Мокаем RowDropdown, так как это отдельный сложный компонент
 vi.mock("@/features/employees/_ui/row-dropdown", () => ({

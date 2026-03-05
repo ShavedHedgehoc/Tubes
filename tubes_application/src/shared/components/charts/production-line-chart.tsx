@@ -23,10 +23,7 @@ export default function ProductionLineChart({ summaryData, postId }: { summaryDa
     ],
   });
 
-  if (!summaryData?.extrusionTresholds && postId === 1) return;
-  if (summaryData && !summaryData.varnishTresholds && postId === 2) return;
-  if (!summaryData?.offsetTresholds && postId === 3) return;
-  if (!summaryData?.sealantTresholds && postId === 4) return;
+  if (!summaryData?.tresholds) return;
 
   return (
     <Box backgroundColor="bg.panel" w="full" h="full" rounded="lg" p={4} alignItems="center" justifyContent="center">
@@ -76,7 +73,7 @@ export default function ProductionLineChart({ summaryData, postId }: { summaryDa
                   // fill={`url(#${item.name}-gradient)`}
                   stroke={lineChart.color(item.color)}
                   strokeWidth={2}
-                  // stackId="a"
+                // stackId="a"
                 />
               ))}
             </LineChart>

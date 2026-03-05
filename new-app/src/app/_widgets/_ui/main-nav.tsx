@@ -24,6 +24,15 @@ export function MainNav() {
       >
         Сводки
       </Link>
+      <Link
+        className="tracking-[-0.01em]"
+        href={{
+          pathname: "/tresholds",
+          // query: { page: 1, limit: 10, name_asc: "true" },
+        }}
+      >
+        Границы
+      </Link>
     </nav>
   );
 }

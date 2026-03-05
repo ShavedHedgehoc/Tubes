@@ -6,44 +6,21 @@ interface SimplyModalStore {
   setOpen: (val: boolean) => void;
 }
 
-export const useVarnishAuthModalStore = create<SimplyModalStore>()(
-  devtools((set) => ({
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-  }))
-);
+const createModalStore = (name: string) =>
+  create<SimplyModalStore>()(
+    devtools(
+      (set) => ({
+        open: false,
+        setOpen: (value) => set({ open: value }),
+      }),
+      { name: `ModalStore/${name}` }
+    )
+  );
 
-export const useVarnishLogoutModalStore = create<SimplyModalStore>()(
-  devtools((set) => ({
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-  }))
-);
+export const useVarnishAuthModalStore = createModalStore("Auth");
+export const useVarnishLogoutModalStore = createModalStore("Logout");
+export const useVarnishCloseConfirmModalStore = createModalStore("CloseConfirm");
+export const useVarnishMaterialScanModalStore = createModalStore("MaterialScan");
+export const useVarnishCloseSummaryModalStore = createModalStore("CloseSummary");
+export const useVarnishDefectInputModalStore = createModalStore("DefectInput");
 
-export const useVarnishCloseConfirmModalStore = create<SimplyModalStore>()(
-  devtools((set) => ({
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-  }))
-);
-
-export const useVarnishMaterialScanModalStore = create<SimplyModalStore>()(
-  devtools((set) => ({
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-  }))
-);
-
-export const useVarnishCloseSummaryModalStore = create<SimplyModalStore>()(
-  devtools((set) => ({
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-  }))
-);
-
-export const useVarnishDefectInputModalStore = create<SimplyModalStore>()(
-  devtools((set) => ({
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-  }))
-);

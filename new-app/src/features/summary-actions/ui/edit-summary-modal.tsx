@@ -1,9 +1,9 @@
 "use client";
 
-import { Dialog, DialogContent, DialogTitle, ModalLayout } from "@/shared/ui";
+import { ModalLayout } from "@/shared/ui";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { LoaderCard } from "@/shared/ui";
 import { summaryApi, useSummaryUiParams } from "@/entities/summary";
 import { useModalState } from "@/shared/lib";

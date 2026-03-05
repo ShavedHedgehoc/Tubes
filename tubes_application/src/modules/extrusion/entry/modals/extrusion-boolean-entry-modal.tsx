@@ -1,40 +1,35 @@
-import BooleanEntryModal, { type BooleanEntryModalProps } from "@/shared/components/modals/boolean-entry-modal";
-import type { DataFormField } from "@/shared/helpers/data-form-field";
+import BooleanEntryModal from "@/shared/components/modals/boolean-entry-modal";
 import { useShallow } from "zustand/shallow";
-import { useExtrusionInputStore, ExtrusionInputParams } from "../../store/use-extrusion-input-current-parameters-store";
+import { useExtrusionInputStore, ExtrusionInputParams } from "../../store/use-extrusion-input-store";
 import { useExtrusionBooleanEntryModalStore } from "../../store/use-extrusion-boolean-entry-modal-store";
 
 export default function ExtrusionBooleanEntryModal() {
-  const id = useExtrusionBooleanEntryModalStore(useShallow((state) => state.key));
-  const title = useExtrusionBooleanEntryModalStore(useShallow((state) => state.title));
-  const open = useExtrusionBooleanEntryModalStore(useShallow((state) => state.open));
-  const setOpen = useExtrusionBooleanEntryModalStore(useShallow((state) => state.setOpen));
-  const dataKey = useExtrusionBooleanEntryModalStore(useShallow((state) => state.key));
+
+  const { key, title, open, setOpen } = useExtrusionBooleanEntryModalStore(
+    useShallow((state) => ({
+      key: state.key,
+      title: state.title,
+      open: state.open,
+      setOpen: state.setOpen,
+    }))
+  );
+
   const changeData = useExtrusionInputStore(useShallow((state) => state.changeData));
 
   const data = useExtrusionInputStore(
     useShallow((state) => {
-      switch (dataKey) {
-        case ExtrusionInputParams.TIGHTNESS:
-          return state.data.tightness;
-        case ExtrusionInputParams.TUBE_CUTTING_QUALITY:
-          return state.data.tube_cutting_quality;
-        case ExtrusionInputParams.EXTERNAL_THREAD_QUALITY:
-          return state.data.external_thread_quality;
-        default:
-          break;
-      }
+      if (!key) return false;
+      return state.data[key as keyof typeof state.data] as boolean;
     })
   );
 
-  const booleanEntryModalProps: BooleanEntryModalProps = {
-    id: id,
-    title: title,
-    open: open,
-    dataKey: dataKey,
-    data: data,
-    setOpen: (val: boolean) => setOpen(val),
-    changeData: (val: DataFormField) => changeData(val),
-  };
-  return <BooleanEntryModal {...booleanEntryModalProps} />;
+  if (!key) return null
+  return <BooleanEntryModal<ExtrusionInputParams>
+    id={key as ExtrusionInputParams}
+    dataKey={key as ExtrusionInputParams}
+    title={title}
+    open={open}
+    data={data}
+    setOpen={setOpen}
+    changeData={changeData} />;
 }

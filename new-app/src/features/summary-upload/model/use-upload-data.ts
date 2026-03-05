@@ -1,5 +1,5 @@
 import { summaryApi } from "@/entities/summary";
-import { handleError } from "@/shared/api/handle-error";
+import { handleError } from "@/shared/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 

@@ -17,7 +17,7 @@ export class CreateOffsetEntryDto {
   readonly imprint_quantity_printed_box_6: number | null;
   readonly ink_supply_time: number;
   readonly design_match: boolean;
-  readonly tube_apperarance: boolean;
+  readonly tube_appearance: boolean;
   readonly tube_edge_deformation_lack: boolean;
   readonly aluminium_clearance_lack: boolean;
   readonly drips_lack: boolean;

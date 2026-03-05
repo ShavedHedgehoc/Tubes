@@ -8,7 +8,7 @@ export interface CreateExtrusionEntryDto {
   blow_time: number;
   turning_machine_speed: number;
   annealing_furnace_temp: number;
-  rondel_id: number;
+  // rondel_id: number;
   tube_cilindrical_section_length: number;
   membrane_thickness: number;
   tube_diameter: number;
@@ -18,6 +18,7 @@ export interface CreateExtrusionEntryDto {
   tightness: boolean;
   external_thread_quality: boolean;
   employee_id: number;
+  tube_marking: boolean
 }
 
 export interface CreateVarnishEntryDto {
@@ -64,7 +65,7 @@ export interface CreateOffsetEntryDto {
   imprint_quantity_printed_box_6: number | null;
   ink_supply_time: number;
   design_match: boolean;
-  tube_apperarance: boolean;
+  tube_appearance: boolean;
   tube_edge_deformation_lack: boolean;
   aluminium_clearance_lack: boolean;
   drips_lack: boolean;

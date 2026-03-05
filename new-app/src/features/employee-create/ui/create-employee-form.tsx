@@ -6,6 +6,7 @@ import { RankEntity } from "@/entities/rank/model/types";
 import { useCreateEmployeeForm } from "../model";
 import { BarcodeField, NameField, RankComboboxField } from "./form-fields";
 import { FormFooter } from "./form-footer";
+import { toast } from "sonner";
 
 export function CreateEmployeeForm({ ranks }: { ranks: RankEntity[] }) {
   const { form, onSubmit, handleClose, ...state } = useCreateEmployeeForm({ ranks })

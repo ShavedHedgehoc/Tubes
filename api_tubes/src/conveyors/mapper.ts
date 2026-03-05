@@ -72,28 +72,48 @@ export const mappedConveyors = ({
     ? {
         employee: extrusion_employee ? extrusion_employee.name : null,
         production: extrusion_status.counter_value,
-        state: extrusion_status.finished === true ? "finished" : extrusion_status.idle === true ? "idle" : "working",
+        state:
+          extrusion_status.finished === true
+            ? "finished"
+            : extrusion_status.idle === true
+              ? "idle"
+              : "working",
       }
     : null;
   const mappedVarnishStatus: IPostData | null = varnish_status
     ? {
         employee: varnish_employee ? varnish_employee.name : null,
         production: varnish_status.counter_value,
-        state: varnish_status.finished === true ? "finished" : varnish_status.idle === true ? "idle" : "working",
+        state:
+          varnish_status.finished === true
+            ? "finished"
+            : varnish_status.idle === true
+              ? "idle"
+              : "working",
       }
     : null;
   const mappedOffsetStatus: IPostData | null = offset_status
     ? {
         employee: offset_employee ? offset_employee.name : null,
         production: offset_status.counter_value,
-        state: offset_status.finished === true ? "finished" : offset_status.idle === true ? "idle" : "working",
+        state:
+          offset_status.finished === true
+            ? "finished"
+            : offset_status.idle === true
+              ? "idle"
+              : "working",
       }
     : null;
   const mappedSealantStatus: IPostData | null = sealant_status
     ? {
         employee: sealant_employee ? sealant_employee.name : null,
         production: sealant_status.counter_value,
-        state: sealant_status.finished === true ? "finished" : sealant_status.idle === true ? "idle" : "working",
+        state:
+          sealant_status.finished === true
+            ? "finished"
+            : sealant_status.idle === true
+              ? "idle"
+              : "working",
       }
     : null;
 

@@ -13,6 +13,7 @@ export enum ParameterUnits {
   //   EXTRUSION_TIGHTNESS = "Герметичность",//boolean
   //   EXTRUSION_RONDEL_TYPE = "Тип рондоли",//boolean
   //   EXTRUSION_EXTERNAL_THREAD_QUALITY = "Внешняя резьба",//boolean
+  // EXTRUSION_TUBE_MARKING = "Маркировка тубы", //boolean
 
   VARNISH_VARNISH_MACHINE_SPEED = "шт/мин",
   VARNISH_TOTAL_AIR_PRESSURE = "Бар", //float
@@ -73,3 +74,19 @@ export enum ParameterUnits {
   SEALANT_TUBE_RIGIDITY = "мм",
   SEALANT_CAP_UNSCREWING_TORQUE = "Н.см",
 }
+
+export const EXTRUSION_PARAMETER_UNITS: Record<string, string> = {
+  // Общие
+  counter_value: "шт",
+  press_speed: "шт/мин",
+  blow_time: "мс",
+  turning_machine_speed: "шт/мин",
+  annealing_furnace_temp: "°С",
+  tube_cylindrical_section_length: "мм",
+  membrane_thickness: "мм",
+  tube_diameter: "мм",
+  tube_cilindrical_thickness: "мм",
+  tube_rigidity: "мм",
+
+
+} as const;

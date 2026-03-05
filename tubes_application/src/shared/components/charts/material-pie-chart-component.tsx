@@ -23,10 +23,7 @@ export default function MaterialPieChartComponent({
 
   const isAllScanned = data.length && !data.map((item) => item.scanned).includes(false);
 
-  if (!summaryData?.extrusionTresholds && postId === 1) return;
-  if (summaryData && !summaryData.varnishTresholds && postId === 2) return;
-  if (!summaryData?.offsetTresholds && postId === 3) return;
-  if (!summaryData?.sealantTresholds && postId === 4) return;
+  if (!summaryData?.tresholds) return;
 
   return (
     <Box backgroundColor="bg.panel" w="full" h="full" rounded="lg" p={8} alignItems="center" justifyContent="center">
@@ -88,7 +85,7 @@ export default function MaterialPieChartComponent({
                       viewBox={viewBox}
                       title={isAllScanned ? "OK" : "!"}
                       description={isAllScanned ? "Комплектующие" : "Отсканируйте"}
-                      // description={""}
+                    // description={""}
                     />
                   )}
                 />

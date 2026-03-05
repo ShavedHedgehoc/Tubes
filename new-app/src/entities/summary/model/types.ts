@@ -63,8 +63,4 @@ export type ValError = {
   error: string;
 };
 
-export type SummaryUploadDto = {
-  summaryDate: string;
-  update: boolean;
-  rows: SummaryUploadDataRow[];
-};
+

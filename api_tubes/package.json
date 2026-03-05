@@ -14,6 +14,7 @@
     "start:prod": "node dist/main",
     "start:migrate:prod": "prisma migrate deploy && npm run start:prod",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "lint:types": "tsc --noEmit",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
@@ -24,7 +25,8 @@
     "tsx_seed": "tsx prisma/seed.ts",
     "reset": "npx prisma migrate reset",
     "migrate": "npx prisma migrate dev",
-    "studio": "npx prisma studio"
+    "studio": "npx prisma studio",
+    "prettier": "prettier -w ."
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
@@ -56,6 +58,7 @@
     "@swc/core": "^1.10.7",
     "@types/bcrypt": "^6.0.0",
     "@types/bcryptjs": "^2.4.6",
+    "@types/cookie-parser": "^1.4.10",
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.10.7",

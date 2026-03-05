@@ -3,10 +3,10 @@ import { vi, describe, it, expect, beforeEach, Mock } from "vitest";
 import { getQueryClient } from "@/shared/api/query-client";
 import { employeeQueries } from "@/entities/employee/api/employee.queries";
 import { ranksQueries } from "@/entities/rank/api";
-import { Employees } from "../../../../widgets/employees/ui/employees";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import EmployeesView from "@/widgets/employees/ui/employees-view";
 import { EmployeeParams } from "@/entities/employee/model/search-params";
+import { Employees } from "./employees";
 
 // 1. Мокаем зависимости
 vi.mock("@/shared/api/query-client", () => ({

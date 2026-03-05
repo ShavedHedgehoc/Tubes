@@ -28,7 +28,7 @@ export function useXlsxParser() {
         if (!result) return;
 
         const currentErrors: ValError[] = [];
-        // let json: any[] = [];
+
 
         try {
           const wb = read(result);
@@ -36,6 +36,7 @@ export function useXlsxParser() {
           const json = utils.sheet_to_json<SummaryUploadDataRow>(ws, {
             raw: false,
           });
+
 
           json.forEach((row, i) => {
             const isRowValid = parse(row);

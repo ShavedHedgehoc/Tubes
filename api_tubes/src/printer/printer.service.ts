@@ -6,7 +6,9 @@ export class PrinterService {
   constructor(private prisma: PrismaService) {}
 
   async getPrinter(conveyor_id: number) {
-    const ip = await this.prisma.printer.findUnique({ where: { conveyor_id: conveyor_id } });
+    const ip = await this.prisma.printer.findUnique({
+      where: { conveyor_id: conveyor_id },
+    });
     return ip;
   }
 }

@@ -2,7 +2,7 @@ import { $api } from "../http";
 import { ApiRoutes } from "./api-routes";
 
 export default class HealthService {
-  static async checkApiHealth(): Promise<any> {
+  static async checkApiHealth(): Promise<number> {
     const res = await $api.get(ApiRoutes.HEALTH_CHECK);
     return res.data;
   }

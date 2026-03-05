@@ -174,6 +174,7 @@ DataTypes.DATE.prototype._stringify = function _stringify(date, options) {
     }),
     SequelizeModule.forRoot({
       dialect: "postgres",
+      autoLoadModels: true,
       host: process.env.POSTGRES_HOST,
       port: Number(process.env.POSTGRES_PORT),
       username: process.env.POSTGRES_USERNAME,
@@ -262,4 +263,4 @@ DataTypes.DATE.prototype._stringify = function _stringify(date, options) {
     HealthCheckModule,
   ],
 })
-export default class AppModule {}
+export default class AppModule { }

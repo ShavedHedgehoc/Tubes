@@ -1,32 +1,48 @@
-# FROM node:18-alpine
+# FROM node:18-alpine as build-step
 
 # WORKDIR /tubes_application
+
+# ENV PATH /tubes_application/node_modules/.bin:$PATH
 
 # COPY ./tubes_application/package*.json ./
 # COPY ./tubes_application/tsconfig*.json ./
 # COPY ./tubes_application/vite.config*.json ./
-# COPY ./tubes_applicationh/src ./src
+# COPY ./tubes_application/src ./src
 # RUN npm ci
 # COPY ./tubes_application .
 # RUN npm run build
-# RUN npm i -g http-server
-# CMD ["http-server", "-p3000", "./dist"]
 
-
+# FROM nginx:stable
+# COPY --from=build-step /tubes_application/dist /usr/share/nginx/html
+# COPY docker/tubes/nginx.conf /etc/nginx/nginx.conf
+# Stage 1: Сборка
 FROM node:18-alpine as build-step
 
-WORKDIR /tubes_application
+WORKDIR /app
 
-ENV PATH /tubes_application/node_modules/.bin:$PATH
-
+# Копируем только файлы зависимостей для кэширования слоев
 COPY ./tubes_application/package*.json ./
-COPY ./tubes_application/tsconfig*.json ./
-COPY ./tubes_application/vite.config*.json ./
-COPY ./tubes_application/src ./src
+# Устанавливаем зависимости (ci быстрее и чище для продакшена)
 RUN npm ci
-COPY ./tubes_application .
+
+# Копируем остальные исходники (убедись, что vite.config.ts/js попадает сюда)
+COPY ./tubes_application/ ./
+
+# Собираем проект (Vite по умолчанию кладет билд в папку /dist)
 RUN npm run build
 
-FROM nginx:stable
-COPY --from=build-step /tubes_application/dist /usr/share/nginx/html
+# Stage 2: Раздача статики
+FROM nginx:stable-alpine
+
+# Очищаем дефолтную папку nginx
+RUN rm -rf /usr/share/nginx/html/*
+
+# Копируем билд из первой стадии
+COPY --from=build-step /app/dist /usr/share/nginx/html
+
+# Копируем твой кастомный конфиг, который мы правили ранее
 COPY docker/tubes/nginx.conf /etc/nginx/nginx.conf
+
+EXPOSE 3000
+
+CMD ["nginx", "-g", "daemon off;"]

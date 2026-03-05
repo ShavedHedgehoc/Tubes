@@ -24,7 +24,7 @@ import { GetEmployeeDto } from "./dto/get-employee.dto";
 @ApiTags("Сотрудники")
 @Controller("employees")
 export class EmployeesController {
-  constructor(private readonly employeesService: EmployeesService) { }
+  constructor(private readonly employeesService: EmployeesService) {}
   //  used in employee auth
   @ApiOperation({ summary: "Получить сотрудника по штрихкоду" })
   @Get()
@@ -41,7 +41,9 @@ export class EmployeesController {
 
   @ApiOperation({ summary: "Получить список сотрудников" })
   @Get("/list")
-  getEmployees(@Query(new ValidationPipe({ transform: true })) query: GetEmployeesListDto) {
+  getEmployees(
+    @Query(new ValidationPipe({ transform: true })) query: GetEmployeesListDto,
+  ) {
     return this.employeesService.getEmployeeList(query);
   }
 
@@ -55,7 +57,9 @@ export class EmployeesController {
   @ApiOperation({ summary: "Создать сотрудника" })
   @Post()
   @UseFilters(new ValidationExceptionFilter())
-  createEmployee(@Body(new ValidationPipe({ transform: true })) dto: CreateEmployeeDto) {
+  createEmployee(
+    @Body(new ValidationPipe({ transform: true })) dto: CreateEmployeeDto,
+  ) {
     return this.employeesService.createEmployee(dto);
   }
 
@@ -69,7 +73,9 @@ export class EmployeesController {
   @ApiOperation({ summary: "Обновить данные сотрудника" })
   @Patch()
   @UsePipes(new ValidationPipe({ transform: true }))
-  updateEmployee(@Body(new ValidationPipe({ transform: true })) dto: UpdateEmployeeDto) {
+  updateEmployee(
+    @Body(new ValidationPipe({ transform: true })) dto: UpdateEmployeeDto,
+  ) {
     return this.employeesService.updateEmployee(dto);
   }
 }

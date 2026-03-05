@@ -1,17 +1,17 @@
 import { Dialog, Stack, type DialogOpenChangeDetails, Switch, HStack, Heading, Status, VStack } from "@chakra-ui/react";
 import type { DataFormField } from "../../helpers/data-form-field";
 
-export interface BooleanEntryModalProps {
+export interface BooleanEntryModalProps<T> {
   id: string;
   title: string;
   open: boolean;
-  dataKey: string;
+  dataKey: T;
   data: boolean | undefined;
   setOpen: (val: boolean) => void;
-  changeData: (val: DataFormField) => void;
+  changeData: (val: DataFormField<T>) => void;
 }
 
-export default function BooleanEntryModal(props: BooleanEntryModalProps) {
+export default function BooleanEntryModal<T>(props: BooleanEntryModalProps<T>) {
   return (
     <Dialog.Root
       open={props.open}
@@ -24,7 +24,7 @@ export default function BooleanEntryModal(props: BooleanEntryModalProps) {
       <Dialog.Positioner>
         <Dialog.Content
           rounded="lg"
-          onClick={() => props.changeData({ key: props.id, value: props.data ? "false" : "true" })}
+          onClick={() => props.changeData({ key: props.dataKey, value: props.data ? "false" : "true" })}
         >
           <Dialog.Header>
             <Dialog.Title w="full">
@@ -43,7 +43,7 @@ export default function BooleanEntryModal(props: BooleanEntryModalProps) {
               <Switch.Root
                 size="lg"
                 checked={props.data}
-                onCheckedChange={(e) => props.changeData({ key: props.id, value: e.checked ? "true" : "false" })}
+                onCheckedChange={(e) => props.changeData({ key: props.dataKey, value: e.checked ? "true" : "false" })}
               >
                 <Switch.HiddenInput />
                 <Switch.Control>

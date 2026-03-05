@@ -6,19 +6,26 @@ import { UpdateEmployeeDto } from "./dto/update-employee.dto";
 
 @Injectable()
 export class EmployeesService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   // use in employee auth
   async getEmployeeByBarcode(barcode: string) {
-    const employee = await this.prisma.employee.findUnique({ where: { barcode: barcode }, include: { rank: true } });
-    if (employee && employee.banned) throw new HttpException("Доступ запрещен!", HttpStatus.FORBIDDEN);
+    const employee = await this.prisma.employee.findUnique({
+      where: { barcode: barcode },
+      include: { rank: true },
+    });
+    if (employee && employee.banned)
+      throw new HttpException("Доступ запрещен!", HttpStatus.FORBIDDEN);
     return employee;
   }
 
   async getEmployeeList(query: GetEmployeesListDto) {
     let filter = {};
     if (query.name) {
-      filter = { ...filter, name: { contains: query.name, mode: "insensitive" } };
+      filter = {
+        ...filter,
+        name: { contains: query.name, mode: "insensitive" },
+      };
     }
 
     if (query.banned && query.banned.length > 0) {
@@ -45,17 +52,18 @@ export class EmployeesService {
     const employee = await this.prisma.employee.findUnique({
       where: { id: employee_id },
     });
-    if (!employee) throw new HttpException("Сотрудник не найден", HttpStatus.NOT_FOUND);
+    if (!employee)
+      throw new HttpException("Сотрудник не найден", HttpStatus.NOT_FOUND);
 
     return employee;
   }
-
 
   async changeBanned(employee_id: number) {
     const employee = await this.prisma.employee.findUnique({
       where: { id: employee_id },
     });
-    if (!employee) throw new HttpException("Сотрудник не найден", HttpStatus.NOT_FOUND);
+    if (!employee)
+      throw new HttpException("Сотрудник не найден", HttpStatus.NOT_FOUND);
     const updateEmployee = await this.prisma.employee.update({
       where: { id: employee_id },
       data: {
@@ -66,12 +74,19 @@ export class EmployeesService {
   }
 
   async createEmployee(dto: CreateEmployeeDto) {
-    const rank = await this.prisma.rank.findUnique({ where: { id: dto.rank_id } });
-    if (!rank) throw new HttpException("Разряд не найден", HttpStatus.NOT_FOUND);
+    const rank = await this.prisma.rank.findUnique({
+      where: { id: dto.rank_id },
+    });
+    if (!rank)
+      throw new HttpException("Разряд не найден", HttpStatus.NOT_FOUND);
     const employee = await this.prisma.employee.findUnique({
       where: { barcode: dto.barcode },
     });
-    if (employee) throw new HttpException("Уже существует сотрудник с таким штрихкодом", HttpStatus.BAD_REQUEST);
+    if (employee)
+      throw new HttpException(
+        "Уже существует сотрудник с таким штрихкодом",
+        HttpStatus.BAD_REQUEST,
+      );
     const createdEmployee = await this.prisma.employee.create({
       data: { ...dto },
     });
@@ -82,7 +97,8 @@ export class EmployeesService {
     const employee = await this.prisma.employee.findUnique({
       where: { id: employee_id },
     });
-    if (!employee) throw new HttpException("Сотрудник не найден", HttpStatus.NOT_FOUND);
+    if (!employee)
+      throw new HttpException("Сотрудник не найден", HttpStatus.NOT_FOUND);
     await this.prisma.employee.delete({ where: { id: employee_id } });
   }
 
@@ -90,20 +106,35 @@ export class EmployeesService {
     const employee = await this.prisma.employee.findUnique({
       where: { id: dto.id },
     });
-    if (!employee) throw new HttpException("Сотрудник не найден", HttpStatus.NOT_FOUND);
+    if (!employee)
+      throw new HttpException("Сотрудник не найден", HttpStatus.NOT_FOUND);
 
     const employee_with_same_barcode = await this.prisma.employee.findUnique({
       where: { barcode: dto.barcode },
     });
 
-    if (employee_with_same_barcode && employee_with_same_barcode.id !== employee.id)
-      throw new HttpException("Уже существует сотрудник с таким штрихкодом", HttpStatus.BAD_REQUEST);
-    const rank = await this.prisma.rank.findUnique({ where: { id: dto.rank_id } });
-    if (!rank) throw new HttpException("Разряд не найден", HttpStatus.NOT_FOUND);
+    if (
+      employee_with_same_barcode &&
+      employee_with_same_barcode.id !== employee.id
+    )
+      throw new HttpException(
+        "Уже существует сотрудник с таким штрихкодом",
+        HttpStatus.BAD_REQUEST,
+      );
+    const rank = await this.prisma.rank.findUnique({
+      where: { id: dto.rank_id },
+    });
+    if (!rank)
+      throw new HttpException("Разряд не найден", HttpStatus.NOT_FOUND);
 
     const updateEmployee = await this.prisma.employee.update({
       where: { id: dto.id },
-      data: { name: dto.name, barcode: dto.barcode, rank_id: dto.rank_id, banned: employee.banned },
+      data: {
+        name: dto.name,
+        barcode: dto.barcode,
+        rank_id: dto.rank_id,
+        banned: employee.banned,
+      },
     });
     return updateEmployee;
   }

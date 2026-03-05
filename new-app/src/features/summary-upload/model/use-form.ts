@@ -6,7 +6,7 @@ import {
   useSummaryUiParams,
 } from "@/entities/summary";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { useXlsxParser } from "../lib/use-xlsx-parser";
 import { useUploadSummaryData } from ".";
 import { useRef } from "react";
@@ -30,11 +30,11 @@ export const useSummaryUploadForm = () => {
     },
   });
   const {
-    watch,
+    control,
     formState: { isSubmitting },
   } = form;
-  const fileValue = watch("file");
-  const dateValue = watch("date");
+  const fileValue = useWatch({ control, name: "file" });
+  const dateValue = useWatch({ control, name: "date" });
   const resetDisable = !fileValue && !dateValue;
   const submitDisable =
     !fileValue || !dateValue || !isValid || uploadPending || isSubmitting;

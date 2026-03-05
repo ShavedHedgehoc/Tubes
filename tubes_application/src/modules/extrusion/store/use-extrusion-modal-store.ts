@@ -6,44 +6,21 @@ interface SimplyModalStore {
   setOpen: (val: boolean) => void;
 }
 
-export const useExtrusionAuthModalStore = create<SimplyModalStore>()(
-  devtools((set) => ({
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-  }))
-);
 
-export const useExtrusionLogoutModalStore = create<SimplyModalStore>()(
-  devtools((set) => ({
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-  }))
-);
+const createModalStore = (name: string) =>
+  create<SimplyModalStore>()(
+    devtools(
+      (set) => ({
+        open: false,
+        setOpen: (value) => set({ open: value }),
+      }),
+      { name: `ModalStore/${name}` }
+    )
+  );
 
-export const useExtrusionCloseConfirmModalStore = create<SimplyModalStore>()(
-  devtools((set) => ({
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-  }))
-);
-
-export const useExtrusionMaterialScanModalStore = create<SimplyModalStore>()(
-  devtools((set) => ({
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-  }))
-);
-
-export const useExtrusionCloseSummaryModalStore = create<SimplyModalStore>()(
-  devtools((set) => ({
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-  }))
-);
-
-export const useExtrusionDefectInputModalStore = create<SimplyModalStore>()(
-  devtools((set) => ({
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-  }))
-);
+export const useExtrusionAuthModalStore = createModalStore("Auth");
+export const useExtrusionLogoutModalStore = createModalStore("Logout");
+export const useExtrusionCloseConfirmModalStore = createModalStore("CloseConfirm");
+export const useExtrusionMaterialScanModalStore = createModalStore("MaterialScan");
+export const useExtrusionCloseSummaryModalStore = createModalStore("CloseSummary");
+export const useExtrusionDefectInputModalStore = createModalStore("DefectInput");

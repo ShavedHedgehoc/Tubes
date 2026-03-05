@@ -1,5 +1,5 @@
-import Menu from "../../../../shared/components/menu/menu";
-import type { MenuButtonProps } from "../../../../shared/components/menu/menu-button";
+import Menu from "@/shared/components/menu/menu";
+import type { MenuButtonProps } from "@/shared/components/menu/menu-button";
 import {
   TbAdjustments,
   TbAutomation,
@@ -26,6 +26,7 @@ export default function SealantMenu() {
     setOpenLogout,
     setOpenMaterialScan,
     setOpenCloseSummary,
+    handleOpenParametersClick,
     inputParametersButtonDisabledCondition,
     scanMaterialsButtonDisabledCondition,
     operationButtonDisabledCondition,
@@ -39,7 +40,7 @@ export default function SealantMenu() {
     title: "Параметры",
     icon: <TbAdjustments />,
     disabled: inputParametersButtonDisabledCondition,
-    action: () => navigate(`${RouteNames.SEALANT_ADD_ENTRY_ROOT}/${sealantConveyor?.name}`),
+    action: () => handleOpenParametersClick(),
   };
 
   const scanMaterilButtonProps: MenuButtonProps = {

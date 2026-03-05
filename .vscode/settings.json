@@ -11,6 +11,9 @@
   "window.commandCenter": false,
   "git.autoRepositoryDetection": "subFolders",
   "editor.formatOnSave": true,
-  "prettier.printWidth": 120,
-  "terminal.integrated.sendKeybindingsToShell": true
+  "terminal.integrated.sendKeybindingsToShell": true,
+  "prisma.pinToPrisma6": true,
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  },
 }

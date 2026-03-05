@@ -7,22 +7,22 @@ import RankCombobox from "./rank-combobox";
 import ResetButton from "./reset-button";
 
 type Props = {
-  rankListItems: RankEntity[] | [];
+  rankListItems: RankEntity[];
   actions?: React.ReactNode;
 };
 
-export function EmployeesFilter(props: Props) {
+export function EmployeesFilter({ rankListItems, actions }: Props) {
   return (
     <div className="flex  mb-4 justify-between">
       <div className="flex justify-start gap-2">
         <div className="flex flex-row">
           <NameInput />
-          <BannedSelector />
-          <RankCombobox items={props.rankListItems} />
+          <BannedSelector rankListItems={rankListItems} />
+          <RankCombobox items={rankListItems} />
         </div>
         <ResetButton />
       </div>
-      {props.actions}
+      {actions}
     </div>
   );
 }

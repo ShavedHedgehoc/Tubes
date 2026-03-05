@@ -2,7 +2,7 @@ import { HttpAdapterHost, NestFactory } from "@nestjs/core";
 import * as cookieParser from "cookie-parser";
 import * as bodyParser from "body-parser";
 import { AppModule } from "./app.module";
-import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import { DocumentBuilder, OpenAPIObject, SwaggerModule } from "@nestjs/swagger";
 import { PrismaClientExceptionFilter } from "./prisma-client-exception/prisma-client-exception.filter";
 // import { ValidationPipe } from "@nestjs/common";
 
@@ -22,18 +22,28 @@ async function bootstrap() {
     .addTag("API")
     .build();
 
-  const swaggerFactory = SwaggerModule.createDocument(app, swaggerOptions);
+  const swaggerFactory: OpenAPIObject = SwaggerModule.createDocument(
+    app,
+    swaggerOptions,
+  );
   SwaggerModule.setup("/api_tubes/swagger", app, swaggerFactory);
 
   app.use(cookieParser());
   app.use(bodyParser.json({ limit: "10mb" }));
   app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
+
   // app.useGlobalPipes(
   //   new ValidationPipe({
   //     transform: true,
   //     whitelist: true,
   //   })
   // );
+
+  // eslint-disable-next-line no-console
   await app.listen(PORT, () => console.log(`API started on ${PORT}`));
 }
-bootstrap();
+
+void bootstrap().catch((err: unknown) => {
+  console.error("Critical error during bootstrap:", err); // eslint-disable-line
+  process.exit(1);
+});

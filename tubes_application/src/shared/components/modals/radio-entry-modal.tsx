@@ -10,7 +10,7 @@ import {
   Status,
 } from "@chakra-ui/react";
 import type { DataFormField } from "../../helpers/data-form-field";
-import { useExtrusionInputStore } from "../../../modules/extrusion/store/use-extrusion-input-current-parameters-store";
+import { useExtrusionInputStore } from "../../../modules/extrusion/store/use-extrusion-input-store";
 import { useShallow } from "zustand/react/shallow";
 
 export interface RadioEntryModalProps {

@@ -7,8 +7,9 @@ import {
 } from "@testing-library/react";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { vi, describe, it, expect, beforeEach } from "vitest";
-import { CreateEmployeeForm } from "../create-employee-form";
+
 import { RankEntity } from "@/entities/rank/model/types";
+import { CreateEmployeeForm } from "./create-employee-form";
 
 const mockRanks: RankEntity[] = [
   { id: 1, val: 1, description: "Разряд 1" },

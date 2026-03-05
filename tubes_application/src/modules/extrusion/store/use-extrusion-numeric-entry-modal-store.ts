@@ -1,7 +1,8 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
+import type { ExtrusionInputParams } from "./use-extrusion-input-store";
 
-interface EntryModalStore {
+interface EntryModalStore<T = string> {
   key: string;
   title: string;
   open: boolean;
@@ -11,13 +12,13 @@ interface EntryModalStore {
   setMinValue: (val: number | null | undefined) => void;
   setMaxValue: (val: number | null | undefined) => void;
   setUnit: (val: string | null | undefined) => void;
-  setKey: (val: string) => void;
+  setKey: (val: T) => void;
   setTitle: (val: string) => void;
   setOpen: (val: boolean) => void;
 }
-export const useExtrusionNumericEntryModalStore = create<EntryModalStore>()(
+export const useExtrusionNumericEntryModalStore = create<EntryModalStore<ExtrusionInputParams>>()(
   devtools((set) => ({
-    key: "",
+    key: null,
     title: "",
     open: false,
     minValue: null,

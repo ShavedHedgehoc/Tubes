@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { render } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { vi, describe, it, expect, beforeEach } from "vitest";
@@ -34,8 +35,8 @@ describe("Server Component: Summaries", () => {
 
   it("должен выполнять предзагрузку данных с правильными параметрами", async () => {
     const testProps = {
-      start_date: getMonthBounds().firstDay,
-      end_date: getMonthBounds().lastDay,
+      start_date: format(getMonthBounds().firstDay, "yyyy-MM-dd"),
+      end_date: format(getMonthBounds().lastDay, "yyyy-MM-dd"),
       page: 1,
       limit: 10,
     } as SummaryParams;

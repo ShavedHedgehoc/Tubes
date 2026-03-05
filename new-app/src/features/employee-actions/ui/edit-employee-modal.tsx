@@ -1,10 +1,10 @@
 "use client";
 
-import { Dialog, DialogContent, DialogTitle, ModalLayout } from "@/shared/ui";
+import { ModalLayout } from "@/shared/ui";
 import { useQuery } from "@tanstack/react-query";
 import { EditEmployeeForm } from "./edit-employee-form";
 import { toast } from "sonner";
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { LoaderCard } from "@/shared/ui";
 import { employeeApi, useEmployeeUiParams } from "@/entities/employee";
 import { RankEntity } from "@/entities/rank";
@@ -24,6 +24,11 @@ export function EditEmployeeModal({ ranks }: { ranks: RankEntity[] }) {
   );
 
   useEffect(() => {
+    if (isOpen && ranks.length === 0) {
+      toast.error("Список разрядов пуст. Редактирование невозможно.");
+      onOpenChange(false);
+      return;
+    }
     if (isSuccess && !data && editId) {
       toast.error("Данные сотрудника не найдены");
       onOpenChange(false)
@@ -32,7 +37,7 @@ export function EditEmployeeModal({ ranks }: { ranks: RankEntity[] }) {
       toast.error("Ошибка при загрузке данных");
       onOpenChange(false)
     }
-  }, [isSuccess, data, editId, isError, onOpenChange]);
+  }, [ranks.length, isSuccess, data, editId, isError, onOpenChange]);
 
   return (
     <ModalLayout

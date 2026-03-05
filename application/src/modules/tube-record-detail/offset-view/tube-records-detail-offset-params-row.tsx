@@ -100,7 +100,7 @@ export default function TubeRecordsDetailOffsetParamsRow({
         <Typography level="body-xs">{row.design_match === true ? "Ok" : "nOk"}</Typography>
       </td>
       <td style={{ width: 40, textAlign: "center", padding: "12px 24px" }}>
-        <Typography level="body-xs">{row.tube_apperarance === true ? "Ok" : "nOk"}</Typography>
+        <Typography level="body-xs">{row.tube_appearance === true ? "Ok" : "nOk"}</Typography>
       </td>
       <td style={{ width: 40, textAlign: "center", padding: "12px 24px" }}>
         <Typography level="body-xs">{row.tube_edge_deformation_lack === true ? "Ok" : "nOk"}</Typography>

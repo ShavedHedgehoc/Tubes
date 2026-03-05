@@ -5,11 +5,17 @@ import { ApiMessages } from "src/resources/api-messages";
 
 @Injectable()
 export class ProductionBoxService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   async createProductionBox(dto: CreateProductionBoxDto) {
-    const existsBox = await this.prisma.productionBox.findUnique({ where: { uuid: dto.uuid } });
-    if (existsBox) throw new HttpException(ApiMessages.BOX_ALREADY_IN_DATABASE, HttpStatus.BAD_REQUEST);
+    const existsBox = await this.prisma.productionBox.findUnique({
+      where: { uuid: dto.uuid },
+    });
+    if (existsBox)
+      throw new HttpException(
+        ApiMessages.BOX_ALREADY_IN_DATABASE,
+        HttpStatus.BAD_REQUEST,
+      );
     const box = await this.prisma.productionBox.create({ data: { ...dto } });
     return box;
   }

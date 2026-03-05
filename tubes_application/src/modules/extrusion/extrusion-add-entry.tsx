@@ -21,7 +21,6 @@ import ExtrusionEntries from "./entry/extrusion-entries";
 import ExtrusionCloseConfirmModal from "./entry/modals/extrusion-close-confirm-modal";
 import ExtrusionEntryAlertModal from "./entry/modals/extrusion-entry-alert-modal";
 import ExtrusionBooleanEntryModal from "./entry/modals/extrusion-boolean-entry-modal";
-import ExtrusionRadioEntryModal from "./entry/modals/extrusion-radio-entry-modal";
 import { ColorModeProvider } from "@/components/ui/color-mode";
 import { Theme } from "@chakra-ui/react";
 import ExtrusionIntegerEntryModal from "./entry/modals/extrusion-integer-entry-modal";
@@ -55,7 +54,6 @@ export default function ExtrusionAddEntry() {
         <ExtrusionNumericEntryModal />
         <ExtrusionIntegerEntryModal />
         <ExtrusionBooleanEntryModal />
-        <ExtrusionRadioEntryModal />
         <ExtrusionCloseConfirmModal />
         <ExtrusionEntryAlertModal />
       </Theme>

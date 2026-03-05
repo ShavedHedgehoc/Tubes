@@ -1,9 +1,19 @@
-import { Controller, Post, UseInterceptors, UploadedFile, BadRequestException } from "@nestjs/common";
+import {
+  Controller,
+  Post,
+  UseInterceptors,
+  UploadedFile,
+  BadRequestException,
+} from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
-import { Express } from "express";
+import { Express, Request } from "express";
 import { diskStorage } from "multer";
 
-const editFileName = (req, file, callback) => {
+const editFileName = (
+  _req: Request,
+  file: Express.Multer.File,
+  callback: (error: Error | null, filename: string) => void,
+) => {
   //   const name = file.originalname.split(".")[0];
   //   const fileExtName = extname(file.originalname);
   //   const randomName = Array(32)
@@ -16,10 +26,17 @@ const editFileName = (req, file, callback) => {
   callback(null, file.originalname);
 };
 
-const imageFileFilter = (req, file, callback) => {
-  if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+const imageFileFilter = (
+  _req: Request,
+  file: Express.Multer.File,
+  callback: (error: Error | null, acceptFile: boolean) => void,
+) => {
+  if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
     // If the file extension is not valid, reject the file
-    return callback(new BadRequestException("Only image files are allowed!"), false);
+    return callback(
+      new BadRequestException("Only image files are allowed!"),
+      false,
+    );
   }
   // Accept the file
   callback(null, true);
@@ -40,9 +57,12 @@ export class UploadController {
         filename: editFileName, // Use the custom filename function
       }),
       fileFilter: imageFileFilter,
-    })
+    }),
   )
   uploadFile(@UploadedFile() file: Express.Multer.File) {
+    if (!file) {
+      throw new BadRequestException("File is missing or invalid");
+    }
     return {
       message: "File uploaded successfully",
       filename: file.filename,

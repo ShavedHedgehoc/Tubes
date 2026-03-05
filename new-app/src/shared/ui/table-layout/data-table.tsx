@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/shared/lib";
 import {
   Table,
   TableHeader,
@@ -35,23 +36,45 @@ export function DataTable<TData, TValue>({
     <div className="overflow-hidden rounded-md border">
       <Table>
         <TableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
+          {table.getHeaderGroups().map((headerGroup, groupIndex) => (
+            <TableRow key={headerGroup.id} className={cn(
+              // groupIndex === 0 ? "border-b-0" : "border-b"
+              "border-b-0"
+            )}>
               {headerGroup.headers.map((header) => {
+
+                const isGroup = header.column.getLeafColumns().length > 1;
+                const isSingle = !header.column.parent && !isGroup;
+
+
+                if (groupIndex === 1 && isSingle) return null;
+
+
+                const rowSpan = isSingle && groupIndex === 0 ? 2 : 1;
                 return (
-                  <TableHead key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext(),
-                        )}
+                  <TableHead
+                    key={header.id}
+                    colSpan={header.colSpan}
+                    rowSpan={rowSpan}
+                    className={cn(
+                      "text-center align-middle  bg-muted/20",
+                      "h-auto py-2",
+                      groupIndex === 0 && isGroup ? "border-b-0" : "border-b"
+                    )}
+                  >
+                    {flexRender(
+                      header.column.columnDef.header,
+                      header.getContext()
+                    )}
                   </TableHead>
                 );
               })}
             </TableRow>
           ))}
         </TableHeader>
+
+
+
         <TableBody>
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (

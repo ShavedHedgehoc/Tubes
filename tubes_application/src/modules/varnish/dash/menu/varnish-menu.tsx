@@ -25,6 +25,7 @@ export default function VarnishMenu() {
     setOpenLogout,
     setOpenMaterialScan,
     setOpenCloseSummary,
+    handleOpenParametersClick,
     inputParametersButtonDisabledCondition,
     scanMaterialsButtonDisabledCondition,
     operationButtonDisabledCondition,
@@ -37,7 +38,7 @@ export default function VarnishMenu() {
     title: "Параметры",
     icon: <TbAdjustments />,
     disabled: inputParametersButtonDisabledCondition,
-    action: () => navigate(`${RouteNames.VARNISH_ADD_ENTRY_ROOT}/${varnishConveyor?.name}`),
+    action: () => handleOpenParametersClick()
   };
 
   const scanMaterilButtonProps: MenuButtonProps = {

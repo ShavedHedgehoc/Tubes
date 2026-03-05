@@ -1,6 +1,8 @@
 "use client";
 
 import { useEmployeeSearchParams } from "@/entities/employee";
+import { RankEntity } from "@/entities/rank";
+import { cn } from "@/shared/lib";
 import {
   Select,
   SelectContent,
@@ -17,7 +19,7 @@ const LIST_ITEMS = [
   { value: "2", description: "Запрещен" },
 ];
 
-export default function BannedSelector() {
+export default function BannedSelector({ rankListItems }: { rankListItems: RankEntity[] }) {
   const { params, setParams } = useEmployeeSearchParams();
   const currentValue = params.banned?.[0] ?? "All";
 
@@ -38,7 +40,9 @@ export default function BannedSelector() {
     <Select value={currentValue} onValueChange={onValueChange}>
       <SelectTrigger
         size="sm"
-        className=" w-[120px]  text-xs rounded-l-none rounded-r-none border-r-0 focus:ring-0 focus:ring-offset-0"
+        className={cn("w-[120px]  text-xs rounded-l-none",
+          rankListItems.length !== 0 && "rounded-r-none border-r-0",
+          "focus:ring-0 focus:ring-offset-0")}
       >
         <SelectValue>{currentDescription}</SelectValue>
       </SelectTrigger>

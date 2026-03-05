@@ -5,7 +5,7 @@ import AlertModal from "@/shared/components/modals/alert-modal";
 import { useNavigate } from "react-router-dom";
 import { RouteNames } from "@/shared/router/route-names";
 import { useExtrusionConveyorStore } from "../../store/use-extrusion-conveyor-store";
-import { useExtrusionInputStore } from "../../store/use-extrusion-input-current-parameters-store";
+import { useExtrusionInputStore } from "../../store/use-extrusion-input-store";
 
 export default function ExtrusionCloseConfirmModal() {
   const open = useExtrusionCloseConfirmModalStore(useShallow((state) => state.open));

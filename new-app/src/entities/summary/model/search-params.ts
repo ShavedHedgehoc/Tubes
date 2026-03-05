@@ -26,9 +26,6 @@ export const summaryParamsSchema = {
     undefined as unknown as string[],
   ),
   states: parseAsArrayOf(parseAsString),
-  // .withDefault(
-  //   undefined as unknown as string[],
-  // )
   limit: parseAsInteger.withDefault(10),
   page: parseAsInteger.withDefault(1),
 };

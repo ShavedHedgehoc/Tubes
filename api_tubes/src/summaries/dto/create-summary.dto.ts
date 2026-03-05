@@ -1,3 +1,4 @@
+// Добавить валидацию
 interface CreateSummaryRow {
   code1C: string;
   product_marking: string;

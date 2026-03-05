@@ -1,9 +1,10 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { vi, describe, it, expect, beforeEach } from "vitest";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { CreateEmployeeForm } from "../create-employee-form";
+
 import { proxyApiClient } from "@/shared/api/base";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import { CreateEmployeeForm } from "./create-employee-form";
 
 // 1. Мокаем базовый API-клиент (самый нижний уровень)
 vi.mock("@/shared/api/base", () => ({

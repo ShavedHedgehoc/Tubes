@@ -39,19 +39,18 @@ export function formatTwoDatesDiffTimeToString(startDate: Date, endDate: Date) {
 }
 
 export function getFirstDayOfCurrentMonth() {
-  let date = new Date();
+  const date = new Date();
   return new Date(date.getFullYear(), date.getMonth(), 1, 12);
 }
 
 export function getLastDayOfCurrentMonth() {
-  let date = new Date();
+  const date = new Date();
   return new Date(date.getFullYear(), date.getMonth() + 1, 0, 12);
 }
 
 export function getCurrentDay() {
-  let date = new Date();
+  const date = new Date();
   date.setTime(date.getTime() + 3 * 60 * 60 * 1000);
-  // return new Date(date.setHours(12));
   return date;
 }
 

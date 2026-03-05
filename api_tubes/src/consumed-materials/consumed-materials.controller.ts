@@ -6,7 +6,9 @@ import { ConsumedMaterialsService } from "./consumed-materials.service";
 @ApiTags("Используемые комплектующие")
 @Controller("consumed-materials")
 export class ConsumedMaterialsController {
-  constructor(private readonly consumedMaterialService: ConsumedMaterialsService) {}
+  constructor(
+    private readonly consumedMaterialService: ConsumedMaterialsService,
+  ) {}
   @ApiOperation({ summary: "Создать запись используемых комплектующих" })
   @Post()
   createConsumedMaterial(@Body() dto: CreateConsumedMaterialDto) {

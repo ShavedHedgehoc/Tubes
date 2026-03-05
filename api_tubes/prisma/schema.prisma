@@ -1,14 +1,10 @@
 generator client {
-  // provider = "prisma-client"
   provider = "prisma-client-js"
   output   = "../generated/prisma"
-  // previewFeatures = ["typedSql"]
-  // engineType = "client"
 }
 
 datasource db {
   provider = "postgresql"
-  // eslint-disable-next-line
   url      = env("DATABASE_URL")
 }
 
@@ -54,16 +50,13 @@ model Rank {
 
 //  Продукция
 model Product {
-  id                  Int                 @id @default(autoincrement())
-  code                String              @unique
-  marking             String
-  name                String
-  summaries           Summary[]
-  extrusion_tresholds ExtrusionTreshold[]
-  varnish_tresholds   VarnishTreshold[]
-  offset_tresholds    OffsetTreshold[]
-  sealant_tresholds   SealantTreshold[]
-  pictures            Pictures[]
+  id        Int        @id @default(autoincrement())
+  code      String     @unique
+  marking   String
+  name      String
+  summaries Summary[]
+  pictures  Pictures[]
+  tresholds Treshold[]
 
   @@map("products")
 }
@@ -115,14 +108,11 @@ model SealantSopPictures {
 
 // Конвейеры
 model Conveyor {
-  id                 Int                 @id @default(autoincrement())
-  name               String              @unique
-  summaries          Summary[]
-  printers           Printer[]
-  extrusionTresholds ExtrusionTreshold[]
-  varnishTresholds   VarnishTreshold[]
-  offsetTresholds    OffsetTreshold[]
-  sealantTresholds   SealantTreshold[]
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
+  summaries Summary[]
+  printers  Printer[]
+  tresholds Treshold[]
 
   @@map("conveyors")
 }
@@ -160,16 +150,6 @@ model Printer {
   port        Int
 
   @@map("printers")
-}
-
-//  Рондоль
-model Rondel {
-  id                  Int                 @id @default(autoincrement())
-  value               String
-  extrusion_params    ExtrusionParam[]
-  extrusion_tresholds ExtrusionTreshold[]
-
-  @@map("rondels")
 }
 
 // Партии материалов
@@ -315,8 +295,6 @@ model ExtrusionParam {
   blow_time                          Int
   turning_machine_speed              Int
   annealing_furnace_temp             Int
-  rondel                             Rondel   @relation(fields: [rondel_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  rondel_id                          Int
   tube_cilindrical_section_length    Int
   membrane_thickness                 Float
   tube_diameter                      Float
@@ -325,44 +303,12 @@ model ExtrusionParam {
   tube_cutting_quality               Boolean  @default(false)
   tightness                          Boolean  @default(false)
   external_thread_quality            Boolean  @default(false)
+  tube_marking                       Boolean  @default(false)
   employee                           Employee @relation(fields: [employee_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   employee_id                        Int
   createdAt                          DateTime @default(now())
 
   @@map("extrusion_params")
-}
-
-// Границы экструзии
-model ExtrusionTreshold {
-  id                                     Int      @id @default(autoincrement())
-  product                                Product  @relation(fields: [product_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  product_id                             Int
-  conveyor                               Conveyor @relation(fields: [conveyor_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  conveyor_id                            Int
-  press_speed_min                        Int
-  press_speed_max                        Int
-  blow_time_min                          Int
-  blow_time_max                          Int
-  turning_machine_speed_min              Int
-  turning_machine_speed_max              Int
-  annealing_furnace_temp_min             Int
-  annealing_furnace_temp_max             Int
-  rondel                                 Rondel   @relation(fields: [rondel_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  rondel_id                              Int
-  tube_cilindrical_section_length_min    Int
-  tube_cilindrical_section_length_max    Int
-  membrane_thickness_min                 Float
-  membrane_thickness_max                 Float
-  tube_diameter_min                      Float
-  tube_diameter_max                      Float
-  tube_cilindrical_section_thickness_min Float
-  tube_cilindrical_section_thickness_max Float
-  tube_rigidity_min                      Int
-  tube_rigidity_max                      Int
-  external_thread_value                  String
-  createdAt                              DateTime @default(now())
-
-  @@map("extrusion_tresholds")
 }
 
 //varnish
@@ -398,51 +344,6 @@ model VarnishParam {
   @@map("varnish_params")
 }
 
-model VarnishTreshold {
-  id                                Int      @id @default(autoincrement())
-  product                           Product  @relation(fields: [product_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  product_id                        Int
-  conveyor                          Conveyor @relation(fields: [conveyor_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  conveyor_id                       Int
-  varnish_machine_speed_min         Int
-  varnish_machine_speed_max         Int
-  total_air_pressure_min            Float
-  total_air_pressure_max            Float
-  feed_can_air_pressure_min         Float
-  feed_can_air_pressure_max         Float
-  nozzle_regulator_air_pressure_min Float
-  nozzle_regulator_air_pressure_max Float
-  cells_speed_min                   Int
-  cells_speed_max                   Int
-  injection_a_start_position_min    Int
-  injection_a_start_position_max    Int
-  injection_b_start_position_min    Int
-  injection_b_start_position_max    Int
-  injection_c_start_position_min    Int
-  injection_c_start_position_max    Int
-  injection_d_start_position_min    Int
-  injection_d_start_position_max    Int
-  injection_a_end_position_min      Int
-  injection_a_end_position_max      Int
-  injection_b_end_position_min      Int
-  injection_b_end_position_max      Int
-  injection_c_end_position_min      Int
-  injection_c_end_position_max      Int
-  injection_d_end_position_min      Int
-  injection_d_end_position_max      Int
-  tube_molding_start_position_min   Int
-  tube_molding_start_position_max   Int
-  tube_molding_end_position_min     Int
-  tube_molding_end_position_max     Int
-  polimerization_furnace_temp_min   Int
-  polimerization_furnace_temp_max   Int
-  internal_varnish_porosity_min     Float
-  internal_varnish_porosity_max     Float
-  createdAt                         DateTime @default(now())
-
-  @@map("varnish_tresholds")
-}
-
 //offset
 model OffsetParam {
   id                             Int      @id @default(autoincrement())
@@ -464,7 +365,7 @@ model OffsetParam {
   imprint_quantity_printed_box_6 Int?
   ink_supply_time                Float
   design_match                   Boolean  @default(false)
-  tube_apperarance               Boolean  @default(false)
+  tube_appearance                Boolean  @default(false)
   tube_edge_deformation_lack     Boolean  @default(false)
   aluminium_clearance_lack       Boolean  @default(false)
   drips_lack                     Boolean  @default(false)
@@ -473,45 +374,6 @@ model OffsetParam {
   createdAt                      DateTime @default(now())
 
   @@map("offset_params")
-}
-
-model OffsetTreshold {
-  id                                 Int      @id @default(autoincrement())
-  product                            Product  @relation(fields: [product_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  product_id                         Int
-  conveyor                           Conveyor @relation(fields: [conveyor_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  conveyor_id                        Int
-  printing_machine_speed_min         Int
-  printing_machine_speed_max         Int
-  total_air_pressure_min             Int
-  total_air_pressure_max             Int
-  padding_furnace_temp_min           Int
-  padding_furnace_temp_max           Int
-  offset_furnace_temp_min            Int
-  offset_furnace_temp_max            Int
-  printer_motor_min                  Int
-  printer_motor_max                  Int
-  base_covers_holders_motor_min      Int
-  base_covers_holders_motor_max      Int
-  base_covers_station_motor_min      Int
-  base_covers_station_motor_max      Int
-  imprint_quantity_printed_box_1_min Int?
-  imprint_quantity_printed_box_1_max Int?
-  imprint_quantity_printed_box_2_min Int?
-  imprint_quantity_printed_box_2_max Int?
-  imprint_quantity_printed_box_3_min Int?
-  imprint_quantity_printed_box_3_max Int?
-  imprint_quantity_printed_box_4_min Int?
-  imprint_quantity_printed_box_4_max Int?
-  imprint_quantity_printed_box_5_min Int?
-  imprint_quantity_printed_box_5_max Int?
-  imprint_quantity_printed_box_6_min Int?
-  imprint_quantity_printed_box_6_max Int?
-  ink_supply_time_min                Float
-  ink_supply_time_max                Float
-  createdAt                          DateTime @default(now())
-
-  @@map("offset_tresholds")
 }
 
 //sealant
@@ -543,49 +405,6 @@ model SealantParam {
   createdAt                        DateTime @default(now())
 
   @@map("sealant_params")
-}
-
-model SealantTreshold {
-  id                                   Int      @id @default(autoincrement())
-  product                              Product  @relation(fields: [product_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  product_id                           Int
-  conveyor                             Conveyor @relation(fields: [conveyor_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  conveyor_id                          Int
-  cap_machine_speed_min                Int
-  cap_machine_speed_max                Int
-  total_air_pressure_min               Float
-  total_air_pressure_max               Float
-  holders_forward_min                  Int
-  holders_forward_max                  Int
-  holders_opening_left_min             Int
-  holders_opening_left_max             Int
-  holders_opening_right_min            Int
-  holders_opening_right_max            Int
-  holders_closing_min                  Int
-  holders_closing_max                  Int
-  injection_a_start_min                Int
-  injection_a_start_max                Int
-  injection_b_start_min                Int
-  injection_b_start_max                Int
-  injection_a_end_min                  Int
-  injection_a_end_max                  Int
-  injection_b_end_min                  Int
-  injection_b_end_max                  Int
-  injection_tube_orientation_start_min Int
-  injection_tube_orientation_start_max Int
-  injection_tube_orientation_end_min   Int
-  injection_tube_orientation_end_max   Int
-  latex_ring_padding_min               Int
-  latex_ring_padding_max               Int
-  latex_ring_width_min                 Int
-  latex_ring_width_max                 Int
-  tube_rigidity_min                    Int
-  tube_rigidity_max                    Int
-  cap_unscrewing_torque_min            Int
-  cap_unscrewing_torque_max            Int
-  createdAt                            DateTime @default(now())
-
-  @@map("sealant_tresholds")
 }
 
 model ExtrusionOperation {
@@ -698,4 +517,128 @@ model SealantStatus {
   createdAt     DateTime          @default(now())
 
   @@map("sealant_statuses")
+}
+
+model Treshold {
+  id                                               Int      @id @default(autoincrement())
+  product                                          Product  @relation(fields: [product_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  product_id                                       Int
+  conveyor                                         Conveyor @relation(fields: [conveyor_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  conveyor_id                                      Int
+  extrusion_press_speed_min                        Int
+  extrusion_press_speed_max                        Int
+  extrusion_blow_time_min                          Int
+  extrusion_blow_time_max                          Int
+  extrusion_turning_machine_speed_min              Int
+  extrusion_turning_machine_speed_max              Int
+  extrusion_annealing_furnace_temp_min             Int
+  extrusion_annealing_furnace_temp_max             Int
+  extrusion_tube_cilindrical_section_length_min    Int
+  extrusion_tube_cilindrical_section_length_max    Int
+  extrusion_membrane_thickness_min                 Float
+  extrusion_membrane_thickness_max                 Float
+  extrusion_tube_diameter_min                      Float
+  extrusion_tube_diameter_max                      Float
+  extrusion_tube_cilindrical_section_thickness_min Float
+  extrusion_tube_cilindrical_section_thickness_max Float
+  extrusion_tube_rigidity_min                      Int
+  extrusion_tube_rigidity_max                      Int
+  extrusion_external_thread_value                  String
+  varnish_varnish_machine_speed_min                Int
+  varnish_varnish_machine_speed_max                Int
+  varnish_total_air_pressure_min                   Float
+  varnish_total_air_pressure_max                   Float
+  varnish_feed_can_air_pressure_min                Float
+  varnish_feed_can_air_pressure_max                Float
+  varnish_nozzle_regulator_air_pressure_min        Float
+  varnish_nozzle_regulator_air_pressure_max        Float
+  varnish_cells_speed_min                          Int
+  varnish_cells_speed_max                          Int
+  varnish_injection_a_start_position_min           Int
+  varnish_injection_a_start_position_max           Int
+  varnish_injection_b_start_position_min           Int
+  varnish_injection_b_start_position_max           Int
+  varnish_injection_c_start_position_min           Int
+  varnish_injection_c_start_position_max           Int
+  varnish_injection_d_start_position_min           Int
+  varnish_injection_d_start_position_max           Int
+  varnish_injection_a_end_position_min             Int
+  varnish_injection_a_end_position_max             Int
+  varnish_injection_b_end_position_min             Int
+  varnish_injection_b_end_position_max             Int
+  varnish_injection_c_end_position_min             Int
+  varnish_injection_c_end_position_max             Int
+  varnish_injection_d_end_position_min             Int
+  varnish_injection_d_end_position_max             Int
+  varnish_tube_molding_start_position_min          Int
+  varnish_tube_molding_start_position_max          Int
+  varnish_tube_molding_end_position_min            Int
+  varnish_tube_molding_end_position_max            Int
+  varnish_polimerization_furnace_temp_min          Int
+  varnish_polimerization_furnace_temp_max          Int
+  varnish_internal_varnish_porosity_min            Float
+  varnish_internal_varnish_porosity_max            Float
+  offset_printing_machine_speed_min                Int
+  offset_printing_machine_speed_max                Int
+  offset_total_air_pressure_min                    Int
+  offset_total_air_pressure_max                    Int
+  offset_padding_furnace_temp_min                  Int
+  offset_padding_furnace_temp_max                  Int
+  offset_offset_furnace_temp_min                   Int
+  offset_offset_furnace_temp_max                   Int
+  offset_printer_motor_min                         Int
+  offset_printer_motor_max                         Int
+  offset_base_covers_holders_motor_min             Int
+  offset_base_covers_holders_motor_max             Int
+  offset_base_covers_station_motor_min             Int
+  offset_base_covers_station_motor_max             Int
+  offset_imprint_quantity_printed_box_1_min        Int?
+  offset_imprint_quantity_printed_box_1_max        Int?
+  offset_imprint_quantity_printed_box_2_min        Int?
+  offset_imprint_quantity_printed_box_2_max        Int?
+  offset_imprint_quantity_printed_box_3_min        Int?
+  offset_imprint_quantity_printed_box_3_max        Int?
+  offset_imprint_quantity_printed_box_4_min        Int?
+  offset_imprint_quantity_printed_box_4_max        Int?
+  offset_imprint_quantity_printed_box_5_min        Int?
+  offset_imprint_quantity_printed_box_5_max        Int?
+  offset_imprint_quantity_printed_box_6_min        Int?
+  offset_imprint_quantity_printed_box_6_max        Int?
+  offset_ink_supply_time_min                       Float
+  offset_ink_supply_time_max                       Float
+  sealant_cap_machine_speed_min                    Int
+  sealant_cap_machine_speed_max                    Int
+  sealant_total_air_pressure_min                   Float
+  sealant_total_air_pressure_max                   Float
+  sealant_holders_forward_min                      Int
+  sealant_holders_forward_max                      Int
+  sealant_holders_opening_left_min                 Int
+  sealant_holders_opening_left_max                 Int
+  sealant_holders_opening_right_min                Int
+  sealant_holders_opening_right_max                Int
+  sealant_holders_closing_min                      Int
+  sealant_holders_closing_max                      Int
+  sealant_injection_a_start_min                    Int
+  sealant_injection_a_start_max                    Int
+  sealant_injection_b_start_min                    Int
+  sealant_injection_b_start_max                    Int
+  sealant_injection_a_end_min                      Int
+  sealant_injection_a_end_max                      Int
+  sealant_injection_b_end_min                      Int
+  sealant_injection_b_end_max                      Int
+  sealant_injection_tube_orientation_start_min     Int
+  sealant_injection_tube_orientation_start_max     Int
+  sealant_injection_tube_orientation_end_min       Int
+  sealant_injection_tube_orientation_end_max       Int
+  sealant_latex_ring_padding_min                   Int
+  sealant_latex_ring_padding_max                   Int
+  sealant_latex_ring_width_min                     Int
+  sealant_latex_ring_width_max                     Int
+  sealant_tube_rigidity_min                        Int
+  sealant_tube_rigidity_max                        Int
+  sealant_cap_unscrewing_torque_min                Int
+  sealant_cap_unscrewing_torque_max                Int
+  createdAt                                        DateTime @default(now())
+
+  @@map("tresholds")
 }

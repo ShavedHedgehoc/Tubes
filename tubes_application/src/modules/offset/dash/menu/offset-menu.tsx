@@ -25,6 +25,7 @@ export default function OffsetMenu() {
     setOpenLogout,
     setOpenMaterialScan,
     setOpenCloseSummary,
+    handleOpenParametersClick,
     inputParametersButtonDisabledCondition,
     scanMaterialsButtonDisabledCondition,
     operationButtonDisabledCondition,
@@ -37,7 +38,7 @@ export default function OffsetMenu() {
     title: "Параметры",
     icon: <TbAdjustments />,
     disabled: inputParametersButtonDisabledCondition,
-    action: () => navigate(`${RouteNames.OFFSET_ADD_ENTRY_ROOT}/${offsetConveyor?.name}`),
+    action: () => handleOpenParametersClick(),
   };
 
   const scanMaterilButtonProps: MenuButtonProps = {

@@ -5,10 +5,12 @@ import {
   useExtrusionAuthModalStore,
   useExtrusionMaterialScanModalStore,
   useExtrusionLogoutModalStore,
-  // useExtrusionAlertCloseSummaryModalStore,
   useExtrusionCloseSummaryModalStore,
 } from "../../store/use-extrusion-modal-store";
 import { useActiveSummary } from "@/shared/api/use-active-summary";
+import { ExtrusionInputParams, useExtrusionInputStore } from "../../store/use-extrusion-input-store";
+import { useNavigate } from "react-router-dom";
+import { RouteNames } from "@/shared/router/route-names";
 
 export default function useExtrusionMenu() {
   const employee = useExtrusionEmployeeStore(useShallow((state) => state.extrusionEmployee));
@@ -17,8 +19,10 @@ export default function useExtrusionMenu() {
   const setOpenAuth = useExtrusionAuthModalStore(useShallow((state) => state.setOpen));
   const setOpenMaterialScan = useExtrusionMaterialScanModalStore(useShallow((state) => state.setOpen));
   const setOpenLogout = useExtrusionLogoutModalStore(useShallow((state) => state.setOpen));
-  // const setOpenCloseSummary = useExtrusionAlertCloseSummaryModalStore(useShallow((state) => state.setOpen));
   const setOpenCloseSummary = useExtrusionCloseSummaryModalStore(useShallow((state) => state.setOpen));
+
+  const navigate = useNavigate()
+  const setData = useExtrusionInputStore(useShallow((state) => state.setData));
 
   const inputParametersButtonDisabledCondition =
     !employee ||
@@ -26,7 +30,7 @@ export default function useExtrusionMenu() {
     summaryData.extrusionStatus.idle ||
     !summaryData.extrusion_materials.length ||
     summaryData.extrusionStatus.finished ||
-    !summaryData.extrusionTresholds ||
+    !summaryData.tresholds ||
     summaryData.extrusion_materials.map((item) => item.scanned).includes(false);
 
   const scanMaterialsButtonDisabledCondition =
@@ -34,7 +38,7 @@ export default function useExtrusionMenu() {
     !summaryData ||
     summaryData.extrusionStatus.finished ||
     summaryData.extrusionStatus.idle ||
-    !summaryData.extrusionTresholds;
+    !summaryData.tresholds;
 
   const operationButtonDisabledCondition =
     !employee || !summaryData || !summaryData.extrusionStatus.createdAt || summaryData.extrusionStatus.finished;
@@ -48,6 +52,32 @@ export default function useExtrusionMenu() {
     summaryData.extrusionStatus.idle ||
     summaryData.extrusionStatus.finished;
 
+  const handleOpenParametersClick = () => {
+    const params = summaryData?.extrusionParams ?? null
+
+    const pressSpeed = String(params?.press_speed ?? "0");
+    const blowTime = String(params?.blow_time ?? "0");
+    const turningMachineSpeed = String(params?.turning_machine_speed ?? "0");
+    // const annealingFurnaceTemp = String(params?.annealing_furnace_temp ?? "0");
+    // const tubeCilindricalSectionLength = String(params?.tube_cilindrical_section_length ?? "0");
+    // const membraneThickness = String(params?.membrane_thickness ?? "0");
+    const tubeDiameter = String(params?.tube_diameter ?? "0");
+    // const tubeCilindricalSectionThickness = String(params?.tube_cilindrical_section_thickness ?? "0");
+    // const tubeRigidity = String(params?.tube_rigidity ?? "0");
+
+    setData({ key: ExtrusionInputParams.PRESS_SPEED, value: pressSpeed })
+    setData({ key: ExtrusionInputParams.BLOW_TIME, value: blowTime })
+    setData({ key: ExtrusionInputParams.TURNING_MACHINE_SPEED, value: turningMachineSpeed })
+
+    // setData({ key: ExtrusionInputParams.ANNEALING_FURNACE_TEMP, value: annealingFurnaceTemp })
+    // setData({ key: ExtrusionInputParams.TUBE_CILINDRICAL_SECTION_LENGTH, value: tubeCilindricalSectionLength })
+    // setData({ key: ExtrusionInputParams.MEMBRANE_THICKNESS, value: membraneThickness })
+    setData({ key: ExtrusionInputParams.TUBE_DIAMETER, value: tubeDiameter })
+    // setData({ key: ExtrusionInputParams.TUBE_CILINDRICAL_THICKNESS, value: tubeCilindricalSectionThickness })
+    // setData({ key: ExtrusionInputParams.TUBE_RIGIDITY, value: tubeRigidity })
+    navigate(`${RouteNames.EXTRUSION_ADD_ENTRY_ROOT}/${extrusionConveyor?.name}`)
+  }
+
   return {
     employee,
     extrusionConveyor,
@@ -55,6 +85,7 @@ export default function useExtrusionMenu() {
     setOpenLogout,
     setOpenMaterialScan,
     setOpenCloseSummary,
+    handleOpenParametersClick,
     inputParametersButtonDisabledCondition,
     scanMaterialsButtonDisabledCondition,
     operationButtonDisabledCondition,

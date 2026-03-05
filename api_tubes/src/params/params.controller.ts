@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Post } from "@nestjs/common";
 import { ParamsService } from "./params.service";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import { CreateExtrusionEntryDto } from "./dto/create-extrusion-entry.dto";

@@ -1,6 +1,12 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
-import { IsNotEmpty, IsNumber, IsString, MaxLength, MinLength } from "class-validator";
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  MaxLength,
+  MinLength,
+} from "class-validator";
 
 export class UpdateEmployeeDto {
   @ApiProperty({ example: 1, description: "id сотрудника" })

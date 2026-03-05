@@ -1,6 +1,16 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
-import { Transform, Type } from "class-transformer";
-import { IsArray, IsDate, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
+import { Type } from "class-transformer";
+import {
+  IsArray,
+  IsDate,
+  IsInt,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from "class-validator";
+import { ToNumber } from "src/shared/lib/to-number.decorator";
+import { ToNumbersArray } from "src/shared/lib/to-numbers-array.decorator";
 
 export class GetSummariesListDto {
   @ApiProperty({ description: "Дата начала", example: "2025-12-19" })
@@ -15,42 +25,34 @@ export class GetSummariesListDto {
   @IsNotEmpty()
   readonly end_date: Date;
 
-  @ApiPropertyOptional({
-    description: "Код",
-  })
+  @ApiPropertyOptional({ description: "Код" })
   @IsString()
   @IsOptional()
   readonly code?: string;
 
   @ApiPropertyOptional({ description: "Конвейеры" })
   @IsOptional()
+  @ToNumbersArray()
   @IsArray()
   @IsInt({ each: true })
-  @Transform(({ value }) => {
-    const stringArray = Array.isArray(value) ? value : value.split(",");
-    return stringArray.map((item: string) => parseInt(item, 10));
-  })
   readonly conveyors?: number[];
 
   @ApiPropertyOptional({ description: "Статусы" })
   @IsOptional()
+  @ToNumbersArray()
   @IsArray()
   @IsInt({ each: true })
-  @Transform(({ value }) => {
-    const stringArray = Array.isArray(value) ? value : value.split(",");
-    return stringArray.map((item: string) => parseInt(item, 10));
-  })
   readonly states?: number[];
 
   @ApiProperty({ description: "На странице", example: 10 })
   @IsNotEmpty()
-  @Type(() => Number)
-  @IsNumber()
+  @ToNumber()
+  @IsNumber({}, { message: "Поле должно быть числом" })
   readonly limit: number;
 
   @ApiProperty({ description: "Страница", example: 1 })
   @IsNotEmpty()
-  @Type(() => Number)
-  @IsNumber()
+  @ToNumber()
+  @IsNumber({}, { message: "Поле должно быть числом" })
   readonly page: number;
 }

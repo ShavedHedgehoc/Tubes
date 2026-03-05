@@ -11,8 +11,14 @@ export class OperationsController {
   @ApiOperation({ summary: "Получить операции поста 1" })
   @ApiQuery({ name: "rank", required: false, type: String })
   @ApiQuery({ name: "id", required: false, type: String })
-  getExtrusionOperations(@Query("rank") rank?: string, @Query("id") id?: string) {
-    return this.operationsService.getExtrusionOperations({ rank: rank, id: id });
+  getExtrusionOperations(
+    @Query("rank") rank?: string,
+    @Query("id") id?: string,
+  ) {
+    return this.operationsService.getExtrusionOperations({
+      rank: rank,
+      id: id,
+    });
   }
   @Get("/varnish")
   @ApiOperation({ summary: "Получить операции поста 2" })

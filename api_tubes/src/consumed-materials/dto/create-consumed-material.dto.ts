@@ -9,6 +9,9 @@ export class CreateConsumedMaterialDto {
   readonly post_id: number;
   @ApiProperty({ example: "067792", description: "Код 1С комплектуюшей" })
   readonly code: string;
-  @ApiProperty({ example: "07286593690910202501", description: "Партия комплектующей" })
+  @ApiProperty({
+    example: "07286593690910202501",
+    description: "Партия комплектующей",
+  })
   readonly lot: string;
 }

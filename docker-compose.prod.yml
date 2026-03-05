@@ -8,7 +8,7 @@ services:
         max-size: "10m"
         max-file: "3"
     environment:
-      POSTGRES_DB: "summary"
+      POSTGRES_DB:  ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USERNAME}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
@@ -19,15 +19,15 @@ services:
 
   pgadmin:
     container_name: pgadmin_container
-    image: dpage/pgadmin4:9.10
+    image: dpage/pgadmin4:9.12
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
         max-file: "3"
     environment:
-      PGADMIN_DEFAULT_EMAIL: "eagle221174@gmail.com"
-      PGADMIN_DEFAULT_PASSWORD: "1"
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
       PGADMIN_CONFIG_SERVER_MODE: "False"
     volumes:
       - pgadmin-data:/var/lib/pgadmin
@@ -37,43 +37,7 @@ services:
     networks:
       - postgres
     depends_on:
-      - postgres
-
-  api:
-    container_name: api_container
-    build:
-      context: .
-      dockerfile: docker/api/Dockerfile.prod
-      args:
-        - NODE_ENV=production
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-    environment:
-      POSTGRES_HOST: postgres
-      POSTGRES_PORT: "5432"
-      POSTGRES_USERNAME: ${POSTGRES_USERNAME}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: "summary"
-      PORT: "7000"
-      BOT_TOKEN: ${BOT_TOKEN}
-      CHAT_ID: ${CHAT_ID}
-      KLP_TECHNOLOGIST_CHAT_ID: ${KLP_TECHNOLOGIST_CHAT_ID}
-      PSK_TECHNOLOGIST_CHAT_ID: ${PSK_TECHNOLOGIST_CHAT_ID}
-      KLP_PACKAGING_CHAT_ID: ${KLP_PACKAGING_CHAT_ID}
-      PSK_PACKAGING_CHAT_ID: ${PSK_PACKAGING_CHAT_ID}
-      MSSQL_HOST: ${MSSQL_HOST}
-      MSSQL_USERNAME: ${MSSQL_USERNAME}
-      MSSQL_PASSWORD: ${MSSQL_PASSWORD}
-      MSSQL_DB: ${MSSQL_DB}
-    depends_on:
-      - postgres
-    restart: always
-    networks:
-      - postgres
-      - general
+      - postgres  
   tubes_api:
     container_name: api_tubes
     build:
@@ -82,12 +46,12 @@ services:
       args:
         - NODE_ENV=production
     environment:
-      DATABASE_URL: postgresql://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@postgres:5432/tubesdb?schema=public
-      POSTGRES_HOST: postgres
+      DATABASE_URL: postgresql://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/${POSTGRES_DB}?schema=public
+      POSTGRES_HOST: ${POSTGRES_HOST}
       POSTGRES_PORT: "5432"
       POSTGRES_USERNAME: ${POSTGRES_USERNAME}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: "tubes_db"
+      POSTGRES_DB: ${POSTGRES_DB}
       PORT: "7100"
     volumes:
       - files-data:/api_tubes/uploads 
@@ -97,25 +61,6 @@ services:
     networks:
       - postgres
       - general
-
-  app:
-    container_name: app_container
-    build:
-      context: .
-      dockerfile: docker/application/Dockerfile.prod
-      args:
-        - NODE_ENV=production    
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-    depends_on:
-      - api
-    restart: always
-    networks:
-      - general
-
   new_app:
     container_name: new_app
     build:
@@ -123,11 +68,11 @@ services:
       dockerfile: docker/new-app/Dockerfile.prod
       args:
         - NODE_ENV=production        
-        - NEXT_PUBLIC_API_URL=/api_tubes
-        - INTERNAL_API_URL=http://tubes_api:7100/api_tubes
+        - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+        - INTERNAL_API_URL=${INTERNAL_API_URL}
     environment:
-      - NEXT_PUBLIC_API_URL=/api_tubes
-      - INTERNAL_API_URL=http://tubes_api:7100/api_tubes
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+      - INTERNAL_API_URL=${INTERNAL_API_URL}
     logging:
       driver: "json-file"
       options:
@@ -168,12 +113,12 @@ services:
     restart: always
     ports:
       - "80:80"      
-      - "3100:3100"    
-      - "3200:3200"  
+      - "3100:3100"           
     networks:
       - general
     depends_on:
-      - app      
+      - tubes_dash
+      - new_app      
 
   nginx-file-server:
     container_name: nginx_file_server_container
@@ -190,11 +135,8 @@ services:
     ports:
       - "8080:8080"
     restart: always
-    networks:
-      - postgres
-      - general
-    depends_on:
-      - postgres
+    networks:      
+      - general    
 
 volumes:
   summary-data:

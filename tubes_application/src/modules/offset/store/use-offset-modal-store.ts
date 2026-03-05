@@ -6,44 +6,21 @@ interface SimplyModalStore {
   setOpen: (val: boolean) => void;
 }
 
-export const useOffsetAuthModalStore = create<SimplyModalStore>()(
-  devtools((set) => ({
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-  }))
-);
 
-export const useOffsetLogoutModalStore = create<SimplyModalStore>()(
-  devtools((set) => ({
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-  }))
-);
+const createModalStore = (name: string) =>
+  create<SimplyModalStore>()(
+    devtools(
+      (set) => ({
+        open: false,
+        setOpen: (value) => set({ open: value }),
+      }),
+      { name: `ModalStore/${name}` }
+    )
+  );
 
-export const useOffsetCloseConfirmModalStore = create<SimplyModalStore>()(
-  devtools((set) => ({
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-  }))
-);
-
-export const useOffsetMaterialScanModalStore = create<SimplyModalStore>()(
-  devtools((set) => ({
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-  }))
-);
-
-export const useOffsetCloseSummaryModalStore = create<SimplyModalStore>()(
-  devtools((set) => ({
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-  }))
-);
-
-export const useOffsetDefectInputModalStore = create<SimplyModalStore>()(
-  devtools((set) => ({
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-  }))
-);
+export const useOffsetAuthModalStore = createModalStore("Auth");
+export const useOffsetLogoutModalStore = createModalStore("Logout");
+export const useOffsetCloseConfirmModalStore = createModalStore("CloseConfirm");
+export const useOffsetMaterialScanModalStore = createModalStore("MaterialScan");
+export const useOffsetCloseSummaryModalStore = createModalStore("CloseSummary");
+export const useOffsetDefectInputModalStore = createModalStore("DefectInput");
