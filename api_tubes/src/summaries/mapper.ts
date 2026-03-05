@@ -165,7 +165,7 @@ export interface IMappedOperation {
   finished: boolean;
   state: state;
   operation_description: string;
-  createdAt: Date;
+  createdAt: Date | null;
   operation_id: number | null;
 }
 
@@ -259,22 +259,23 @@ export const mappedStatus = ({
 }: {
   status: ExtrusionStatus | SealantStatus | VarnishStatus | OffsetStatus | null;
   operation:
-    | ExtrusionOperation
-    | VarnishOperation
-    | OffsetOperation
-    | SealantOperation
-    | null;
-}): IMappedOperation | null => {
-  if (!status) return null;
-  // return {
-  //   idle: false,
-  //   finished: false,
-  //   state: "working",
-  //   operation_description: "-",
-  //   createdAt: null,
-  //   operation_id: null,
+  | ExtrusionOperation
+  | VarnishOperation
+  | OffsetOperation
+  | SealantOperation
+  | null;
+}): IMappedOperation => {
+  if (!status) {
+    return {
+      idle: false,
+      finished: false,
+      state: "working",
+      operation_description: "-",
+      createdAt: null,
+      operation_id: null
+    }
+  }
 
-  // };
 
   return {
     idle: status.idle,

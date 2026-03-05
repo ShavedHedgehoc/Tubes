@@ -44,7 +44,7 @@ class IStatus {
   finished: boolean;
   state: state;
   operation_description: string;
-  createdAt: Date;
+  createdAt: Date | null;
   operation_id: number | null;
 }
 class ISummaryData {
@@ -180,13 +180,13 @@ export class ActiveSummaryResponse {
   varnish_materials: IMaterial[] | [];
   offset_materials: IMaterial[] | [];
   sealant_materials: IMaterial[] | [];
-  extrusionStatus: IStatus | null;
+  extrusionStatus: IStatus
   extrusionOperations: IOperation[] | [];
-  varnishStatus: IStatus | null;
+  varnishStatus: IStatus;
   varnishOperations: IOperation[] | [];
-  offsetStatus: IStatus | null;
+  offsetStatus: IStatus;
   offsetOperations: IOperation[] | [];
-  sealantStatus: IStatus | null;
+  sealantStatus: IStatus;
   sealantOperations: IOperation[] | [];
   extrusionIdleTime: number;
   varnishIdleTime: number;
