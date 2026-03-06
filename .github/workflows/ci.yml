@@ -2,9 +2,9 @@ name: Monorepo CI
 
 on:
   push:
-    branches: [ main, release ]
-  pull_request:
     branches: [ main ]
+  pull_request:
+    branches: [ main, release ]
 
 jobs:
   # --- Job для NestJS (api_tubes) ---
