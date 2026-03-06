@@ -2,23 +2,26 @@ name: Release & Versioning
 
 on:
   push:
-    branches: [release] # Срабатывает при слиянии в release
+    branches: [release]
 
 jobs:
   bump-and-tag:
+    # Проверка [skip ci], чтобы GitHub Actions не запускал сам себя после пуша версии
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Нужно для истории коммитов
+          fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: 'npm'
 
       - name: Git Config
         run: |
@@ -26,25 +29,22 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Bump Version
-        # --include-workspace-root обновит версию во всём монорепозитории (api, app, dash)
-        # patch увеличит 1.0.0 -> 1.0.1
-        run: npm version patch --include-workspace-root --workspaces
-
-      - name: Push Changes & Tags
+        # Добавляем сообщение коммита с [skip ci], чтобы избежать бесконечного цикла
         run: |
-          git push origin release
-          git push --tags
+          npm version patch --include-workspace-root --workspaces -m "chore: bump version to %s [skip ci]"
+
+      - name: Push Changes & Tags to Release
+        run: |
+          # Пушим коммит и тег в ветку release
+          git push origin release --follow-tags
 
       - name: Sync version to Main
         run: |
-          # Переключаемся на main (fetch-depth: 0 уже есть в начале)
           git fetch origin main
           git checkout main
-
-          # Вливаем изменения из release (где уже поднята версия) в main
-          # --ff-only гарантирует, что мы не создадим лишний merge-коммит, 
-          # если ветки не разошлись. Если разошлись — будет ошибка.
-          git merge release --ff-only 
-
-          # Пушим обновленный package.json в main
+          
+          # Если main ушел вперед, --ff-only упадет. 
+          # Используем обычный merge, чтобы просто забрать версию.
+          git merge release -m "chore: sync version from release [skip ci]"
+          
           git push origin main
