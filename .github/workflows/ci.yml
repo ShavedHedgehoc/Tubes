@@ -55,4 +55,4 @@ jobs:
       - name: Install
         run: npm ci
       - name: Build
-        run: npm run build -w new_app
+        run: npm run build -w new-app
