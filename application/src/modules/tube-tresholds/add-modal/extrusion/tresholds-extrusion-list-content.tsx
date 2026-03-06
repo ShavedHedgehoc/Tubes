@@ -61,13 +61,13 @@ export default function TresholdsExtrusionListContent() {
         onChange={changeTresholds}
       />
       <TresholdsMinMaxEntry
-        idMin={ExtrusionTresholdsParams.TUBE_CILINDRICAL_SECTION_LENGTH_MIN}
-        idMax={ExtrusionTresholdsParams.TUBE_CILINDRICAL_SECTION_LENGTH_MAX}
-        title={`${ParameterNames.EXTRUSION_TUBE_CILINDRICAL_SECTION_LENGTH}: `}
+        idMin={ExtrusionTresholdsParams.TUBE_CYLINDRICAL_SECTION_LENGTH_MIN}
+        idMax={ExtrusionTresholdsParams.TUBE_CYLINDRICAL_SECTION_LENGTH_MAX}
+        title={`${ParameterNames.EXTRUSION_TUBE_CYLINDRICAL_SECTION_LENGTH}: `}
         isInteger={true}
         required={true}
-        minValue={tresholds.tube_cilindrical_section_length_min}
-        maxValue={tresholds.tube_cilindrical_section_length_max}
+        minValue={tresholds.tube_cylindrical_section_length_min}
+        maxValue={tresholds.tube_cylindrical_section_length_max}
         onChange={changeTresholds}
       />
       <TresholdsMinMaxEntry
@@ -81,13 +81,13 @@ export default function TresholdsExtrusionListContent() {
         onChange={changeTresholds}
       />
       <TresholdsMinMaxEntry
-        idMin={ExtrusionTresholdsParams.TUBE_CILINDRICAL_SECTION_THICKNESS_MIN}
-        idMax={ExtrusionTresholdsParams.TUBE_CILINDRICAL_SECTION_THICKNESS_MAX}
-        title={`${ParameterNames.EXTRUSION_TUBE_CILINDRICAL_THICKNESS}: `}
+        idMin={ExtrusionTresholdsParams.TUBE_CYLINDRICAL_SECTION_THICKNESS_MIN}
+        idMax={ExtrusionTresholdsParams.TUBE_CYLINDRICAL_SECTION_THICKNESS_MAX}
+        title={`${ParameterNames.EXTRUSION_TUBE_CYLINDRICAL_THICKNESS}: `}
         isInteger={false}
         required={true}
-        minValue={tresholds.tube_cilindrical_section_thickness_min}
-        maxValue={tresholds.tube_cilindrical_section_thickness_max}
+        minValue={tresholds.tube_cylindrical_section_thickness_min}
+        maxValue={tresholds.tube_cylindrical_section_thickness_max}
         onChange={changeTresholds}
       />
       <TresholdsMinMaxEntry

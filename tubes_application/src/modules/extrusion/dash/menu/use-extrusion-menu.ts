@@ -59,10 +59,10 @@ export default function useExtrusionMenu() {
     const blowTime = String(params?.blow_time ?? "0");
     const turningMachineSpeed = String(params?.turning_machine_speed ?? "0");
     // const annealingFurnaceTemp = String(params?.annealing_furnace_temp ?? "0");
-    // const tubeCilindricalSectionLength = String(params?.tube_cilindrical_section_length ?? "0");
+    // const tubeCylindricalSectionLength = String(params?.tube_cylindrical_section_length ?? "0");
     // const membraneThickness = String(params?.membrane_thickness ?? "0");
     const tubeDiameter = String(params?.tube_diameter ?? "0");
-    // const tubeCilindricalSectionThickness = String(params?.tube_cilindrical_section_thickness ?? "0");
+    // const tubeCylindricalSectionThickness = String(params?.tube_cylindrical_section_thickness ?? "0");
     // const tubeRigidity = String(params?.tube_rigidity ?? "0");
 
     setData({ key: ExtrusionInputParams.PRESS_SPEED, value: pressSpeed })
@@ -70,10 +70,10 @@ export default function useExtrusionMenu() {
     setData({ key: ExtrusionInputParams.TURNING_MACHINE_SPEED, value: turningMachineSpeed })
 
     // setData({ key: ExtrusionInputParams.ANNEALING_FURNACE_TEMP, value: annealingFurnaceTemp })
-    // setData({ key: ExtrusionInputParams.TUBE_CILINDRICAL_SECTION_LENGTH, value: tubeCilindricalSectionLength })
+    // setData({ key: ExtrusionInputParams.TUBE_CYLINDRICAL_SECTION_LENGTH, value: tubeCylindricalSectionLength })
     // setData({ key: ExtrusionInputParams.MEMBRANE_THICKNESS, value: membraneThickness })
     setData({ key: ExtrusionInputParams.TUBE_DIAMETER, value: tubeDiameter })
-    // setData({ key: ExtrusionInputParams.TUBE_CILINDRICAL_THICKNESS, value: tubeCilindricalSectionThickness })
+    // setData({ key: ExtrusionInputParams.TUBE_CYLINDRICAL_THICKNESS, value: tubeCylindricalSectionThickness })
     // setData({ key: ExtrusionInputParams.TUBE_RIGIDITY, value: tubeRigidity })
     navigate(`${RouteNames.EXTRUSION_ADD_ENTRY_ROOT}/${extrusionConveyor?.name}`)
   }

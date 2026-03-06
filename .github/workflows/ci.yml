@@ -1,0 +1,58 @@
+name: Monorepo CI
+
+on:
+  push:
+    branches: [ main, release ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # --- Job для NestJS (api_tubes) ---
+  api-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: Install & Prisma
+        run: |
+          npm ci
+          npx prisma generate -w api_tubes
+      - name: Type Check & Lint
+        run: |
+          npm run lint:types -w api_tubes
+          npm run lint -w api_tubes
+      - name: Build
+        run: npm run build -w api_tubes
+
+  # --- Job для Dashboard (tubes_application - Vite) ---
+  dash-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: Install
+        run: npm ci
+      - name: Build (Check 300kb chunk)
+        run: |
+          npm run lint:types -w tubes_application
+          npm run build -w tubes_application
+
+  # --- Job для Client App (new_app - Next.js) ---
+  next-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: Install
+        run: npm ci
+      - name: Build
+        run: npm run build -w new_app

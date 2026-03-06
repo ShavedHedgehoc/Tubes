@@ -1,6 +1,6 @@
 import { HttpAdapterHost, NestFactory } from "@nestjs/core";
 import * as cookieParser from "cookie-parser";
-import * as bodyParser from "body-parser";
+import * as express from "express";
 import { AppModule } from "./app.module";
 import { DocumentBuilder, OpenAPIObject, SwaggerModule } from "@nestjs/swagger";
 import { PrismaClientExceptionFilter } from "./prisma-client-exception/prisma-client-exception.filter";
@@ -29,8 +29,8 @@ async function bootstrap() {
   SwaggerModule.setup("/api_tubes/swagger", app, swaggerFactory);
 
   app.use(cookieParser());
-  app.use(bodyParser.json({ limit: "10mb" }));
-  app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
+  app.use(express.json({ limit: "10mb" }));
+  app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
   // app.useGlobalPipes(
   //   new ValidationPipe({

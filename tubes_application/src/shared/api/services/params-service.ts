@@ -9,10 +9,10 @@ export interface CreateExtrusionEntryDto {
   turning_machine_speed: number;
   annealing_furnace_temp: number;
   // rondel_id: number;
-  tube_cilindrical_section_length: number;
+  tube_cylindrical_section_length: number;
   membrane_thickness: number;
   tube_diameter: number;
-  tube_cilindrical_section_thickness: number;
+  tube_cylindrical_section_thickness: number;
   tube_rigidity: number;
   tube_cutting_quality: boolean;
   tightness: boolean;

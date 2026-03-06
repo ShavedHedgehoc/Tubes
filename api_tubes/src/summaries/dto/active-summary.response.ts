@@ -72,10 +72,10 @@ class IExtrusionParams {
   annealing_furnace_temp: number;
 
   // rondel_id: number;
-  tube_cilindrical_section_length: number;
+  tube_cylindrical_section_length: number;
   membrane_thickness: number;
   tube_diameter: number;
-  tube_cilindrical_section_thickness: number;
+  tube_cylindrical_section_thickness: number;
   tube_rigidity: number;
   tube_cutting_quality: boolean;
   tube_marking: boolean;
@@ -180,7 +180,7 @@ export class ActiveSummaryResponse {
   varnish_materials: IMaterial[] | [];
   offset_materials: IMaterial[] | [];
   sealant_materials: IMaterial[] | [];
-  extrusionStatus: IStatus
+  extrusionStatus: IStatus;
   extrusionOperations: IOperation[] | [];
   varnishStatus: IStatus;
   varnishOperations: IOperation[] | [];

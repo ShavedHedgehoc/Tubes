@@ -1,0 +1,23 @@
+{
+    "name": "tubes-monorepo",
+    "private": true,
+    "workspaces": [
+        "api_tubes",
+        "tubes_application",
+        "new_app"
+    ],
+    "scripts": {
+        "install:all": "npm install",
+        "generate": "npm run generate -w api_tubes",
+        "lint:all": "npm run lint --workspaces",
+        "types:all": "npm run lint:types --workspaces",
+        "build:all": "npm run build --workspaces",
+        "check:all": "npm run types:all && npm run build:all",
+        "knip": "knip",
+        "pre-flight": "npm run types:all && npm run lint:all"
+    },
+    "devDependencies": {
+        "knip": "^5.85.0",
+        "typescript": "^5.9.3"
+    }
+}

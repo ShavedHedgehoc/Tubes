@@ -9,10 +9,10 @@ interface IExtrusionParameterData {
   blow_time: string;
   turning_machine_speed: string;
   annealing_furnace_temp: string;
-  tube_cilindrical_section_length: string;
+  tube_cylindrical_section_length: string;
   membrane_thickness: string;
   tube_diameter: string;
-  tube_cilindrical_thikness: string;
+  tube_cylindrical_thickness: string;
   tube_rigidity: string;
   tube_cutting_quality: boolean;
   tightness: boolean;
@@ -36,10 +36,10 @@ export const initDataValue: IExtrusionParameterData = {
   blow_time: "0",
   turning_machine_speed: "0",
   annealing_furnace_temp: "0",
-  tube_cilindrical_section_length: "0",
+  tube_cylindrical_section_length: "0",
   membrane_thickness: "0",
   tube_diameter: "0",
-  tube_cilindrical_thikness: "0",
+  tube_cylindrical_thickness: "0",
   tube_rigidity: "0",
   tube_cutting_quality: false,
   tightness: false,
@@ -53,10 +53,10 @@ export enum ExtrusionInputParams {
   BLOW_TIME = "blow_time",
   TURNING_MACHINE_SPEED = "turning_machine_speed",
   ANNEALING_FURNACE_TEMP = "annealing_furnace_temp",
-  TUBE_CILINDRICAL_SECTION_LENGTH = "tube_cilindrical_section_length",
+  TUBE_CYLINDRICAL_SECTION_LENGTH = "tube_cylindrical_section_length",
   MEMBRANE_THICKNESS = "membrane_thickness",
   TUBE_DIAMETER = "tube_diameter",
-  TUBE_CILINDRICAL_THICKNESS = "tube_cilindrical_thikness",
+  TUBE_CYLINDRICAL_THICKNESS = "tube_cylindrical_thickness",
   TUBE_RIGIDITY = "tube_rigidity",
   TUBE_CUTTING_QUALITY = "tube_cutting_quality",
   TIGHTNESS = "tightness",

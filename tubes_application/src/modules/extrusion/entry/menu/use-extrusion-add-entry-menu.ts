@@ -30,10 +30,10 @@ export default function useExtrusionAddEntryMenu(summaryData: ISummary | null) {
     data.blow_time === "0" ||
     data.turning_machine_speed === "0" ||
     data.annealing_furnace_temp === "0" ||
-    data.tube_cilindrical_section_length === "0" ||
+    data.tube_cylindrical_section_length === "0" ||
     data.membrane_thickness === "0" ||
     data.tube_diameter === "0" ||
-    data.tube_cilindrical_thikness === "0" ||
+    data.tube_cylindrical_thickness === "0" ||
     data.tube_rigidity === "0"
   // ||
   // data.rondel_type_id === null;
@@ -52,12 +52,12 @@ export default function useExtrusionAddEntryMenu(summaryData: ISummary | null) {
       Number(data.turning_machine_speed) > tresholdsData.extrusion_turning_machine_speed_max ||
       Number(data.membrane_thickness) > tresholdsData.extrusion_membrane_thickness_max ||
       Number(data.membrane_thickness) < tresholdsData.extrusion_membrane_thickness_min ||
-      Number(data.tube_cilindrical_section_length) < tresholdsData.extrusion_tube_cilindrical_section_length_min ||
-      Number(data.tube_cilindrical_section_length) > tresholdsData.extrusion_tube_cilindrical_section_length_max ||
+      Number(data.tube_cylindrical_section_length) < tresholdsData.extrusion_tube_cylindrical_section_length_min ||
+      Number(data.tube_cylindrical_section_length) > tresholdsData.extrusion_tube_cylindrical_section_length_max ||
       Number(data.tube_diameter) > tresholdsData.extrusion_tube_diameter_max ||
       Number(data.tube_diameter) < tresholdsData.extrusion_tube_diameter_min ||
-      Number(data.tube_cilindrical_thikness) > tresholdsData.extrusion_tube_cilindrical_section_thickness_max ||
-      Number(data.tube_cilindrical_thikness) < tresholdsData.extrusion_tube_cilindrical_section_thickness_min ||
+      Number(data.tube_cylindrical_thickness) > tresholdsData.extrusion_tube_cylindrical_section_thickness_max ||
+      Number(data.tube_cylindrical_thickness) < tresholdsData.extrusion_tube_cylindrical_section_thickness_min ||
       Number(data.tube_rigidity) > tresholdsData.extrusion_tube_rigidity_max ||
       Number(data.tube_rigidity) < tresholdsData.extrusion_tube_rigidity_min ||
       // Number(data.rondel_type_id) !== tresholdsData.extrusion_rondel_id ||
@@ -79,10 +79,10 @@ export default function useExtrusionAddEntryMenu(summaryData: ISummary | null) {
         annealing_furnace_temp: Number(data.annealing_furnace_temp),
         employee_id: employee.id,
         // rondel_id: Number(data.rondel_type_id ?? 1),
-        tube_cilindrical_section_length: Number(data.tube_cilindrical_section_length),
+        tube_cylindrical_section_length: Number(data.tube_cylindrical_section_length),
         membrane_thickness: Number(data.membrane_thickness),
         tube_diameter: Number(data.tube_diameter),
-        tube_cilindrical_section_thickness: Number(data.tube_cilindrical_thikness),
+        tube_cylindrical_section_thickness: Number(data.tube_cylindrical_thickness),
         tube_rigidity: Number(data.tube_rigidity),
         tube_cutting_quality: data.tube_cutting_quality,
         tightness: data.tightness,

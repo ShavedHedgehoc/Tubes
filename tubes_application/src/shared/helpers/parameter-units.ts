@@ -1,92 +1,78 @@
-export enum ParameterUnits {
-  COUNTER_VALUE = "шт",
-  EXTRUSION_PRESS_SPEED = "шт/мин",
-  EXTRUSION_BLOW_TIME = "мс",
-  EXTRUSION_TURNING_MACHINE_SPEED = "шт/мин",
-  EXTRUSION_ANNEALING_FURNACE_TEMP = "°С",
-  EXTRUSION_TUBE_CILINDRICAL_SECTION_LENGTH = "мм",
-  EXTRUSION_MEMBRANE_THIKNESS = "мм",
-  EXTRUSION_TUBE_DIAMETER = "мм",
-  EXTRUSION_TUBE_CILINDRICAL_THICKNESS = "мм",
-  EXTRUSION_TUBE_RIGIDITY = "мм",
-  //   EXTRUSION_TUBE_CUTTING_QUALITY = "Качество обрезки тубы", //boolean
-  //   EXTRUSION_TIGHTNESS = "Герметичность",//boolean
-  //   EXTRUSION_RONDEL_TYPE = "Тип рондоли",//boolean
-  //   EXTRUSION_EXTERNAL_THREAD_QUALITY = "Внешняя резьба",//boolean
-  // EXTRUSION_TUBE_MARKING = "Маркировка тубы", //boolean
-
-  VARNISH_VARNISH_MACHINE_SPEED = "шт/мин",
-  VARNISH_TOTAL_AIR_PRESSURE = "Бар", //float
-  VARNISH_FEED_CAN_AIR_PRESSURE = "Бар", //float
-  VARNISH_NOZZLE_REGULATOR_AIR_PRESSURE = "Бар", //float
-  VARNISH_CELLS_SPEED = "RPM", //RPM
-  VARNISH_INJECTION_A_START_POSITION = "ед.", //ед.
-  VARNISH_INJECTION_B_START_POSITION = "ед.", //ед.
-  VARNISH_INJECTION_C_START_POSITION = "ед.", //ед.
-  VARNISH_INJECTION_D_START_POSITION = "ед.", //ед.
-  VARNISH_INJECTION_A_END_POSITION = "ед.", //ед.
-  VARNISH_INJECTION_B_END_POSITION = "ед.", //ед.
-  VARNISH_INJECTION_C_END_POSITION = "ед.", //ед.
-  VARNISH_INJECTION_D_END_POSITION = "ед.", //ед.
-  VARNISH_TUBE_MOLDING_START_POSITION = "ед.", //ед.
-  VARNISH_TUBE_MOLDING_END_POSITION = "ед.", // ед.
-  VARNISH_POLIMERIZATION_FURNACE_TEMP = "°С",
-  VARNISH_INTERNAL_VARNISH_POROSITY = "mA", //boolean 0-15??
-  // VARNISH_INTERNAL_SECTIONAL_VIEW = "Внутренний вид тубы в разрезе, качество покрытия", //boolean
-  // VARNISH_ALUMINIUM_CLEARANCE_LACK = "Отсутствие просветов алюминия", //boolean
-  // VARNISH_UNPAINTING_LACK = "Отсутствие непрокрасов и пятен", //boolean
-
-  OFFSET_PRINTING_MACHINE_SPEED = "шт/мин",
-  OFFSET_TOTAL_AIR_PRESSURE = "Бар", //float
-  OFFSET_PADDING_FURNACE_TEMP = "°С",
-  OFFSET_OFFSET_FURNACE_TEMP = "°С",
-  OFFSET_PRINTER_MOTOR = "RPM",
-  OFFSET_BASE_COVERS_HOLDERS_MOTOR = "RPM",
-  OFFSET_BASE_COVERS_STATION_MOTOR = "RPM",
-  OFFSET_IMPRINT_QUANTITY_PRINTED_BOX_1 = "отпечатков", //not required
-  OFFSET_IMPRINT_QUANTITY_PRINTED_BOX_2 = "отпечатков", //not required
-  OFFSET_IMPRINT_QUANTITY_PRINTED_BOX_3 = "отпечатков", //not required
-  OFFSET_IMPRINT_QUANTITY_PRINTED_BOX_4 = "отпечатков", //not required
-  OFFSET_IMPRINT_QUANTITY_PRINTED_BOX_5 = "отпечатков", //not required
-  OFFSET_IMPRINT_QUANTITY_PRINTED_BOX_6 = "отпечатков", //not required
-  OFFSET_INK_SUPPLY_TIME = "c", // decimal
-  // OFFSET_DESIGN_MATCH = "Соответсвие дизайну и контрольному образцу", //boolean
-  // OFFSET_TUBE_APPEARANCE = "Внешний вид тубы (разнотон, нечеткий текст, двоение печати)", //boolean
-  // OFFSET_TUBE_EDGE_DEFORMATION_LACK = "Отсутствие деформации края тубы", //boolean
-  // OFFSET_ALUMINIUM_CLEARANCE_LACK = "Отсутствие просветов алюминия", //boolean
-  // OFFSET_DRIPS_LACK = "Отсутствие марашек", //boolean
-
-  SEALANT_CAP_MACHINE_SPEED = "шт/мин",
-  SEALANT_TOTAL_AIR_PRESSURE = "Бар", //float
-  SEALANT_HOLDERS_FORWARD = "ед.", //ед.
-  SEALANT_HOLDERS_OPENING_LEFT = "ед.", //ед.
-  SEALANT_HOLDERS_OPENING_RIGHT = "ед.", //ед.
-  SEALANT_HOLDER_CLOSING = "ед.", //ед.
-  // SEALANT_INJECTION_A_START = "Начало впрыска А", Ед??
-  // SEALANT_INJECTION_B_START = "Начало впрыска B",
-  // SEALANT_INJECTION_A_END = "Конец впрыска А",
-  // SEALANT_INJECTION_B_END = "Конец впрыска B",
-  // SEALANT_INJECTION_TUBE_ORIENTATION_START = "Положение тубы для впрыска (начальное положение)",
-  // SEALANT_INJECTION_TUBE_ORIENTATION_END = "Положение тубы для впрыска (конечное положение)",
-  // SEALANT_IS_CAP_SURFACE_SMOOTH = "Поверхность колпачка гладкая, без царапин", //boolean
-  SEALANT_LATEX_RING_PADDING = "мм",
-  SEALANT_LATEX_RING_WIDTH = "мм",
-  SEALANT_TUBE_RIGIDITY = "мм",
-  SEALANT_CAP_UNSCREWING_TORQUE = "Н.см",
-}
-
-export const EXTRUSION_PARAMETER_UNITS: Record<string, string> = {
-  // Общие
-  counter_value: "шт",
-  press_speed: "шт/мин",
-  blow_time: "мс",
-  turning_machine_speed: "шт/мин",
-  annealing_furnace_temp: "°С",
-  tube_cylindrical_section_length: "мм",
-  membrane_thickness: "мм",
-  tube_diameter: "мм",
-  tube_cilindrical_thickness: "мм",
-  tube_rigidity: "мм",
-
-
+export const UNITS = {
+  PCS: "шт",
+  PCS_MIN: "шт/мин",
+  MS: "мс",
+  TEMP: "°С",
+  MM: "мм",
+  BAR: "Бар",
+  RPM: "RPM",
+  ED: "ед.",
+  MA: "mA",
+  SEC: "c",
+  NCM: "Н.см",
+  IMPRINTS: "отпечатков",
 } as const;
+
+export const PARAMETER_UNITS = {
+  // --- COMMON ---
+  counter_value: UNITS.PCS,
+  total_air_pressure: UNITS.BAR,
+  tube_rigidity: UNITS.MM,
+  // --- EXTRUSION (EXT_) ---
+  press_speed: UNITS.PCS_MIN,
+  blow_time: UNITS.MS,
+  turning_machine_speed: UNITS.PCS_MIN,
+  annealing_furnace_temp: UNITS.TEMP,
+  tube_cylindrical_section_length: UNITS.MM,
+  membrane_thickness: UNITS.MM,
+  tube_diameter: UNITS.MM,
+  tube_cylindrical_thickness: UNITS.MM,
+
+
+  // --- VARNISH (VAR_) ---
+  varnish_machine_speed: UNITS.PCS_MIN,
+  feed_can_air_pressure: UNITS.BAR,
+  nozzle_regulator_air_pressure: UNITS.BAR,
+  cells_speed: UNITS.RPM,
+  injection_a_start_position: UNITS.ED,
+  injection_b_start_position: UNITS.ED,
+  injection_c_start_position: UNITS.ED,
+  injection_d_start_position: UNITS.ED,
+  injection_a_end_position: UNITS.ED,
+  injection_b_end_position: UNITS.ED,
+  injection_c_end_position: UNITS.ED,
+  injection_d_end_position: UNITS.ED,
+  tube_molding_start_position: UNITS.ED,
+  tube_molding_end_position: UNITS.ED,
+  polimerization_furnace_temp: UNITS.TEMP,
+  internal_varnish_porosity: UNITS.MA,
+
+  // --- OFFSET (OFF_) ---
+  printing_machine_speed: UNITS.PCS_MIN,
+  padding_furnace_temp: UNITS.TEMP,
+  offset_furnace_temp: UNITS.TEMP,
+  printer_motor: UNITS.RPM,
+  base_covers_holders_motor: UNITS.RPM,
+  base_covers_station_motor: UNITS.RPM,
+  imprint_box_1: UNITS.IMPRINTS,
+  imprint_box_2: UNITS.IMPRINTS,
+  imprint_box_3: UNITS.IMPRINTS,
+  imprint_box_4: UNITS.IMPRINTS,
+  imprint_box_5: UNITS.IMPRINTS,
+  imprint_box_6: UNITS.IMPRINTS,
+  ink_supply_time: UNITS.SEC,
+
+  // --- SEALANT (SEA_) ---
+  cap_machine_speed: UNITS.PCS_MIN,
+  holders_forward: UNITS.ED,
+  holders_opening_left: UNITS.ED,
+  holders_opening_right: UNITS.ED,
+  holders_closing: UNITS.ED,
+  latex_ring_padding: UNITS.MM,
+  latex_ring_width: UNITS.MM,
+  cap_unscrewing_torque: UNITS.NCM,
+} as const;
+
+// export type ParameterKey = keyof typeof PARAMETER_UNITS;
+// export type UnitValue = (typeof UNITS)[keyof typeof UNITS];
+

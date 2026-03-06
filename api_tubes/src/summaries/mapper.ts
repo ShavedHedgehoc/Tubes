@@ -1,5 +1,4 @@
 import {
-  Conveyor,
   ExtrusionOperation,
   ExtrusionStatus,
   OffsetOperation,
@@ -29,23 +28,6 @@ export interface IMappedSummary {
   shift: number;
 }
 
-export interface IMappedSummaryReportData {
-  id: number;
-  batch_name: string;
-  product_id: number;
-  product_code: string;
-  batch_id: number;
-  conveyor_id: number;
-  conveyor_name: string;
-  plan: number;
-  isActive: boolean;
-  isFinished: boolean;
-  product_name: string;
-  marking: string;
-  date: Date;
-  shift: number;
-}
-
 export interface IMappedExtrusionParams {
   id: number;
   summary_id: number;
@@ -54,10 +36,10 @@ export interface IMappedExtrusionParams {
   blow_time: number;
   turning_machine_speed: number;
   annealing_furnace_temp: number;
-  tube_cilindrical_section_length: number;
+  tube_cylindrical_section_length: number;
   membrane_thickness: number;
   tube_diameter: number;
-  tube_cilindrical_section_thickness: number;
+  tube_cylindrical_section_thickness: number;
   tube_rigidity: number;
   tube_cutting_quality: boolean;
   tightness: boolean;
@@ -147,17 +129,6 @@ export interface IMappedSealantParams {
   createdAt: Date;
 }
 
-export interface IMappedExtrusionCounters {
-  counter_value: number;
-  createdAt: Date;
-}
-
-export interface IMappedStatusCounters {
-  counter_value: number;
-  createdAt: Date;
-  idle: boolean;
-}
-
 type state = "idle" | "working" | "finished";
 
 export interface IMappedOperation {
@@ -195,35 +166,6 @@ export const mappedSummary = ({
   };
 };
 
-export const mappedSummaryReportData = ({
-  summary,
-  batch,
-  product,
-  conveyor,
-}: {
-  summary: Summary;
-  batch: Batch;
-  product: Product;
-  conveyor: Conveyor;
-}): IMappedSummaryReportData => {
-  return {
-    id: summary.id,
-    date: summary.date,
-    batch_name: batch.name,
-    product_id: summary.product_id,
-    product_code: product.code,
-    product_name: product.name,
-    marking: product.marking,
-    batch_id: summary.batch_id,
-    conveyor_id: summary.conveyor_id,
-    conveyor_name: conveyor.name,
-    plan: summary.plan,
-    isActive: summary.isActive,
-    isFinished: summary.isFinished,
-    shift: summary.shift,
-  };
-};
-
 interface PrismaEntity {
   summary?: unknown;
   employee?: unknown;
@@ -235,35 +177,17 @@ export function mapParams<T>(params: T | null): T | null {
   return data as T;
 }
 
-export const mappedStatusCounters = (
-  statuses:
-    | ExtrusionStatus[]
-    | VarnishStatus[]
-    | OffsetStatus[]
-    | SealantStatus[]
-    | null,
-): IMappedStatusCounters[] | [] => {
-  if (!statuses) return [];
-  return statuses
-    .sort((a, b) => a.id - b.id)
-    .map((item) => ({
-      counter_value: item.counter_value,
-      createdAt: item.createdAt,
-      idle: item.idle,
-    }));
-};
-
 export const mappedStatus = ({
   status,
   operation,
 }: {
   status: ExtrusionStatus | SealantStatus | VarnishStatus | OffsetStatus | null;
   operation:
-  | ExtrusionOperation
-  | VarnishOperation
-  | OffsetOperation
-  | SealantOperation
-  | null;
+    | ExtrusionOperation
+    | VarnishOperation
+    | OffsetOperation
+    | SealantOperation
+    | null;
 }): IMappedOperation => {
   if (!status) {
     return {
@@ -272,10 +196,9 @@ export const mappedStatus = ({
       state: "working",
       operation_description: "-",
       createdAt: null,
-      operation_id: null
-    }
+      operation_id: null,
+    };
   }
-
 
   return {
     idle: status.idle,
@@ -290,8 +213,4 @@ export const mappedStatus = ({
     operation_description: operation ? operation.description : "-",
     operation_id: operation ? operation.id : null,
   };
-};
-
-export const mappedOperations = () => {
-  return [];
 };

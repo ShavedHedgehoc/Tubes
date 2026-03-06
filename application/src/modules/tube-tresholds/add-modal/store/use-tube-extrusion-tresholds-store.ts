@@ -23,14 +23,14 @@ interface ExtrusionTresholds {
   annealing_furnace_temp_min: string;
   annealing_furnace_temp_max: string;
   rondel_id: number | null;
-  tube_cilindrical_section_length_min: string;
-  tube_cilindrical_section_length_max: string;
+  tube_cylindrical_section_length_min: string;
+  tube_cylindrical_section_length_max: string;
   membrane_thickness_min: string;
   membrane_thickness_max: string;
   tube_diameter_min: string;
   tube_diameter_max: string;
-  tube_cilindrical_section_thickness_min: string;
-  tube_cilindrical_section_thickness_max: string;
+  tube_cylindrical_section_thickness_min: string;
+  tube_cylindrical_section_thickness_max: string;
   tube_rigidity_min: string;
   tube_rigidity_max: string;
   external_thread_value: string;
@@ -67,14 +67,14 @@ const initTresholdsValue: ExtrusionTresholds = {
   annealing_furnace_temp_min: "",
   annealing_furnace_temp_max: "",
   rondel_id: null,
-  tube_cilindrical_section_length_min: "",
-  tube_cilindrical_section_length_max: "",
+  tube_cylindrical_section_length_min: "",
+  tube_cylindrical_section_length_max: "",
   membrane_thickness_min: "",
   membrane_thickness_max: "",
   tube_diameter_min: "",
   tube_diameter_max: "",
-  tube_cilindrical_section_thickness_min: "",
-  tube_cilindrical_section_thickness_max: "",
+  tube_cylindrical_section_thickness_min: "",
+  tube_cylindrical_section_thickness_max: "",
   tube_rigidity_min: "",
   tube_rigidity_max: "",
   external_thread_value: "М11х1.5",
@@ -91,14 +91,14 @@ export enum ExtrusionTresholdsParams {
   ANNEALING_FURNACE_TEMP_MIN = "annealing_furnace_temp_min",
   ANNEALING_FURNACE_TEMP_MAX = "annealing_furnace_temp_max",
   RONDEL_ID = "rondel_id",
-  TUBE_CILINDRICAL_SECTION_LENGTH_MIN = "tube_cilindrical_section_length_min",
-  TUBE_CILINDRICAL_SECTION_LENGTH_MAX = "tube_cilindrical_section_length_max",
+  TUBE_CYLINDRICAL_SECTION_LENGTH_MIN = "tube_cylindrical_section_length_min",
+  TUBE_CYLINDRICAL_SECTION_LENGTH_MAX = "tube_cylindrical_section_length_max",
   MEMBRANE_THICKNESS_MIN = "membrane_thickness_min",
   MEMBRANE_THICKNESS_MAX = "membrane_thickness_max",
   TUBE_DIAMETER_MIN = "tube_diameter_min",
   TUBE_DIAMETER_MAX = "tube_diameter_max",
-  TUBE_CILINDRICAL_SECTION_THICKNESS_MIN = "tube_cilindrical_section_thickness_min",
-  TUBE_CILINDRICAL_SECTION_THICKNESS_MAX = "tube_cilindrical_section_thickness_max",
+  TUBE_CYLINDRICAL_SECTION_THICKNESS_MIN = "tube_cylindrical_section_thickness_min",
+  TUBE_CYLINDRICAL_SECTION_THICKNESS_MAX = "tube_cylindrical_section_thickness_max",
   TUBE_RIGIDITY_MIN = "tube_rigidity_min",
   TUBE_RIGIDITY_MAX = "tube_rigidity_max",
   EXTERNAL_THREAD_VALUE = "external_thread_value",
@@ -162,11 +162,11 @@ export const useTubeExtrusionTresholdsStore = create<TubeExtrusionTresholdsStore
         case ExtrusionTresholdsParams.ANNEALING_FURNACE_TEMP_MAX:
           set((state) => ({ tresholds: { ...state.tresholds, annealing_furnace_temp_max: value } }));
           break;
-        case ExtrusionTresholdsParams.TUBE_CILINDRICAL_SECTION_LENGTH_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, tube_cilindrical_section_length_min: value } }));
+        case ExtrusionTresholdsParams.TUBE_CYLINDRICAL_SECTION_LENGTH_MIN:
+          set((state) => ({ tresholds: { ...state.tresholds, tube_cylindrical_section_length_min: value } }));
           break;
-        case ExtrusionTresholdsParams.TUBE_CILINDRICAL_SECTION_LENGTH_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, tube_cilindrical_section_length_max: value } }));
+        case ExtrusionTresholdsParams.TUBE_CYLINDRICAL_SECTION_LENGTH_MAX:
+          set((state) => ({ tresholds: { ...state.tresholds, tube_cylindrical_section_length_max: value } }));
           break;
         case ExtrusionTresholdsParams.MEMBRANE_THICKNESS_MIN:
           set((state) => ({ tresholds: { ...state.tresholds, membrane_thickness_min: value } }));
@@ -180,11 +180,11 @@ export const useTubeExtrusionTresholdsStore = create<TubeExtrusionTresholdsStore
         case ExtrusionTresholdsParams.TUBE_DIAMETER_MAX:
           set((state) => ({ tresholds: { ...state.tresholds, tube_diameter_max: value } }));
           break;
-        case ExtrusionTresholdsParams.TUBE_CILINDRICAL_SECTION_THICKNESS_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, tube_cilindrical_section_thickness_min: value } }));
+        case ExtrusionTresholdsParams.TUBE_CYLINDRICAL_SECTION_THICKNESS_MIN:
+          set((state) => ({ tresholds: { ...state.tresholds, tube_cylindrical_section_thickness_min: value } }));
           break;
-        case ExtrusionTresholdsParams.TUBE_CILINDRICAL_SECTION_THICKNESS_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, tube_cilindrical_section_thickness_max: value } }));
+        case ExtrusionTresholdsParams.TUBE_CYLINDRICAL_SECTION_THICKNESS_MAX:
+          set((state) => ({ tresholds: { ...state.tresholds, tube_cylindrical_section_thickness_max: value } }));
           break;
         case ExtrusionTresholdsParams.TUBE_RIGIDITY_MIN:
           set((state) => ({ tresholds: { ...state.tresholds, tube_rigidity_min: value } }));
@@ -220,14 +220,14 @@ export const useTubeExtrusionTresholdsStore = create<TubeExtrusionTresholdsStore
           annealing_furnace_temp_min: value.annealing_furnace_temp_min,
           annealing_furnace_temp_max: value.annealing_furnace_temp_max,
           rondel_id: value.rondel_id,
-          tube_cilindrical_section_length_min: value.tube_cilindrical_section_length_min,
-          tube_cilindrical_section_length_max: value.tube_cilindrical_section_length_max,
+          tube_cylindrical_section_length_min: value.tube_cylindrical_section_length_min,
+          tube_cylindrical_section_length_max: value.tube_cylindrical_section_length_max,
           membrane_thickness_min: value.membrane_thickness_min,
           membrane_thickness_max: value.membrane_thickness_max,
           tube_diameter_min: value.tube_diameter_min,
           tube_diameter_max: value.tube_diameter_max,
-          tube_cilindrical_section_thickness_min: value.tube_cilindrical_section_thickness_min,
-          tube_cilindrical_section_thickness_max: value.tube_cilindrical_section_thickness_max,
+          tube_cylindrical_section_thickness_min: value.tube_cylindrical_section_thickness_min,
+          tube_cylindrical_section_thickness_max: value.tube_cylindrical_section_thickness_max,
           tube_rigidity_min: value.tube_rigidity_min,
           tube_rigidity_max: value.tube_rigidity_max,
           external_thread_value: value.external_thread_value,

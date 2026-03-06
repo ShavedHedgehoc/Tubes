@@ -72,11 +72,11 @@ export class CreateTresholdsBulkItem {
 
   @ToNumber()
   @IsNumber({}, { message: "Поле должно быть числом" })
-  extrusion_tube_cilindrical_section_length_min: number;
+  extrusion_tube_cylindrical_section_length_min: number;
 
   @ToNumber()
   @IsNumber({}, { message: "Поле должно быть числом" })
-  extrusion_tube_cilindrical_section_length_max: number;
+  extrusion_tube_cylindrical_section_length_max: number;
 
   @ToNumber()
   @IsNumber({}, { message: "Поле должно быть числом" })
@@ -96,11 +96,11 @@ export class CreateTresholdsBulkItem {
 
   @ToNumber()
   @IsNumber({}, { message: "Поле должно быть числом" })
-  extrusion_tube_cilindrical_section_thickness_min: number;
+  extrusion_tube_cylindrical_section_thickness_min: number;
 
   @ToNumber()
   @IsNumber({}, { message: "Поле должно быть числом" })
-  extrusion_tube_cilindrical_section_thickness_max: number;
+  extrusion_tube_cylindrical_section_thickness_max: number;
 
   @ToNumber()
   @IsNumber({}, { message: "Поле должно быть числом" })

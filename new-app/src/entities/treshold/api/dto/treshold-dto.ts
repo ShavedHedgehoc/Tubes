@@ -10,14 +10,14 @@ export type TresholdDto = {
     extrusion_turning_machine_speed_max: number;
     extrusion_annealing_furnace_temp_min: number;
     extrusion_annealing_furnace_temp_max: number;
-    extrusion_tube_cilindrical_section_length_min: number;
-    extrusion_tube_cilindrical_section_length_max: number;
+    extrusion_tube_cylindrical_section_length_min: number;
+    extrusion_tube_cylindrical_section_length_max: number;
     extrusion_membrane_thickness_min: number;
     extrusion_membrane_thickness_max: number;
     extrusion_tube_diameter_min: number;
     extrusion_tube_diameter_max: number;
-    extrusion_tube_cilindrical_section_thickness_min: number;
-    extrusion_tube_cilindrical_section_thickness_max: number;
+    extrusion_tube_cylindrical_section_thickness_min: number;
+    extrusion_tube_cylindrical_section_thickness_max: number;
     extrusion_tube_rigidity_min: number;
     extrusion_tube_rigidity_max: number;
     extrusion_external_thread_value: string;

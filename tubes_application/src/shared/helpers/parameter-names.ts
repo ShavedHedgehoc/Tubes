@@ -1,82 +1,85 @@
-/* eslint-disable @typescript-eslint/no-duplicate-enum-values */
-export enum ParameterNames {
-  COUNTER_VALUE = "Показания счетчика",
-  EXTRUSION_PRESS_SPEED = "Скорость пресса",
-  EXTRUSION_BLOW_TIME = "Время выдува",
-  EXTRUSION_TURNING_MACHINE_SPEED = "Скорость токарного автомата",
-  EXTRUSION_ANNEALING_FURNACE_TEMP = "Температура печи отжига",
-  EXTRUSION_TUBE_CILINDRICAL_SECTION_LENGTH = "Длина цилиндрической части тубы",
-  EXTRUSION_MEMBRANE_THICKNESS = "Толщина мембраны",
-  EXTRUSION_TUBE_DIAMETER = "Диаметр тубы",
-  EXTRUSION_TUBE_CILINDRICAL_THICKNESS = "Толщина цилиндрической части тубы",
-  EXTRUSION_TUBE_RIGIDITY = "Жесткость тубы",
-  EXTRUSION_TUBE_CUTTING_QUALITY = "Качество обрезки тубы",
-  EXTRUSION_TIGHTNESS = "Герметичность",
-  EXTRUSION_RONDEL_TYPE = "Тип рондоли",
-  EXTRUSION_EXTERNAL_THREAD_QUALITY = "Внешняя резьба",
-  EXTRUSION_TUBE_MARKING = "Маркировка тубы",
+export const EXTRUSION_PARAMETER_NAMES = {
+  counter_value: "Показания счетчика",
+  press_speed: "Скорость пресса",
+  blow_time: "Время выдува",
+  turning_machine_speed: "Скорость токарного автомата",
+  annealing_furnace_temp: "Температура печи отжига",
+  tube_cylindrical_section_length: "Длина цилиндрической части тубы",
+  membrane_thickness: "Толщина мембраны",
+  tube_diameter: "Диаметр тубы",
+  tube_cylindrical_thickness: "Толщина цилиндрической части тубы",
+  tube_rigidity: "Жесткость тубы",
+  tube_cutting_quality: "Качество обрезки тубы",
+  tightness: "Герметичность",
+  rondel_type: "Тип рондоли",
+  external_thread_quality: "Внешняя резьба",
+  tube_marking: "Маркировка тубы",
+} as const
 
+export const VARNISH_PARAMETER_NAMES = {
+  counter_value: "Показания счетчика",
+  varnish_machine_speed: "Скорость лаковой машины", //шт.мин
+  total_air_pressure: "Давление воздуха общее", //Бар //float
+  feed_can_air_pressure: "Давление воздуха в загрузочной емкости", //Бар //float
+  nozzle_regulator_air_pressure: "Давление воздуха на регуляторах форсунок", //Бар //float
+  cells_speed: "Скорость ячеек", //RPM
+  injection_a_start_position: "Впрыск А начальное положение", //ед.
+  injection_b_start_position: "Впрыск B начальное положение", //ед.
+  injection_c_start_position: "Впрыск C начальное положение", //ед.
+  injection_d_start_position: "Впрыск D начальное положение", //ед.
+  injection_a_end_position: "Впрыск A конечное положение", //ед.
+  injection_b_end_position: "Впрыск B конечное положение", //ед.
+  injection_c_end_position: "Впрыск C конечное положение", //ед.
+  injection_d_end_position: "Впрыск D конечное положение", //ед.
+  tube_molding_start_position: "Вдув тубы начальное положение", //ед.
+  tube_molding_end_position: "Вдув тубы конечное положение", // ед.
+  polimerization_furnace_temp: "Температура печи полимеризации", //°С
+  internal_varnish_porosity: "Пористость вн. лакового покрытия", //mA  
+  internal_sectional_view: "Внутренний вид тубы в разрезе",
+  aluminium_clearance_lack: "Отсутствие просветов алюминия",
+  unpainting_lack: "Отсутствие непрокрасов и пятен",
+} as const
 
-  VARNISH_VARNISH_MACHINE_SPEED = "Скорость лаковой машины", //шт.мин
-  VARNISH_TOTAL_AIR_PRESSURE = "Давление воздуха общее", //Бар //float
-  VARNISH_FEED_CAN_AIR_PRESSURE = "Давление воздуха в загрузочной емкости", //Бар //float
-  VARNISH_NOZZLE_REGULATOR_AIR_PRESSURE = "Давление воздуха на регуляторах форсунок", //Бар //float
-  VARNISH_CELLS_SPEED = "Скорость ячеек", //RPM
-  VARNISH_INJECTION_A_START_POSITION = "Впрыск А начальное положение", //ед.
-  VARNISH_INJECTION_B_START_POSITION = "Впрыск B начальное положение", //ед.
-  VARNISH_INJECTION_C_START_POSITION = "Впрыск C начальное положение", //ед.
-  VARNISH_INJECTION_D_START_POSITION = "Впрыск D начальное положение", //ед.
-  VARNISH_INJECTION_A_END_POSITION = "Впрыск A конечное положение", //ед.
-  VARNISH_INJECTION_B_END_POSITION = "Впрыск B конечное положение", //ед.
-  VARNISH_INJECTION_C_END_POSITION = "Впрыск C конечное положение", //ед.
-  VARNISH_INJECTION_D_END_POSITION = "Впрыск D конечное положение", //ед.
-  VARNISH_TUBE_MOLDING_START_POSITION = "Вдув тубы начальное положение", //ед.
-  VARNISH_TUBE_MOLDING_END_POSITION = "Вдув тубы конечное положение", // ед.
-  VARNISH_POLIMERIZATION_FURNACE_TEMP = "Температура печи полимеризации", //°С
-  VARNISH_INTERNAL_VARNISH_POROSITY = "Пористость вн. лакового покрытия", //mA
-  // VARNISH_INTERNAL_VARNISH_POROSITY = "Пористость внутреннего лакового покрытия", //mA
-  // VARNISH_INTERNAL_SECTIONAL_VIEW = "Внутренний вид тубы в разрезе, качество покрытия",
-  VARNISH_INTERNAL_SECTIONAL_VIEW = "Внутренний вид тубы в разрезе",
-  VARNISH_ALUMINIUM_CLEARANCE_LACK = "Отсутствие просветов алюминия",
-  VARNISH_UNPAINTING_LACK = "Отсутствие непрокрасов и пятен",
+export const OFFSET_PARAMETER_NAMES = {
+  counter_value: "Показания счетчика",
+  printing_machine_speed: "Скорость принтовальной машины",
+  total_air_pressure: "Давление воздуха общее",
+  padding_furnace_temp: "Температура печи (грунтование)",
+  offset_furnace_temp: "Температура печи (печать)",
+  printer_motor: "Мотор принтера",
+  base_covers_holders_motor: "Мотор держателей баз. покрытий",
+  base_covers_station_motor: "Мотор станции баз. покрытия",
+  imprint_quantity_printed_box_1: "1 печатный ящик (отпечатков)", //-количество отпечатков ", //not required
+  imprint_quantity_printed_box_2: "2 печатный ящик (отпечатков)", //-количество отпечатков ", //not required
+  imprint_quantity_printed_box_3: "3 печатный ящик (отпечатков)", //-количество отпечатков ", //not required
+  imprint_quantity_printed_box_4: "4 печатный ящик (отпечатков)", //-количество отпечатков ", //not required
+  imprint_quantity_printed_box_5: "5 печатный ящик (отпечатков)", //-количество отпечатков ", //not required
+  imprint_quantity_printed_box_6: "6 печатный ящик (отпечатков)", //-количество отпечатков ", //not required
+  ink_supply_time: "Время подачи чернил", // decimal
+  design_match: "Соответсвие дизайну и контрольному образцу", //boolean
+  tube_appearance: "Внешний вид тубы (разнотон, нечеткий текст, двоение печати)", //boolean
+  tube_edge_deformation_lack: "Отсутствие деформации края тубы", //boolean
+  aluminium_clearance_lack: "Отсутствие просветов алюминия", //boolean
+  drips_lack: "Отсутствие марашек", //boolean
+} as const
 
-  OFFSET_PRINTING_MACHINE_SPEED = "Скорость принтовальной машины",
-  OFFSET_TOTAL_AIR_PRESSURE = "Давление воздуха общее",
-  OFFSET_PADDING_FURNACE_TEMP = "Температура печи (грунтование)",
-  OFFSET_OFFSET_FURNACE_TEMP = "Температура печи (печать)",
-  OFFSET_PRINTER_MOTOR = "Мотор принтера",
-  OFFSET_BASE_COVERS_HOLDERS_MOTOR = "Мотор держателей баз. покрытий",
-  OFFSET_BASE_COVERS_STATION_MOTOR = "Мотор станции баз. покрытия",
-  OFFSET_IMPRINT_QUANTITY_PRINTED_BOX_1 = "1 печатный ящик (отпечатков)", //-количество отпечатков ", //not required
-  OFFSET_IMPRINT_QUANTITY_PRINTED_BOX_2 = "2 печатный ящик (отпечатков)", //-количество отпечатков ", //not required
-  OFFSET_IMPRINT_QUANTITY_PRINTED_BOX_3 = "3 печатный ящик (отпечатков)", //-количество отпечатков ", //not required
-  OFFSET_IMPRINT_QUANTITY_PRINTED_BOX_4 = "4 печатный ящик (отпечатков)", //-количество отпечатков ", //not required
-  OFFSET_IMPRINT_QUANTITY_PRINTED_BOX_5 = "5 печатный ящик (отпечатков)", //-количество отпечатков ", //not required
-  OFFSET_IMPRINT_QUANTITY_PRINTED_BOX_6 = "6 печатный ящик (отпечатков)", //-количество отпечатков ", //not required
-  OFFSET_INK_SUPPLY_TIME = "Время подачи чернил", // decimal
-  OFFSET_DESIGN_MATCH = "Соответсвие дизайну и контрольному образцу", //boolean
-  OFFSET_TUBE_APPEARANCE = "Внешний вид тубы (разнотон, нечеткий текст, двоение печати)", //boolean
-  OFFSET_TUBE_EDGE_DEFORMATION_LACK = "Отсутствие деформации края тубы", //boolean
-  OFFSET_ALUMINIUM_CLEARANCE_LACK = "Отсутствие просветов алюминия", //boolean
-  OFFSET_DRIPS_LACK = "Отсутствие марашек", //boolean
-
-  SEALANT_CAP_MACHINE_SPEED = "Скорость колпачковой машины", //шт./мин.
-  SEALANT_TOTAL_AIR_PRESSURE = "Давление воздуха общее", //Бар.	//float
-  SEALANT_HOLDERS_FORWARD = "Захваты вперед", //ед.
-  SEALANT_HOLDERS_OPENING_LEFT = "Открытие захваты (лев)", //ед.
-  SEALANT_HOLDERS_OPENING_RIGHT = "Открытие захваты (прав)", //ед.
-  SEALANT_HOLDER_CLOSING = "Закрытие захвата", //ед.
-  SEALANT_INJECTION_A_START = "Начало впрыска А",
-  SEALANT_INJECTION_B_START = "Начало впрыска B",
-  SEALANT_INJECTION_A_END = "Конец впрыска А",
-  SEALANT_INJECTION_B_END = "Конец впрыска B",
-  // SEALANT_INJECTION_TUBE_ORIENTATION_START = "Положение тубы для впрыска (начальное положение)",
-  // SEALANT_INJECTION_TUBE_ORIENTATION_END = "Положение тубы для впрыска (конечное положение)",
-  SEALANT_INJECTION_TUBE_ORIENTATION_START = "Положение тубы для впрыска (начало)",
-  SEALANT_INJECTION_TUBE_ORIENTATION_END = "Положение тубы для впрыска (конец)",
-  SEALANT_IS_CAP_SURFACE_SMOOTH = "Поверхность колпачка гладкая, без царапин", //boolean
-  SEALANT_LATEX_RING_PADDING = "Отступ латексного кольца от края тубы", //мм.
-  SEALANT_LATEX_RING_WIDTH = "Ширина латексного кольца", //мм.
-  SEALANT_TUBE_RIGIDITY = "Жесткость готовой тубы", // мм
-  SEALANT_CAP_UNSCREWING_TORQUE = "Измерение крутящего момента откручивания колпачка", // Н.см.
-}
+export const SEALANT_PARAMETER_NAMES = {
+  counter_value: "Показания счетчика",
+  cap_machine_speed: "Скорость колпачковой машины", //шт./мин.
+  total_air_pressure: "Давление воздуха общее", //Бар.	//float
+  holders_forward: "Захваты вперед", //ед.
+  holders_opening_left: "Открытие захваты (лев)", //ед.
+  holders_opening_right: "Открытие захваты (прав)", //ед.
+  holders_closing: "Закрытие захвата", //ед.
+  injection_a_start: "Начало впрыска А",
+  injection_b_start: "Начало впрыска B",
+  injection_a_end: "Конец впрыска А",
+  injection_b_end: "Конец впрыска B",
+  injection_tube_orientation_start: "Положение тубы для впрыска (начало)",
+  injection_tube_orientation_end: "Положение тубы для впрыска (конец)",
+  is_cap_surface_smooth: "Поверхность колпачка гладкая, без царапин", //boolean
+  latex_ring_padding: "Отступ латексного кольца от края тубы", //мм.
+  latex_ring_width: "Ширина латексного кольца", //мм.
+  tube_rigidity: "Жесткость готовой тубы", // мм
+  cap_unscrewing_torque: "Измерение крутящего момента откручивания колпачка", // Н.см.
+} as const

@@ -13,14 +13,14 @@ export interface IExtrusionTreshold {
   annealing_furnace_temp_min: string;
   annealing_furnace_temp_max: string;
   rondel_id: number | null;
-  tube_cilindrical_section_length_min: string;
-  tube_cilindrical_section_length_max: string;
+  tube_cylindrical_section_length_min: string;
+  tube_cylindrical_section_length_max: string;
   membrane_thickness_min: string;
   membrane_thickness_max: string;
   tube_diameter_min: string;
   tube_diameter_max: string;
-  tube_cilindrical_section_thickness_min: string;
-  tube_cilindrical_section_thickness_max: string;
+  tube_cylindrical_section_thickness_min: string;
+  tube_cylindrical_section_thickness_max: string;
   tube_rigidity_min: string;
   tube_rigidity_max: string;
   external_thread_value: string;
@@ -228,14 +228,14 @@ export interface CreateExtrusionTresholdDto {
   annealing_furnace_temp_min: string;
   annealing_furnace_temp_max: string;
   rondel_id: number | null;
-  tube_cilindrical_section_length_min: string;
-  tube_cilindrical_section_length_max: string;
+  tube_cylindrical_section_length_min: string;
+  tube_cylindrical_section_length_max: string;
   membrane_thickness_min: string;
   membrane_thickness_max: string;
   tube_diameter_min: string;
   tube_diameter_max: string;
-  tube_cilindrical_section_thickness_min: string;
-  tube_cilindrical_section_thickness_max: string;
+  tube_cylindrical_section_thickness_min: string;
+  tube_cylindrical_section_thickness_max: string;
   tube_rigidity_min: string;
   tube_rigidity_max: string;
   external_thread_value: string;
@@ -353,8 +353,7 @@ export interface CreateSealantTresholdDto {
 export default class TubeTresholdsService {
   static async getExtrusionTresholds(dto: FetchTubeTresholdsDto): Promise<TubeExtrusionTresholdResponse> {
     const res = await $apiTubes.get(
-      `/tresholds/extrusion?page=${dto.page}&limit=${dto.limit}&code=${dto.filter.code}&marking=${
-        dto.filter.marking
+      `/tresholds/extrusion?page=${dto.page}&limit=${dto.limit}&code=${dto.filter.code}&marking=${dto.filter.marking
       }${dto.filter.empty.map((item) => `&empty=${item}`)}${dto.filter.conveyors.map((item) => `&conveyors=${item}`)}`
     );
     return res.data;
@@ -362,8 +361,7 @@ export default class TubeTresholdsService {
 
   static async getVarnishTresholds(dto: FetchTubeTresholdsDto): Promise<TubeVarnishTresholdResponse> {
     const res = await $apiTubes.get(
-      `/tresholds/varnish?page=${dto.page}&limit=${dto.limit}&code=${dto.filter.code}&marking=${
-        dto.filter.marking
+      `/tresholds/varnish?page=${dto.page}&limit=${dto.limit}&code=${dto.filter.code}&marking=${dto.filter.marking
       }${dto.filter.empty.map((item) => `&empty=${item}`)}${dto.filter.conveyors.map((item) => `&conveyors=${item}`)}`
     );
     return res.data;
@@ -371,8 +369,7 @@ export default class TubeTresholdsService {
 
   static async getOffsetTresholds(dto: FetchTubeTresholdsDto): Promise<TubeOffsetTresholdResponse> {
     const res = await $apiTubes.get(
-      `/tresholds/offset?page=${dto.page}&limit=${dto.limit}&code=${dto.filter.code}&marking=${
-        dto.filter.marking
+      `/tresholds/offset?page=${dto.page}&limit=${dto.limit}&code=${dto.filter.code}&marking=${dto.filter.marking
       }${dto.filter.empty.map((item) => `&empty=${item}`)}${dto.filter.conveyors.map((item) => `&conveyors=${item}`)}`
     );
     return res.data;
@@ -380,8 +377,7 @@ export default class TubeTresholdsService {
 
   static async getSealantTresholds(dto: FetchTubeTresholdsDto): Promise<TubeSealantTresholdResponse> {
     const res = await $apiTubes.get(
-      `/tresholds/sealant?page=${dto.page}&limit=${dto.limit}&code=${dto.filter.code}&marking=${
-        dto.filter.marking
+      `/tresholds/sealant?page=${dto.page}&limit=${dto.limit}&code=${dto.filter.code}&marking=${dto.filter.marking
       }${dto.filter.empty.map((item) => `&empty=${item}`)}${dto.filter.conveyors.map((item) => `&conveyors=${item}`)}`
     );
     return res.data;

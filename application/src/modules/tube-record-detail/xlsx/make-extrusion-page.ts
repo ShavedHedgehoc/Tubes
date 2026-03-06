@@ -160,7 +160,7 @@ export default function makeExtrusionPage({ workbook, data }: { workbook: WorkBo
       },
     },
     {
-      v: row.tube_cilindrical_section_length,
+      v: row.tube_cylindrical_section_length,
       t: "s",
       s: {
         alignment: { horizontal: "center" },
@@ -202,7 +202,7 @@ export default function makeExtrusionPage({ workbook, data }: { workbook: WorkBo
       },
     },
     {
-      v: row.tube_cilindrical_section_thickness,
+      v: row.tube_cylindrical_section_thickness,
       t: "s",
       s: {
         alignment: { horizontal: "center" },
@@ -672,11 +672,10 @@ export default function makeExtrusionPage({ workbook, data }: { workbook: WorkBo
   };
 
   worksheet["C10"] = {
-    v: `${
-      data.extrusion.tresholds
+    v: `${data.extrusion.tresholds
         ? `${data.extrusion.tresholds.press_speed_min}-${data.extrusion.tresholds.press_speed_max}`
         : "-"
-    }`,
+      }`,
     t: "s",
     s: {
       fill: { fgColor: { rgb: "d1fae5" } },
@@ -716,11 +715,10 @@ export default function makeExtrusionPage({ workbook, data }: { workbook: WorkBo
   };
 
   worksheet["D10"] = {
-    v: `${
-      data.extrusion.tresholds
+    v: `${data.extrusion.tresholds
         ? `${data.extrusion.tresholds.blow_time_min}-${data.extrusion.tresholds.blow_time_max}`
         : "-"
-    }`,
+      }`,
     t: "s",
     s: {
       fill: { fgColor: { rgb: "d1fae5" } },
@@ -760,11 +758,10 @@ export default function makeExtrusionPage({ workbook, data }: { workbook: WorkBo
   };
 
   worksheet["E10"] = {
-    v: `${
-      data.extrusion.tresholds
+    v: `${data.extrusion.tresholds
         ? `${data.extrusion.tresholds.turning_machine_speed_min}-${data.extrusion.tresholds.turning_machine_speed_max}`
         : "-"
-    }`,
+      }`,
     t: "s",
     s: {
       fill: { fgColor: { rgb: "d1fae5" } },
@@ -804,11 +801,10 @@ export default function makeExtrusionPage({ workbook, data }: { workbook: WorkBo
   };
 
   worksheet["F10"] = {
-    v: `${
-      data.extrusion.tresholds
+    v: `${data.extrusion.tresholds
         ? `${data.extrusion.tresholds.annealing_furnace_temp_min}-${data.extrusion.tresholds.annealing_furnace_temp_max}`
         : "-"
-    }`,
+      }`,
     t: "s",
     s: {
       fill: { fgColor: { rgb: "d1fae5" } },
@@ -848,9 +844,8 @@ export default function makeExtrusionPage({ workbook, data }: { workbook: WorkBo
   };
 
   worksheet["G10"] = {
-    v: `${
-      data.extrusion.tresholds ? (data.extrusion.tresholds.rondel ? data.extrusion.tresholds.rondel.value : "-") : "-"
-    }`,
+    v: `${data.extrusion.tresholds ? (data.extrusion.tresholds.rondel ? data.extrusion.tresholds.rondel.value : "-") : "-"
+      }`,
     t: "s",
     s: {
       fill: { fgColor: { rgb: "d1fae5" } },
@@ -882,11 +877,10 @@ export default function makeExtrusionPage({ workbook, data }: { workbook: WorkBo
   };
 
   worksheet["H10"] = {
-    v: `${
-      data.extrusion.tresholds
-        ? `${data.extrusion.tresholds.tube_cilindrical_section_length_min}-${data.extrusion.tresholds.tube_cilindrical_section_length_max}`
+    v: `${data.extrusion.tresholds
+        ? `${data.extrusion.tresholds.tube_cylindrical_section_length_min}-${data.extrusion.tresholds.tube_cylindrical_section_length_max}`
         : "-"
-    }`,
+      }`,
     t: "s",
     s: {
       fill: { fgColor: { rgb: "d1fae5" } },
@@ -926,11 +920,10 @@ export default function makeExtrusionPage({ workbook, data }: { workbook: WorkBo
   };
 
   worksheet["I10"] = {
-    v: `${
-      data.extrusion.tresholds
+    v: `${data.extrusion.tresholds
         ? `${data.extrusion.tresholds.membrane_thickness_min}-${data.extrusion.tresholds.membrane_thickness_max}`
         : "-"
-    }`,
+      }`,
     t: "s",
     s: {
       fill: { fgColor: { rgb: "d1fae5" } },
@@ -970,11 +963,10 @@ export default function makeExtrusionPage({ workbook, data }: { workbook: WorkBo
   };
 
   worksheet["J10"] = {
-    v: `${
-      data.extrusion.tresholds
+    v: `${data.extrusion.tresholds
         ? `${data.extrusion.tresholds.tube_diameter_min}-${data.extrusion.tresholds.tube_diameter_max}`
         : "-"
-    }`,
+      }`,
     t: "s",
     s: {
       fill: { fgColor: { rgb: "d1fae5" } },
@@ -1014,11 +1006,10 @@ export default function makeExtrusionPage({ workbook, data }: { workbook: WorkBo
   };
 
   worksheet["K10"] = {
-    v: `${
-      data.extrusion.tresholds
-        ? `${data.extrusion.tresholds.tube_cilindrical_section_thickness_min}-${data.extrusion.tresholds.tube_cilindrical_section_thickness_max}`
+    v: `${data.extrusion.tresholds
+        ? `${data.extrusion.tresholds.tube_cylindrical_section_thickness_min}-${data.extrusion.tresholds.tube_cylindrical_section_thickness_max}`
         : "-"
-    }`,
+      }`,
     t: "s",
     s: {
       fill: { fgColor: { rgb: "d1fae5" } },
@@ -1058,11 +1049,10 @@ export default function makeExtrusionPage({ workbook, data }: { workbook: WorkBo
   };
 
   worksheet["L10"] = {
-    v: `${
-      data.extrusion.tresholds
+    v: `${data.extrusion.tresholds
         ? `${data.extrusion.tresholds.tube_rigidity_min}-${data.extrusion.tresholds.tube_rigidity_max}`
         : "-"
-    }`,
+      }`,
     t: "s",
     s: {
       fill: { fgColor: { rgb: "d1fae5" } },

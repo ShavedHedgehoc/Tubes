@@ -604,11 +604,11 @@ export class SummariesService {
   //         blow_time: item.blow_time,
   //         turning_machine_speed: item.turning_machine_speed,
   //         annealing_furnace_temp: item.annealing_furnace_temp,
-  //         tube_cilindrical_section_length: item.tube_cilindrical_section_length,
+  //         tube_cylindrical_section_length: item.tube_cylindrical_section_length,
   //         membrane_thickness: item.membrane_thickness,
   //         tube_diameter: item.tube_diameter,
-  //         tube_cilindrical_section_thickness:
-  //           item.tube_cilindrical_section_thickness,
+  //         tube_cylindrical_section_thickness:
+  //           item.tube_cylindrical_section_thickness,
   //         tube_rigidity: item.tube_rigidity,
   //         tube_cutting_quality: item.tube_cutting_quality,
   //         tightness: item.tightness,

@@ -295,10 +295,10 @@ model ExtrusionParam {
   blow_time                          Int
   turning_machine_speed              Int
   annealing_furnace_temp             Int
-  tube_cilindrical_section_length    Int
+  tube_cylindrical_section_length    Int
   membrane_thickness                 Float
   tube_diameter                      Float
-  tube_cilindrical_section_thickness Float
+  tube_cylindrical_section_thickness Float
   tube_rigidity                      Int
   tube_cutting_quality               Boolean  @default(false)
   tightness                          Boolean  @default(false)
@@ -533,14 +533,14 @@ model Treshold {
   extrusion_turning_machine_speed_max              Int
   extrusion_annealing_furnace_temp_min             Int
   extrusion_annealing_furnace_temp_max             Int
-  extrusion_tube_cilindrical_section_length_min    Int
-  extrusion_tube_cilindrical_section_length_max    Int
+  extrusion_tube_cylindrical_section_length_min    Int
+  extrusion_tube_cylindrical_section_length_max    Int
   extrusion_membrane_thickness_min                 Float
   extrusion_membrane_thickness_max                 Float
   extrusion_tube_diameter_min                      Float
   extrusion_tube_diameter_max                      Float
-  extrusion_tube_cilindrical_section_thickness_min Float
-  extrusion_tube_cilindrical_section_thickness_max Float
+  extrusion_tube_cylindrical_section_thickness_min Float
+  extrusion_tube_cylindrical_section_thickness_max Float
   extrusion_tube_rigidity_min                      Int
   extrusion_tube_rigidity_max                      Int
   extrusion_external_thread_value                  String

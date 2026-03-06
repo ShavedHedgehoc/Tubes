@@ -1,7 +1,7 @@
 import type { ISummary } from "@/shared/api/services/summary-service";
 import { Box, DataList, HStack, Stack, Text } from "@chakra-ui/react";
 import InputTimer from "./input-timer";
-import { CheckIntervals } from "@/shared/helpers/check-intervals";
+import { CHECK_INTERVALS } from "@/shared/helpers/check-intervals";
 import useProductionCardData from "./use-production-card-data";
 import { formatTimeToString } from "@/shared/helpers/date-time-formatters";
 
@@ -35,7 +35,7 @@ export default function ProductionCard({ summaryData, postId }: { summaryData: I
           </Text>
         </Stack>
       ),
-      working: <InputTimer checkInterval={CheckIntervals.HARDWARE} date={lastCheckDate} idleTime={idleTime} />,
+      working: <InputTimer checkInterval={CHECK_INTERVALS.hardware} date={lastCheckDate} idleTime={idleTime} />,
       finished: (
         <Stack>
           <Text color="fg.a" textStyle="xl" animation="colorCycle">

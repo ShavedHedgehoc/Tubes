@@ -55,7 +55,7 @@ export default function TubeRecordsDetailExtrusionParamsRow({
         <Typography level="body-xs">{row.rondel}</Typography>
       </td>
       <td style={{ width: 40, textAlign: "center", padding: "12px 24px" }}>
-        <Typography level="body-xs">{row.tube_cilindrical_section_length}</Typography>
+        <Typography level="body-xs">{row.tube_cylindrical_section_length}</Typography>
       </td>
       <td style={{ width: 40, textAlign: "center", padding: "12px 24px" }}>
         <Typography level="body-xs">{row.membrane_thickness}</Typography>
@@ -64,7 +64,7 @@ export default function TubeRecordsDetailExtrusionParamsRow({
         <Typography level="body-xs">{row.tube_diameter}</Typography>
       </td>
       <td style={{ width: 40, textAlign: "center", padding: "12px 24px" }}>
-        <Typography level="body-xs">{row.tube_cilindrical_section_thickness}</Typography>
+        <Typography level="body-xs">{row.tube_cylindrical_section_thickness}</Typography>
       </td>
       <td style={{ width: 40, textAlign: "center", padding: "12px 24px" }}>
         <Typography level="body-xs">{row.tube_rigidity}</Typography>

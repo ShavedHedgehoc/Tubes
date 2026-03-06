@@ -21,14 +21,14 @@ export function isExtrusionTreshold(
     "annealing_furnace_temp_min" in obj &&
     "annealing_furnace_temp_max" in obj &&
     "rondel_id" in obj &&
-    "tube_cilindrical_section_length_min" in obj &&
-    "tube_cilindrical_section_length_max" in obj &&
+    "tube_cylindrical_section_length_min" in obj &&
+    "tube_cylindrical_section_length_max" in obj &&
     "membrane_thickness_min" in obj &&
     "membrane_thickness_max" in obj &&
     "tube_diameter_min" in obj &&
     "tube_diameter_max" in obj &&
-    "tube_cilindrical_section_thickness_min" in obj &&
-    "tube_cilindrical_section_thickness_max" in obj &&
+    "tube_cylindrical_section_thickness_min" in obj &&
+    "tube_cylindrical_section_thickness_max" in obj &&
     "tube_rigidity_min" in obj &&
     "tube_rigidity_max" in obj &&
     "external_thread_value" in obj &&

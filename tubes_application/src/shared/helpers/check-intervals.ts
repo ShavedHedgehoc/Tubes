@@ -1,4 +1,4 @@
-export enum CheckIntervals {
-  HARDWARE = 30,
-  QUALITY = 30,
-}
+export const CHECK_INTERVALS = {
+  hardware: 30,
+  quality: 30,
+} as const
