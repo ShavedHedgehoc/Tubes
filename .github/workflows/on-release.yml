@@ -1,0 +1,36 @@
+name: Release & Versioning
+
+on:
+  push:
+    branches: [ release ] # Срабатывает при слиянии в release
+
+jobs:
+  bump-and-tag:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Нужно для истории коммитов
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Git Config
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Bump Version
+        # --include-workspace-root обновит версию во всём монорепозитории (api, app, dash)
+        # patch увеличит 1.0.0 -> 1.0.1
+        run: npm version patch --include-workspace-root --workspaces
+
+      - name: Push Changes & Tags
+        run: |
+          git push origin release
+          git push --tags
