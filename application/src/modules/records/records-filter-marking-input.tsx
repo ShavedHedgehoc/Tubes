@@ -5,7 +5,9 @@ import { RecordsFilterParams } from "./records-filter-params";
 
 export default function RecordsFilterMarkingInput() {
   const filter = useRecordsFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useRecordsFilterStore(useShallow((state) => state.changeFilter));
+  const changeFilter = useRecordsFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
 
   const inputProps: FilterInputProps = {
     id: RecordsFilterParams.MARKING,
@@ -13,7 +15,8 @@ export default function RecordsFilterMarkingInput() {
     disabled: filter.marking === "",
     label: "Поиск по артикулу",
     placeholder: "Артикул",
-    changeFilter: ({ key, value }: { key: string; value: string }) => changeFilter({ key, value }),
+    changeFilter: ({ key, value }: { key: string; value: string }) =>
+      changeFilter({ key, value }),
   };
 
   return <FilterInput {...inputProps} />;

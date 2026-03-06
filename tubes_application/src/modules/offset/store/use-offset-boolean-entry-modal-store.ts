@@ -17,5 +17,5 @@ export const useOffsetBooleanEntryModalStore = create<BooleanEntryModalStore>()(
     setKey: (value) => set(() => ({ key: value })),
     setTitle: (value) => set(() => ({ title: value })),
     setOpen: (value) => set(() => ({ open: value })),
-  }))
+  })),
 );

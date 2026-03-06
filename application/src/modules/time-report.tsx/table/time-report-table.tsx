@@ -37,7 +37,9 @@ export default function TimeReportTable() {
 
   return (
     <TableLayout thead={commonThead}>
-      {isSuccess && data.length && data.map((row) => <TimeReportRow row={row} key={row.id} />)}
+      {isSuccess &&
+        data.length &&
+        data.map((row) => <TimeReportRow row={row} key={row.id} />)}
     </TableLayout>
   );
 }

@@ -153,118 +153,208 @@ export const useTubeSealantTresholdsStore = create<TubeSealantTresholdsStore>()(
       switch (key) {
         case SealantTresholdsParams.PRODUCT_ID:
           set((state) => ({
-            tresholds: { ...state.tresholds, product_id: values?.length ? values[0] : state.tresholds.product_id },
+            tresholds: {
+              ...state.tresholds,
+              product_id: values?.length
+                ? values[0]
+                : state.tresholds.product_id,
+            },
           }));
           break;
         case SealantTresholdsParams.CONVEYOR_ID:
           set((state) => ({
-            tresholds: { ...state.tresholds, conveyor_id: values?.length ? values[0] : state.tresholds.conveyor_id },
+            tresholds: {
+              ...state.tresholds,
+              conveyor_id: values?.length
+                ? values[0]
+                : state.tresholds.conveyor_id,
+            },
           }));
           break;
         case SealantTresholdsParams.CAP_MACHINE_SPEED_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, cap_machine_speed_min: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, cap_machine_speed_min: value },
+          }));
           break;
         case SealantTresholdsParams.CAP_MACHINE_SPEED_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, cap_machine_speed_max: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, cap_machine_speed_max: value },
+          }));
           break;
         case SealantTresholdsParams.TOTAL_AIR_PRESSURE_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, total_air_pressure_min: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, total_air_pressure_min: value },
+          }));
           break;
         case SealantTresholdsParams.TOTAL_AIR_PRESSURE_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, total_air_pressure_max: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, total_air_pressure_max: value },
+          }));
           break;
         case SealantTresholdsParams.HOLDERS_FORWARD_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, holders_forward_min: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, holders_forward_min: value },
+          }));
           break;
         case SealantTresholdsParams.HOLDERS_FORWARD_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, holders_forward_max: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, holders_forward_max: value },
+          }));
           break;
         case SealantTresholdsParams.HOLDERS_OPENING_LEFT_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, holders_opening_left_min: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, holders_opening_left_min: value },
+          }));
           break;
         case SealantTresholdsParams.HOLDERS_OPENING_LEFT_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, holders_opening_left_max: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, holders_opening_left_max: value },
+          }));
           break;
         case SealantTresholdsParams.HOLDERS_OPENING_RIGHT_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, holders_opening_right_min: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, holders_opening_right_min: value },
+          }));
           break;
         case SealantTresholdsParams.HOLDERS_OPENING_RIGHT_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, holders_opening_right_max: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, holders_opening_right_max: value },
+          }));
           break;
         case SealantTresholdsParams.HOLDERS_CLOSING_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, holders_closing_min: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, holders_closing_min: value },
+          }));
           break;
         case SealantTresholdsParams.HOLDERS_CLOSING_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, holders_closing_max: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, holders_closing_max: value },
+          }));
           break;
         case SealantTresholdsParams.INJECTION_A_START_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, injection_a_start_min: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, injection_a_start_min: value },
+          }));
           break;
         case SealantTresholdsParams.INJECTION_A_START_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, injection_a_start_max: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, injection_a_start_max: value },
+          }));
           break;
         case SealantTresholdsParams.INJECTION_B_START_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, injection_b_start_min: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, injection_b_start_min: value },
+          }));
           break;
         case SealantTresholdsParams.INJECTION_B_START_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, injection_b_start_max: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, injection_b_start_max: value },
+          }));
           break;
         case SealantTresholdsParams.INJECTION_A_END_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, injection_a_end_min: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, injection_a_end_min: value },
+          }));
           break;
         case SealantTresholdsParams.INJECTION_A_END_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, injection_a_end_max: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, injection_a_end_max: value },
+          }));
           break;
         case SealantTresholdsParams.INJECTION_B_END_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, injection_b_end_min: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, injection_b_end_min: value },
+          }));
           break;
         case SealantTresholdsParams.INJECTION_B_END_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, injection_b_end_max: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, injection_b_end_max: value },
+          }));
           break;
         case SealantTresholdsParams.INJECTION_TUBE_ORIENTATION_START_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, injection_tube_orientation_start_min: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              injection_tube_orientation_start_min: value,
+            },
+          }));
           break;
         case SealantTresholdsParams.INJECTION_TUBE_ORIENTATION_START_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, injection_tube_orientation_start_max: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              injection_tube_orientation_start_max: value,
+            },
+          }));
           break;
         case SealantTresholdsParams.INJECTION_TUBE_ORIENTATION_END_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, injection_tube_orientation_end_min: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              injection_tube_orientation_end_min: value,
+            },
+          }));
           break;
         case SealantTresholdsParams.INJECTION_TUBE_ORIENTATION_END_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, injection_tube_orientation_end_max: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              injection_tube_orientation_end_max: value,
+            },
+          }));
           break;
         case SealantTresholdsParams.LATEX_RING_PADDING_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, latex_ring_padding_min: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, latex_ring_padding_min: value },
+          }));
           break;
         case SealantTresholdsParams.LATEX_RING_PADDING_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, latex_ring_padding_max: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, latex_ring_padding_max: value },
+          }));
           break;
         case SealantTresholdsParams.LATEX_RING_WIDTH_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, latex_ring_width_min: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, latex_ring_width_min: value },
+          }));
           break;
         case SealantTresholdsParams.LATEX_RING_WIDTH_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, latex_ring_width_max: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, latex_ring_width_max: value },
+          }));
           break;
         case SealantTresholdsParams.TUBE_RIGIDITY_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, tube_rigidity_min: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, tube_rigidity_min: value },
+          }));
           break;
         case SealantTresholdsParams.TUBE_RIGIDITY_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, tube_rigidity_max: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, tube_rigidity_max: value },
+          }));
           break;
         case SealantTresholdsParams.CAP_UNSCREWING_TORQUE_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, cap_unscrewing_torque_min: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, cap_unscrewing_torque_min: value },
+          }));
           break;
         case SealantTresholdsParams.CAP_UNSCREWING_TORQUE_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, cap_unscrewing_torque_max: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, cap_unscrewing_torque_max: value },
+          }));
           break;
         default:
           break;
       }
     },
-    fillConveyorSelectorOptions: (values) => set(() => ({ conveyorSelectorOptions: [...values] })),
-    setSelectedConveyorOption: (value) => set(() => ({ selectedConveyorOption: value })),
-    fillProductSelectorOptions: (values) => set(() => ({ productSelectorOptions: [...values] })),
-    setSelectedProductOption: (value) => set(() => ({ selectedProductOption: value })),
+    fillConveyorSelectorOptions: (values) =>
+      set(() => ({ conveyorSelectorOptions: [...values] })),
+    setSelectedConveyorOption: (value) =>
+      set(() => ({ selectedConveyorOption: value })),
+    fillProductSelectorOptions: (values) =>
+      set(() => ({ productSelectorOptions: [...values] })),
+    setSelectedProductOption: (value) =>
+      set(() => ({ selectedProductOption: value })),
 
     setTreshold: (value) =>
       set((state) => ({
@@ -292,10 +382,14 @@ export const useTubeSealantTresholdsStore = create<TubeSealantTresholdsStore>()(
           injection_a_end_max: value.injection_a_end_max,
           injection_b_end_min: value.injection_b_end_min,
           injection_b_end_max: value.injection_b_end_max,
-          injection_tube_orientation_start_min: value.injection_tube_orientation_start_min,
-          injection_tube_orientation_start_max: value.injection_tube_orientation_start_max,
-          injection_tube_orientation_end_min: value.injection_tube_orientation_end_min,
-          injection_tube_orientation_end_max: value.injection_tube_orientation_end_max,
+          injection_tube_orientation_start_min:
+            value.injection_tube_orientation_start_min,
+          injection_tube_orientation_start_max:
+            value.injection_tube_orientation_start_max,
+          injection_tube_orientation_end_min:
+            value.injection_tube_orientation_end_min,
+          injection_tube_orientation_end_max:
+            value.injection_tube_orientation_end_max,
           latex_ring_padding_min: value.latex_ring_padding_min,
           latex_ring_padding_max: value.latex_ring_padding_max,
           latex_ring_width_min: value.latex_ring_width_min,
@@ -308,5 +402,5 @@ export const useTubeSealantTresholdsStore = create<TubeSealantTresholdsStore>()(
         selectedProductOption: value.product_id,
         selectedConveyorOption: value.conveyor_id,
       })),
-  }))
+  })),
 );

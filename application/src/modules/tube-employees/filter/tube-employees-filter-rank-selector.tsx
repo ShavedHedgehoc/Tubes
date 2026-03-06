@@ -7,9 +7,15 @@ import FilterMultiSelector, {
 import { TubeEmployeesFilterParams } from "./tube-employees-filter-params";
 
 export default function TubeEmployeesFilterRankSelector() {
-  const filter = useTubeEmployeesFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useTubeEmployeesFilterStore(useShallow((state) => state.changeFilter));
-  const rankSelectorOptions = useTubeEmployeesFilterStore(useShallow((state) => state.rankSelectorOptions));
+  const filter = useTubeEmployeesFilterStore(
+    useShallow((state) => state.filter),
+  );
+  const changeFilter = useTubeEmployeesFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
+  const rankSelectorOptions = useTubeEmployeesFilterStore(
+    useShallow((state) => state.rankSelectorOptions),
+  );
 
   const stateOptions = rankSelectorOptions.map((state) => (
     <FilterMultiSelectorOption
@@ -26,8 +32,15 @@ export default function TubeEmployeesFilterRankSelector() {
     placeholder: "Выберите разряд",
     label: "Поиск по разряду",
     options: stateOptions,
-    changeFilter: ({ key, value, values }: { key: string; value: string; values: number[] | [] }) =>
-      changeFilter({ key, value, values }),
+    changeFilter: ({
+      key,
+      value,
+      values,
+    }: {
+      key: string;
+      value: string;
+      values: number[] | [];
+    }) => changeFilter({ key, value, values }),
   };
 
   return <FilterMultiSelector {...stateSelectorProps} />;

@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import TubeRecordsService, { FetchTubeRecordsListDto } from "../../shared/api/services/tube-records-service";
+import TubeRecordsService, {
+  FetchTubeRecordsListDto,
+} from "../../shared/api/services/tube-records-service";
 
 export const useTubeRecordsList = (dto: FetchTubeRecordsListDto) =>
   useQuery({

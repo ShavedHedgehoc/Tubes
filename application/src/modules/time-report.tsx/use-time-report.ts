@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import RecordService, { TimeReportDto } from "../../shared/api/services/record-service";
+import RecordService, {
+  TimeReportDto,
+} from "../../shared/api/services/record-service";
 
 export const useTimeReport = (dto: TimeReportDto) =>
   useQuery({

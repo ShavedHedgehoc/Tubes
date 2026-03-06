@@ -5,7 +5,9 @@ import { TraceBatchsFilterParams } from "./trace-batchs-filter-params";
 
 export default function TraceBatchsFilterMarkingInput() {
   const filter = useTraceBatchsFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useTraceBatchsFilterStore(useShallow((state) => state.changeFilter));
+  const changeFilter = useTraceBatchsFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
 
   const codeInputProps: FilterInputProps = {
     id: TraceBatchsFilterParams.MARKING,
@@ -14,7 +16,8 @@ export default function TraceBatchsFilterMarkingInput() {
     label: "Поиск по артикулу",
     placeholder: "Артикул",
     maxW: 150,
-    changeFilter: ({ key, value }: { key: string; value: string }) => changeFilter({ key, value }),
+    changeFilter: ({ key, value }: { key: string; value: string }) =>
+      changeFilter({ key, value }),
   };
 
   return <FilterInput {...codeInputProps} />;

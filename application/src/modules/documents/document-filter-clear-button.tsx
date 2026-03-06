@@ -2,10 +2,15 @@ import { useShallow } from "zustand/react/shallow";
 import { useDocumentsFilterStore } from "./store/use-documents-filter-store";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import FilterButton, { FilterButtonProps } from "../../shared/ui/filter-button";
-import { getFirstDayOfCurrentMonth, getLastDayOfCurrentMonth } from "../../shared/helpers/date-time-formatters";
+import {
+  getFirstDayOfCurrentMonth,
+  getLastDayOfCurrentMonth,
+} from "../../shared/helpers/date-time-formatters";
 
 export default function DocumentsFilterClearButton() {
-  const clearFilter = useDocumentsFilterStore(useShallow((state) => state.clearFilter));
+  const clearFilter = useDocumentsFilterStore(
+    useShallow((state) => state.clearFilter),
+  );
   const filter = useDocumentsFilterStore(useShallow((state) => state.filter));
 
   const disableDocumentFilterClearButton =

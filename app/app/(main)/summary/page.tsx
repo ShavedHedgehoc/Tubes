@@ -5,9 +5,12 @@ import { Box } from "@chakra-ui/react";
 async function getSummaries(): Promise<TubeRecordsListResponce> {
   const externalApiUrl = process.env.API_URL;
   const url = `${externalApiUrl}/summaries`;
-  const res = await fetch(`${url}?start_date="2022-01-01&end_date="2027-01-01"&page=1&limit=30&code=`, {
-    next: { revalidate: 5 },
-  });
+  const res = await fetch(
+    `${url}?start_date="2022-01-01&end_date="2027-01-01"&page=1&limit=30&code=`,
+    {
+      next: { revalidate: 5 },
+    },
+  );
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }

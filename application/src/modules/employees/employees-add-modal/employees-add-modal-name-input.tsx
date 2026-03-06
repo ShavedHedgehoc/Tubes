@@ -4,7 +4,9 @@ import { useEmployeeAddModalStore } from "../store/use-employees-add-modal-store
 
 export default function EmployeesAddModalNameInput() {
   const name = useEmployeeAddModalStore(useShallow((state) => state.name));
-  const setName = useEmployeeAddModalStore(useShallow((state) => state.setName));
+  const setName = useEmployeeAddModalStore(
+    useShallow((state) => state.setName),
+  );
   return (
     <Input
       sx={{

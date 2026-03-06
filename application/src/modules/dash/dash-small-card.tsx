@@ -20,15 +20,23 @@ const pulse = keyframes`
 export default function DashSmallCard({ row }: { row: IDocRow }) {
   const { mode } = useColorScheme();
 
-  const setOpen = useDashHistoryModalStore(useShallow((state) => state.setOpen));
-  const setRecordId = useDashHistoryModalStore(useShallow((state) => state.setRecordId));
-  const setTitle = useDashHistoryModalStore(useShallow((state) => state.setTitle));
+  const setOpen = useDashHistoryModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const setRecordId = useDashHistoryModalStore(
+    useShallow((state) => state.setRecordId),
+  );
+  const setTitle = useDashHistoryModalStore(
+    useShallow((state) => state.setTitle),
+  );
   const user = useAuthStore(useShallow((state) => state.user));
 
   const handleClick = () => {
     if (user?.roles?.includes(DbRoles.CARDS)) {
       setRecordId(row.id);
-      setTitle(`Историй статусов по продукту ${row.product}, партия - ${row.boil}`);
+      setTitle(
+        `Историй статусов по продукту ${row.product}, партия - ${row.boil}`,
+      );
       setOpen(true);
     }
   };

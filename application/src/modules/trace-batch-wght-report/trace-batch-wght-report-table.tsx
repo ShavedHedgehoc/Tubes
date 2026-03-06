@@ -22,13 +22,29 @@ const commonThead = [
 ];
 
 export default function TraceBatchWghtReportTable() {
-  const filter = useTraceBatchWghtReportFilterStore(useShallow((state) => state.filter));
-  const page = useTraceBatchWghtReportPaginationStore(useShallow((state) => state.page));
-  const limit = useTraceBatchWghtReportPaginationStore(useShallow((state) => state.limit));
-  const total = useTraceBatchWghtReportPaginationStore(useShallow((state) => state.total));
-  const setTotal = useTraceBatchWghtReportPaginationStore(useShallow((state) => state.setTotal));
-  const setPage = useTraceBatchWghtReportPaginationStore(useShallow((state) => state.setPage));
-  const { isPending, data, isSuccess } = useTraceBatchWghtReport({ filter: filter, limit: limit, page: page });
+  const filter = useTraceBatchWghtReportFilterStore(
+    useShallow((state) => state.filter),
+  );
+  const page = useTraceBatchWghtReportPaginationStore(
+    useShallow((state) => state.page),
+  );
+  const limit = useTraceBatchWghtReportPaginationStore(
+    useShallow((state) => state.limit),
+  );
+  const total = useTraceBatchWghtReportPaginationStore(
+    useShallow((state) => state.total),
+  );
+  const setTotal = useTraceBatchWghtReportPaginationStore(
+    useShallow((state) => state.setTotal),
+  );
+  const setPage = useTraceBatchWghtReportPaginationStore(
+    useShallow((state) => state.setPage),
+  );
+  const { isPending, data, isSuccess } = useTraceBatchWghtReport({
+    filter: filter,
+    limit: limit,
+    page: page,
+  });
 
   //REmove useeffects
 
@@ -55,7 +71,12 @@ export default function TraceBatchWghtReportTable() {
   return (
     <TableLayout thead={commonThead}>
       {isSuccess &&
-        data.rows.map((row) => <TraceBatchWghtReportTableRow row={row} key={`${row.product_id + row.BatchNumber}`} />)}
+        data.rows.map((row) => (
+          <TraceBatchWghtReportTableRow
+            row={row}
+            key={`${row.product_id + row.BatchNumber}`}
+          />
+        ))}
     </TableLayout>
   );
 }

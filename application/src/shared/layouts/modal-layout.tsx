@@ -1,5 +1,14 @@
 import * as React from "react";
-import { Box, Button, DialogContent, DialogTitle, Modal, ModalClose, ModalDialog, ModalOverflow } from "@mui/joy";
+import {
+  Box,
+  Button,
+  DialogContent,
+  DialogTitle,
+  Modal,
+  ModalClose,
+  ModalDialog,
+  ModalOverflow,
+} from "@mui/joy";
 
 export interface ModalLayoutProps {
   open: boolean;
@@ -22,7 +31,14 @@ export default function ModalLayout({
 }) {
   const ButtonsComponent = () => {
     return (
-      <Box sx={{ display: "flex", alignItems: "center", justifyContent: "flex-start", gap: 1 }}>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-start",
+          gap: 1,
+        }}
+      >
         {props.onlyCloseButton && (
           <Button
             color="neutral"
@@ -42,7 +58,10 @@ export default function ModalLayout({
     <React.Fragment>
       <Modal
         open={props.open}
-        onClose={(_event: React.MouseEvent<HTMLButtonElement>, reason: string) => {
+        onClose={(
+          _event: React.MouseEvent<HTMLButtonElement>,
+          reason: string,
+        ) => {
           if (reason === "closeClick") {
             props.onClose();
           }
@@ -67,7 +86,9 @@ export default function ModalLayout({
               },
             ]}
           >
-            <DialogTitle sx={{ color: "var(--joy-palette-text-secondary)" }}>{props.title}</DialogTitle>
+            <DialogTitle sx={{ color: "var(--joy-palette-text-secondary)" }}>
+              {props.title}
+            </DialogTitle>
             <DialogContent>
               <Box
                 sx={{

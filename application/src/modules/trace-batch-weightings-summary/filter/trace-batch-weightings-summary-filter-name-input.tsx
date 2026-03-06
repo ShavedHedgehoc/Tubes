@@ -4,8 +4,12 @@ import { useTraceBatchWeightingsSummaryFilterStore } from "../store/use-trace-ba
 import { TraceBatchWeightingsSummaryFilterParams } from "./trace-batch-weightings-summary-filter-params";
 
 export default function TraceBatchWeightingsSummaryFilterNameInput() {
-  const filter = useTraceBatchWeightingsSummaryFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useTraceBatchWeightingsSummaryFilterStore(useShallow((state) => state.changeFilter));
+  const filter = useTraceBatchWeightingsSummaryFilterStore(
+    useShallow((state) => state.filter),
+  );
+  const changeFilter = useTraceBatchWeightingsSummaryFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
 
   const codeInputProps: FilterInputProps = {
     id: TraceBatchWeightingsSummaryFilterParams.AUTHOR,
@@ -14,7 +18,8 @@ export default function TraceBatchWeightingsSummaryFilterNameInput() {
     label: "Поиск по ФИО",
     placeholder: "ФИО",
     maxW: 150,
-    changeFilter: ({ key, value }: { key: string; value: string }) => changeFilter({ key, value }),
+    changeFilter: ({ key, value }: { key: string; value: string }) =>
+      changeFilter({ key, value }),
   };
 
   return <FilterInput {...codeInputProps} />;

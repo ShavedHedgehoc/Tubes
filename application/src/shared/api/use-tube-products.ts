@@ -6,10 +6,14 @@ import { useTubeOffsetTresholdsStore } from "../../modules/tube-tresholds/add-mo
 import { useTubeSealantTresholdsStore } from "../../modules/tube-tresholds/add-modal/store/use-tube-sealant-tresholds-store";
 
 export const useTubeProducts = () => {
-  const { fillProductSelectorOptions: fillExtrusionProductSelectorOptions } = useTubeExtrusionTresholdsStore();
-  const { fillProductSelectorOptions: fillVarnishProductSelectorOptions } = useTubeVarnishTresholdsStore();
-  const { fillProductSelectorOptions: fillOffsetProductSelectorOptions } = useTubeOffsetTresholdsStore();
-  const { fillProductSelectorOptions: fillSealantProductSelectorOptions } = useTubeSealantTresholdsStore();
+  const { fillProductSelectorOptions: fillExtrusionProductSelectorOptions } =
+    useTubeExtrusionTresholdsStore();
+  const { fillProductSelectorOptions: fillVarnishProductSelectorOptions } =
+    useTubeVarnishTresholdsStore();
+  const { fillProductSelectorOptions: fillOffsetProductSelectorOptions } =
+    useTubeOffsetTresholdsStore();
+  const { fillProductSelectorOptions: fillSealantProductSelectorOptions } =
+    useTubeSealantTresholdsStore();
 
   return useQuery({
     queryKey: ["tube_products"],

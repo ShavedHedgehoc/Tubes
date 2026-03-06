@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import TubeTresholdsService, { FetchTubeTresholdsDto } from "../../shared/api/services/tube-tresholds-service";
+import TubeTresholdsService, {
+  FetchTubeTresholdsDto,
+} from "../../shared/api/services/tube-tresholds-service";
 
 export const useTubeExtrusionTresholds = (dto: FetchTubeTresholdsDto) =>
   useQuery({

@@ -7,10 +7,18 @@ import { useTimeReportHistoryModalStore } from "../store/use-time-report-history
 import TimeReportHistoryModalRow from "./time-report-history-modal-row";
 
 export default function TimeReportHistoryModal() {
-  const open = useTimeReportHistoryModalStore(useShallow((state) => state.open));
-  const record_id = useTimeReportHistoryModalStore(useShallow((state) => state.record_id));
-  const title = useTimeReportHistoryModalStore(useShallow((state) => state.title));
-  const setOpen = useTimeReportHistoryModalStore(useShallow((state) => state.setOpen));
+  const open = useTimeReportHistoryModalStore(
+    useShallow((state) => state.open),
+  );
+  const record_id = useTimeReportHistoryModalStore(
+    useShallow((state) => state.record_id),
+  );
+  const title = useTimeReportHistoryModalStore(
+    useShallow((state) => state.title),
+  );
+  const setOpen = useTimeReportHistoryModalStore(
+    useShallow((state) => state.setOpen),
+  );
   const { isPending, data, isSuccess } = useRecordHistories(record_id);
 
   const history_table_thead: TheadProperties[] = [
@@ -37,7 +45,10 @@ export default function TimeReportHistoryModal() {
     }
     return (
       <TableLayout thead={history_table_thead}>
-        {isSuccess && data.histories.map((row) => <TimeReportHistoryModalRow row={row} key={row.id} />)}
+        {isSuccess &&
+          data.histories.map((row) => (
+            <TimeReportHistoryModalRow row={row} key={row.id} />
+          ))}
       </TableLayout>
     );
   };

@@ -18,7 +18,11 @@ const commonThead = [
   { width: 20, value: "" },
 ];
 
-export default function TraceBatchWghtReportDetailTable({ dto }: { dto: FetchTraceBatchWghtReportDetailDto }) {
+export default function TraceBatchWghtReportDetailTable({
+  dto,
+}: {
+  dto: FetchTraceBatchWghtReportDetailDto;
+}) {
   const { isPending, data, isSuccess } = useTraceBatchWghtReportDetail(dto);
 
   if (isPending) {
@@ -31,7 +35,13 @@ export default function TraceBatchWghtReportDetailTable({ dto }: { dto: FetchTra
 
   return (
     <TableLayout thead={commonThead}>
-      {isSuccess && data.map((row) => <TraceBatchWghtReportDetailTableRow row={row} key={row.weighting_pk} />)}
+      {isSuccess &&
+        data.map((row) => (
+          <TraceBatchWghtReportDetailTableRow
+            row={row}
+            key={row.weighting_pk}
+          />
+        ))}
     </TableLayout>
   );
 }

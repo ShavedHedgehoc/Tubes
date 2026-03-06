@@ -5,7 +5,9 @@ import FilterInput, { FilterInputProps } from "../../../shared/ui/filter-input";
 
 export default function BoilsReportFilterMarkingInput() {
   const filter = useBoilsReportFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useBoilsReportFilterStore(useShallow((state) => state.changeFilter));
+  const changeFilter = useBoilsReportFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
 
   const inputProps: FilterInputProps = {
     id: BoilsReportFilterParams.MARKING,
@@ -13,7 +15,8 @@ export default function BoilsReportFilterMarkingInput() {
     disabled: filter.marking === "",
     label: "Поиск по артикулу",
     placeholder: "Артикул",
-    changeFilter: ({ key, value }: { key: string; value: string }) => changeFilter({ key, value }),
+    changeFilter: ({ key, value }: { key: string; value: string }) =>
+      changeFilter({ key, value }),
   };
 
   return <FilterInput {...inputProps} />;

@@ -7,8 +7,13 @@ import { useExtrusionTresholds } from "./use-extrusion-tresholds";
 import { ParameterNames } from "../shared/parameter-names";
 
 export default function TresholdsExtrusionListContent() {
-  const { tresholds, rondelSelectorOptions, setSelectedRondelOption, selectedRondelOption, changeTresholds } =
-    useExtrusionTresholds();
+  const {
+    tresholds,
+    rondelSelectorOptions,
+    setSelectedRondelOption,
+    selectedRondelOption,
+    changeTresholds,
+  } = useExtrusionTresholds();
 
   return (
     <Stack spacing={2}>

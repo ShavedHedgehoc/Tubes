@@ -81,12 +81,16 @@ export default class TraceCansService {
     return res.data;
   }
 
-  static async getCansListWithParams(dto: FetchCansListDto): Promise<ITraceCanResponse> {
+  static async getCansListWithParams(
+    dto: FetchCansListDto,
+  ): Promise<ITraceCanResponse> {
     const res = await $api.post(`trace-cans/list`, dto);
     return res.data;
   }
 
-  static async getLastTenRecords(canId: number | null): Promise<ITraceCanRecord[]> {
+  static async getLastTenRecords(
+    canId: number | null,
+  ): Promise<ITraceCanRecord[]> {
     const res = await $api.get(`trace-can-records/last_ten/${canId}`);
     return res.data;
   }

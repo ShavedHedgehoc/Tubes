@@ -8,7 +8,9 @@ import RegulationsUpsertFormLoader from "./regulations-upsert-form-loader";
 export default function RegulationsUpsertForm() {
   return (
     <React.Fragment>
-      <Box sx={{ gap: 3, display: "flex", flexDirection: "column", width: "100%" }}>
+      <Box
+        sx={{ gap: 3, display: "flex", flexDirection: "column", width: "100%" }}
+      >
         <FormCard props={{ title: "Выбор файла", grow: true }}>
           <RegulationsUpsertFormFileInput />
         </FormCard>

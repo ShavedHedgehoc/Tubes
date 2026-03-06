@@ -16,9 +16,15 @@ export default function UsersTable() {
   const page = useUsersPaginationStore(useShallow((state) => state.page));
   const limit = useUsersPaginationStore(useShallow((state) => state.limit));
   const total = useUsersPaginationStore(useShallow((state) => state.total));
-  const setTotal = useUsersPaginationStore(useShallow((state) => state.setTotal));
+  const setTotal = useUsersPaginationStore(
+    useShallow((state) => state.setTotal),
+  );
   const setPage = useUsersPaginationStore(useShallow((state) => state.setPage));
-  const { isPending, data, isSuccess } = useUsers({ filter: filter, limit: limit, page: page });
+  const { isPending, data, isSuccess } = useUsers({
+    filter: filter,
+    limit: limit,
+    page: page,
+  });
 
   //REmove useeffects
 

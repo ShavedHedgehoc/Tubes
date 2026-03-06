@@ -16,10 +16,8 @@ interface ISummaryData {
   shift: number;
 }
 
-
-
 interface ITreshold {
-  id: number,
+  id: number;
   product_id: number;
   conveyor_id: number;
   extrusion_press_speed_min: number;
@@ -135,7 +133,7 @@ interface ITreshold {
   sealant_tube_rigidity_max: number;
   sealant_cap_unscrewing_torque_min: number;
   sealant_cap_unscrewing_torque_max: number;
-  createdAt: Date
+  createdAt: Date;
 }
 interface IExtrusionParams {
   id: number;
@@ -281,7 +279,7 @@ export interface ISummary {
   varnishParams: IVarnishParams | null;
   offsetParams: IOffsetParams | null;
   sealantParams: ISealantParams | null;
-  tresholds: ITreshold | null
+  tresholds: ITreshold | null;
   extrusion_note: string | null;
   varnish_note: string | null;
   offset_note: string | null;
@@ -309,7 +307,9 @@ export interface ISummary {
 }
 
 export default class SummaryService {
-  static async getActiveSummaryRecordByConveyorId(conveyor_id: number | null): Promise<ISummary> {
+  static async getActiveSummaryRecordByConveyorId(
+    conveyor_id: number | null,
+  ): Promise<ISummary> {
     const res = await $api.get(`${ApiRoutes.GET_ACTIVE_SUMMARY}${conveyor_id}`);
     return res.data;
   }

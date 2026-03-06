@@ -23,9 +23,15 @@ const pulse = keyframes`
 export default function DashCard({ row }: { row: IDocRow }) {
   const { mode } = useColorScheme();
 
-  const setOpen = useDashHistoryModalStore(useShallow((state) => state.setOpen));
-  const setRecordId = useDashHistoryModalStore(useShallow((state) => state.setRecordId));
-  const setTitle = useDashHistoryModalStore(useShallow((state) => state.setTitle));
+  const setOpen = useDashHistoryModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const setRecordId = useDashHistoryModalStore(
+    useShallow((state) => state.setRecordId),
+  );
+  const setTitle = useDashHistoryModalStore(
+    useShallow((state) => state.setTitle),
+  );
   const user = useAuthStore(useShallow((state) => state.user));
 
   // digital marking condition
@@ -34,7 +40,9 @@ export default function DashCard({ row }: { row: IDocRow }) {
   const handleClick = () => {
     if (user?.roles?.includes(DbRoles.CARDS)) {
       setRecordId(row.id);
-      setTitle(`Историй статусов по продукту ${row.product}, партия - ${row.boil}`);
+      setTitle(
+        `Историй статусов по продукту ${row.product}, партия - ${row.boil}`,
+      );
       setOpen(true);
     }
   };
@@ -174,7 +182,11 @@ export default function DashCard({ row }: { row: IDocRow }) {
             justifyContent: "flex-end    ",
           }}
         >
-          {digitalMarking ? (row.fact ? `${row.fact}/${row.plan}` : `-/${row.plan}`) : row.plan}
+          {digitalMarking
+            ? row.fact
+              ? `${row.fact}/${row.plan}`
+              : `-/${row.plan}`
+            : row.plan}
         </Box>
       </Box>
       <Box
@@ -214,7 +226,13 @@ export default function DashCard({ row }: { row: IDocRow }) {
         >
           {row.state}
         </Box>
-        <Box sx={{ display: "flex", justifyContent: "flex-end", fontSize: "0.5rem" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            fontSize: "0.5rem",
+          }}
+        >
           {digitalMarking && <QrCode2OutlinedIcon sx={{ color: "white" }} />}
         </Box>
       </Box>

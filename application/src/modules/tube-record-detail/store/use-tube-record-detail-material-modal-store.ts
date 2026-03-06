@@ -11,12 +11,13 @@ interface TubeRecordMaterialModalStore {
   clearData: () => void;
 }
 
-export const useTubeRecordMaterialModalStore = create<TubeRecordMaterialModalStore>()((set) => ({
-  open: false,
-  title: "",
-  data: [],
-  setOpen: (value) => set(() => ({ open: value })),
-  setTitle: (value) => set(() => ({ title: value })),
-  setData: (value) => set(() => ({ data: value })),
-  clearData: () => set(() => ({ data: [], title: "" })),
-}));
+export const useTubeRecordMaterialModalStore =
+  create<TubeRecordMaterialModalStore>()((set) => ({
+    open: false,
+    title: "",
+    data: [],
+    setOpen: (value) => set(() => ({ open: value })),
+    setTitle: (value) => set(() => ({ title: value })),
+    setData: (value) => set(() => ({ data: value })),
+    clearData: () => set(() => ({ data: [], title: "" })),
+  }));

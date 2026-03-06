@@ -8,10 +8,18 @@ import { IChangeTubeRecorStatedDto } from "../../../shared/api/services/tube-rec
 
 export default function DashFinishModal() {
   const open = useDashFinishModalStore(useShallow((state) => state.open));
-  const summary_id = useDashFinishModalStore(useShallow((state) => state.summary_id));
-  const boil_value = useDashFinishModalStore(useShallow((state) => state.boil_value));
-  const setBoilValue = useDashFinishModalStore(useShallow((state) => state.setBoilValue));
-  const setSummaryId = useDashFinishModalStore(useShallow((state) => state.setSummaryId));
+  const summary_id = useDashFinishModalStore(
+    useShallow((state) => state.summary_id),
+  );
+  const boil_value = useDashFinishModalStore(
+    useShallow((state) => state.boil_value),
+  );
+  const setBoilValue = useDashFinishModalStore(
+    useShallow((state) => state.setBoilValue),
+  );
+  const setSummaryId = useDashFinishModalStore(
+    useShallow((state) => state.setSummaryId),
+  );
   const title = useDashFinishModalStore(useShallow((state) => state.title));
   const setOpen = useDashFinishModalStore(useShallow((state) => state.setOpen));
 
@@ -55,7 +63,15 @@ export default function DashFinishModal() {
   };
 
   const Buttons = () => (
-    <Stack direction="row" sx={{ width: "100%", display: "flex", justifyContent: "flex-end", gap: 2 }}>
+    <Stack
+      direction="row"
+      sx={{
+        width: "100%",
+        display: "flex",
+        justifyContent: "flex-end",
+        gap: 2,
+      }}
+    >
       <ModalButton {...finishButtonProps} />
       <ModalButton {...closeButtonProps} />
     </Stack>

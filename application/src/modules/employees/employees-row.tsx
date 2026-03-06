@@ -8,11 +8,19 @@ import { useEmployeesEditModalStore } from "./store/use-employees-edit-modal-sto
 
 export default function EmployeesRow({ row }: { row: IEmployee }) {
   const { deleteEmployee } = useDeleteEmployee();
-  const openEditModal = useEmployeesEditModalStore(useShallow((state) => state.setOpen));
+  const openEditModal = useEmployeesEditModalStore(
+    useShallow((state) => state.setOpen),
+  );
   const setId = useEmployeesEditModalStore(useShallow((state) => state.setId));
-  const setName = useEmployeesEditModalStore(useShallow((state) => state.setName));
-  const setBarcode = useEmployeesEditModalStore(useShallow((state) => state.setBarcode));
-  const setOccupation = useEmployeesEditModalStore(useShallow((state) => state.setOccupation));
+  const setName = useEmployeesEditModalStore(
+    useShallow((state) => state.setName),
+  );
+  const setBarcode = useEmployeesEditModalStore(
+    useShallow((state) => state.setBarcode),
+  );
+  const setOccupation = useEmployeesEditModalStore(
+    useShallow((state) => state.setOccupation),
+  );
 
   const handleEdit = () => {
     setId(row.id);

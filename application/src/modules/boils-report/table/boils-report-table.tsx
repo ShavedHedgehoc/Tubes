@@ -25,11 +25,23 @@ const commonThead: TheadProperties[] = [
 export default function BoilsReportTable() {
   const filter = useBoilsReportFilterStore(useShallow((state) => state.filter));
   const page = useBoilsReportPaginationStore(useShallow((state) => state.page));
-  const limit = useBoilsReportPaginationStore(useShallow((state) => state.limit));
-  const total = useBoilsReportPaginationStore(useShallow((state) => state.total));
-  const setTotal = useBoilsReportPaginationStore(useShallow((state) => state.setTotal));
-  const setPage = useBoilsReportPaginationStore(useShallow((state) => state.setPage));
-  const { isPending, data, isSuccess } = useBoilsReport({ filter: filter, limit: limit, page: page });
+  const limit = useBoilsReportPaginationStore(
+    useShallow((state) => state.limit),
+  );
+  const total = useBoilsReportPaginationStore(
+    useShallow((state) => state.total),
+  );
+  const setTotal = useBoilsReportPaginationStore(
+    useShallow((state) => state.setTotal),
+  );
+  const setPage = useBoilsReportPaginationStore(
+    useShallow((state) => state.setPage),
+  );
+  const { isPending, data, isSuccess } = useBoilsReport({
+    filter: filter,
+    limit: limit,
+    page: page,
+  });
 
   //REmove useeffects
 
@@ -55,7 +67,8 @@ export default function BoilsReportTable() {
 
   return (
     <TableLayout thead={commonThead}>
-      {isSuccess && data.rows.map((row) => <BoilsReportRow row={row} key={row.id} />)}
+      {isSuccess &&
+        data.rows.map((row) => <BoilsReportRow row={row} key={row.id} />)}
     </TableLayout>
   );
 }

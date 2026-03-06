@@ -1,12 +1,25 @@
 // import * as XLSX from "xlsx-js-style";
 
 import { utils, writeFile } from "xlsx-js-style";
-import { formatDateToString, formatTimeToString } from "../../shared/helpers/date-time-formatters";
+import {
+  formatDateToString,
+  formatTimeToString,
+} from "../../shared/helpers/date-time-formatters";
 import { ITraceWeightingsSummaryData } from "../../shared/api/services/trace-batchs-service";
 
-export default function makeXLSXFile(data: ITraceWeightingsSummaryData[], title: string) {
+export default function makeXLSXFile(
+  data: ITraceWeightingsSummaryData[],
+  title: string,
+) {
   const workbook = utils.book_new();
-  const headers = ["№", "Сотрудник", "Строк всего", "Взвешено всего", "Первое взвешивание", "Последнее взвешивание"];
+  const headers = [
+    "№",
+    "Сотрудник",
+    "Строк всего",
+    "Взвешено всего",
+    "Первое взвешивание",
+    "Последнее взвешивание",
+  ];
 
   const worksheet = utils.aoa_to_sheet([
     headers.map((cell) => ({
@@ -27,7 +40,14 @@ export default function makeXLSXFile(data: ITraceWeightingsSummaryData[], title:
   ]);
 
   utils.book_append_sheet(workbook, worksheet, "Отчет");
-  worksheet["!cols"] = [{ wch: 10 }, { wch: 30 }, { wch: 20 }, { wch: 20 }, { wch: 30 }, { wch: 30 }];
+  worksheet["!cols"] = [
+    { wch: 10 },
+    { wch: 30 },
+    { wch: 20 },
+    { wch: 20 },
+    { wch: 30 },
+    { wch: 30 },
+  ];
 
   const rows = data.map((row, index) => [
     {
@@ -84,7 +104,9 @@ export default function makeXLSXFile(data: ITraceWeightingsSummaryData[], title:
       },
     },
     {
-      v: row.w_start_date ? `${formatDateToString(row.w_start_date)} ${formatTimeToString(row.w_start_date)}` : "-",
+      v: row.w_start_date
+        ? `${formatDateToString(row.w_start_date)} ${formatTimeToString(row.w_start_date)}`
+        : "-",
       t: "s",
       s: {
         alignment: { horizontal: "center" },
@@ -97,7 +119,9 @@ export default function makeXLSXFile(data: ITraceWeightingsSummaryData[], title:
       },
     },
     {
-      v: row.w_end_date ? `${formatDateToString(row.w_end_date)} ${formatTimeToString(row.w_end_date)}` : "-",
+      v: row.w_end_date
+        ? `${formatDateToString(row.w_end_date)} ${formatTimeToString(row.w_end_date)}`
+        : "-",
       t: "s",
       s: {
         alignment: { horizontal: "center" },

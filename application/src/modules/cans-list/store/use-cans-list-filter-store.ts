@@ -37,14 +37,27 @@ export const useCansListFilterStore = create<CansListFilterStore>()((set) => ({
         set((state) => ({ filter: { ...state.filter, value: value } }));
         break;
       case CansListFilterParams.VALUE_ASC:
-        set((state) => ({ filter: { ...state.filter, valueAsc: value === "true" ? true : false } }));
+        set((state) => ({
+          filter: {
+            ...state.filter,
+            valueAsc: value === "true" ? true : false,
+          },
+        }));
         break;
       case CansListFilterParams.ONLY_EMPTY_BARCODE:
-        set((state) => ({ filter: { ...state.filter, onlyEmptyBarcode: value === "true" ? true : false } }));
+        set((state) => ({
+          filter: {
+            ...state.filter,
+            onlyEmptyBarcode: value === "true" ? true : false,
+          },
+        }));
         break;
       case CansListFilterParams.PLANTS:
         set((state) => ({
-          filter: { ...state.filter, plants: values ? [...values] : [...state.filter.plants] },
+          filter: {
+            ...state.filter,
+            plants: values ? [...values] : [...state.filter.plants],
+          },
         }));
         break;
       default:
@@ -53,5 +66,10 @@ export const useCansListFilterStore = create<CansListFilterStore>()((set) => ({
   },
   setSelectedPlant: (value) => set(() => ({ selectedPlant: value })),
   fillPlantSelectorOptions: (values) =>
-    set(() => ({ plantSelectorOptions: [{ PlantPK: 999999, PlantName: "Все", PlantAlias: "" }, ...values] })),
+    set(() => ({
+      plantSelectorOptions: [
+        { PlantPK: 999999, PlantName: "Все", PlantAlias: "" },
+        ...values,
+      ],
+    })),
 }));

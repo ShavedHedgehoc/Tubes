@@ -9,8 +9,12 @@ import { useOffsetEmployeeStore } from "../../store/use-offset-employee-store";
 
 export default function OffsetLogoutAlertModal() {
   const open = useOffsetLogoutModalStore(useShallow((state) => state.open));
-  const setOpen = useOffsetLogoutModalStore(useShallow((state) => state.setOpen));
-  const logout = useOffsetEmployeeStore(useShallow((state) => state.clearOffsetEmployee));
+  const setOpen = useOffsetLogoutModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const logout = useOffsetEmployeeStore(
+    useShallow((state) => state.clearOffsetEmployee),
+  );
 
   const alertModalProps: AlertModalProps = {
     title: "Выход пользователя",

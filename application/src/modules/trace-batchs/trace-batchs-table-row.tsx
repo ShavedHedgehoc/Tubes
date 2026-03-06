@@ -6,7 +6,11 @@ import { formatDateToString } from "../../shared/helpers/date-time-formatters";
 import TableButton from "../../shared/ui/table-button";
 import { RouteNames } from "../../shared/router/route-names";
 
-export default function TraceBatchsTableRow({ row }: { row: ITraceBatchRowData }) {
+export default function TraceBatchsTableRow({
+  row,
+}: {
+  row: ITraceBatchRowData;
+}) {
   const navigate = useNavigate();
   return (
     <tr key={row.batch_id}>

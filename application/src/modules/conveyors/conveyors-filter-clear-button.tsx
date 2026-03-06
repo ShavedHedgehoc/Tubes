@@ -4,11 +4,15 @@ import FilterButton, { FilterButtonProps } from "../../shared/ui/filter-button";
 import { useConveyorsFilterStore } from "./store/use-conveyors-filter-store";
 
 export default function ConveyorsFilterClearButton() {
-  const clearFilter = useConveyorsFilterStore(useShallow((state) => state.clearFilter));
+  const clearFilter = useConveyorsFilterStore(
+    useShallow((state) => state.clearFilter),
+  );
   const filter = useConveyorsFilterStore(useShallow((state) => state.filter));
 
   const disableClearButtonCondition =
-    filter.value === "" && filter.valueAsc === true && filter.onlyEmptyBarcode === false;
+    filter.value === "" &&
+    filter.valueAsc === true &&
+    filter.onlyEmptyBarcode === false;
 
   const clearButtonProps: FilterButtonProps = {
     label: "Сбросить",

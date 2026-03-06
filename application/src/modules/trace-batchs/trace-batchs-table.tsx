@@ -20,11 +20,23 @@ const commonThead = [
 export default function TraceBatchsTable() {
   const filter = useTraceBatchsFilterStore(useShallow((state) => state.filter));
   const page = useTraceBatchsPaginationStore(useShallow((state) => state.page));
-  const limit = useTraceBatchsPaginationStore(useShallow((state) => state.limit));
-  const total = useTraceBatchsPaginationStore(useShallow((state) => state.total));
-  const setTotal = useTraceBatchsPaginationStore(useShallow((state) => state.setTotal));
-  const setPage = useTraceBatchsPaginationStore(useShallow((state) => state.setPage));
-  const { isPending, data, isSuccess } = useTraceBatchs({ filter: filter, limit: limit, page: page });
+  const limit = useTraceBatchsPaginationStore(
+    useShallow((state) => state.limit),
+  );
+  const total = useTraceBatchsPaginationStore(
+    useShallow((state) => state.total),
+  );
+  const setTotal = useTraceBatchsPaginationStore(
+    useShallow((state) => state.setTotal),
+  );
+  const setPage = useTraceBatchsPaginationStore(
+    useShallow((state) => state.setPage),
+  );
+  const { isPending, data, isSuccess } = useTraceBatchs({
+    filter: filter,
+    limit: limit,
+    page: page,
+  });
 
   //REmove useeffects
 
@@ -50,7 +62,10 @@ export default function TraceBatchsTable() {
 
   return (
     <TableLayout thead={commonThead}>
-      {isSuccess && data.rows.map((row) => <TraceBatchsTableRow row={row} key={row.batch_id} />)}
+      {isSuccess &&
+        data.rows.map((row) => (
+          <TraceBatchsTableRow row={row} key={row.batch_id} />
+        ))}
     </TableLayout>
   );
 }

@@ -10,5 +10,5 @@ export const useOffsetOperationStore = create<OffsetOperationStore>()(
   devtools((set) => ({
     selectedOperation: null,
     setSelectedOperation: (value) => set(() => ({ selectedOperation: value })),
-  }))
+  })),
 );

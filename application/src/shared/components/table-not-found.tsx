@@ -21,12 +21,19 @@ export default function TableNotFoundComponent() {
       mb: { xs: 0, sm: 1 },
     },
     (theme) => ({
-      backgroundColor: { xs: "var(--joy-palette-background-body)", sm: theme.variants.soft.neutral },
+      backgroundColor: {
+        xs: "var(--joy-palette-background-body)",
+        sm: theme.variants.soft.neutral,
+      },
     }),
   ];
   return (
     <React.Fragment>
-      <Sheet className="NoRecordsFoundContainer" variant={"outlined"} sx={sheetSxProps}>
+      <Sheet
+        className="NoRecordsFoundContainer"
+        variant={"outlined"}
+        sx={sheetSxProps}
+      >
         <Box>
           <Typography color="neutral" level="title-md" variant="plain">
             Записей не найдено

@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import TraceBatchService, { FetchTraceBatchsDto } from "../../shared/api/services/trace-batchs-service";
+import TraceBatchService, {
+  FetchTraceBatchsDto,
+} from "../../shared/api/services/trace-batchs-service";
 
 export const useTraceBatchs = (dto: FetchTraceBatchsDto) =>
   useQuery({

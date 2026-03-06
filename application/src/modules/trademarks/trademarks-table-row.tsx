@@ -1,7 +1,11 @@
 import { Typography } from "@mui/joy";
 import { ITrademarkRowData } from "../../shared/api/services/trace-trademark-service";
 
-export default function TrademarksTableRow({ row }: { row: ITrademarkRowData }) {
+export default function TrademarksTableRow({
+  row,
+}: {
+  row: ITrademarkRowData;
+}) {
   return (
     <tr key={row.trademark_name}>
       <td style={{ width: 80, textAlign: "left", padding: "12px 24px" }}>

@@ -1,46 +1,33 @@
 {
-    "$schema": "https://unpkg.com",
-    "workspaces": {
-        ".": {
-            // Только файлы в самом корне (без рекурсии **)
-            "project": [
-                "*.{ts,js,jsonc}"
-            ],
-            "ignoreDependencies": [
-                "@nestjs/schematics",
-                "@swc/core"
-            ]
-        },
-        "api_tubes": {
-            "entry": [
-                "src/main.ts!"
-            ],
-            "project": [
-                "src/**/*.ts"
-            ]
-        },
-        "tubes_application": {
-            "entry": [
-                "src/main.tsx!"
-            ], // Твой Vite Dashboard
-            "project": [
-                "src/**/*.{ts,tsx}"
-            ]
-        },
-        "new_app": {
-            "entry": [
-                "pages/**/*.{js,jsx,ts,tsx}",
-                "app/**/*.{js,jsx,ts,tsx}"
-            ], // Next.js
-            "project": [
-                "src/**/*.{ts,tsx}",
-                "app/**/*.{ts,tsx}"
-            ]
-        },
-        // "packages/shared": {
-        //   "entry": ["index.ts"],
-        //   "project": ["**/*.ts"]
-        // }
+  "$schema": "https://unpkg.com",
+  "workspaces": {
+    ".": {
+      // Только файлы в самом корне (без рекурсии **)
+      "project": ["*.{ts,js,jsonc}"],
+      // "ignoreDependencies": [
+      //     "@nestjs/schematics",
+      //     "@swc/core"
+      // ]
     },
-    "ignoreExportsUsedInFile": true
+    "api_tubes": {
+      "entry": ["src/main.ts!"],
+      "project": ["src/**/*.ts"],
+    },
+    "tubes_application": {
+      // "entry": [
+      //     "src/main.tsx!"
+      // ], // Твой Vite Dashboard
+      "project": ["src/**/*.{ts,tsx}"],
+    },
+    "new_app": {
+      "entry": ["pages/**/*.{js,jsx,ts,tsx}", "app/**/*.{js,jsx,ts,tsx}"], // Next.js
+      "project": ["src/**/*.{ts,tsx}", "app/**/*.{ts,tsx}"],
+    },
+    // "packages/shared": {
+    //   "entry": ["index.ts"],
+    //   "project": ["**/*.ts"]
+    // }
+  },
+  "ignoreExportsUsedInFile": true,
+  "ignore": ["new-app/src/shared/ui/**"],
 }

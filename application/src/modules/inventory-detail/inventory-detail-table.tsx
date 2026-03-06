@@ -23,8 +23,13 @@ export default function InventoryDetailTable() {
   const params = useParams<Params.INVENTORY_PARAMS>();
   const inventory_id: string | undefined = params.inventory_id;
 
-  const filter = useInventoryDetailFilterStore(useShallow((state) => state.filter));
-  const { isPending, data, isSuccess } = useInventoryRows({ inventoryId: inventory_id, filter: filter });
+  const filter = useInventoryDetailFilterStore(
+    useShallow((state) => state.filter),
+  );
+  const { isPending, data, isSuccess } = useInventoryRows({
+    inventoryId: inventory_id,
+    filter: filter,
+  });
 
   if (isPending) {
     return <TableLoaderComponent />;
@@ -36,7 +41,10 @@ export default function InventoryDetailTable() {
 
   return (
     <TableLayout thead={commonThead}>
-      {isSuccess && data.map((row) => <InventoryDetailRowComponent row={row} key={row.id} />)}
+      {isSuccess &&
+        data.map((row) => (
+          <InventoryDetailRowComponent row={row} key={row.id} />
+        ))}
     </TableLayout>
   );
 }

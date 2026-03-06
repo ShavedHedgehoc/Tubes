@@ -4,7 +4,16 @@ import MainPageHeader from "../../shared/components/headers/MainPageHeader";
 
 import Ajv, { SchemaObject } from "ajv/dist/jtd";
 import * as XLSX from "xlsx";
-import { Box, Button, DialogContent, FormControl, Modal, ModalDialog, ModalOverflow, Typography } from "@mui/joy";
+import {
+  Box,
+  Button,
+  DialogContent,
+  FormControl,
+  Modal,
+  ModalDialog,
+  ModalOverflow,
+  Typography,
+} from "@mui/joy";
 import { useUpdateBases } from "../bases-upload/use-update-bases";
 
 interface IXLSData {
@@ -18,7 +27,13 @@ export interface PendingModalProps {
   width: number;
 }
 
-function PendingModal({ props, children }: { props: PendingModalProps; children: React.ReactNode }) {
+function PendingModal({
+  props,
+  children,
+}: {
+  props: PendingModalProps;
+  children: React.ReactNode;
+}) {
   return (
     <React.Fragment>
       <Modal
@@ -70,7 +85,9 @@ export default function UpdateBases() {
   const [fileName, setFileName] = React.useState("");
   const [file, setFile] = React.useState<File>();
 
-  const [dataForUpload, setDataForUpload] = React.useState({} as BulkUpdateBasesDto);
+  const [dataForUpload, setDataForUpload] = React.useState(
+    {} as BulkUpdateBasesDto,
+  );
 
   const [isValid, setIsValid] = React.useState(false);
 
@@ -160,7 +177,14 @@ export default function UpdateBases() {
           },
         }}
       >
-        <Box sx={{ gap: 3, display: "flex", flexDirection: "column", width: "100%" }}>
+        <Box
+          sx={{
+            gap: 3,
+            display: "flex",
+            flexDirection: "column",
+            width: "100%",
+          }}
+        >
           {/* <UploadPendingModal />
         <ErrorModal />
 
@@ -192,7 +216,9 @@ export default function UpdateBases() {
                 width: "100%",
               }}
             >
-              <Typography level="body-sm">{fileName.split("\\").slice(-1)[0] || "Файл не выбран"}</Typography>
+              <Typography level="body-sm">
+                {fileName.split("\\").slice(-1)[0] || "Файл не выбран"}
+              </Typography>
               <FormControl size="sm">
                 <input
                   accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
@@ -201,7 +227,9 @@ export default function UpdateBases() {
                   type="file"
                   value={fileName}
                   disabled={file !== undefined}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleFileSelect(e)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    handleFileSelect(e)
+                  }
                 />
                 <label htmlFor="raised-button-file">
                   <Button
@@ -217,7 +245,7 @@ export default function UpdateBases() {
               <Button
                 size="sm"
                 disabled={file === undefined}
-                sx={{ display: file === undefined ? "none" : "block" }}                
+                sx={{ display: file === undefined ? "none" : "block" }}
                 onClick={() => clearData()}
               >
                 Очистить

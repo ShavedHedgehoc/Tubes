@@ -4,8 +4,12 @@ import { usePictureProductStore } from "@/modules/pictures/store/use-picture-pro
 import ProductService from "./services/product-service";
 
 export const useProduct = (id: string | null) => {
-  const setPictureProduct = usePictureProductStore(useShallow((state) => state.setPictureProduct));
-  const clearPictureProduct = usePictureProductStore(useShallow((state) => state.clearPictureProduct));
+  const setPictureProduct = usePictureProductStore(
+    useShallow((state) => state.setPictureProduct),
+  );
+  const clearPictureProduct = usePictureProductStore(
+    useShallow((state) => state.clearPictureProduct),
+  );
 
   return useQuery({
     queryKey: ["conveyor"],

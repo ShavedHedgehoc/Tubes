@@ -1,13 +1,30 @@
-import { Dialog, Grid, GridItem, HStack, Heading, Stack, Text, Button } from "@chakra-ui/react";
+import {
+  Dialog,
+  Grid,
+  GridItem,
+  HStack,
+  Heading,
+  Stack,
+  Text,
+  Button,
+} from "@chakra-ui/react";
 import { type DialogOpenChangeDetails } from "@chakra-ui/react";
 
 const BUTTONS = [
   { label: "C", action: "clear", col: 4 },
   { label: "<<", action: "slice", col: 8 },
-  { label: "7" }, { label: "8" }, { label: "9" },
-  { label: "4" }, { label: "5" }, { label: "6" },
-  { label: "1" }, { label: "2" }, { label: "3" },
-  { label: "." }, { label: "0" }, { label: "OK", action: "close" },
+  { label: "7" },
+  { label: "8" },
+  { label: "9" },
+  { label: "4" },
+  { label: "5" },
+  { label: "6" },
+  { label: "1" },
+  { label: "2" },
+  { label: "3" },
+  { label: "." },
+  { label: "0" },
+  { label: "OK", action: "close" },
 ];
 
 export interface DefectInputModalProps {
@@ -51,7 +68,7 @@ export default function DefectInputModal(props: DefectInputModalProps) {
   //   props.roundData();
   // };
 
-  const handleAction = (btn: typeof BUTTONS[0]) => {
+  const handleAction = (btn: (typeof BUTTONS)[0]) => {
     if (btn.action === "clear") return props.clearData();
     if (btn.action === "slice") return props.sliceData();
     if (btn.action === "close") {
@@ -62,7 +79,12 @@ export default function DefectInputModal(props: DefectInputModalProps) {
   };
 
   return (
-    <Dialog.Root open={props.open} onOpenChange={(e) => handleOpenchange(e)} placement="center" size="sm">
+    <Dialog.Root
+      open={props.open}
+      onOpenChange={(e) => handleOpenchange(e)}
+      placement="center"
+      size="sm"
+    >
       {/* <Portal> */}
       <Dialog.Backdrop />
       <Dialog.Positioner>
@@ -75,7 +97,13 @@ export default function DefectInputModal(props: DefectInputModalProps) {
                 </HStack>
 
                 <Stack gap={5}>
-                  <HStack justify="end" px={4} py={2} rounded="md" borderWidth="1px">
+                  <HStack
+                    justify="end"
+                    px={4}
+                    py={2}
+                    rounded="md"
+                    borderWidth="1px"
+                  >
                     <Text textStyle="3xl" color="fg.a">
                       {props.data ? props.data : "0"}
                     </Text>
@@ -86,7 +114,13 @@ export default function DefectInputModal(props: DefectInputModalProps) {
           </Dialog.Header>
 
           <Dialog.Body backgroundColor="bg.panel" rounded="lg">
-            <Grid maxH="100%" w="100%" templateRows="repeat(15, 1fr)" templateColumns="repeat(12, 1fr)" gap={2}>
+            <Grid
+              maxH="100%"
+              w="100%"
+              templateRows="repeat(15, 1fr)"
+              templateColumns="repeat(12, 1fr)"
+              gap={2}
+            >
               {BUTTONS.map((btn) => (
                 <GridItem key={btn.label} colSpan={btn.col ?? 4}>
                   <Button

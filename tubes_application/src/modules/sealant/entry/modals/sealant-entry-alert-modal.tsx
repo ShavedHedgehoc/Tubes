@@ -10,12 +10,18 @@ import { useSealantConveyorStore } from "../../store/use-sealant-conveyor-store"
 import { useCreateSealantEntry } from "../../use-create-sealant-entry";
 
 export default function SealantEntryAlertModal() {
-  const open = useSealantEntryAlertModalStore(useShallow((state) => state.open));
-  const setOpen = useSealantEntryAlertModalStore(useShallow((state) => state.setOpen));
+  const open = useSealantEntryAlertModalStore(
+    useShallow((state) => state.open),
+  );
+  const setOpen = useSealantEntryAlertModalStore(
+    useShallow((state) => state.setOpen),
+  );
   const dto = useSealantEntryAlertModalStore((state) => state.dto);
   const clearDto = useSealantEntryAlertModalStore((state) => state.clearDto);
   const initData = useSealantInputStore(useShallow((state) => state.initData));
-  const sealantConveyor = useSealantConveyorStore(useShallow((state) => state.sealantConveyor));
+  const sealantConveyor = useSealantConveyorStore(
+    useShallow((state) => state.sealantConveyor),
+  );
   const { createSealantEntry } = useCreateSealantEntry();
   const navigate = useNavigate();
 

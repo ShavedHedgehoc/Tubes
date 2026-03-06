@@ -25,28 +25,36 @@ interface UserUpdateModalStore {
   fillPlantSelectorOptions: (values: IPlant[]) => void;
   setPlants: (value: FetchBoilsFilterFormField) => void;
 }
-export const useUserUpdateModalStore = create<UserUpdateModalStore>()((set) => ({
-  id: null,
-  user: null,
-  open: false,
-  name: "",
-  editName: false,
-  email: "",
-  editEmail: false,
-  selectedPlant: null,
-  plantSelectorOptions: [],
-  plants: [],
-  setId: (val: number) => set(() => ({ id: val })),
-  setUser: (val: IUserRow | null) => set(() => ({ user: val })),
-  setOpen: (val: boolean) => set(() => ({ open: val })),
-  setName: (val: string) => set(() => ({ name: val })),
-  resetName: () => set((state) => ({ name: state.user?.name })),
-  setEditName: (val: boolean) => set(() => ({ editName: val })),
-  setEmail: (val: string) => set(() => ({ email: val })),
-  setEditEmail: (val: boolean) => set(() => ({ editEmail: val })),
-  resetEmail: () => set((state) => ({ email: state.user?.email })),
-  setSelectedPlant: (value) => set(() => ({ selectedPlant: value })),
-  fillPlantSelectorOptions: (values) =>
-    set(() => ({ plantSelectorOptions: [{ id: 999999, value: "Не установлена", abb: "" }, ...values] })),
-  setPlants: ({ values }) => set((state) => ({ plants: values ? [...values] : [...state.plants] })),
-}));
+export const useUserUpdateModalStore = create<UserUpdateModalStore>()(
+  (set) => ({
+    id: null,
+    user: null,
+    open: false,
+    name: "",
+    editName: false,
+    email: "",
+    editEmail: false,
+    selectedPlant: null,
+    plantSelectorOptions: [],
+    plants: [],
+    setId: (val: number) => set(() => ({ id: val })),
+    setUser: (val: IUserRow | null) => set(() => ({ user: val })),
+    setOpen: (val: boolean) => set(() => ({ open: val })),
+    setName: (val: string) => set(() => ({ name: val })),
+    resetName: () => set((state) => ({ name: state.user?.name })),
+    setEditName: (val: boolean) => set(() => ({ editName: val })),
+    setEmail: (val: string) => set(() => ({ email: val })),
+    setEditEmail: (val: boolean) => set(() => ({ editEmail: val })),
+    resetEmail: () => set((state) => ({ email: state.user?.email })),
+    setSelectedPlant: (value) => set(() => ({ selectedPlant: value })),
+    fillPlantSelectorOptions: (values) =>
+      set(() => ({
+        plantSelectorOptions: [
+          { id: 999999, value: "Не установлена", abb: "" },
+          ...values,
+        ],
+      })),
+    setPlants: ({ values }) =>
+      set((state) => ({ plants: values ? [...values] : [...state.plants] })),
+  }),
+);

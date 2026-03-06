@@ -12,10 +12,13 @@ export async function POST(request: NextRequest) {
         message: "Data submitted successfully",
         data: body,
       },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     // console.error("Error fetching external data:", error);
-    return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+    return NextResponse.json(
+      { message: "Internal Server Error" },
+      { status: 500 },
+    );
   }
 }

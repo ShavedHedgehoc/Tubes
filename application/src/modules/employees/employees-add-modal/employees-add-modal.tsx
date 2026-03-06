@@ -4,7 +4,9 @@ import FormHelperText from "@mui/joy/FormHelperText";
 import Typography from "@mui/joy/Typography";
 import { useShallow } from "zustand/react/shallow";
 import { useEmployeeAddModalStore } from "../store/use-employees-add-modal-store";
-import ModalLayout, { ModalLayoutProps } from "../../../shared/layouts/modal-layout";
+import ModalLayout, {
+  ModalLayoutProps,
+} from "../../../shared/layouts/modal-layout";
 import BarcodeInput from "./employees-add-modal-barcode-input";
 import EmployeesAddModalOccupationSelector from "./employees-add-modal-occupations-selector";
 import EmployeesAddModalButtons from "./employees-add-modal-buttons";
@@ -12,9 +14,15 @@ import EmployeesAddModalNameInput from "./employees-add-modal-name-input";
 
 export default function EmployeesAddModal() {
   const open = useEmployeeAddModalStore(useShallow((state) => state.open));
-  const setOpen = useEmployeeAddModalStore(useShallow((state) => state.setOpen));
-  const occupationsOptions = useEmployeeAddModalStore(useShallow((state) => state.occupationsOptions));
-  const setOccupation = useEmployeeAddModalStore(useShallow((state) => state.setOccupation));
+  const setOpen = useEmployeeAddModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const occupationsOptions = useEmployeeAddModalStore(
+    useShallow((state) => state.occupationsOptions),
+  );
+  const setOccupation = useEmployeeAddModalStore(
+    useShallow((state) => state.setOccupation),
+  );
 
   const handleClose = () => {
     setOpen(false);

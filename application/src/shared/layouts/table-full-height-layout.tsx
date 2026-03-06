@@ -46,9 +46,15 @@ export default function TableFullHeightLayout({
       "--TableCell-paddingX": "8px",
     },
     (theme) => ({
-      "& td[scope='fail'] ": { bgcolor: mode === "light" ? "danger.softBg" : "neutral.softBg" },
-      "& td[scope='wait'] ": { bgcolor: mode === "light" ? "warning.softBg" : "neutral.softBg" },
-      "& td[scope='success'] ": { bgcolor: mode === "light" ? "success.softBg" : "neutral.softBg" },
+      "& td[scope='fail'] ": {
+        bgcolor: mode === "light" ? "danger.softBg" : "neutral.softBg",
+      },
+      "& td[scope='wait'] ": {
+        bgcolor: mode === "light" ? "warning.softBg" : "neutral.softBg",
+      },
+      "& td[scope='success'] ": {
+        bgcolor: mode === "light" ? "success.softBg" : "neutral.softBg",
+      },
       "& td[scope='cancelled'] ": {
         bgcolor: mode === "light" ? "danger.softBg" : "neutral.softBg",
       },
@@ -75,10 +81,17 @@ export default function TableFullHeightLayout({
                 <Typography
                   level="body-xs"
                   sx={{
-                    writingMode: item.rotate && item.rotate === true ? "vertical-rl" : "none", // Vertical right-to-left
-                    transform: item.rotate && item.rotate === true ? "rotate(180deg)" : "none", // To read top-to-bottom
+                    writingMode:
+                      item.rotate && item.rotate === true
+                        ? "vertical-rl"
+                        : "none", // Vertical right-to-left
+                    transform:
+                      item.rotate && item.rotate === true
+                        ? "rotate(180deg)"
+                        : "none", // To read top-to-bottom
                     whiteSpace: "normal",
-                    margin: item.rotate && item.rotate === true ? "auto" : "none",
+                    margin:
+                      item.rotate && item.rotate === true ? "auto" : "none",
                   }}
                 >
                   {item.value}

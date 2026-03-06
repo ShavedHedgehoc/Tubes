@@ -9,12 +9,13 @@ interface ExtrusionEntryAlertModalStore {
   setDto: (val: CreateExtrusionEntryDto) => void;
   clearDto: () => void;
 }
-export const useExtrusionEntryAlertModalStore = create<ExtrusionEntryAlertModalStore>()(
-  devtools((set) => ({
-    dto: {},
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-    setDto: (value) => set(() => ({ dto: value })),
-    clearDto: () => set(() => ({ dto: null })),
-  }))
-);
+export const useExtrusionEntryAlertModalStore =
+  create<ExtrusionEntryAlertModalStore>()(
+    devtools((set) => ({
+      dto: {},
+      open: false,
+      setOpen: (value) => set(() => ({ open: value })),
+      setDto: (value) => set(() => ({ dto: value })),
+      clearDto: () => set(() => ({ dto: null })),
+    })),
+  );

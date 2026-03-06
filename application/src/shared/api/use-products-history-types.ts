@@ -5,9 +5,12 @@ import { useForemanFilterStore } from "../../modules/foreman/store/use-foreman-f
 import { useRecordsFilterStore } from "../../modules/records/store/use-record-filter-store";
 
 export const useProductsHistoryTypes = () => {
-  const { fillStateSelectorOptions: fillDocumentDetailOptions } = useDocumentDetailFilterStore();
-  const { fillStateSelectorOptions: fillForemanOptions } = useForemanFilterStore();
-  const { fillStateSelectorOptions: fillRecordsOptions } = useRecordsFilterStore();
+  const { fillStateSelectorOptions: fillDocumentDetailOptions } =
+    useDocumentDetailFilterStore();
+  const { fillStateSelectorOptions: fillForemanOptions } =
+    useForemanFilterStore();
+  const { fillStateSelectorOptions: fillRecordsOptions } =
+    useRecordsFilterStore();
   useQuery({
     queryKey: ["products_history_types"],
     queryFn: async () => {

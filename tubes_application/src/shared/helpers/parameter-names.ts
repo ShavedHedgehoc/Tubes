@@ -14,7 +14,7 @@ export const EXTRUSION_PARAMETER_NAMES = {
   rondel_type: "Тип рондоли",
   external_thread_quality: "Внешняя резьба",
   tube_marking: "Маркировка тубы",
-} as const
+} as const;
 
 export const VARNISH_PARAMETER_NAMES = {
   counter_value: "Показания счетчика",
@@ -34,11 +34,11 @@ export const VARNISH_PARAMETER_NAMES = {
   tube_molding_start_position: "Вдув тубы начальное положение", //ед.
   tube_molding_end_position: "Вдув тубы конечное положение", // ед.
   polimerization_furnace_temp: "Температура печи полимеризации", //°С
-  internal_varnish_porosity: "Пористость вн. лакового покрытия", //mA  
+  internal_varnish_porosity: "Пористость вн. лакового покрытия", //mA
   internal_sectional_view: "Внутренний вид тубы в разрезе",
   aluminium_clearance_lack: "Отсутствие просветов алюминия",
   unpainting_lack: "Отсутствие непрокрасов и пятен",
-} as const
+} as const;
 
 export const OFFSET_PARAMETER_NAMES = {
   counter_value: "Показания счетчика",
@@ -57,11 +57,12 @@ export const OFFSET_PARAMETER_NAMES = {
   imprint_quantity_printed_box_6: "6 печатный ящик (отпечатков)", //-количество отпечатков ", //not required
   ink_supply_time: "Время подачи чернил", // decimal
   design_match: "Соответсвие дизайну и контрольному образцу", //boolean
-  tube_appearance: "Внешний вид тубы (разнотон, нечеткий текст, двоение печати)", //boolean
+  tube_appearance:
+    "Внешний вид тубы (разнотон, нечеткий текст, двоение печати)", //boolean
   tube_edge_deformation_lack: "Отсутствие деформации края тубы", //boolean
   aluminium_clearance_lack: "Отсутствие просветов алюминия", //boolean
   drips_lack: "Отсутствие марашек", //boolean
-} as const
+} as const;
 
 export const SEALANT_PARAMETER_NAMES = {
   counter_value: "Показания счетчика",
@@ -82,4 +83,4 @@ export const SEALANT_PARAMETER_NAMES = {
   latex_ring_width: "Ширина латексного кольца", //мм.
   tube_rigidity: "Жесткость готовой тубы", // мм
   cap_unscrewing_torque: "Измерение крутящего момента откручивания колпачка", // Н.см.
-} as const
+} as const;

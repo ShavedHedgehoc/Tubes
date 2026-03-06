@@ -3,8 +3,12 @@ import { useDocumentDetailAddHistoryModalFormStore } from "../store/use-document
 import { useShallow } from "zustand/react/shallow";
 
 export default function DocumentDetailAddHistoryModalNote() {
-  const historyNote = useDocumentDetailAddHistoryModalFormStore(useShallow((state) => state.historyNote));
-  const setHistoryNote = useDocumentDetailAddHistoryModalFormStore(useShallow((state) => state.setHistoryNote));
+  const historyNote = useDocumentDetailAddHistoryModalFormStore(
+    useShallow((state) => state.historyNote),
+  );
+  const setHistoryNote = useDocumentDetailAddHistoryModalFormStore(
+    useShallow((state) => state.setHistoryNote),
+  );
   return (
     <Box sx={{ display: "flex", flexGrow: 1 }}>
       <FormControl size="sm" sx={{ display: "flex", flexGrow: 1 }}>
@@ -24,7 +28,15 @@ export default function DocumentDetailAddHistoryModalNote() {
             { display: "flex", width: "100%", flexGrow: 1 },
           ]}
           endDecorator={
-            <Box sx={{ display: "flex", justifyContent: "flex-end", width: "100%", pb: 0.5, pr: 0.5 }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "flex-end",
+                width: "100%",
+                pb: 0.5,
+                pr: 0.5,
+              }}
+            >
               <Button
                 color="neutral"
                 variant="outlined"

@@ -1,11 +1,18 @@
 import { useShallow } from "zustand/react/shallow";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import FilterButton, { FilterButtonProps } from "../../../shared/ui/filter-button";
-import { getFirstDayOfCurrentMonth, getLastDayOfCurrentMonth } from "../../../shared/helpers/date-time-formatters";
+import FilterButton, {
+  FilterButtonProps,
+} from "../../../shared/ui/filter-button";
+import {
+  getFirstDayOfCurrentMonth,
+  getLastDayOfCurrentMonth,
+} from "../../../shared/helpers/date-time-formatters";
 import { useInventoriesFilterStore } from "../store/use-inventories-filter-store";
 
 export default function InventoriesFilterClearButton() {
-  const clearFilter = useInventoriesFilterStore(useShallow((state) => state.clearFilter));
+  const clearFilter = useInventoriesFilterStore(
+    useShallow((state) => state.clearFilter),
+  );
   const filter = useInventoriesFilterStore(useShallow((state) => state.filter));
 
   const disableDocumentFilterClearButton =

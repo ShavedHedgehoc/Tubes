@@ -50,24 +50,34 @@ export interface AddHistoryDto {
 }
 
 export default class HistoryService {
-  static async createHistory(data: AddHistoryDto): Promise<AxiosResponse<HistoryCreateResponce>> {
+  static async createHistory(
+    data: AddHistoryDto,
+  ): Promise<AxiosResponse<HistoryCreateResponce>> {
     return $api.post(`/histories`, data);
   }
-  static async createHistoryDirect(data: AddHistoryDto): Promise<AxiosResponse<HistoryCreateResponce>> {
+  static async createHistoryDirect(
+    data: AddHistoryDto,
+  ): Promise<AxiosResponse<HistoryCreateResponce>> {
     return $api.post(`/histories/direct`, data);
   }
 
-  static async createHistoryBaseCheck(data: AddHistoryDto): Promise<AxiosResponse<HistoryCreateResponce>> {
+  static async createHistoryBaseCheck(
+    data: AddHistoryDto,
+  ): Promise<AxiosResponse<HistoryCreateResponce>> {
     return $api.post(`/histories/base_check`, data);
   }
   static async deleteHistory(id: number): Promise<AxiosResponse> {
     return $api.delete(`/histories/${id}`);
   }
-  static async getHistoriesByRecordId(id: string): Promise<AxiosResponse<IHistory[]>> {
+  static async getHistoriesByRecordId(
+    id: string,
+  ): Promise<AxiosResponse<IHistory[]>> {
     return $api.get(`/histories/all/${id}`);
   }
 
-  static async getHistoriesByBoilId(id: string): Promise<AxiosResponse<IHistory[]>> {
+  static async getHistoriesByBoilId(
+    id: string,
+  ): Promise<AxiosResponse<IHistory[]>> {
     return $api.get(`/histories/boil/${id}`);
   }
 }

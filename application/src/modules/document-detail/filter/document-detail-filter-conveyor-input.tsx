@@ -4,8 +4,12 @@ import { useDocumentDetailFilterStore } from "../store/use-document-detail-filte
 import { DocumentDetailFilterParams } from "./document-detail-filter-params";
 
 export default function DocumentDetailFilterConveyorInput() {
-  const filter = useDocumentDetailFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useDocumentDetailFilterStore(useShallow((state) => state.changeFilter));
+  const filter = useDocumentDetailFilterStore(
+    useShallow((state) => state.filter),
+  );
+  const changeFilter = useDocumentDetailFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
 
   const inputProps: FilterInputProps = {
     id: DocumentDetailFilterParams.CONVEYOR,
@@ -13,7 +17,8 @@ export default function DocumentDetailFilterConveyorInput() {
     disabled: filter.conveyor === "",
     label: "Поиск по конвейеру",
     placeholder: "Конвейер",
-    changeFilter: ({ key, value }: { key: string; value: string }) => changeFilter({ key, value }),
+    changeFilter: ({ key, value }: { key: string; value: string }) =>
+      changeFilter({ key, value }),
   };
 
   return <FilterInput {...inputProps} />;

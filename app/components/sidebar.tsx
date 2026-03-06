@@ -19,7 +19,12 @@ function SidebarContent() {
 export default async function Sidebar() {
   // const session = await getServerSession(authConfig);
   return (
-    <Box display={{ base: "none", md: "block" }} w="64" h="full" borderRightWidth="1px">
+    <Box
+      display={{ base: "none", md: "block" }}
+      w="64"
+      h="full"
+      borderRightWidth="1px"
+    >
       <SidebarContent />
       <UserPane />
     </Box>

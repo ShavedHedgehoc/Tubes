@@ -4,8 +4,14 @@ import CloseSummaryModal from "@/shared/components/modals/close-summary-modal";
 import useExtrusionCloseSummaryModal from "./use-extrusion-close-summary-modal";
 
 export default function ExtrusionCloseSummaryModal() {
-  const { open, setOpen, data, clearData, handleAddButtonClick, handleEndButtonClick } =
-    useExtrusionCloseSummaryModal();
+  const {
+    open,
+    setOpen,
+    data,
+    clearData,
+    handleAddButtonClick,
+    handleEndButtonClick,
+  } = useExtrusionCloseSummaryModal();
   const modalProps: CloseSummaryModalProps = {
     title: PostNames.EXTRUSION,
     open: open,

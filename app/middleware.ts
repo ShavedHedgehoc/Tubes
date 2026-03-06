@@ -23,5 +23,7 @@ export { default } from "next-auth/middleware";
 // }
 
 export const config = {
-  matcher: ["/((?!login|register|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)"],
+  matcher: [
+    "/((?!login|register|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+  ],
 };

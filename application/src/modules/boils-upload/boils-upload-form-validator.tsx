@@ -3,7 +3,10 @@ import { useShallow } from "zustand/react/shallow";
 import Ajv from "ajv";
 import ajvErrors from "ajv-errors";
 import { read, utils } from "xlsx";
-import { ValError, useBoilsUploadFormStore } from "./store/use-boils-upload-form-store";
+import {
+  ValError,
+  useBoilsUploadFormStore,
+} from "./store/use-boils-upload-form-store";
 import { useBoilsUploadValidateModalStore } from "./store/use-boils-upload-validate-modal-store";
 import { IXLSBoilsRowData } from "../../shared/api/services/direct-trace-service";
 
@@ -22,14 +25,22 @@ interface IXLSBoilsSheetRow {
 
 export default function BoilsUploadFormValidator() {
   const isValid = useBoilsUploadFormStore(useShallow((state) => state.isValid));
-  const setIsValid = useBoilsUploadFormStore(useShallow((state) => state.setIsValid));
+  const setIsValid = useBoilsUploadFormStore(
+    useShallow((state) => state.setIsValid),
+  );
   const errs = useBoilsUploadFormStore(useShallow((state) => state.errs));
   const addErrs = useBoilsUploadFormStore(useShallow((state) => state.addErrs));
   const file = useBoilsUploadFormStore(useShallow((state) => state.file));
 
-  const setErrsModalShow = useBoilsUploadFormStore(useShallow((state) => state.setErrsModalShow));
-  const setDataForUpload = useBoilsUploadFormStore(useShallow((state) => state.setDataForUpload));
-  const setOpenVaildateModal = useBoilsUploadValidateModalStore(useShallow((state) => state.setOpen));
+  const setErrsModalShow = useBoilsUploadFormStore(
+    useShallow((state) => state.setErrsModalShow),
+  );
+  const setDataForUpload = useBoilsUploadFormStore(
+    useShallow((state) => state.setDataForUpload),
+  );
+  const setOpenVaildateModal = useBoilsUploadValidateModalStore(
+    useShallow((state) => state.setOpen),
+  );
   const formatDateString = (dateString: string) => {
     const [day, month, year] = dateString.split(".");
     return `${year}-${month}-${day}`;
@@ -37,19 +48,38 @@ export default function BoilsUploadFormValidator() {
   const handleValidationComplete = (json: IXLSBoilsSheetRow[]) => {
     let res: IXLSBoilsRowData[] = [];
     json.map((item) => {
-      const _row = { productid: item.productid, productname: item.productname, quantity: item.quantity };
-      if (res.some((resItem) => resItem["document"]["batch_record"]["_attributes"]["batch"] === item.batch)) {
+      const _row = {
+        productid: item.productid,
+        productname: item.productname,
+        quantity: item.quantity,
+      };
+      if (
+        res.some(
+          (resItem) =>
+            resItem["document"]["batch_record"]["_attributes"]["batch"] ===
+            item.batch,
+        )
+      ) {
         const existsItem = res.filter(
-          (resItem) => resItem["document"]["batch_record"]["_attributes"]["batch"] === item.batch
+          (resItem) =>
+            resItem["document"]["batch_record"]["_attributes"]["batch"] ===
+            item.batch,
         )[0];
 
         const _attr = existsItem["document"]["batch_record"]["_attributes"];
         const rows = existsItem["document"]["batch_record"]["row"];
         const updatedItem: IXLSBoilsRowData = {
-          document: { batch_record: { _attributes: { ..._attr }, row: [...rows, { ..._row }] } },
+          document: {
+            batch_record: {
+              _attributes: { ..._attr },
+              row: [...rows, { ..._row }],
+            },
+          },
         };
         const resWithoutUpdated = res.filter(
-          (fItem) => fItem["document"]["batch_record"]["_attributes"]["batch"] !== item.batch
+          (fItem) =>
+            fItem["document"]["batch_record"]["_attributes"]["batch"] !==
+            item.batch,
         );
         res = [...resWithoutUpdated, updatedItem];
       } else {
@@ -62,7 +92,11 @@ export default function BoilsUploadFormValidator() {
           plan: item.plan,
           plant: item.plant,
         };
-        const _doc: IXLSBoilsRowData = { document: { batch_record: { _attributes: { ...attr }, row: [{ ..._row }] } } };
+        const _doc: IXLSBoilsRowData = {
+          document: {
+            batch_record: { _attributes: { ...attr }, row: [{ ..._row }] },
+          },
+        };
         res = [...res, { ..._doc }];
       }
     }, {});
@@ -123,10 +157,20 @@ export default function BoilsUploadFormValidator() {
       marking: { type: "string", minLength: 1 },
       batch: { type: "string", minLength: 1 },
       apparatus: { type: "string", MustBeNumeric: "prefix", minLength: 1 },
-      plan: { type: "string", MustBeNumeric: "prefix", NotZeroValue: "prefix", minLength: 1 },
+      plan: {
+        type: "string",
+        MustBeNumeric: "prefix",
+        NotZeroValue: "prefix",
+        minLength: 1,
+      },
       productid: { type: "string", MustBeNumeric: "prefix", minLength: 1 },
       productname: { type: "string", minLength: 1 },
-      quantity: { type: "string", MustBeNumeric: "prefix", NotZeroValue: "prefix", minLength: 1 },
+      quantity: {
+        type: "string",
+        MustBeNumeric: "prefix",
+        NotZeroValue: "prefix",
+        minLength: 1,
+      },
       plant: { type: "string", minLength: 1 },
     },
     required: [

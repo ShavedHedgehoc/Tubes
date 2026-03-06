@@ -16,12 +16,24 @@ import { useTubeSealantTresholds } from "./use-tube-sealant-tresholds";
 import TresholdsAddModal from "./add-modal/tresholds-add-modal";
 
 export default function TubeTresholds() {
-  const filter = useTubeTresholdsFilterStore(useShallow((state) => state.filter));
-  const page = useTubeTresholdsPaginationStore(useShallow((state) => state.page));
-  const limit = useTubeTresholdsPaginationStore(useShallow((state) => state.limit));
-  const total = useTubeTresholdsPaginationStore(useShallow((state) => state.total));
-  const setTotal = useTubeTresholdsPaginationStore(useShallow((state) => state.setTotal));
-  const setPage = useTubeTresholdsPaginationStore(useShallow((state) => state.setPage));
+  const filter = useTubeTresholdsFilterStore(
+    useShallow((state) => state.filter),
+  );
+  const page = useTubeTresholdsPaginationStore(
+    useShallow((state) => state.page),
+  );
+  const limit = useTubeTresholdsPaginationStore(
+    useShallow((state) => state.limit),
+  );
+  const total = useTubeTresholdsPaginationStore(
+    useShallow((state) => state.total),
+  );
+  const setTotal = useTubeTresholdsPaginationStore(
+    useShallow((state) => state.setTotal),
+  );
+  const setPage = useTubeTresholdsPaginationStore(
+    useShallow((state) => state.setPage),
+  );
   const post = useTubeTresholdsPostStore(useShallow((state) => state.post));
 
   const {
@@ -84,11 +96,33 @@ export default function TubeTresholds() {
 
   const table = {
     extrusion: (
-      <TubeTresholdsTable data={extrusionData} isPending={isExtrusionPending} isSuccess={isExtrusionSuccess} />
+      <TubeTresholdsTable
+        data={extrusionData}
+        isPending={isExtrusionPending}
+        isSuccess={isExtrusionSuccess}
+      />
     ),
-    varnish: <TubeTresholdsTable data={varnishData} isPending={isVarnishPending} isSuccess={isVarnishSuccess} />,
-    offset: <TubeTresholdsTable data={offsetData} isPending={isOffsetPending} isSuccess={isOffsetSuccess} />,
-    sealant: <TubeTresholdsTable data={sealantData} isPending={isSealantPending} isSuccess={isSealantSuccess} />,
+    varnish: (
+      <TubeTresholdsTable
+        data={varnishData}
+        isPending={isVarnishPending}
+        isSuccess={isVarnishSuccess}
+      />
+    ),
+    offset: (
+      <TubeTresholdsTable
+        data={offsetData}
+        isPending={isOffsetPending}
+        isSuccess={isOffsetSuccess}
+      />
+    ),
+    sealant: (
+      <TubeTresholdsTable
+        data={sealantData}
+        isPending={isSealantPending}
+        isSuccess={isSealantSuccess}
+      />
+    ),
   }[post];
 
   return (

@@ -1,12 +1,17 @@
 import { useShallow } from "zustand/react/shallow";
 
 import { Button, Stack, ToggleButtonGroup, Typography } from "@mui/joy";
-import { TubePostName, useTubeRecordDetailPostStore } from "./store/use-tube-record-detail-post-store";
+import {
+  TubePostName,
+  useTubeRecordDetailPostStore,
+} from "./store/use-tube-record-detail-post-store";
 import { PostNames } from "../../shared/helpers/post-names";
 
 export default function TubeRecordDetailToggle() {
   const post = useTubeRecordDetailPostStore(useShallow((state) => state.post));
-  const setPostName = useTubeRecordDetailPostStore(useShallow((state) => state.setPostName));
+  const setPostName = useTubeRecordDetailPostStore(
+    useShallow((state) => state.setPostName),
+  );
 
   const handleChange = (newValue: TubePostName | null) => {
     newValue && setPostName(newValue);
@@ -24,7 +29,10 @@ export default function TubeRecordDetailToggle() {
       <ToggleButtonGroup
         size="md"
         value={post}
-        onChange={(event: React.SyntheticEvent | null, newValue: TubePostName | null) => {
+        onChange={(
+          event: React.SyntheticEvent | null,
+          newValue: TubePostName | null,
+        ) => {
           event && newValue && handleChange(newValue);
         }}
       >

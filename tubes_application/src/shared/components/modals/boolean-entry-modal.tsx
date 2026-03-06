@@ -1,4 +1,13 @@
-import { Dialog, Stack, type DialogOpenChangeDetails, Switch, HStack, Heading, Status, VStack } from "@chakra-ui/react";
+import {
+  Dialog,
+  Stack,
+  type DialogOpenChangeDetails,
+  Switch,
+  HStack,
+  Heading,
+  Status,
+  VStack,
+} from "@chakra-ui/react";
 import type { DataFormField } from "../../helpers/data-form-field";
 
 export interface BooleanEntryModalProps<T> {
@@ -24,14 +33,23 @@ export default function BooleanEntryModal<T>(props: BooleanEntryModalProps<T>) {
       <Dialog.Positioner>
         <Dialog.Content
           rounded="lg"
-          onClick={() => props.changeData({ key: props.dataKey, value: props.data ? "false" : "true" })}
+          onClick={() =>
+            props.changeData({
+              key: props.dataKey,
+              value: props.data ? "false" : "true",
+            })
+          }
         >
           <Dialog.Header>
             <Dialog.Title w="full">
               <Stack gap={4}>
                 <HStack justify="space-between">
                   <Heading color="fg.muted">{props.title}</Heading>
-                  <Status.Root colorPalette={props.data ? "green" : "red"} alignItems="end" size="lg">
+                  <Status.Root
+                    colorPalette={props.data ? "green" : "red"}
+                    alignItems="end"
+                    size="lg"
+                  >
                     <Status.Indicator />
                   </Status.Root>
                 </HStack>
@@ -43,7 +61,12 @@ export default function BooleanEntryModal<T>(props: BooleanEntryModalProps<T>) {
               <Switch.Root
                 size="lg"
                 checked={props.data}
-                onCheckedChange={(e) => props.changeData({ key: props.dataKey, value: e.checked ? "true" : "false" })}
+                onCheckedChange={(e) =>
+                  props.changeData({
+                    key: props.dataKey,
+                    value: e.checked ? "true" : "false",
+                  })
+                }
               >
                 <Switch.HiddenInput />
                 <Switch.Control>
@@ -51,7 +74,9 @@ export default function BooleanEntryModal<T>(props: BooleanEntryModalProps<T>) {
                 </Switch.Control>
                 <Switch.Label />
               </Switch.Root>
-              <Heading color={props.data ? "green" : "red"}>{props.data ? "Соответствует" : "Не соответсвует"}</Heading>
+              <Heading color={props.data ? "green" : "red"}>
+                {props.data ? "Соответствует" : "Не соответсвует"}
+              </Heading>
             </VStack>
           </Dialog.Body>
         </Dialog.Content>

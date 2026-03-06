@@ -1,23 +1,26 @@
 {
-    "name": "tubes-monorepo",
-    "private": true,
-    "workspaces": [
-        "api_tubes",
-        "tubes_application",
-        "new-app"
-    ],
-    "scripts": {
-        "install:all": "npm install",
-        "generate": "npm run generate -w api_tubes",
-        "lint:all": "npm run lint --workspaces",
-        "types:all": "npm run lint:types --workspaces",
-        "build:all": "npm run build --workspaces",
-        "check:all": "npm run types:all && npm run build:all",
-        "knip": "knip",
-        "pre-flight": "npm run types:all && npm run lint:all"
-    },
-    "devDependencies": {
-        "knip": "^5.85.0",
-        "typescript": "^5.9.3"
-    }
+  "name": "tubes-monorepo",
+  "private": true,
+  "workspaces": [
+    "api_tubes",
+    "tubes_application",
+    "new-app"
+  ],
+  "scripts": {
+    "install:all": "npm install",
+    "generate": "npm run generate -w api_tubes",
+    "lint:all": "npm run lint --workspaces",
+    "types:all": "npm run lint:types --workspaces",
+    "build:all": "npm run build --workspaces",
+    "check:all": "npm run types:all && npm run build:all",
+    "knip": "knip",
+    "prettier:check": "prettier --check .",
+    "prettier:fix": "prettier --write .",
+    "pre-flight": "npm run prettier:check && npm run types:all && npm run lint:all && knip"
+  },
+  "devDependencies": {
+    "knip": "^5.85.0",
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3"
+  }
 }

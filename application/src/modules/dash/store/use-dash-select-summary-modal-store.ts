@@ -11,13 +11,14 @@ interface DashSelectSummaryModalStore {
   setConveyorName: (value: string | null) => void;
 }
 
-export const useDashSelectSummaryModalStore = create<DashSelectSummaryModalStore>()((set) => ({
-  open: false,
-  conveyor_id: null,
-  conveyor_name: null,
-  title: "",
-  setOpen: (value) => set(() => ({ open: value })),
-  setTitle: (value) => set(() => ({ title: value })),
-  setConveyorId: (value) => set(() => ({ conveyor_id: value })),
-  setConveyorName: (value) => set(() => ({ conveyor_name: value })),
-}));
+export const useDashSelectSummaryModalStore =
+  create<DashSelectSummaryModalStore>()((set) => ({
+    open: false,
+    conveyor_id: null,
+    conveyor_name: null,
+    title: "",
+    setOpen: (value) => set(() => ({ open: value })),
+    setTitle: (value) => set(() => ({ title: value })),
+    setConveyorId: (value) => set(() => ({ conveyor_id: value })),
+    setConveyorName: (value) => set(() => ({ conveyor_name: value })),
+  }));

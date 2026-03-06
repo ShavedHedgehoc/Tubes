@@ -8,7 +8,9 @@ import { useOffsetEmployeeStore } from "../../store/use-offset-employee-store";
 export default function OffsetAuthModal() {
   const open = useOffsetAuthModalStore(useShallow((state) => state.open));
   const setOpen = useOffsetAuthModalStore(useShallow((state) => state.setOpen));
-  const setEmployee = useOffsetEmployeeStore(useShallow((state) => state.setOffsetEmployee));
+  const setEmployee = useOffsetEmployeeStore(
+    useShallow((state) => state.setOffsetEmployee),
+  );
   const { login } = useEmployeeLogin(setEmployee);
 
   const modalProps: ScanModalProps = {

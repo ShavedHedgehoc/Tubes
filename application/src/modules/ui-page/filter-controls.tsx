@@ -4,7 +4,10 @@ import FilterDateInput from "../../shared/ui/filter-date-input";
 import FilterInput from "../../shared/ui/filter-input";
 import FilterInputWithSort from "../../shared/ui/filter-input-with-sort";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import FilterSelector, { FilterSelectorOption, FilterSelectorProps } from "../../shared/ui/filter-selector";
+import FilterSelector, {
+  FilterSelectorOption,
+  FilterSelectorProps,
+} from "../../shared/ui/filter-selector";
 
 export default function FilterControls() {
   const filterSelectorOptions = (

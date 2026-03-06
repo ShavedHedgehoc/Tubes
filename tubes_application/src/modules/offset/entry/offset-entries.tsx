@@ -5,16 +5,26 @@ import { useShallow } from "zustand/shallow";
 import type { AddParameterCardProps } from "../../../shared/components/cards/add-parameter-card";
 import { VStack, HStack } from "@chakra-ui/react";
 import AddParameterCard from "../../../shared/components/cards/add-parameter-card";
-import { OffsetInputParams, useOffsetInputStore } from "../store/use-offset-input-store";
+import {
+  OffsetInputParams,
+  useOffsetInputStore,
+} from "../store/use-offset-input-store";
 import useOffsetEntriesHandleCardsClick from "./use-offset-entries-handle-cards-click";
 import { PARAMETER_UNITS } from "@/shared/helpers/parameter-units";
 
-export default function OffsetEntries({ summaryData }: { summaryData: ISummary | null }) {
+export default function OffsetEntries({
+  summaryData,
+}: {
+  summaryData: ISummary | null;
+}) {
   const data = useOffsetInputStore(useShallow((state) => state.data));
-  const { handleCardClick, handleIntegerCardClick, handleBooleanCardClick } = useOffsetEntriesHandleCardsClick();
+  const { handleCardClick, handleIntegerCardClick, handleBooleanCardClick } =
+    useOffsetEntriesHandleCardsClick();
 
   const tresholdsData = summaryData?.tresholds ?? null;
-  const lastCounterValue = summaryData?.offsetParams ? summaryData.offsetParams.counter_value : null;
+  const lastCounterValue = summaryData?.offsetParams
+    ? summaryData.offsetParams.counter_value
+    : null;
 
   const counterValueCardProps: AddParameterCardProps = {
     id: OffsetInputParams.COUNTER_VALUE,
@@ -106,7 +116,8 @@ export default function OffsetEntries({ summaryData }: { summaryData: ISummary |
 
   const printedBox1CardProps: AddParameterCardProps = {
     id: OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_1,
-    title: OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_1],
+    title:
+      OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_1],
     value: Number(data.imprint_quantity_printed_box_1) || null,
     minValue: tresholdsData?.offset_imprint_quantity_printed_box_1_min || null,
     maxValue: tresholdsData?.offset_imprint_quantity_printed_box_1_max || null,
@@ -116,7 +127,8 @@ export default function OffsetEntries({ summaryData }: { summaryData: ISummary |
 
   const printedBox2CardProps: AddParameterCardProps = {
     id: OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_2,
-    title: OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_2],
+    title:
+      OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_2],
     value: Number(data.imprint_quantity_printed_box_2) || null,
     minValue: tresholdsData?.offset_imprint_quantity_printed_box_2_min || null,
     maxValue: tresholdsData?.offset_imprint_quantity_printed_box_2_max || null,
@@ -126,7 +138,8 @@ export default function OffsetEntries({ summaryData }: { summaryData: ISummary |
 
   const printedBox3CardProps: AddParameterCardProps = {
     id: OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_3,
-    title: OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_3],
+    title:
+      OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_3],
     value: Number(data.imprint_quantity_printed_box_3) || null,
     minValue: tresholdsData?.offset_imprint_quantity_printed_box_3_min || null,
     maxValue: tresholdsData?.offset_imprint_quantity_printed_box_3_max || null,
@@ -136,7 +149,8 @@ export default function OffsetEntries({ summaryData }: { summaryData: ISummary |
 
   const printedBox4CardProps: AddParameterCardProps = {
     id: OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_4,
-    title: OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_4],
+    title:
+      OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_4],
     value: Number(data.imprint_quantity_printed_box_4) || null,
     minValue: tresholdsData?.offset_imprint_quantity_printed_box_4_min || null,
     maxValue: tresholdsData?.offset_imprint_quantity_printed_box_4_max ?? null,
@@ -146,7 +160,8 @@ export default function OffsetEntries({ summaryData }: { summaryData: ISummary |
 
   const printedBox5CardProps: AddParameterCardProps = {
     id: OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_5,
-    title: OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_5],
+    title:
+      OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_5],
     value: Number(data.imprint_quantity_printed_box_5) || null,
     minValue: tresholdsData?.offset_imprint_quantity_printed_box_5_min ?? null,
     maxValue: tresholdsData?.offset_imprint_quantity_printed_box_5_max ?? null,
@@ -156,7 +171,8 @@ export default function OffsetEntries({ summaryData }: { summaryData: ISummary |
 
   const printedBox6CardProps: AddParameterCardProps = {
     id: OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_6,
-    title: OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_6],
+    title:
+      OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_6],
     value: Number(data.imprint_quantity_printed_box_6) || null,
     minValue: tresholdsData?.offset_imprint_quantity_printed_box_6_min ?? null,
     maxValue: tresholdsData?.offset_imprint_quantity_printed_box_6_max ?? null,

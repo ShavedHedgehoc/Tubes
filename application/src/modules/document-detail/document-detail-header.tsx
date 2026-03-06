@@ -13,11 +13,18 @@ export default function DocumentDetailHeader() {
   return (
     <React.Fragment>
       <BreadCrumbHeader
-        breadcrumbs={["Сводка", isSuccess && data.id ? `${data.plants.value} - ${formatDateToString(data.date)}` : ""]}
+        breadcrumbs={[
+          "Сводка",
+          isSuccess && data.id
+            ? `${data.plants.value} - ${formatDateToString(data.date)}`
+            : "",
+        ]}
       />
       <MainPageHeader
         pageTitle={`Подробная сводка (${
-          isSuccess && data.id ? `${data.plants.value} - ${formatDateToString(data.date)}` : ""
+          isSuccess && data.id
+            ? `${data.plants.value} - ${formatDateToString(data.date)}`
+            : ""
         })`}
       />
     </React.Fragment>

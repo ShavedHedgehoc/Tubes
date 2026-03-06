@@ -4,7 +4,14 @@ import CloseSummaryModal from "@/shared/components/modals/close-summary-modal";
 import useSealantCloseSummaryModal from "./use-sealant-close-summary-modal";
 
 export default function SealantCloseSummaryModal() {
-  const { open, setOpen, data, clearData, handleAddButtonClick, handleEndButtonClick } = useSealantCloseSummaryModal();
+  const {
+    open,
+    setOpen,
+    data,
+    clearData,
+    handleAddButtonClick,
+    handleEndButtonClick,
+  } = useSealantCloseSummaryModal();
   const modalProps: CloseSummaryModalProps = {
     title: PostNames.SEALANT,
     open: open,

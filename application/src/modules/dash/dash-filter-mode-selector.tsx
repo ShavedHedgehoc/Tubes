@@ -39,7 +39,10 @@ export default function DashFilterModeSelector() {
             display: "flex",
             flexShrink: 1,
           }}
-          onChange={(event: React.SyntheticEvent | null, newValue: DashMode | null) => {
+          onChange={(
+            event: React.SyntheticEvent | null,
+            newValue: DashMode | null,
+          ) => {
             event && newValue && handleChange(newValue);
           }}
         >

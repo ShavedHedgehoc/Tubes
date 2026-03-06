@@ -10,8 +10,12 @@ import TubeRecordsUploadFormLoader from "./tube-records-upload-form-loader";
 export default function TubeRecordsUploadForm() {
   return (
     <React.Fragment>
-      <Box sx={{ gap: 3, display: "flex", flexDirection: "column", width: "100%" }}>
-        <Box sx={{ display: "flex", flexDirection: "row", width: "100%", gap: 2 }}>
+      <Box
+        sx={{ gap: 3, display: "flex", flexDirection: "column", width: "100%" }}
+      >
+        <Box
+          sx={{ display: "flex", flexDirection: "row", width: "100%", gap: 2 }}
+        >
           <FormCard props={{ title: "Данные загрузки", grow: true }}>
             <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
               <TubeRecordsUploadFormDateInput />

@@ -26,7 +26,10 @@ export default function RowComponent({ row }: { row: IConveyor }) {
     onError: (err) => {
       if (err instanceof Error) {
         const error = handleError(err);
-        enqueueSnackbar(error, { variant: "error", anchorOrigin: { vertical: "top", horizontal: "right" } });
+        enqueueSnackbar(error, {
+          variant: "error",
+          anchorOrigin: { vertical: "top", horizontal: "right" },
+        });
       }
     },
   });
@@ -36,7 +39,15 @@ export default function RowComponent({ row }: { row: IConveyor }) {
   const setValue = useEditModalStore(useShallow((state) => state.setValue));
   const setBarcode = useEditModalStore(useShallow((state) => state.setBarcode));
 
-  const handleEditButtonClick = ({ id, value, barcode }: { id: number; value: string; barcode: string }) => {
+  const handleEditButtonClick = ({
+    id,
+    value,
+    barcode,
+  }: {
+    id: number;
+    value: string;
+    barcode: string;
+  }) => {
     setId(id);
     setValue(value);
     setBarcode(barcode);
@@ -49,7 +60,9 @@ export default function RowComponent({ row }: { row: IConveyor }) {
         <Typography level="body-xs">{row.value}</Typography>
       </td>
       <td style={{ width: 80, textAlign: "center", padding: "12px 6px" }}>
-        <Typography level="body-xs">{row.barcode ? row.barcode : "-"}</Typography>
+        <Typography level="body-xs">
+          {row.barcode ? row.barcode : "-"}
+        </Typography>
       </td>
 
       <td style={{ width: 110, textAlign: "center", padding: "12px 6px" }}>
@@ -57,7 +70,13 @@ export default function RowComponent({ row }: { row: IConveyor }) {
           <IconButton
             color="primary"
             size="sm"
-            onClick={() => handleEditButtonClick({ id: row.id, value: row.value, barcode: row.barcode })}
+            onClick={() =>
+              handleEditButtonClick({
+                id: row.id,
+                value: row.value,
+                barcode: row.barcode,
+              })
+            }
           >
             <EditOutlinedIcon />
           </IconButton>

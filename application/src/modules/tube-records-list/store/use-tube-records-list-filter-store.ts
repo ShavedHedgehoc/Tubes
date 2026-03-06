@@ -34,53 +34,70 @@ const initFilterValue: FetchTubeRecordsListFilter = {
   conveyors: [],
 };
 
-export const useTubeRecordsListFilterStore = create<TubeRecordsListFilterStore>()(
-  devtools((set) => ({
-    filter: initFilterValue,
+export const useTubeRecordsListFilterStore =
+  create<TubeRecordsListFilterStore>()(
+    devtools((set) => ({
+      filter: initFilterValue,
 
-    selectedStateOption: 999999,
-    selectedConveyorOption: 999999,
+      selectedStateOption: 999999,
+      selectedConveyorOption: 999999,
 
-    conveyorSelectorOptions: [],
+      conveyorSelectorOptions: [],
 
-    clearFilter: () =>
-      set(() => ({ filter: initFilterValue, selectedStateOption: 999999, selectedConveyorOption: 999999 })),
-    setDayToToday: () =>
-      set((state) => ({
-        filter: {
-          ...state.filter,
-          start_date: getCurrentDay().toJSON().slice(0, 10),
-          end_date: getCurrentDay().toJSON().slice(0, 10),
-        },
-      })),
-    changeFilter: ({ key, value, values }) => {
-      switch (key) {
-        case TubeRecordsListFilterParams.CODE:
-          set((state) => ({ filter: { ...state.filter, code: value } }));
-          break;
-        case TubeRecordsListFilterParams.START_DATE:
-          set((state) => ({ filter: { ...state.filter, start_date: value } }));
-          break;
-        case TubeRecordsListFilterParams.END_DATE:
-          set((state) => ({ filter: { ...state.filter, end_date: value } }));
-          break;
-        case TubeRecordsListFilterParams.CONVEYORS:
-          set((state) => ({
-            filter: { ...state.filter, conveyors: values ? [...values] : [...state.filter.conveyors] },
-          }));
-          break;
-        case TubeRecordsListFilterParams.STATES:
-          set((state) => ({
-            filter: { ...state.filter, states: values ? [...values] : [...state.filter.states] },
-          }));
-          break;
-        default:
-          break;
-      }
-    },
-    fillConveyorSelectorOptions: (values) =>
-      set(() => ({ conveyorSelectorOptions: [{ id: 999999, name: "Все" }, ...values] })),
-    setSelectedStateOption: (value) => set(() => ({ selectedStateOption: value })),
-    setSelectedConveyorOption: (value) => set(() => ({ selectedConveyorOption: value })),
-  }))
-);
+      clearFilter: () =>
+        set(() => ({
+          filter: initFilterValue,
+          selectedStateOption: 999999,
+          selectedConveyorOption: 999999,
+        })),
+      setDayToToday: () =>
+        set((state) => ({
+          filter: {
+            ...state.filter,
+            start_date: getCurrentDay().toJSON().slice(0, 10),
+            end_date: getCurrentDay().toJSON().slice(0, 10),
+          },
+        })),
+      changeFilter: ({ key, value, values }) => {
+        switch (key) {
+          case TubeRecordsListFilterParams.CODE:
+            set((state) => ({ filter: { ...state.filter, code: value } }));
+            break;
+          case TubeRecordsListFilterParams.START_DATE:
+            set((state) => ({
+              filter: { ...state.filter, start_date: value },
+            }));
+            break;
+          case TubeRecordsListFilterParams.END_DATE:
+            set((state) => ({ filter: { ...state.filter, end_date: value } }));
+            break;
+          case TubeRecordsListFilterParams.CONVEYORS:
+            set((state) => ({
+              filter: {
+                ...state.filter,
+                conveyors: values ? [...values] : [...state.filter.conveyors],
+              },
+            }));
+            break;
+          case TubeRecordsListFilterParams.STATES:
+            set((state) => ({
+              filter: {
+                ...state.filter,
+                states: values ? [...values] : [...state.filter.states],
+              },
+            }));
+            break;
+          default:
+            break;
+        }
+      },
+      fillConveyorSelectorOptions: (values) =>
+        set(() => ({
+          conveyorSelectorOptions: [{ id: 999999, name: "Все" }, ...values],
+        })),
+      setSelectedStateOption: (value) =>
+        set(() => ({ selectedStateOption: value })),
+      setSelectedConveyorOption: (value) =>
+        set(() => ({ selectedConveyorOption: value })),
+    })),
+  );

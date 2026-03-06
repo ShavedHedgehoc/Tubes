@@ -5,8 +5,12 @@ import { useShallow } from "zustand/shallow";
 import { useOffsetOperationSopStore } from "./store/use-offset-operation-sop-store";
 
 export const useOffsetOperation = (operationId: string | null) => {
-  const setSelectedOperation = useOffsetOperationSopStore(useShallow((state) => state.setSelectedOperation));
-  const clearSelectedOperation = useOffsetOperationSopStore(useShallow((state) => state.clearSelectedOperation));
+  const setSelectedOperation = useOffsetOperationSopStore(
+    useShallow((state) => state.setSelectedOperation),
+  );
+  const clearSelectedOperation = useOffsetOperationSopStore(
+    useShallow((state) => state.clearSelectedOperation),
+  );
   return useQuery({
     queryKey: ["offset_sop_operation", operationId],
     queryFn: async () => {

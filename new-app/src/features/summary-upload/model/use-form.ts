@@ -7,7 +7,7 @@ import {
 import type { SummaryUploadDto } from "@/entities/summary";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, useWatch } from "react-hook-form";
-import { useXlsxParser } from "../lib/use-xlsx-parser";
+import { useXlsxParser } from "../lib";
 import { useUploadSummaryData } from ".";
 import { useRef } from "react";
 

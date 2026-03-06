@@ -12,6 +12,9 @@ export const useTubeTresholdsExtrusionFormModalStore = create<ModalStore>()(
       open: false,
       setOpen: (val: boolean) => set(() => ({ open: val })),
     }),
-    { name: "TubeTresholdsExtrusionFormModalStore", store: "TubeTresholdsExtrusionFormModalStore" }
-  )
+    {
+      name: "TubeTresholdsExtrusionFormModalStore",
+      store: "TubeTresholdsExtrusionFormModalStore",
+    },
+  ),
 );

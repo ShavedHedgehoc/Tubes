@@ -10,5 +10,5 @@ export const useExtrusionOperationStore = create<ExtrusionOperationStore>()(
   devtools((set) => ({
     selectedOperation: null,
     setSelectedOperation: (value) => set(() => ({ selectedOperation: value })),
-  }))
+  })),
 );

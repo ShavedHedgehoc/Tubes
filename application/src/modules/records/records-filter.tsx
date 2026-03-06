@@ -13,12 +13,22 @@ import { RecordsFilterParams } from "./records-filter-params";
 
 export default function RecordsFilter() {
   const user = useAuthStore(useShallow((state) => state.user));
-  const changeFilter = useRecordsFilterStore(useShallow((state) => state.changeFilter));
-  const plantSelectorOptions = useRecordsFilterStore(useShallow((state) => state.plantSelectorOptions));
-  const setSelectedPlant = useRecordsFilterStore(useShallow((state) => state.setSelectedPlant));
+  const changeFilter = useRecordsFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
+  const plantSelectorOptions = useRecordsFilterStore(
+    useShallow((state) => state.plantSelectorOptions),
+  );
+  const setSelectedPlant = useRecordsFilterStore(
+    useShallow((state) => state.setSelectedPlant),
+  );
   const plant_id = user?.settings?.plant_id || plantSelectorOptions[0].id;
   setSelectedPlant(plant_id);
-  changeFilter({ key: RecordsFilterParams.PLANT, value: "", values: [plant_id] });
+  changeFilter({
+    key: RecordsFilterParams.PLANT,
+    value: "",
+    values: [plant_id],
+  });
   return (
     <PageFilterLayout>
       <PageFilterLayout.Left>

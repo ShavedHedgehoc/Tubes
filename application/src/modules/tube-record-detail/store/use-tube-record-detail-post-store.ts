@@ -6,7 +6,9 @@ interface TubeRecordDetailPostStore {
   setPostName: (val: TubePostName) => void;
 }
 
-export const useTubeRecordDetailPostStore = create<TubeRecordDetailPostStore>()((set) => ({
-  post: "extrusion",
-  setPostName: (val) => set(() => ({ post: val })),
-}));
+export const useTubeRecordDetailPostStore = create<TubeRecordDetailPostStore>()(
+  (set) => ({
+    post: "extrusion",
+    setPostName: (val) => set(() => ({ post: val })),
+  }),
+);

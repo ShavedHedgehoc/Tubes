@@ -4,8 +4,12 @@ import { useInventoryDetailFilterStore } from "../store/inventory-detail-filter-
 import { InventoryDetailFilterParams } from "../store/inventory-detail-filter-params";
 
 export default function InventoryDetailFilterCodeInput() {
-  const filter = useInventoryDetailFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useInventoryDetailFilterStore(useShallow((state) => state.changeFilter));
+  const filter = useInventoryDetailFilterStore(
+    useShallow((state) => state.filter),
+  );
+  const changeFilter = useInventoryDetailFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
 
   const inputProps: FilterInputProps = {
     id: InventoryDetailFilterParams.PRODUCT,
@@ -13,7 +17,8 @@ export default function InventoryDetailFilterCodeInput() {
     disabled: filter.productCode === "",
     label: "Поиск по коду 1С",
     placeholder: "Код 1С",
-    changeFilter: ({ key, value }: { key: string; value: string }) => changeFilter({ key, value }),
+    changeFilter: ({ key, value }: { key: string; value: string }) =>
+      changeFilter({ key, value }),
   };
 
   return <FilterInput {...inputProps} />;

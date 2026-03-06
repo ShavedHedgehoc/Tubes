@@ -12,5 +12,5 @@ export const useVarnishOperationSopStore = create<VarnishOperationStore>()(
     selectedOperation: null,
     setSelectedOperation: (value) => set(() => ({ selectedOperation: value })),
     clearSelectedOperation: () => set(() => ({ selectedOperation: null })),
-  }))
+  })),
 );

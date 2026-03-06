@@ -9,11 +9,21 @@ import FilterStringValueSelector, {
 } from "../../../shared/ui/filter-string-value-selector";
 
 export default function TraceBatchsFilterPlantSelector() {
-  const changeFilter = useTraceBatchsFilterStore(useShallow((state) => state.changeFilter));
-  const selectedPlant = useTraceBatchsFilterStore(useShallow((state) => state.selectedPlant));
-  const setSelectedPlant = useTraceBatchsFilterStore(useShallow((state) => state.setSelectedPlant));
-  const plantSelectorOptions = useTraceBatchsFilterStore(useShallow((state) => state.plantSelectorOptions));
-  const fillPlantSelectorOptions = useTraceBatchsFilterStore(useShallow((state) => state.fillPlantSelectorOptions));
+  const changeFilter = useTraceBatchsFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
+  const selectedPlant = useTraceBatchsFilterStore(
+    useShallow((state) => state.selectedPlant),
+  );
+  const setSelectedPlant = useTraceBatchsFilterStore(
+    useShallow((state) => state.setSelectedPlant),
+  );
+  const plantSelectorOptions = useTraceBatchsFilterStore(
+    useShallow((state) => state.plantSelectorOptions),
+  );
+  const fillPlantSelectorOptions = useTraceBatchsFilterStore(
+    useShallow((state) => state.fillPlantSelectorOptions),
+  );
 
   useQuery({
     queryKey: ["plants_options", "documents"],
@@ -27,7 +37,11 @@ export default function TraceBatchsFilterPlantSelector() {
   });
 
   const plantOptions = plantSelectorOptions.map((plant) => (
-    <FilterStringValueSelectorOption key={`plant_option_${plant.id}`} id={plant.abb[0]} value={plant.value} />
+    <FilterStringValueSelectorOption
+      key={`plant_option_${plant.id}`}
+      id={plant.abb[0]}
+      value={plant.value}
+    />
   ));
 
   const plantSelectorProps: FilterStringValueSelectorProps = {
@@ -38,8 +52,15 @@ export default function TraceBatchsFilterPlantSelector() {
     options: plantOptions,
     maxW: 120,
     setSelectedOption: (id: string) => setSelectedPlant(id),
-    changeFilter: ({ key, value, values }: { key: string; value: string; values: string[] | [] }) =>
-      changeFilter({ key, value, values }),
+    changeFilter: ({
+      key,
+      value,
+      values,
+    }: {
+      key: string;
+      value: string;
+      values: string[] | [];
+    }) => changeFilter({ key, value, values }),
   };
 
   return <FilterStringValueSelector {...plantSelectorProps} />;

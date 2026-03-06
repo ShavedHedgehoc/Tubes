@@ -5,8 +5,10 @@ import { useEmployeesEditModalStore } from "../../modules/employees/store/use-em
 import { useEmployeeAddModalStore } from "../../modules/employees/store/use-employees-add-modal-store";
 
 export const useOccupations = () => {
-  const { fillOccupationSelectorOptions: fillEmployeesOptions } = useEmployeesFilterStore();
-  const { fillOccupationOptions: fillEmployeesEditModalOccupationsOptions } = useEmployeesEditModalStore();
+  const { fillOccupationSelectorOptions: fillEmployeesOptions } =
+    useEmployeesFilterStore();
+  const { fillOccupationOptions: fillEmployeesEditModalOccupationsOptions } =
+    useEmployeesEditModalStore();
   const {
     fillOccupationOptions: fillEmployeesAddModalOccupationsOptions,
     setOccupation: setEmployeeAddModalOccupation,

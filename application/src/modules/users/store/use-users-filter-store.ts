@@ -28,7 +28,8 @@ export const useUsersFilterStore = create<UsersFilterStore>()(
       selectedBannedOption: 999999,
       roleSelectorOptions: [],
       bannedSelectorOptions: [],
-      clearFilter: () => set(() => ({ filter: initFilterValue, selectedBannedOption: 999999 })),
+      clearFilter: () =>
+        set(() => ({ filter: initFilterValue, selectedBannedOption: 999999 })),
       changeFilter: ({ key, value, values }) => {
         switch (key) {
           case UsersFilterParams.NAME:
@@ -39,24 +40,37 @@ export const useUsersFilterStore = create<UsersFilterStore>()(
             break;
           case UsersFilterParams.BANNED:
             set((state) => ({
-              filter: { ...state.filter, banned: values ? [...values] : [...state.filter.banned] },
+              filter: {
+                ...state.filter,
+                banned: values ? [...values] : [...state.filter.banned],
+              },
             }));
             break;
           case UsersFilterParams.NAME_ASC:
-            set((state) => ({ filter: { ...state.filter, nameAsc: value === "true" ? true : false } }));
+            set((state) => ({
+              filter: {
+                ...state.filter,
+                nameAsc: value === "true" ? true : false,
+              },
+            }));
             break;
           case UsersFilterParams.ROLES:
             set((state) => ({
-              filter: { ...state.filter, roles: values ? [...values] : [...state.filter.roles] },
+              filter: {
+                ...state.filter,
+                roles: values ? [...values] : [...state.filter.roles],
+              },
             }));
             break;
           default:
             break;
         }
       },
-      setSelectedBannedOption: (value) => set(() => ({ selectedBannedOption: value })),
-      fillRoleSelectorOptions: (values) => set(() => ({ roleSelectorOptions: [...values] })),
+      setSelectedBannedOption: (value) =>
+        set(() => ({ selectedBannedOption: value })),
+      fillRoleSelectorOptions: (values) =>
+        set(() => ({ roleSelectorOptions: [...values] })),
     }),
-    { name: "UserFilterStore", store: "useUserFilterStore" }
-  )
+    { name: "UserFilterStore", store: "useUserFilterStore" },
+  ),
 );

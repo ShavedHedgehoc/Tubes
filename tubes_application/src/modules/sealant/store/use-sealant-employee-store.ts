@@ -13,5 +13,5 @@ export const useSealantEmployeeStore = create<SealantEmployeeStore>()(
     sealantEmployee: null,
     setSealantEmployee: (value) => set(() => ({ sealantEmployee: value })),
     clearSealantEmployee: () => set(() => ({ sealantEmployee: null })),
-  }))
+  })),
 );

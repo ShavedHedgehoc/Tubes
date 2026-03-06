@@ -4,24 +4,34 @@ import { useQuery } from "@tanstack/react-query";
 import { useDocumentDetailAddHistoryModalFormStore } from "../store/use-document-detail-add-history-modal-form-store";
 
 import HistoryTypeService from "../../../shared/api/services/history-types-service";
-import { Box, FormControl, FormHelperText, Option, Select, SelectStaticProps } from "@mui/joy";
+import {
+  Box,
+  FormControl,
+  FormHelperText,
+  Option,
+  Select,
+  SelectStaticProps,
+} from "@mui/joy";
 import { useDocumentDetailAddHistoryModalStore } from "../store/use-document-detail-add-history-modal-store";
 
 export default function DocumentDetailAddHistoryModalStateSelector() {
   const action: SelectStaticProps["action"] = React.useRef(null);
   const selectedHistoryType = useDocumentDetailAddHistoryModalFormStore(
-    useShallow((state) => state.selectedHistoryType)
+    useShallow((state) => state.selectedHistoryType),
   );
   const setSelectedHistoryType = useDocumentDetailAddHistoryModalFormStore(
-    useShallow((state) => state.setSelectedHistoryType)
+    useShallow((state) => state.setSelectedHistoryType),
   );
   const historyTypeSelectorOptions = useDocumentDetailAddHistoryModalFormStore(
-    useShallow((state) => state.historyTypeSelectorOptions)
+    useShallow((state) => state.historyTypeSelectorOptions),
   );
-  const fillHistoryTypeSelectorOptions = useDocumentDetailAddHistoryModalFormStore(
-    useShallow((state) => state.fillHistoryTypeSelectorOptions)
+  const fillHistoryTypeSelectorOptions =
+    useDocumentDetailAddHistoryModalFormStore(
+      useShallow((state) => state.fillHistoryTypeSelectorOptions),
+    );
+  const row = useDocumentDetailAddHistoryModalStore(
+    useShallow((state) => state.row),
   );
-  const row = useDocumentDetailAddHistoryModalStore(useShallow((state) => state.row));
 
   useQuery({
     queryKey: ["history_types_options"],
@@ -56,7 +66,10 @@ export default function DocumentDetailAddHistoryModalStateSelector() {
             flexGrow: 1,
             mt: 1,
           }}
-          onChange={(event: React.SyntheticEvent | null, newValue: string | null) => {
+          onChange={(
+            event: React.SyntheticEvent | null,
+            newValue: string | null,
+          ) => {
             event && newValue && setSelectedHistoryType(newValue);
           }}
         >

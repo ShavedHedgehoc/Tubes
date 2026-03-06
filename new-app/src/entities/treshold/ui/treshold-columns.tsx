@@ -1,6 +1,4 @@
-import {
-  TresholdEntity,
-} from "@/entities/treshold";
+import { TresholdEntity } from "@/entities/treshold";
 import { cn } from "@/shared/lib";
 
 import { ColumnDef } from "@tanstack/react-table";

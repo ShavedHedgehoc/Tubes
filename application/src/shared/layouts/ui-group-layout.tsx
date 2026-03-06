@@ -46,7 +46,11 @@ function Main({ children }: { children: React.ReactNode }) {
 
 UiGroupLayout.Header = Header;
 UiGroupLayout.Main = Main;
-export default function UiGroupLayout({ children }: { children: React.ReactNode | string }) {
+export default function UiGroupLayout({
+  children,
+}: {
+  children: React.ReactNode | string;
+}) {
   return (
     <React.Fragment>
       <Sheet variant="outlined" sx={sheetSXProps}>

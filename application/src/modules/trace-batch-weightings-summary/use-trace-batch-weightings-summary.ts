@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import TraceBatchService, { GetWeightingsSummaryDto } from "../../shared/api/services/trace-batchs-service";
+import TraceBatchService, {
+  GetWeightingsSummaryDto,
+} from "../../shared/api/services/trace-batchs-service";
 
 export const useTraceBatchWeightingsSummary = (dto: GetWeightingsSummaryDto) =>
   useQuery({

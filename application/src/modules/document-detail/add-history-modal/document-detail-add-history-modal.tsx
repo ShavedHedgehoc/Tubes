@@ -8,9 +8,13 @@ import DocumentDetailAddHistoryModalButtons from "./document-detail-add-history-
 import DocumentDetailAddHistoryModalNote from "./document-detail-add-history-modal-note";
 
 export default function DocumentDetailAddHistoryModal() {
-  const open = useDocumentDetailAddHistoryModalStore(useShallow((state) => state.open));
+  const open = useDocumentDetailAddHistoryModalStore(
+    useShallow((state) => state.open),
+  );
   // const title = useDocumentDetailAddHistoryModalStore(useShallow((state) => state.title));
-  const setOpen = useDocumentDetailAddHistoryModalStore(useShallow((state) => state.setOpen));
+  const setOpen = useDocumentDetailAddHistoryModalStore(
+    useShallow((state) => state.setOpen),
+  );
 
   const modalProps = {
     open: open,
@@ -23,7 +27,10 @@ export default function DocumentDetailAddHistoryModal() {
   };
 
   return (
-    <ModalLayout props={modalProps} buttons={<DocumentDetailAddHistoryModalButtons />}>
+    <ModalLayout
+      props={modalProps}
+      buttons={<DocumentDetailAddHistoryModalButtons />}
+    >
       <DocumentDetailAddHistoryInfo />
       <DocumentDetailAddHistoryModalStateSelector />
       <DocumentDetailAddHistoryModalNote />

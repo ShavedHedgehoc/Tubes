@@ -7,11 +7,21 @@ import { ITubeRecordsUploadData } from "../../shared/api/services/tube-records-s
 
 export default function TubeRecordsUploadFormLoader() {
   const { uploadTubeRecords, uploadPending } = useUploadTubeRecords();
-  const formData = useTubeRecordsUploadFormStore(useShallow((state) => state.formData));
-  const dataForUpload = useTubeRecordsUploadFormStore(useShallow((state) => state.dataForUpload));
-  const isValid = useTubeRecordsUploadFormStore(useShallow((state) => state.isValid));
-  const clearData = useTubeRecordsUploadFormStore(useShallow((state) => state.clearData));
-  const update = useTubeRecordsUploadFormStore(useShallow((state) => state.update));
+  const formData = useTubeRecordsUploadFormStore(
+    useShallow((state) => state.formData),
+  );
+  const dataForUpload = useTubeRecordsUploadFormStore(
+    useShallow((state) => state.dataForUpload),
+  );
+  const isValid = useTubeRecordsUploadFormStore(
+    useShallow((state) => state.isValid),
+  );
+  const clearData = useTubeRecordsUploadFormStore(
+    useShallow((state) => state.clearData),
+  );
+  const update = useTubeRecordsUploadFormStore(
+    useShallow((state) => state.update),
+  );
 
   const upload = async () => {
     if (formData.dateForUpload && dataForUpload.length > 0) {

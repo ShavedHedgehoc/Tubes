@@ -1,6 +1,9 @@
 import { Typography } from "@mui/joy";
 import { TubeRecordDetailDataVarnishParam } from "../../../shared/api/services/tube-records-service";
-import { formatDateToString, formatTimeToString } from "../../../shared/helpers/date-time-formatters";
+import {
+  formatDateToString,
+  formatTimeToString,
+} from "../../../shared/helpers/date-time-formatters";
 import { TableIconButton } from "../../../shared/ui/table-icon-button";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { useShallow } from "zustand/react/shallow";
@@ -13,9 +16,15 @@ export default function TubeRecordsDetailVarnishParamsRow({
   row: TubeRecordDetailDataVarnishParam;
   index: number;
 }) {
-  const setOpen = useTubeRecordMaterialModalStore(useShallow((state) => state.setOpen));
-  const setData = useTubeRecordMaterialModalStore(useShallow((state) => state.setData));
-  const setTitle = useTubeRecordMaterialModalStore(useShallow((state) => state.setTitle));
+  const setOpen = useTubeRecordMaterialModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const setData = useTubeRecordMaterialModalStore(
+    useShallow((state) => state.setData),
+  );
+  const setTitle = useTubeRecordMaterialModalStore(
+    useShallow((state) => state.setTitle),
+  );
 
   const handleInfoClick = () => {
     setTitle("Использованные материалы");
@@ -28,10 +37,14 @@ export default function TubeRecordsDetailVarnishParamsRow({
         <Typography level="body-xs">{index + 1}</Typography>
       </td>
       <td style={{ width: 120, textAlign: "center", padding: "12px 24px" }}>
-        <Typography level="body-xs">{formatDateToString(row.createdAt)}</Typography>
+        <Typography level="body-xs">
+          {formatDateToString(row.createdAt)}
+        </Typography>
       </td>
       <td style={{ width: 120, textAlign: "center", padding: "12px 24px" }}>
-        <Typography level="body-xs">{formatTimeToString(row.createdAt)}</Typography>
+        <Typography level="body-xs">
+          {formatTimeToString(row.createdAt)}
+        </Typography>
       </td>
       <td style={{ width: 200, textAlign: "center", padding: "12px 24px" }}>
         <Typography level="body-xs">{row.employee}</Typography>
@@ -49,7 +62,9 @@ export default function TubeRecordsDetailVarnishParamsRow({
         <Typography level="body-xs">{row.feed_can_air_pressure}</Typography>
       </td>
       <td style={{ width: 120, textAlign: "center", padding: "12px 24px" }}>
-        <Typography level="body-xs">{row.nozzle_regulator_air_pressure}</Typography>
+        <Typography level="body-xs">
+          {row.nozzle_regulator_air_pressure}
+        </Typography>
       </td>
       <td style={{ width: 120, textAlign: "center", padding: "12px 24px" }}>
         <Typography level="body-xs">{row.cells_speed}</Typography>
@@ -75,26 +90,36 @@ export default function TubeRecordsDetailVarnishParamsRow({
         </Typography>
       </td>
       <td style={{ width: 120, textAlign: "center", padding: "12px 24px" }}>
-        <Typography level="body-xs">{row.tube_molding_start_position}</Typography>
+        <Typography level="body-xs">
+          {row.tube_molding_start_position}
+        </Typography>
       </td>
       <td style={{ width: 120, textAlign: "center", padding: "12px 24px" }}>
         <Typography level="body-xs">{row.tube_molding_end_position}</Typography>
       </td>
       <td style={{ width: 120, textAlign: "center", padding: "12px 24px" }}>
-        <Typography level="body-xs">{row.polimerization_furnace_temp}</Typography>
+        <Typography level="body-xs">
+          {row.polimerization_furnace_temp}
+        </Typography>
       </td>
       <td style={{ width: 120, textAlign: "center", padding: "12px 24px" }}>
         <Typography level="body-xs">{row.internal_varnish_porosity}</Typography>
       </td>
 
       <td style={{ width: 120, textAlign: "center", padding: "12px 24px" }}>
-        <Typography level="body-xs">{row.internal_sectional_view === true ? "Ok" : "nOk"}</Typography>
+        <Typography level="body-xs">
+          {row.internal_sectional_view === true ? "Ok" : "nOk"}
+        </Typography>
       </td>
       <td style={{ width: 120, textAlign: "center", padding: "12px 24px" }}>
-        <Typography level="body-xs">{row.aluminium_clearance_lack === true ? "Ok" : "nOk"}</Typography>
+        <Typography level="body-xs">
+          {row.aluminium_clearance_lack === true ? "Ok" : "nOk"}
+        </Typography>
       </td>
       <td style={{ width: 120, textAlign: "center", padding: "12px 24px" }}>
-        <Typography level="body-xs">{row.unpainting_lack === true ? "Ok" : "nOk"}</Typography>
+        <Typography level="body-xs">
+          {row.unpainting_lack === true ? "Ok" : "nOk"}
+        </Typography>
       </td>
       <td style={{ width: 120, textAlign: "center", padding: "12px 24px" }}>
         <TableIconButton color="success" onClick={handleInfoClick}>

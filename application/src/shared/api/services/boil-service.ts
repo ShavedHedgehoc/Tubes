@@ -5,7 +5,9 @@ export interface BoilHistoriesResponse {
 }
 
 export default class BoilService {
-  static async getHistoriesByBoilId(boil_id: number | null): Promise<IHistory[]> {
+  static async getHistoriesByBoilId(
+    boil_id: number | null,
+  ): Promise<IHistory[]> {
     const res = await $api.get(`/histories/boil/${boil_id}`);
     return res.data;
   }
@@ -15,7 +17,9 @@ export default class BoilService {
     return res.data;
   }
 
-  static async getBoilsReportWithParams(dto: FetchBoilsDto): Promise<IBoilReportData> {
+  static async getBoilsReportWithParams(
+    dto: FetchBoilsDto,
+  ): Promise<IBoilReportData> {
     const res = await $api.post(`/boils_list/report`, dto);
     return res.data;
   }

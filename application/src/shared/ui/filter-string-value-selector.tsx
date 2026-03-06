@@ -1,5 +1,12 @@
 import * as React from "react";
-import { Box, FormControl, FormHelperText, Option, Select, SelectStaticProps } from "@mui/joy";
+import {
+  Box,
+  FormControl,
+  FormHelperText,
+  Option,
+  Select,
+  SelectStaticProps,
+} from "@mui/joy";
 
 export interface FilterStringValueSelectorOptionProps {
   id: string;
@@ -14,10 +21,20 @@ export interface FilterStringValueSelectorProps {
   maxW?: number;
   options: React.ReactNode;
   setSelectedOption: (id: string) => void;
-  changeFilter: ({ key, value, values }: { key: string; value: string; values: string[] | [] }) => void;
+  changeFilter: ({
+    key,
+    value,
+    values,
+  }: {
+    key: string;
+    value: string;
+    values: string[] | [];
+  }) => void;
 }
 
-export function FilterStringValueSelectorOption(props: FilterStringValueSelectorOptionProps) {
+export function FilterStringValueSelectorOption(
+  props: FilterStringValueSelectorOptionProps,
+) {
   return (
     <Option value={props.id} key={props.id}>
       <FormControl size="sm">{props.value}</FormControl>
@@ -25,11 +42,18 @@ export function FilterStringValueSelectorOption(props: FilterStringValueSelector
   );
 }
 
-export default function FilterStringValueSelector(props: FilterStringValueSelectorProps) {
+export default function FilterStringValueSelector(
+  props: FilterStringValueSelectorProps,
+) {
   const action: SelectStaticProps["action"] = React.useRef(null);
   const handleChange = (newValue: string | null) => {
     newValue && props.setSelectedOption(newValue);
-    newValue && props.changeFilter({ key: props.id, value: "", values: newValue === "#" ? [] : [newValue] });
+    newValue &&
+      props.changeFilter({
+        key: props.id,
+        value: "",
+        values: newValue === "#" ? [] : [newValue],
+      });
   };
   return (
     <Box sx={{ display: "flex", pt: 1 }}>
@@ -49,7 +73,10 @@ export default function FilterStringValueSelector(props: FilterStringValueSelect
             display: "flex",
             flexShrink: 1,
           }}
-          onChange={(event: React.SyntheticEvent | null, newValue: string | null) => {
+          onChange={(
+            event: React.SyntheticEvent | null,
+            newValue: string | null,
+          ) => {
             event && newValue && handleChange(newValue);
           }}
         >

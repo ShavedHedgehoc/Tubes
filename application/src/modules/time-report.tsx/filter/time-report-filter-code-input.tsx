@@ -5,7 +5,9 @@ import { TimeReportFilterParams } from "./time-report-filter-params";
 
 export default function TimeReportFilterCodeInput() {
   const filter = useTimeReportFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useTimeReportFilterStore(useShallow((state) => state.changeFilter));
+  const changeFilter = useTimeReportFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
 
   const codeInputProps: FilterInputProps = {
     id: TimeReportFilterParams.PRODUCT,
@@ -13,7 +15,8 @@ export default function TimeReportFilterCodeInput() {
     disabled: filter.productCode === "",
     label: "Поиск по коду 1С",
     placeholder: "Код 1С",
-    changeFilter: ({ key, value }: { key: string; value: string }) => changeFilter({ key, value }),
+    changeFilter: ({ key, value }: { key: string; value: string }) =>
+      changeFilter({ key, value }),
   };
 
   return <FilterInput {...codeInputProps} />;

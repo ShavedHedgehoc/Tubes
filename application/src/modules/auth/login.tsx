@@ -1,5 +1,13 @@
 import * as React from "react";
-import { Box, FormControl, FormLabel, Input, Sheet, Typography, Button } from "@mui/joy";
+import {
+  Box,
+  FormControl,
+  FormLabel,
+  Input,
+  Sheet,
+  Typography,
+  Button,
+} from "@mui/joy";
 import { useNavigate } from "react-router-dom";
 
 import LoginPendingModal from "../../shared/components/login-pending-modal";
@@ -60,7 +68,9 @@ export default function Login() {
             variant={"outlined"}
           >
             <div>
-              <Typography level="h4">{isLogin ? "Вход" : "Регистрация"}</Typography>
+              <Typography level="h4">
+                {isLogin ? "Вход" : "Регистрация"}
+              </Typography>
             </div>
             {!isLogin && (
               <FormControl>
@@ -101,9 +111,21 @@ export default function Login() {
               />
             </FormControl>
             {isLogin && <Button onClick={() => handleLogin()}>Войти</Button>}
-            {!isLogin && <Button onClick={() => handleRegister()}>Зарегистрироваться</Button>}
-            <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
-              <Typography level="body-sm">{isLogin ? "В первый раз? " : "Уже зарегистрирован? "}</Typography>
+            {!isLogin && (
+              <Button onClick={() => handleRegister()}>
+                Зарегистрироваться
+              </Button>
+            )}
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+              }}
+            >
+              <Typography level="body-sm">
+                {isLogin ? "В первый раз? " : "Уже зарегистрирован? "}
+              </Typography>
               <Typography
                 level="body-sm"
                 color="primary"
@@ -137,7 +159,9 @@ export default function Login() {
           }}
         >
           <div>
-            <Typography level="h4">{isLogin ? "Вход" : "Регистрация"}</Typography>
+            <Typography level="h4">
+              {isLogin ? "Вход" : "Регистрация"}
+            </Typography>
           </div>
           {!isLogin && (
             <FormControl>
@@ -187,8 +211,16 @@ export default function Login() {
               Зарегистрироваться
             </Button>
           )}
-          <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
-            <Typography level="body-sm">{isLogin ? "В первый раз? " : "Уже зарегистрирован? "}</Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <Typography level="body-sm">
+              {isLogin ? "В первый раз? " : "Уже зарегистрирован? "}
+            </Typography>
             <Typography
               level="body-sm"
               color="primary"

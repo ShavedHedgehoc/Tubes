@@ -4,10 +4,18 @@ import { useTubeRecordMaterialModalStore } from "../store/use-tube-record-detail
 import TubeRecordMaterialModalTable from "./tube-record-material-modal-table";
 
 export default function TubeRecordMaterialModal() {
-  const open = useTubeRecordMaterialModalStore(useShallow((state) => state.open));
-  const setOpen = useTubeRecordMaterialModalStore(useShallow((state) => state.setOpen));
-  const title = useTubeRecordMaterialModalStore(useShallow((state) => state.title));
-  const clearData = useTubeRecordMaterialModalStore(useShallow((state) => state.clearData));
+  const open = useTubeRecordMaterialModalStore(
+    useShallow((state) => state.open),
+  );
+  const setOpen = useTubeRecordMaterialModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const title = useTubeRecordMaterialModalStore(
+    useShallow((state) => state.title),
+  );
+  const clearData = useTubeRecordMaterialModalStore(
+    useShallow((state) => state.clearData),
+  );
 
   const handleClose = () => {
     setOpen(false);

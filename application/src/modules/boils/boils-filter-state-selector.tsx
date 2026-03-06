@@ -9,8 +9,12 @@ import FilterMultiSelector, {
 
 export default function BoilsFilterStateSelector() {
   const filter = useBoilsFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useBoilsFilterStore(useShallow((state) => state.changeFilter));
-  const stateSelectorOptions = useBoilsFilterStore(useShallow((state) => state.stateSelectorOptions));
+  const changeFilter = useBoilsFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
+  const stateSelectorOptions = useBoilsFilterStore(
+    useShallow((state) => state.stateSelectorOptions),
+  );
 
   const stateOptions = stateSelectorOptions.map((state) => (
     <FilterMultiSelectorOption
@@ -27,8 +31,15 @@ export default function BoilsFilterStateSelector() {
     placeholder: "Выберите статус",
     label: "Поиск по статусу",
     options: stateOptions,
-    changeFilter: ({ key, value, values }: { key: string; value: string; values: number[] | [] }) =>
-      changeFilter({ key, value, values }),
+    changeFilter: ({
+      key,
+      value,
+      values,
+    }: {
+      key: string;
+      value: string;
+      values: number[] | [];
+    }) => changeFilter({ key, value, values }),
   };
 
   return <FilterMultiSelector {...stateSelectorProps} />;

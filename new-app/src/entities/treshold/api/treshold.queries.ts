@@ -26,7 +26,8 @@ export const tresholdQueries = {
       staleTime: 60 * 1000,
     }),
   details: () => [...tresholdQueries.all(), "detail"],
-  detail: (id: string | null
+  detail: (
+    id: string | null,
     // , options?: { isServer: boolean }
   ) =>
     queryOptions({

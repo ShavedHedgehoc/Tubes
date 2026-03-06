@@ -51,7 +51,9 @@ export class DocDetailController {
     return this.docDetailService.getTimeReport(dto);
   }
 
-  @ApiOperation({ summary: "Получить все записи с параметрами по id документа" })
+  @ApiOperation({
+    summary: "Получить все записи с параметрами по id документа",
+  })
   @Post("/by_id")
   getDocByIDWithParams(@Body() dto: GetDocByIdDto) {
     return this.docDetailService.getDocDetailByIdWithFilter(dto);

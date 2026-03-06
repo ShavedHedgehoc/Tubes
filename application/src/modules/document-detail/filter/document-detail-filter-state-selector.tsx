@@ -8,9 +8,15 @@ import { useDocumentDetailFilterStore } from "../store/use-document-detail-filte
 import { DocumentDetailFilterParams } from "./document-detail-filter-params";
 
 export default function DocumentDetailFilterStateSelector() {
-  const filter = useDocumentDetailFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useDocumentDetailFilterStore(useShallow((state) => state.changeFilter));
-  const stateSelectorOptions = useDocumentDetailFilterStore(useShallow((state) => state.stateSelectorOptions));
+  const filter = useDocumentDetailFilterStore(
+    useShallow((state) => state.filter),
+  );
+  const changeFilter = useDocumentDetailFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
+  const stateSelectorOptions = useDocumentDetailFilterStore(
+    useShallow((state) => state.stateSelectorOptions),
+  );
 
   const stateOptions = stateSelectorOptions.map((state) => (
     <FilterMultiSelectorOption
@@ -27,8 +33,15 @@ export default function DocumentDetailFilterStateSelector() {
     placeholder: "Выберите статус",
     label: "Поиск по статусу",
     options: stateOptions,
-    changeFilter: ({ key, value, values }: { key: string; value: string; values: number[] | [] }) =>
-      changeFilter({ key, value, values }),
+    changeFilter: ({
+      key,
+      value,
+      values,
+    }: {
+      key: string;
+      value: string;
+      values: number[] | [];
+    }) => changeFilter({ key, value, values }),
   };
 
   return <FilterMultiSelector {...stateSelectorProps} />;

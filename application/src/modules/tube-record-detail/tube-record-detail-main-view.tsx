@@ -11,7 +11,11 @@ import TubeRecordDetailProduct from "./tube-record-detail-product";
 import TubeRecordDetailOffsetView from "./offset-view/tube-record-detail-offset-view";
 import TubeRecordDetailSealantView from "./sealant-view/tube-record-detail-sealant-view";
 
-export default function TubeRecordDetailMainView({ summary_id }: { summary_id: string | undefined }) {
+export default function TubeRecordDetailMainView({
+  summary_id,
+}: {
+  summary_id: string | undefined;
+}) {
   const { data, isError, isPending } = useTubeRecordDetail(summary_id);
   const post = useTubeRecordDetailPostStore(useShallow((state) => state.post));
 

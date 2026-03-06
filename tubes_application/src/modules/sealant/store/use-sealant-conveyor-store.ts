@@ -14,5 +14,5 @@ export const useSealantConveyorStore = create<SealantConveyorStore>()(
     sealantConveyor: null,
     setSealantConveyor: (value) => set(() => ({ sealantConveyor: value })),
     clearSealantConveyor: () => set(() => ({ sealantConveyor: null })),
-  }))
+  })),
 );

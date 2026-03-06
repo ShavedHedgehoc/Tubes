@@ -1,10 +1,16 @@
-import MenuButton, { type MenuButtonProps } from "@/shared/components/menu/menu-button";
+import MenuButton, {
+  type MenuButtonProps,
+} from "@/shared/components/menu/menu-button";
 import { TbSettingsAutomation, TbSettingsCancel, TbX } from "react-icons/tb";
 import Menu from "@/shared/components/menu/menu";
 import type { ISummary } from "@/shared/api/services/summary-service";
 import useOffsetOperationsMenu from "./use-offset-operations-menu";
 
-export default function OffsetOperationsMenu({ summaryData }: { summaryData: ISummary | null }) {
+export default function OffsetOperationsMenu({
+  summaryData,
+}: {
+  summaryData: ISummary | null;
+}) {
   const {
     handleSetClick,
     handleExitClick,
@@ -38,7 +44,9 @@ export default function OffsetOperationsMenu({ summaryData }: { summaryData: ISu
   return (
     <Menu>
       {setIdleButtonVisibleCondition && <MenuButton {...setIdleButtonProps} />}
-      {setWorkingButtonVisibleCondition && <MenuButton {...setWorkingButtonProps} />}
+      {setWorkingButtonVisibleCondition && (
+        <MenuButton {...setWorkingButtonProps} />
+      )}
       <MenuButton {...backButtonProps} />
     </Menu>
   );

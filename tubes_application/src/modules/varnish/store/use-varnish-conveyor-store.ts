@@ -14,5 +14,5 @@ export const useVarnishConveyorStore = create<VarnishConveyorStore>()(
     varnishConveyor: null,
     setVarnishConveyor: (value) => set(() => ({ varnishConveyor: value })),
     clearVarnishConveyor: () => set(() => ({ varnishConveyor: null })),
-  }))
+  })),
 );

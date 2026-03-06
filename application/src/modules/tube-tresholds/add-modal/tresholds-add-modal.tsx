@@ -19,7 +19,9 @@ import TresholdsSealantListContent from "./sealant/tresholds-sealant-list-conten
 import TresholdsSealantButtons from "./sealant/tresholds-sealant-buttons";
 
 export default function TresholdsAddModal() {
-  const open = useTubeTresholdsExtrusionFormModalStore(useShallow((state) => state.open));
+  const open = useTubeTresholdsExtrusionFormModalStore(
+    useShallow((state) => state.open),
+  );
   const post = useTubeTresholdsPostStore(useShallow((state) => state.post));
 
   const {
@@ -93,7 +95,16 @@ export default function TresholdsAddModal() {
       >
         <Stack spacing={2}>
           <Box sx={{ height: `100%`, px: 1 }}>{headerContent}</Box>
-          <Box sx={{ height: `${modalProps.height * 0.75}px`, overflow: "auto", px: 1, py: 1 }}>{listContent}</Box>
+          <Box
+            sx={{
+              height: `${modalProps.height * 0.75}px`,
+              overflow: "auto",
+              px: 1,
+              py: 1,
+            }}
+          >
+            {listContent}
+          </Box>
           <Box sx={{ height: "100%", px: 1 }}>{buttonContent}</Box>
         </Stack>
       </form>

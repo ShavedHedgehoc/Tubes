@@ -8,7 +8,9 @@ import KeyboardDoubleArrowLeftOutlinedIcon from "@mui/icons-material/KeyboardDou
 import KeyboardDoubleArrowRightOutlinedIcon from "@mui/icons-material/KeyboardDoubleArrowRightOutlined";
 
 export const perPageValues = [10, 15, 20, 50, 90];
-export const extPerPageValues = [10, 15, 20, 50, 90, 200, 1000, 2000, 10000, 50000];
+export const extPerPageValues = [
+  10, 15, 20, 50, 90, 200, 1000, 2000, 10000, 50000,
+];
 export interface PaginationProps {
   page: number;
   total: number;
@@ -44,15 +46,32 @@ export function Pagination(props: PaginationProps) {
           }),
         ]}
       >
-        <Box sx={{ display: "flex", alignItems: "center", flexDirection: "row", gap: 1 }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "row",
+            gap: 1,
+          }}
+        >
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Typography level="body-xs">
               Записи: {pages === 0 ? 0 : 1 + (props.page - 1) * props.limit} -{" "}
-              {props.page * props.limit > props.total ? props.total : props.page * props.limit} из {props.total}
+              {props.page * props.limit > props.total
+                ? props.total
+                : props.page * props.limit}{" "}
+              из {props.total}
             </Typography>
           </Box>
         </Box>
-        <Box sx={{ display: "flex", alignItems: "center", flexDirection: "row", gap: 1 }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "row",
+            gap: 1,
+          }}
+        >
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Typography level="body-xs">Записей на странице:</Typography>
           </Box>
@@ -63,7 +82,10 @@ export function Pagination(props: PaginationProps) {
               defaultValue={props.limit}
               slotProps={{ button: { sx: { whiteSpace: "nowrap" } } }}
               disabled={pages === 0}
-              onChange={(event: React.SyntheticEvent | null, newValue: number | null) => {
+              onChange={(
+                event: React.SyntheticEvent | null,
+                newValue: number | null,
+              ) => {
                 event && newValue && props.setLimit(newValue);
               }}
             >

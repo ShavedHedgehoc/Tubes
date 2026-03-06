@@ -8,21 +8,43 @@ import { useExtrusionEmployeeStore } from "../../store/use-extrusion-employee-st
 import { useCreateExtrusionStatus } from "../../use-create-extrusion-status";
 import { useExtrusionOperationStore } from "../../store/use-extrusion-operation-store";
 
-export default function useExtrusionOperationsMenu(summaryData: ISummary | null) {
-  const extrusionConveyor = useExtrusionConveyorStore(useShallow((state) => state.extrusionConveyor));
-  const employee = useExtrusionEmployeeStore(useShallow((state) => state.extrusionEmployee));
-  const selectedOperation = useExtrusionOperationStore(useShallow((state) => state.selectedOperation));
-  const setSelectedOperation = useExtrusionOperationStore(useShallow((state) => state.setSelectedOperation));
+export default function useExtrusionOperationsMenu(
+  summaryData: ISummary | null,
+) {
+  const extrusionConveyor = useExtrusionConveyorStore(
+    useShallow((state) => state.extrusionConveyor),
+  );
+  const employee = useExtrusionEmployeeStore(
+    useShallow((state) => state.extrusionEmployee),
+  );
+  const selectedOperation = useExtrusionOperationStore(
+    useShallow((state) => state.selectedOperation),
+  );
+  const setSelectedOperation = useExtrusionOperationStore(
+    useShallow((state) => state.setSelectedOperation),
+  );
   const { createExtrusionStatus } = useCreateExtrusionStatus();
   const navigate = useNavigate();
 
   const setIdleButtonVisibleCondition =
-    summaryData && summaryData.extrusionStatus ? (summaryData.extrusionStatus.idle === false ? true : false) : false;
+    summaryData && summaryData.extrusionStatus
+      ? summaryData.extrusionStatus.idle === false
+        ? true
+        : false
+      : false;
 
   const setWorkingButtonVisibleCondition =
-    summaryData && summaryData.extrusionStatus ? (summaryData.extrusionStatus.idle === true ? true : false) : false;
+    summaryData && summaryData.extrusionStatus
+      ? summaryData.extrusionStatus.idle === true
+        ? true
+        : false
+      : false;
 
-  const setIdleButtonDisableCondition = !(summaryData && employee && selectedOperation);
+  const setIdleButtonDisableCondition = !(
+    summaryData &&
+    employee &&
+    selectedOperation
+  );
 
   const setWorkingButtonDisableCondition = !(summaryData && employee);
 

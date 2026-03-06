@@ -28,16 +28,30 @@ import ExtrusionIntegerEntryModal from "./entry/modals/extrusion-integer-entry-m
 export default function ExtrusionAddEntry() {
   const params = useParams<Params.CONVEYOR_NAME>();
   const { isPending } = useConveyor(params.conveyor_name ?? null);
-  const extrusionConveyor = useExtrusionConveyorStore(useShallow((state) => state.extrusionConveyor));
-  const employee = useExtrusionEmployeeStore(useShallow((state) => state.extrusionEmployee));
-  const { data: summaryData, isPending: isPendingSummary, isError } = useActiveSummary(extrusionConveyor?.id ?? null);
+  const extrusionConveyor = useExtrusionConveyorStore(
+    useShallow((state) => state.extrusionConveyor),
+  );
+  const employee = useExtrusionEmployeeStore(
+    useShallow((state) => state.extrusionEmployee),
+  );
+  const {
+    data: summaryData,
+    isPending: isPendingSummary,
+    isError,
+  } = useActiveSummary(extrusionConveyor?.id ?? null);
 
   if (isPending) return <Loader />;
-  if (!extrusionConveyor) return <NotFound message={AppMessages.CONVEYOR_NOT_EXISTS} />;
+  if (!extrusionConveyor)
+    return <NotFound message={AppMessages.CONVEYOR_NOT_EXISTS} />;
 
   const addEntryPageLayoutProps: AddEntryPageLayoutProps = {
     timeComponent: <TimeComponent />,
-    headerComponent: <HeaderComponent conveyorName={extrusionConveyor.name} postName={PostNames.EXTRUSION} />,
+    headerComponent: (
+      <HeaderComponent
+        conveyorName={extrusionConveyor.name}
+        postName={PostNames.EXTRUSION}
+      />
+    ),
     entriesComponent: <ExtrusionEntries summaryData={summaryData ?? null} />,
     menuComponent: <ExtrusionAddEntryMenu summaryData={summaryData ?? null} />,
     userComponent: <UserComponent employee={employee} />,

@@ -4,7 +4,9 @@ import { useTubeEmployeesAddModalStore } from "../store/use-tube-employees-add-m
 
 export default function TubeEmployeesAddModalNameInput() {
   const name = useTubeEmployeesAddModalStore(useShallow((state) => state.name));
-  const setName = useTubeEmployeesAddModalStore(useShallow((state) => state.setName));
+  const setName = useTubeEmployeesAddModalStore(
+    useShallow((state) => state.setName),
+  );
   return (
     <Input
       sx={{

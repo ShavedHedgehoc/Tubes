@@ -8,11 +8,23 @@ import { useSealantBoxConfirmModalStore } from "../../store/use-sealant-modal-st
 import { usePrinter } from "../../use-printer";
 import { useQuantityIntegerModalStore } from "../../store/use-quantity-integer-modal-store";
 
-export default function useSealantPrintMenu({ summaryData }: { summaryData: ISummary | null }) {
-  const employee = useSealantEmployeeStore(useShallow((state) => state.sealantEmployee));
-  const sealantConveyor = useSealantConveyorStore(useShallow((state) => state.sealantConveyor));
-  const setOpenConfirm = useSealantBoxConfirmModalStore(useShallow((state) => state.setOpen));
-  const setOpenPrint = useQuantityIntegerModalStore(useShallow((state) => state.setOpen));
+export default function useSealantPrintMenu({
+  summaryData,
+}: {
+  summaryData: ISummary | null;
+}) {
+  const employee = useSealantEmployeeStore(
+    useShallow((state) => state.sealantEmployee),
+  );
+  const sealantConveyor = useSealantConveyorStore(
+    useShallow((state) => state.sealantConveyor),
+  );
+  const setOpenConfirm = useSealantBoxConfirmModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const setOpenPrint = useQuantityIntegerModalStore(
+    useShallow((state) => state.setOpen),
+  );
 
   const { data: printerData } = usePrinter(sealantConveyor?.id ?? null);
 
@@ -22,7 +34,8 @@ export default function useSealantPrintMenu({ summaryData }: { summaryData: ISum
     setOpenPrint(true);
   };
 
-  const printButtonDisabledCondition = !employee || !summaryData || !printerData;
+  const printButtonDisabledCondition =
+    !employee || !summaryData || !printerData;
   const confirmButtonDisabledCondition = !employee || !summaryData;
 
   const handleExitClick = () => {

@@ -6,7 +6,6 @@ interface SimplyModalStore {
   setOpen: (val: boolean) => void;
 }
 
-
 const createModalStore = (name: string) =>
   create<SimplyModalStore>()(
     devtools(
@@ -14,13 +13,17 @@ const createModalStore = (name: string) =>
         open: false,
         setOpen: (value) => set({ open: value }),
       }),
-      { name: `ModalStore/${name}` }
-    )
+      { name: `ModalStore/${name}` },
+    ),
   );
 
 export const useExtrusionAuthModalStore = createModalStore("Auth");
 export const useExtrusionLogoutModalStore = createModalStore("Logout");
-export const useExtrusionCloseConfirmModalStore = createModalStore("CloseConfirm");
-export const useExtrusionMaterialScanModalStore = createModalStore("MaterialScan");
-export const useExtrusionCloseSummaryModalStore = createModalStore("CloseSummary");
-export const useExtrusionDefectInputModalStore = createModalStore("DefectInput");
+export const useExtrusionCloseConfirmModalStore =
+  createModalStore("CloseConfirm");
+export const useExtrusionMaterialScanModalStore =
+  createModalStore("MaterialScan");
+export const useExtrusionCloseSummaryModalStore =
+  createModalStore("CloseSummary");
+export const useExtrusionDefectInputModalStore =
+  createModalStore("DefectInput");

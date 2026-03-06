@@ -41,54 +41,58 @@ const initFilterValue: TubeRecordsUploadFormData = {
   update: false,
 };
 
-export const useTubeRecordsUploadFormStore = create<TubeRecordsUploadFormStore>()(
-  devtools((set) => ({
-    formData: initFilterValue,
-    update: false,
-    dataForUpload: [],
-    errsModalShow: false,
-    isValid: false,
-    file: undefined,
-    fileName: "",
-    errs: [],
+export const useTubeRecordsUploadFormStore =
+  create<TubeRecordsUploadFormStore>()(
+    devtools((set) => ({
+      formData: initFilterValue,
+      update: false,
+      dataForUpload: [],
+      errsModalShow: false,
+      isValid: false,
+      file: undefined,
+      fileName: "",
+      errs: [],
 
-    setUpdate: (value) => set(() => ({ update: value })),
-    setErrsModalShow: (value) => set(() => ({ errsModalShow: value })),
-    changeFilter: ({ key, value }) => {
-      switch (key) {
-        case TubeRecordsUploadFormParams.DATE:
-          set((state) => ({
-            formData: { ...state.formData, dateForUpload: value },
-          }));
-          break;
-        case TubeRecordsUploadFormParams.UPDATE:
-          set((state) => ({
-            formData: { ...state.formData, update: value === "true" ? true : false },
-          }));
-          break;
-        default:
-          break;
-      }
-    },
+      setUpdate: (value) => set(() => ({ update: value })),
+      setErrsModalShow: (value) => set(() => ({ errsModalShow: value })),
+      changeFilter: ({ key, value }) => {
+        switch (key) {
+          case TubeRecordsUploadFormParams.DATE:
+            set((state) => ({
+              formData: { ...state.formData, dateForUpload: value },
+            }));
+            break;
+          case TubeRecordsUploadFormParams.UPDATE:
+            set((state) => ({
+              formData: {
+                ...state.formData,
+                update: value === "true" ? true : false,
+              },
+            }));
+            break;
+          default:
+            break;
+        }
+      },
 
-    setIsValid: (value) => set(() => ({ isValid: value })),
-    setFile: (value) => set(() => ({ file: value })),
-    setFileName: (value) => set(() => ({ fileName: value })),
-    clearData: () =>
-      set(() => ({
-        isValid: false,
-        file: undefined,
-        fileName: "",
-        errs: [],
-        dataForUpload: [],
-        errsModalShow: false,
-      })),
-    // setErrs: (values) => set(() => ({ errs: values })),
-    addErrs: (value) => {
-      set((state) => ({
-        errs: [...state.errs, value],
-      }));
-    },
-    setDataForUpload: (arr) => set(() => ({ dataForUpload: [...arr] })),
-  }))
-);
+      setIsValid: (value) => set(() => ({ isValid: value })),
+      setFile: (value) => set(() => ({ file: value })),
+      setFileName: (value) => set(() => ({ fileName: value })),
+      clearData: () =>
+        set(() => ({
+          isValid: false,
+          file: undefined,
+          fileName: "",
+          errs: [],
+          dataForUpload: [],
+          errsModalShow: false,
+        })),
+      // setErrs: (values) => set(() => ({ errs: values })),
+      addErrs: (value) => {
+        set((state) => ({
+          errs: [...state.errs, value],
+        }));
+      },
+      setDataForUpload: (arr) => set(() => ({ dataForUpload: [...arr] })),
+    })),
+  );

@@ -1,5 +1,12 @@
 import * as React from "react";
-import { Box, FormControl, FormHelperText, IconButton, Input, useColorScheme } from "@mui/joy";
+import {
+  Box,
+  FormControl,
+  FormHelperText,
+  IconButton,
+  Input,
+  useColorScheme,
+} from "@mui/joy";
 import ClearOutlinedIcon from "@mui/icons-material/ClearOutlined";
 import FilterListOutlinedIcon from "@mui/icons-material/FilterListOutlined";
 
@@ -24,7 +31,9 @@ export default function FilterInputWithSort(props: FilterInputWithSortProps) {
           sx={{
             "&:focus-within": {
               "--Input-focusedHighlight":
-                mode === "light" ? "var(--joy-palette-neutral-400)" : "var(--joy-palette-neutral-400)",
+                mode === "light"
+                  ? "var(--joy-palette-neutral-400)"
+                  : "var(--joy-palette-neutral-400)",
             },
             minWidth: "150px",
             maxWidth: "150px",
@@ -33,7 +42,9 @@ export default function FilterInputWithSort(props: FilterInputWithSortProps) {
           }}
           autoComplete="false"
           value={props.value}
-          onChange={(e) => props.changeFilter({ key: e.target.id, value: e.target.value })}
+          onChange={(e) =>
+            props.changeFilter({ key: e.target.id, value: e.target.value })
+          }
           placeholder={props.placeholder}
           startDecorator={
             <IconButton

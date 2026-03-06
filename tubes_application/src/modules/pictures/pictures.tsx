@@ -19,7 +19,9 @@ export default function Pictures() {
   const params = useParams<Params.PRODUCT_ID>();
 
   const { isPending } = useProduct(params.product_id ?? null);
-  const product = usePictureProductStore(useShallow((state) => state.pictureProduct));
+  const product = usePictureProductStore(
+    useShallow((state) => state.pictureProduct),
+  );
 
   if (isPending) return <Loader />;
   if (!product) return <NotFound message={AppMessages.PRODUCT_NOT_EXISTS} />;

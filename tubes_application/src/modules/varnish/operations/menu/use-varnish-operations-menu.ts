@@ -10,20 +10,40 @@ import { useVarnishOperationStore } from "../../store/use-varnish-operation-stor
 import { useCreateVarnishStatus } from "../../use-create-varnish-status";
 
 export default function useVarnishOperationsMenu(summaryData: ISummary | null) {
-  const varnishConveyor = useVarnishConveyorStore(useShallow((state) => state.varnishConveyor));
-  const employee = useVarnishEmployeeStore(useShallow((state) => state.varnishEmployee));
-  const selectedOperation = useVarnishOperationStore(useShallow((state) => state.selectedOperation));
-  const setSelectedOperation = useVarnishOperationStore(useShallow((state) => state.setSelectedOperation));
+  const varnishConveyor = useVarnishConveyorStore(
+    useShallow((state) => state.varnishConveyor),
+  );
+  const employee = useVarnishEmployeeStore(
+    useShallow((state) => state.varnishEmployee),
+  );
+  const selectedOperation = useVarnishOperationStore(
+    useShallow((state) => state.selectedOperation),
+  );
+  const setSelectedOperation = useVarnishOperationStore(
+    useShallow((state) => state.setSelectedOperation),
+  );
   const { createVarnishStatus } = useCreateVarnishStatus();
   const navigate = useNavigate();
 
   const setIdleButtonVisibleCondition =
-    summaryData && summaryData.varnishStatus ? (summaryData.varnishStatus.idle === false ? true : false) : false;
+    summaryData && summaryData.varnishStatus
+      ? summaryData.varnishStatus.idle === false
+        ? true
+        : false
+      : false;
 
   const setWorkingButtonVisibleCondition =
-    summaryData && summaryData.varnishStatus ? (summaryData.varnishStatus.idle === true ? true : false) : false;
+    summaryData && summaryData.varnishStatus
+      ? summaryData.varnishStatus.idle === true
+        ? true
+        : false
+      : false;
 
-  const setIdleButtonDisableCondition = !(summaryData && employee && selectedOperation);
+  const setIdleButtonDisableCondition = !(
+    summaryData &&
+    employee &&
+    selectedOperation
+  );
 
   const setWorkingButtonDisableCondition = !(summaryData && employee);
 

@@ -351,34 +351,46 @@ export interface CreateSealantTresholdDto {
 }
 
 export default class TubeTresholdsService {
-  static async getExtrusionTresholds(dto: FetchTubeTresholdsDto): Promise<TubeExtrusionTresholdResponse> {
+  static async getExtrusionTresholds(
+    dto: FetchTubeTresholdsDto,
+  ): Promise<TubeExtrusionTresholdResponse> {
     const res = await $apiTubes.get(
-      `/tresholds/extrusion?page=${dto.page}&limit=${dto.limit}&code=${dto.filter.code}&marking=${dto.filter.marking
-      }${dto.filter.empty.map((item) => `&empty=${item}`)}${dto.filter.conveyors.map((item) => `&conveyors=${item}`)}`
+      `/tresholds/extrusion?page=${dto.page}&limit=${dto.limit}&code=${dto.filter.code}&marking=${
+        dto.filter.marking
+      }${dto.filter.empty.map((item) => `&empty=${item}`)}${dto.filter.conveyors.map((item) => `&conveyors=${item}`)}`,
     );
     return res.data;
   }
 
-  static async getVarnishTresholds(dto: FetchTubeTresholdsDto): Promise<TubeVarnishTresholdResponse> {
+  static async getVarnishTresholds(
+    dto: FetchTubeTresholdsDto,
+  ): Promise<TubeVarnishTresholdResponse> {
     const res = await $apiTubes.get(
-      `/tresholds/varnish?page=${dto.page}&limit=${dto.limit}&code=${dto.filter.code}&marking=${dto.filter.marking
-      }${dto.filter.empty.map((item) => `&empty=${item}`)}${dto.filter.conveyors.map((item) => `&conveyors=${item}`)}`
+      `/tresholds/varnish?page=${dto.page}&limit=${dto.limit}&code=${dto.filter.code}&marking=${
+        dto.filter.marking
+      }${dto.filter.empty.map((item) => `&empty=${item}`)}${dto.filter.conveyors.map((item) => `&conveyors=${item}`)}`,
     );
     return res.data;
   }
 
-  static async getOffsetTresholds(dto: FetchTubeTresholdsDto): Promise<TubeOffsetTresholdResponse> {
+  static async getOffsetTresholds(
+    dto: FetchTubeTresholdsDto,
+  ): Promise<TubeOffsetTresholdResponse> {
     const res = await $apiTubes.get(
-      `/tresholds/offset?page=${dto.page}&limit=${dto.limit}&code=${dto.filter.code}&marking=${dto.filter.marking
-      }${dto.filter.empty.map((item) => `&empty=${item}`)}${dto.filter.conveyors.map((item) => `&conveyors=${item}`)}`
+      `/tresholds/offset?page=${dto.page}&limit=${dto.limit}&code=${dto.filter.code}&marking=${
+        dto.filter.marking
+      }${dto.filter.empty.map((item) => `&empty=${item}`)}${dto.filter.conveyors.map((item) => `&conveyors=${item}`)}`,
     );
     return res.data;
   }
 
-  static async getSealantTresholds(dto: FetchTubeTresholdsDto): Promise<TubeSealantTresholdResponse> {
+  static async getSealantTresholds(
+    dto: FetchTubeTresholdsDto,
+  ): Promise<TubeSealantTresholdResponse> {
     const res = await $apiTubes.get(
-      `/tresholds/sealant?page=${dto.page}&limit=${dto.limit}&code=${dto.filter.code}&marking=${dto.filter.marking
-      }${dto.filter.empty.map((item) => `&empty=${item}`)}${dto.filter.conveyors.map((item) => `&conveyors=${item}`)}`
+      `/tresholds/sealant?page=${dto.page}&limit=${dto.limit}&code=${dto.filter.code}&marking=${
+        dto.filter.marking
+      }${dto.filter.empty.map((item) => `&empty=${item}`)}${dto.filter.conveyors.map((item) => `&conveyors=${item}`)}`,
     );
     return res.data;
   }

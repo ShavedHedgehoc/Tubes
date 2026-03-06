@@ -9,14 +9,26 @@ import { useCreateProductionBox } from "../../use-create-production-box";
 import type { CreateProductionBoxDto } from "@/shared/api/services/production-box-service";
 
 export default function SealantBoxConfirmModal() {
-  const open = useSealantBoxConfirmModalStore(useShallow((state) => state.open));
-  const setOpen = useSealantBoxConfirmModalStore(useShallow((state) => state.setOpen));
+  const open = useSealantBoxConfirmModalStore(
+    useShallow((state) => state.open),
+  );
+  const setOpen = useSealantBoxConfirmModalStore(
+    useShallow((state) => state.setOpen),
+  );
   const { createProductionBox } = useCreateProductionBox();
 
   const processBarcode = (val: string) => {
     setOpen(false);
 
-    const { uuid, box_number, batch_id, summary_id, employee_id, quantity, createdAt } = parseBoxBarcode(val);
+    const {
+      uuid,
+      box_number,
+      batch_id,
+      summary_id,
+      employee_id,
+      quantity,
+      createdAt,
+    } = parseBoxBarcode(val);
     if (uuid && summary_id && employee_id && quantity && createdAt) {
       const dto: CreateProductionBoxDto = {
         uuid: uuid,

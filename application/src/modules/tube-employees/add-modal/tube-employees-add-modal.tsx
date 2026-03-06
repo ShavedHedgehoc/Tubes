@@ -4,7 +4,9 @@ import FormHelperText from "@mui/joy/FormHelperText";
 import Typography from "@mui/joy/Typography";
 import { useShallow } from "zustand/react/shallow";
 import { useTubeEmployeesAddModalStore } from "../store/use-tube-employees-add-modal-store";
-import ModalLayout, { ModalLayoutProps } from "../../../shared/layouts/modal-layout";
+import ModalLayout, {
+  ModalLayoutProps,
+} from "../../../shared/layouts/modal-layout";
 import BarcodeInput from "./tube-employees-add-modal-barcode-input";
 
 import TubeEmployeesAddModalButtons from "./tube-employees-add-modal-buttons";
@@ -13,9 +15,15 @@ import TubeEmployeesAddModalRankSelector from "./tube-employees-add-modal-rank-s
 
 export default function TubeEmployeesAddModal() {
   const open = useTubeEmployeesAddModalStore(useShallow((state) => state.open));
-  const setOpen = useTubeEmployeesAddModalStore(useShallow((state) => state.setOpen));
-  const rankOptions = useTubeEmployeesAddModalStore(useShallow((state) => state.rankOptions));
-  const setRank = useTubeEmployeesAddModalStore(useShallow((state) => state.setRank));
+  const setOpen = useTubeEmployeesAddModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const rankOptions = useTubeEmployeesAddModalStore(
+    useShallow((state) => state.rankOptions),
+  );
+  const setRank = useTubeEmployeesAddModalStore(
+    useShallow((state) => state.setRank),
+  );
 
   const handleClose = () => {
     setOpen(false);

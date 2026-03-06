@@ -5,8 +5,12 @@ import FormSwitcher, { FormSwitcherProps } from "../../shared/ui/form-switcher";
 import { useTubeRecordsUploadFormStore } from "./store/use-records-upload-form-store";
 
 export default function TubeRecordsUploadFormUpdateSwitch() {
-  const update = useTubeRecordsUploadFormStore(useShallow((state) => state.update));
-  const setUpdate = useTubeRecordsUploadFormStore(useShallow((state) => state.setUpdate));
+  const update = useTubeRecordsUploadFormStore(
+    useShallow((state) => state.update),
+  );
+  const setUpdate = useTubeRecordsUploadFormStore(
+    useShallow((state) => state.setUpdate),
+  );
 
   const formSwitcherProps: FormSwitcherProps = {
     condition: update,
@@ -25,7 +29,9 @@ export default function TubeRecordsUploadFormUpdateSwitch() {
       <FormSwitcher {...formSwitcherProps} />
       <Typography>{update ? "Добавление" : "Загрузка"}</Typography>
       <Typography level="body-xs">
-        {update ? "Добавление строк в существующий документ" : "Создание нового документа"}
+        {update
+          ? "Добавление строк в существующий документ"
+          : "Создание нового документа"}
       </Typography>
     </Box>
   );

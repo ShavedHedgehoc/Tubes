@@ -5,7 +5,9 @@ import { useUsersFilterStore } from "../store/use-users-filter-store";
 
 export default function UsersFilterEmailInput() {
   const filter = useUsersFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useUsersFilterStore(useShallow((state) => state.changeFilter));
+  const changeFilter = useUsersFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
 
   const emailInputProps: FilterInputProps = {
     id: UsersFilterParams.EMAIL,
@@ -13,7 +15,8 @@ export default function UsersFilterEmailInput() {
     disabled: filter.email === "",
     label: "Поиск по email",
     placeholder: "Email",
-    changeFilter: ({ key, value }: { key: string; value: string }) => changeFilter({ key, value }),
+    changeFilter: ({ key, value }: { key: string; value: string }) =>
+      changeFilter({ key, value }),
   };
 
   return <FilterInput {...emailInputProps} />;

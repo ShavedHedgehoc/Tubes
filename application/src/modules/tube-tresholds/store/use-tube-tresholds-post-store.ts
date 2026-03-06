@@ -6,7 +6,9 @@ interface TubeTresholdsPostStore {
   setPostName: (val: TubePostName) => void;
 }
 
-export const useTubeTresholdsPostStore = create<TubeTresholdsPostStore>()((set) => ({
-  post: "extrusion",
-  setPostName: (val) => set(() => ({ post: val })),
-}));
+export const useTubeTresholdsPostStore = create<TubeTresholdsPostStore>()(
+  (set) => ({
+    post: "extrusion",
+    setPostName: (val) => set(() => ({ post: val })),
+  }),
+);

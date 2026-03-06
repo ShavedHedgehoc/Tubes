@@ -1,5 +1,8 @@
 import { Box, Button, Typography } from "@mui/joy";
-import { ValError, useDocsUploadFormStore } from "./store/use-docs-upload-form-store";
+import {
+  ValError,
+  useDocsUploadFormStore,
+} from "./store/use-docs-upload-form-store";
 import { useShallow } from "zustand/react/shallow";
 // import Ajv, { SchemaObject } from "ajv/dist/jtd";
 import Ajv from "ajv";
@@ -9,13 +12,21 @@ import ajvErrors from "ajv-errors";
 
 export default function DocsUploadFormValidator() {
   const isValid = useDocsUploadFormStore(useShallow((state) => state.isValid));
-  const setIsValid = useDocsUploadFormStore(useShallow((state) => state.setIsValid));
+  const setIsValid = useDocsUploadFormStore(
+    useShallow((state) => state.setIsValid),
+  );
   const errs = useDocsUploadFormStore(useShallow((state) => state.errs));
   const addErrs = useDocsUploadFormStore(useShallow((state) => state.addErrs));
   const file = useDocsUploadFormStore(useShallow((state) => state.file));
-  const formData = useDocsUploadFormStore(useShallow((state) => state.formData));
-  const setErrsModalShow = useDocsUploadFormStore(useShallow((state) => state.setErrsModalShow));
-  const setDataForUpload = useDocsUploadFormStore(useShallow((state) => state.setDataForUpload));
+  const formData = useDocsUploadFormStore(
+    useShallow((state) => state.formData),
+  );
+  const setErrsModalShow = useDocsUploadFormStore(
+    useShallow((state) => state.setErrsModalShow),
+  );
+  const setDataForUpload = useDocsUploadFormStore(
+    useShallow((state) => state.setDataForUpload),
+  );
 
   const handleValidationComplete = (json: IXLSDocsRowData[]) => {
     if (formData.plant && formData.dateForUpload) {
@@ -45,7 +56,9 @@ export default function DocsUploadFormValidator() {
       plan: {
         type: "string",
         pattern: "^(?:[1-9]\\d{0,5})$",
-        errorMessage: { pattern: "План должен быть целым числом от 1 до 999 999" },
+        errorMessage: {
+          pattern: "План должен быть целым числом от 1 до 999 999",
+        },
       },
       apparatus: { type: "string", minLength: 1 },
       can: { type: "string", minLength: 1 },

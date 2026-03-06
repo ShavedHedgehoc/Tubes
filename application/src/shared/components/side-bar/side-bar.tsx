@@ -1,5 +1,15 @@
 import * as React from "react";
-import { Box, Divider, GlobalStyles, Link, List, ListItem, ListItemContent, Sheet, Typography } from "@mui/joy";
+import {
+  Box,
+  Divider,
+  GlobalStyles,
+  Link,
+  List,
+  ListItem,
+  ListItemContent,
+  Sheet,
+  Typography,
+} from "@mui/joy";
 
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
@@ -28,7 +38,10 @@ function Toggler({
 }: {
   defaultExpanded?: boolean;
   children: React.ReactNode;
-  renderToggle: (params: { open: boolean; setOpen: React.Dispatch<React.SetStateAction<boolean>> }) => React.ReactNode;
+  renderToggle: (params: {
+    open: boolean;
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  }) => React.ReactNode;
 }) {
   const [open, setOpen] = React.useState(defaultExpanded);
 
@@ -157,7 +170,9 @@ export default function SideBar() {
                   <ListItemContent>
                     <Typography level="title-sm">Планировщик</Typography>
                   </ListItemContent>
-                  <KeyboardArrowDownIcon sx={{ transform: open ? "rotate(180deg)" : "none" }} />
+                  <KeyboardArrowDownIcon
+                    sx={{ transform: open ? "rotate(180deg)" : "none" }}
+                  />
                 </ListItemButton>
               )}
             >
@@ -248,7 +263,9 @@ export default function SideBar() {
                   <ListItemContent>
                     <Typography level="title-sm">Лаборатория</Typography>
                   </ListItemContent>
-                  <KeyboardArrowDownIcon sx={{ transform: open ? "rotate(180deg)" : "none" }} />
+                  <KeyboardArrowDownIcon
+                    sx={{ transform: open ? "rotate(180deg)" : "none" }}
+                  />
                 </ListItemButton>
               )}
             >
@@ -296,7 +313,9 @@ export default function SideBar() {
                   <ListItemContent>
                     <Typography level="title-sm">Технолог</Typography>
                   </ListItemContent>
-                  <KeyboardArrowDownIcon sx={{ transform: open ? "rotate(180deg)" : "none" }} />
+                  <KeyboardArrowDownIcon
+                    sx={{ transform: open ? "rotate(180deg)" : "none" }}
+                  />
                 </ListItemButton>
               )}
             >
@@ -328,7 +347,9 @@ export default function SideBar() {
                         sx={{ display: "flex", gap: 1 }}
                         onClick={() => closeSidebar()}
                       >
-                        <Typography level="title-sm">Список ёмкостей</Typography>
+                        <Typography level="title-sm">
+                          Список ёмкостей
+                        </Typography>
                       </Link>
                     </ListItemContent>
                   </ListItemButton>
@@ -361,7 +382,9 @@ export default function SideBar() {
                   <ListItemContent>
                     <Typography level="title-sm">Весовой участок</Typography>
                   </ListItemContent>
-                  <KeyboardArrowDownIcon sx={{ transform: open ? "rotate(180deg)" : "none" }} />
+                  <KeyboardArrowDownIcon
+                    sx={{ transform: open ? "rotate(180deg)" : "none" }}
+                  />
                 </ListItemButton>
               )}
             >
@@ -393,7 +416,9 @@ export default function SideBar() {
                         sx={{ display: "flex", gap: 1 }}
                         onClick={() => closeSidebar()}
                       >
-                        <Typography level="title-sm">Отчет по взвешиваниям</Typography>
+                        <Typography level="title-sm">
+                          Отчет по взвешиваниям
+                        </Typography>
                       </Link>
                     </ListItemContent>
                   </ListItemButton>
@@ -427,7 +452,9 @@ export default function SideBar() {
                   <ListItemContent>
                     <Typography level="title-sm">Прослеживаемость</Typography>
                   </ListItemContent>
-                  <KeyboardArrowDownIcon sx={{ transform: open ? "rotate(180deg)" : "none" }} />
+                  <KeyboardArrowDownIcon
+                    sx={{ transform: open ? "rotate(180deg)" : "none" }}
+                  />
                 </ListItemButton>
               )}
             >
@@ -460,7 +487,9 @@ export default function SideBar() {
                         onClick={() => closeSidebar()}
                       >
                         {/* <ScienceRoundedIcon /> */}
-                        <Typography level="title-sm">Торговые названия</Typography>
+                        <Typography level="title-sm">
+                          Торговые названия
+                        </Typography>
                       </Link>
                     </ListItemContent>
                   </ListItemButton>
@@ -513,7 +542,9 @@ export default function SideBar() {
                   <ListItemContent>
                     <Typography level="title-sm">Тубы</Typography>
                   </ListItemContent>
-                  <KeyboardArrowDownIcon sx={{ transform: open ? "rotate(180deg)" : "none" }} />
+                  <KeyboardArrowDownIcon
+                    sx={{ transform: open ? "rotate(180deg)" : "none" }}
+                  />
                 </ListItemButton>
               )}
             >
@@ -562,7 +593,9 @@ export default function SideBar() {
                   <ListItemContent>
                     <Typography level="title-sm">Отчеты</Typography>
                   </ListItemContent>
-                  <KeyboardArrowDownIcon sx={{ transform: open ? "rotate(180deg)" : "none" }} />
+                  <KeyboardArrowDownIcon
+                    sx={{ transform: open ? "rotate(180deg)" : "none" }}
+                  />
                 </ListItemButton>
               )}
             >
@@ -610,7 +643,9 @@ export default function SideBar() {
                   onClick={() => closeSidebar()}
                 >
                   <PersonRoundedIcon />
-                  <Typography level="title-sm">Пользователи рабочей станции</Typography>
+                  <Typography level="title-sm">
+                    Пользователи рабочей станции
+                  </Typography>
                 </Link>
               </ListItemContent>
             </ListItemButton>
@@ -623,7 +658,9 @@ export default function SideBar() {
                   <ListItemContent>
                     <Typography level="title-sm">Администратор</Typography>
                   </ListItemContent>
-                  <KeyboardArrowDownIcon sx={{ transform: open ? "rotate(180deg)" : "none" }} />
+                  <KeyboardArrowDownIcon
+                    sx={{ transform: open ? "rotate(180deg)" : "none" }}
+                  />
                 </ListItemButton>
               )}
             >
@@ -652,7 +689,9 @@ export default function SideBar() {
                       sx={{ display: "flex", gap: 1 }}
                       onClick={() => closeSidebar()}
                     >
-                      <Typography level="title-sm">Загрузка картинок</Typography>
+                      <Typography level="title-sm">
+                        Загрузка картинок
+                      </Typography>
                     </Link>
                   </ListItemContent>
                 </ListItem>

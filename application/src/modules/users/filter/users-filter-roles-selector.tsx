@@ -8,8 +8,12 @@ import { UsersFilterParams } from "./users-filter-params";
 
 export default function UsersFilterRolesSelector() {
   const filter = useUsersFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useUsersFilterStore(useShallow((state) => state.changeFilter));
-  const roleSelectorOptions = useUsersFilterStore(useShallow((state) => state.roleSelectorOptions));
+  const changeFilter = useUsersFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
+  const roleSelectorOptions = useUsersFilterStore(
+    useShallow((state) => state.roleSelectorOptions),
+  );
 
   const roleOptions = roleSelectorOptions.map((role) => (
     <FilterMultiSelectorOption
@@ -26,8 +30,15 @@ export default function UsersFilterRolesSelector() {
     placeholder: "Выберите роли",
     label: "Поиск по роли",
     options: roleOptions,
-    changeFilter: ({ key, value, values }: { key: string; value: string; values: number[] | [] }) =>
-      changeFilter({ key, value, values }),
+    changeFilter: ({
+      key,
+      value,
+      values,
+    }: {
+      key: string;
+      value: string;
+      values: number[] | [];
+    }) => changeFilter({ key, value, values }),
   };
 
   return <FilterMultiSelector {...stateSelectorProps} />;

@@ -3,8 +3,6 @@ import { formatKeyboardInput } from "@/shared/helpers/format-keyboard-input";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-
-
 interface IVarnishParameterData {
   counter_value: string;
   varnish_machine_speed: string;
@@ -33,9 +31,15 @@ interface VarnishInputStore {
   data: IVarnishParameterData;
   initData: () => void;
   changeData: (value: DataFormField<keyof IVarnishParameterData>) => void;
-  clearData: (value: Pick<DataFormField<keyof IVarnishParameterData>, 'key'>) => void;
-  sliceData: (value: Pick<DataFormField<keyof IVarnishParameterData>, 'key'>) => void;
-  roundData: (value: Pick<DataFormField<keyof IVarnishParameterData>, 'key'>) => void;
+  clearData: (
+    value: Pick<DataFormField<keyof IVarnishParameterData>, "key">,
+  ) => void;
+  sliceData: (
+    value: Pick<DataFormField<keyof IVarnishParameterData>, "key">,
+  ) => void;
+  roundData: (
+    value: Pick<DataFormField<keyof IVarnishParameterData>, "key">,
+  ) => void;
   setData: (value: DataFormField<keyof IVarnishParameterData>) => void;
 }
 
@@ -97,7 +101,8 @@ export const useVarnishInputStore = create<VarnishInputStore>()(
       set((state) => ({
         data: {
           ...state.data,
-          [fieldKey]: typeof initDataValue[fieldKey] === "boolean" ? false : "0",
+          [fieldKey]:
+            typeof initDataValue[fieldKey] === "boolean" ? false : "0",
         },
       }));
     },
@@ -171,8 +176,5 @@ export const useVarnishInputStore = create<VarnishInputStore>()(
         return state;
       });
     },
-  }))
+  })),
 );
-
-
-

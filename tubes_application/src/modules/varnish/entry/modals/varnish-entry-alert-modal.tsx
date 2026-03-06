@@ -10,12 +10,18 @@ import { useVarnishConveyorStore } from "../../store/use-varnish-conveyor-store"
 import { useCreateVarnishEntry } from "../../use-create-varnish-entry";
 
 export default function VarnishEntryAlertModal() {
-  const open = useVarnishEntryAlertModalStore(useShallow((state) => state.open));
-  const setOpen = useVarnishEntryAlertModalStore(useShallow((state) => state.setOpen));
+  const open = useVarnishEntryAlertModalStore(
+    useShallow((state) => state.open),
+  );
+  const setOpen = useVarnishEntryAlertModalStore(
+    useShallow((state) => state.setOpen),
+  );
   const dto = useVarnishEntryAlertModalStore((state) => state.dto);
   const clearDto = useVarnishEntryAlertModalStore((state) => state.clearDto);
   const initData = useVarnishInputStore(useShallow((state) => state.initData));
-  const varnishConveyor = useVarnishConveyorStore(useShallow((state) => state.varnishConveyor));
+  const varnishConveyor = useVarnishConveyorStore(
+    useShallow((state) => state.varnishConveyor),
+  );
   const { createVarnishEntry } = useCreateVarnishEntry();
   const navigate = useNavigate();
 

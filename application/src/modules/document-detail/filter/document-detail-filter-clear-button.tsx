@@ -1,11 +1,17 @@
 import { useShallow } from "zustand/react/shallow";
 import { useDocumentDetailFilterStore } from "../store/use-document-detail-filter-store";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import FilterButton, { FilterButtonProps } from "../../../shared/ui/filter-button";
+import FilterButton, {
+  FilterButtonProps,
+} from "../../../shared/ui/filter-button";
 
 export default function DocumentDetailFilterClearButton() {
-  const clearFilter = useDocumentDetailFilterStore(useShallow((state) => state.clearFilter));
-  const filter = useDocumentDetailFilterStore(useShallow((state) => state.filter));
+  const clearFilter = useDocumentDetailFilterStore(
+    useShallow((state) => state.clearFilter),
+  );
+  const filter = useDocumentDetailFilterStore(
+    useShallow((state) => state.filter),
+  );
 
   const disableClearButtonCondition =
     filter.boil === "" &&

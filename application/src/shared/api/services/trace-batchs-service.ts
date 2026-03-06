@@ -146,28 +146,36 @@ export interface ITraceWeightingsSummaryDetailData {
 }
 
 export default class TraceBatchService {
-  static async getTraceBatchsWithFilter(dto: FetchTraceBatchsDto): Promise<ITraceBatchsListData> {
+  static async getTraceBatchsWithFilter(
+    dto: FetchTraceBatchsDto,
+  ): Promise<ITraceBatchsListData> {
     const res = await $api.post(`/trace-batch`, dto);
     return res.data;
   }
 
-  static async getTraceBatchById(id: string | undefined): Promise<ITraceBatchRowData> {
+  static async getTraceBatchById(
+    id: string | undefined,
+  ): Promise<ITraceBatchRowData> {
     const res = await $api.get(`/trace-batch/by_id/${id}`);
     return res.data;
   }
 
-  static async getTraceBatchDetailById(id: string | undefined): Promise<ITraceBatchDetailData> {
+  static async getTraceBatchDetailById(
+    id: string | undefined,
+  ): Promise<ITraceBatchDetailData> {
     const res = await $api.get(`/trace-batch/detail/${id}`);
     return res.data;
   }
 
-  static async getTraceBatchsWghtReport(dto: FetchTraceBatchWghtReportDto): Promise<ITraceBatchWghtReportData> {
+  static async getTraceBatchsWghtReport(
+    dto: FetchTraceBatchWghtReportDto,
+  ): Promise<ITraceBatchWghtReportData> {
     const res = await $api.post(`/trace-batch/wght-report`, dto);
     return res.data;
   }
 
   static async getTraceBatchsWghtReportDetail(
-    dto: FetchTraceBatchWghtReportDetailDto
+    dto: FetchTraceBatchWghtReportDetailDto,
   ): Promise<ITraceBatchWghtReportDetailData[] | []> {
     const res = await $api.post(`/trace-batch/wght-report-detail`, dto);
     return res.data;
@@ -178,15 +186,23 @@ export default class TraceBatchService {
     return await $api.delete(`/trace-batch/delete_by_container/${id}`);
   }
 
-  static async getWeightingsSummary(dto: GetWeightingsSummaryDto): Promise<ITraceWeightingsSummaryData[] | []> {
-    const res = await $api.post(`/trace-batch/weightings_department_summary`, dto);
+  static async getWeightingsSummary(
+    dto: GetWeightingsSummaryDto,
+  ): Promise<ITraceWeightingsSummaryData[] | []> {
+    const res = await $api.post(
+      `/trace-batch/weightings_department_summary`,
+      dto,
+    );
     return res.data;
   }
 
   static async getWeightingsSummaryDetail(
-    dto: GetWeightingsSummaryDetailDto
+    dto: GetWeightingsSummaryDetailDto,
   ): Promise<ITraceWeightingsSummaryDetailData> {
-    const res = await $api.post(`/trace-batch/weightings_department_summary_detail`, dto);
+    const res = await $api.post(
+      `/trace-batch/weightings_department_summary_detail`,
+      dto,
+    );
     return res.data;
   }
 }

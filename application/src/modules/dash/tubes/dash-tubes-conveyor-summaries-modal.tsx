@@ -8,11 +8,20 @@ import TableNotFoundComponent from "../../../shared/components/table-not-found";
 import DashTubesConveyorSummariesRow from "./dash-tubes-conveyor-summaries-row";
 
 export default function DashTubesConveyorSummariesModal() {
-  const open = useDashSelectSummaryModalStore(useShallow((state) => state.open));
-  const conveyor_id = useDashSelectSummaryModalStore(useShallow((state) => state.conveyor_id));
-  const title = useDashSelectSummaryModalStore(useShallow((state) => state.title));
-  const setOpen = useDashSelectSummaryModalStore(useShallow((state) => state.setOpen));
-  const { isPending, data, isSuccess } = useTubeConveyorAvailableSummaries(conveyor_id);
+  const open = useDashSelectSummaryModalStore(
+    useShallow((state) => state.open),
+  );
+  const conveyor_id = useDashSelectSummaryModalStore(
+    useShallow((state) => state.conveyor_id),
+  );
+  const title = useDashSelectSummaryModalStore(
+    useShallow((state) => state.title),
+  );
+  const setOpen = useDashSelectSummaryModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const { isPending, data, isSuccess } =
+    useTubeConveyorAvailableSummaries(conveyor_id);
 
   const tube_summaries_table_thead: TheadProperties[] = [
     { width: 50, padding: "18px 6px", value: "Дата" },
@@ -44,7 +53,10 @@ export default function DashTubesConveyorSummariesModal() {
 
     return (
       <TableLayout thead={tube_summaries_table_thead}>
-        {isSuccess && data.summaries.map((row) => <DashTubesConveyorSummariesRow row={row} key={row.id} />)}
+        {isSuccess &&
+          data.summaries.map((row) => (
+            <DashTubesConveyorSummariesRow row={row} key={row.id} />
+          ))}
       </TableLayout>
     );
   };

@@ -19,11 +19,23 @@ const commonThead = [
 export default function InventoriesTable() {
   const filter = useInventoriesFilterStore(useShallow((state) => state.filter));
   const page = useInventoriesPaginationStore(useShallow((state) => state.page));
-  const limit = useInventoriesPaginationStore(useShallow((state) => state.limit));
-  const total = useInventoriesPaginationStore(useShallow((state) => state.total));
-  const setTotal = useInventoriesPaginationStore(useShallow((state) => state.setTotal));
-  const setPage = useInventoriesPaginationStore(useShallow((state) => state.setPage));
-  const { isPending, data, isSuccess } = useInventories({ filter: filter, limit: limit, page: page });
+  const limit = useInventoriesPaginationStore(
+    useShallow((state) => state.limit),
+  );
+  const total = useInventoriesPaginationStore(
+    useShallow((state) => state.total),
+  );
+  const setTotal = useInventoriesPaginationStore(
+    useShallow((state) => state.setTotal),
+  );
+  const setPage = useInventoriesPaginationStore(
+    useShallow((state) => state.setPage),
+  );
+  const { isPending, data, isSuccess } = useInventories({
+    filter: filter,
+    limit: limit,
+    page: page,
+  });
 
   //REmove useeffects
 
@@ -49,7 +61,8 @@ export default function InventoriesTable() {
 
   return (
     <TableLayout thead={commonThead}>
-      {isSuccess && data.rows.map((row) => <InventoryDocsRow row={row} key={row.id} />)}
+      {isSuccess &&
+        data.rows.map((row) => <InventoryDocsRow row={row} key={row.id} />)}
     </TableLayout>
   );
 }

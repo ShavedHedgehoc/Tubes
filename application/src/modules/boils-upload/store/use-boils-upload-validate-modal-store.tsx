@@ -6,9 +6,10 @@ interface BoilsUploadValidateModalStore {
   setOpen: (value: boolean) => void;
 }
 
-export const useBoilsUploadValidateModalStore = create<BoilsUploadValidateModalStore>()(
-  devtools((set) => ({
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-  }))
-);
+export const useBoilsUploadValidateModalStore =
+  create<BoilsUploadValidateModalStore>()(
+    devtools((set) => ({
+      open: false,
+      setOpen: (value) => set(() => ({ open: value })),
+    })),
+  );

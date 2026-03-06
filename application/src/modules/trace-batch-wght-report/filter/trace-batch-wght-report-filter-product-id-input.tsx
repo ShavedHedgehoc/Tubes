@@ -4,8 +4,12 @@ import { useTraceBatchWghtReportFilterStore } from "../store/use-trace-batch-wgh
 import { TraceBatchWghtReportFilterParams } from "./trace-batch-wght-report-filter-params";
 
 export default function TraceBatchWghtReportFilterProductIdInput() {
-  const filter = useTraceBatchWghtReportFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useTraceBatchWghtReportFilterStore(useShallow((state) => state.changeFilter));
+  const filter = useTraceBatchWghtReportFilterStore(
+    useShallow((state) => state.filter),
+  );
+  const changeFilter = useTraceBatchWghtReportFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
 
   const codeInputProps: FilterInputProps = {
     id: TraceBatchWghtReportFilterParams.PRODUCT_ID,
@@ -14,7 +18,8 @@ export default function TraceBatchWghtReportFilterProductIdInput() {
     label: "Поиск по коду 1С",
     placeholder: "Код 1С",
     maxW: 120,
-    changeFilter: ({ key, value }: { key: string; value: string }) => changeFilter({ key, value }),
+    changeFilter: ({ key, value }: { key: string; value: string }) =>
+      changeFilter({ key, value }),
   };
 
   return <FilterInput {...codeInputProps} />;

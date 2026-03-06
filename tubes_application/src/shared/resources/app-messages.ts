@@ -1,5 +1,5 @@
 export enum AppMessages {
-  CONVEYOR_NOT_SPECIFIED = "В строке поиска отсутствует конвейер",
+  // CONVEYOR_NOT_SPECIFIED = "В строке поиска отсутствует конвейер",
   CONVEYOR_NOT_EXISTS = "Конвейера с таким номером нет в базе данных",
   CONVEYORS_NOT_FOUND = "Конвейера не найдены",
   PRODUCT_NOT_EXISTS = "Продукта с таким id нет в базе данных",
@@ -18,7 +18,7 @@ export enum AppMessages {
   OPERATION_NOT_FOUND = "Операция не найдена",
   NOT_AUTHORIZED = "Не авторизован",
   PRINT_SUCCESFULL = "Успешно напечатано",
-  BOX_SCAN_ERROR = "Ошибка сканирования короба",
+  // BOX_SCAN_ERROR = "Ошибка сканирования короба",
   RECORDS_NOT_FOUND = "Записей не найдено",
   PARAMS_NOT_FOUND = "Параметры для этого продукта не найдены",
 }

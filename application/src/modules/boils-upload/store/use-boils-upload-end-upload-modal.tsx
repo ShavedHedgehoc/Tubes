@@ -6,9 +6,10 @@ interface BoilsUploadEndUploadModalStore {
   setOpen: (value: boolean) => void;
 }
 
-export const useBoilsUploadEndUploadModalStore = create<BoilsUploadEndUploadModalStore>()(
-  devtools((set) => ({
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-  }))
-);
+export const useBoilsUploadEndUploadModalStore =
+  create<BoilsUploadEndUploadModalStore>()(
+    devtools((set) => ({
+      open: false,
+      setOpen: (value) => set(() => ({ open: value })),
+    })),
+  );

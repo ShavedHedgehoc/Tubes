@@ -293,9 +293,6 @@ async function main() {
   //   });
   // }
 
-
-
-
   const ext_operations: string[] = [
     "Замена пуансона",
     "Настройка вылета носика",
@@ -315,7 +312,6 @@ async function main() {
     "ТО №3",
     "Прочее",
     "Простой",
-
   ];
 
   for (let i = 0; i < ext_operations.length; i++) {
@@ -409,7 +405,6 @@ async function main() {
       },
     });
   }
-
 }
 
 main()

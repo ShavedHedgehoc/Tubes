@@ -17,7 +17,9 @@ export default function TubeRecordDetailVarnishView({
       <TubeRecordDetailPostState state={varnishData.status} />
       <TubeRecordDetailVarnishParamsTable paramsData={varnishData.params} />
       <TubeRecordDetailDefect defect={varnishData.defect} />
-      <TubeRecordDetailOperationsTable operationsData={varnishData.operations} />
+      <TubeRecordDetailOperationsTable
+        operationsData={varnishData.operations}
+      />
     </TubeDetailViewLayout>
   );
 }

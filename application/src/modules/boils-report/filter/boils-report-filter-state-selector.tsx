@@ -8,8 +8,12 @@ import { BoilsReportFilterParams } from "./boils-report-filter-params";
 
 export default function BoilsReportFilterStateSelector() {
   const filter = useBoilsReportFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useBoilsReportFilterStore(useShallow((state) => state.changeFilter));
-  const stateSelectorOptions = useBoilsReportFilterStore(useShallow((state) => state.stateSelectorOptions));
+  const changeFilter = useBoilsReportFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
+  const stateSelectorOptions = useBoilsReportFilterStore(
+    useShallow((state) => state.stateSelectorOptions),
+  );
 
   const stateOptions = stateSelectorOptions.map((state) => (
     <FilterMultiSelectorOption
@@ -26,8 +30,15 @@ export default function BoilsReportFilterStateSelector() {
     placeholder: "Выберите статус",
     label: "Поиск по статусу",
     options: stateOptions,
-    changeFilter: ({ key, value, values }: { key: string; value: string; values: number[] | [] }) =>
-      changeFilter({ key, value, values }),
+    changeFilter: ({
+      key,
+      value,
+      values,
+    }: {
+      key: string;
+      value: string;
+      values: number[] | [];
+    }) => changeFilter({ key, value, values }),
   };
 
   return <FilterMultiSelector {...stateSelectorProps} />;

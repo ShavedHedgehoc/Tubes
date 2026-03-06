@@ -7,14 +7,30 @@ import { useVarnishConveyorStore } from "@/modules/varnish/store/use-varnish-con
 import { useSealantConveyorStore } from "@/modules/sealant/store/use-sealant-conveyor-store";
 
 export const useConveyor = (name: string | null) => {
-  const setExtrusionConveyor = useExtrusionConveyorStore(useShallow((state) => state.setExtrusionConveyor));
-  const setVarnishConveyor = useVarnishConveyorStore(useShallow((state) => state.setVarnishConveyor));
-  const setOffsetConveyor = useOffsetConveyorStore(useShallow((state) => state.setOffsetConveyor));
-  const setSealantConveyor = useSealantConveyorStore(useShallow((state) => state.setSealantConveyor));
-  const clearExtrusionConveyor = useExtrusionConveyorStore(useShallow((state) => state.clearExtrusionConveyor));
-  const clearVarnishConveyor = useVarnishConveyorStore(useShallow((state) => state.clearVarnishConveyor));
-  const clearOffsetConveyor = useOffsetConveyorStore(useShallow((state) => state.clearOffsetConveyor));
-  const clearSealantConveyor = useSealantConveyorStore(useShallow((state) => state.clearSealantConveyor));
+  const setExtrusionConveyor = useExtrusionConveyorStore(
+    useShallow((state) => state.setExtrusionConveyor),
+  );
+  const setVarnishConveyor = useVarnishConveyorStore(
+    useShallow((state) => state.setVarnishConveyor),
+  );
+  const setOffsetConveyor = useOffsetConveyorStore(
+    useShallow((state) => state.setOffsetConveyor),
+  );
+  const setSealantConveyor = useSealantConveyorStore(
+    useShallow((state) => state.setSealantConveyor),
+  );
+  const clearExtrusionConveyor = useExtrusionConveyorStore(
+    useShallow((state) => state.clearExtrusionConveyor),
+  );
+  const clearVarnishConveyor = useVarnishConveyorStore(
+    useShallow((state) => state.clearVarnishConveyor),
+  );
+  const clearOffsetConveyor = useOffsetConveyorStore(
+    useShallow((state) => state.clearOffsetConveyor),
+  );
+  const clearSealantConveyor = useSealantConveyorStore(
+    useShallow((state) => state.clearSealantConveyor),
+  );
   return useQuery({
     queryKey: ["conveyor"],
     queryFn: async () => {

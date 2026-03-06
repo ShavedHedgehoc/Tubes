@@ -1,7 +1,10 @@
 import { Typography } from "@mui/joy";
 
 import { ITraceWeightingsSummaryDetailRow } from "../../shared/api/services/trace-batchs-service";
-import { formatDateToString, formatTimeToString } from "../../shared/helpers/date-time-formatters";
+import {
+  formatDateToString,
+  formatTimeToString,
+} from "../../shared/helpers/date-time-formatters";
 
 export default function TraceBatchWeightingsSummaryDetailTableRow({
   row,
@@ -28,10 +31,14 @@ export default function TraceBatchWeightingsSummaryDetailTableRow({
         <Typography level="body-xs">{row.w_quantity}</Typography>
       </td>
       <td style={{ width: 60, textAlign: "center", padding: "12px 24px" }}>
-        <Typography level="body-xs">{formatDateToString(row.w_date)}</Typography>
+        <Typography level="body-xs">
+          {formatDateToString(row.w_date)}
+        </Typography>
       </td>
       <td style={{ width: 60, textAlign: "center", padding: "12px 24px" }}>
-        <Typography level="body-xs">{formatTimeToString(row.w_date)}</Typography>
+        <Typography level="body-xs">
+          {formatTimeToString(row.w_date)}
+        </Typography>
       </td>
     </tr>
   );

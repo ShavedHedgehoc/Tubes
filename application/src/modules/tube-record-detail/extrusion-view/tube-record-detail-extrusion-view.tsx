@@ -17,7 +17,9 @@ export default function TubeRecordDetailExtrusionView({
       <TubeRecordDetailPostState state={extrusionData.status} />
       <TubeRecordDetailExtrusionParamsTable paramsData={extrusionData.params} />
       <TubeRecordDetailDefect defect={extrusionData.defect} />
-      <TubeRecordDetailOperationsTable operationsData={extrusionData.operations} />
+      <TubeRecordDetailOperationsTable
+        operationsData={extrusionData.operations}
+      />
     </TubeDetailViewLayout>
   );
 }

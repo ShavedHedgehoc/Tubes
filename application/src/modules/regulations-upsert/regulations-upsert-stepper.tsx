@@ -5,7 +5,9 @@ import { useRegulationsUpsertFormStore } from "./store/use-regulations-upsert-fo
 
 export default function RegulationsUpsertStepper() {
   const file = useRegulationsUpsertFormStore(useShallow((state) => state.file));
-  const isValid = useRegulationsUpsertFormStore(useShallow((state) => state.isValid));
+  const isValid = useRegulationsUpsertFormStore(
+    useShallow((state) => state.isValid),
+  );
   const errs = useRegulationsUpsertFormStore(useShallow((state) => state.errs));
   return (
     <Box sx={{ mt: 4, width: "100%" }}>

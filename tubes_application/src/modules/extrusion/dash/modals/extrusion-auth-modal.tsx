@@ -8,8 +8,12 @@ import { useEmployeeLogin } from "@/shared/api/use-employee-login";
 
 export default function ExtrusionAuthModal() {
   const open = useExtrusionAuthModalStore(useShallow((state) => state.open));
-  const setOpen = useExtrusionAuthModalStore(useShallow((state) => state.setOpen));
-  const setEmployee = useExtrusionEmployeeStore(useShallow((state) => state.setExtrusionEmployee));
+  const setOpen = useExtrusionAuthModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const setEmployee = useExtrusionEmployeeStore(
+    useShallow((state) => state.setExtrusionEmployee),
+  );
   const { login } = useEmployeeLogin(setEmployee);
 
   const modalProps: ScanModalProps = {

@@ -11,7 +11,10 @@ export interface PendingModalProps {
 function PendingModal(props: PendingModalProps) {
   return (
     <React.Fragment>
-      <Modal open={props.pending} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <Modal
+        open={props.pending}
+        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
         <Sheet
           variant="plain"
           sx={{
@@ -21,7 +24,14 @@ function PendingModal(props: PendingModalProps) {
           }}
         >
           <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-            <Typography component="h2" id="modal-title" level="h4" textColor="inherit" fontWeight="lg" mb={1}>
+            <Typography
+              component="h2"
+              id="modal-title"
+              level="h4"
+              textColor="inherit"
+              fontWeight="lg"
+              mb={1}
+            >
               {props.title}
             </Typography>
             <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>

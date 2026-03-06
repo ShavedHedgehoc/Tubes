@@ -22,9 +22,17 @@ export default function DocumentsTable() {
   const page = useDocumentsPaginationStore(useShallow((state) => state.page));
   const limit = useDocumentsPaginationStore(useShallow((state) => state.limit));
   const total = useDocumentsPaginationStore(useShallow((state) => state.total));
-  const setTotal = useDocumentsPaginationStore(useShallow((state) => state.setTotal));
-  const setPage = useDocumentsPaginationStore(useShallow((state) => state.setPage));
-  const { isPending, data, isSuccess } = useDocuments({ filter: filter, limit: limit, page: page });
+  const setTotal = useDocumentsPaginationStore(
+    useShallow((state) => state.setTotal),
+  );
+  const setPage = useDocumentsPaginationStore(
+    useShallow((state) => state.setPage),
+  );
+  const { isPending, data, isSuccess } = useDocuments({
+    filter: filter,
+    limit: limit,
+    page: page,
+  });
 
   //REmove useeffects
 
@@ -50,7 +58,8 @@ export default function DocumentsTable() {
 
   return (
     <TableLayout thead={commonThead}>
-      {isSuccess && data.rows.map((row) => <DocumentsRow row={row} key={row.id} />)}
+      {isSuccess &&
+        data.rows.map((row) => <DocumentsRow row={row} key={row.id} />)}
     </TableLayout>
   );
 }

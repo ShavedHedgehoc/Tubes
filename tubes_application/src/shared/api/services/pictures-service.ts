@@ -13,8 +13,12 @@ export interface IPictureData {
 
 //use-pictures
 export default class PicturesService {
-  static async getPicturesByProductId(productId: number | null): Promise<IPictureData> {
-    const res = await $api.get(`${ApiRoutes.GET_PICTURES}?product_id=${productId}`);
+  static async getPicturesByProductId(
+    productId: number | null,
+  ): Promise<IPictureData> {
+    const res = await $api.get(
+      `${ApiRoutes.GET_PICTURES}?product_id=${productId}`,
+    );
     return res.data;
   }
 }

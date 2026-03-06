@@ -16,11 +16,21 @@ import { TableState } from "../../shared/ui/table-state";
 import UseBoilsRowActions from "./use-boils-row-actions";
 
 const useHistoryModalOpen = ({ row }: { row: IBoilRow }) => {
-  const setOpen = useBoilHistoryModalStore(useShallow((state) => state.setOpen));
-  const setBoilId = useBoilHistoryModalStore(useShallow((state) => state.setBoilId));
-  const setBoilValue = useBoilHistoryModalStore(useShallow((state) => state.setBoilValue));
-  const setTitle = useBoilHistoryModalStore(useShallow((state) => state.setTitle));
-  const setCancelButtonEnabled = useBoilHistoryModalStore(useShallow((state) => state.setCancelButtonEnabled));
+  const setOpen = useBoilHistoryModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const setBoilId = useBoilHistoryModalStore(
+    useShallow((state) => state.setBoilId),
+  );
+  const setBoilValue = useBoilHistoryModalStore(
+    useShallow((state) => state.setBoilValue),
+  );
+  const setTitle = useBoilHistoryModalStore(
+    useShallow((state) => state.setTitle),
+  );
+  const setCancelButtonEnabled = useBoilHistoryModalStore(
+    useShallow((state) => state.setCancelButtonEnabled),
+  );
   const handleOpenHistoryModalButtonClick = () => {
     if (
       row.stateValue === "base_fail" ||
@@ -43,7 +53,11 @@ const useHistoryModalOpen = ({ row }: { row: IBoilRow }) => {
 const HistoryModalOpenButton = ({ row }: { row: IBoilRow }) => {
   const handleOpenHistoryModalButtonClick = useHistoryModalOpen({ row });
   return (
-    <IconButton variant="plain" size="sm" onClick={() => handleOpenHistoryModalButtonClick()}>
+    <IconButton
+      variant="plain"
+      size="sm"
+      onClick={() => handleOpenHistoryModalButtonClick()}
+    >
       <InfoOutlinedIcon />
     </IconButton>
   );
@@ -73,11 +87,15 @@ export default function BoilsRow({ row }: { row: IBoilRow }) {
         <Typography level="body-xs">{row.value}</Typography>
       </td>
       <td style={{ width: 64, textAlign: "center", padding: "18px 6px" }}>
-        <Typography level="body-xs">{row.base_marking ? row.base_marking : "-"}</Typography>
+        <Typography level="body-xs">
+          {row.base_marking ? row.base_marking : "-"}
+        </Typography>
       </td>
 
       <td style={{ width: 64, textAlign: "center", padding: "18px 6px" }}>
-        <Typography level="body-xs">{row.base_code ? row.base_code : "-"}</Typography>
+        <Typography level="body-xs">
+          {row.base_code ? row.base_code : "-"}
+        </Typography>
       </td>
       <td style={{ width: 50, textAlign: "center", padding: "18px 6px" }}>
         <Typography level="body-xs">{row.plant ? row.plant : "-"}</Typography>
@@ -86,7 +104,14 @@ export default function BoilsRow({ row }: { row: IBoilRow }) {
       <td style={{ width: 50, textAlign: "center", padding: "18px 6px" }}>
         <Typography
           level="body-xs"
-          sx={{ color: mode === "dark" ? (row.recordsCount !== 0 ? "success.plainColor" : "neutral") : "neutral" }}
+          sx={{
+            color:
+              mode === "dark"
+                ? row.recordsCount !== 0
+                  ? "success.plainColor"
+                  : "neutral"
+                : "neutral",
+          }}
         >
           {row.recordsCount}
         </Typography>
@@ -94,7 +119,14 @@ export default function BoilsRow({ row }: { row: IBoilRow }) {
       <td style={{ width: 50, textAlign: "center", padding: "18px 6px" }}>
         <Typography
           level="body-xs"
-          sx={{ color: mode === "dark" ? (row.historiesCount !== 0 ? "success.plainColor" : "neutral") : "neutral" }}
+          sx={{
+            color:
+              mode === "dark"
+                ? row.historiesCount !== 0
+                  ? "success.plainColor"
+                  : "neutral"
+                : "neutral",
+          }}
         >
           {row.historiesCount}
         </Typography>
@@ -131,12 +163,18 @@ export default function BoilsRow({ row }: { row: IBoilRow }) {
       </td>
 
       <td style={{ width: 70, textAlign: "center", padding: "12px 6px" }}>
-        {row.stateValue === "base_check" && <TableButton {...passButtonProps} />}
+        {row.stateValue === "base_check" && (
+          <TableButton {...passButtonProps} />
+        )}
       </td>
 
       <td style={{ width: 60, textAlign: "center", padding: "6px 6px" }}>
         {row.stateValue !== "base_fail" && row.historiesCount !== 0 && (
-          <TableIconButton color="danger" disabled={isPending} onClick={() => handleFailButtonClick()}>
+          <TableIconButton
+            color="danger"
+            disabled={isPending}
+            onClick={() => handleFailButtonClick()}
+          >
             <BlockOutlinedIcon />
           </TableIconButton>
         )}

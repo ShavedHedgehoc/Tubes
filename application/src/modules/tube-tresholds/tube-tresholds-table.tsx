@@ -45,7 +45,12 @@ export default function TubeTresholdsTable({
     <TableLayout thead={commonThead}>
       {isSuccess &&
         data &&
-        data.rows.map((row) => <TubeTresholdsRow row={row} key={`row_${row.conveyor_id}_${row.product_id}`} />)}
+        data.rows.map((row) => (
+          <TubeTresholdsRow
+            row={row}
+            key={`row_${row.conveyor_id}_${row.product_id}`}
+          />
+        ))}
     </TableLayout>
   );
 }

@@ -48,7 +48,12 @@ export const useForemanFilterStore = create<ForemanFilterStore>()((set) => ({
         set((state) => ({ filter: { ...state.filter, boil: value } }));
         break;
       case ForemanFilterParams.PLANT:
-        set((state) => ({ filter: { ...state.filter, plant: values?.length ? values[0] : state.filter.plant } }));
+        set((state) => ({
+          filter: {
+            ...state.filter,
+            plant: values?.length ? values[0] : state.filter.plant,
+          },
+        }));
         break;
       case ForemanFilterParams.PRODUCT:
         set((state) => ({ filter: { ...state.filter, productCode: value } }));
@@ -60,11 +65,16 @@ export const useForemanFilterStore = create<ForemanFilterStore>()((set) => ({
         set((state) => ({ filter: { ...state.filter, conveyor: value } }));
         break;
       case ForemanFilterParams.BOIL_ASC:
-        set((state) => ({ filter: { ...state.filter, boilAsc: value === "true" ? true : false } }));
+        set((state) => ({
+          filter: { ...state.filter, boilAsc: value === "true" ? true : false },
+        }));
         break;
       case ForemanFilterParams.STATES:
         set((state) => ({
-          filter: { ...state.filter, states: values ? [...values] : [...state.filter.states] },
+          filter: {
+            ...state.filter,
+            states: values ? [...values] : [...state.filter.states],
+          },
         }));
         break;
       default:
@@ -72,6 +82,8 @@ export const useForemanFilterStore = create<ForemanFilterStore>()((set) => ({
     }
   },
   setSelectedPlant: (value) => set(() => ({ selectedPlant: value })),
-  fillPlantSelectorOptions: (values) => set(() => ({ plantSelectorOptions: [...values] })),
-  fillStateSelectorOptions: (values) => set(() => ({ stateSelectorOptions: [...values] })),
+  fillPlantSelectorOptions: (values) =>
+    set(() => ({ plantSelectorOptions: [...values] })),
+  fillStateSelectorOptions: (values) =>
+    set(() => ({ stateSelectorOptions: [...values] })),
 }));

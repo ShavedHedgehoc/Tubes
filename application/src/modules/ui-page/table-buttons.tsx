@@ -17,11 +17,15 @@ export default function TableButtons() {
 
   function parse(value: string): parsedSemiProduct[] | [] {
     let result: parsedSemiProduct[] = [];
-    const re = /(?<={)([0-9]{6})#([0-9]{1,4}[A-L][0-9][X-Z,S,R]{0,1}[S]{0,1})#([^}]+)(?=})/g;
+    const re =
+      /(?<={)([0-9]{6})#([0-9]{1,4}[A-L][0-9][X-Z,S,R]{0,1}[S]{0,1})#([^}]+)(?=})/g;
     const matchArr = [...value.matchAll(re)];
     if (matchArr.length > 0) {
       matchArr.map((item) => {
-        result = [...result, { code: item[1], batch: item[2], marking: item[3] }];
+        result = [
+          ...result,
+          { code: item[1], batch: item[2], marking: item[3] },
+        ];
       });
     }
     return result;
@@ -50,7 +54,12 @@ export default function TableButtons() {
         <TableIconButton color="warning" onClick={() => void 0}>
           <BlockOutlinedIcon />
         </TableIconButton>
-        <TableButton variant={"danger"} startDecorator={<BlockOutlinedIcon />} label="DANGER" onClick={() => void 0} />
+        <TableButton
+          variant={"danger"}
+          startDecorator={<BlockOutlinedIcon />}
+          label="DANGER"
+          onClick={() => void 0}
+        />
         <TableIconButton color="danger" onClick={() => void 0}>
           <BlockOutlinedIcon />
         </TableIconButton>

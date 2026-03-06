@@ -11,13 +11,22 @@ interface TresholdsSelectEntryProps {
   value: number | null;
   options: TubeRondel[] | [];
   setSelected: (value: number) => void;
-  onChange: ({ key, value, values }: { key: string; value: string; values?: number[] }) => void;
+  onChange: ({
+    key,
+    value,
+    values,
+  }: {
+    key: string;
+    value: string;
+    values?: number[];
+  }) => void;
 }
 
 export default function TresholdsSelectEntry(props: TresholdsSelectEntryProps) {
   const handleChange = (newValue: number | null) => {
     newValue && props.setSelected(newValue);
-    newValue && props.onChange({ key: props.id, value: "", values: [newValue] });
+    newValue &&
+      props.onChange({ key: props.id, value: "", values: [newValue] });
   };
   return (
     <Stack spacing={1}>
@@ -26,7 +35,12 @@ export default function TresholdsSelectEntry(props: TresholdsSelectEntryProps) {
         <span style={{ color: "red", fontWeight: "bold" }}>*</span>
       </Stack>
 
-      <Stack spacing={1} direction="row" justifyContent="space-between" alignItems="center">
+      <Stack
+        spacing={1}
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+      >
         <Typography level="body-xs">Выберите:</Typography>
         <Select
           size="sm"
@@ -40,7 +54,10 @@ export default function TresholdsSelectEntry(props: TresholdsSelectEntryProps) {
             display: "flex",
             flexShrink: 1,
           }}
-          onChange={(event: React.SyntheticEvent | null, newValue: number | null) => {
+          onChange={(
+            event: React.SyntheticEvent | null,
+            newValue: number | null,
+          ) => {
             event && newValue && handleChange(newValue);
           }}
           value={props.value}

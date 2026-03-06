@@ -9,7 +9,9 @@ import { Box } from "@mui/joy";
 
 export default function UpdateUserRolesModalButtons() {
   const id = useChangeUserRolesModalStore(useShallow((state) => state.id));
-  const setOpen = useChangeUserRolesModalStore(useShallow((state) => state.setOpen));
+  const setOpen = useChangeUserRolesModalStore(
+    useShallow((state) => state.setOpen),
+  );
   const rolesList = useRolesListStore(useShallow((state) => state.rolesList));
 
   const { updateRoles } = useUpdateUserRoles();

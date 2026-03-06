@@ -30,7 +30,7 @@ export default function ExtrusionMenu() {
     operationButtonDisabledCondition,
     pictureButtonDisabledCondition,
     endButtonDisabledCondition,
-    handleOpenParametersClick
+    handleOpenParametersClick,
   } = useExtrusionMenu();
   const { data: summaryData } = useActiveSummary(extrusionConveyor?.id ?? null);
 
@@ -52,7 +52,10 @@ export default function ExtrusionMenu() {
     title: "Операции",
     icon: <TbAutomation />,
     disabled: operationButtonDisabledCondition,
-    action: () => navigate(`${RouteNames.EXTRUSION_OPERATIONS_ROOT}/${extrusionConveyor?.name}`),
+    action: () =>
+      navigate(
+        `${RouteNames.EXTRUSION_OPERATIONS_ROOT}/${extrusionConveyor?.name}`,
+      ),
   };
 
   const sopButtonProps: MenuButtonProps = {
@@ -61,7 +64,9 @@ export default function ExtrusionMenu() {
     disabled: false,
     action: () =>
       summaryData?.extrusionStatus.operation_id
-        ? navigate(`${RouteNames.EXTRUSION_SOP_ROOT}/${summaryData.extrusionStatus.operation_id}`)
+        ? navigate(
+            `${RouteNames.EXTRUSION_SOP_ROOT}/${summaryData.extrusionStatus.operation_id}`,
+          )
         : undefined,
   };
 
@@ -70,7 +75,9 @@ export default function ExtrusionMenu() {
     icon: <TbLibraryPhoto />,
     disabled: pictureButtonDisabledCondition,
     action: () =>
-      summaryData?.data.product_id ? navigate(`${RouteNames.PICTURES_ROOT}/${summaryData.data.product_id}`) : undefined,
+      summaryData?.data.product_id
+        ? navigate(`${RouteNames.PICTURES_ROOT}/${summaryData.data.product_id}`)
+        : undefined,
   };
 
   const endButtonProps: MenuButtonProps = {
@@ -92,7 +99,9 @@ export default function ExtrusionMenu() {
       <MenuButton {...inputParametersButtonProps} />
       <MenuButton {...scanMaterilButtonProps} />
       <MenuButton {...operationsButtonProps} />
-      {summaryData && summaryData.extrusionStatus.state === "idle" && <MenuButton {...sopButtonProps} />}
+      {summaryData && summaryData.extrusionStatus.state === "idle" && (
+        <MenuButton {...sopButtonProps} />
+      )}
 
       <MenuButton {...picturesButtonProps} />
       <MenuButton {...endButtonProps} />

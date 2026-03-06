@@ -5,9 +5,15 @@ import { useShallow } from "zustand/react/shallow";
 import { useEmployeesEditModalStore } from "../store/use-employees-edit-modal-store";
 
 export default function EmployeesEditModalOccupationSelector() {
-  const occupationsOptions = useEmployeesEditModalStore(useShallow((state) => state.occupationsOptions));
-  const occupation = useEmployeesEditModalStore(useShallow((state) => state.occupation));
-  const setOccupation = useEmployeesEditModalStore(useShallow((state) => state.setOccupation));
+  const occupationsOptions = useEmployeesEditModalStore(
+    useShallow((state) => state.occupationsOptions),
+  );
+  const occupation = useEmployeesEditModalStore(
+    useShallow((state) => state.occupation),
+  );
+  const setOccupation = useEmployeesEditModalStore(
+    useShallow((state) => state.setOccupation),
+  );
   const options = occupationsOptions.map((occupation) => (
     <Option value={occupation.id} key={occupation.id}>
       {occupation.description}
@@ -28,7 +34,10 @@ export default function EmployeesEditModalOccupationSelector() {
         display: "flex",
         flexShrink: 1,
       }}
-      onChange={(event: React.SyntheticEvent | null, newValue: number | null) => {
+      onChange={(
+        event: React.SyntheticEvent | null,
+        newValue: number | null,
+      ) => {
         event && newValue && setOccupation(newValue);
       }}
     >

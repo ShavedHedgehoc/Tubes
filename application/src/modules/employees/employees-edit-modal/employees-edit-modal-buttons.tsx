@@ -5,17 +5,30 @@ import { useEmployeesEditModalStore } from "../store/use-employees-edit-modal-st
 import { useUpdateEmployee } from "../use-update-employee";
 
 export default function EmployeesEditModalButtonComponent() {
-  const setOpen = useEmployeesEditModalStore(useShallow((state) => state.setOpen));
-  const clearData = useEmployeesEditModalStore(useShallow((state) => state.clearData));
+  const setOpen = useEmployeesEditModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const clearData = useEmployeesEditModalStore(
+    useShallow((state) => state.clearData),
+  );
   const id = useEmployeesEditModalStore(useShallow((state) => state.id));
   const name = useEmployeesEditModalStore(useShallow((state) => state.name));
-  const barcode = useEmployeesEditModalStore(useShallow((state) => state.barcode));
-  const occupation = useEmployeesEditModalStore(useShallow((state) => state.occupation));
+  const barcode = useEmployeesEditModalStore(
+    useShallow((state) => state.barcode),
+  );
+  const occupation = useEmployeesEditModalStore(
+    useShallow((state) => state.occupation),
+  );
   const { updateEmployee } = useUpdateEmployee();
 
   const handleUpdate = () => {
     if (name !== "" && barcode !== "" && occupation && id) {
-      updateEmployee({ id: id, name: name, barcode: barcode, occupationId: occupation });
+      updateEmployee({
+        id: id,
+        name: name,
+        barcode: barcode,
+        occupationId: occupation,
+      });
       setOpen(false);
       clearData();
     }

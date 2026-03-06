@@ -34,6 +34,6 @@ export const useTubeEmployeesEditModalStore = create<EditModalStore>()(
       clearData: () => set(() => ({ name: "", barcode: "", rank: null })),
       fillRanksOptions: (values) => set(() => ({ ranksOptions: [...values] })),
     }),
-    { name: "EmployeeEditModalStore", store: "useEmployeeEditModalStore" }
-  )
+    { name: "EmployeeEditModalStore", store: "useEmployeeEditModalStore" },
+  ),
 );

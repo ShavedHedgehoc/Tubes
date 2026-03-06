@@ -12,5 +12,5 @@ export const useOffsetOperationSopStore = create<OffsetOperationStore>()(
     selectedOperation: null,
     setSelectedOperation: (value) => set(() => ({ selectedOperation: value })),
     clearSelectedOperation: () => set(() => ({ selectedOperation: null })),
-  }))
+  })),
 );

@@ -23,7 +23,9 @@ export default function SealantSop() {
   const params = useParams<Params.OPERATION_ID>();
 
   const { isPending } = useSealantOperation(params.operation_id ?? null);
-  const operation = useSealantOperationSopStore(useShallow((state) => state.selectedOperation));
+  const operation = useSealantOperationSopStore(
+    useShallow((state) => state.selectedOperation),
+  );
 
   if (isPending) return <Loader />;
   if (!operation) return <NotFound message={AppMessages.OPERATION_NOT_FOUND} />;
@@ -31,7 +33,9 @@ export default function SealantSop() {
   const pageLayoutProps: CarouselSopPageLayoutProps = {
     timeComponent: <TimeComponent />,
     headerComponent: <OperationHeaderComponent operation={operation ?? null} />,
-    carouselComponent: <SealantSopCarousel operationId={operation.id ?? null} />,
+    carouselComponent: (
+      <SealantSopCarousel operationId={operation.id ?? null} />
+    ),
     menuComponent: <SealantSopMenu />,
     loaderComponent: <Loader />,
     notFoundComponent: undefined,

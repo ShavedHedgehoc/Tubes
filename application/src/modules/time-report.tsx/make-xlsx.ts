@@ -1,6 +1,9 @@
 import { utils, writeFile } from "xlsx-js-style";
 import { TimeReportRowData } from "../../shared/api/services/record-service";
-import { formatDateToString, formatTimeToString } from "../../shared/helpers/date-time-formatters";
+import {
+  formatDateToString,
+  formatTimeToString,
+} from "../../shared/helpers/date-time-formatters";
 
 export default function makeXLSXFile(data: TimeReportRowData[], title: string) {
   const workbook = utils.book_new();
@@ -119,7 +122,9 @@ export default function makeXLSXFile(data: TimeReportRowData[], title: string) {
       },
     },
     {
-      v: row.lastBaseCheck ? `${formatDateToString(row.lastBaseCheck)} ${formatTimeToString(row.lastBaseCheck)}` : "-",
+      v: row.lastBaseCheck
+        ? `${formatDateToString(row.lastBaseCheck)} ${formatTimeToString(row.lastBaseCheck)}`
+        : "-",
       t: "s",
       s: {
         alignment: { horizontal: "center" },
@@ -132,7 +137,9 @@ export default function makeXLSXFile(data: TimeReportRowData[], title: string) {
       },
     },
     {
-      v: row.lastPlugPass ? `${formatDateToString(row.lastPlugPass)} ${formatTimeToString(row.lastPlugPass)}` : "-",
+      v: row.lastPlugPass
+        ? `${formatDateToString(row.lastPlugPass)} ${formatTimeToString(row.lastPlugPass)}`
+        : "-",
       t: "s",
       s: {
         alignment: { horizontal: "center" },
@@ -171,7 +178,9 @@ export default function makeXLSXFile(data: TimeReportRowData[], title: string) {
       },
     },
     {
-      v: row.lastProductInProgress ? formatTimeToString(row.lastProductInProgress) : "-",
+      v: row.lastProductInProgress
+        ? formatTimeToString(row.lastProductInProgress)
+        : "-",
       t: "s",
       s: {
         alignment: { horizontal: "center" },
@@ -184,7 +193,9 @@ export default function makeXLSXFile(data: TimeReportRowData[], title: string) {
       },
     },
     {
-      v: row.lastProductFinished ? formatTimeToString(row.lastProductFinished) : "-",
+      v: row.lastProductFinished
+        ? formatTimeToString(row.lastProductFinished)
+        : "-",
       t: "s",
       s: {
         alignment: { horizontal: "center" },

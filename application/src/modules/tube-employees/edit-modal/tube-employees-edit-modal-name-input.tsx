@@ -3,8 +3,12 @@ import { useShallow } from "zustand/react/shallow";
 import { useTubeEmployeesEditModalStore } from "../store/use-tube-employees-edit-modal-store";
 
 export default function TubeEmployeesEditModalNameInput() {
-  const name = useTubeEmployeesEditModalStore(useShallow((state) => state.name));
-  const setName = useTubeEmployeesEditModalStore(useShallow((state) => state.setName));
+  const name = useTubeEmployeesEditModalStore(
+    useShallow((state) => state.name),
+  );
+  const setName = useTubeEmployeesEditModalStore(
+    useShallow((state) => state.setName),
+  );
   return (
     <Input
       sx={{

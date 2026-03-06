@@ -28,16 +28,30 @@ import OffsetIntegerEntryModal from "./entry/modals/offset-integer-entry-modal";
 export default function OffsetAddEntry() {
   const params = useParams<Params.CONVEYOR_NAME>();
   const { isPending } = useConveyor(params.conveyor_name ?? null);
-  const offsetConveyor = useOffsetConveyorStore(useShallow((state) => state.offsetConveyor));
-  const employee = useOffsetEmployeeStore(useShallow((state) => state.offsetEmployee));
-  const { data: summaryData, isPending: isPendingSummary, isError } = useActiveSummary(offsetConveyor?.id ?? null);
+  const offsetConveyor = useOffsetConveyorStore(
+    useShallow((state) => state.offsetConveyor),
+  );
+  const employee = useOffsetEmployeeStore(
+    useShallow((state) => state.offsetEmployee),
+  );
+  const {
+    data: summaryData,
+    isPending: isPendingSummary,
+    isError,
+  } = useActiveSummary(offsetConveyor?.id ?? null);
 
   if (isPending) return <Loader />;
-  if (!offsetConveyor) return <NotFound message={AppMessages.CONVEYOR_NOT_EXISTS} />;
+  if (!offsetConveyor)
+    return <NotFound message={AppMessages.CONVEYOR_NOT_EXISTS} />;
 
   const addEntryPageLayoutProps: AddEntryPageLayoutProps = {
     timeComponent: <TimeComponent />,
-    headerComponent: <HeaderComponent conveyorName={offsetConveyor.name} postName={PostNames.OFFSET} />,
+    headerComponent: (
+      <HeaderComponent
+        conveyorName={offsetConveyor.name}
+        postName={PostNames.OFFSET}
+      />
+    ),
     entriesComponent: <OffsetEntries summaryData={summaryData ?? null} />,
     menuComponent: <OffsetAddEntryMenu summaryData={summaryData ?? null} />,
     userComponent: <UserComponent employee={employee} />,

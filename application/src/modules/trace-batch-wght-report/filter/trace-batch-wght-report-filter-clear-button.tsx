@@ -1,12 +1,18 @@
 import { useShallow } from "zustand/react/shallow";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import FilterButton, { FilterButtonProps } from "../../../shared/ui/filter-button";
+import FilterButton, {
+  FilterButtonProps,
+} from "../../../shared/ui/filter-button";
 import { getTomorrowDate } from "../../../shared/helpers/date-time-formatters";
 import { useTraceBatchWghtReportFilterStore } from "../store/use-trace-batch-wght-report-filter-store";
 
 export default function TraceBatchWghtReportFilterClearButton() {
-  const clearFilter = useTraceBatchWghtReportFilterStore(useShallow((state) => state.clearFilter));
-  const filter = useTraceBatchWghtReportFilterStore(useShallow((state) => state.filter));
+  const clearFilter = useTraceBatchWghtReportFilterStore(
+    useShallow((state) => state.clearFilter),
+  );
+  const filter = useTraceBatchWghtReportFilterStore(
+    useShallow((state) => state.filter),
+  );
 
   const disableDocumentFilterClearButton =
     filter.startDate === getTomorrowDate() &&

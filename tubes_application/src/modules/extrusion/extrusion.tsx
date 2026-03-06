@@ -31,20 +31,42 @@ import ExtrusionDefectEntryModal from "./dash/modals/extrusion-defect-enter-moda
 export default function Extrusion() {
   const params = useParams<Params.CONVEYOR_NAME>();
   const { isPending } = useConveyor(params.conveyor_name ?? null);
-  const extrusionConveyor = useExtrusionConveyorStore(useShallow((state) => state.extrusionConveyor));
-  const employee = useExtrusionEmployeeStore(useShallow((state) => state.extrusionEmployee));
-  const { data: summaryData, isPending: isPendingSummary, isError } = useActiveSummary(extrusionConveyor?.id ?? null);
+  const extrusionConveyor = useExtrusionConveyorStore(
+    useShallow((state) => state.extrusionConveyor),
+  );
+  const employee = useExtrusionEmployeeStore(
+    useShallow((state) => state.extrusionEmployee),
+  );
+  const {
+    data: summaryData,
+    isPending: isPendingSummary,
+    isError,
+  } = useActiveSummary(extrusionConveyor?.id ?? null);
 
   if (isPending) return <Loader />;
-  if (!extrusionConveyor) return <NotFound message={AppMessages.CONVEYOR_NOT_EXISTS} />;
+  if (!extrusionConveyor)
+    return <NotFound message={AppMessages.CONVEYOR_NOT_EXISTS} />;
 
   const pageLayoutProps: PageLayoutProps = {
     timeComponent: <TimeComponent />,
-    headerComponent: <HeaderComponent conveyorName={extrusionConveyor.name} postName={PostNames.EXTRUSION} />,
-    parameterComponent: <ExtrusionParameters summaryData={summaryData ?? null} />,
-    materialPieChartComponent: <MaterialPieChartComponent summaryData={summaryData ?? null} postId={1} />,
-    productionLineChartComponent: <ProductionLineChart summaryData={summaryData ?? null} postId={1} />,
-    productionCardComponent: <ProductionCard summaryData={summaryData ?? null} postId={1} />,
+    headerComponent: (
+      <HeaderComponent
+        conveyorName={extrusionConveyor.name}
+        postName={PostNames.EXTRUSION}
+      />
+    ),
+    parameterComponent: (
+      <ExtrusionParameters summaryData={summaryData ?? null} />
+    ),
+    materialPieChartComponent: (
+      <MaterialPieChartComponent summaryData={summaryData ?? null} postId={1} />
+    ),
+    productionLineChartComponent: (
+      <ProductionLineChart summaryData={summaryData ?? null} postId={1} />
+    ),
+    productionCardComponent: (
+      <ProductionCard summaryData={summaryData ?? null} postId={1} />
+    ),
     menuComponent: <ExtrusionMenu />,
     userComponent: <UserComponent employee={employee} />,
     loaderComponent: <Loader />,

@@ -1,8 +1,8 @@
 export const EMPLOYEE_ENDPOINTS = {
-  LIST: "/employees",
+  LIST: "/employees/list",
   CHANGE_BANNED: "",
   CREATE: "",
   DELETE: "",
   UPDATE: "",
-  DETAIL: "",
+  DETAIL: "/employees/by_id/",
 } as const;

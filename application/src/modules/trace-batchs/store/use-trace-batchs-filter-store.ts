@@ -43,7 +43,8 @@ export const useTraceBatchsFilterStore = create<TraceBatchsFilterStore>()(
     filter: initFilterValue,
     selectedPlant: "#",
     plantSelectorOptions: [],
-    clearFilter: () => set(() => ({ filter: initFilterValue, selectedPlant: "#" })),
+    clearFilter: () =>
+      set(() => ({ filter: initFilterValue, selectedPlant: "#" })),
     setDayToToday: () =>
       set((state) => ({
         filter: {
@@ -85,7 +86,10 @@ export const useTraceBatchsFilterStore = create<TraceBatchsFilterStore>()(
           break;
         case TraceBatchsFilterParams.PLANTS:
           set((state) => ({
-            filter: { ...state.filter, plants: values ? [...values] : [...state.filter.plants] },
+            filter: {
+              ...state.filter,
+              plants: values ? [...values] : [...state.filter.plants],
+            },
           }));
           break;
         default:
@@ -94,6 +98,11 @@ export const useTraceBatchsFilterStore = create<TraceBatchsFilterStore>()(
     },
     setSelectedPlant: (value) => set(() => ({ selectedPlant: value })),
     fillPlantSelectorOptions: (values) =>
-      set(() => ({ plantSelectorOptions: [{ id: 999999, value: "Все", abb: "#" }, ...values] })),
-  }))
+      set(() => ({
+        plantSelectorOptions: [
+          { id: 999999, value: "Все", abb: "#" },
+          ...values,
+        ],
+      })),
+  })),
 );

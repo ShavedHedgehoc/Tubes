@@ -1,6 +1,10 @@
 import { Sheet, Stack } from "@mui/joy";
 
-export default function TubeDetailViewLayout({ children }: { children: React.ReactNode }) {
+export default function TubeDetailViewLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <Sheet
       sx={[

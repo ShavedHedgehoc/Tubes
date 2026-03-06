@@ -13,7 +13,12 @@ export default function MaterialPieChartComponent({
 }) {
   const data = getMaterialsData(postId, summaryData);
 
-  const chartData: { name: string; value: number; color: string; label?: string }[] = data.map((item) => ({
+  const chartData: {
+    name: string;
+    value: number;
+    color: string;
+    label?: string;
+  }[] = data.map((item) => ({
     name: item.code + item.name,
     value: 1,
     color: item.scanned ? "green.solid" : "red.solid",
@@ -21,12 +26,21 @@ export default function MaterialPieChartComponent({
 
   const chart = useChart({ data: chartData });
 
-  const isAllScanned = data.length && !data.map((item) => item.scanned).includes(false);
+  const isAllScanned =
+    data.length && !data.map((item) => item.scanned).includes(false);
 
   if (!summaryData?.tresholds) return;
 
   return (
-    <Box backgroundColor="bg.panel" w="full" h="full" rounded="lg" p={8} alignItems="center" justifyContent="center">
+    <Box
+      backgroundColor="bg.panel"
+      w="full"
+      h="full"
+      rounded="lg"
+      p={8}
+      alignItems="center"
+      justifyContent="center"
+    >
       <VStack h="full" justify="center">
         {chartData.length ? (
           <Chart.Root boxSize="200px" chart={chart}>
@@ -40,16 +54,31 @@ export default function MaterialPieChartComponent({
                 dataKey={chart.key("value")}
                 nameKey="name"
                 labelLine={false}
-                label={({ cx, cy, midAngle, innerRadius, outerRadius, index }) => {
+                label={({
+                  cx,
+                  cy,
+                  midAngle,
+                  innerRadius,
+                  outerRadius,
+                  index,
+                }) => {
                   const RADIAN = Math.PI / 180;
                   const radius = 40 + innerRadius + (outerRadius - innerRadius);
-                  const x = cx + radius * Math.cos(midAngle ? -midAngle * RADIAN : 0);
-                  const y = cy + radius * Math.sin(midAngle ? -midAngle * RADIAN : 0);
+                  const x =
+                    cx + radius * Math.cos(midAngle ? -midAngle * RADIAN : 0);
+                  const y =
+                    cy + radius * Math.sin(midAngle ? -midAngle * RADIAN : 0);
 
                   return (
                     <>
                       <text
-                        x={chartData.length === 1 ? x + 30 : chartData.length > 4 ? x - 10 : x + 5}
+                        x={
+                          chartData.length === 1
+                            ? x + 30
+                            : chartData.length > 4
+                              ? x - 10
+                              : x + 5
+                        }
                         y={chartData.length === 1 ? y : y - 10}
                         fill="#a1a1aa"
                         textAnchor={x > cx ? "start" : "end"}
@@ -58,7 +87,13 @@ export default function MaterialPieChartComponent({
                         {`${chart.data[index].name.slice(0, 6)}`}
                       </text>
                       <text
-                        x={chartData.length === 1 ? x + 30 : chartData.length > 4 ? x - 10 : x + 5}
+                        x={
+                          chartData.length === 1
+                            ? x + 30
+                            : chartData.length > 4
+                              ? x - 10
+                              : x + 5
+                        }
                         y={chartData.length === 1 ? y + 12 : y + 2}
                         fill="#a1a1aa"
                         textAnchor={x > cx ? "start" : "end"}
@@ -67,7 +102,13 @@ export default function MaterialPieChartComponent({
                         {`${chart.data[index].name.slice(6, 40)}`}
                       </text>
                       <text
-                        x={chartData.length === 1 ? x + 30 : chartData.length > 4 ? x - 10 : x + 5}
+                        x={
+                          chartData.length === 1
+                            ? x + 30
+                            : chartData.length > 4
+                              ? x - 10
+                              : x + 5
+                        }
                         y={chartData.length === 1 ? y + 24 : y + 14}
                         fill="#a1a1aa"
                         textAnchor={x > cx ? "start" : "end"}
@@ -84,14 +125,20 @@ export default function MaterialPieChartComponent({
                     <Chart.RadialText
                       viewBox={viewBox}
                       title={isAllScanned ? "OK" : "!"}
-                      description={isAllScanned ? "Комплектующие" : "Отсканируйте"}
-                    // description={""}
+                      description={
+                        isAllScanned ? "Комплектующие" : "Отсканируйте"
+                      }
+                      // description={""}
                     />
                   )}
                 />
 
                 {chart.data.map((item) => (
-                  <Cell key={item.name} strokeWidth={0} fill={chart.color(item.color)}></Cell>
+                  <Cell
+                    key={item.name}
+                    strokeWidth={0}
+                    fill={chart.color(item.color)}
+                  ></Cell>
                 ))}
               </Pie>
             </PieChart>

@@ -13,15 +13,27 @@ import { useDashModeStore } from "./store/use-dash-mode-store";
 export default function DashFilter() {
   const mode = useDashModeStore(useShallow((state) => state.mode));
   const user = useAuthStore(useShallow((state) => state.user));
-  const plantSelectorOptions = useDashFilterStore(useShallow((state) => state.plantSelectorOptions));
-  const setSelectedPlant = useDashFilterStore(useShallow((state) => state.setSelectedPlant));
-  const changeFilter = useDashFilterStore(useShallow((state) => state.changeFilter));
-  const selectedPlant = useDashFilterStore(useShallow((state) => state.selectedPlant));
+  const plantSelectorOptions = useDashFilterStore(
+    useShallow((state) => state.plantSelectorOptions),
+  );
+  const setSelectedPlant = useDashFilterStore(
+    useShallow((state) => state.setSelectedPlant),
+  );
+  const changeFilter = useDashFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
+  const selectedPlant = useDashFilterStore(
+    useShallow((state) => state.selectedPlant),
+  );
 
   if (user && plantSelectorOptions.length && !selectedPlant) {
     const plant_id = user?.settings?.plant_id || plantSelectorOptions[0].id;
     setSelectedPlant(plant_id);
-    changeFilter({ key: DashFilterParams.PLANT, value: "", values: [plant_id] });
+    changeFilter({
+      key: DashFilterParams.PLANT,
+      value: "",
+      values: [plant_id],
+    });
   }
 
   const sheetSXProps: SxProps = [

@@ -1,4 +1,14 @@
-import { Dialog, Grid, GridItem, HStack, Heading, Stack, Text, Button, Status } from "@chakra-ui/react";
+import {
+  Dialog,
+  Grid,
+  GridItem,
+  HStack,
+  Heading,
+  Stack,
+  Text,
+  Button,
+  Status,
+} from "@chakra-ui/react";
 import { type DialogOpenChangeDetails } from "@chakra-ui/react";
 import type { DataFormField } from "../../helpers/data-form-field";
 
@@ -12,10 +22,10 @@ export interface IntegerEntryModalProps<T> {
   maxValue: number | null | undefined;
   unit: string | null | undefined;
   setOpen: (val: boolean) => void;
-  clearData: (val: Pick<DataFormField<T>, 'key'>) => void;
+  clearData: (val: Pick<DataFormField<T>, "key">) => void;
   changeData: (val: DataFormField<T>) => void;
-  sliceData: (val: Pick<DataFormField<T>, 'key'>) => void;
-  roundData: (val: Pick<DataFormField<T>, 'key'>) => void;
+  sliceData: (val: Pick<DataFormField<T>, "key">) => void;
+  roundData: (val: Pick<DataFormField<T>, "key">) => void;
 }
 
 interface AddEntryModalButtonProps {
@@ -50,7 +60,12 @@ export default function IntegerEntryModal<T>(props: IntegerEntryModalProps<T>) {
   };
 
   return (
-    <Dialog.Root open={props.open} onOpenChange={(e) => handleOpenchange(e)} placement="center" size="sm">
+    <Dialog.Root
+      open={props.open}
+      onOpenChange={(e) => handleOpenchange(e)}
+      placement="center"
+      size="sm"
+    >
       {/* <Portal> */}
       <Dialog.Backdrop />
       <Dialog.Positioner>
@@ -63,10 +78,11 @@ export default function IntegerEntryModal<T>(props: IntegerEntryModalProps<T>) {
                   <Status.Root
                     colorPalette={
                       props.data &&
-                        typeof props.maxValue === "number" &&
-                        typeof props.minValue === "number" &&
-                        props.data !== "0"
-                        ? Number(props.data) > props.maxValue || Number(props.data) < props.minValue
+                      typeof props.maxValue === "number" &&
+                      typeof props.minValue === "number" &&
+                      props.data !== "0"
+                        ? Number(props.data) > props.maxValue ||
+                          Number(props.data) < props.minValue
                           ? "red"
                           : "green"
                         : props.data && props.data !== "0"
@@ -81,7 +97,13 @@ export default function IntegerEntryModal<T>(props: IntegerEntryModalProps<T>) {
                 </HStack>
 
                 <Stack gap={5}>
-                  <HStack justify="end" px={4} py={2} rounded="md" borderWidth="1px">
+                  <HStack
+                    justify="end"
+                    px={4}
+                    py={2}
+                    rounded="md"
+                    borderWidth="1px"
+                  >
                     <Text textStyle="3xl" color="fg.a">
                       {props.data ? props.data : "0"}
                     </Text>
@@ -97,65 +119,123 @@ export default function IntegerEntryModal<T>(props: IntegerEntryModalProps<T>) {
           </Dialog.Header>
 
           <Dialog.Body backgroundColor="bg.panel" rounded="lg">
-            <Grid maxH="100%" w="100%" templateRows="repeat(15, 1fr)" templateColumns="repeat(12, 1fr)" gap={2}>
-              <GridItem colSpan={4} rowSpan={3}>
-                <AddEntryModalButton props={{ value: "C", onClick: () => props.clearData({ key: props.dataKey }) }} />
-              </GridItem>
-              <GridItem colSpan={8} rowSpan={3}>
-                <AddEntryModalButton props={{ value: "<<", onClick: () => props.sliceData({ key: props.dataKey }) }} />
-              </GridItem>
-              <GridItem colSpan={4} rowSpan={3}>
-                <AddEntryModalButton
-                  props={{ value: "7", onClick: () => props.changeData({ key: props.dataKey, value: "7" }) }}
-                />
-              </GridItem>
+            <Grid
+              maxH="100%"
+              w="100%"
+              templateRows="repeat(15, 1fr)"
+              templateColumns="repeat(12, 1fr)"
+              gap={2}
+            >
               <GridItem colSpan={4} rowSpan={3}>
                 <AddEntryModalButton
-                  props={{ value: "8", onClick: () => props.changeData({ key: props.dataKey, value: "8" }) }}
-                />
-              </GridItem>
-              <GridItem colSpan={4} rowSpan={3}>
-                <AddEntryModalButton
-                  props={{ value: "9", onClick: () => props.changeData({ key: props.dataKey, value: "9" }) }}
-                />
-              </GridItem>
-              <GridItem colSpan={4} rowSpan={3}>
-                <AddEntryModalButton
-                  props={{ value: "4", onClick: () => props.changeData({ key: props.dataKey, value: "4" }) }}
-                />
-              </GridItem>
-              <GridItem colSpan={4} rowSpan={3}>
-                <AddEntryModalButton
-                  props={{ value: "5", onClick: () => props.changeData({ key: props.dataKey, value: "5" }) }}
-                />
-              </GridItem>
-              <GridItem colSpan={4} rowSpan={3}>
-                <AddEntryModalButton
-                  props={{ value: "6", onClick: () => props.changeData({ key: props.dataKey, value: "6" }) }}
-                />
-              </GridItem>
-              <GridItem colSpan={4} rowSpan={3}>
-                <AddEntryModalButton
-                  props={{ value: "1", onClick: () => props.changeData({ key: props.dataKey, value: "1" }) }}
-                />
-              </GridItem>
-              <GridItem colSpan={4} rowSpan={3}>
-                <AddEntryModalButton
-                  props={{ value: "2", onClick: () => props.changeData({ key: props.dataKey, value: "2" }) }}
-                />
-              </GridItem>
-              <GridItem colSpan={4} rowSpan={3}>
-                <AddEntryModalButton
-                  props={{ value: "3", onClick: () => props.changeData({ key: props.dataKey, value: "3" }) }}
+                  props={{
+                    value: "C",
+                    onClick: () => props.clearData({ key: props.dataKey }),
+                  }}
                 />
               </GridItem>
               <GridItem colSpan={8} rowSpan={3}>
                 <AddEntryModalButton
-                  props={{ value: "0", onClick: () => props.changeData({ key: props.dataKey, value: "0" }) }}
+                  props={{
+                    value: "<<",
+                    onClick: () => props.sliceData({ key: props.dataKey }),
+                  }}
                 />
               </GridItem>
               <GridItem colSpan={4} rowSpan={3}>
-                <AddEntryModalButton props={{ value: "OK", onClick: () => handleClose() }} />
+                <AddEntryModalButton
+                  props={{
+                    value: "7",
+                    onClick: () =>
+                      props.changeData({ key: props.dataKey, value: "7" }),
+                  }}
+                />
+              </GridItem>
+              <GridItem colSpan={4} rowSpan={3}>
+                <AddEntryModalButton
+                  props={{
+                    value: "8",
+                    onClick: () =>
+                      props.changeData({ key: props.dataKey, value: "8" }),
+                  }}
+                />
+              </GridItem>
+              <GridItem colSpan={4} rowSpan={3}>
+                <AddEntryModalButton
+                  props={{
+                    value: "9",
+                    onClick: () =>
+                      props.changeData({ key: props.dataKey, value: "9" }),
+                  }}
+                />
+              </GridItem>
+              <GridItem colSpan={4} rowSpan={3}>
+                <AddEntryModalButton
+                  props={{
+                    value: "4",
+                    onClick: () =>
+                      props.changeData({ key: props.dataKey, value: "4" }),
+                  }}
+                />
+              </GridItem>
+              <GridItem colSpan={4} rowSpan={3}>
+                <AddEntryModalButton
+                  props={{
+                    value: "5",
+                    onClick: () =>
+                      props.changeData({ key: props.dataKey, value: "5" }),
+                  }}
+                />
+              </GridItem>
+              <GridItem colSpan={4} rowSpan={3}>
+                <AddEntryModalButton
+                  props={{
+                    value: "6",
+                    onClick: () =>
+                      props.changeData({ key: props.dataKey, value: "6" }),
+                  }}
+                />
+              </GridItem>
+              <GridItem colSpan={4} rowSpan={3}>
+                <AddEntryModalButton
+                  props={{
+                    value: "1",
+                    onClick: () =>
+                      props.changeData({ key: props.dataKey, value: "1" }),
+                  }}
+                />
+              </GridItem>
+              <GridItem colSpan={4} rowSpan={3}>
+                <AddEntryModalButton
+                  props={{
+                    value: "2",
+                    onClick: () =>
+                      props.changeData({ key: props.dataKey, value: "2" }),
+                  }}
+                />
+              </GridItem>
+              <GridItem colSpan={4} rowSpan={3}>
+                <AddEntryModalButton
+                  props={{
+                    value: "3",
+                    onClick: () =>
+                      props.changeData({ key: props.dataKey, value: "3" }),
+                  }}
+                />
+              </GridItem>
+              <GridItem colSpan={8} rowSpan={3}>
+                <AddEntryModalButton
+                  props={{
+                    value: "0",
+                    onClick: () =>
+                      props.changeData({ key: props.dataKey, value: "0" }),
+                  }}
+                />
+              </GridItem>
+              <GridItem colSpan={4} rowSpan={3}>
+                <AddEntryModalButton
+                  props={{ value: "OK", onClick: () => handleClose() }}
+                />
               </GridItem>
             </Grid>
           </Dialog.Body>

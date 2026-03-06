@@ -6,7 +6,11 @@ import {
 } from "../../../shared/api/services/tube-tresholds-service";
 
 export function isExtrusionTreshold(
-  obj: IExtrusionTreshold | IVarnishTreshold | IOffsetTreshold | ISealantTreshold
+  obj:
+    | IExtrusionTreshold
+    | IVarnishTreshold
+    | IOffsetTreshold
+    | ISealantTreshold,
 ): obj is IExtrusionTreshold {
   return (
     "id" in obj &&
@@ -37,7 +41,11 @@ export function isExtrusionTreshold(
 }
 
 export function isVarnishTreshold(
-  obj: IExtrusionTreshold | IVarnishTreshold | IOffsetTreshold | ISealantTreshold
+  obj:
+    | IExtrusionTreshold
+    | IVarnishTreshold
+    | IOffsetTreshold
+    | ISealantTreshold,
 ): obj is IVarnishTreshold {
   return (
     "id" in obj &&
@@ -82,7 +90,11 @@ export function isVarnishTreshold(
 }
 
 export function isOffsetTreshold(
-  obj: IExtrusionTreshold | IVarnishTreshold | IOffsetTreshold | ISealantTreshold
+  obj:
+    | IExtrusionTreshold
+    | IVarnishTreshold
+    | IOffsetTreshold
+    | ISealantTreshold,
 ): obj is IOffsetTreshold {
   return (
     "id" in obj &&
@@ -121,7 +133,11 @@ export function isOffsetTreshold(
 }
 
 export function isSealantTreshold(
-  obj: IExtrusionTreshold | IVarnishTreshold | IOffsetTreshold | ISealantTreshold
+  obj:
+    | IExtrusionTreshold
+    | IVarnishTreshold
+    | IOffsetTreshold
+    | ISealantTreshold,
 ): obj is ISealantTreshold {
   return (
     "id" in obj &&

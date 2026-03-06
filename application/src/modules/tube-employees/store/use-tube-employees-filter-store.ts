@@ -32,7 +32,8 @@ export const useTubeEmployeesFilterStore = create<TubeEmployeesFilterStore>()(
     selectedBannedOption: 999999,
     rankSelectorOptions: [],
     bannedSelectorOptions: [],
-    clearFilter: () => set(() => ({ filter: initFilterValue, selectedBannedOption: 999999 })),
+    clearFilter: () =>
+      set(() => ({ filter: initFilterValue, selectedBannedOption: 999999 })),
     changeFilter: ({ key, value, values }) => {
       switch (key) {
         case TubeEmployeesFilterParams.NAME:
@@ -40,23 +41,36 @@ export const useTubeEmployeesFilterStore = create<TubeEmployeesFilterStore>()(
           break;
 
         case TubeEmployeesFilterParams.NAME_ASC:
-          set((state) => ({ filter: { ...state.filter, nameAsc: value === "true" ? true : false } }));
+          set((state) => ({
+            filter: {
+              ...state.filter,
+              nameAsc: value === "true" ? true : false,
+            },
+          }));
           break;
         case TubeEmployeesFilterParams.RANKS:
           set((state) => ({
-            filter: { ...state.filter, ranks: values ? [...values] : [...state.filter.ranks] },
+            filter: {
+              ...state.filter,
+              ranks: values ? [...values] : [...state.filter.ranks],
+            },
           }));
           break;
         case TubeEmployeesFilterParams.BANNED:
           set((state) => ({
-            filter: { ...state.filter, banned: values ? [...values] : [...state.filter.banned] },
+            filter: {
+              ...state.filter,
+              banned: values ? [...values] : [...state.filter.banned],
+            },
           }));
           break;
         default:
           break;
       }
     },
-    fillRankSelectorOptions: (values) => set(() => ({ rankSelectorOptions: [...values] })),
-    setSelectedBannedOption: (value) => set(() => ({ selectedBannedOption: value })),
-  }))
+    fillRankSelectorOptions: (values) =>
+      set(() => ({ rankSelectorOptions: [...values] })),
+    setSelectedBannedOption: (value) =>
+      set(() => ({ selectedBannedOption: value })),
+  })),
 );

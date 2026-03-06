@@ -60,7 +60,9 @@ export default class EmployeeService {
     return res.data;
   }
 
-  static async getEmployeeListWithParams(dto: FetchEmployeesDto): Promise<IEmployeeResponse> {
+  static async getEmployeeListWithParams(
+    dto: FetchEmployeesDto,
+  ): Promise<IEmployeeResponse> {
     const res = await $api.post(`/employees/list`, dto);
     return res.data;
   }

@@ -9,8 +9,12 @@ import FilterMultiSelector, {
 
 export default function ForemanFilterStateSelector() {
   const filter = useForemanFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useForemanFilterStore(useShallow((state) => state.changeFilter));
-  const stateSelectorOptions = useForemanFilterStore(useShallow((state) => state.stateSelectorOptions));
+  const changeFilter = useForemanFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
+  const stateSelectorOptions = useForemanFilterStore(
+    useShallow((state) => state.stateSelectorOptions),
+  );
 
   const stateOptions = stateSelectorOptions.map((state) => (
     <FilterMultiSelectorOption
@@ -27,8 +31,15 @@ export default function ForemanFilterStateSelector() {
     placeholder: "Выберите статус",
     label: "Поиск по статусу",
     options: stateOptions,
-    changeFilter: ({ key, value, values }: { key: string; value: string; values: number[] | [] }) =>
-      changeFilter({ key, value, values }),
+    changeFilter: ({
+      key,
+      value,
+      values,
+    }: {
+      key: string;
+      value: string;
+      values: number[] | [];
+    }) => changeFilter({ key, value, values }),
   };
 
   return <FilterMultiSelector {...stateSelectorProps} />;

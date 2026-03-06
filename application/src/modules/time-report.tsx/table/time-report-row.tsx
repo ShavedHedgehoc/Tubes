@@ -1,20 +1,31 @@
 import { Typography } from "@mui/joy";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
-import { formatDateToString, formatTimeToString } from "../../../shared/helpers/date-time-formatters";
+import {
+  formatDateToString,
+  formatTimeToString,
+} from "../../../shared/helpers/date-time-formatters";
 import { TimeReportRowData } from "../../../shared/api/services/record-service";
 import { TableIconButton } from "../../../shared/ui/table-icon-button";
 import { useTimeReportHistoryModalStore } from "../store/use-time-report-history-modal-store";
 import { useShallow } from "zustand/react/shallow";
 
 export default function TimeReportRow({ row }: { row: TimeReportRowData }) {
-  const setOpen = useTimeReportHistoryModalStore(useShallow((state) => state.setOpen));
-  const setRecordId = useTimeReportHistoryModalStore(useShallow((state) => state.setRecordId));
-  const setTitle = useTimeReportHistoryModalStore(useShallow((state) => state.setTitle));
+  const setOpen = useTimeReportHistoryModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const setRecordId = useTimeReportHistoryModalStore(
+    useShallow((state) => state.setRecordId),
+  );
+  const setTitle = useTimeReportHistoryModalStore(
+    useShallow((state) => state.setTitle),
+  );
 
   const handleDetailButtonClick = () => {
     setRecordId(row.id);
-    setTitle(`Историй статусов по продукту ${row.product}, партия - ${row.boil}`);
+    setTitle(
+      `Историй статусов по продукту ${row.product}, партия - ${row.boil}`,
+    );
     setOpen(true);
   };
 
@@ -37,7 +48,11 @@ export default function TimeReportRow({ row }: { row: TimeReportRowData }) {
         <Typography level="body-xs">{row.plan}</Typography>
       </td>
       <td style={{ width: 20, textAlign: "center", padding: "18px 6px" }}>
-        <TableIconButton color="success" disabled={row.state === "-"} onClick={() => handleDetailButtonClick()}>
+        <TableIconButton
+          color="success"
+          disabled={row.state === "-"}
+          onClick={() => handleDetailButtonClick()}
+        >
           <InfoOutlinedIcon />
         </TableIconButton>
       </td>
@@ -51,25 +66,37 @@ export default function TimeReportRow({ row }: { row: TimeReportRowData }) {
       </td>
       <td style={{ width: 100, textAlign: "center", padding: "18px 6px" }}>
         <Typography level="body-xs">
-          {row.lastPlugPass ? `${formatDateToString(row.lastPlugPass)} ${formatTimeToString(row.lastPlugPass)}` : "-"}
+          {row.lastPlugPass
+            ? `${formatDateToString(row.lastPlugPass)} ${formatTimeToString(row.lastPlugPass)}`
+            : "-"}
         </Typography>
       </td>
 
       <td style={{ width: 80, textAlign: "center", padding: "18px 6px" }}>
-        <Typography level="body-xs">{row.lastProductCheck ? formatTimeToString(row.lastProductCheck) : "-"}</Typography>
+        <Typography level="body-xs">
+          {row.lastProductCheck
+            ? formatTimeToString(row.lastProductCheck)
+            : "-"}
+        </Typography>
       </td>
 
       <td style={{ width: 80, textAlign: "center", padding: "18px 6px" }}>
-        <Typography level="body-xs">{row.lastProductPass ? formatTimeToString(row.lastProductPass) : "-"}</Typography>
+        <Typography level="body-xs">
+          {row.lastProductPass ? formatTimeToString(row.lastProductPass) : "-"}
+        </Typography>
       </td>
       <td style={{ width: 80, textAlign: "center", padding: "18px 6px" }}>
         <Typography level="body-xs">
-          {row.lastProductInProgress ? formatTimeToString(row.lastProductInProgress) : "-"}
+          {row.lastProductInProgress
+            ? formatTimeToString(row.lastProductInProgress)
+            : "-"}
         </Typography>
       </td>
       <td style={{ width: 100, textAlign: "center", padding: "18px 6px" }}>
         <Typography level="body-xs">
-          {row.lastProductFinished ? formatTimeToString(row.lastProductFinished) : "-"}
+          {row.lastProductFinished
+            ? formatTimeToString(row.lastProductFinished)
+            : "-"}
         </Typography>
       </td>
     </tr>

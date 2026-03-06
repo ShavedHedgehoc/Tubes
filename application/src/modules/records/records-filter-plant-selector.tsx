@@ -1,15 +1,30 @@
 import { useShallow } from "zustand/react/shallow";
-import FilterSelector, { FilterSelectorOption, FilterSelectorProps } from "../../shared/ui/filter-selector";
+import FilterSelector, {
+  FilterSelectorOption,
+  FilterSelectorProps,
+} from "../../shared/ui/filter-selector";
 import { RecordsFilterParams } from "./records-filter-params";
 import { useRecordsFilterStore } from "./store/use-record-filter-store";
 
 export default function RecordsFilterPlantSelector() {
-  const changeFilter = useRecordsFilterStore(useShallow((state) => state.changeFilter));
-  const selectedPlant = useRecordsFilterStore(useShallow((state) => state.selectedPlant));
-  const setSelectedPlant = useRecordsFilterStore(useShallow((state) => state.setSelectedPlant));
-  const plantSelectorOptions = useRecordsFilterStore(useShallow((state) => state.plantSelectorOptions));
+  const changeFilter = useRecordsFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
+  const selectedPlant = useRecordsFilterStore(
+    useShallow((state) => state.selectedPlant),
+  );
+  const setSelectedPlant = useRecordsFilterStore(
+    useShallow((state) => state.setSelectedPlant),
+  );
+  const plantSelectorOptions = useRecordsFilterStore(
+    useShallow((state) => state.plantSelectorOptions),
+  );
   const plantOptions = plantSelectorOptions.map((plant) => (
-    <FilterSelectorOption key={`plant_option_${plant.id}`} id={plant.id} value={plant.value} />
+    <FilterSelectorOption
+      key={`plant_option_${plant.id}`}
+      id={plant.id}
+      value={plant.value}
+    />
   ));
 
   const plantSelectorProps: FilterSelectorProps = {
@@ -19,8 +34,15 @@ export default function RecordsFilterPlantSelector() {
     label: "Выбор площадки",
     options: plantOptions,
     setSelectedOption: (id: number) => setSelectedPlant(id),
-    changeFilter: ({ key, value, values }: { key: string; value: string; values: number[] | [] }) =>
-      changeFilter({ key, value, values }),
+    changeFilter: ({
+      key,
+      value,
+      values,
+    }: {
+      key: string;
+      value: string;
+      values: number[] | [];
+    }) => changeFilter({ key, value, values }),
   };
 
   return <FilterSelector {...plantSelectorProps} />;

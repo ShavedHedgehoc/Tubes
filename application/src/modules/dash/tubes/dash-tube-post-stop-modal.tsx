@@ -12,14 +12,30 @@ import { useTubeCreateSealantStatus } from "../../../shared/api/use-tube-create-
 
 export default function DashTubePostStopModal() {
   const open = useDashTubePostStopModalStore(useShallow((state) => state.open));
-  const title = useDashTubePostStopModalStore(useShallow((state) => state.title));
-  const summary_id = useDashTubePostStopModalStore(useShallow((state) => state.summary_id));
-  const defectValue = useDashTubePostStopModalStore(useShallow((state) => state.defectValue));
-  const post_id = useDashTubePostStopModalStore(useShallow((state) => state.post_id));
-  const setSummaryId = useDashTubePostStopModalStore(useShallow((state) => state.setSummaryId));
-  const setDefectValue = useDashTubePostStopModalStore(useShallow((state) => state.setDefectValue));
-  const clearData = useDashTubePostStopModalStore(useShallow((state) => state.clearData));
-  const setOpen = useDashTubePostStopModalStore(useShallow((state) => state.setOpen));
+  const title = useDashTubePostStopModalStore(
+    useShallow((state) => state.title),
+  );
+  const summary_id = useDashTubePostStopModalStore(
+    useShallow((state) => state.summary_id),
+  );
+  const defectValue = useDashTubePostStopModalStore(
+    useShallow((state) => state.defectValue),
+  );
+  const post_id = useDashTubePostStopModalStore(
+    useShallow((state) => state.post_id),
+  );
+  const setSummaryId = useDashTubePostStopModalStore(
+    useShallow((state) => state.setSummaryId),
+  );
+  const setDefectValue = useDashTubePostStopModalStore(
+    useShallow((state) => state.setDefectValue),
+  );
+  const clearData = useDashTubePostStopModalStore(
+    useShallow((state) => state.clearData),
+  );
+  const setOpen = useDashTubePostStopModalStore(
+    useShallow((state) => state.setOpen),
+  );
 
   const { createTubeExtrusionStatus } = useTubeCreateExtrusionStatus();
   const { createTubeVarnishStatus } = useTubeCreateVarnishStatus();
@@ -85,7 +101,15 @@ export default function DashTubePostStopModal() {
   };
 
   const Buttons = () => (
-    <Stack direction="row" sx={{ width: "100%", display: "flex", justifyContent: "flex-end", gap: 2 }}>
+    <Stack
+      direction="row"
+      sx={{
+        width: "100%",
+        display: "flex",
+        justifyContent: "flex-end",
+        gap: 2,
+      }}
+    >
       <ModalButton {...startButtonProps} />
       <ModalButton {...closeButtonProps} />
     </Stack>
@@ -95,11 +119,19 @@ export default function DashTubePostStopModal() {
     <ModalLayout props={modalProps} buttons={<Buttons />}>
       <Stack gap={2}>
         <Typography level="body-sm">
-          Вы действительно хотите закончить работу поста? Дальнейшее введение данных будет невозможно...
+          Вы действительно хотите закончить работу поста? Дальнейшее введение
+          данных будет невозможно...
         </Typography>
-        <Typography level="body-sm">Для завершения работы поста необходимо внести количество брака</Typography>
+        <Typography level="body-sm">
+          Для завершения работы поста необходимо внести количество брака
+        </Typography>
       </Stack>
-      <Stack direction="row" alignItems="center" gap={4} justifyContent="flex-start">
+      <Stack
+        direction="row"
+        alignItems="center"
+        gap={4}
+        justifyContent="flex-start"
+      >
         <Typography level="body-md">Брак: </Typography>
         <Input
           type="number"

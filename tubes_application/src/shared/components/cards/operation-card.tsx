@@ -11,7 +11,13 @@ interface OperationCardProps {
 export default function OperationCard(props: OperationCardProps) {
   return (
     <Box
-      backgroundColor={props.disabled ? "red.muted" : props.selected ? "green.muted" : "bg.panel"}
+      backgroundColor={
+        props.disabled
+          ? "red.muted"
+          : props.selected
+            ? "green.muted"
+            : "bg.panel"
+      }
       w="full"
       minH="120px"
       rounded="lg"
@@ -19,10 +25,16 @@ export default function OperationCard(props: OperationCardProps) {
       px={6}
       alignItems="center"
       justifyContent="center"
-      onClick={() => (props.disabled ? undefined : props.onClick(props.operation))}
+      onClick={() =>
+        props.disabled ? undefined : props.onClick(props.operation)
+      }
     >
       <Stack h="full" justify="space-between">
-        <Text textStyle="md" color={props.disabled ? "fg.subtle" : "fg.a"} w="full">
+        <Text
+          textStyle="md"
+          color={props.disabled ? "fg.subtle" : "fg.a"}
+          w="full"
+        >
           {props.operation.description}
         </Text>
         <HStack justify="center">
@@ -33,11 +45,19 @@ export default function OperationCard(props: OperationCardProps) {
           )}
         </HStack>
         <HStack justify="space-between">
-          <Text textStyle="lg" color={props.disabled ? "fg.subtle" : "fg.muted"} alignItems="flex-end">
+          <Text
+            textStyle="lg"
+            color={props.disabled ? "fg.subtle" : "fg.muted"}
+            alignItems="flex-end"
+          >
             {`Разряд: ${props.operation.min_rank}`}
           </Text>
 
-          <Text textStyle="lg" color={props.disabled ? "fg.subtle" : "fg.muted"} alignItems="flex-end">
+          <Text
+            textStyle="lg"
+            color={props.disabled ? "fg.subtle" : "fg.muted"}
+            alignItems="flex-end"
+          >
             {`Код: ${props.operation.value}`}
           </Text>
         </HStack>

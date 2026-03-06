@@ -8,10 +8,18 @@ import BoilsReportHistoryModalRow from "./boils-report-history-modal-row";
 import { useBoilsHistories } from "../../../shared/api/use-boils-histories";
 
 export default function BoilsReportHistoryModal() {
-  const open = useBoilsReportHistoryModalStore(useShallow((state) => state.open));
-  const record_id = useBoilsReportHistoryModalStore(useShallow((state) => state.record_id));
-  const title = useBoilsReportHistoryModalStore(useShallow((state) => state.title));
-  const setOpen = useBoilsReportHistoryModalStore(useShallow((state) => state.setOpen));
+  const open = useBoilsReportHistoryModalStore(
+    useShallow((state) => state.open),
+  );
+  const record_id = useBoilsReportHistoryModalStore(
+    useShallow((state) => state.record_id),
+  );
+  const title = useBoilsReportHistoryModalStore(
+    useShallow((state) => state.title),
+  );
+  const setOpen = useBoilsReportHistoryModalStore(
+    useShallow((state) => state.setOpen),
+  );
   const { isPending, data, isSuccess } = useBoilsHistories(record_id);
 
   const history_table_thead: TheadProperties[] = [
@@ -38,7 +46,10 @@ export default function BoilsReportHistoryModal() {
     }
     return (
       <TableLayout thead={history_table_thead}>
-        {isSuccess && data.map((row) => <BoilsReportHistoryModalRow row={row} key={row.id} />)}
+        {isSuccess &&
+          data.map((row) => (
+            <BoilsReportHistoryModalRow row={row} key={row.id} />
+          ))}
       </TableLayout>
     );
   };

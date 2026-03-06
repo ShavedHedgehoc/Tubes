@@ -8,7 +8,11 @@ import { RouteNames } from "../../shared/router/route-names";
 
 import { TableIconButton } from "../../shared/ui/table-icon-button";
 
-export default function TraceBatchWghtReportTableRow({ row }: { row: ITraceBatchWghtReportRowData }) {
+export default function TraceBatchWghtReportTableRow({
+  row,
+}: {
+  row: ITraceBatchWghtReportRowData;
+}) {
   const navigate = useNavigate();
   function currentState(row: ITraceBatchWghtReportRowData) {
     return row.fact_q
@@ -23,10 +27,16 @@ export default function TraceBatchWghtReportTableRow({ row }: { row: ITraceBatch
   return (
     <tr key={`${row.product_id + row.batch_id}`}>
       <td style={{ width: 30, textAlign: "center", padding: "12px 24px" }}>
-        <TableState text={row.batch_date ? formatDateToString(row.batch_date) : "-"} state={currentState(row)} />
+        <TableState
+          text={row.batch_date ? formatDateToString(row.batch_date) : "-"}
+          state={currentState(row)}
+        />
       </td>
       <td style={{ width: 30, textAlign: "center", padding: "12px 24px" }}>
-        <TableState text={row.plant ? row.plant : "-"} state={currentState(row)} />
+        <TableState
+          text={row.plant ? row.plant : "-"}
+          state={currentState(row)}
+        />
       </td>
       <td style={{ width: 30, textAlign: "center", padding: "12px 24px" }}>
         <TableState text={row.batch_name} state={currentState(row)} />
@@ -44,14 +54,16 @@ export default function TraceBatchWghtReportTableRow({ row }: { row: ITraceBatch
             currentState(row) === "product_pass"
               ? "success"
               : currentState(row) === "product_check"
-              ? "warning"
-              : "danger"
+                ? "warning"
+                : "danger"
           }
           variant="plain"
           size="sm"
           disabled={!row.fact_q}
           onClick={() =>
-            navigate(`${RouteNames.TRACE_WGHT_REPORT_DETAIL}?batch_name=${row.batch_name}&product_id=${row.product_id}`)
+            navigate(
+              `${RouteNames.TRACE_WGHT_REPORT_DETAIL}?batch_name=${row.batch_name}&product_id=${row.product_id}`,
+            )
           }
         >
           <InfoOutlinedIcon />

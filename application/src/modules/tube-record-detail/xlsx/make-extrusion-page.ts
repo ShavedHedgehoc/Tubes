@@ -1,9 +1,18 @@
 import { utils, WorkBook } from "xlsx-js-style";
-import { formatDateToString, formatTimeToString } from "../../../shared/helpers/date-time-formatters";
+import {
+  formatDateToString,
+  formatTimeToString,
+} from "../../../shared/helpers/date-time-formatters";
 import { TubeRecordDetail } from "../../../shared/api/services/tube-records-service";
 import { PostNames } from "../../../shared/helpers/post-names";
 
-export default function makeExtrusionPage({ workbook, data }: { workbook: WorkBook; data: TubeRecordDetail }) {
+export default function makeExtrusionPage({
+  workbook,
+  data,
+}: {
+  workbook: WorkBook;
+  data: TubeRecordDetail;
+}) {
   const extrusionHeaders = [
     "время", //1
     "показания счетчика", //2
@@ -672,10 +681,11 @@ export default function makeExtrusionPage({ workbook, data }: { workbook: WorkBo
   };
 
   worksheet["C10"] = {
-    v: `${data.extrusion.tresholds
+    v: `${
+      data.extrusion.tresholds
         ? `${data.extrusion.tresholds.press_speed_min}-${data.extrusion.tresholds.press_speed_max}`
         : "-"
-      }`,
+    }`,
     t: "s",
     s: {
       fill: { fgColor: { rgb: "d1fae5" } },
@@ -715,10 +725,11 @@ export default function makeExtrusionPage({ workbook, data }: { workbook: WorkBo
   };
 
   worksheet["D10"] = {
-    v: `${data.extrusion.tresholds
+    v: `${
+      data.extrusion.tresholds
         ? `${data.extrusion.tresholds.blow_time_min}-${data.extrusion.tresholds.blow_time_max}`
         : "-"
-      }`,
+    }`,
     t: "s",
     s: {
       fill: { fgColor: { rgb: "d1fae5" } },
@@ -758,10 +769,11 @@ export default function makeExtrusionPage({ workbook, data }: { workbook: WorkBo
   };
 
   worksheet["E10"] = {
-    v: `${data.extrusion.tresholds
+    v: `${
+      data.extrusion.tresholds
         ? `${data.extrusion.tresholds.turning_machine_speed_min}-${data.extrusion.tresholds.turning_machine_speed_max}`
         : "-"
-      }`,
+    }`,
     t: "s",
     s: {
       fill: { fgColor: { rgb: "d1fae5" } },
@@ -801,10 +813,11 @@ export default function makeExtrusionPage({ workbook, data }: { workbook: WorkBo
   };
 
   worksheet["F10"] = {
-    v: `${data.extrusion.tresholds
+    v: `${
+      data.extrusion.tresholds
         ? `${data.extrusion.tresholds.annealing_furnace_temp_min}-${data.extrusion.tresholds.annealing_furnace_temp_max}`
         : "-"
-      }`,
+    }`,
     t: "s",
     s: {
       fill: { fgColor: { rgb: "d1fae5" } },
@@ -844,8 +857,13 @@ export default function makeExtrusionPage({ workbook, data }: { workbook: WorkBo
   };
 
   worksheet["G10"] = {
-    v: `${data.extrusion.tresholds ? (data.extrusion.tresholds.rondel ? data.extrusion.tresholds.rondel.value : "-") : "-"
-      }`,
+    v: `${
+      data.extrusion.tresholds
+        ? data.extrusion.tresholds.rondel
+          ? data.extrusion.tresholds.rondel.value
+          : "-"
+        : "-"
+    }`,
     t: "s",
     s: {
       fill: { fgColor: { rgb: "d1fae5" } },
@@ -877,10 +895,11 @@ export default function makeExtrusionPage({ workbook, data }: { workbook: WorkBo
   };
 
   worksheet["H10"] = {
-    v: `${data.extrusion.tresholds
+    v: `${
+      data.extrusion.tresholds
         ? `${data.extrusion.tresholds.tube_cylindrical_section_length_min}-${data.extrusion.tresholds.tube_cylindrical_section_length_max}`
         : "-"
-      }`,
+    }`,
     t: "s",
     s: {
       fill: { fgColor: { rgb: "d1fae5" } },
@@ -920,10 +939,11 @@ export default function makeExtrusionPage({ workbook, data }: { workbook: WorkBo
   };
 
   worksheet["I10"] = {
-    v: `${data.extrusion.tresholds
+    v: `${
+      data.extrusion.tresholds
         ? `${data.extrusion.tresholds.membrane_thickness_min}-${data.extrusion.tresholds.membrane_thickness_max}`
         : "-"
-      }`,
+    }`,
     t: "s",
     s: {
       fill: { fgColor: { rgb: "d1fae5" } },
@@ -963,10 +983,11 @@ export default function makeExtrusionPage({ workbook, data }: { workbook: WorkBo
   };
 
   worksheet["J10"] = {
-    v: `${data.extrusion.tresholds
+    v: `${
+      data.extrusion.tresholds
         ? `${data.extrusion.tresholds.tube_diameter_min}-${data.extrusion.tresholds.tube_diameter_max}`
         : "-"
-      }`,
+    }`,
     t: "s",
     s: {
       fill: { fgColor: { rgb: "d1fae5" } },
@@ -1006,10 +1027,11 @@ export default function makeExtrusionPage({ workbook, data }: { workbook: WorkBo
   };
 
   worksheet["K10"] = {
-    v: `${data.extrusion.tresholds
+    v: `${
+      data.extrusion.tresholds
         ? `${data.extrusion.tresholds.tube_cylindrical_section_thickness_min}-${data.extrusion.tresholds.tube_cylindrical_section_thickness_max}`
         : "-"
-      }`,
+    }`,
     t: "s",
     s: {
       fill: { fgColor: { rgb: "d1fae5" } },
@@ -1049,10 +1071,11 @@ export default function makeExtrusionPage({ workbook, data }: { workbook: WorkBo
   };
 
   worksheet["L10"] = {
-    v: `${data.extrusion.tresholds
+    v: `${
+      data.extrusion.tresholds
         ? `${data.extrusion.tresholds.tube_rigidity_min}-${data.extrusion.tresholds.tube_rigidity_max}`
         : "-"
-      }`,
+    }`,
     t: "s",
     s: {
       fill: { fgColor: { rgb: "d1fae5" } },
@@ -1243,7 +1266,9 @@ export default function makeExtrusionPage({ workbook, data }: { workbook: WorkBo
     },
   };
 
-  const rowsShift = data.extrusion.params.length ? data.extrusion.params.length : 0;
+  const rowsShift = data.extrusion.params.length
+    ? data.extrusion.params.length
+    : 0;
   const shiftAddress = () => {
     return utils.encode_cell({ c: 0, r: 12 + rowsShift });
   };
@@ -1266,7 +1291,10 @@ export default function makeExtrusionPage({ workbook, data }: { workbook: WorkBo
   const mergeRangeN10N11 = { s: { r: 9, c: 13 }, e: { r: 10, c: 13 } };
   const mergeRangeO10O11 = { s: { r: 9, c: 14 }, e: { r: 10, c: 14 } };
   const mergeRangeP8P11 = { s: { r: 7, c: 15 }, e: { r: 10, c: 15 } };
-  const mergeRange = { s: { r: 12 + rowsShift, c: 0 }, e: { r: 12 + rowsShift, c: 4 } };
+  const mergeRange = {
+    s: { r: 12 + rowsShift, c: 0 },
+    e: { r: 12 + rowsShift, c: 4 },
+  };
 
   worksheet["!merges"] = [
     mergeRangeA1P1,

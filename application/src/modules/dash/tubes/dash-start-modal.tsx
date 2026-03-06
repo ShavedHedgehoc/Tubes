@@ -10,13 +10,23 @@ import { useDashSelectSummaryModalStore } from "../store/use-dash-select-summary
 
 export default function DashStartModal() {
   const open = useDashStartModalStore(useShallow((state) => state.open));
-  const summary_id = useDashStartModalStore(useShallow((state) => state.summary_id));
-  const boil_value = useDashStartModalStore(useShallow((state) => state.boil_value));
-  const setBoilValue = useDashStartModalStore(useShallow((state) => state.setBoilValue));
-  const setSummaryId = useDashStartModalStore(useShallow((state) => state.setSummaryId));
+  const summary_id = useDashStartModalStore(
+    useShallow((state) => state.summary_id),
+  );
+  const boil_value = useDashStartModalStore(
+    useShallow((state) => state.boil_value),
+  );
+  const setBoilValue = useDashStartModalStore(
+    useShallow((state) => state.setBoilValue),
+  );
+  const setSummaryId = useDashStartModalStore(
+    useShallow((state) => state.setSummaryId),
+  );
   const title = useDashStartModalStore(useShallow((state) => state.title));
   const setOpen = useDashStartModalStore(useShallow((state) => state.setOpen));
-  const setOpenParent = useDashSelectSummaryModalStore(useShallow((state) => state.setOpen));
+  const setOpenParent = useDashSelectSummaryModalStore(
+    useShallow((state) => state.setOpen),
+  );
 
   const { startTubeSummary } = useStartTubeSummary();
 
@@ -59,7 +69,15 @@ export default function DashStartModal() {
   };
 
   const Buttons = () => (
-    <Stack direction="row" sx={{ width: "100%", display: "flex", justifyContent: "flex-end", gap: 2 }}>
+    <Stack
+      direction="row"
+      sx={{
+        width: "100%",
+        display: "flex",
+        justifyContent: "flex-end",
+        gap: 2,
+      }}
+    >
       <ModalButton {...startButtonProps} />
       <ModalButton {...closeButtonProps} />
     </Stack>

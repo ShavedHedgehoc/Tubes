@@ -5,7 +5,9 @@ import { ForemanFilterParams } from "./foreman-filter-params";
 
 export default function ForemanFilterConveyorInput() {
   const filter = useForemanFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useForemanFilterStore(useShallow((state) => state.changeFilter));
+  const changeFilter = useForemanFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
 
   const inputProps: FilterInputProps = {
     id: ForemanFilterParams.CONVEYOR,
@@ -13,7 +15,8 @@ export default function ForemanFilterConveyorInput() {
     disabled: filter.conveyor === "",
     label: "Поиск по конвейеру",
     placeholder: "Конвейер",
-    changeFilter: ({ key, value }: { key: string; value: string }) => changeFilter({ key, value }),
+    changeFilter: ({ key, value }: { key: string; value: string }) =>
+      changeFilter({ key, value }),
   };
 
   return <FilterInput {...inputProps} />;

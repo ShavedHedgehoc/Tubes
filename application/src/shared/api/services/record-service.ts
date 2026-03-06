@@ -76,17 +76,23 @@ export interface TimeReportRowData {
 }
 
 export default class RecordService {
-  static async getHistoriesByRecordId(record_id: number | null): Promise<RecordHistoriesResponse> {
+  static async getHistoriesByRecordId(
+    record_id: number | null,
+  ): Promise<RecordHistoriesResponse> {
     const res = await $api.get(`/record_detail/${record_id}`);
     return res.data;
   }
 
-  static async getCurrentRecordsList(dto: FetchProductsDto): Promise<SummaryResponse> {
+  static async getCurrentRecordsList(
+    dto: FetchProductsDto,
+  ): Promise<SummaryResponse> {
     const res = await $api.post(`/doc_detail/`, dto);
     return res.data;
   }
 
-  static async getRecordsByDocId(dto: FetchProductsWithDocIdDto): Promise<SummaryResponse> {
+  static async getRecordsByDocId(
+    dto: FetchProductsWithDocIdDto,
+  ): Promise<SummaryResponse> {
     const res = await $api.post(`/doc_detail/by_id/`, dto);
     return res.data;
   }

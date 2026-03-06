@@ -21,7 +21,9 @@ export interface RegisterDto {
 }
 
 export default class AuthService {
-  static async register(dto: RegisterDto): Promise<AxiosResponse<AuthResponce>> {
+  static async register(
+    dto: RegisterDto,
+  ): Promise<AxiosResponse<AuthResponce>> {
     return $api.post(ApiRoutes.REGISTER, dto);
   }
   static async login(dto: LoginDto): Promise<AxiosResponse<AuthResponce>> {

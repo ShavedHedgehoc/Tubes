@@ -29,9 +29,15 @@ export default function BoilsTable() {
   const page = useBoilsPaginationStore(useShallow((state) => state.page));
   const limit = useBoilsPaginationStore(useShallow((state) => state.limit));
   const total = useBoilsPaginationStore(useShallow((state) => state.total));
-  const setTotal = useBoilsPaginationStore(useShallow((state) => state.setTotal));
+  const setTotal = useBoilsPaginationStore(
+    useShallow((state) => state.setTotal),
+  );
   const setPage = useBoilsPaginationStore(useShallow((state) => state.setPage));
-  const { isPending, data, isSuccess } = useBoils({ filter: filter, limit: limit, page: page });
+  const { isPending, data, isSuccess } = useBoils({
+    filter: filter,
+    limit: limit,
+    page: page,
+  });
 
   //REmove useeffects
 
@@ -57,7 +63,8 @@ export default function BoilsTable() {
 
   return (
     <TableLayout thead={commonThead}>
-      {isSuccess && data.rows.map((row) => <RowComponent row={row} key={row.id} />)}
+      {isSuccess &&
+        data.rows.map((row) => <RowComponent row={row} key={row.id} />)}
     </TableLayout>
   );
 }

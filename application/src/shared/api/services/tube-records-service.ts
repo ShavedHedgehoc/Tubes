@@ -426,8 +426,12 @@ export default class TubeRecordsService {
     return res.data;
   }
 
-  static async getAvailableTubeRecords(conveyor_id: number | null): Promise<IAvailabletubeSummariesResponse> {
-    const res = await $apiTubes.get(`/summaries/available?conveyor_id=${conveyor_id}`);
+  static async getAvailableTubeRecords(
+    conveyor_id: number | null,
+  ): Promise<IAvailabletubeSummariesResponse> {
+    const res = await $apiTubes.get(
+      `/summaries/available?conveyor_id=${conveyor_id}`,
+    );
     return res.data;
   }
 
@@ -446,17 +450,22 @@ export default class TubeRecordsService {
     return res.data;
   }
 
-  static async getTubeRecordDetail(id: string | undefined): Promise<TubeRecordDetail> {
+  static async getTubeRecordDetail(
+    id: string | undefined,
+  ): Promise<TubeRecordDetail> {
     const res = await $apiTubes.get(`/summaries/detail/${id}`);
     return res.data;
   }
 
-  static async getRecordsList(dto: FetchTubeRecordsListDto): Promise<TubeRecordsListResponce> {
+  static async getRecordsList(
+    dto: FetchTubeRecordsListDto,
+  ): Promise<TubeRecordsListResponce> {
     const res = await $apiTubes.get(
-      `/summaries?start_date=${dto.filter.start_date}&end_date=${dto.filter.end_date}&page=${dto.page}&limit=${dto.limit
+      `/summaries?start_date=${dto.filter.start_date}&end_date=${dto.filter.end_date}&page=${dto.page}&limit=${
+        dto.limit
       }&code=${dto.filter.code}${dto.filter.states.map((item) => `&states=${item}`)}${dto.filter.conveyors.map(
-        (item) => `&conveyors=${item}`
-      )}`
+        (item) => `&conveyors=${item}`,
+      )}`,
     );
     return res.data;
   }

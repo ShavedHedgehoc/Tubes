@@ -22,14 +22,30 @@ const commonThead: TheadProperties[] = [
 
 export default function TraceBatchWeightingsSummaryDetailTable() {
   const [searchParams] = useSearchParams();
-  const author_id: string | null = searchParams.get(Params.TRACE_BATCH_WGHT_SUMMARY_AUTHOR_ID);
-  const startDate: string | null = searchParams.get(Params.TRACE_BATCH_WGHT_SUMMARY_START_DATE);
-  const endDate: string | null = searchParams.get(Params.TRACE_BATCH_WGHT_SUMMARY_END_DATE);
-  const page = useTraceBatchWeightingsSummaryDetailPaginationStore(useShallow((state) => state.page));
-  const limit = useTraceBatchWeightingsSummaryDetailPaginationStore(useShallow((state) => state.limit));
-  const total = useTraceBatchWeightingsSummaryDetailPaginationStore(useShallow((state) => state.total));
-  const setTotal = useTraceBatchWeightingsSummaryDetailPaginationStore(useShallow((state) => state.setTotal));
-  const setPage = useTraceBatchWeightingsSummaryDetailPaginationStore(useShallow((state) => state.setPage));
+  const author_id: string | null = searchParams.get(
+    Params.TRACE_BATCH_WGHT_SUMMARY_AUTHOR_ID,
+  );
+  const startDate: string | null = searchParams.get(
+    Params.TRACE_BATCH_WGHT_SUMMARY_START_DATE,
+  );
+  const endDate: string | null = searchParams.get(
+    Params.TRACE_BATCH_WGHT_SUMMARY_END_DATE,
+  );
+  const page = useTraceBatchWeightingsSummaryDetailPaginationStore(
+    useShallow((state) => state.page),
+  );
+  const limit = useTraceBatchWeightingsSummaryDetailPaginationStore(
+    useShallow((state) => state.limit),
+  );
+  const total = useTraceBatchWeightingsSummaryDetailPaginationStore(
+    useShallow((state) => state.total),
+  );
+  const setTotal = useTraceBatchWeightingsSummaryDetailPaginationStore(
+    useShallow((state) => state.setTotal),
+  );
+  const setPage = useTraceBatchWeightingsSummaryDetailPaginationStore(
+    useShallow((state) => state.setPage),
+  );
 
   const dto: GetWeightingsSummaryDetailDto = {
     author_id: Number(author_id),
@@ -39,7 +55,8 @@ export default function TraceBatchWeightingsSummaryDetailTable() {
     limit: limit,
   };
 
-  const { isPending, data, isSuccess } = useTraceBatchWeightingsSummaryDetail(dto);
+  const { isPending, data, isSuccess } =
+    useTraceBatchWeightingsSummaryDetail(dto);
   React.useEffect(() => {
     if (data && data.total !== total) {
       setTotal(data.total);
@@ -65,7 +82,11 @@ export default function TraceBatchWeightingsSummaryDetailTable() {
     <TableLayout thead={commonThead}>
       {isSuccess &&
         data.rows.map((row, index) => (
-          <TraceBatchWeightingsSummaryDetailTableRow row={row} index={index} key={row.w_id} />
+          <TraceBatchWeightingsSummaryDetailTableRow
+            row={row}
+            index={index}
+            key={row.w_id}
+          />
         ))}
     </TableLayout>
   );

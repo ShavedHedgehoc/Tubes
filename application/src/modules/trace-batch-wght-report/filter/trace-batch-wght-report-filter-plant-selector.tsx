@@ -10,12 +10,20 @@ import { useTraceBatchWghtReportFilterStore } from "../store/use-trace-batch-wgh
 import { TraceBatchWghtReportFilterParams } from "./trace-batch-wght-report-filter-params";
 
 export default function TraceBatchWghtReportFilterPlantSelector() {
-  const changeFilter = useTraceBatchWghtReportFilterStore(useShallow((state) => state.changeFilter));
-  const selectedPlant = useTraceBatchWghtReportFilterStore(useShallow((state) => state.selectedPlant));
-  const setSelectedPlant = useTraceBatchWghtReportFilterStore(useShallow((state) => state.setSelectedPlant));
-  const plantSelectorOptions = useTraceBatchWghtReportFilterStore(useShallow((state) => state.plantSelectorOptions));
+  const changeFilter = useTraceBatchWghtReportFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
+  const selectedPlant = useTraceBatchWghtReportFilterStore(
+    useShallow((state) => state.selectedPlant),
+  );
+  const setSelectedPlant = useTraceBatchWghtReportFilterStore(
+    useShallow((state) => state.setSelectedPlant),
+  );
+  const plantSelectorOptions = useTraceBatchWghtReportFilterStore(
+    useShallow((state) => state.plantSelectorOptions),
+  );
   const fillPlantSelectorOptions = useTraceBatchWghtReportFilterStore(
-    useShallow((state) => state.fillPlantSelectorOptions)
+    useShallow((state) => state.fillPlantSelectorOptions),
   );
 
   useQuery({
@@ -30,7 +38,11 @@ export default function TraceBatchWghtReportFilterPlantSelector() {
   });
 
   const plantOptions = plantSelectorOptions.map((plant) => (
-    <FilterStringValueSelectorOption key={`plant_option_${plant.id}`} id={plant.abb[0]} value={plant.value} />
+    <FilterStringValueSelectorOption
+      key={`plant_option_${plant.id}`}
+      id={plant.abb[0]}
+      value={plant.value}
+    />
   ));
 
   const plantSelectorProps: FilterStringValueSelectorProps = {
@@ -41,8 +53,15 @@ export default function TraceBatchWghtReportFilterPlantSelector() {
     options: plantOptions,
     maxW: 120,
     setSelectedOption: (id: string) => setSelectedPlant(id),
-    changeFilter: ({ key, value, values }: { key: string; value: string; values: string[] | [] }) =>
-      changeFilter({ key, value, values }),
+    changeFilter: ({
+      key,
+      value,
+      values,
+    }: {
+      key: string;
+      value: string;
+      values: string[] | [];
+    }) => changeFilter({ key, value, values }),
   };
 
   return <FilterStringValueSelector {...plantSelectorProps} />;

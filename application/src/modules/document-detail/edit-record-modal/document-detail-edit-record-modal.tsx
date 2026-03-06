@@ -1,7 +1,9 @@
 import * as React from "react";
 import { useShallow } from "zustand/react/shallow";
 import { Box, Button, Textarea, Typography } from "@mui/joy";
-import ModalLayout, { ModalLayoutProps } from "../../../shared/layouts/modal-layout";
+import ModalLayout, {
+  ModalLayoutProps,
+} from "../../../shared/layouts/modal-layout";
 import { useDocumentDetailEditRecordlModalStore } from "../store/use-document-detail-edit-record-modal-store";
 
 import ModalInputWithLabel from "../../../shared/ui/modal-input-with-label";
@@ -9,18 +11,42 @@ import { TableState } from "../../../shared/ui/table-state";
 import { useUpdateRecord } from "../use-update-record";
 
 const ContentComponent = () => {
-  const row = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.row));
-  const apparatus = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.apparatus));
-  const setApparatus = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.setApparatus));
-  const can = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.can));
-  const setCan = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.setCan));
-  const conveyor = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.conveyor));
-  const setConveyor = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.setConveyor));
-  const plan = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.plan));
-  const setPlan = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.setPlan));
-  const note = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.note));
-  const setNote = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.setNote));
-  const setUpdated = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.setUpdated));
+  const row = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.row),
+  );
+  const apparatus = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.apparatus),
+  );
+  const setApparatus = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.setApparatus),
+  );
+  const can = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.can),
+  );
+  const setCan = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.setCan),
+  );
+  const conveyor = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.conveyor),
+  );
+  const setConveyor = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.setConveyor),
+  );
+  const plan = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.plan),
+  );
+  const setPlan = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.setPlan),
+  );
+  const note = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.note),
+  );
+  const setNote = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.setNote),
+  );
+  const setUpdated = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.setUpdated),
+  );
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
@@ -34,20 +60,43 @@ const ContentComponent = () => {
               justifyContent: "flex-start",
             }}
           >
-            <Box sx={{ display: "flex", paddingY: "4px", alignItems: "center", gap: 2 }}>
+            <Box
+              sx={{
+                display: "flex",
+                paddingY: "4px",
+                alignItems: "center",
+                gap: 2,
+              }}
+            >
               <Typography level="body-sm">Код1С:</Typography>
               <Typography level="body-md">{row?.productId}</Typography>
             </Box>
 
-            <Box sx={{ display: "flex", paddingY: "4px", alignItems: "center", gap: 2 }}>
+            <Box
+              sx={{
+                display: "flex",
+                paddingY: "4px",
+                alignItems: "center",
+                gap: 2,
+              }}
+            >
               <Typography level="body-sm">Артикул:</Typography>
               <Typography level="body-md">{row?.product}</Typography>
             </Box>
-            <Box sx={{ display: "flex", paddingY: "4px", alignItems: "center", gap: 2 }}>
+            <Box
+              sx={{
+                display: "flex",
+                paddingY: "4px",
+                alignItems: "center",
+                gap: 2,
+              }}
+            >
               <Typography level="body-sm">Партия:</Typography>
               <Typography level="body-md">{row?.boil}</Typography>
             </Box>
-            <Box sx={{ display: "flex", paddingY: "4px", alignItems: "center" }}>
+            <Box
+              sx={{ display: "flex", paddingY: "4px", alignItems: "center" }}
+            >
               {row && <TableState text={row.state} state={row?.stateValue} />}
             </Box>
           </Box>
@@ -115,7 +164,15 @@ const ContentComponent = () => {
               { mb: 1, display: "flex", flexGrow: 1 },
             ]}
             endDecorator={
-              <Box sx={{ display: "flex", justifyContent: "flex-end", width: "100%", pb: 0.5, pr: 0.5 }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  width: "100%",
+                  pb: 0.5,
+                  pr: 0.5,
+                }}
+              >
                 <Button
                   color="neutral"
                   variant="outlined"
@@ -137,8 +194,12 @@ const ContentComponent = () => {
 };
 
 const CancelButton = () => {
-  const setOpen = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.setOpen));
-  const setUpdated = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.setUpdated));
+  const setOpen = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const setUpdated = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.setUpdated),
+  );
   const handleCancelButtonClick = () => {
     setOpen(false);
     setUpdated(false);
@@ -159,16 +220,36 @@ const CancelButton = () => {
 const SetButton = () => {
   const { updateRecord } = useUpdateRecord();
 
-  const setOpen = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.setOpen));
-  const setRow = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.setRow));
-  const conveyor = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.conveyor));
-  const plan = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.plan));
-  const apparatus = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.apparatus));
-  const can = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.can));
-  const row = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.row));
-  const note = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.note));
-  const updated = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.updated));
-  const setUpdated = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.setUpdated));
+  const setOpen = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const setRow = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.setRow),
+  );
+  const conveyor = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.conveyor),
+  );
+  const plan = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.plan),
+  );
+  const apparatus = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.apparatus),
+  );
+  const can = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.can),
+  );
+  const row = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.row),
+  );
+  const note = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.note),
+  );
+  const updated = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.updated),
+  );
+  const setUpdated = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.setUpdated),
+  );
 
   const handleSetButtonClick = () => {
     if (row) {
@@ -197,7 +278,13 @@ const SetButton = () => {
         fontWeight: "normal",
         fontSize: "small",
       }}
-      disabled={conveyor === "" || plan === "" || apparatus === "" || can === "" || !updated}
+      disabled={
+        conveyor === "" ||
+        plan === "" ||
+        apparatus === "" ||
+        can === "" ||
+        !updated
+      }
       onClick={() => handleSetButtonClick()}
     >
       Записать
@@ -215,8 +302,12 @@ const ButtonsComponent = () => {
 };
 
 export default function DocumentDetailEditRecordModal() {
-  const open = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.open));
-  const setOpen = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.setOpen));
+  const open = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.open),
+  );
+  const setOpen = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.setOpen),
+  );
 
   const modalProps: ModalLayoutProps = {
     open: open,

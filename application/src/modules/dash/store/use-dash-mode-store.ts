@@ -15,6 +15,6 @@ export const useDashModeStore = create<DashModeStore>()(
       // mode: "tubes",
       changeMode: (value) => set(() => ({ mode: value })),
     }),
-    { name: "DashModeStore", store: "DashModeStore" }
-  )
+    { name: "DashModeStore", store: "DashModeStore" },
+  ),
 );

@@ -10,7 +10,9 @@ export function useCheckAuth() {
   const setToken = useAuthStore(useShallow((state) => state.setToken));
   const setUser = useAuthStore(useShallow((state) => state.setUser));
   const clearToken = useAuthStore(useShallow((state) => state.clearToken));
-  const setLastCheckTime = useAuthStore(useShallow((state) => state.setLastCheckTime));
+  const setLastCheckTime = useAuthStore(
+    useShallow((state) => state.setLastCheckTime),
+  );
 
   const {
     mutate: checkAuth,
@@ -31,7 +33,10 @@ export function useCheckAuth() {
         setUser(null);
         setAuth(false);
         const error = handleError(err);
-        enqueueSnackbar(error, { variant: "error", anchorOrigin: { vertical: "top", horizontal: "right" } });
+        enqueueSnackbar(error, {
+          variant: "error",
+          anchorOrigin: { vertical: "top", horizontal: "right" },
+        });
       }
     },
   });

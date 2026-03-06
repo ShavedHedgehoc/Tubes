@@ -8,7 +8,10 @@ import {
 } from "@/shared/helpers/summary-data-parsers";
 import { useDate } from "@/shared/helpers/use-date";
 
-export default function useProductionCardData(postId: number, summaryData: ISummary | null) {
+export default function useProductionCardData(
+  postId: number,
+  summaryData: ISummary | null,
+) {
   const { today } = useDate();
   const note = getNoteData(postId, summaryData);
   const production = getProductionData(postId, summaryData);

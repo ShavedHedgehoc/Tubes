@@ -3,9 +3,15 @@ import { useEmployeeAddModalStore } from "../store/use-employees-add-modal-store
 import { Option, Select } from "@mui/joy";
 
 export default function EmployeesAddModalOccupationSelector() {
-  const occupationsOptions = useEmployeeAddModalStore(useShallow((state) => state.occupationsOptions));
-  const occupation = useEmployeeAddModalStore(useShallow((state) => state.occupation));
-  const setOccupation = useEmployeeAddModalStore(useShallow((state) => state.setOccupation));
+  const occupationsOptions = useEmployeeAddModalStore(
+    useShallow((state) => state.occupationsOptions),
+  );
+  const occupation = useEmployeeAddModalStore(
+    useShallow((state) => state.occupation),
+  );
+  const setOccupation = useEmployeeAddModalStore(
+    useShallow((state) => state.setOccupation),
+  );
 
   const options = occupationsOptions.map((occupation) => (
     <Option value={occupation.id} key={occupation.id}>
@@ -28,7 +34,10 @@ export default function EmployeesAddModalOccupationSelector() {
         display: "flex",
         flexShrink: 1,
       }}
-      onChange={(event: React.SyntheticEvent | null, newValue: number | null) => {
+      onChange={(
+        event: React.SyntheticEvent | null,
+        newValue: number | null,
+      ) => {
         event && newValue && setOccupation(newValue);
       }}
     >

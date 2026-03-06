@@ -15,24 +15,42 @@ import Info from "../../shared/components/info/info";
 import { PostNames } from "@/shared/helpers/post-names";
 import { Theme } from "@chakra-ui/react";
 import { ColorModeProvider } from "@/components/ui/color-mode";
-import OperationPageLayout, { type OperationPageLayoutProps } from "@/shared/components/layouts/operation-page-layout";
+import OperationPageLayout, {
+  type OperationPageLayoutProps,
+} from "@/shared/components/layouts/operation-page-layout";
 import SealantOperationContent from "./operations/content/sealant-operations-content";
 import SealantOperationsMenu from "./operations/menu/sealant-operations-menu";
 
 export default function SealantOperations() {
   const params = useParams<Params.CONVEYOR_NAME>();
   const { isPending } = useConveyor(params.conveyor_name ?? null);
-  const sealantConveyor = useSealantConveyorStore(useShallow((state) => state.sealantConveyor));
-  const employee = useSealantEmployeeStore(useShallow((state) => state.sealantEmployee));
-  const { data: summaryData, isPending: isPendingSummary, isError } = useActiveSummary(sealantConveyor?.id ?? null);
+  const sealantConveyor = useSealantConveyorStore(
+    useShallow((state) => state.sealantConveyor),
+  );
+  const employee = useSealantEmployeeStore(
+    useShallow((state) => state.sealantEmployee),
+  );
+  const {
+    data: summaryData,
+    isPending: isPendingSummary,
+    isError,
+  } = useActiveSummary(sealantConveyor?.id ?? null);
 
   if (isPending) return <Loader />;
-  if (!sealantConveyor) return <NotFound message={AppMessages.CONVEYOR_NOT_EXISTS} />;
+  if (!sealantConveyor)
+    return <NotFound message={AppMessages.CONVEYOR_NOT_EXISTS} />;
 
   const pageLayoutProps: OperationPageLayoutProps = {
     timeComponent: <TimeComponent />,
-    headerComponent: <HeaderComponent conveyorName={sealantConveyor.name} postName={PostNames.SEALANT} />,
-    operationComponent: <SealantOperationContent summaryData={summaryData ?? null} />,
+    headerComponent: (
+      <HeaderComponent
+        conveyorName={sealantConveyor.name}
+        postName={PostNames.SEALANT}
+      />
+    ),
+    operationComponent: (
+      <SealantOperationContent summaryData={summaryData ?? null} />
+    ),
     menuComponent: <SealantOperationsMenu summaryData={summaryData ?? null} />,
     userComponent: <UserComponent employee={employee} />,
     loaderComponent: <Loader />,

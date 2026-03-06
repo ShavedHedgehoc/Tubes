@@ -35,29 +35,30 @@ interface RegulationsUpsertFormStore {
   setDataForUpload: (arr: IXLSRegulationsData[]) => void;
 }
 
-export const useRegulationsUpsertFormStore = create<RegulationsUpsertFormStore>()(
-  devtools((set) => ({
-    file: undefined,
-    fileName: "",
-    isValid: false,
-    errs: [],
-    dataForUpload: [],
-    errsModalShow: false,
-    setIsValid: (value) => set(() => ({ isValid: value })),
-    setErrsModalShow: (value) => set(() => ({ errsModalShow: value })),
-    setFile: (value) => set(() => ({ file: value })),
-    setFileName: (value) => set(() => ({ fileName: value })),
-    clearData: () =>
-      set(() => ({
-        isValid: false,
-        file: undefined,
-        fileName: "",
-        errs: [],
-        errsModalShow: false,
-        dataForUpload: [],
-      })),
-    setErrs: (values) => set(() => ({ errs: values })),
-    addErrs: (value) => set((state) => ({ errs: [...state.errs, value] })),
-    setDataForUpload: (arr) => set(() => ({ dataForUpload: [...arr] })),
-  }))
-);
+export const useRegulationsUpsertFormStore =
+  create<RegulationsUpsertFormStore>()(
+    devtools((set) => ({
+      file: undefined,
+      fileName: "",
+      isValid: false,
+      errs: [],
+      dataForUpload: [],
+      errsModalShow: false,
+      setIsValid: (value) => set(() => ({ isValid: value })),
+      setErrsModalShow: (value) => set(() => ({ errsModalShow: value })),
+      setFile: (value) => set(() => ({ file: value })),
+      setFileName: (value) => set(() => ({ fileName: value })),
+      clearData: () =>
+        set(() => ({
+          isValid: false,
+          file: undefined,
+          fileName: "",
+          errs: [],
+          errsModalShow: false,
+          dataForUpload: [],
+        })),
+      setErrs: (values) => set(() => ({ errs: values })),
+      addErrs: (value) => set((state) => ({ errs: [...state.errs, value] })),
+      setDataForUpload: (arr) => set(() => ({ dataForUpload: [...arr] })),
+    })),
+  );

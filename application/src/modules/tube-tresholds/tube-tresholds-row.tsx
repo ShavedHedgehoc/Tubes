@@ -28,14 +28,30 @@ import { useTubeSealantTresholdsStore } from "./add-modal/store/use-tube-sealant
 export default function TubeTresholdsRow({
   row,
 }: {
-  row: ITubeExtrusionTresholdRow | ITubeVarnishTresholdRow | ITubeOffsetTresholdRow | ITubeSealantTresholdRow;
+  row:
+    | ITubeExtrusionTresholdRow
+    | ITubeVarnishTresholdRow
+    | ITubeOffsetTresholdRow
+    | ITubeSealantTresholdRow;
 }) {
-  const changeFilter = useTubeTresholdsFilterStore(useShallow((state) => state.changeFilter));
-  const setOpen = useTubeTresholdsExtrusionFormModalStore(useShallow((state) => state.setOpen));
-  const setExtrusionTreshold = useTubeExtrusionTresholdsStore(useShallow((state) => state.setTreshold));
-  const setVarnishTreshold = useTubeVarnishTresholdsStore(useShallow((state) => state.setTreshold));
-  const setOffsetTreshold = useTubeOffsetTresholdsStore(useShallow((state) => state.setTreshold));
-  const setSealantTreshold = useTubeSealantTresholdsStore(useShallow((state) => state.setTreshold));
+  const changeFilter = useTubeTresholdsFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
+  const setOpen = useTubeTresholdsExtrusionFormModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const setExtrusionTreshold = useTubeExtrusionTresholdsStore(
+    useShallow((state) => state.setTreshold),
+  );
+  const setVarnishTreshold = useTubeVarnishTresholdsStore(
+    useShallow((state) => state.setTreshold),
+  );
+  const setOffsetTreshold = useTubeOffsetTresholdsStore(
+    useShallow((state) => state.setTreshold),
+  );
+  const setSealantTreshold = useTubeSealantTresholdsStore(
+    useShallow((state) => state.setTreshold),
+  );
 
   const handleOpenExtrusion = (val: boolean) => {
     row.last && isExtrusionTreshold(row.last) && setExtrusionTreshold(row.last);
@@ -68,13 +84,20 @@ export default function TubeTresholdsRow({
   }[post];
 
   const handleAddSearchClick = () => {
-    changeFilter({ key: TubeTresholdsFilterParams.CODE, value: row.product_code });
+    changeFilter({
+      key: TubeTresholdsFilterParams.CODE,
+      value: row.product_code,
+    });
   };
 
   return (
     <tr key={`tr_${row.conveyor_id}_${row.product_id}`}>
       <td style={{ width: 30, textAlign: "center", padding: "12px 6px" }}>
-        <IconButton color="neutral" size="sm" onClick={() => handleAddSearchClick()}>
+        <IconButton
+          color="neutral"
+          size="sm"
+          onClick={() => handleAddSearchClick()}
+        >
           <KeyboardArrowUpOutlinedIcon />
         </IconButton>
       </td>
@@ -91,11 +114,19 @@ export default function TubeTresholdsRow({
         <Typography level="body-xs">{row.conveyor_name}</Typography>
       </td>
       <td style={{ width: 64, textAlign: "center", padding: "12px 6px" }}>
-        <StyledTypography text={row.count} state={row.count === 0 ? "fail" : "success"} />
+        <StyledTypography
+          text={row.count}
+          state={row.count === 0 ? "fail" : "success"}
+        />
       </td>
       <td style={{ width: 80, textAlign: "center", padding: "12px 6px" }}>
         <Box sx={{ display: "flex", justifyContent: "center", gap: 2 }}>
-          <IconButton color="success" size="sm" onClick={() => handleAddCopy(true)} disabled={row.count === 0}>
+          <IconButton
+            color="success"
+            size="sm"
+            onClick={() => handleAddCopy(true)}
+            disabled={row.count === 0}
+          >
             <AddOutlinedIcon />
           </IconButton>
         </Box>

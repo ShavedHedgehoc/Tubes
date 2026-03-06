@@ -10,5 +10,5 @@ export const useSealantOperationStore = create<SealantOperationStore>()(
   devtools((set) => ({
     selectedOperation: null,
     setSelectedOperation: (value) => set(() => ({ selectedOperation: value })),
-  }))
+  })),
 );

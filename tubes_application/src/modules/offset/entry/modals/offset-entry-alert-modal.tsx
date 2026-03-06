@@ -11,12 +11,18 @@ import { AppMessages } from "@/shared/resources/app-messages";
 import { useEOffsetEntryAlertModalStore } from "../../store/use-offset-entry-alert-modal-store";
 
 export default function OffsetEntryAlertModal() {
-  const open = useEOffsetEntryAlertModalStore(useShallow((state) => state.open));
-  const setOpen = useEOffsetEntryAlertModalStore(useShallow((state) => state.setOpen));
+  const open = useEOffsetEntryAlertModalStore(
+    useShallow((state) => state.open),
+  );
+  const setOpen = useEOffsetEntryAlertModalStore(
+    useShallow((state) => state.setOpen),
+  );
   const dto = useEOffsetEntryAlertModalStore((state) => state.dto);
   const clearDto = useEOffsetEntryAlertModalStore((state) => state.clearDto);
   const initData = useOffsetInputStore(useShallow((state) => state.initData));
-  const offsetConveyor = useOffsetConveyorStore(useShallow((state) => state.offsetConveyor));
+  const offsetConveyor = useOffsetConveyorStore(
+    useShallow((state) => state.offsetConveyor),
+  );
   const { createOffsetEntry } = useCreateOffsetEntry();
   const navigate = useNavigate();
 

@@ -47,5 +47,5 @@ export const useBasesUploadFormStore = create<BasesUploadFormStore>()(
     setErrs: (values) => set(() => ({ errs: values })),
     addErrs: (value) => set((state) => ({ errs: [...state.errs, value] })),
     setDataForUpload: (arr) => set(() => ({ dataForUpload: [...arr] })),
-  }))
+  })),
 );

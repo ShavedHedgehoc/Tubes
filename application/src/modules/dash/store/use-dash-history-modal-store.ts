@@ -11,13 +11,15 @@ interface DashHistoryModalStore {
   setBoilValue: (value: string | null) => void;
 }
 
-export const useDashHistoryModalStore = create<DashHistoryModalStore>()((set) => ({
-  open: false,
-  record_id: null,
-  boil_value: null,
-  title: "",
-  setOpen: (value) => set(() => ({ open: value })),
-  setRecordId: (value) => set(() => ({ record_id: value })),
-  setTitle: (value) => set(() => ({ title: value })),
-  setBoilValue: (value) => set(() => ({ boil_value: value })),
-}));
+export const useDashHistoryModalStore = create<DashHistoryModalStore>()(
+  (set) => ({
+    open: false,
+    record_id: null,
+    boil_value: null,
+    title: "",
+    setOpen: (value) => set(() => ({ open: value })),
+    setRecordId: (value) => set(() => ({ record_id: value })),
+    setTitle: (value) => set(() => ({ title: value })),
+    setBoilValue: (value) => set(() => ({ boil_value: value })),
+  }),
+);

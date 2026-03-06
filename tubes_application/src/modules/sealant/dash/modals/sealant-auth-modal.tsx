@@ -7,8 +7,12 @@ import { useEmployeeLogin } from "@/shared/api/use-employee-login";
 
 export default function SealantAuthModal() {
   const open = useSealantAuthModalStore(useShallow((state) => state.open));
-  const setOpen = useSealantAuthModalStore(useShallow((state) => state.setOpen));
-  const setEmployee = useSealantEmployeeStore(useShallow((state) => state.setSealantEmployee));
+  const setOpen = useSealantAuthModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const setEmployee = useSealantEmployeeStore(
+    useShallow((state) => state.setSealantEmployee),
+  );
   const { login } = useEmployeeLogin(setEmployee);
 
   const modalProps: ScanModalProps = {

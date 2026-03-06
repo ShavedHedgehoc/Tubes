@@ -9,16 +9,17 @@ interface UploadTubePicturesFormStore {
   clearData: () => void;
 }
 
-export const useUploadTubePicturesFormStore = create<UploadTubePicturesFormStore>()(
-  devtools((set) => ({
-    file: undefined,
-    fileName: "",
-    setFile: (value) => set(() => ({ file: value })),
-    setFileName: (value) => set(() => ({ fileName: value })),
-    clearData: () =>
-      set(() => ({
-        file: undefined,
-        fileName: "",
-      })),
-  }))
-);
+export const useUploadTubePicturesFormStore =
+  create<UploadTubePicturesFormStore>()(
+    devtools((set) => ({
+      file: undefined,
+      fileName: "",
+      setFile: (value) => set(() => ({ file: value })),
+      setFileName: (value) => set(() => ({ fileName: value })),
+      clearData: () =>
+        set(() => ({
+          file: undefined,
+          fileName: "",
+        })),
+    })),
+  );

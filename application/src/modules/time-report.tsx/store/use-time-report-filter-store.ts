@@ -69,7 +69,12 @@ export const useTimeReportFilterStore = create<TimeReportFilterStore>()(
           set((state) => ({ filter: { ...state.filter, boil: value } }));
           break;
         case TimeReportFilterParams.PLANT:
-          set((state) => ({ filter: { ...state.filter, plant: values?.length ? values[0] : state.filter.plant } }));
+          set((state) => ({
+            filter: {
+              ...state.filter,
+              plant: values?.length ? values[0] : state.filter.plant,
+            },
+          }));
           break;
         case TimeReportFilterParams.PRODUCT:
           set((state) => ({ filter: { ...state.filter, productCode: value } }));
@@ -81,11 +86,19 @@ export const useTimeReportFilterStore = create<TimeReportFilterStore>()(
           set((state) => ({ filter: { ...state.filter, conveyor: value } }));
           break;
         case TimeReportFilterParams.BOIL_ASC:
-          set((state) => ({ filter: { ...state.filter, boilAsc: value === "true" ? true : false } }));
+          set((state) => ({
+            filter: {
+              ...state.filter,
+              boilAsc: value === "true" ? true : false,
+            },
+          }));
           break;
         case TimeReportFilterParams.STATES:
           set((state) => ({
-            filter: { ...state.filter, states: values ? [...values] : [...state.filter.states] },
+            filter: {
+              ...state.filter,
+              states: values ? [...values] : [...state.filter.states],
+            },
           }));
           break;
         default:
@@ -93,7 +106,9 @@ export const useTimeReportFilterStore = create<TimeReportFilterStore>()(
       }
     },
     setSelectedPlant: (value) => set(() => ({ selectedPlant: value })),
-    fillPlantSelectorOptions: (values) => set(() => ({ plantSelectorOptions: [...values] })),
-    fillStateSelectorOptions: (values) => set(() => ({ stateSelectorOptions: [...values] })),
-  }))
+    fillPlantSelectorOptions: (values) =>
+      set(() => ({ plantSelectorOptions: [...values] })),
+    fillStateSelectorOptions: (values) =>
+      set(() => ({ stateSelectorOptions: [...values] })),
+  })),
 );

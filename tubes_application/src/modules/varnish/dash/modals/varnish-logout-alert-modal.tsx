@@ -7,8 +7,12 @@ import { AppMessages } from "@/shared/resources/app-messages";
 
 export default function VarnishLogoutAlertModal() {
   const open = useVarnishLogoutModalStore(useShallow((state) => state.open));
-  const setOpen = useVarnishLogoutModalStore(useShallow((state) => state.setOpen));
-  const logout = useVarnishEmployeeStore(useShallow((state) => state.clearVarnishEmployee));
+  const setOpen = useVarnishLogoutModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const logout = useVarnishEmployeeStore(
+    useShallow((state) => state.clearVarnishEmployee),
+  );
 
   const alertModalProps: AlertModalProps = {
     title: "Выход пользователя",

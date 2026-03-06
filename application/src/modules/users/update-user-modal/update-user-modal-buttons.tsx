@@ -12,8 +12,12 @@ export default function UpdateUserModalButtons() {
   const id = useUserUpdateModalStore(useShallow((state) => state.id));
   const name = useUserUpdateModalStore(useShallow((state) => state.name));
   const email = useUserUpdateModalStore(useShallow((state) => state.email));
-  const setEditName = useUserUpdateModalStore(useShallow((state) => state.setEditName));
-  const setEditEmail = useUserUpdateModalStore(useShallow((state) => state.setEditEmail));
+  const setEditName = useUserUpdateModalStore(
+    useShallow((state) => state.setEditName),
+  );
+  const setEditEmail = useUserUpdateModalStore(
+    useShallow((state) => state.setEditEmail),
+  );
   const plants = useUserUpdateModalStore(useShallow((state) => state.plants));
 
   const { updateUser } = useUpdateUser();

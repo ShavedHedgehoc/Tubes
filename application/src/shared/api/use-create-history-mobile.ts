@@ -22,7 +22,10 @@ export function useCreateHistoryMobile() {
     onError: (err) => {
       if (err instanceof Error) {
         const error = handleError(err);
-        enqueueSnackbar(error, { variant: "error", anchorOrigin: { vertical: "bottom", horizontal: "right" } });
+        enqueueSnackbar(error, {
+          variant: "error",
+          anchorOrigin: { vertical: "bottom", horizontal: "right" },
+        });
       }
     },
   });

@@ -14,5 +14,5 @@ export const useOffsetConveyorStore = create<OffsetConveyorStore>()(
     offsetConveyor: null,
     setOffsetConveyor: (value) => set(() => ({ offsetConveyor: value })),
     clearOffsetConveyor: () => set(() => ({ offsetConveyor: null })),
-  }))
+  })),
 );

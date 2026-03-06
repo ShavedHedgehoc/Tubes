@@ -10,20 +10,40 @@ import { useOffsetOperationStore } from "../../store/use-offset-operation-store"
 import { useCreateOffsetStatus } from "../../use-create-offset-status";
 
 export default function useOffsetOperationsMenu(summaryData: ISummary | null) {
-  const offsetConveyor = useOffsetConveyorStore(useShallow((state) => state.offsetConveyor));
-  const employee = useOffsetEmployeeStore(useShallow((state) => state.offsetEmployee));
-  const selectedOperation = useOffsetOperationStore(useShallow((state) => state.selectedOperation));
-  const setSelectedOperation = useOffsetOperationStore(useShallow((state) => state.setSelectedOperation));
+  const offsetConveyor = useOffsetConveyorStore(
+    useShallow((state) => state.offsetConveyor),
+  );
+  const employee = useOffsetEmployeeStore(
+    useShallow((state) => state.offsetEmployee),
+  );
+  const selectedOperation = useOffsetOperationStore(
+    useShallow((state) => state.selectedOperation),
+  );
+  const setSelectedOperation = useOffsetOperationStore(
+    useShallow((state) => state.setSelectedOperation),
+  );
   const { createOffsetStatus } = useCreateOffsetStatus();
   const navigate = useNavigate();
 
   const setIdleButtonVisibleCondition =
-    summaryData && summaryData.offsetStatus ? (summaryData.offsetStatus.idle === false ? true : false) : false;
+    summaryData && summaryData.offsetStatus
+      ? summaryData.offsetStatus.idle === false
+        ? true
+        : false
+      : false;
 
   const setWorkingButtonVisibleCondition =
-    summaryData && summaryData.offsetStatus ? (summaryData.offsetStatus.idle === true ? true : false) : false;
+    summaryData && summaryData.offsetStatus
+      ? summaryData.offsetStatus.idle === true
+        ? true
+        : false
+      : false;
 
-  const setIdleButtonDisableCondition = !(summaryData && employee && selectedOperation);
+  const setIdleButtonDisableCondition = !(
+    summaryData &&
+    employee &&
+    selectedOperation
+  );
 
   const setWorkingButtonDisableCondition = !(summaryData && employee);
 

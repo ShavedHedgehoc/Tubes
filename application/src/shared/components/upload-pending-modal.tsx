@@ -1,4 +1,12 @@
-import { Box, CircularProgress, DialogContent, Modal, ModalDialog, ModalOverflow, Typography } from "@mui/joy";
+import {
+  Box,
+  CircularProgress,
+  DialogContent,
+  Modal,
+  ModalDialog,
+  ModalOverflow,
+  Typography,
+} from "@mui/joy";
 import * as React from "react";
 
 export default function UploadPendingModal({ open }: { open: boolean }) {
@@ -38,7 +46,9 @@ export default function UploadPendingModal({ open }: { open: boolean }) {
               >
                 <CircularProgress color="neutral" size="sm" value={75} />
                 <Typography level="body-md">Загружаю...</Typography>
-                <Typography level="body-xs">Дождитесь окончания загрузки!</Typography>
+                <Typography level="body-xs">
+                  Дождитесь окончания загрузки!
+                </Typography>
               </Box>
             </DialogContent>
           </ModalDialog>

@@ -1,6 +1,9 @@
 import { Box, Sheet, useColorScheme } from "@mui/joy";
 import { keyframes } from "@emotion/react";
-import { formatDateToString, formatTimeToString } from "../../shared/helpers/date-time-formatters";
+import {
+  formatDateToString,
+  formatTimeToString,
+} from "../../shared/helpers/date-time-formatters";
 import { ITraceCanData } from "../../shared/api/services/trace-cans-service";
 import { useCansHistoryModalStore } from "./store/use-cans-history-modal-store";
 import { useShallow } from "zustand/react/shallow";
@@ -20,9 +23,15 @@ const pulse = keyframes`
 export default function CanCard({ row }: { row: ITraceCanData }) {
   const { mode } = useColorScheme();
 
-  const setOpen = useCansHistoryModalStore(useShallow((state) => state.setOpen));
-  const setCanId = useCansHistoryModalStore(useShallow((state) => state.setCanId));
-  const setTitle = useCansHistoryModalStore(useShallow((state) => state.setTitle));
+  const setOpen = useCansHistoryModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const setCanId = useCansHistoryModalStore(
+    useShallow((state) => state.setCanId),
+  );
+  const setTitle = useCansHistoryModalStore(
+    useShallow((state) => state.setTitle),
+  );
 
   const handleClick = () => {
     setCanId(row.id);
@@ -48,7 +57,10 @@ export default function CanCard({ row }: { row: ITraceCanData }) {
         () => ({
           "&&:hover": {
             cursor: "pointer",
-            bgcolor: mode === "light" ? "var(--joy-palette-neutral-800)" : "var(--joy-palette-neutral-500)",
+            bgcolor:
+              mode === "light"
+                ? "var(--joy-palette-neutral-800)"
+                : "var(--joy-palette-neutral-500)",
           },
         }),
 

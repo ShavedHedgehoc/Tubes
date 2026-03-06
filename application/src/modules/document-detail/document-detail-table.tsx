@@ -26,9 +26,14 @@ const commonThead: TheadProperties[] = [
 export default function DocumentDetailTable() {
   const params = useParams<Params.SUMMARY_PARAMS>();
   const doc_id: string | undefined = params.summary_id;
-  const filter = useDocumentDetailFilterStore(useShallow((state) => state.filter));
+  const filter = useDocumentDetailFilterStore(
+    useShallow((state) => state.filter),
+  );
 
-  const { isPending, data, isSuccess } = useDocumentDetail({ doc_id: doc_id, filter: filter });
+  const { isPending, data, isSuccess } = useDocumentDetail({
+    doc_id: doc_id,
+    filter: filter,
+  });
 
   if (isPending) {
     return <TableLoaderComponent />;
@@ -40,7 +45,8 @@ export default function DocumentDetailTable() {
 
   return (
     <TableLayout thead={commonThead}>
-      {isSuccess && data.records.map((row) => <DocumentDetailRow row={row} key={row.id} />)}
+      {isSuccess &&
+        data.records.map((row) => <DocumentDetailRow row={row} key={row.id} />)}
     </TableLayout>
   );
 }

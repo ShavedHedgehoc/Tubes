@@ -31,7 +31,11 @@ export const useTubeTresholdsFilterStore = create<TubeTresholdsFilterStore>()(
     conveyorSelectorOptions: [],
 
     clearFilter: () =>
-      set(() => ({ filter: initFilterValue, selectedEmptyOption: 999999, selectedConveyorOption: 999999 })),
+      set(() => ({
+        filter: initFilterValue,
+        selectedEmptyOption: 999999,
+        selectedConveyorOption: 999999,
+      })),
     changeFilter: ({ key, value, values }) => {
       switch (key) {
         case TubeTresholdsFilterParams.CODE:
@@ -42,12 +46,18 @@ export const useTubeTresholdsFilterStore = create<TubeTresholdsFilterStore>()(
           break;
         case TubeTresholdsFilterParams.CONVEYORS:
           set((state) => ({
-            filter: { ...state.filter, conveyors: values ? [...values] : [...state.filter.conveyors] },
+            filter: {
+              ...state.filter,
+              conveyors: values ? [...values] : [...state.filter.conveyors],
+            },
           }));
           break;
         case TubeTresholdsFilterParams.EMPTY:
           set((state) => ({
-            filter: { ...state.filter, empty: values ? [...values] : [...state.filter.empty] },
+            filter: {
+              ...state.filter,
+              empty: values ? [...values] : [...state.filter.empty],
+            },
           }));
           break;
         default:
@@ -55,8 +65,12 @@ export const useTubeTresholdsFilterStore = create<TubeTresholdsFilterStore>()(
       }
     },
     fillConveyorSelectorOptions: (values) =>
-      set(() => ({ conveyorSelectorOptions: [{ id: 999999, name: "Все" }, ...values] })),
-    setSelectedEmptyOption: (value) => set(() => ({ selectedEmptyOption: value })),
-    setSelectedConveyorOption: (value) => set(() => ({ selectedConveyorOption: value })),
-  }))
+      set(() => ({
+        conveyorSelectorOptions: [{ id: 999999, name: "Все" }, ...values],
+      })),
+    setSelectedEmptyOption: (value) =>
+      set(() => ({ selectedEmptyOption: value })),
+    setSelectedConveyorOption: (value) =>
+      set(() => ({ selectedConveyorOption: value })),
+  })),
 );

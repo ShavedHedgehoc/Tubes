@@ -28,16 +28,30 @@ import SealantIntegerEntryModal from "./entry/modals/sealant-integer-entry-modal
 export default function SealantAddEntry() {
   const params = useParams<Params.CONVEYOR_NAME>();
   const { isPending } = useConveyor(params.conveyor_name ?? null);
-  const sealantConveyor = useSealantConveyorStore(useShallow((state) => state.sealantConveyor));
-  const employee = useSealantEmployeeStore(useShallow((state) => state.sealantEmployee));
-  const { data: summaryData, isPending: isPendingSummary, isError } = useActiveSummary(sealantConveyor?.id ?? null);
+  const sealantConveyor = useSealantConveyorStore(
+    useShallow((state) => state.sealantConveyor),
+  );
+  const employee = useSealantEmployeeStore(
+    useShallow((state) => state.sealantEmployee),
+  );
+  const {
+    data: summaryData,
+    isPending: isPendingSummary,
+    isError,
+  } = useActiveSummary(sealantConveyor?.id ?? null);
 
   if (isPending) return <Loader />;
-  if (!sealantConveyor) return <NotFound message={AppMessages.CONVEYOR_NOT_EXISTS} />;
+  if (!sealantConveyor)
+    return <NotFound message={AppMessages.CONVEYOR_NOT_EXISTS} />;
 
   const addEntryPageLayoutProps: AddEntryPageLayoutProps = {
     timeComponent: <TimeComponent />,
-    headerComponent: <HeaderComponent conveyorName={sealantConveyor.name} postName={PostNames.SEALANT} />,
+    headerComponent: (
+      <HeaderComponent
+        conveyorName={sealantConveyor.name}
+        postName={PostNames.SEALANT}
+      />
+    ),
     entriesComponent: <SealantEntries summaryData={summaryData ?? null} />,
     menuComponent: <SealantAddEntryMenu summaryData={summaryData ?? null} />,
     userComponent: <UserComponent employee={employee} />,

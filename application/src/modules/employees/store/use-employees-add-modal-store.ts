@@ -30,10 +30,14 @@ export const useEmployeeAddModalStore = create<AddModalStore>()(
         set((state) => ({
           name: "",
           barcode: "",
-          occupation: state.occupationsOptions.length > 0 ? state.occupationsOptions[1].id : null,
+          occupation:
+            state.occupationsOptions.length > 0
+              ? state.occupationsOptions[1].id
+              : null,
         })),
-      fillOccupationOptions: (values) => set(() => ({ occupationsOptions: [...values] })),
+      fillOccupationOptions: (values) =>
+        set(() => ({ occupationsOptions: [...values] })),
     }),
-    { name: "EmployeeAddModalStore", store: "useEmployeeAddModalStore" }
-  )
+    { name: "EmployeeAddModalStore", store: "useEmployeeAddModalStore" },
+  ),
 );

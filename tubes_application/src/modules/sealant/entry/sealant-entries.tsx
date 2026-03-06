@@ -6,15 +6,25 @@ import type { AddParameterCardProps } from "../../../shared/components/cards/add
 import { VStack, HStack } from "@chakra-ui/react";
 import AddParameterCard from "../../../shared/components/cards/add-parameter-card";
 import { PARAMETER_UNITS } from "@/shared/helpers/parameter-units";
-import { useSealantInputStore, SealantInputParams } from "../store/use-sealant-input-store";
+import {
+  useSealantInputStore,
+  SealantInputParams,
+} from "../store/use-sealant-input-store";
 import useSealantEntriesHandleCardsClick from "./use-sealant-entries-handle-cards-click";
 
-export default function SealantEntries({ summaryData }: { summaryData: ISummary | null }) {
+export default function SealantEntries({
+  summaryData,
+}: {
+  summaryData: ISummary | null;
+}) {
   const data = useSealantInputStore(useShallow((state) => state.data));
-  const { handleCardClick, handleIntegerCardClick, handleBooleanCardClick } = useSealantEntriesHandleCardsClick();
+  const { handleCardClick, handleIntegerCardClick, handleBooleanCardClick } =
+    useSealantEntriesHandleCardsClick();
 
   const tresholdsData = summaryData?.tresholds || null;
-  const lastCounterValue = summaryData?.sealantParams ? summaryData.sealantParams.counter_value : null;
+  const lastCounterValue = summaryData?.sealantParams
+    ? summaryData.sealantParams.counter_value
+    : null;
 
   const counterValueCardProps: AddParameterCardProps = {
     id: SealantInputParams.COUNTER_VALUE,
@@ -135,17 +145,25 @@ export default function SealantEntries({ summaryData }: { summaryData: ISummary 
 
   const injectionTubeOrientationStartCardProps: AddParameterCardProps = {
     id: SealantInputParams.INJECTION_TUBE_ORIENTATION_START,
-    title: SEALANT_PARAMETER_NAMES[SealantInputParams.INJECTION_TUBE_ORIENTATION_START],
+    title:
+      SEALANT_PARAMETER_NAMES[
+        SealantInputParams.INJECTION_TUBE_ORIENTATION_START
+      ],
     value: Number(data.injection_tube_orientation_start) || null,
-    minValue: tresholdsData?.sealant_injection_tube_orientation_start_min || null,
-    maxValue: tresholdsData?.sealant_injection_tube_orientation_start_max || null,
+    minValue:
+      tresholdsData?.sealant_injection_tube_orientation_start_min || null,
+    maxValue:
+      tresholdsData?.sealant_injection_tube_orientation_start_max || null,
     onClick: (val) => handleIntegerCardClick(val),
     variant: "numeric",
   };
 
   const injectionTubeOrientationEndCardProps: AddParameterCardProps = {
     id: SealantInputParams.INJECTION_TUBE_ORIENTATION_END,
-    title: SEALANT_PARAMETER_NAMES[SealantInputParams.INJECTION_TUBE_ORIENTATION_END],
+    title:
+      SEALANT_PARAMETER_NAMES[
+        SealantInputParams.INJECTION_TUBE_ORIENTATION_END
+      ],
     value: Number(data.injection_tube_orientation_end) || null,
     minValue: tresholdsData?.sealant_injection_tube_orientation_end_min || null,
     maxValue: tresholdsData?.sealant_injection_tube_orientation_end_max || null,

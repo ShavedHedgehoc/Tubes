@@ -1,6 +1,12 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import * as React from "react";
-import { Routes, Navigate, Outlet, Route, BrowserRouter } from "react-router-dom";
+import {
+  Routes,
+  Navigate,
+  Outlet,
+  Route,
+  BrowserRouter,
+} from "react-router-dom";
 import { RouteNames } from "./route-names";
 import { DbRoles } from "../db-roles";
 import { useCheckAuth } from "../../modules/auth/use-check-auth";
@@ -30,38 +36,77 @@ const Dash = React.lazy(() => import("../../modules/dash/dash"));
 const Documents = React.lazy(() => import("../../modules/documents/documents"));
 const UiPage = React.lazy(() => import("../../modules/ui-page/ui-page"));
 const Employees = React.lazy(() => import("../../modules/employees/employees"));
-const DocumentDetail = React.lazy(() => import("../../modules/document-detail/document-detail"));
-const DocsUpload = React.lazy(() => import("../../modules/docs-upload/docs-upload"));
-const BasesUpload = React.lazy(() => import("../../modules/bases-upload/bases-upload"));
+const DocumentDetail = React.lazy(
+  () => import("../../modules/document-detail/document-detail"),
+);
+const DocsUpload = React.lazy(
+  () => import("../../modules/docs-upload/docs-upload"),
+);
+const BasesUpload = React.lazy(
+  () => import("../../modules/bases-upload/bases-upload"),
+);
 const Forbidden = React.lazy(() => import("../../modules/forbidden/forbidden"));
 const Cans = React.lazy(() => import("../../modules/cans/cans"));
 const CansList = React.lazy(() => import("../../modules/cans-list/cans-list"));
 const CansDash = React.lazy(() => import("../../modules/cans-dash/cans-dash"));
-const BoilsReport = React.lazy(() => import("../../modules/boils-report/boils-report"));
-const TubeRecordsUpload = React.lazy(() => import("../../modules/tube-records-upload/tube-records-upload"));
-const TimeReport = React.lazy(() => import("../../modules/time-report.tsx/time-report"));
-const Inventories = React.lazy(() => import("../../modules/inventories/inventories"));
-const InventoryDetail = React.lazy(() => import("../../modules/inventory-detail/inventory-detail"));
-const Trademarks = React.lazy(() => import("../../modules/trademarks/trademarks"));
-const TraceBatchs = React.lazy(() => import("../../modules/trace-batchs/trace-batchs"));
-const TraceBatchDetail = React.lazy(() => import("../../modules/trace-batch-detail/trace-batch-detail"));
-const TraceBatchWghtReport = React.lazy(() => import("../../modules/trace-batch-wght-report/trace-batch-wght-report"));
+const BoilsReport = React.lazy(
+  () => import("../../modules/boils-report/boils-report"),
+);
+const TubeRecordsUpload = React.lazy(
+  () => import("../../modules/tube-records-upload/tube-records-upload"),
+);
+const TimeReport = React.lazy(
+  () => import("../../modules/time-report.tsx/time-report"),
+);
+const Inventories = React.lazy(
+  () => import("../../modules/inventories/inventories"),
+);
+const InventoryDetail = React.lazy(
+  () => import("../../modules/inventory-detail/inventory-detail"),
+);
+const Trademarks = React.lazy(
+  () => import("../../modules/trademarks/trademarks"),
+);
+const TraceBatchs = React.lazy(
+  () => import("../../modules/trace-batchs/trace-batchs"),
+);
+const TraceBatchDetail = React.lazy(
+  () => import("../../modules/trace-batch-detail/trace-batch-detail"),
+);
+const TraceBatchWghtReport = React.lazy(
+  () => import("../../modules/trace-batch-wght-report/trace-batch-wght-report"),
+);
 const TraceBatchWghtReportDetail = React.lazy(
-  () => import("../../modules/trace-batch-wght-report-detail/trace-batch-wght-report-detail")
+  () =>
+    import("../../modules/trace-batch-wght-report-detail/trace-batch-wght-report-detail"),
 );
 const TraceBatchWeightingsSummary = React.lazy(
-  () => import("../../modules/trace-batch-weightings-summary/trace-batch-weightings-summary")
+  () =>
+    import("../../modules/trace-batch-weightings-summary/trace-batch-weightings-summary"),
 );
 const TraceBatchWeightingsSummaryDetail = React.lazy(
-  () => import("../../modules/trace-weighting-summary-detail/trace-batch-weighting-summary-detail")
+  () =>
+    import("../../modules/trace-weighting-summary-detail/trace-batch-weighting-summary-detail"),
 );
-const BoilsUpload = React.lazy(() => import("../../modules/boils-upload/boils-upload"));
-const TubeUploadPictures = React.lazy(() => import("../../modules/upload-tube-pictures/upload-tube-pictures"));
-const TubeEmployees = React.lazy(() => import("../../modules/tube-employees/tube-employees"));
-const TubeTresholds = React.lazy(() => import("../../modules/tube-tresholds/tube-tresholds"));
+const BoilsUpload = React.lazy(
+  () => import("../../modules/boils-upload/boils-upload"),
+);
+const TubeUploadPictures = React.lazy(
+  () => import("../../modules/upload-tube-pictures/upload-tube-pictures"),
+);
+const TubeEmployees = React.lazy(
+  () => import("../../modules/tube-employees/tube-employees"),
+);
+const TubeTresholds = React.lazy(
+  () => import("../../modules/tube-tresholds/tube-tresholds"),
+);
 
-const TubeRecordsList = React.lazy(() => import("../../modules/tube-records-list/tube-records-list"));
-const TubeRecordDetail = React.lazy(() => import("../../modules/tube-record-detail/tube-record-detail"));
+const TubeRecordsList = React.lazy(
+  () => import("../../modules/tube-records-list/tube-records-list"),
+);
+const TubeRecordDetail = React.lazy(
+  () => import("../../modules/tube-record-detail/tube-record-detail"),
+);
 
 export default function AppRouter() {
   const isHealthy = useHealthStore(useShallow((state) => state.isHealthy));
@@ -107,8 +152,10 @@ export default function AppRouter() {
   }
 
   const RoleProtectedRoutes = (props: RoleProtectedRoutesProps) => {
-    if (isHealthy && accessToken && isAuth && !isCheckPending && !user) checkAuth();
-    if (user?.roles && !user?.roles?.includes(props.role)) return <Navigate to={RouteNames.FORBIDDEN} />;
+    if (isHealthy && accessToken && isAuth && !isCheckPending && !user)
+      checkAuth();
+    if (user?.roles && !user?.roles?.includes(props.role))
+      return <Navigate to={RouteNames.FORBIDDEN} />;
     return <Outlet />;
   };
 
@@ -130,12 +177,24 @@ export default function AppRouter() {
             </Route>
             <Route element={<RoleProtectedRoutes role={DbRoles.PLANNER} />}>
               <Route path={RouteNames.DOCUMENTS} element={<Documents />} />
-              <Route path={RouteNames.SUMMARY_UPLOAD} element={<DocsUpload />} />
-              <Route path={RouteNames.TUBE_RECORDS_UPLOAD} element={<TubeRecordsUpload />} />
-              <Route path={RouteNames.SUMMARY_DETAIL} element={<DocumentDetail />} />
+              <Route
+                path={RouteNames.SUMMARY_UPLOAD}
+                element={<DocsUpload />}
+              />
+              <Route
+                path={RouteNames.TUBE_RECORDS_UPLOAD}
+                element={<TubeRecordsUpload />}
+              />
+              <Route
+                path={RouteNames.SUMMARY_DETAIL}
+                element={<DocumentDetail />}
+              />
               <Route path={RouteNames.CONVEYORS} element={<Conveyors />} />
               <Route path={RouteNames.BASES_UPDATE} element={<BasesUpload />} />
-              <Route path={RouteNames.TUBES_RECORDS_LIST} element={<TubeRecordsList />} />
+              <Route
+                path={RouteNames.TUBES_RECORDS_LIST}
+                element={<TubeRecordsList />}
+              />
             </Route>
             <Route element={<RoleProtectedRoutes role={DbRoles.REPORTS} />}>
               <Route path={RouteNames.BOILS_REPORT} element={<BoilsReport />} />
@@ -144,34 +203,77 @@ export default function AppRouter() {
             <Route element={<RoleProtectedRoutes role={DbRoles.ADMIN} />}>
               <Route path={RouteNames.USERS_LIST} element={<Users />} />
               <Route path={RouteNames.UI_PAGE} element={<UiPage />} />
-              <Route path={RouteNames.TUBES_UPLOAD_PICTURES} element={<TubeUploadPictures />} />
+              <Route
+                path={RouteNames.TUBES_UPLOAD_PICTURES}
+                element={<TubeUploadPictures />}
+              />
             </Route>
-            <Route element={<RoleProtectedRoutes role={DbRoles.TECHNOLOGIST} />}>
+            <Route
+              element={<RoleProtectedRoutes role={DbRoles.TECHNOLOGIST} />}
+            >
               <Route path={RouteNames.CANS_DASH} element={<Cans />} />
               <Route path={RouteNames.CANS_LIST} element={<CansList />} />
               <Route path={RouteNames.CANS_LOCATION} element={<CansDash />} />
             </Route>
             <Route element={<RoleProtectedRoutes role={DbRoles.WEIGHER} />}>
               <Route path={RouteNames.INVENTORIES} element={<Inventories />} />
-              <Route path={RouteNames.INVENTORY_DETAIL} element={<InventoryDetail />} />
-              <Route path={RouteNames.TRACE_WGHT_REPORT} element={<TraceBatchWghtReport />} />
-              <Route path={RouteNames.TRACE_WGHT_REPORT_DETAIL} element={<TraceBatchWghtReportDetail />} />
-              <Route path={RouteNames.TRACE_WGHT_SUMMARY} element={<TraceBatchWeightingsSummary />} />
-              <Route path={RouteNames.TRACE_WGHT_SUMMARY_DETAIL} element={<TraceBatchWeightingsSummaryDetail />} />
-              <Route element={<RoleProtectedRoutes role={DbRoles.WGHT_GODMODE} />}>
-                <Route path={RouteNames.TRACE_UPLOAD_BOILS} element={<BoilsUpload />} />
+              <Route
+                path={RouteNames.INVENTORY_DETAIL}
+                element={<InventoryDetail />}
+              />
+              <Route
+                path={RouteNames.TRACE_WGHT_REPORT}
+                element={<TraceBatchWghtReport />}
+              />
+              <Route
+                path={RouteNames.TRACE_WGHT_REPORT_DETAIL}
+                element={<TraceBatchWghtReportDetail />}
+              />
+              <Route
+                path={RouteNames.TRACE_WGHT_SUMMARY}
+                element={<TraceBatchWeightingsSummary />}
+              />
+              <Route
+                path={RouteNames.TRACE_WGHT_SUMMARY_DETAIL}
+                element={<TraceBatchWeightingsSummaryDetail />}
+              />
+              <Route
+                element={<RoleProtectedRoutes role={DbRoles.WGHT_GODMODE} />}
+              >
+                <Route
+                  path={RouteNames.TRACE_UPLOAD_BOILS}
+                  element={<BoilsUpload />}
+                />
               </Route>
             </Route>
             <Route element={<RoleProtectedRoutes role={DbRoles.TRACE} />}>
-              <Route path={RouteNames.TRACE_TRADEMARKS} element={<Trademarks />} />
+              <Route
+                path={RouteNames.TRACE_TRADEMARKS}
+                element={<Trademarks />}
+              />
               <Route path={RouteNames.TRACE_BATCHS} element={<TraceBatchs />} />
-              <Route path={RouteNames.TRACE_BATCH_DETAIL} element={<TraceBatchDetail />} />
+              <Route
+                path={RouteNames.TRACE_BATCH_DETAIL}
+                element={<TraceBatchDetail />}
+              />
             </Route>
             <Route element={<RoleProtectedRoutes role={DbRoles.TUBES} />}>
-              <Route path={RouteNames.TUBES_TRESHOLDS} element={<TubeTresholds />} />
-              <Route path={RouteNames.TUBES_RECORDS_LIST} element={<TubeRecordsList />} />
-              <Route path={RouteNames.TUBES_EMPLOYEES} element={<TubeEmployees />} />
-              <Route path={RouteNames.TUBES_RECORDS_DETAIL} element={<TubeRecordDetail />} />
+              <Route
+                path={RouteNames.TUBES_TRESHOLDS}
+                element={<TubeTresholds />}
+              />
+              <Route
+                path={RouteNames.TUBES_RECORDS_LIST}
+                element={<TubeRecordsList />}
+              />
+              <Route
+                path={RouteNames.TUBES_EMPLOYEES}
+                element={<TubeEmployees />}
+              />
+              <Route
+                path={RouteNames.TUBES_RECORDS_DETAIL}
+                element={<TubeRecordDetail />}
+              />
             </Route>
             <Route path={RouteNames.FORBIDDEN} element={<Forbidden />} />
           </Route>

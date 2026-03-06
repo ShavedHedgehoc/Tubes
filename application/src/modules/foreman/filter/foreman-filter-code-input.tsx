@@ -5,7 +5,9 @@ import { ForemanFilterParams } from "./foreman-filter-params";
 
 export default function ForemanFilterCodeInput() {
   const filter = useForemanFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useForemanFilterStore(useShallow((state) => state.changeFilter));
+  const changeFilter = useForemanFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
 
   const inputProps: FilterInputProps = {
     id: ForemanFilterParams.PRODUCT,
@@ -13,7 +15,8 @@ export default function ForemanFilterCodeInput() {
     disabled: filter.productCode === "",
     label: "Поиск по коду 1С",
     placeholder: "Код 1С",
-    changeFilter: ({ key, value }: { key: string; value: string }) => changeFilter({ key, value }),
+    changeFilter: ({ key, value }: { key: string; value: string }) =>
+      changeFilter({ key, value }),
   };
 
   return <FilterInput {...inputProps} />;

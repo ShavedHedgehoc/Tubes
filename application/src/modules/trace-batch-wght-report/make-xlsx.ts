@@ -2,9 +2,20 @@ import { utils, writeFile } from "xlsx-js-style";
 import { formatDateToString } from "../../shared/helpers/date-time-formatters";
 import { ITraceBatchWghtReportRowData } from "../../shared/api/services/trace-batchs-service";
 
-export default function makeXLSXFile(data: ITraceBatchWghtReportRowData[], title: string) {
+export default function makeXLSXFile(
+  data: ITraceBatchWghtReportRowData[],
+  title: string,
+) {
   const workbook = utils.book_new();
-  const headers = ["Дата", "Площадка", "Партия", "Код 1С", "Наименование", "План", "Факт"];
+  const headers = [
+    "Дата",
+    "Площадка",
+    "Партия",
+    "Код 1С",
+    "Наименование",
+    "План",
+    "Факт",
+  ];
 
   const worksheet = utils.aoa_to_sheet([
     headers.map((cell) => ({
@@ -25,7 +36,15 @@ export default function makeXLSXFile(data: ITraceBatchWghtReportRowData[], title
   ]);
 
   utils.book_append_sheet(workbook, worksheet, "Отчет");
-  worksheet["!cols"] = [{ wch: 10 }, { wch: 20 }, { wch: 10 }, { wch: 10 }, { wch: 60 }, { wch: 10 }, { wch: 10 }];
+  worksheet["!cols"] = [
+    { wch: 10 },
+    { wch: 20 },
+    { wch: 10 },
+    { wch: 10 },
+    { wch: 60 },
+    { wch: 10 },
+    { wch: 10 },
+  ];
 
   const rows = data.map((row) => [
     {

@@ -13,7 +13,15 @@ export interface ModalSelectorProps {
   placeholder: string;
   options: React.ReactNode;
   setSelectedOption: (id: number) => void;
-  onChange: ({ key, value, values }: { key: string; value: string; values: number[] | [] }) => void;
+  onChange: ({
+    key,
+    value,
+    values,
+  }: {
+    key: string;
+    value: string;
+    values: number[] | [];
+  }) => void;
 }
 
 export function ModalSelectorOption(props: ModalSelectorOptionProps) {
@@ -28,7 +36,12 @@ export default function ModalSelector(props: ModalSelectorProps) {
   const action: SelectStaticProps["action"] = React.useRef(null);
   const handleChange = (newValue: number | null) => {
     newValue && props.setSelectedOption(newValue);
-    newValue && props.onChange({ key: props.id, value: "", values: newValue === 999999 ? [] : [newValue] });
+    newValue &&
+      props.onChange({
+        key: props.id,
+        value: "",
+        values: newValue === 999999 ? [] : [newValue],
+      });
   };
   return (
     <Box sx={{ display: "flex", width: "100%" }}>
@@ -48,7 +61,10 @@ export default function ModalSelector(props: ModalSelectorProps) {
             display: "flex",
             flexShrink: 1,
           }}
-          onChange={(event: React.SyntheticEvent | null, newValue: number | null) => {
+          onChange={(
+            event: React.SyntheticEvent | null,
+            newValue: number | null,
+          ) => {
             event && newValue && handleChange(newValue);
           }}
         >

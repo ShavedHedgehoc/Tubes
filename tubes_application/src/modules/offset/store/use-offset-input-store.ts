@@ -3,7 +3,6 @@ import { formatKeyboardInput } from "@/shared/helpers/format-keyboard-input";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-
 interface IOffsetParameterData {
   counter_value: string;
   printing_machine_speed: string;
@@ -32,9 +31,15 @@ interface OffsetInputStore {
 
   initData: () => void;
   changeData: (value: DataFormField<keyof IOffsetParameterData>) => void;
-  clearData: (value: Pick<DataFormField<keyof IOffsetParameterData>, 'key'>) => void;
-  sliceData: (value: Pick<DataFormField<keyof IOffsetParameterData>, 'key'>) => void;
-  roundData: (value: Pick<DataFormField<keyof IOffsetParameterData>, 'key'>) => void;
+  clearData: (
+    value: Pick<DataFormField<keyof IOffsetParameterData>, "key">,
+  ) => void;
+  sliceData: (
+    value: Pick<DataFormField<keyof IOffsetParameterData>, "key">,
+  ) => void;
+  roundData: (
+    value: Pick<DataFormField<keyof IOffsetParameterData>, "key">,
+  ) => void;
   setData: (value: DataFormField<keyof IOffsetParameterData>) => void;
 }
 
@@ -95,7 +100,8 @@ export const useOffsetInputStore = create<OffsetInputStore>()(
       set((state) => ({
         data: {
           ...state.data,
-          [fieldKey]: typeof initDataValue[fieldKey] === "boolean" ? false : "0",
+          [fieldKey]:
+            typeof initDataValue[fieldKey] === "boolean" ? false : "0",
         },
       }));
     },
@@ -169,6 +175,5 @@ export const useOffsetInputStore = create<OffsetInputStore>()(
         return state;
       });
     },
-
-  }))
+  })),
 );

@@ -1,6 +1,15 @@
 import * as React from "react";
-import { Box, Button, Typography, FormControl, Textarea, FormHelperText } from "@mui/joy";
-import ModalLayout, { ModalLayoutProps } from "../../shared/layouts/modal-layout";
+import {
+  Box,
+  Button,
+  Typography,
+  FormControl,
+  Textarea,
+  FormHelperText,
+} from "@mui/joy";
+import ModalLayout, {
+  ModalLayoutProps,
+} from "../../shared/layouts/modal-layout";
 import { useAddRecordModalStore } from "./store/use-add-record-modal-store";
 import { useShallow } from "zustand/react/shallow";
 import { useCreateHistory } from "../../shared/api/use-create-history";
@@ -8,9 +17,15 @@ import { useRecordHistoryNoteStore } from "./store/use-record-history-note-store
 import { useAuthStore } from "../auth/store/auth-store";
 
 const ContentComponent = () => {
-  const historyNote = useRecordHistoryNoteStore(useShallow((state) => state.historyNote));
-  const setHistoryNote = useRecordHistoryNoteStore(useShallow((state) => state.setHistoryNote));
-  const noteRequired = useAddRecordModalStore(useShallow((state) => state.noteRequired));
+  const historyNote = useRecordHistoryNoteStore(
+    useShallow((state) => state.historyNote),
+  );
+  const setHistoryNote = useRecordHistoryNoteStore(
+    useShallow((state) => state.setHistoryNote),
+  );
+  const noteRequired = useAddRecordModalStore(
+    useShallow((state) => state.noteRequired),
+  );
   const title = useAddRecordModalStore(useShallow((state) => state.title));
 
   return (
@@ -36,7 +51,15 @@ const ContentComponent = () => {
               { mb: 1, display: "flex", flexGrow: 1 },
             ]}
             endDecorator={
-              <Box sx={{ display: "flex", justifyContent: "flex-end", width: "100%", pb: 0.5, pr: 0.5 }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  width: "100%",
+                  pb: 0.5,
+                  pr: 0.5,
+                }}
+              >
                 <Button
                   color="neutral"
                   variant="outlined"
@@ -51,7 +74,9 @@ const ContentComponent = () => {
           />
           <FormHelperText>
             <Typography level="body-xs">
-              {noteRequired ? "Для внесения записи комментарий должен быть заполнен!" : ""}
+              {noteRequired
+                ? "Для внесения записи комментарий должен быть заполнен!"
+                : ""}
             </Typography>
           </FormHelperText>
         </FormControl>
@@ -62,7 +87,9 @@ const ContentComponent = () => {
 
 const CancelButton = () => {
   const setOpen = useAddRecordModalStore(useShallow((state) => state.setOpen));
-  const setHistoryNote = useRecordHistoryNoteStore(useShallow((state) => state.setHistoryNote));
+  const setHistoryNote = useRecordHistoryNoteStore(
+    useShallow((state) => state.setHistoryNote),
+  );
   const handleCancelButtonClick = () => {
     setOpen(false);
     setHistoryNote("");
@@ -83,11 +110,19 @@ const CancelButton = () => {
 const SetButton = () => {
   const user = useAuthStore(useShallow((state) => state.user));
   const setOpen = useAddRecordModalStore(useShallow((state) => state.setOpen));
-  const record_id = useAddRecordModalStore(useShallow((state) => state.record_id));
+  const record_id = useAddRecordModalStore(
+    useShallow((state) => state.record_id),
+  );
   const state = useAddRecordModalStore(useShallow((state) => state.state));
-  const historyNote = useRecordHistoryNoteStore(useShallow((state) => state.historyNote));
-  const setHistoryNote = useRecordHistoryNoteStore(useShallow((state) => state.setHistoryNote));
-  const noteRequired = useAddRecordModalStore(useShallow((state) => state.noteRequired));
+  const historyNote = useRecordHistoryNoteStore(
+    useShallow((state) => state.historyNote),
+  );
+  const setHistoryNote = useRecordHistoryNoteStore(
+    useShallow((state) => state.setHistoryNote),
+  );
+  const noteRequired = useAddRecordModalStore(
+    useShallow((state) => state.noteRequired),
+  );
   const { addHistory } = useCreateHistory();
   const handleSetButtonClick = () => {
     if (user) {

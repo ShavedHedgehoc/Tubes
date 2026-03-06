@@ -24,7 +24,9 @@ export interface FetchInventoryRowsDto {
 }
 
 export default class InventoryRowsService {
-  static async getInventoryRowsByInventoryId(dto: FetchInventoryRowsDto): Promise<InventoryRowsData[]> {
+  static async getInventoryRowsByInventoryId(
+    dto: FetchInventoryRowsDto,
+  ): Promise<InventoryRowsData[]> {
     const res = await $api.post(`/trace-inventory-rows`, dto);
     return res.data;
   }

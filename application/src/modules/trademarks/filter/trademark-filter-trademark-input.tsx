@@ -5,7 +5,9 @@ import { TrademarksFilterParams } from "./trademarks-filter-params";
 
 export default function TrademarkFilterTrademarkInput() {
   const filter = useTrademarksFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useTrademarksFilterStore(useShallow((state) => state.changeFilter));
+  const changeFilter = useTrademarksFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
 
   const codeInputProps: FilterInputProps = {
     id: TrademarksFilterParams.TRADEMARK,
@@ -14,7 +16,8 @@ export default function TrademarkFilterTrademarkInput() {
     label: "Поиск по торговому названию",
     placeholder: "Торговое название",
     maxW: 220,
-    changeFilter: ({ key, value }: { key: string; value: string }) => changeFilter({ key, value }),
+    changeFilter: ({ key, value }: { key: string; value: string }) =>
+      changeFilter({ key, value }),
   };
 
   return <FilterInput {...codeInputProps} />;

@@ -11,13 +11,15 @@ interface DashFinishModalStore {
   setBoilValue: (value: string | null) => void;
 }
 
-export const useDashFinishModalStore = create<DashFinishModalStore>()((set) => ({
-  open: false,
-  summary_id: null,
-  boil_value: null,
-  title: "",
-  setOpen: (value) => set(() => ({ open: value })),
-  setSummaryId: (value) => set(() => ({ summary_id: value })),
-  setTitle: (value) => set(() => ({ title: value })),
-  setBoilValue: (value) => set(() => ({ boil_value: value })),
-}));
+export const useDashFinishModalStore = create<DashFinishModalStore>()(
+  (set) => ({
+    open: false,
+    summary_id: null,
+    boil_value: null,
+    title: "",
+    setOpen: (value) => set(() => ({ open: value })),
+    setSummaryId: (value) => set(() => ({ summary_id: value })),
+    setTitle: (value) => set(() => ({ title: value })),
+    setBoilValue: (value) => set(() => ({ boil_value: value })),
+  }),
+);

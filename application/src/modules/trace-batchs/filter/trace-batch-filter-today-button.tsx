@@ -1,11 +1,15 @@
 import { useShallow } from "zustand/react/shallow";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
-import FilterButton, { FilterButtonProps } from "../../../shared/ui/filter-button";
+import FilterButton, {
+  FilterButtonProps,
+} from "../../../shared/ui/filter-button";
 import { getCurrentDay } from "../../../shared/helpers/date-time-formatters";
 import { useTraceBatchsFilterStore } from "../store/use-trace-batchs-filter-store";
 
 export default function TraceBatchsFilterTodayButton() {
-  const setDayToToday = useTraceBatchsFilterStore(useShallow((state) => state.setDayToToday));
+  const setDayToToday = useTraceBatchsFilterStore(
+    useShallow((state) => state.setDayToToday),
+  );
   const filter = useTraceBatchsFilterStore(useShallow((state) => state.filter));
 
   const disableDocumentFilterTodayButton =

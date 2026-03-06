@@ -2,19 +2,34 @@ import { Box, Button, Typography } from "@mui/joy";
 import { useShallow } from "zustand/react/shallow";
 import Ajv from "ajv";
 import { read, utils } from "xlsx";
-import { ValError, useTubeRecordsUploadFormStore } from "./store/use-records-upload-form-store";
+import {
+  ValError,
+  useTubeRecordsUploadFormStore,
+} from "./store/use-records-upload-form-store";
 import { IXLSXTubeRecordRowData } from "../../shared/api/services/tube-records-service";
 import ajvErrors from "ajv-errors";
 
 export default function TubeRecordsUploadFormValidator() {
-  const isValid = useTubeRecordsUploadFormStore(useShallow((state) => state.isValid));
-  const setIsValid = useTubeRecordsUploadFormStore(useShallow((state) => state.setIsValid));
+  const isValid = useTubeRecordsUploadFormStore(
+    useShallow((state) => state.isValid),
+  );
+  const setIsValid = useTubeRecordsUploadFormStore(
+    useShallow((state) => state.setIsValid),
+  );
   const errs = useTubeRecordsUploadFormStore(useShallow((state) => state.errs));
-  const addErrs = useTubeRecordsUploadFormStore(useShallow((state) => state.addErrs));
+  const addErrs = useTubeRecordsUploadFormStore(
+    useShallow((state) => state.addErrs),
+  );
   const file = useTubeRecordsUploadFormStore(useShallow((state) => state.file));
-  const formData = useTubeRecordsUploadFormStore(useShallow((state) => state.formData));
-  const setErrsModalShow = useTubeRecordsUploadFormStore(useShallow((state) => state.setErrsModalShow));
-  const setDataForUpload = useTubeRecordsUploadFormStore(useShallow((state) => state.setDataForUpload));
+  const formData = useTubeRecordsUploadFormStore(
+    useShallow((state) => state.formData),
+  );
+  const setErrsModalShow = useTubeRecordsUploadFormStore(
+    useShallow((state) => state.setErrsModalShow),
+  );
+  const setDataForUpload = useTubeRecordsUploadFormStore(
+    useShallow((state) => state.setDataForUpload),
+  );
 
   const handleValidationComplete = (json: IXLSXTubeRecordRowData[]) => {
     if (formData.dateForUpload) {
@@ -62,18 +77,23 @@ export default function TubeRecordsUploadFormValidator() {
       plan: {
         type: "string",
         pattern: "^(?:[1-9]\\d{0,5})$",
-        errorMessage: { pattern: "План должен быть целым числом от 1 до 999 999" },
+        errorMessage: {
+          pattern: "План должен быть целым числом от 1 до 999 999",
+        },
       },
       conveyor: {
         type: "string",
         pattern: "^(?:[1-9]\\d{1,2})$",
-        errorMessage: { pattern: "Номер конвейера должен быть целым трехзначным  числом" },
+        errorMessage: {
+          pattern: "Номер конвейера должен быть целым трехзначным  числом",
+        },
       },
       specification: {
         type: "string",
         pattern: "^([{]{1}\\d{6}#[^#{}]+#[1-4]{1}[}]{1})+$",
         errorMessage: {
-          pattern: "Шаблон спецификации '{<Код (6 цифр)>#<Наименование>#<Номер поста (1-4)>}' не совпадает",
+          pattern:
+            "Шаблон спецификации '{<Код (6 цифр)>#<Наименование>#<Номер поста (1-4)>}' не совпадает",
         },
       },
       shift: {
@@ -84,7 +104,16 @@ export default function TubeRecordsUploadFormValidator() {
         },
       },
     },
-    required: ["code1C", "product_marking", "product_name", "batch", "plan", "conveyor", "specification", "shift"],
+    required: [
+      "code1C",
+      "product_marking",
+      "product_name",
+      "batch",
+      "plan",
+      "conveyor",
+      "specification",
+      "shift",
+    ],
   };
   const parse = ajv.compile(valSchema);
 

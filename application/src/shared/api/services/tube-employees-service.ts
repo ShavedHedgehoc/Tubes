@@ -41,11 +41,13 @@ export interface FetchTubeEmployeesDto {
 }
 
 export default class TubeEmployeesService {
-  static async getEmployeesList(dto: FetchTubeEmployeesDto): Promise<EmployeeListResponse> {
+  static async getEmployeesList(
+    dto: FetchTubeEmployeesDto,
+  ): Promise<EmployeeListResponse> {
     const res = await $apiTubes.get(
       `/employees/list?name=${dto.filter.name}&name_asc=${dto.filter.nameAsc}&page=${dto.page}&limit=${
         dto.limit
-      }${dto.filter.banned.map((item) => `&banned=${item}`)}${dto.filter.ranks.map((item) => `&ranks=${item}`)}`
+      }${dto.filter.banned.map((item) => `&banned=${item}`)}${dto.filter.ranks.map((item) => `&ranks=${item}`)}`,
     );
     return res.data;
   }

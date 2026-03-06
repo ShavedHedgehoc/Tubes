@@ -2,8 +2,20 @@ import type { ISummary } from "@/shared/api/services/summary-service";
 import { useProductionBoxes } from "../use-production-boxes";
 import Loader from "@/shared/components/info/loader";
 import { AppMessages } from "@/shared/resources/app-messages";
-import { Box, Center, HStack, Icon, Stack, Table, Text, VStack } from "@chakra-ui/react";
-import { formatDateToString, formatTimeToString } from "@/shared/helpers/date-time-formatters";
+import {
+  Box,
+  Center,
+  HStack,
+  Icon,
+  Stack,
+  Table,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
+import {
+  formatDateToString,
+  formatTimeToString,
+} from "@/shared/helpers/date-time-formatters";
 import type { IPrinter } from "@/shared/api/services/printer-service";
 import { IoWarningOutline } from "react-icons/io5";
 
@@ -14,7 +26,9 @@ export default function PrintContent({
   summaryData: ISummary | null;
   printerData: IPrinter | null;
 }) {
-  const { data, isPending, isSuccess } = useProductionBoxes(summaryData?.data.id ?? null);
+  const { data, isPending, isSuccess } = useProductionBoxes(
+    summaryData?.data.id ?? null,
+  );
   if (isPending) return <Loader />;
   if (isSuccess && data && data.length === 0)
     return (
@@ -32,7 +46,9 @@ export default function PrintContent({
           <HStack w="3/4">
             <Text color="fg.subtle">Принтер: </Text>
             <Text animation={printerData ? "none" : "colorCycle"}>
-              {printerData ? `${printerData.ip}:${printerData.port}` : "Не установлен"}
+              {printerData
+                ? `${printerData.ip}:${printerData.port}`
+                : "Не установлен"}
             </Text>
           </HStack>
         </Stack>
@@ -50,11 +66,19 @@ export default function PrintContent({
                   <Table.ColumnHeader textAlign="center">№</Table.ColumnHeader>
                   <Table.ColumnHeader>UUID</Table.ColumnHeader>
                   <Table.ColumnHeader>Наименование</Table.ColumnHeader>
-                  <Table.ColumnHeader textAlign="center">Партия</Table.ColumnHeader>
-                  <Table.ColumnHeader textAlign="center">В коробе, шт</Table.ColumnHeader>
+                  <Table.ColumnHeader textAlign="center">
+                    Партия
+                  </Table.ColumnHeader>
+                  <Table.ColumnHeader textAlign="center">
+                    В коробе, шт
+                  </Table.ColumnHeader>
                   <Table.ColumnHeader>Сотрудник</Table.ColumnHeader>
-                  <Table.ColumnHeader textAlign="center">Дата</Table.ColumnHeader>
-                  <Table.ColumnHeader textAlign="center">Время</Table.ColumnHeader>
+                  <Table.ColumnHeader textAlign="center">
+                    Дата
+                  </Table.ColumnHeader>
+                  <Table.ColumnHeader textAlign="center">
+                    Время
+                  </Table.ColumnHeader>
                 </Table.Row>
               </Table.Header>
               <Table.Body>
@@ -64,19 +88,31 @@ export default function PrintContent({
                     <Table.Row
                       key={item.id}
                       animation={
-                        new Date().getTime() - new Date(item.createdAt).getTime() < 1000 * 60 * 2
+                        new Date().getTime() -
+                          new Date(item.createdAt).getTime() <
+                        1000 * 60 * 2
                           ? "colorCycleWhiteSubtle"
                           : ""
                       }
                     >
-                      <Table.Cell textAlign="center">{item.box_number}</Table.Cell>
+                      <Table.Cell textAlign="center">
+                        {item.box_number}
+                      </Table.Cell>
                       <Table.Cell>{item.uuid}</Table.Cell>
                       <Table.Cell>{item.summary.product.name}</Table.Cell>
-                      <Table.Cell textAlign="center">{item.summary.batch.name}</Table.Cell>
-                      <Table.Cell textAlign="center">{item.quantity}</Table.Cell>
+                      <Table.Cell textAlign="center">
+                        {item.summary.batch.name}
+                      </Table.Cell>
+                      <Table.Cell textAlign="center">
+                        {item.quantity}
+                      </Table.Cell>
                       <Table.Cell>{item.employee.name}</Table.Cell>
-                      <Table.Cell textAlign="center">{formatDateToString(item.createdAt)}</Table.Cell>
-                      <Table.Cell textAlign="center">{formatTimeToString(item.createdAt)}</Table.Cell>
+                      <Table.Cell textAlign="center">
+                        {formatDateToString(item.createdAt)}
+                      </Table.Cell>
+                      <Table.Cell textAlign="center">
+                        {formatTimeToString(item.createdAt)}
+                      </Table.Cell>
                     </Table.Row>
                   ))}
               </Table.Body>
@@ -86,7 +122,9 @@ export default function PrintContent({
             <HStack>
               <Text color="fg.subtle">Принтер: </Text>
               <Text animation={printerData ? "none" : "colorCycle"}>
-                {printerData ? `${printerData.ip}:${printerData.port}` : "Не установлен"}
+                {printerData
+                  ? `${printerData.ip}:${printerData.port}`
+                  : "Не установлен"}
               </Text>
             </HStack>
             <HStack gap={16}>
@@ -96,7 +134,9 @@ export default function PrintContent({
               </HStack>
               <HStack>
                 <Text color="fg.subtle">Произведено всего: </Text>
-                <Text>{data?.reduce((acc, current) => acc + current.quantity, 0)}</Text>
+                <Text>
+                  {data?.reduce((acc, current) => acc + current.quantity, 0)}
+                </Text>
               </HStack>
             </HStack>
           </HStack>

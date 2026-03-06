@@ -29,5 +29,5 @@ export const useVarnishIntegerEntryModalStore = create<EntryModalStore>()(
     setKey: (value) => set(() => ({ key: value })),
     setTitle: (value) => set(() => ({ title: value })),
     setOpen: (value) => set(() => ({ open: value })),
-  }))
+  })),
 );
