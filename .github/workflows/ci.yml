@@ -19,7 +19,7 @@ jobs:
       - name: Install & Prisma
         run: |
           npm ci
-          npx prisma generate -w api_tubes
+          npm run generate -w api_tubes
       - name: Type Check & Lint
         run: |
           npm run lint:types -w api_tubes
