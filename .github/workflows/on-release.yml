@@ -24,11 +24,17 @@ jobs:
         run: |
           npm version patch --include-workspace-root --workspaces -m "chore: release %s [skip ci]"
           git push origin release --follow-tags
-
       - name: Sync version to Main
         run: |
           git fetch origin main
-          git checkout main
-          # Синхронизируем main с release
+          # Принудительно переключаемся на main, игнорируя локальные изменения в release
+          git checkout -f main
+          
+          # Мерджим ветку release в main
           git merge release --no-ff -m "chore: sync version from release [skip ci]"
+          
+          # Пушим обновленный main обратно в репозиторий
           git push origin main
+
+
+      
