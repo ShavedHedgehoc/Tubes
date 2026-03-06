@@ -2,7 +2,16 @@ import { ColorModeProvider } from "@/components/ui/color-mode";
 import { PostNames } from "@/shared/helpers/post-names";
 import type { Params } from "@/shared/router/params";
 import { RouteNames } from "@/shared/router/route-names";
-import { Theme, Grid, GridItem, Text, Button, VStack, Heading, Center } from "@chakra-ui/react";
+import {
+  Theme,
+  Grid,
+  GridItem,
+  Text,
+  Button,
+  VStack,
+  Heading,
+  Center,
+} from "@chakra-ui/react";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function Posts() {
@@ -12,7 +21,13 @@ export default function Posts() {
   return (
     <ColorModeProvider forcedTheme="dark">
       <Theme appearance="dark" colorPalette="gray">
-        <Grid h="100vh" w="100wv" templateRows="repeat(12, 1fr)" templateColumns="repeat(12, 1fr)" gap={2}>
+        <Grid
+          h="100vh"
+          w="100wv"
+          templateRows="repeat(12, 1fr)"
+          templateColumns="repeat(12, 1fr)"
+          gap={2}
+        >
           <GridItem rowSpan={1} colSpan={12}></GridItem>
           <GridItem rowSpan={1} colSpan={12}>
             <VStack>
@@ -29,7 +44,11 @@ export default function Posts() {
                   w="full"
                   variant="surface"
                   colorPalette="current"
-                  onClick={() => navigate(`${RouteNames.EXTRUSION_ROOT}/${params.conveyor_name}`)}
+                  onClick={() =>
+                    navigate(
+                      `${RouteNames.EXTRUSION_ROOT}/${params.conveyor_name}`,
+                    )
+                  }
                 >
                   <Text textStyle="2xl" color="fg.subtle">
                     {PostNames.EXTRUSION}
@@ -40,7 +59,11 @@ export default function Posts() {
                   w="full"
                   variant="surface"
                   colorPalette="current"
-                  onClick={() => navigate(`${RouteNames.VARNISH_ROOT}/${params.conveyor_name}`)}
+                  onClick={() =>
+                    navigate(
+                      `${RouteNames.VARNISH_ROOT}/${params.conveyor_name}`,
+                    )
+                  }
                 >
                   <Text textStyle="2xl" color="fg.subtle">
                     {PostNames.VARNISH}
@@ -51,7 +74,11 @@ export default function Posts() {
                   w="full"
                   variant="surface"
                   colorPalette="current"
-                  onClick={() => navigate(`${RouteNames.OFFSET_ROOT}/${params.conveyor_name}`)}
+                  onClick={() =>
+                    navigate(
+                      `${RouteNames.OFFSET_ROOT}/${params.conveyor_name}`,
+                    )
+                  }
                 >
                   <Text textStyle="2xl" color="fg.subtle">
                     {PostNames.OFFSET}
@@ -62,7 +89,11 @@ export default function Posts() {
                   w="full"
                   variant="surface"
                   colorPalette="current"
-                  onClick={() => navigate(`${RouteNames.SEALANT_ROOT}/${params.conveyor_name}`)}
+                  onClick={() =>
+                    navigate(
+                      `${RouteNames.SEALANT_ROOT}/${params.conveyor_name}`,
+                    )
+                  }
                 >
                   <Text textStyle="2xl" color="fg.subtle">
                     {PostNames.SEALANT}

@@ -11,12 +11,24 @@ import { useAuthStore } from "../auth/store/auth-store";
 
 export default function ForemanActionModal() {
   const open = useForemanActionModalStore(useShallow((state) => state.open));
-  const record = useForemanActionModalStore(useShallow((state) => state.record));
-  const startButtonEnabled = useForemanActionModalStore(useShallow((state) => state.startButtonEnabled));
-  const finishButtonEnabled = useForemanActionModalStore(useShallow((state) => state.finishButtonEnabled));
-  const cancelStartButtonEnabled = useForemanActionModalStore(useShallow((state) => state.cancelStartButtonEnabled));
-  const cancelFinishButtonEnabled = useForemanActionModalStore(useShallow((state) => state.cancelFinishButtonEnabled));
-  const setOpen = useForemanActionModalStore(useShallow((state) => state.setOpen));
+  const record = useForemanActionModalStore(
+    useShallow((state) => state.record),
+  );
+  const startButtonEnabled = useForemanActionModalStore(
+    useShallow((state) => state.startButtonEnabled),
+  );
+  const finishButtonEnabled = useForemanActionModalStore(
+    useShallow((state) => state.finishButtonEnabled),
+  );
+  const cancelStartButtonEnabled = useForemanActionModalStore(
+    useShallow((state) => state.cancelStartButtonEnabled),
+  );
+  const cancelFinishButtonEnabled = useForemanActionModalStore(
+    useShallow((state) => state.cancelFinishButtonEnabled),
+  );
+  const setOpen = useForemanActionModalStore(
+    useShallow((state) => state.setOpen),
+  );
   const user = useAuthStore(useShallow((state) => state.user));
   const addHistoryDirectMobile = useCreateHistoryDirectMobile();
   const addHistoryMobile = useCreateHistoryMobile();
@@ -179,24 +191,55 @@ export default function ForemanActionModal() {
           }),
         ]}
       >
-        <Box sx={{ display: "flex", justifyContent: "flex-start", fontSize: "2rem", fontWeight: "semibold" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-start",
+            fontSize: "2rem",
+            fontWeight: "semibold",
+          }}
+        >
           <Box>{record.conveyor}</Box>
         </Box>
-        <Box sx={{ display: "flex", justifyContent: "space-between", fontSize: "1rem" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            fontSize: "1rem",
+          }}
+        >
           <Box>{record.product}</Box>
           <Box>{record.boil}</Box>
         </Box>
-        <Box sx={{ display: "flex", justifyContent: "space-between", fontSize: "1rem" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            fontSize: "1rem",
+          }}
+        >
           <Box>План:</Box>
           <Box>{record.plan}</Box>
         </Box>
-        <Box sx={{ display: "flex", justifyContent: "space-between", fontSize: "1rem" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            fontSize: "1rem",
+          }}
+        >
           <Box>Годен до:</Box>
           <Box>{record.bbf}</Box>
         </Box>
         {record.history_note && (
           <Box
-            sx={{ display: "flex", flexDirection: "column", gap: 1, justifyContent: "space-between", fontSize: "1rem" }}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 1,
+              justifyContent: "space-between",
+              fontSize: "1rem",
+            }}
           >
             <Box>Комментарий лаборатории:</Box>
 
@@ -388,7 +431,9 @@ export default function ForemanActionModal() {
               }),
             ]}
           >
-            <Box sx={{ width: "100%", textAlign: "center" }}>Начать фасовку</Box>
+            <Box sx={{ width: "100%", textAlign: "center" }}>
+              Начать фасовку
+            </Box>
           </Sheet>
         )}
         {finishButtonEnabled && (
@@ -414,13 +459,17 @@ export default function ForemanActionModal() {
               }),
             ]}
           >
-            <Box sx={{ width: "100%", textAlign: "center" }}>Закончить фасовку</Box>
+            <Box sx={{ width: "100%", textAlign: "center" }}>
+              Закончить фасовку
+            </Box>
           </Sheet>
         )}
         {cancelStartButtonEnabled && (
           <Sheet
             variant="outlined"
-            slotProps={{ root: { onClick: () => handleCancelStartButtonClick() } }}
+            slotProps={{
+              root: { onClick: () => handleCancelStartButtonClick() },
+            }}
             sx={[
               {
                 borderRadius: "sm",
@@ -440,13 +489,17 @@ export default function ForemanActionModal() {
               }),
             ]}
           >
-            <Box sx={{ width: "100%", textAlign: "center" }}>Отменить начало фасовки</Box>
+            <Box sx={{ width: "100%", textAlign: "center" }}>
+              Отменить начало фасовки
+            </Box>
           </Sheet>
         )}
         {cancelFinishButtonEnabled && (
           <Sheet
             variant="outlined"
-            slotProps={{ root: { onClick: () => handleCancelFinishButtonClick() } }}
+            slotProps={{
+              root: { onClick: () => handleCancelFinishButtonClick() },
+            }}
             sx={[
               {
                 borderRadius: "sm",
@@ -466,7 +519,9 @@ export default function ForemanActionModal() {
               }),
             ]}
           >
-            <Box sx={{ width: "100%", textAlign: "center" }}>Отменить окончание фасовки</Box>
+            <Box sx={{ width: "100%", textAlign: "center" }}>
+              Отменить окончание фасовки
+            </Box>
           </Sheet>
         )}
 

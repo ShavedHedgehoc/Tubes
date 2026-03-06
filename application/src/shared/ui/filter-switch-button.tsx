@@ -11,7 +11,13 @@ export interface FilterSwitchButtonProps {
 export default function FilterSwitchButton(props: FilterSwitchButtonProps) {
   return (
     <Box
-      sx={{ display: "flex", alignItems: "center", justifyContent: "center", py: 1, border: "0.5px solid tertiary" }}
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        py: 1,
+        border: "0.5px solid tertiary",
+      }}
     >
       <ButtonGroup size="sm">
         <IconButton disabled={props.condition} onClick={() => props.onClick()}>

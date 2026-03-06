@@ -6,7 +6,11 @@ import TubeDetailViewLayout from "../../../shared/layouts/tube-detail-view-layou
 import TubeRecordDetailPostState from "../tube-record-detail-post-state";
 import TubeRecordDetailOperationsTable from "../operations/tube-record-detail-operations-table";
 
-export default function TubeRecordDetailOffsetView({ offsetData }: { offsetData: TubeRecordDetailDataOffset | null }) {
+export default function TubeRecordDetailOffsetView({
+  offsetData,
+}: {
+  offsetData: TubeRecordDetailDataOffset | null;
+}) {
   if (!offsetData) return <NotFoundComponent />;
   return (
     <TubeDetailViewLayout>

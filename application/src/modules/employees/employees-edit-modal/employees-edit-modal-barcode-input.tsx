@@ -3,8 +3,12 @@ import { useShallow } from "zustand/react/shallow";
 import { useEmployeesEditModalStore } from "../store/use-employees-edit-modal-store";
 
 export default function EmployeesEditModalBarcodeInput() {
-  const barcode = useEmployeesEditModalStore(useShallow((state) => state.barcode));
-  const setBarcode = useEmployeesEditModalStore(useShallow((state) => state.setBarcode));
+  const barcode = useEmployeesEditModalStore(
+    useShallow((state) => state.barcode),
+  );
+  const setBarcode = useEmployeesEditModalStore(
+    useShallow((state) => state.setBarcode),
+  );
   return (
     <Input
       sx={{

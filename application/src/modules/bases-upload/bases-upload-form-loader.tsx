@@ -7,9 +7,13 @@ import { useUpdateBases } from "./use-update-bases";
 export default function BasesUploadFormLoader() {
   const { updateBases, isPending } = useUpdateBases();
 
-  const dataForUpload = useBasesUploadFormStore(useShallow((state) => state.dataForUpload));
+  const dataForUpload = useBasesUploadFormStore(
+    useShallow((state) => state.dataForUpload),
+  );
   const isValid = useBasesUploadFormStore(useShallow((state) => state.isValid));
-  const clearData = useBasesUploadFormStore(useShallow((state) => state.clearData));
+  const clearData = useBasesUploadFormStore(
+    useShallow((state) => state.clearData),
+  );
 
   const upload = async () => {
     updateBases({ bases: dataForUpload });

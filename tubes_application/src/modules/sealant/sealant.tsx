@@ -31,20 +31,40 @@ import SealantDefectEntryModal from "./dash/modals/sealant-defect-entry-modal";
 export default function Sealant() {
   const params = useParams<Params.CONVEYOR_NAME>();
   const { isPending } = useConveyor(params.conveyor_name ?? null);
-  const sealantConveyor = useSealantConveyorStore(useShallow((state) => state.sealantConveyor));
-  const employee = useSealantEmployeeStore(useShallow((state) => state.sealantEmployee));
-  const { data: summaryData, isPending: isPendingSummary, isError } = useActiveSummary(sealantConveyor?.id ?? null);
+  const sealantConveyor = useSealantConveyorStore(
+    useShallow((state) => state.sealantConveyor),
+  );
+  const employee = useSealantEmployeeStore(
+    useShallow((state) => state.sealantEmployee),
+  );
+  const {
+    data: summaryData,
+    isPending: isPendingSummary,
+    isError,
+  } = useActiveSummary(sealantConveyor?.id ?? null);
 
   if (isPending) return <Loader />;
-  if (!sealantConveyor) return <NotFound message={AppMessages.CONVEYOR_NOT_EXISTS} />;
+  if (!sealantConveyor)
+    return <NotFound message={AppMessages.CONVEYOR_NOT_EXISTS} />;
 
   const pageLayoutProps: PageLayoutProps = {
     timeComponent: <TimeComponent />,
-    headerComponent: <HeaderComponent conveyorName={sealantConveyor.name} postName={PostNames.SEALANT} />,
+    headerComponent: (
+      <HeaderComponent
+        conveyorName={sealantConveyor.name}
+        postName={PostNames.SEALANT}
+      />
+    ),
     parameterComponent: <SealantParameters summaryData={summaryData ?? null} />,
-    materialPieChartComponent: <MaterialPieChartComponent summaryData={summaryData ?? null} postId={4} />,
-    productionLineChartComponent: <ProductionLineChart summaryData={summaryData ?? null} postId={4} />,
-    productionCardComponent: <ProductionCard summaryData={summaryData ?? null} postId={4} />,
+    materialPieChartComponent: (
+      <MaterialPieChartComponent summaryData={summaryData ?? null} postId={4} />
+    ),
+    productionLineChartComponent: (
+      <ProductionLineChart summaryData={summaryData ?? null} postId={4} />
+    ),
+    productionCardComponent: (
+      <ProductionCard summaryData={summaryData ?? null} postId={4} />
+    ),
     menuComponent: <SealantMenu />,
     userComponent: <UserComponent employee={employee} />,
     loaderComponent: <Loader />,

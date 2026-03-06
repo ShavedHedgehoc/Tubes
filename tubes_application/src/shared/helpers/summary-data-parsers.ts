@@ -1,24 +1,47 @@
-import type { IMaterial, IStatus, IStatusCounter, ISummary } from "../api/services/summary-service";
+import type {
+  IMaterial,
+  IStatus,
+  IStatusCounter,
+  ISummary,
+} from "../api/services/summary-service";
 
-export function getNoteData(postId: number, data: ISummary | null): { header: string; note: string } {
+export function getNoteData(
+  postId: number,
+  data: ISummary | null,
+): { header: string; note: string } {
   const existsHeader = "Примечание главного технолога: ";
   const emptyString = "";
   if (!data) return { header: emptyString, note: emptyString };
   switch (postId) {
     case 1:
-      return { header: data.extrusion_note ? existsHeader : "", note: data.extrusion_note ?? "" };
+      return {
+        header: data.extrusion_note ? existsHeader : "",
+        note: data.extrusion_note ?? "",
+      };
     case 2:
-      return { header: data.varnish_note ? existsHeader : "", note: data.varnish_note ?? "" };
+      return {
+        header: data.varnish_note ? existsHeader : "",
+        note: data.varnish_note ?? "",
+      };
     case 3:
-      return { header: data.offset_note ? existsHeader : "", note: data.offset_note ?? "" };
+      return {
+        header: data.offset_note ? existsHeader : "",
+        note: data.offset_note ?? "",
+      };
     case 4:
-      return { header: data.sealant_note ? existsHeader : "", note: data.sealant_note ?? "" };
+      return {
+        header: data.sealant_note ? existsHeader : "",
+        note: data.sealant_note ?? "",
+      };
     default:
       return { header: emptyString, note: emptyString };
   }
 }
 
-export function getProductionData(postId: number, data: ISummary | null): number {
+export function getProductionData(
+  postId: number,
+  data: ISummary | null,
+): number {
   if (!data) return 0;
   switch (postId) {
     case 1:
@@ -34,7 +57,10 @@ export function getProductionData(postId: number, data: ISummary | null): number
   }
 }
 
-export function getLastCheckDate(postId: number, data: ISummary | null): Date | undefined {
+export function getLastCheckDate(
+  postId: number,
+  data: ISummary | null,
+): Date | undefined {
   if (!data) return undefined;
   switch (postId) {
     case 1:
@@ -66,7 +92,10 @@ export function getLastCheckDate(postId: number, data: ISummary | null): Date | 
 //   }
 // }
 
-export function getStatusCountersData(postId: number, data: ISummary | null): IStatusCounter[] | [] {
+export function getStatusCountersData(
+  postId: number,
+  data: ISummary | null,
+): IStatusCounter[] | [] {
   if (!data) return [];
   switch (postId) {
     case 1:
@@ -82,7 +111,10 @@ export function getStatusCountersData(postId: number, data: ISummary | null): IS
   }
 }
 
-export function getMaterialsData(postId: number, data: ISummary | null): IMaterial[] | [] {
+export function getMaterialsData(
+  postId: number,
+  data: ISummary | null,
+): IMaterial[] | [] {
   if (!data) return [];
   switch (postId) {
     case 1:
@@ -98,7 +130,10 @@ export function getMaterialsData(postId: number, data: ISummary | null): IMateri
   }
 }
 
-export function getStatusData(postId: number, data: ISummary | null): IStatus | null {
+export function getStatusData(
+  postId: number,
+  data: ISummary | null,
+): IStatus | null {
   if (!data) return null;
   switch (postId) {
     case 1:

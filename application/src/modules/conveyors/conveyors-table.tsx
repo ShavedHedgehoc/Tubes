@@ -22,9 +22,17 @@ export default function ConveyorsTable() {
   const page = useConveyorsPaginationStore(useShallow((state) => state.page));
   const limit = useConveyorsPaginationStore(useShallow((state) => state.limit));
   const total = useConveyorsPaginationStore(useShallow((state) => state.total));
-  const setTotal = useConveyorsPaginationStore(useShallow((state) => state.setTotal));
-  const setPage = useConveyorsPaginationStore(useShallow((state) => state.setPage));
-  const { isPending, data, isSuccess } = useConveyors({ filter: filter, limit: limit, page: page });
+  const setTotal = useConveyorsPaginationStore(
+    useShallow((state) => state.setTotal),
+  );
+  const setPage = useConveyorsPaginationStore(
+    useShallow((state) => state.setPage),
+  );
+  const { isPending, data, isSuccess } = useConveyors({
+    filter: filter,
+    limit: limit,
+    page: page,
+  });
 
   React.useEffect(() => {
     if (data && data.total !== total) {
@@ -49,7 +57,8 @@ export default function ConveyorsTable() {
 
   return (
     <TableLayout thead={commonThead}>
-      {isSuccess && data.rows.map((row) => <RowComponent row={row} key={row.id} />)}
+      {isSuccess &&
+        data.rows.map((row) => <RowComponent row={row} key={row.id} />)}
     </TableLayout>
   );
 }

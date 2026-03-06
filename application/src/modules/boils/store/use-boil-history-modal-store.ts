@@ -23,6 +23,7 @@ export const useBoilHistoryModalStore = create<HistoryModalStore>()((set) => ({
   setOpen: (value) => set(() => ({ open: value })),
   setBoilValue: (value) => set(() => ({ boil_value: value })),
   setTitle: (value) => set(() => ({ title: value })),
-  setCancelButtonEnabled: (value) => set(() => ({ cancelButtonEnabled: value })),
+  setCancelButtonEnabled: (value) =>
+    set(() => ({ cancelButtonEnabled: value })),
   setBoilId: (value) => set(() => ({ boil_id: value })),
 }));

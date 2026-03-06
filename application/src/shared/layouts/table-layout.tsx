@@ -2,7 +2,13 @@ import * as React from "react";
 import { Sheet, Table, TableProps, useColorScheme } from "@mui/joy";
 import { SxProps } from "@mui/joy/styles/types";
 
-export default function TableLayout({ thead, children }: { thead: TheadProperties[]; children: React.ReactNode }) {
+export default function TableLayout({
+  thead,
+  children,
+}: {
+  thead: TheadProperties[];
+  children: React.ReactNode;
+}) {
   const { mode } = useColorScheme();
   const sheetSxProps: SxProps = [
     {
@@ -33,9 +39,15 @@ export default function TableLayout({ thead, children }: { thead: TheadPropertie
       "--TableCell-paddingX": "8px",
     },
     (theme) => ({
-      "& td[scope='fail'] ": { bgcolor: mode === "light" ? "danger.softBg" : "neutral.softBg" },
-      "& td[scope='wait'] ": { bgcolor: mode === "light" ? "warning.softBg" : "neutral.softBg" },
-      "& td[scope='success'] ": { bgcolor: mode === "light" ? "success.softBg" : "neutral.softBg" },
+      "& td[scope='fail'] ": {
+        bgcolor: mode === "light" ? "danger.softBg" : "neutral.softBg",
+      },
+      "& td[scope='wait'] ": {
+        bgcolor: mode === "light" ? "warning.softBg" : "neutral.softBg",
+      },
+      "& td[scope='success'] ": {
+        bgcolor: mode === "light" ? "success.softBg" : "neutral.softBg",
+      },
       "& td[scope='cancelled'] ": {
         bgcolor: mode === "light" ? "danger.softBg" : "neutral.softBg",
       },

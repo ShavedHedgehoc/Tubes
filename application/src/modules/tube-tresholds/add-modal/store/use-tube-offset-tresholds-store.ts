@@ -142,107 +142,231 @@ export const useTubeOffsetTresholdsStore = create<TubeOffsetTresholdsStore>()(
       switch (key) {
         case OffsetTresholdsParams.PRODUCT_ID:
           set((state) => ({
-            tresholds: { ...state.tresholds, product_id: values?.length ? values[0] : state.tresholds.product_id },
+            tresholds: {
+              ...state.tresholds,
+              product_id: values?.length
+                ? values[0]
+                : state.tresholds.product_id,
+            },
           }));
           break;
         case OffsetTresholdsParams.CONVEYOR_ID:
           set((state) => ({
-            tresholds: { ...state.tresholds, conveyor_id: values?.length ? values[0] : state.tresholds.conveyor_id },
+            tresholds: {
+              ...state.tresholds,
+              conveyor_id: values?.length
+                ? values[0]
+                : state.tresholds.conveyor_id,
+            },
           }));
           break;
         case OffsetTresholdsParams.PRINTING_MACHINE_SPEED_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, printing_machine_speed_min: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              printing_machine_speed_min: value,
+            },
+          }));
           break;
         case OffsetTresholdsParams.PRINTING_MACHINE_SPEED_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, printing_machine_speed_max: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              printing_machine_speed_max: value,
+            },
+          }));
           break;
         case OffsetTresholdsParams.TOTAL_AIR_PRESSURE_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, total_air_pressure_min: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, total_air_pressure_min: value },
+          }));
           break;
         case OffsetTresholdsParams.TOTAL_AIR_PRESSURE_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, total_air_pressure_max: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, total_air_pressure_max: value },
+          }));
           break;
         case OffsetTresholdsParams.PADDING_FURNACE_TEMP_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, padding_furnace_temp_min: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, padding_furnace_temp_min: value },
+          }));
           break;
         case OffsetTresholdsParams.PADDING_FURNACE_TEMP_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, padding_furnace_temp_max: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, padding_furnace_temp_max: value },
+          }));
           break;
         case OffsetTresholdsParams.OFFSET_FURNACE_TEMP_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, offset_furnace_temp_min: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, offset_furnace_temp_min: value },
+          }));
           break;
         case OffsetTresholdsParams.OFFSET_FURNACE_TEMP_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, offset_furnace_temp_max: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, offset_furnace_temp_max: value },
+          }));
           break;
         case OffsetTresholdsParams.PRINTER_MOTOR_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, printer_motor_min: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, printer_motor_min: value },
+          }));
           break;
         case OffsetTresholdsParams.PRINTER_MOTOR_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, printer_motor_max: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, printer_motor_max: value },
+          }));
           break;
         case OffsetTresholdsParams.BASE_COVERS_HOLDERS_MOTOR_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, base_covers_holders_motor_min: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              base_covers_holders_motor_min: value,
+            },
+          }));
           break;
         case OffsetTresholdsParams.BASE_COVERS_HOLDERS_MOTOR_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, base_covers_holders_motor_max: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              base_covers_holders_motor_max: value,
+            },
+          }));
           break;
         case OffsetTresholdsParams.BASE_COVERS_STATION_MOTOR_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, base_covers_station_motor_min: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              base_covers_station_motor_min: value,
+            },
+          }));
           break;
         case OffsetTresholdsParams.BASE_COVERS_STATION_MOTOR_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, base_covers_station_motor_max: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              base_covers_station_motor_max: value,
+            },
+          }));
           break;
         case OffsetTresholdsParams.IMPRINT_QUANTITY_PRINTED_BOX_1_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, imprint_quantity_printed_box_1_min: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              imprint_quantity_printed_box_1_min: value,
+            },
+          }));
           break;
         case OffsetTresholdsParams.IMPRINT_QUANTITY_PRINTED_BOX_1_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, imprint_quantity_printed_box_1_max: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              imprint_quantity_printed_box_1_max: value,
+            },
+          }));
           break;
         case OffsetTresholdsParams.IMPRINT_QUANTITY_PRINTED_BOX_2_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, imprint_quantity_printed_box_2_min: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              imprint_quantity_printed_box_2_min: value,
+            },
+          }));
           break;
         case OffsetTresholdsParams.IMPRINT_QUANTITY_PRINTED_BOX_2_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, imprint_quantity_printed_box_2_max: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              imprint_quantity_printed_box_2_max: value,
+            },
+          }));
           break;
         case OffsetTresholdsParams.IMPRINT_QUANTITY_PRINTED_BOX_3_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, imprint_quantity_printed_box_3_min: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              imprint_quantity_printed_box_3_min: value,
+            },
+          }));
           break;
         case OffsetTresholdsParams.IMPRINT_QUANTITY_PRINTED_BOX_3_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, imprint_quantity_printed_box_3_max: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              imprint_quantity_printed_box_3_max: value,
+            },
+          }));
           break;
         case OffsetTresholdsParams.IMPRINT_QUANTITY_PRINTED_BOX_4_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, imprint_quantity_printed_box_4_min: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              imprint_quantity_printed_box_4_min: value,
+            },
+          }));
           break;
         case OffsetTresholdsParams.IMPRINT_QUANTITY_PRINTED_BOX_4_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, imprint_quantity_printed_box_4_max: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              imprint_quantity_printed_box_4_max: value,
+            },
+          }));
           break;
         case OffsetTresholdsParams.IMPRINT_QUANTITY_PRINTED_BOX_5_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, imprint_quantity_printed_box_5_min: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              imprint_quantity_printed_box_5_min: value,
+            },
+          }));
           break;
         case OffsetTresholdsParams.IMPRINT_QUANTITY_PRINTED_BOX_5_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, imprint_quantity_printed_box_5_max: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              imprint_quantity_printed_box_5_max: value,
+            },
+          }));
           break;
         case OffsetTresholdsParams.IMPRINT_QUANTITY_PRINTED_BOX_6_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, imprint_quantity_printed_box_6_min: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              imprint_quantity_printed_box_6_min: value,
+            },
+          }));
           break;
         case OffsetTresholdsParams.IMPRINT_QUANTITY_PRINTED_BOX_6_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, imprint_quantity_printed_box_6_max: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              imprint_quantity_printed_box_6_max: value,
+            },
+          }));
           break;
         case OffsetTresholdsParams.INK_SUPPLY_TIME_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, ink_supply_time_min: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, ink_supply_time_min: value },
+          }));
           break;
         case OffsetTresholdsParams.INK_SUPPLY_TIME_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, ink_supply_time_max: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, ink_supply_time_max: value },
+          }));
           break;
 
         default:
           break;
       }
     },
-    fillConveyorSelectorOptions: (values) => set(() => ({ conveyorSelectorOptions: [...values] })),
-    setSelectedConveyorOption: (value) => set(() => ({ selectedConveyorOption: value })),
-    fillProductSelectorOptions: (values) => set(() => ({ productSelectorOptions: [...values] })),
-    setSelectedProductOption: (value) => set(() => ({ selectedProductOption: value })),
+    fillConveyorSelectorOptions: (values) =>
+      set(() => ({ conveyorSelectorOptions: [...values] })),
+    setSelectedConveyorOption: (value) =>
+      set(() => ({ selectedConveyorOption: value })),
+    fillProductSelectorOptions: (values) =>
+      set(() => ({ productSelectorOptions: [...values] })),
+    setSelectedProductOption: (value) =>
+      set(() => ({ selectedProductOption: value })),
 
     setTreshold: (value) =>
       set((state) => ({
@@ -264,23 +388,35 @@ export const useTubeOffsetTresholdsStore = create<TubeOffsetTresholdsStore>()(
           base_covers_holders_motor_max: value.base_covers_holders_motor_max,
           base_covers_station_motor_min: value.base_covers_station_motor_min,
           base_covers_station_motor_max: value.base_covers_station_motor_max,
-          imprint_quantity_printed_box_1_min: value.imprint_quantity_printed_box_1_min ?? "",
-          imprint_quantity_printed_box_1_max: value.imprint_quantity_printed_box_1_max ?? "",
-          imprint_quantity_printed_box_2_min: value.imprint_quantity_printed_box_2_min ?? "",
-          imprint_quantity_printed_box_2_max: value.imprint_quantity_printed_box_2_max ?? "",
-          imprint_quantity_printed_box_3_min: value.imprint_quantity_printed_box_3_min ?? "",
-          imprint_quantity_printed_box_3_max: value.imprint_quantity_printed_box_3_max ?? "",
-          imprint_quantity_printed_box_4_min: value.imprint_quantity_printed_box_4_min ?? "",
-          imprint_quantity_printed_box_4_max: value.imprint_quantity_printed_box_4_max ?? "",
-          imprint_quantity_printed_box_5_min: value.imprint_quantity_printed_box_5_min ?? "",
-          imprint_quantity_printed_box_5_max: value.imprint_quantity_printed_box_5_max ?? "",
-          imprint_quantity_printed_box_6_min: value.imprint_quantity_printed_box_6_min ?? "",
-          imprint_quantity_printed_box_6_max: value.imprint_quantity_printed_box_6_max ?? "",
+          imprint_quantity_printed_box_1_min:
+            value.imprint_quantity_printed_box_1_min ?? "",
+          imprint_quantity_printed_box_1_max:
+            value.imprint_quantity_printed_box_1_max ?? "",
+          imprint_quantity_printed_box_2_min:
+            value.imprint_quantity_printed_box_2_min ?? "",
+          imprint_quantity_printed_box_2_max:
+            value.imprint_quantity_printed_box_2_max ?? "",
+          imprint_quantity_printed_box_3_min:
+            value.imprint_quantity_printed_box_3_min ?? "",
+          imprint_quantity_printed_box_3_max:
+            value.imprint_quantity_printed_box_3_max ?? "",
+          imprint_quantity_printed_box_4_min:
+            value.imprint_quantity_printed_box_4_min ?? "",
+          imprint_quantity_printed_box_4_max:
+            value.imprint_quantity_printed_box_4_max ?? "",
+          imprint_quantity_printed_box_5_min:
+            value.imprint_quantity_printed_box_5_min ?? "",
+          imprint_quantity_printed_box_5_max:
+            value.imprint_quantity_printed_box_5_max ?? "",
+          imprint_quantity_printed_box_6_min:
+            value.imprint_quantity_printed_box_6_min ?? "",
+          imprint_quantity_printed_box_6_max:
+            value.imprint_quantity_printed_box_6_max ?? "",
           ink_supply_time_min: value.ink_supply_time_min,
           ink_supply_time_max: value.ink_supply_time_max,
         },
         selectedProductOption: value.product_id,
         selectedConveyorOption: value.conveyor_id,
       })),
-  }))
+  })),
 );

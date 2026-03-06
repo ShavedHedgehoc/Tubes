@@ -4,8 +4,12 @@ import { useDocumentDetailFilterStore } from "../store/use-document-detail-filte
 import { DocumentDetailFilterParams } from "./document-detail-filter-params";
 
 export default function DocumentDetailFilterMarkingInput() {
-  const filter = useDocumentDetailFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useDocumentDetailFilterStore(useShallow((state) => state.changeFilter));
+  const filter = useDocumentDetailFilterStore(
+    useShallow((state) => state.filter),
+  );
+  const changeFilter = useDocumentDetailFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
 
   const inputProps: FilterInputProps = {
     id: DocumentDetailFilterParams.MARKING,
@@ -13,7 +17,8 @@ export default function DocumentDetailFilterMarkingInput() {
     disabled: filter.marking === "",
     label: "Поиск по артикулу",
     placeholder: "Артикул",
-    changeFilter: ({ key, value }: { key: string; value: string }) => changeFilter({ key, value }),
+    changeFilter: ({ key, value }: { key: string; value: string }) =>
+      changeFilter({ key, value }),
   };
 
   return <FilterInput {...inputProps} />;

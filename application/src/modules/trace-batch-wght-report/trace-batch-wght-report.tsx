@@ -8,7 +8,9 @@ import TraceBatchWghtReportFilter from "./filter/trace-batch-wght-report-filter"
 export default function TraceBatchWghtReport() {
   return (
     <React.Fragment>
-      <BreadCrumbHeader breadcrumbs={["Весовой участок", "Отчет по взвешиваниям"]} />
+      <BreadCrumbHeader
+        breadcrumbs={["Весовой участок", "Отчет по взвешиваниям"]}
+      />
       <MainPageHeader pageTitle={"Отчет по взвешиваниям"} />
       <TraceBatchWghtReportFilter />
       <TraceBatchWghtReportTable />

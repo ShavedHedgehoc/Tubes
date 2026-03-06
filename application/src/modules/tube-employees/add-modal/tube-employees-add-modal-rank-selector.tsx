@@ -3,9 +3,13 @@ import { useTubeEmployeesAddModalStore } from "../store/use-tube-employees-add-m
 import { Option, Select } from "@mui/joy";
 
 export default function TubeEmployeesAddModalRankSelector() {
-  const rankOptions = useTubeEmployeesAddModalStore(useShallow((state) => state.rankOptions));
+  const rankOptions = useTubeEmployeesAddModalStore(
+    useShallow((state) => state.rankOptions),
+  );
   const rank = useTubeEmployeesAddModalStore(useShallow((state) => state.rank));
-  const setRank = useTubeEmployeesAddModalStore(useShallow((state) => state.setRank));
+  const setRank = useTubeEmployeesAddModalStore(
+    useShallow((state) => state.setRank),
+  );
 
   const options = rankOptions.map((rank) => (
     <Option value={rank.id} key={rank.id}>
@@ -28,7 +32,10 @@ export default function TubeEmployeesAddModalRankSelector() {
         display: "flex",
         flexShrink: 1,
       }}
-      onChange={(event: React.SyntheticEvent | null, newValue: number | null) => {
+      onChange={(
+        event: React.SyntheticEvent | null,
+        newValue: number | null,
+      ) => {
         event && newValue && setRank(newValue);
       }}
     >

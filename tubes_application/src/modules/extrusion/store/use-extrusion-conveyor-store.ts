@@ -14,5 +14,5 @@ export const useExtrusionConveyorStore = create<ExtrusionConveyorStore>()(
     extrusionConveyor: null,
     setExtrusionConveyor: (value) => set(() => ({ extrusionConveyor: value })),
     clearExtrusionConveyor: () => set(() => ({ extrusionConveyor: null })),
-  }))
+  })),
 );

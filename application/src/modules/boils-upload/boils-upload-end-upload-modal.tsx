@@ -1,7 +1,9 @@
 import * as React from "react";
 import { useBoilsUploadUploadModalStore } from "./store/use-boils-upload-upload-modal-store";
 import { useShallow } from "zustand/react/shallow";
-import UniversalProcessModal, { UniversalProcessModalProps } from "../../shared/components/universal-process-modal";
+import UniversalProcessModal, {
+  UniversalProcessModalProps,
+} from "../../shared/components/universal-process-modal";
 import { Box, Button, Typography } from "@mui/joy";
 import { useBoilsUploadEndUploadModalStore } from "./store/use-boils-upload-end-upload-modal";
 import { useBoilsUploadFormStore } from "./store/use-boils-upload-form-store";
@@ -9,11 +11,21 @@ import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
 import ReportProblemOutlinedIcon from "@mui/icons-material/ReportProblemOutlined";
 
 export default function BoilsUploadEndUploadModal() {
-  const open = useBoilsUploadEndUploadModalStore(useShallow((state) => state.open));
-  const setOpen = useBoilsUploadEndUploadModalStore(useShallow((state) => state.setOpen));
-  const fail = useBoilsUploadUploadModalStore(useShallow((state) => state.fail));
-  const resetUploadModal = useBoilsUploadUploadModalStore(useShallow((state) => state.reset));
-  const clearData = useBoilsUploadFormStore(useShallow((state) => state.clearData));
+  const open = useBoilsUploadEndUploadModalStore(
+    useShallow((state) => state.open),
+  );
+  const setOpen = useBoilsUploadEndUploadModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const fail = useBoilsUploadUploadModalStore(
+    useShallow((state) => state.fail),
+  );
+  const resetUploadModal = useBoilsUploadUploadModalStore(
+    useShallow((state) => state.reset),
+  );
+  const clearData = useBoilsUploadFormStore(
+    useShallow((state) => state.clearData),
+  );
   const handleOkClick = () => {
     setOpen(false);
     resetUploadModal();
@@ -22,15 +34,31 @@ export default function BoilsUploadEndUploadModal() {
 
   const content = (
     <React.Fragment>
-      <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 1 }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 1,
+        }}
+      >
         {fail > 0 ? (
           <ReportProblemOutlinedIcon color="warning" sx={{ fontSize: "xl4" }} />
         ) : (
           <DoneOutlinedIcon color="success" sx={{ fontSize: "xl4" }} />
         )}
 
-        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
-          <Typography>Загрузка завершена {fail > 0 ? "с ошибками!" : "успешно!"}</Typography>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 3,
+          }}
+        >
+          <Typography>
+            Загрузка завершена {fail > 0 ? "с ошибками!" : "успешно!"}
+          </Typography>
           <Button
             color="neutral"
             onClick={() => handleOkClick()}

@@ -9,14 +9,28 @@ import { useUploadBoil } from "./use-upload-boil";
 export default function BoilsUploadFormLoader() {
   const { uploadBoil } = useUploadBoil();
 
-  const dataForUpload = useBoilsUploadFormStore(useShallow((state) => state.dataForUpload));
+  const dataForUpload = useBoilsUploadFormStore(
+    useShallow((state) => state.dataForUpload),
+  );
   const isValid = useBoilsUploadFormStore(useShallow((state) => state.isValid));
-  const setOpenUploadModal = useBoilsUploadUploadModalStore(useShallow((state) => state.setOpen));
-  const setToProcess = useBoilsUploadUploadModalStore(useShallow((state) => state.setToProcess));
-  const increaseSuccess = useBoilsUploadUploadModalStore(useShallow((state) => state.increaseSuccess));
-  const increaseFail = useBoilsUploadUploadModalStore(useShallow((state) => state.increaseFail));
-  const increaseProcessed = useBoilsUploadUploadModalStore(useShallow((state) => state.increaseProcessed));
-  const setOpenEndUploadModal = useBoilsUploadEndUploadModalStore(useShallow((state) => state.setOpen));
+  const setOpenUploadModal = useBoilsUploadUploadModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const setToProcess = useBoilsUploadUploadModalStore(
+    useShallow((state) => state.setToProcess),
+  );
+  const increaseSuccess = useBoilsUploadUploadModalStore(
+    useShallow((state) => state.increaseSuccess),
+  );
+  const increaseFail = useBoilsUploadUploadModalStore(
+    useShallow((state) => state.increaseFail),
+  );
+  const increaseProcessed = useBoilsUploadUploadModalStore(
+    useShallow((state) => state.increaseProcessed),
+  );
+  const setOpenEndUploadModal = useBoilsUploadEndUploadModalStore(
+    useShallow((state) => state.setOpen),
+  );
 
   const upload = async () => {
     if (dataForUpload.length > 0) {

@@ -41,5 +41,5 @@ export const useTrademarksFilterStore = create<TrademarksFilterStore>()(
           break;
       }
     },
-  }))
+  })),
 );

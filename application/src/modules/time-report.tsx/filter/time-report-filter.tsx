@@ -13,15 +13,25 @@ import { useTimeReportFilterStore } from "../store/use-time-report-filter-store"
 import { TimeReportFilterParams } from "./time-report-filter-params";
 
 export default function TimeReportFilter() {
-  const changeFilter = useTimeReportFilterStore(useShallow((state) => state.changeFilter));
+  const changeFilter = useTimeReportFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
 
-  const setSelectedPlant = useTimeReportFilterStore(useShallow((state) => state.setSelectedPlant));
-  const plantSelectorOptions = useTimeReportFilterStore(useShallow((state) => state.plantSelectorOptions));
+  const setSelectedPlant = useTimeReportFilterStore(
+    useShallow((state) => state.setSelectedPlant),
+  );
+  const plantSelectorOptions = useTimeReportFilterStore(
+    useShallow((state) => state.plantSelectorOptions),
+  );
   const user = useAuthStore(useShallow((state) => state.user));
   if (user) {
     const plant_id = user?.settings?.plant_id || plantSelectorOptions[0].id;
     setSelectedPlant(plant_id);
-    changeFilter({ key: TimeReportFilterParams.PLANT, value: "", values: [plant_id] });
+    changeFilter({
+      key: TimeReportFilterParams.PLANT,
+      value: "",
+      values: [plant_id],
+    });
   }
   return (
     <PageFilterLayout>

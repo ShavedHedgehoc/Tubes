@@ -15,17 +15,23 @@ interface ForemanActionModalStore {
   setCancelFinishButtonEnabled: (value: boolean) => void;
 }
 
-export const useForemanActionModalStore = create<ForemanActionModalStore>()((set) => ({
-  open: false,
-  record: null,
-  startButtonEnabled: false,
-  finishButtonEnabled: false,
-  cancelStartButtonEnabled: false,
-  cancelFinishButtonEnabled: false,
-  setOpen: (value) => set(() => ({ open: value })),
-  setRecord: (value) => set(() => ({ record: value })),
-  setStartButtonEnabled: (value) => set(() => ({ startButtonEnabled: value })),
-  setFinishButtonEnabled: (value) => set(() => ({ finishButtonEnabled: value })),
-  setCancelStartButtonEnabled: (value) => set(() => ({ cancelStartButtonEnabled: value })),
-  setCancelFinishButtonEnabled: (value) => set(() => ({ cancelFinishButtonEnabled: value })),
-}));
+export const useForemanActionModalStore = create<ForemanActionModalStore>()(
+  (set) => ({
+    open: false,
+    record: null,
+    startButtonEnabled: false,
+    finishButtonEnabled: false,
+    cancelStartButtonEnabled: false,
+    cancelFinishButtonEnabled: false,
+    setOpen: (value) => set(() => ({ open: value })),
+    setRecord: (value) => set(() => ({ record: value })),
+    setStartButtonEnabled: (value) =>
+      set(() => ({ startButtonEnabled: value })),
+    setFinishButtonEnabled: (value) =>
+      set(() => ({ finishButtonEnabled: value })),
+    setCancelStartButtonEnabled: (value) =>
+      set(() => ({ cancelStartButtonEnabled: value })),
+    setCancelFinishButtonEnabled: (value) =>
+      set(() => ({ cancelFinishButtonEnabled: value })),
+  }),
+);

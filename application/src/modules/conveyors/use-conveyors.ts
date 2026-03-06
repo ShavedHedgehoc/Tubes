@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import ConveyorService, { FetchConveyorsDto } from "../../shared/api/services/conveyor-service";
+import ConveyorService, {
+  FetchConveyorsDto,
+} from "../../shared/api/services/conveyor-service";
 
 export const useConveyors = (dto: FetchConveyorsDto) =>
   useQuery({

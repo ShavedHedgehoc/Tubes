@@ -1,5 +1,12 @@
 import * as React from "react";
-import { Box, FormControl, FormHelperText, IconButton, Input, useColorScheme } from "@mui/joy";
+import {
+  Box,
+  FormControl,
+  FormHelperText,
+  IconButton,
+  Input,
+  useColorScheme,
+} from "@mui/joy";
 import ClearOutlinedIcon from "@mui/icons-material/ClearOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 
@@ -22,7 +29,9 @@ export default function FilterInput(props: FilterInputProps) {
           sx={{
             "&:focus-within": {
               "--Input-focusedHighlight":
-                mode === "light" ? "var(--joy-palette-neutral-400)" : "var(--joy-palette-neutral-400)",
+                mode === "light"
+                  ? "var(--joy-palette-neutral-400)"
+                  : "var(--joy-palette-neutral-400)",
             },
             minWidth: props.maxW ? `${props.maxW}px` : "150px",
             maxWidth: props.maxW ? `${props.maxW}px` : "150px",
@@ -31,7 +40,9 @@ export default function FilterInput(props: FilterInputProps) {
           }}
           autoComplete="false"
           value={props.value}
-          onChange={(e) => props.changeFilter({ key: e.target.id, value: e.target.value })}
+          onChange={(e) =>
+            props.changeFilter({ key: e.target.id, value: e.target.value })
+          }
           placeholder={props.placeholder}
           startDecorator={<SearchIcon />}
           endDecorator={

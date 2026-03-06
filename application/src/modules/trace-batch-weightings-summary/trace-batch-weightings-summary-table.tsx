@@ -7,7 +7,12 @@ import { useTraceBatchWeightingsSummaryFilterStore } from "./store/use-trace-bat
 import { useShallow } from "zustand/react/shallow";
 
 const commonThead: TheadProperties[] = [
-  { width: 60, value: "Сотрудник", align: "left", padding: "12px 6px 12px 40px" },
+  {
+    width: 60,
+    value: "Сотрудник",
+    align: "left",
+    padding: "12px 6px 12px 40px",
+  },
   { width: 30, value: "Строк всего" },
   { width: 30, value: "Взвешено всего" },
   { width: 50, value: "Первое взвешивание" },
@@ -16,8 +21,12 @@ const commonThead: TheadProperties[] = [
 ];
 
 export default function TraceBatchWeightingsSummaryTable() {
-  const filter = useTraceBatchWeightingsSummaryFilterStore(useShallow((state) => state.filter));
-  const { isPending, data, isSuccess } = useTraceBatchWeightingsSummary({ filter: filter });
+  const filter = useTraceBatchWeightingsSummaryFilterStore(
+    useShallow((state) => state.filter),
+  );
+  const { isPending, data, isSuccess } = useTraceBatchWeightingsSummary({
+    filter: filter,
+  });
 
   if (isPending) {
     return <TableLoaderComponent />;
@@ -29,7 +38,13 @@ export default function TraceBatchWeightingsSummaryTable() {
 
   return (
     <TableLayout thead={commonThead}>
-      {isSuccess && data.map((row) => <TraceBatchWeightingsSummaryTableRow row={row} key={row.w_author_id} />)}
+      {isSuccess &&
+        data.map((row) => (
+          <TraceBatchWeightingsSummaryTableRow
+            row={row}
+            key={row.w_author_id}
+          />
+        ))}
     </TableLayout>
   );
 }

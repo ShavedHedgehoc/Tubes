@@ -5,7 +5,9 @@ import { RecordsFilterParams } from "./records-filter-params";
 
 export default function RecordsFilterCodeInput() {
   const filter = useRecordsFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useRecordsFilterStore(useShallow((state) => state.changeFilter));
+  const changeFilter = useRecordsFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
 
   const inputProps: FilterInputProps = {
     id: RecordsFilterParams.PRODUCT,
@@ -13,7 +15,8 @@ export default function RecordsFilterCodeInput() {
     disabled: filter.productCode === "",
     label: "Поиск по коду 1С",
     placeholder: "Код 1С",
-    changeFilter: ({ key, value }: { key: string; value: string }) => changeFilter({ key, value }),
+    changeFilter: ({ key, value }: { key: string; value: string }) =>
+      changeFilter({ key, value }),
   };
 
   return <FilterInput {...inputProps} />;

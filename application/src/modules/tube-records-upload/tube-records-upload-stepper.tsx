@@ -5,7 +5,9 @@ import { useTubeRecordsUploadFormStore } from "./store/use-records-upload-form-s
 
 export default function TubeRecordsUploadStepper() {
   const file = useTubeRecordsUploadFormStore(useShallow((state) => state.file));
-  const isValid = useTubeRecordsUploadFormStore(useShallow((state) => state.isValid));
+  const isValid = useTubeRecordsUploadFormStore(
+    useShallow((state) => state.isValid),
+  );
   const errs = useTubeRecordsUploadFormStore(useShallow((state) => state.errs));
   return (
     <Box sx={{ mt: 4, width: "100%" }}>

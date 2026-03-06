@@ -14,7 +14,9 @@ interface IConveyorData {
 
 export default class ConveyorService {
   //   static async getConveyorsListWithParams(dto: FetchBoilsDto): Promise<IBoilData> {
-  static async getConveyorsList(dto: FetchConveyorsDto): Promise<IConveyorData> {
+  static async getConveyorsList(
+    dto: FetchConveyorsDto,
+  ): Promise<IConveyorData> {
     // const res = await $api.get(`/conveyors`);
     const res = await $api.post(`/conveyors`, dto);
     return res.data;

@@ -10,5 +10,5 @@ export const useRecordHistoryNoteStore = create<RecordHistoryNoteStore>()(
   devtools((set) => ({
     historyNote: "",
     setHistoryNote: (value) => set(() => ({ historyNote: value })),
-  }))
+  })),
 );

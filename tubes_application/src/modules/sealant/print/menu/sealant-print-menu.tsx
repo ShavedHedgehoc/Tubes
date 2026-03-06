@@ -1,10 +1,16 @@
-import MenuButton, { type MenuButtonProps } from "@/shared/components/menu/menu-button";
+import MenuButton, {
+  type MenuButtonProps,
+} from "@/shared/components/menu/menu-button";
 import { TbX, TbPrinter, TbBarcode } from "react-icons/tb";
 import Menu from "@/shared/components/menu/menu";
 import type { ISummary } from "@/shared/api/services/summary-service";
 import useSealantPrintMenu from "./use-sealant-print-menu";
 
-export default function SealantPrintMenu({ summaryData }: { summaryData: ISummary | null }) {
+export default function SealantPrintMenu({
+  summaryData,
+}: {
+  summaryData: ISummary | null;
+}) {
   const {
     handlePrintClick,
     handleExitClick,

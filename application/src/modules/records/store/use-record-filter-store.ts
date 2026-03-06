@@ -48,7 +48,12 @@ export const useRecordsFilterStore = create<RecordsFilterStore>()((set) => ({
         set((state) => ({ filter: { ...state.filter, boil: value } }));
         break;
       case RecordsFilterParams.PLANT:
-        set((state) => ({ filter: { ...state.filter, plant: values?.length ? values[0] : state.filter.plant } }));
+        set((state) => ({
+          filter: {
+            ...state.filter,
+            plant: values?.length ? values[0] : state.filter.plant,
+          },
+        }));
         break;
       case RecordsFilterParams.PRODUCT:
         set((state) => ({ filter: { ...state.filter, productCode: value } }));
@@ -60,11 +65,16 @@ export const useRecordsFilterStore = create<RecordsFilterStore>()((set) => ({
         set((state) => ({ filter: { ...state.filter, conveyor: value } }));
         break;
       case RecordsFilterParams.BOIL_ASC:
-        set((state) => ({ filter: { ...state.filter, boilAsc: value === "true" ? true : false } }));
+        set((state) => ({
+          filter: { ...state.filter, boilAsc: value === "true" ? true : false },
+        }));
         break;
       case RecordsFilterParams.STATES:
         set((state) => ({
-          filter: { ...state.filter, states: values ? [...values] : [...state.filter.states] },
+          filter: {
+            ...state.filter,
+            states: values ? [...values] : [...state.filter.states],
+          },
         }));
         break;
       default:
@@ -72,6 +82,8 @@ export const useRecordsFilterStore = create<RecordsFilterStore>()((set) => ({
     }
   },
   setSelectedPlant: (value) => set(() => ({ selectedPlant: value })),
-  fillPlantSelectorOptions: (values) => set(() => ({ plantSelectorOptions: [...values] })),
-  fillStateSelectorOptions: (values) => set(() => ({ stateSelectorOptions: [...values] })),
+  fillPlantSelectorOptions: (values) =>
+    set(() => ({ plantSelectorOptions: [...values] })),
+  fillStateSelectorOptions: (values) =>
+    set(() => ({ stateSelectorOptions: [...values] })),
 }));

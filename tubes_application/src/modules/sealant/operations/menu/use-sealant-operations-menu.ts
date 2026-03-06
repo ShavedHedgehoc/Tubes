@@ -10,20 +10,40 @@ import { useSealantOperationStore } from "../../store/use-sealant-operation-stor
 import { useCreateSealantStatus } from "../../use-create-sealant-status";
 
 export default function useSealantOperationsMenu(summaryData: ISummary | null) {
-  const sealantConveyor = useSealantConveyorStore(useShallow((state) => state.sealantConveyor));
-  const employee = useSealantEmployeeStore(useShallow((state) => state.sealantEmployee));
-  const selectedOperation = useSealantOperationStore(useShallow((state) => state.selectedOperation));
-  const setSelectedOperation = useSealantOperationStore(useShallow((state) => state.setSelectedOperation));
+  const sealantConveyor = useSealantConveyorStore(
+    useShallow((state) => state.sealantConveyor),
+  );
+  const employee = useSealantEmployeeStore(
+    useShallow((state) => state.sealantEmployee),
+  );
+  const selectedOperation = useSealantOperationStore(
+    useShallow((state) => state.selectedOperation),
+  );
+  const setSelectedOperation = useSealantOperationStore(
+    useShallow((state) => state.setSelectedOperation),
+  );
   const { createSealantStatus } = useCreateSealantStatus();
   const navigate = useNavigate();
 
   const setIdleButtonVisibleCondition =
-    summaryData && summaryData.sealantStatus ? (summaryData.sealantStatus.idle === false ? true : false) : false;
+    summaryData && summaryData.sealantStatus
+      ? summaryData.sealantStatus.idle === false
+        ? true
+        : false
+      : false;
 
   const setWorkingButtonVisibleCondition =
-    summaryData && summaryData.sealantStatus ? (summaryData.sealantStatus.idle === true ? true : false) : false;
+    summaryData && summaryData.sealantStatus
+      ? summaryData.sealantStatus.idle === true
+        ? true
+        : false
+      : false;
 
-  const setIdleButtonDisableCondition = !(summaryData && employee && selectedOperation);
+  const setIdleButtonDisableCondition = !(
+    summaryData &&
+    employee &&
+    selectedOperation
+  );
 
   const setWorkingButtonDisableCondition = !(summaryData && employee);
 

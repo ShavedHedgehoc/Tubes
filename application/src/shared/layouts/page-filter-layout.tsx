@@ -22,19 +22,37 @@ const sheetSXProps: SxProps = [
 ];
 
 function Left({ children }: { children: React.ReactNode }) {
-  return <Box sx={{ display: "flex", gap: 2, alignItems: "center", pl: 2 }}>{children}</Box>;
+  return (
+    <Box sx={{ display: "flex", gap: 2, alignItems: "center", pl: 2 }}>
+      {children}
+    </Box>
+  );
 }
 
 function Right({ children }: { children: React.ReactNode }) {
   return (
-    <Box sx={{ display: "flex", gap: 2, alignItems: "center", pr: 2, justifyContent: "flex-end" }}>{children}</Box>
+    <Box
+      sx={{
+        display: "flex",
+        gap: 2,
+        alignItems: "center",
+        pr: 2,
+        justifyContent: "flex-end",
+      }}
+    >
+      {children}
+    </Box>
   );
 }
 
 PageFilterLayout.Left = Left;
 PageFilterLayout.Right = Right;
 
-export default function PageFilterLayout({ children }: { children: React.ReactNode }) {
+export default function PageFilterLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <React.Fragment>
       <Sheet variant="outlined" sx={sheetSXProps}>

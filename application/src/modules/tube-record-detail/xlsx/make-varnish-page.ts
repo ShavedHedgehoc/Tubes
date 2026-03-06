@@ -1,9 +1,18 @@
 import { utils, WorkBook } from "xlsx-js-style";
-import { formatDateToString, formatTimeToString } from "../../../shared/helpers/date-time-formatters";
+import {
+  formatDateToString,
+  formatTimeToString,
+} from "../../../shared/helpers/date-time-formatters";
 import { TubeRecordDetail } from "../../../shared/api/services/tube-records-service";
 import { PostNames } from "../../../shared/helpers/post-names";
 
-export default function makeVarnishPage({ workbook, data }: { workbook: WorkBook; data: TubeRecordDetail }) {
+export default function makeVarnishPage({
+  workbook,
+  data,
+}: {
+  workbook: WorkBook;
+  data: TubeRecordDetail;
+}) {
   const varnishHeaders = [
     "время",
     "показания счетчика",
@@ -1370,7 +1379,10 @@ export default function makeVarnishPage({ workbook, data }: { workbook: WorkBook
   const mergeRangeQ10Q11 = { s: { r: 9, c: 16 }, e: { r: 10, c: 16 } };
 
   const mergeRangeR8R11 = { s: { r: 7, c: 17 }, e: { r: 10, c: 17 } };
-  const mergeRange = { s: { r: 12 + rowsShift, c: 0 }, e: { r: 12 + rowsShift, c: 4 } };
+  const mergeRange = {
+    s: { r: 12 + rowsShift, c: 0 },
+    e: { r: 12 + rowsShift, c: 4 },
+  };
 
   worksheet["!merges"] = [
     mergeRangeA1R1,

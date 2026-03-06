@@ -16,7 +16,9 @@ interface EntryModalStore<T = string> {
   setTitle: (val: string) => void;
   setOpen: (val: boolean) => void;
 }
-export const useExtrusionNumericEntryModalStore = create<EntryModalStore<ExtrusionInputParams>>()(
+export const useExtrusionNumericEntryModalStore = create<
+  EntryModalStore<ExtrusionInputParams>
+>()(
   devtools((set) => ({
     key: null,
     title: "",
@@ -30,5 +32,5 @@ export const useExtrusionNumericEntryModalStore = create<EntryModalStore<Extrusi
     setKey: (value) => set(() => ({ key: value })),
     setTitle: (value) => set(() => ({ title: value })),
     setOpen: (value) => set(() => ({ open: value })),
-  }))
+  })),
 );

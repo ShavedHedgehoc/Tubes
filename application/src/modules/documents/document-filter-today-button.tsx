@@ -5,7 +5,9 @@ import FilterButton, { FilterButtonProps } from "../../shared/ui/filter-button";
 import { getCurrentDay } from "../../shared/helpers/date-time-formatters";
 
 export default function DocumentsFilterTodayButton() {
-  const setDayToToday = useDocumentsFilterStore(useShallow((state) => state.setDayToToday));
+  const setDayToToday = useDocumentsFilterStore(
+    useShallow((state) => state.setDayToToday),
+  );
   const filter = useDocumentsFilterStore(useShallow((state) => state.filter));
 
   const disableDocumentFilterTodayButton =

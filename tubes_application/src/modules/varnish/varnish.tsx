@@ -31,20 +31,40 @@ import VarnishCloseSummaryModal from "./dash/modals/varnish-close-summary-modal"
 export default function Varnish() {
   const params = useParams<Params.CONVEYOR_NAME>();
   const { isPending } = useConveyor(params.conveyor_name ?? null);
-  const varnishConveyor = useVarnishConveyorStore(useShallow((state) => state.varnishConveyor));
-  const employee = useVarnishEmployeeStore(useShallow((state) => state.varnishEmployee));
-  const { data: summaryData, isPending: isPendingSummary, isError } = useActiveSummary(varnishConveyor?.id ?? null);
+  const varnishConveyor = useVarnishConveyorStore(
+    useShallow((state) => state.varnishConveyor),
+  );
+  const employee = useVarnishEmployeeStore(
+    useShallow((state) => state.varnishEmployee),
+  );
+  const {
+    data: summaryData,
+    isPending: isPendingSummary,
+    isError,
+  } = useActiveSummary(varnishConveyor?.id ?? null);
 
   if (isPending) return <Loader />;
-  if (!varnishConveyor) return <NotFound message={AppMessages.CONVEYOR_NOT_EXISTS} />;
+  if (!varnishConveyor)
+    return <NotFound message={AppMessages.CONVEYOR_NOT_EXISTS} />;
 
   const pageLayoutProps: PageLayoutProps = {
     timeComponent: <TimeComponent />,
-    headerComponent: <HeaderComponent conveyorName={varnishConveyor.name} postName={PostNames.VARNISH} />,
+    headerComponent: (
+      <HeaderComponent
+        conveyorName={varnishConveyor.name}
+        postName={PostNames.VARNISH}
+      />
+    ),
     parameterComponent: <VarnishParameters summaryData={summaryData ?? null} />,
-    materialPieChartComponent: <MaterialPieChartComponent summaryData={summaryData ?? null} postId={2} />,
-    productionLineChartComponent: <ProductionLineChart summaryData={summaryData ?? null} postId={2} />,
-    productionCardComponent: <ProductionCard summaryData={summaryData ?? null} postId={2} />,
+    materialPieChartComponent: (
+      <MaterialPieChartComponent summaryData={summaryData ?? null} postId={2} />
+    ),
+    productionLineChartComponent: (
+      <ProductionLineChart summaryData={summaryData ?? null} postId={2} />
+    ),
+    productionCardComponent: (
+      <ProductionCard summaryData={summaryData ?? null} postId={2} />
+    ),
     menuComponent: <VarnishMenu />,
     userComponent: <UserComponent employee={employee} />,
     loaderComponent: <Loader />,

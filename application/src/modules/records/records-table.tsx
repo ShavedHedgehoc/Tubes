@@ -34,7 +34,8 @@ export default function RecordsTable() {
 
   return (
     <TableLayout thead={commonThead}>
-      {isSuccess && data.records.map((row) => <RowComponent row={row} key={row.id} />)}
+      {isSuccess &&
+        data.records.map((row) => <RowComponent row={row} key={row.id} />)}
     </TableLayout>
   );
 }

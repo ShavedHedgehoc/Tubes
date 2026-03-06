@@ -9,12 +9,13 @@ interface OffsetEntryAlertModalStore {
   setDto: (val: CreateOffsetEntryDto) => void;
   clearDto: () => void;
 }
-export const useEOffsetEntryAlertModalStore = create<OffsetEntryAlertModalStore>()(
-  devtools((set) => ({
-    dto: {},
-    open: false,
-    setOpen: (value) => set(() => ({ open: value })),
-    setDto: (value) => set(() => ({ dto: value })),
-    clearDto: () => set(() => ({ dto: null })),
-  }))
-);
+export const useEOffsetEntryAlertModalStore =
+  create<OffsetEntryAlertModalStore>()(
+    devtools((set) => ({
+      dto: {},
+      open: false,
+      setOpen: (value) => set(() => ({ open: value })),
+      setDto: (value) => set(() => ({ dto: value })),
+      clearDto: () => set(() => ({ dto: null })),
+    })),
+  );

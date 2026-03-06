@@ -23,14 +23,30 @@ const commonThead: TheadProperties[] = [
 ];
 
 export default function TubeRecordsListTable() {
-  const filter = useTubeRecordsListFilterStore(useShallow((state) => state.filter));
-  const page = useTubeRecordsListPaginationStore(useShallow((state) => state.page));
-  const limit = useTubeRecordsListPaginationStore(useShallow((state) => state.limit));
-  const total = useTubeRecordsListPaginationStore(useShallow((state) => state.total));
-  const setTotal = useTubeRecordsListPaginationStore(useShallow((state) => state.setTotal));
-  const setPage = useTubeRecordsListPaginationStore(useShallow((state) => state.setPage));
+  const filter = useTubeRecordsListFilterStore(
+    useShallow((state) => state.filter),
+  );
+  const page = useTubeRecordsListPaginationStore(
+    useShallow((state) => state.page),
+  );
+  const limit = useTubeRecordsListPaginationStore(
+    useShallow((state) => state.limit),
+  );
+  const total = useTubeRecordsListPaginationStore(
+    useShallow((state) => state.total),
+  );
+  const setTotal = useTubeRecordsListPaginationStore(
+    useShallow((state) => state.setTotal),
+  );
+  const setPage = useTubeRecordsListPaginationStore(
+    useShallow((state) => state.setPage),
+  );
 
-  const { isPending, data, isSuccess } = useTubeRecordsList({ filter: filter, limit: limit, page: page });
+  const { isPending, data, isSuccess } = useTubeRecordsList({
+    filter: filter,
+    limit: limit,
+    page: page,
+  });
 
   //REmove useeffects
 
@@ -57,7 +73,8 @@ export default function TubeRecordsListTable() {
 
   return (
     <TableLayout thead={commonThead}>
-      {isSuccess && data.rows.map((row) => <TubeRecordsListRow row={row} key={row.id} />)}
+      {isSuccess &&
+        data.rows.map((row) => <TubeRecordsListRow row={row} key={row.id} />)}
     </TableLayout>
   );
 }

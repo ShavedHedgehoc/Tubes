@@ -37,7 +37,11 @@ export default function TubeRecordDetailExtrusionParamsTable({
       ) : (
         <TableFullHeightLayout thead={commonThead}>
           {paramsData.map((row, index) => (
-            <TubeRecordsDetailExtrusionParamsRow row={row} key={row.id} index={index} />
+            <TubeRecordsDetailExtrusionParamsRow
+              row={row}
+              key={row.id}
+              index={index}
+            />
           ))}
         </TableFullHeightLayout>
       )}

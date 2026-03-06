@@ -22,10 +22,18 @@ export default function EmployeesTable() {
   const page = useEmployeesPaginationStore(useShallow((state) => state.page));
   const limit = useEmployeesPaginationStore(useShallow((state) => state.limit));
   const total = useEmployeesPaginationStore(useShallow((state) => state.total));
-  const setTotal = useEmployeesPaginationStore(useShallow((state) => state.setTotal));
-  const setPage = useEmployeesPaginationStore(useShallow((state) => state.setPage));
+  const setTotal = useEmployeesPaginationStore(
+    useShallow((state) => state.setTotal),
+  );
+  const setPage = useEmployeesPaginationStore(
+    useShallow((state) => state.setPage),
+  );
 
-  const { isPending, data, isSuccess } = useEmployees({ filter: filter, limit: limit, page: page });
+  const { isPending, data, isSuccess } = useEmployees({
+    filter: filter,
+    limit: limit,
+    page: page,
+  });
 
   //REmove useeffects
 
@@ -52,7 +60,8 @@ export default function EmployeesTable() {
 
   return (
     <TableLayout thead={commonThead}>
-      {isSuccess && data.rows.map((row) => <EmployeesRow row={row} key={row.id} />)}
+      {isSuccess &&
+        data.rows.map((row) => <EmployeesRow row={row} key={row.id} />)}
     </TableLayout>
   );
 }

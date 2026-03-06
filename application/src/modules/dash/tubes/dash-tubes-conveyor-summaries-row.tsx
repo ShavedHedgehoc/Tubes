@@ -7,11 +7,23 @@ import TableButton, { TableButtonProps } from "../../../shared/ui/table-button";
 import { useDashStartModalStore } from "../store/use-dash-start-modal-store";
 import { useShallow } from "zustand/react/shallow";
 
-export default function DashTubesConveyorSummariesRow({ row }: { row: IAvailableSummary }) {
-  const setBoilValue = useDashStartModalStore(useShallow((state) => state.setBoilValue));
-  const setSummaryId = useDashStartModalStore(useShallow((state) => state.setSummaryId));
-  const setTitleStart = useDashStartModalStore(useShallow((state) => state.setTitle));
-  const setOpenStart = useDashStartModalStore(useShallow((state) => state.setOpen));
+export default function DashTubesConveyorSummariesRow({
+  row,
+}: {
+  row: IAvailableSummary;
+}) {
+  const setBoilValue = useDashStartModalStore(
+    useShallow((state) => state.setBoilValue),
+  );
+  const setSummaryId = useDashStartModalStore(
+    useShallow((state) => state.setSummaryId),
+  );
+  const setTitleStart = useDashStartModalStore(
+    useShallow((state) => state.setTitle),
+  );
+  const setOpenStart = useDashStartModalStore(
+    useShallow((state) => state.setOpen),
+  );
 
   const handleNoteModalButtonClick = () => {
     setTitleStart("Начать партию");

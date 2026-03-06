@@ -1,13 +1,19 @@
 import type { ISummary } from "@/shared/api/services/summary-service";
 import { VStack, HStack } from "@chakra-ui/react";
-import ParameterCard, { type ParameterCardProps } from "../../../shared/components/cards/parameter-card";
+import ParameterCard, {
+  type ParameterCardProps,
+} from "../../../shared/components/cards/parameter-card";
 import { SEALANT_PARAMETER_NAMES } from "@/shared/helpers/parameter-names";
 import { PARAMETER_UNITS } from "@/shared/helpers/parameter-units";
 import NotFound from "@/shared/components/info/not-found-full-screen";
 import { AppMessages } from "@/shared/resources/app-messages";
 import { SealantInputParams } from "../store/use-sealant-input-store";
 
-export default function SealantParameters({ summaryData }: { summaryData: ISummary | null }) {
+export default function SealantParameters({
+  summaryData,
+}: {
+  summaryData: ISummary | null;
+}) {
   const paramsData = summaryData?.sealantParams ?? null;
   const tresholdsData = summaryData?.tresholds ?? null;
 
@@ -93,15 +99,23 @@ export default function SealantParameters({ summaryData }: { summaryData: ISumma
   };
 
   const injectionTubeOrientationStartCardProps: ParameterCardProps = {
-    title: SEALANT_PARAMETER_NAMES[SealantInputParams.INJECTION_TUBE_ORIENTATION_START],
+    title:
+      SEALANT_PARAMETER_NAMES[
+        SealantInputParams.INJECTION_TUBE_ORIENTATION_START
+      ],
     value: paramsData?.injection_tube_orientation_start ?? null,
-    minValue: tresholdsData?.sealant_injection_tube_orientation_start_min ?? null,
-    maxValue: tresholdsData?.sealant_injection_tube_orientation_start_max ?? null,
+    minValue:
+      tresholdsData?.sealant_injection_tube_orientation_start_min ?? null,
+    maxValue:
+      tresholdsData?.sealant_injection_tube_orientation_start_max ?? null,
     variant: "numeric",
   };
 
   const injectionTubeOrientationEndCardProps: ParameterCardProps = {
-    title: SEALANT_PARAMETER_NAMES[SealantInputParams.INJECTION_TUBE_ORIENTATION_END],
+    title:
+      SEALANT_PARAMETER_NAMES[
+        SealantInputParams.INJECTION_TUBE_ORIENTATION_END
+      ],
     value: paramsData?.injection_tube_orientation_end ?? null,
     minValue: tresholdsData?.sealant_injection_tube_orientation_end_min ?? null,
     maxValue: tresholdsData?.sealant_injection_tube_orientation_end_max ?? null,
@@ -150,7 +164,8 @@ export default function SealantParameters({ summaryData }: { summaryData: ISumma
     variant: "numeric",
   };
 
-  if (!tresholdsData) return <NotFound message={AppMessages.PARAMS_NOT_FOUND} />;
+  if (!tresholdsData)
+    return <NotFound message={AppMessages.PARAMS_NOT_FOUND} />;
 
   return (
     <VStack gap={2} h="full" w="full">

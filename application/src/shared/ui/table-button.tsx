@@ -18,16 +18,20 @@ export default function TableButton(props: TableButtonProps) {
             color:
               (props.variant === "success" &&
                 !props.disabled &&
-                ((theme) => theme.vars.palette.darkPalette.tableButtonSuccess)) ||
+                ((theme) =>
+                  theme.vars.palette.darkPalette.tableButtonSuccess)) ||
               (props.variant === "danger" &&
                 !props.disabled &&
-                ((theme) => theme.vars.palette.darkPalette.tableButtonDanger)) ||
+                ((theme) =>
+                  theme.vars.palette.darkPalette.tableButtonDanger)) ||
               (props.variant === "warning" &&
                 !props.disabled &&
-                ((theme) => theme.vars.palette.darkPalette.tableButtonWarning)) ||
+                ((theme) =>
+                  theme.vars.palette.darkPalette.tableButtonWarning)) ||
               (props.variant === "primary" &&
                 !props.disabled &&
-                ((theme) => theme.vars.palette.darkPalette.tableButtonPrimary)) ||
+                ((theme) =>
+                  theme.vars.palette.darkPalette.tableButtonPrimary)) ||
               ((theme) => theme.vars.palette.neutral),
           },
         },
@@ -64,16 +68,20 @@ export default function TableButton(props: TableButtonProps) {
             backgroundColor:
               (props.variant === "success" &&
                 !props.disabled &&
-                ((theme) => theme.vars.palette.darkPalette.tableButtonHoverSuccess)) ||
+                ((theme) =>
+                  theme.vars.palette.darkPalette.tableButtonHoverSuccess)) ||
               (props.variant === "danger" &&
                 !props.disabled &&
-                ((theme) => theme.vars.palette.darkPalette.tableButtonHoverDanger)) ||
+                ((theme) =>
+                  theme.vars.palette.darkPalette.tableButtonHoverDanger)) ||
               (props.variant === "warning" &&
                 !props.disabled &&
-                ((theme) => theme.vars.palette.darkPalette.tableButtonHoverWarning)) ||
+                ((theme) =>
+                  theme.vars.palette.darkPalette.tableButtonHoverWarning)) ||
               (props.variant === "primary" &&
                 !props.disabled &&
-                ((theme) => theme.vars.palette.darkPalette.tableButtonHoverPrimary)) ||
+                ((theme) =>
+                  theme.vars.palette.darkPalette.tableButtonHoverPrimary)) ||
               ((theme) => theme.vars.palette.neutral),
           },
         },

@@ -12,12 +12,22 @@ import { BoilsFilterParams } from "./boils-filter-params";
 
 export default function BoilsFilter() {
   const user = useAuthStore(useShallow((state) => state.user));
-  const changeFilter = useBoilsFilterStore(useShallow((state) => state.changeFilter));
-  const plantSelectorOptions = useBoilsFilterStore(useShallow((state) => state.plantSelectorOptions));
-  const setSelectedPlant = useBoilsFilterStore(useShallow((state) => state.setSelectedPlant));
+  const changeFilter = useBoilsFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
+  const plantSelectorOptions = useBoilsFilterStore(
+    useShallow((state) => state.plantSelectorOptions),
+  );
+  const setSelectedPlant = useBoilsFilterStore(
+    useShallow((state) => state.setSelectedPlant),
+  );
   const plant_id = user?.settings?.plant_id || plantSelectorOptions[0].id;
   setSelectedPlant(plant_id);
-  changeFilter({ key: BoilsFilterParams.PLANTS, value: "", values: plant_id === 999999 ? [] : [plant_id] });
+  changeFilter({
+    key: BoilsFilterParams.PLANTS,
+    value: "",
+    values: plant_id === 999999 ? [] : [plant_id],
+  });
   changeFilter({ key: BoilsFilterParams.STATES, value: "", values: [1] });
   return (
     <PageFilterLayout>

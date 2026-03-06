@@ -1,11 +1,15 @@
 import { useShallow } from "zustand/react/shallow";
 import { useBoilsFilterStore } from "./store/use-boils-filter-store";
 import { BoilsFilterParams } from "./boils-filter-params";
-import FilterInputWithSort, { FilterInputWithSortProps } from "../../shared/ui/filter-input-with-sort";
+import FilterInputWithSort, {
+  FilterInputWithSortProps,
+} from "../../shared/ui/filter-input-with-sort";
 
 export default function BoilsFilterBatchInput() {
   const filter = useBoilsFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useBoilsFilterStore(useShallow((state) => state.changeFilter));
+  const changeFilter = useBoilsFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
 
   const inputProps: FilterInputWithSortProps = {
     id: BoilsFilterParams.BOIL,
@@ -15,7 +19,8 @@ export default function BoilsFilterBatchInput() {
     disabled: filter.boil === "",
     placeholder: "Партия",
     label: "Поиск по партии",
-    changeFilter: ({ key, value }: { key: string; value: string }) => changeFilter({ key, value }),
+    changeFilter: ({ key, value }: { key: string; value: string }) =>
+      changeFilter({ key, value }),
   };
 
   return <FilterInputWithSort {...inputProps} />;

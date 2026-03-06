@@ -3,8 +3,12 @@ import { useEmployeeAddModalStore } from "../store/use-employees-add-modal-store
 import { Input } from "@mui/joy";
 
 export default function BarcodeInput() {
-  const barcode = useEmployeeAddModalStore(useShallow((state) => state.barcode));
-  const setBarcode = useEmployeeAddModalStore(useShallow((state) => state.setBarcode));
+  const barcode = useEmployeeAddModalStore(
+    useShallow((state) => state.barcode),
+  );
+  const setBarcode = useEmployeeAddModalStore(
+    useShallow((state) => state.setBarcode),
+  );
   return (
     <Input
       sx={{

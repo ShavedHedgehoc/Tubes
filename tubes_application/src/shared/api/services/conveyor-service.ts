@@ -41,8 +41,12 @@ export interface IConveyorsDataResponse {
 
 //use-conveyors
 export default class ConveyorService {
-  static async getConveyorByName(conveyorName: string | null): Promise<IConveyor> {
-    const res = await $api.get(`${ApiRoutes.GET_CONVEYOR_BY_NAME}${conveyorName}`);
+  static async getConveyorByName(
+    conveyorName: string | null,
+  ): Promise<IConveyor> {
+    const res = await $api.get(
+      `${ApiRoutes.GET_CONVEYOR_BY_NAME}${conveyorName}`,
+    );
     return res.data;
   }
   static async getAllConveyors(): Promise<IConveyor[] | []> {

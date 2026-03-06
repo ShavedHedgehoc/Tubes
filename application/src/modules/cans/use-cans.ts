@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import TraceCansService, { FetchCansDto } from "../../shared/api/services/trace-cans-service";
+import TraceCansService, {
+  FetchCansDto,
+} from "../../shared/api/services/trace-cans-service";
 
 export const useCans = (dto: FetchCansDto) =>
   useQuery({

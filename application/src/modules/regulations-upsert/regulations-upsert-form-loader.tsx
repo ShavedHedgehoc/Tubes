@@ -7,9 +7,15 @@ import { useUpdateRegulations } from "./use-update-regulations";
 export default function RegulationsUpsertFormLoader() {
   const { updateRegulations, isPending } = useUpdateRegulations();
 
-  const dataForUpload = useRegulationsUpsertFormStore(useShallow((state) => state.dataForUpload));
-  const isValid = useRegulationsUpsertFormStore(useShallow((state) => state.isValid));
-  const clearData = useRegulationsUpsertFormStore(useShallow((state) => state.clearData));
+  const dataForUpload = useRegulationsUpsertFormStore(
+    useShallow((state) => state.dataForUpload),
+  );
+  const isValid = useRegulationsUpsertFormStore(
+    useShallow((state) => state.isValid),
+  );
+  const clearData = useRegulationsUpsertFormStore(
+    useShallow((state) => state.clearData),
+  );
 
   const upload = async () => {
     updateRegulations(dataForUpload);

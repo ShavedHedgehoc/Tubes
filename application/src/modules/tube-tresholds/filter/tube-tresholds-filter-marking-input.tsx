@@ -4,8 +4,12 @@ import { useTubeTresholdsFilterStore } from "../store/use-tube-tresholds-filter-
 import FilterInput, { FilterInputProps } from "../../../shared/ui/filter-input";
 
 export default function TubeTresholdsFilterMarkingInput() {
-  const filter = useTubeTresholdsFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useTubeTresholdsFilterStore(useShallow((state) => state.changeFilter));
+  const filter = useTubeTresholdsFilterStore(
+    useShallow((state) => state.filter),
+  );
+  const changeFilter = useTubeTresholdsFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
 
   const inputProps: FilterInputProps = {
     id: TubeTresholdsFilterParams.MARKING,
@@ -14,7 +18,8 @@ export default function TubeTresholdsFilterMarkingInput() {
     disabled: filter.marking === "",
     placeholder: "Артикул",
     label: "Поиск по артикулу",
-    changeFilter: ({ key, value }: { key: string; value: string }) => changeFilter({ key, value }),
+    changeFilter: ({ key, value }: { key: string; value: string }) =>
+      changeFilter({ key, value }),
   };
 
   return <FilterInput {...inputProps} />;

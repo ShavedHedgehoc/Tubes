@@ -4,8 +4,12 @@ import { useDocumentDetailFilterStore } from "../store/use-document-detail-filte
 import { DocumentDetailFilterParams } from "./document-detail-filter-params";
 
 export default function DocumentDetailFilterCodeInput() {
-  const filter = useDocumentDetailFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useDocumentDetailFilterStore(useShallow((state) => state.changeFilter));
+  const filter = useDocumentDetailFilterStore(
+    useShallow((state) => state.filter),
+  );
+  const changeFilter = useDocumentDetailFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
 
   const inputProps: FilterInputProps = {
     id: DocumentDetailFilterParams.PRODUCT,
@@ -13,7 +17,8 @@ export default function DocumentDetailFilterCodeInput() {
     disabled: filter.productCode === "",
     label: "Поиск по коду 1С",
     placeholder: "Код 1С",
-    changeFilter: ({ key, value }: { key: string; value: string }) => changeFilter({ key, value }),
+    changeFilter: ({ key, value }: { key: string; value: string }) =>
+      changeFilter({ key, value }),
   };
 
   return <FilterInput {...inputProps} />;

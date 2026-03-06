@@ -5,7 +5,14 @@ import { InventoryRowsData } from "../../shared/api/services/inventory-rows-serv
 
 export default function makeXLSXFile(data: InventoryRowsData[], title: string) {
   const workbook = utils.book_new();
-  const headers = ["Код 1С", "Наименование", "Партия", "Срок годности", "Остаток, дней", "Количество"];
+  const headers = [
+    "Код 1С",
+    "Наименование",
+    "Партия",
+    "Срок годности",
+    "Остаток, дней",
+    "Количество",
+  ];
 
   const worksheet = utils.aoa_to_sheet([
     headers.map((cell) => ({
@@ -26,7 +33,14 @@ export default function makeXLSXFile(data: InventoryRowsData[], title: string) {
   ]);
 
   utils.book_append_sheet(workbook, worksheet, "Переучет");
-  worksheet["!cols"] = [{ wch: 10 }, { wch: 50 }, { wch: 25 }, { wch: 20 }, { wch: 20 }, { wch: 20 }];
+  worksheet["!cols"] = [
+    { wch: 10 },
+    { wch: 50 },
+    { wch: 25 },
+    { wch: 20 },
+    { wch: 20 },
+    { wch: 20 },
+  ];
 
   const rows = data.map((row) => [
     {

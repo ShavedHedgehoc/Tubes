@@ -10,7 +10,9 @@ interface BooleanEntryModalStore<T = string> {
   setTitle: (val: string) => void;
   setOpen: (val: boolean) => void;
 }
-export const useExtrusionBooleanEntryModalStore = create<BooleanEntryModalStore<ExtrusionInputParams>>()(
+export const useExtrusionBooleanEntryModalStore = create<
+  BooleanEntryModalStore<ExtrusionInputParams>
+>()(
   devtools((set) => ({
     key: null,
     title: "",
@@ -18,5 +20,5 @@ export const useExtrusionBooleanEntryModalStore = create<BooleanEntryModalStore<
     setKey: (value) => set(() => ({ key: value })),
     setTitle: (value) => set(() => ({ title: value })),
     setOpen: (value) => set(() => ({ open: value })),
-  }))
+  })),
 );

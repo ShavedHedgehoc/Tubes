@@ -17,16 +17,22 @@ interface IExtrusionParameterData {
   tube_cutting_quality: boolean;
   tightness: boolean;
   external_thread_quality: boolean;
-  tube_marking: boolean
+  tube_marking: boolean;
 }
 
 interface ExtrusionInputStore {
   data: IExtrusionParameterData;
   initData: () => void;
   changeData: (value: DataFormField<keyof IExtrusionParameterData>) => void;
-  clearData: (value: Pick<DataFormField<keyof IExtrusionParameterData>, 'key'>) => void;
-  sliceData: (value: Pick<DataFormField<keyof IExtrusionParameterData>, 'key'>) => void;
-  roundData: (value: Pick<DataFormField<keyof IExtrusionParameterData>, 'key'>) => void;
+  clearData: (
+    value: Pick<DataFormField<keyof IExtrusionParameterData>, "key">,
+  ) => void;
+  sliceData: (
+    value: Pick<DataFormField<keyof IExtrusionParameterData>, "key">,
+  ) => void;
+  roundData: (
+    value: Pick<DataFormField<keyof IExtrusionParameterData>, "key">,
+  ) => void;
   setData: (value: DataFormField<keyof IExtrusionParameterData>) => void;
 }
 
@@ -44,7 +50,7 @@ export const initDataValue: IExtrusionParameterData = {
   tube_cutting_quality: false,
   tightness: false,
   external_thread_quality: false,
-  tube_marking: false
+  tube_marking: false,
 };
 
 export enum ExtrusionInputParams {
@@ -64,9 +70,6 @@ export enum ExtrusionInputParams {
   TUBE_MARKING = "tube_marking",
 }
 
-
-
-
 export const useExtrusionInputStore = create<ExtrusionInputStore>()(
   devtools((set) => ({
     data: initDataValue,
@@ -77,7 +80,8 @@ export const useExtrusionInputStore = create<ExtrusionInputStore>()(
       set((state) => ({
         data: {
           ...state.data,
-          [fieldKey]: typeof initDataValue[fieldKey] === "boolean" ? false : "0",
+          [fieldKey]:
+            typeof initDataValue[fieldKey] === "boolean" ? false : "0",
         },
       }));
     },
@@ -151,5 +155,5 @@ export const useExtrusionInputStore = create<ExtrusionInputStore>()(
         return state;
       });
     },
-  }))
+  })),
 );

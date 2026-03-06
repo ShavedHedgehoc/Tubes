@@ -1,13 +1,19 @@
 import type { ISummary } from "@/shared/api/services/summary-service";
 import { VStack, HStack } from "@chakra-ui/react";
-import ParameterCard, { type ParameterCardProps } from "../../../shared/components/cards/parameter-card";
+import ParameterCard, {
+  type ParameterCardProps,
+} from "../../../shared/components/cards/parameter-card";
 import { OFFSET_PARAMETER_NAMES } from "@/shared/helpers/parameter-names";
 import { PARAMETER_UNITS } from "@/shared/helpers/parameter-units";
 import NotFound from "@/shared/components/info/not-found-full-screen";
 import { AppMessages } from "@/shared/resources/app-messages";
 import { OffsetInputParams } from "../store/use-offset-input-store";
 
-export default function OffsetParameters({ summaryData }: { summaryData: ISummary | null }) {
+export default function OffsetParameters({
+  summaryData,
+}: {
+  summaryData: ISummary | null;
+}) {
   const paramsData = summaryData?.offsetParams ?? null;
   const tresholdsData = summaryData?.tresholds ?? null;
 
@@ -68,42 +74,48 @@ export default function OffsetParameters({ summaryData }: { summaryData: ISummar
     variant: "numeric",
   };
   const printedBox1CardProps: ParameterCardProps = {
-    title: OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_1],
+    title:
+      OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_1],
     value: paramsData?.imprint_quantity_printed_box_1 ?? null,
     minValue: tresholdsData?.offset_imprint_quantity_printed_box_1_min ?? null,
     maxValue: tresholdsData?.offset_imprint_quantity_printed_box_1_max ?? null,
     variant: "numeric",
   };
   const printedBox2CardProps: ParameterCardProps = {
-    title: OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_2],
+    title:
+      OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_2],
     value: paramsData?.imprint_quantity_printed_box_2 ?? null,
     minValue: tresholdsData?.offset_imprint_quantity_printed_box_2_min ?? null,
     maxValue: tresholdsData?.offset_imprint_quantity_printed_box_2_max ?? null,
     variant: "numeric",
   };
   const printedBox3CardProps: ParameterCardProps = {
-    title: OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_3],
+    title:
+      OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_3],
     value: paramsData?.imprint_quantity_printed_box_3 ?? null,
     minValue: tresholdsData?.offset_imprint_quantity_printed_box_3_min ?? null,
     maxValue: tresholdsData?.offset_imprint_quantity_printed_box_3_max ?? null,
     variant: "numeric",
   };
   const printedBox4CardProps: ParameterCardProps = {
-    title: OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_4],
+    title:
+      OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_4],
     value: paramsData?.imprint_quantity_printed_box_4 ?? null,
     minValue: tresholdsData?.offset_imprint_quantity_printed_box_4_min ?? null,
     maxValue: tresholdsData?.offset_imprint_quantity_printed_box_4_max ?? null,
     variant: "numeric",
   };
   const printedBox5CardProps: ParameterCardProps = {
-    title: OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_5],
+    title:
+      OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_5],
     value: paramsData?.imprint_quantity_printed_box_5 ?? null,
     minValue: tresholdsData?.offset_imprint_quantity_printed_box_5_min ?? null,
     maxValue: tresholdsData?.offset_imprint_quantity_printed_box_5_max ?? null,
     variant: "numeric",
   };
   const printedBox6CardProps: ParameterCardProps = {
-    title: OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_6],
+    title:
+      OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_6],
     value: paramsData?.imprint_quantity_printed_box_6 ?? null,
     minValue: tresholdsData?.offset_imprint_quantity_printed_box_6_min ?? null,
     maxValue: tresholdsData?.offset_imprint_quantity_printed_box_6_max ?? null,
@@ -144,7 +156,8 @@ export default function OffsetParameters({ summaryData }: { summaryData: ISummar
     variant: "boolean",
   };
 
-  if (!tresholdsData) return <NotFound message={AppMessages.PARAMS_NOT_FOUND} />;
+  if (!tresholdsData)
+    return <NotFound message={AppMessages.PARAMS_NOT_FOUND} />;
 
   return (
     <VStack gap={2} h="full" w="full">

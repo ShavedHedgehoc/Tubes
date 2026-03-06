@@ -7,8 +7,12 @@ import { AppMessages } from "@/shared/resources/app-messages";
 
 export default function ExtrusionLogoutAlertModal() {
   const open = useExtrusionLogoutModalStore(useShallow((state) => state.open));
-  const setOpen = useExtrusionLogoutModalStore(useShallow((state) => state.setOpen));
-  const logout = useExtrusionEmployeeStore(useShallow((state) => state.clearExtrusionEmployee));
+  const setOpen = useExtrusionLogoutModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const logout = useExtrusionEmployeeStore(
+    useShallow((state) => state.clearExtrusionEmployee),
+  );
 
   const alertModalProps: AlertModalProps = {
     title: "Выход пользователя",

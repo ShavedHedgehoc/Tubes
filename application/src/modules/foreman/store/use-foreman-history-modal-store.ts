@@ -19,21 +19,27 @@ interface ForemanHistoryModalStore {
   setBoilValue: (value: string | null) => void;
 }
 
-export const useForemanHistoryModalStore = create<ForemanHistoryModalStore>()((set) => ({
-  open: false,
-  record_id: null,
-  boil_value: null,
-  title: "",
-  startButtonEnabled: false,
-  finishButtonEnabled: false,
-  cancelStartButtonEnabled: false,
-  cancelFinishButtonEnabled: false,
-  setOpen: (value) => set(() => ({ open: value })),
-  setRecordId: (value) => set(() => ({ record_id: value })),
-  setTitle: (value) => set(() => ({ title: value })),
-  setStartButtonEnabled: (value) => set(() => ({ startButtonEnabled: value })),
-  setFinishButtonEnabled: (value) => set(() => ({ finishButtonEnabled: value })),
-  setCancelStartButtonEnabled: (value) => set(() => ({ cancelStartButtonEnabled: value })),
-  setCancelFinishButtonEnabled: (value) => set(() => ({ cancelFinishButtonEnabled: value })),
-  setBoilValue: (value) => set(() => ({ boil_value: value })),
-}));
+export const useForemanHistoryModalStore = create<ForemanHistoryModalStore>()(
+  (set) => ({
+    open: false,
+    record_id: null,
+    boil_value: null,
+    title: "",
+    startButtonEnabled: false,
+    finishButtonEnabled: false,
+    cancelStartButtonEnabled: false,
+    cancelFinishButtonEnabled: false,
+    setOpen: (value) => set(() => ({ open: value })),
+    setRecordId: (value) => set(() => ({ record_id: value })),
+    setTitle: (value) => set(() => ({ title: value })),
+    setStartButtonEnabled: (value) =>
+      set(() => ({ startButtonEnabled: value })),
+    setFinishButtonEnabled: (value) =>
+      set(() => ({ finishButtonEnabled: value })),
+    setCancelStartButtonEnabled: (value) =>
+      set(() => ({ cancelStartButtonEnabled: value })),
+    setCancelFinishButtonEnabled: (value) =>
+      set(() => ({ cancelFinishButtonEnabled: value })),
+    setBoilValue: (value) => set(() => ({ boil_value: value })),
+  }),
+);

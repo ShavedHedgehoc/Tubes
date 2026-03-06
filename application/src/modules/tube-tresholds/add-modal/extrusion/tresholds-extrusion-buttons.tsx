@@ -4,7 +4,11 @@ import { useTubeExtrusionTresholdsStore } from "../store/use-tube-extrusion-tres
 import TresholdsButtons from "../shared/tresholds-buttons";
 
 export default function TresholdsExtrusionButtons() {
-  const setOpen = useTubeTresholdsExtrusionFormModalStore(useShallow((state) => state.setOpen));
-  const clearTresholds = useTubeExtrusionTresholdsStore(useShallow((state) => state.clearTresholds));
+  const setOpen = useTubeTresholdsExtrusionFormModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const clearTresholds = useTubeExtrusionTresholdsStore(
+    useShallow((state) => state.clearTresholds),
+  );
   return <TresholdsButtons setOpen={setOpen} clearData={clearTresholds} />;
 }

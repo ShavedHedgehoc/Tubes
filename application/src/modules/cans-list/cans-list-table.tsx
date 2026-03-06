@@ -25,10 +25,18 @@ export default function CansListTable() {
   const page = useCansListPaginationStore(useShallow((state) => state.page));
   const limit = useCansListPaginationStore(useShallow((state) => state.limit));
   const total = useCansListPaginationStore(useShallow((state) => state.total));
-  const setTotal = useCansListPaginationStore(useShallow((state) => state.setTotal));
-  const setPage = useCansListPaginationStore(useShallow((state) => state.setPage));
+  const setTotal = useCansListPaginationStore(
+    useShallow((state) => state.setTotal),
+  );
+  const setPage = useCansListPaginationStore(
+    useShallow((state) => state.setPage),
+  );
 
-  const { isPending, data, isSuccess } = useCansList({ filter: filter, limit: limit, page: page });
+  const { isPending, data, isSuccess } = useCansList({
+    filter: filter,
+    limit: limit,
+    page: page,
+  });
 
   React.useEffect(() => {
     if (data && data.total !== total) {
@@ -53,7 +61,8 @@ export default function CansListTable() {
 
   return (
     <TableLayout thead={commonThead}>
-      {isSuccess && data.rows.map((row) => <CansListRow row={row} key={row.CanPK} />)}
+      {isSuccess &&
+        data.rows.map((row) => <CansListRow row={row} key={row.CanPK} />)}
       {/* {isSuccess && data.rows.map((row) => <div key={row.CanPK}>{row.CanName}</div>)} */}
     </TableLayout>
   );

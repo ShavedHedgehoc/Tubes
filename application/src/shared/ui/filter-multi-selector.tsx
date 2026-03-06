@@ -1,5 +1,14 @@
 import * as React from "react";
-import { Box, FormControl, FormHelperText, IconButton, Option, Checkbox, Select, SelectStaticProps } from "@mui/joy";
+import {
+  Box,
+  FormControl,
+  FormHelperText,
+  IconButton,
+  Option,
+  Checkbox,
+  Select,
+  SelectStaticProps,
+} from "@mui/joy";
 import CloseRounded from "@mui/icons-material/CloseRounded";
 
 export interface FilterMultiSelectorOptionProps {
@@ -14,14 +23,28 @@ export interface FilterMultiSelectorProps {
   placeholder: string;
   label: string;
   options: React.ReactNode;
-  changeFilter: ({ key, value, values }: { key: string; value: string; values: number[] | [] }) => void;
+  changeFilter: ({
+    key,
+    value,
+    values,
+  }: {
+    key: string;
+    value: string;
+    values: number[] | [];
+  }) => void;
 }
 
-export function FilterMultiSelectorOption(props: FilterMultiSelectorOptionProps) {
+export function FilterMultiSelectorOption(
+  props: FilterMultiSelectorOptionProps,
+) {
   return (
     <Option value={props.id} key={props.id}>
       <FormControl size="sm">
-        <Checkbox color="neutral" checked={[...props.options].includes(props.id)} label={props.value} />
+        <Checkbox
+          color="neutral"
+          checked={[...props.options].includes(props.id)}
+          label={props.value}
+        />
       </FormControl>
     </Option>
   );
@@ -48,8 +71,17 @@ export default function FilterMultiSelector(props: FilterMultiSelectorProps) {
             display: "flex",
             flexShrink: 1,
           }}
-          onChange={(event: React.SyntheticEvent | null, newValue: number[] | null) => {
-            event && newValue && props.changeFilter({ key: props.id, value: "", values: newValue });
+          onChange={(
+            event: React.SyntheticEvent | null,
+            newValue: number[] | null,
+          ) => {
+            event &&
+              newValue &&
+              props.changeFilter({
+                key: props.id,
+                value: "",
+                values: newValue,
+              });
           }}
           {...(props.selectedOptions.length > 0 && {
             endDecorator: (

@@ -5,7 +5,9 @@ import { CansFilterParams } from "./cans-filter-params";
 
 export default function CansFilterCanInput() {
   const filter = useCansFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useCansFilterStore(useShallow((state) => state.changeFilter));
+  const changeFilter = useCansFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
 
   const inputProps: FilterInputProps = {
     id: CansFilterParams.CAN,
@@ -13,7 +15,8 @@ export default function CansFilterCanInput() {
     disabled: filter.can === "",
     placeholder: "Ёмкость",
     label: "Поиск по ёмкости",
-    changeFilter: ({ key, value }: { key: string; value: string }) => changeFilter({ key, value }),
+    changeFilter: ({ key, value }: { key: string; value: string }) =>
+      changeFilter({ key, value }),
   };
 
   return <FilterInput {...inputProps} />;

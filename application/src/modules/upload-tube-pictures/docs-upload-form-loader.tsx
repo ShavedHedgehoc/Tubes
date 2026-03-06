@@ -11,8 +11,12 @@ import UploadPendingModal from "../../shared/components/upload-pending-modal";
 
 export default function UploadTubePicturesFormLoader() {
   const { uploadPicture, uploadPending } = useUploadPicture();
-  const file = useUploadTubePicturesFormStore(useShallow((state) => state.file));
-  const clearData = useUploadTubePicturesFormStore(useShallow((state) => state.clearData));
+  const file = useUploadTubePicturesFormStore(
+    useShallow((state) => state.file),
+  );
+  const clearData = useUploadTubePicturesFormStore(
+    useShallow((state) => state.clearData),
+  );
 
   const upload = () => {
     if (file) {

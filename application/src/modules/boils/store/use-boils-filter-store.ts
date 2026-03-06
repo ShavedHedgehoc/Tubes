@@ -31,7 +31,8 @@ export const useBoilsFilterStore = create<BoilsFilterStore>()(
     selectedPlant: 999999,
     plantSelectorOptions: [],
     stateSelectorOptions: [],
-    clearFilter: () => set(() => ({ filter: initFilterValue, selectedPlant: 999999 })),
+    clearFilter: () =>
+      set(() => ({ filter: initFilterValue, selectedPlant: 999999 })),
 
     changeFilter: ({ key, value, values }) => {
       switch (key) {
@@ -40,7 +41,10 @@ export const useBoilsFilterStore = create<BoilsFilterStore>()(
           break;
         case BoilsFilterParams.PLANTS:
           set((state) => ({
-            filter: { ...state.filter, plants: values ? [...values] : [...state.filter.plants] },
+            filter: {
+              ...state.filter,
+              plants: values ? [...values] : [...state.filter.plants],
+            },
           }));
           break;
         case BoilsFilterParams.BASE:
@@ -50,11 +54,19 @@ export const useBoilsFilterStore = create<BoilsFilterStore>()(
           set((state) => ({ filter: { ...state.filter, marking: value } }));
           break;
         case BoilsFilterParams.BOIL_ASC:
-          set((state) => ({ filter: { ...state.filter, boilAsc: value === "true" ? true : false } }));
+          set((state) => ({
+            filter: {
+              ...state.filter,
+              boilAsc: value === "true" ? true : false,
+            },
+          }));
           break;
         case BoilsFilterParams.STATES:
           set((state) => ({
-            filter: { ...state.filter, states: values ? [...values] : [...state.filter.states] },
+            filter: {
+              ...state.filter,
+              states: values ? [...values] : [...state.filter.states],
+            },
           }));
           break;
         default:
@@ -63,7 +75,13 @@ export const useBoilsFilterStore = create<BoilsFilterStore>()(
     },
     setSelectedPlant: (value) => set(() => ({ selectedPlant: value })),
     fillPlantSelectorOptions: (values) =>
-      set(() => ({ plantSelectorOptions: [{ id: 999999, value: "Все", abb: "" }, ...values] })),
-    fillStateSelectorOptions: (values) => set(() => ({ stateSelectorOptions: [...values] })),
-  }))
+      set(() => ({
+        plantSelectorOptions: [
+          { id: 999999, value: "Все", abb: "" },
+          ...values,
+        ],
+      })),
+    fillStateSelectorOptions: (values) =>
+      set(() => ({ stateSelectorOptions: [...values] })),
+  })),
 );

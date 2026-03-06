@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import TraceTrademarkService, { FetchTrademarksDto } from "../../shared/api/services/trace-trademark-service";
+import TraceTrademarkService, {
+  FetchTrademarksDto,
+} from "../../shared/api/services/trace-trademark-service";
 
 export const useTrademarks = (dto: FetchTrademarksDto) =>
   useQuery({

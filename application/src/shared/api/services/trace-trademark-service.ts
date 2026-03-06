@@ -24,7 +24,9 @@ export interface ITrademarksListData {
 }
 
 export default class TraceTrademarkService {
-  static async getTrademarksWithFilter(dto: FetchTrademarksDto): Promise<ITrademarksListData> {
+  static async getTrademarksWithFilter(
+    dto: FetchTrademarksDto,
+  ): Promise<ITrademarksListData> {
     const res = await $api.post(`/trace-trademarks`, dto);
     return res.data;
   }

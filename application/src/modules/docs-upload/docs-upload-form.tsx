@@ -14,27 +14,48 @@ import { DashFilterParams } from "../dash/dash-filter-params";
 
 export default function DocsUploadForm() {
   const user = useAuthStore(useShallow((state) => state.user));
-  const setSelectedPlant = useDocsUploadFormStore(useShallow((state) => state.setSelectedPlant));
-  const plantSelectorOptions = useDocsUploadFormStore(useShallow((state) => state.plantSelectorOptions));
-  const changeFilter = useDocsUploadFormStore(useShallow((state) => state.changeFilter));
+  const setSelectedPlant = useDocsUploadFormStore(
+    useShallow((state) => state.setSelectedPlant),
+  );
+  const plantSelectorOptions = useDocsUploadFormStore(
+    useShallow((state) => state.plantSelectorOptions),
+  );
+  const changeFilter = useDocsUploadFormStore(
+    useShallow((state) => state.changeFilter),
+  );
 
   if (user && plantSelectorOptions.length) {
     const plant_id = user?.settings?.plant_id || plantSelectorOptions[0].id;
     setSelectedPlant(plant_id);
-    changeFilter({ key: DashFilterParams.PLANT, value: "", values: [plant_id] });
+    changeFilter({
+      key: DashFilterParams.PLANT,
+      value: "",
+      values: [plant_id],
+    });
   }
 
   return (
     <React.Fragment>
-      <Box sx={{ gap: 3, display: "flex", flexDirection: "column", width: "100%" }}>
-        <Box sx={{ display: "flex", flexDirection: "row", width: "100%", gap: 2 }}>
+      <Box
+        sx={{ gap: 3, display: "flex", flexDirection: "column", width: "100%" }}
+      >
+        <Box
+          sx={{ display: "flex", flexDirection: "row", width: "100%", gap: 2 }}
+        >
           <FormCard props={{ title: "Данные загрузки", grow: true }}>
             <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
               <DocsUploadFormPlantSelector />
               <DocsUploadFormdDateInput />
             </Box>
           </FormCard>
-          <FormCard props={{ title: "Режим загрузки", grow: false, width: 350, centerTitle: true }}>
+          <FormCard
+            props={{
+              title: "Режим загрузки",
+              grow: false,
+              width: 350,
+              centerTitle: true,
+            }}
+          >
             <DocsUploadFormUpdateSwitch />
           </FormCard>
         </Box>

@@ -19,16 +19,24 @@ const pulse = keyframes`
 
 export default function ForemanCard({ row }: { row: IDocRow }) {
   const { mode } = useColorScheme();
-  const setOpen = useForemanActionModalStore(useShallow((state) => state.setOpen));
-  const setRecord = useForemanActionModalStore(useShallow((state) => state.setRecord));
+  const setOpen = useForemanActionModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const setRecord = useForemanActionModalStore(
+    useShallow((state) => state.setRecord),
+  );
 
-  const setStartButtonEnabled = useForemanActionModalStore(useShallow((state) => state.setStartButtonEnabled));
-  const setFinishButtonEnabled = useForemanActionModalStore(useShallow((state) => state.setFinishButtonEnabled));
+  const setStartButtonEnabled = useForemanActionModalStore(
+    useShallow((state) => state.setStartButtonEnabled),
+  );
+  const setFinishButtonEnabled = useForemanActionModalStore(
+    useShallow((state) => state.setFinishButtonEnabled),
+  );
   const setCancelStartButtonEnabled = useForemanActionModalStore(
-    useShallow((state) => state.setCancelStartButtonEnabled)
+    useShallow((state) => state.setCancelStartButtonEnabled),
   );
   const setCancelFinishButtonEnabled = useForemanActionModalStore(
-    useShallow((state) => state.setCancelFinishButtonEnabled)
+    useShallow((state) => state.setCancelFinishButtonEnabled),
   );
 
   const handleOpenHistoryModalButtonClick = () => {
@@ -51,7 +59,9 @@ export default function ForemanCard({ row }: { row: IDocRow }) {
   return (
     <Sheet
       variant="outlined"
-      slotProps={{ root: { onClick: () => handleOpenHistoryModalButtonClick() } }}
+      slotProps={{
+        root: { onClick: () => handleOpenHistoryModalButtonClick() },
+      }}
       sx={[
         {
           borderRadius: "sm",

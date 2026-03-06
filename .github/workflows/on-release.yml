@@ -2,7 +2,7 @@ name: Release & Versioning
 
 on:
   push:
-    branches: [ release ] # Срабатывает при слиянии в release
+    branches: [release] # Срабатывает при слиянии в release
 
 jobs:
   bump-and-tag:
@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Git Config
         run: |
@@ -33,14 +33,18 @@ jobs:
       - name: Push Changes & Tags
         run: |
           git push origin release
-          git push --tags      
+          git push --tags
 
-      # Создаем PR для синхронизации main
-      - name: Create Pull Request to Main
-        uses: repo-sync/pull-request@v2
-        with:
-          source_branch: "release"
-          destination_branch: "main"
-          pr_title: "chore: sync version [release -> main]"
-          pr_body: "Автоматическое обновление версий после релиза."
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Sync version to Main
+        run: |
+          # Переключаемся на main (fetch-depth: 0 уже есть в начале)
+          git fetch origin main
+          git checkout main
+
+          # Вливаем изменения из release (где уже поднята версия) в main
+          # --ff-only гарантирует, что мы не создадим лишний merge-коммит, 
+          # если ветки не разошлись. Если разошлись — будет ошибка.
+          git merge release --ff-only 
+
+          # Пушим обновленный package.json в main
+          git push origin main

@@ -5,12 +5,24 @@ import { useCreateHistoryDirect } from "../../../shared/api/use-create-history-d
 import { useDocumentDetailAddHistoryModalFormStore } from "../store/use-document-detail-add-history-modal-form-store";
 
 export default function DocumentDetailAddHistoryModalButtons() {
-  const setOpen = useDocumentDetailAddHistoryModalStore(useShallow((state) => state.setOpen));
-  const row = useDocumentDetailAddHistoryModalStore(useShallow((state) => state.row));
-  const user_id = useDocumentDetailAddHistoryModalStore(useShallow((state) => state.user_id));
-  const historyType = useDocumentDetailAddHistoryModalFormStore(useShallow((state) => state.selectedHistoryType));
-  const historyNote = useDocumentDetailAddHistoryModalFormStore(useShallow((state) => state.historyNote));
-  const setHistoryNote = useDocumentDetailAddHistoryModalFormStore(useShallow((state) => state.setHistoryNote));
+  const setOpen = useDocumentDetailAddHistoryModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const row = useDocumentDetailAddHistoryModalStore(
+    useShallow((state) => state.row),
+  );
+  const user_id = useDocumentDetailAddHistoryModalStore(
+    useShallow((state) => state.user_id),
+  );
+  const historyType = useDocumentDetailAddHistoryModalFormStore(
+    useShallow((state) => state.selectedHistoryType),
+  );
+  const historyNote = useDocumentDetailAddHistoryModalFormStore(
+    useShallow((state) => state.historyNote),
+  );
+  const setHistoryNote = useDocumentDetailAddHistoryModalFormStore(
+    useShallow((state) => state.setHistoryNote),
+  );
   const addHistoryDirect = useCreateHistoryDirect();
 
   const handleCloseButtonClick = () => {
@@ -36,7 +48,14 @@ export default function DocumentDetailAddHistoryModalButtons() {
   };
 
   return (
-    <Box sx={{ display: "flex", alignItems: "center", justifyContent: "flex-start", gap: 1 }}>
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "flex-start",
+        gap: 1,
+      }}
+    >
       <Button
         color="neutral"
         variant="outlined"

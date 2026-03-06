@@ -13,5 +13,5 @@ export const useOffsetEmployeeStore = create<OffsetEmployeeStore>()(
     offsetEmployee: null,
     setOffsetEmployee: (value) => set(() => ({ offsetEmployee: value })),
     clearOffsetEmployee: () => set(() => ({ offsetEmployee: null })),
-  }))
+  })),
 );

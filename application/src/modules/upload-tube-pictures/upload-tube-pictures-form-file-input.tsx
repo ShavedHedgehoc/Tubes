@@ -4,11 +4,21 @@ import { useShallow } from "zustand/react/shallow";
 import { useUploadTubePicturesFormStore } from "./store/use-upload-tube-pictures-form-store";
 
 export default function UploadTubePicturesFormFileInput() {
-  const filename = useUploadTubePicturesFormStore(useShallow((state) => state.fileName));
-  const file = useUploadTubePicturesFormStore(useShallow((state) => state.file));
-  const setFileName = useUploadTubePicturesFormStore(useShallow((state) => state.setFileName));
-  const setFile = useUploadTubePicturesFormStore(useShallow((state) => state.setFile));
-  const clearData = useUploadTubePicturesFormStore(useShallow((state) => state.clearData));
+  const filename = useUploadTubePicturesFormStore(
+    useShallow((state) => state.fileName),
+  );
+  const file = useUploadTubePicturesFormStore(
+    useShallow((state) => state.file),
+  );
+  const setFileName = useUploadTubePicturesFormStore(
+    useShallow((state) => state.setFileName),
+  );
+  const setFile = useUploadTubePicturesFormStore(
+    useShallow((state) => state.setFile),
+  );
+  const clearData = useUploadTubePicturesFormStore(
+    useShallow((state) => state.clearData),
+  );
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -21,7 +31,9 @@ export default function UploadTubePicturesFormFileInput() {
   };
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-      <Typography level="body-sm">{filename.split("\\").slice(-1)[0] || "Файл не выбран"}</Typography>
+      <Typography level="body-sm">
+        {filename.split("\\").slice(-1)[0] || "Файл не выбран"}
+      </Typography>
       <FormControl size="sm">
         <input
           // accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -31,7 +43,9 @@ export default function UploadTubePicturesFormFileInput() {
           type="file"
           value={filename}
           disabled={file !== undefined}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleFileSelect(e)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            handleFileSelect(e)
+          }
         />
         <label htmlFor="raised-button-file">
           <Button

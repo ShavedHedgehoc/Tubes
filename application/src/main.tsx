@@ -20,5 +20,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       </SnackbarProvider>
     </CssVarsProvider>
     <ReactQueryDevtools initialIsOpen={false} />
-  </QueryClientProvider>
+  </QueryClientProvider>,
 );

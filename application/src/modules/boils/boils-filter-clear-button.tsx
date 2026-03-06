@@ -4,7 +4,9 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import FilterButton, { FilterButtonProps } from "../../shared/ui/filter-button";
 
 export default function BoilsFilterClearButton() {
-  const clearFilter = useBoilsFilterStore(useShallow((state) => state.clearFilter));
+  const clearFilter = useBoilsFilterStore(
+    useShallow((state) => state.clearFilter),
+  );
   const filter = useBoilsFilterStore(useShallow((state) => state.filter));
 
   const disableClearButtonCondition =

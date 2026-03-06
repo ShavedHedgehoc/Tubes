@@ -12,5 +12,5 @@ export const useSealantOperationSopStore = create<SealantOperationStore>()(
     selectedOperation: null,
     setSelectedOperation: (value) => set(() => ({ selectedOperation: value })),
     clearSelectedOperation: () => set(() => ({ selectedOperation: null })),
-  }))
+  })),
 );

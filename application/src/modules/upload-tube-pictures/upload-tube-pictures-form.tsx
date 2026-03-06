@@ -8,7 +8,9 @@ import UploadTubePicturesFormFileInput from "./upload-tube-pictures-form-file-in
 export default function UploadTubePicturesForm() {
   return (
     <React.Fragment>
-      <Box sx={{ gap: 3, display: "flex", flexDirection: "column", width: "100%" }}>
+      <Box
+        sx={{ gap: 3, display: "flex", flexDirection: "column", width: "100%" }}
+      >
         <FormCard props={{ title: "Выбор файла", grow: true }}>
           <UploadTubePicturesFormFileInput />
         </FormCard>

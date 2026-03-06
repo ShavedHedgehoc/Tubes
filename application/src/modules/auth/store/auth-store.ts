@@ -43,6 +43,6 @@ export const useAuthStore = create<AuthStore>()(
       setAuth: (value) => set(() => ({ isAuth: value })),
       setLastCheckTime: (value) => set(() => ({ lastCheckTime: value })),
     }),
-    { name: "AuthStore", store: "useAuthStore" }
-  )
+    { name: "AuthStore", store: "useAuthStore" },
+  ),
 );

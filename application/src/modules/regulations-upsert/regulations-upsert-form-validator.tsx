@@ -2,16 +2,29 @@ import { Box, Button, Typography } from "@mui/joy";
 import { useShallow } from "zustand/react/shallow";
 import Ajv, { SchemaObject } from "ajv/dist/jtd";
 import { read, utils } from "xlsx";
-import { IXLSRegulationsData, useRegulationsUpsertFormStore } from "./store/use-regulations-upsert-form-store";
+import {
+  IXLSRegulationsData,
+  useRegulationsUpsertFormStore,
+} from "./store/use-regulations-upsert-form-store";
 
 export default function RegulationsUpsertFormValidator() {
-  const isValid = useRegulationsUpsertFormStore(useShallow((state) => state.isValid));
-  const setIsValid = useRegulationsUpsertFormStore(useShallow((state) => state.setIsValid));
+  const isValid = useRegulationsUpsertFormStore(
+    useShallow((state) => state.isValid),
+  );
+  const setIsValid = useRegulationsUpsertFormStore(
+    useShallow((state) => state.setIsValid),
+  );
   const errs = useRegulationsUpsertFormStore(useShallow((state) => state.errs));
-  const addErrs = useRegulationsUpsertFormStore(useShallow((state) => state.addErrs));
+  const addErrs = useRegulationsUpsertFormStore(
+    useShallow((state) => state.addErrs),
+  );
   const file = useRegulationsUpsertFormStore(useShallow((state) => state.file));
-  const setErrsModalShow = useRegulationsUpsertFormStore(useShallow((state) => state.setErrsModalShow));
-  const setDataForUpload = useRegulationsUpsertFormStore(useShallow((state) => state.setDataForUpload));
+  const setErrsModalShow = useRegulationsUpsertFormStore(
+    useShallow((state) => state.setErrsModalShow),
+  );
+  const setDataForUpload = useRegulationsUpsertFormStore(
+    useShallow((state) => state.setDataForUpload),
+  );
 
   const handleValidationComplete = (json: IXLSRegulationsData[]) => {
     setDataForUpload(json);

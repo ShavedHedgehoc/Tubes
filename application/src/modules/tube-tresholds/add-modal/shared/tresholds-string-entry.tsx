@@ -15,7 +15,12 @@ export function TresholdsStringEntry(props: TresholdsStringEntryProps) {
         <Typography level="title-sm">{props.title}</Typography>
         <span style={{ color: "red", fontWeight: "bold" }}>*</span>
       </Stack>
-      <Stack spacing={1} direction="row" justifyContent="space-between" alignItems="center">
+      <Stack
+        spacing={1}
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+      >
         <Typography level="body-xs">Введите значение</Typography>
         <FormControl>
           <Input
@@ -23,7 +28,9 @@ export function TresholdsStringEntry(props: TresholdsStringEntryProps) {
             required={props.required}
             size="sm"
             value={props.value}
-            onChange={(e) => props.onChange({ key: props.id, value: e.target.value })}
+            onChange={(e) =>
+              props.onChange({ key: props.id, value: e.target.value })
+            }
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 e.preventDefault();

@@ -20,7 +20,9 @@ export default function ExtrusionSop() {
   const params = useParams<Params.OPERATION_ID>();
 
   const { isPending } = useExtrusionOperation(params.operation_id ?? null);
-  const operation = useExtrusionOperationSopStore(useShallow((state) => state.selectedOperation));
+  const operation = useExtrusionOperationSopStore(
+    useShallow((state) => state.selectedOperation),
+  );
 
   if (isPending) return <Loader />;
   if (!operation) return <NotFound message={AppMessages.OPERATION_NOT_FOUND} />;
@@ -28,7 +30,9 @@ export default function ExtrusionSop() {
   const pageLayoutProps: CarouselSopPageLayoutProps = {
     timeComponent: <TimeComponent />,
     headerComponent: <OperationHeaderComponent operation={operation ?? null} />,
-    carouselComponent: <ExtrusionSopCarousel operationId={operation.id ?? null} />,
+    carouselComponent: (
+      <ExtrusionSopCarousel operationId={operation.id ?? null} />
+    ),
     menuComponent: <ExtrusionSopMenu />,
     loaderComponent: <Loader />,
     notFoundComponent: undefined,

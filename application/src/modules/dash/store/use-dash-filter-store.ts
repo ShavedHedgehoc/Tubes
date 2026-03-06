@@ -43,7 +43,12 @@ export const useDashFilterStore = create<DashFilterStore>()(
       changeFilter: ({ key, values }) => {
         switch (key) {
           case DashFilterParams.PLANT:
-            set((state) => ({ filter: { ...state.filter, plant: values?.length ? values[0] : state.filter.plant } }));
+            set((state) => ({
+              filter: {
+                ...state.filter,
+                plant: values?.length ? values[0] : state.filter.plant,
+              },
+            }));
             break;
 
           default:
@@ -51,9 +56,10 @@ export const useDashFilterStore = create<DashFilterStore>()(
         }
       },
       setSelectedPlant: (value) => set(() => ({ selectedPlant: value })),
-      fillPlantSelectorOptions: (values) => set(() => ({ plantSelectorOptions: [...values] })),
+      fillPlantSelectorOptions: (values) =>
+        set(() => ({ plantSelectorOptions: [...values] })),
       setSmallCardView: (value) => set(() => ({ smallCardView: value })),
     }),
-    { name: "DashFilterStore", store: "DashFilterStore" }
-  )
+    { name: "DashFilterStore", store: "DashFilterStore" },
+  ),
 );

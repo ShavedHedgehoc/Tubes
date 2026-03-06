@@ -8,7 +8,7 @@ services:
         max-size: "10m"
         max-file: "3"
     environment:
-      POSTGRES_DB:  ${POSTGRES_DB}
+      POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USERNAME}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
@@ -37,7 +37,7 @@ services:
     networks:
       - postgres
     depends_on:
-      - postgres  
+      - postgres
   tubes_api:
     container_name: api_tubes
     build:
@@ -54,7 +54,7 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       PORT: "7100"
     volumes:
-      - files-data:/api_tubes/uploads 
+      - files-data:/api_tubes/uploads
     depends_on:
       - postgres
     restart: always
@@ -67,7 +67,7 @@ services:
       context: .
       dockerfile: docker/new-app/Dockerfile.prod
       args:
-        - NODE_ENV=production        
+        - NODE_ENV=production
         - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
         - INTERNAL_API_URL=${INTERNAL_API_URL}
     environment:
@@ -101,7 +101,7 @@ services:
     restart: always
     networks:
       - general
-      
+
   nginx:
     container_name: nginx_container
     build: ./docker/nginx
@@ -112,13 +112,13 @@ services:
         max-file: "3"
     restart: always
     ports:
-      - "80:80"      
-      - "3100:3100"           
+      - "80:80"
+      - "3100:3100"
     networks:
       - general
     depends_on:
       - tubes_dash
-      - new_app      
+      - new_app
 
   nginx-file-server:
     container_name: nginx_file_server_container
@@ -135,8 +135,8 @@ services:
     ports:
       - "8080:8080"
     restart: always
-    networks:      
-      - general    
+    networks:
+      - general
 
 volumes:
   summary-data:

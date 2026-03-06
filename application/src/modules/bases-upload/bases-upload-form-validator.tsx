@@ -2,16 +2,25 @@ import { Box, Button, Typography } from "@mui/joy";
 import { useShallow } from "zustand/react/shallow";
 import Ajv, { SchemaObject } from "ajv/dist/jtd";
 import { read, utils } from "xlsx";
-import { IXLSBasesData, useBasesUploadFormStore } from "./store/use-bases-upload-form-store";
+import {
+  IXLSBasesData,
+  useBasesUploadFormStore,
+} from "./store/use-bases-upload-form-store";
 
 export default function BasesUploadFormValidator() {
   const isValid = useBasesUploadFormStore(useShallow((state) => state.isValid));
-  const setIsValid = useBasesUploadFormStore(useShallow((state) => state.setIsValid));
+  const setIsValid = useBasesUploadFormStore(
+    useShallow((state) => state.setIsValid),
+  );
   const errs = useBasesUploadFormStore(useShallow((state) => state.errs));
   const addErrs = useBasesUploadFormStore(useShallow((state) => state.addErrs));
   const file = useBasesUploadFormStore(useShallow((state) => state.file));
-  const setErrsModalShow = useBasesUploadFormStore(useShallow((state) => state.setErrsModalShow));
-  const setDataForUpload = useBasesUploadFormStore(useShallow((state) => state.setDataForUpload));
+  const setErrsModalShow = useBasesUploadFormStore(
+    useShallow((state) => state.setErrsModalShow),
+  );
+  const setDataForUpload = useBasesUploadFormStore(
+    useShallow((state) => state.setDataForUpload),
+  );
 
   const handleValidationComplete = (json: IXLSBasesData[]) => {
     setDataForUpload(json);

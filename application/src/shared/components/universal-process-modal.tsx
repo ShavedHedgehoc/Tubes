@@ -12,7 +12,10 @@ export interface UniversalProcessModalProps {
 function UniversalProcessModal(props: UniversalProcessModalProps) {
   return (
     <React.Fragment>
-      <Modal open={props.open} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <Modal
+        open={props.open}
+        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
         <Sheet
           variant="outlined"
           sx={{
@@ -24,7 +27,13 @@ function UniversalProcessModal(props: UniversalProcessModalProps) {
           }}
         >
           <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-            <Typography component="h4" id="modal-title" textColor="inherit" fontWeight="lg" mb={1}>
+            <Typography
+              component="h4"
+              id="modal-title"
+              textColor="inherit"
+              fontWeight="lg"
+              mb={1}
+            >
               {props.title}
             </Typography>
             {props.content}

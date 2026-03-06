@@ -6,7 +6,9 @@ import FormSwitcher, { FormSwitcherProps } from "../../shared/ui/form-switcher";
 
 export default function DocsUploadFormUpdateSwitch() {
   const update = useDocsUploadFormStore(useShallow((state) => state.update));
-  const setUpdate = useDocsUploadFormStore(useShallow((state) => state.setUpdate));
+  const setUpdate = useDocsUploadFormStore(
+    useShallow((state) => state.setUpdate),
+  );
 
   const formSwitcherProps: FormSwitcherProps = {
     condition: update,
@@ -25,7 +27,9 @@ export default function DocsUploadFormUpdateSwitch() {
       <FormSwitcher {...formSwitcherProps} />
       <Typography>{update ? "Добавление" : "Загрузка"}</Typography>
       <Typography level="body-xs">
-        {update ? "Добавление строк в существующий документ" : "Создание нового документа"}
+        {update
+          ? "Добавление строк в существующий документ"
+          : "Создание нового документа"}
       </Typography>
     </Box>
   );

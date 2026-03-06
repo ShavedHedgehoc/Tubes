@@ -51,5 +51,5 @@ export const useBoilsUploadFormStore = create<BoilsUploadFormStore>()(
       }));
     },
     setDataForUpload: (arr) => set(() => ({ dataForUpload: [...arr] })),
-  }))
+  })),
 );

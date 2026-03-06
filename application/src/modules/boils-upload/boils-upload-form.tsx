@@ -8,7 +8,9 @@ import BoilsUploadFormLoader from "./boils-upload-form-loader";
 export default function BoilsUploadForm() {
   return (
     <React.Fragment>
-      <Box sx={{ gap: 3, display: "flex", flexDirection: "column", width: "100%" }}>
+      <Box
+        sx={{ gap: 3, display: "flex", flexDirection: "column", width: "100%" }}
+      >
         <FormCard props={{ title: "Выбор файла", grow: true }}>
           <BoilsUploadFormFileInput />
         </FormCard>

@@ -31,8 +31,9 @@ export const useEmployeesEditModalStore = create<EditModalStore>()(
       setBarcode: (val: string) => set(() => ({ barcode: val })),
       setOccupation: (val: number) => set(() => ({ occupation: val })),
       clearData: () => set(() => ({ name: "", barcode: "", occupation: null })),
-      fillOccupationOptions: (values) => set(() => ({ occupationsOptions: [...values] })),
+      fillOccupationOptions: (values) =>
+        set(() => ({ occupationsOptions: [...values] })),
     }),
-    { name: "EmployeeEditModalStore", store: "useEmployeeEditModalStore" }
-  )
+    { name: "EmployeeEditModalStore", store: "useEmployeeEditModalStore" },
+  ),
 );

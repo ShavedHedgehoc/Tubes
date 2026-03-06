@@ -1,5 +1,12 @@
 import * as React from "react";
-import { Box, FormControl, FormHelperText, Option, Select, SelectStaticProps } from "@mui/joy";
+import {
+  Box,
+  FormControl,
+  FormHelperText,
+  Option,
+  Select,
+  SelectStaticProps,
+} from "@mui/joy";
 
 export interface FormSelectorOptionProps {
   id: number;
@@ -13,7 +20,15 @@ export interface FormSelectorProps {
   label: string;
   options: React.ReactNode;
   setSelectedOption: (id: number) => void;
-  changeFilter: ({ key, value, values }: { key: string; value: string; values: number[] | [] }) => void;
+  changeFilter: ({
+    key,
+    value,
+    values,
+  }: {
+    key: string;
+    value: string;
+    values: number[] | [];
+  }) => void;
 }
 
 export function FormSelectorOption(props: FormSelectorOptionProps) {
@@ -28,7 +43,12 @@ export default function FormSelector(props: FormSelectorProps) {
   const action: SelectStaticProps["action"] = React.useRef(null);
   const handleChange = (newValue: number | null) => {
     newValue && props.setSelectedOption(newValue);
-    newValue && props.changeFilter({ key: props.id, value: "", values: newValue === 999999 ? [] : [newValue] });
+    newValue &&
+      props.changeFilter({
+        key: props.id,
+        value: "",
+        values: newValue === 999999 ? [] : [newValue],
+      });
   };
   return (
     <Box sx={{ display: "flex", pt: 1 }}>
@@ -50,7 +70,10 @@ export default function FormSelector(props: FormSelectorProps) {
             flexShrink: 1,
             mt: 1,
           }}
-          onChange={(event: React.SyntheticEvent | null, newValue: number | null) => {
+          onChange={(
+            event: React.SyntheticEvent | null,
+            newValue: number | null,
+          ) => {
             event && newValue && handleChange(newValue);
           }}
         >

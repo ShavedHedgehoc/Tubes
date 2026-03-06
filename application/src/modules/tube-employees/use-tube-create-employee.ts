@@ -20,7 +20,10 @@ export function useTubeCreateEmployee() {
     onError: (err) => {
       if (err instanceof Error) {
         const error = handleError(err);
-        enqueueSnackbar(error, { variant: "error", anchorOrigin: { vertical: "top", horizontal: "right" } });
+        enqueueSnackbar(error, {
+          variant: "error",
+          anchorOrigin: { vertical: "top", horizontal: "right" },
+        });
       }
     },
   });

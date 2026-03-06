@@ -14,10 +14,18 @@ import { TableState } from "../../shared/ui/table-state";
 import { useAuthStore } from "../auth/store/auth-store";
 
 const HistoryModalOpenButton = ({ row }: { row: IDocRow }) => {
-  const setOpen = useRecordHistoryModalStore(useShallow((state) => state.setOpen));
-  const setRecordId = useRecordHistoryModalStore(useShallow((state) => state.setRecordId));
-  const setTitle = useRecordHistoryModalStore(useShallow((state) => state.setTitle));
-  const setCancelButtonEnabled = useRecordHistoryModalStore(useShallow((state) => state.setCancelButtonEnabled));
+  const setOpen = useRecordHistoryModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const setRecordId = useRecordHistoryModalStore(
+    useShallow((state) => state.setRecordId),
+  );
+  const setTitle = useRecordHistoryModalStore(
+    useShallow((state) => state.setTitle),
+  );
+  const setCancelButtonEnabled = useRecordHistoryModalStore(
+    useShallow((state) => state.setCancelButtonEnabled),
+  );
   const handleOpenHistoryModalButtonClick = () => {
     if (
       row.stateValue === "product_fail" ||
@@ -29,11 +37,17 @@ const HistoryModalOpenButton = ({ row }: { row: IDocRow }) => {
       setCancelButtonEnabled(false);
     }
     setRecordId(row.id);
-    setTitle(`Историй статусов по продукту ${row.product}, партия - ${row.boil}`);
+    setTitle(
+      `Историй статусов по продукту ${row.product}, партия - ${row.boil}`,
+    );
     setOpen(true);
   };
   return (
-    <IconButton variant="plain" size="sm" onClick={() => handleOpenHistoryModalButtonClick()}>
+    <IconButton
+      variant="plain"
+      size="sm"
+      onClick={() => handleOpenHistoryModalButtonClick()}
+    >
       <InfoOutlinedIcon />
     </IconButton>
   );
@@ -42,10 +56,18 @@ const HistoryModalOpenButton = ({ row }: { row: IDocRow }) => {
 export default function RowComponent({ row }: { row: IDocRow }) {
   const user = useAuthStore(useShallow((state) => state.user));
   const setOpen = useAddRecordModalStore(useShallow((state) => state.setOpen));
-  const setTitle = useAddRecordModalStore(useShallow((state) => state.setTitle));
-  const setRecordId = useAddRecordModalStore(useShallow((state) => state.setRecordId));
-  const setState = useAddRecordModalStore(useShallow((state) => state.setState));
-  const setNoteRequired = useAddRecordModalStore(useShallow((state) => state.setNoteRequired));
+  const setTitle = useAddRecordModalStore(
+    useShallow((state) => state.setTitle),
+  );
+  const setRecordId = useAddRecordModalStore(
+    useShallow((state) => state.setRecordId),
+  );
+  const setState = useAddRecordModalStore(
+    useShallow((state) => state.setState),
+  );
+  const setNoteRequired = useAddRecordModalStore(
+    useShallow((state) => state.setNoteRequired),
+  );
 
   const { addHistory, isPending } = useCreateHistory();
 
@@ -66,7 +88,9 @@ export default function RowComponent({ row }: { row: IDocRow }) {
 
   const handleCorrectButtonClick = () => {
     setRecordId(row.id);
-    setTitle(`Продукт ${row.product}, партия - ${row.boil}, статус - "Требуется доработка"`);
+    setTitle(
+      `Продукт ${row.product}, партия - ${row.boil}, статус - "Требуется доработка"`,
+    );
     setState("product_correct");
     setNoteRequired(true);
     setOpen(true);
@@ -74,7 +98,9 @@ export default function RowComponent({ row }: { row: IDocRow }) {
 
   const handleFailButtonClick = () => {
     setRecordId(row.id);
-    setTitle(`Продукт ${row.product}, партия - ${row.boil}, статус - "Брак продукта"`);
+    setTitle(
+      `Продукт ${row.product}, партия - ${row.boil}, статус - "Брак продукта"`,
+    );
     setState("product_fail");
     setNoteRequired(true);
     setOpen(true);
@@ -137,7 +163,11 @@ export default function RowComponent({ row }: { row: IDocRow }) {
           row.stateValue !== "base_continue" &&
           row.stateValue !== "product_finished" &&
           row.historiesCount !== 0 && (
-            <TableIconButton color="danger" disabled={isPending} onClick={() => handleFailButtonClick()}>
+            <TableIconButton
+              color="danger"
+              disabled={isPending}
+              onClick={() => handleFailButtonClick()}
+            >
               <BlockOutlinedIcon />
             </TableIconButton>
           )}

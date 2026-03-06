@@ -6,14 +6,29 @@ import { useTraceBatchWghtReportFilterStore } from "../store/use-trace-batch-wgh
 import { TraceBatchWghtReportFilterParams } from "./trace-batch-wght-report-filter-params";
 
 export default function TraceBatchWghtReportFilterSortByBatchSwitch() {
-  const toFilter = useTraceBatchWghtReportFilterStore(useShallow((state) => state.filter.sortByBatch));
-  const changeFilter = useTraceBatchWghtReportFilterStore(useShallow((state) => state.changeFilter));
+  const toFilter = useTraceBatchWghtReportFilterStore(
+    useShallow((state) => state.filter.sortByBatch),
+  );
+  const changeFilter = useTraceBatchWghtReportFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
 
   return (
     <Box sx={{ display: "flex", pt: 2, alignItems: "stretch" }}>
       <FormControl size="sm" id={TraceBatchWghtReportFilterParams.COMPARE}>
-        <Box sx={{ display: "flex", flexDirection: "row", alignItems: "stretch", gap: 2 }}>
-          {toFilter ? <Typography color="neutral">НЕТ</Typography> : <Typography>НЕТ</Typography>}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "stretch",
+            gap: 2,
+          }}
+        >
+          {toFilter ? (
+            <Typography color="neutral">НЕТ</Typography>
+          ) : (
+            <Typography>НЕТ</Typography>
+          )}
 
           <Switch
             color="neutral"
@@ -28,7 +43,11 @@ export default function TraceBatchWghtReportFilterSortByBatchSwitch() {
               })
             }
           />
-          {toFilter ? <Typography>ДА</Typography> : <Typography color="neutral">ДА</Typography>}
+          {toFilter ? (
+            <Typography>ДА</Typography>
+          ) : (
+            <Typography color="neutral">ДА</Typography>
+          )}
         </Box>
         <FormHelperText>Сортировка по партиям</FormHelperText>
       </FormControl>

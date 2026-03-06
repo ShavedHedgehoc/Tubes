@@ -1,13 +1,19 @@
 import { useShallow } from "zustand/react/shallow";
 import { useBasesUploadFormStore } from "./store/use-bases-upload-form-store";
-import ModalLayout, { ModalLayoutProps } from "../../shared/layouts/modal-layout";
+import ModalLayout, {
+  ModalLayoutProps,
+} from "../../shared/layouts/modal-layout";
 import TableLayout from "../../shared/layouts/table-layout";
 import { Typography } from "@mui/joy";
 
 export default function BasesUploadErrsModal() {
   const errs = useBasesUploadFormStore(useShallow((state) => state.errs));
-  const setErrsModalShow = useBasesUploadFormStore(useShallow((state) => state.setErrsModalShow));
-  const errsModalShow = useBasesUploadFormStore(useShallow((state) => state.errsModalShow));
+  const setErrsModalShow = useBasesUploadFormStore(
+    useShallow((state) => state.setErrsModalShow),
+  );
+  const errsModalShow = useBasesUploadFormStore(
+    useShallow((state) => state.errsModalShow),
+  );
 
   const modalProps: ModalLayoutProps = {
     open: errsModalShow,
@@ -19,7 +25,9 @@ export default function BasesUploadErrsModal() {
     onlyCloseButton: true,
   };
 
-  const commonThead: TheadProperties[] = [{ width: 280, align: "left", value: "Сообщение" }];
+  const commonThead: TheadProperties[] = [
+    { width: 280, align: "left", value: "Сообщение" },
+  ];
   return (
     <ModalLayout props={modalProps} buttons={<></>}>
       <TableLayout thead={commonThead}>

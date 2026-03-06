@@ -14,5 +14,5 @@ export const usePDFModalStore = create<PDFModalStore>()(
     record: null,
     setOpen: (value) => set(() => ({ open: value })),
     setRecord: (value) => set(() => ({ record: value })),
-  }))
+  })),
 );

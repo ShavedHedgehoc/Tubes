@@ -21,5 +21,5 @@ createRoot(document.getElementById("root")!).render(
         </SnackbarProvider>
       </Provider>
     </QueryClientProvider>
-  </StrictMode>
+  </StrictMode>,
 );

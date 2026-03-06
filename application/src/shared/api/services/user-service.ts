@@ -50,7 +50,9 @@ export default class UserService {
     const res = await $api.post(`/users/list`, dto);
     return res.data;
   }
-  static async updateUserRoles(data: IUpdateUserRolesDto): Promise<IUserResponse> {
+  static async updateUserRoles(
+    data: IUpdateUserRolesDto,
+  ): Promise<IUserResponse> {
     return await $api.post(`/users/update_roles`, data);
   }
   static async changeBannedStatus(id: number): Promise<IUserResponse> {

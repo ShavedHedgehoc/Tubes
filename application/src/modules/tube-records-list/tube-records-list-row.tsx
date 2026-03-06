@@ -72,7 +72,14 @@ export default function TubeRecordsListRow({ row }: { row: ITubeRecordRow }) {
       <td style={{ width: 90, textAlign: "left", padding: "12px 6px" }}>
         <Typography level="body-xs">{row.product.marking}</Typography>
       </td>
-      <td style={{ width: 200, textAlign: "left", padding: "12px 6px", flexGrow: 1 }}>
+      <td
+        style={{
+          width: 200,
+          textAlign: "left",
+          padding: "12px 6px",
+          flexGrow: 1,
+        }}
+      >
         <Typography level="body-xs">{row.product.name}</Typography>
       </td>
       <td style={{ width: 50, textAlign: "center", padding: "12px 6px" }}>
@@ -81,23 +88,39 @@ export default function TubeRecordsListRow({ row }: { row: ITubeRecordRow }) {
       <td style={{ width: 50, textAlign: "center", padding: "12px 6px" }}>
         <StyledTypography
           text={row.isFinished ? "Завершено" : row.isActive ? "В работе" : "-"}
-          state={row.isFinished === true ? "product_pass" : row.isActive === true ? "product_check" : "neutral"}
+          state={
+            row.isFinished === true
+              ? "product_pass"
+              : row.isActive === true
+                ? "product_check"
+                : "neutral"
+          }
         />
       </td>
 
       <td style={{ width: 40, textAlign: "center", padding: "12px 6px" }}>
-        <StyledTypography state={recCount === 0 ? "error" : "success"} text={recCount} />
+        <StyledTypography
+          state={recCount === 0 ? "error" : "success"}
+          text={recCount}
+        />
       </td>
       <td style={{ width: 50, textAlign: "center", padding: "12px 36px" }}>
         <Box sx={{ display: "flex", justifyContent: "center", gap: 2 }}>
           <IconButton
             color="success"
             size="sm"
-            onClick={() => navigate(`${RouteNames.TUBES_RECORDS_DETAIL_ROOT}/${row.id}`)}
+            onClick={() =>
+              navigate(`${RouteNames.TUBES_RECORDS_DETAIL_ROOT}/${row.id}`)
+            }
           >
             <AssessmentIcon />
           </IconButton>
-          <IconButton color="danger" disabled={recCount !== 0} size="sm" onClick={() => handleDelete()}>
+          <IconButton
+            color="danger"
+            disabled={recCount !== 0}
+            size="sm"
+            onClick={() => handleDelete()}
+          >
             <DeleteOutlineOutlinedIcon />
           </IconButton>
         </Box>

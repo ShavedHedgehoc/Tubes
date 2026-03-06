@@ -9,8 +9,12 @@ import FilterMultiSelector, {
 
 export default function RecordsFilterStateSelector() {
   const filter = useRecordsFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useRecordsFilterStore(useShallow((state) => state.changeFilter));
-  const stateSelectorOptions = useRecordsFilterStore(useShallow((state) => state.stateSelectorOptions));
+  const changeFilter = useRecordsFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
+  const stateSelectorOptions = useRecordsFilterStore(
+    useShallow((state) => state.stateSelectorOptions),
+  );
 
   const stateOptions = stateSelectorOptions.map((state) => (
     <FilterMultiSelectorOption
@@ -27,8 +31,15 @@ export default function RecordsFilterStateSelector() {
     placeholder: "Выберите статус",
     label: "Поиск по статусу",
     options: stateOptions,
-    changeFilter: ({ key, value, values }: { key: string; value: string; values: number[] | [] }) =>
-      changeFilter({ key, value, values }),
+    changeFilter: ({
+      key,
+      value,
+      values,
+    }: {
+      key: string;
+      value: string;
+      values: number[] | [];
+    }) => changeFilter({ key, value, values }),
   };
 
   return <FilterMultiSelector {...stateSelectorProps} />;

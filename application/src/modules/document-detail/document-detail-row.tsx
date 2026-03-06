@@ -16,27 +16,57 @@ import { useDocumentDetailAddHistoryModalStore } from "./store/use-document-deta
 import { useAuthStore } from "../auth/store/auth-store";
 
 export default function DocumentDetailRow({ row }: { row: IDocRow }) {
-  const setOpenDeleteModal = useDocumentDetailDeleteRecordlModalStore(useShallow((state) => state.setOpen));
-  const setDeleteId = useDocumentDetailDeleteRecordlModalStore(useShallow((state) => state.setId));
+  const setOpenDeleteModal = useDocumentDetailDeleteRecordlModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const setDeleteId = useDocumentDetailDeleteRecordlModalStore(
+    useShallow((state) => state.setId),
+  );
 
-  const setOpenEditModal = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.setOpen));
-  const setEditRow = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.setRow));
-  const setEditApparatus = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.setApparatus));
-  const setCan = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.setCan));
-  const setConveyor = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.setConveyor));
-  const setPlan = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.setPlan));
-  const setNote = useDocumentDetailEditRecordlModalStore(useShallow((state) => state.setNote));
+  const setOpenEditModal = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const setEditRow = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.setRow),
+  );
+  const setEditApparatus = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.setApparatus),
+  );
+  const setCan = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.setCan),
+  );
+  const setConveyor = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.setConveyor),
+  );
+  const setPlan = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.setPlan),
+  );
+  const setNote = useDocumentDetailEditRecordlModalStore(
+    useShallow((state) => state.setNote),
+  );
 
-  const setOpenHistoriesModal = useDocumentDetailHistoryModalStore(useShallow((state) => state.setOpen));
-  const setRecordId = useDocumentDetailHistoryModalStore(useShallow((state) => state.setRecordId));
-  const setTitle = useDocumentDetailHistoryModalStore(useShallow((state) => state.setTitle));
-  const setAddButtonEnabled = useDocumentDetailHistoryModalStore(useShallow((state) => state.setAddButtonEnabled));
+  const setOpenHistoriesModal = useDocumentDetailHistoryModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const setRecordId = useDocumentDetailHistoryModalStore(
+    useShallow((state) => state.setRecordId),
+  );
+  const setTitle = useDocumentDetailHistoryModalStore(
+    useShallow((state) => state.setTitle),
+  );
+  const setAddButtonEnabled = useDocumentDetailHistoryModalStore(
+    useShallow((state) => state.setAddButtonEnabled),
+  );
 
   // const setOpenPDFModal = usePDFModalStore(useShallow((state) => state.setOpen));
   // const setPDFRecord = usePDFModalStore(useShallow((state) => state.setRecord));
 
-  const setUserId = useDocumentDetailAddHistoryModalStore(useShallow((state) => state.setUserId));
-  const setRow = useDocumentDetailAddHistoryModalStore(useShallow((state) => state.setRow));
+  const setUserId = useDocumentDetailAddHistoryModalStore(
+    useShallow((state) => state.setUserId),
+  );
+  const setRow = useDocumentDetailAddHistoryModalStore(
+    useShallow((state) => state.setRow),
+  );
   const user = useAuthStore(useShallow((state) => state.user));
 
   const handleEditButtonClick = () => {
@@ -59,7 +89,9 @@ export default function DocumentDetailRow({ row }: { row: IDocRow }) {
         setAddButtonEnabled(false);
       }
       setRecordId(row.id);
-      setTitle(`Историй статусов по продукту ${row.product}, партия - ${row.boil}`);
+      setTitle(
+        `Историй статусов по продукту ${row.product}, партия - ${row.boil}`,
+      );
       setOpenHistoriesModal(true);
     }
   };
@@ -104,14 +136,27 @@ export default function DocumentDetailRow({ row }: { row: IDocRow }) {
         <TableState text={row.state} state={row.stateValue} />
       </td>
       <td style={{ width: 80, textAlign: "center", padding: "12px 6px" }}>
-        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px" }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "10px",
+          }}
+        >
           {/* <TableIconButton color="success" disabled={row.state === "-"} onClick={() => handlePDFButtonClick()}>
             <PictureAsPdfOutlinedIcon />
           </TableIconButton> */}
-          <TableIconButton color="primary" onClick={() => handleEditButtonClick()}>
+          <TableIconButton
+            color="primary"
+            onClick={() => handleEditButtonClick()}
+          >
             <EditOutlinedIcon />
           </TableIconButton>
-          <TableIconButton color="success" onClick={() => handleDetailButtonClick()}>
+          <TableIconButton
+            color="success"
+            onClick={() => handleDetailButtonClick()}
+          >
             <InfoOutlinedIcon />
           </TableIconButton>
           <TableIconButton

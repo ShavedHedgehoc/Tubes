@@ -15,18 +15,27 @@ interface BoilsUploadUploadModalStore {
   reset: () => void;
 }
 
-export const useBoilsUploadUploadModalStore = create<BoilsUploadUploadModalStore>()(
-  devtools((set) => ({
-    open: false,
-    toProcess: 0,
-    processed: 0,
-    success: 0,
-    fail: 0,
-    setOpen: (value) => set(() => ({ open: value })),
-    setToProcess: (value) => set(() => ({ toProcess: value })),
-    increaseProcessed: () => set((state) => ({ processed: state.processed + 1 })),
-    increaseSuccess: () => set((state) => ({ success: state.success + 1 })),
-    increaseFail: () => set((state) => ({ fail: state.fail + 1 })),
-    reset: () => set(() => ({ open: false, toProcess: 0, processed: 0, success: 0, fail: 0 })),
-  }))
-);
+export const useBoilsUploadUploadModalStore =
+  create<BoilsUploadUploadModalStore>()(
+    devtools((set) => ({
+      open: false,
+      toProcess: 0,
+      processed: 0,
+      success: 0,
+      fail: 0,
+      setOpen: (value) => set(() => ({ open: value })),
+      setToProcess: (value) => set(() => ({ toProcess: value })),
+      increaseProcessed: () =>
+        set((state) => ({ processed: state.processed + 1 })),
+      increaseSuccess: () => set((state) => ({ success: state.success + 1 })),
+      increaseFail: () => set((state) => ({ fail: state.fail + 1 })),
+      reset: () =>
+        set(() => ({
+          open: false,
+          toProcess: 0,
+          processed: 0,
+          success: 0,
+          fail: 0,
+        })),
+    })),
+  );

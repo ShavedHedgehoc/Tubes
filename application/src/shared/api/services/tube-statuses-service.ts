@@ -19,21 +19,29 @@ export interface ITubeStatusResponce {
   createdAt: Date;
 }
 export default class TubeStatusesService {
-  static async createExtrusionStatus(dto: CreateTubeStatusDto): Promise<ITubeStatusResponce> {
+  static async createExtrusionStatus(
+    dto: CreateTubeStatusDto,
+  ): Promise<ITubeStatusResponce> {
     const res = await $apiTubes.post(`/statuses/extrusion`, dto);
     return res.data;
   }
-  static async createVarnishStatus(dto: CreateTubeStatusDto): Promise<ITubeStatusResponce> {
+  static async createVarnishStatus(
+    dto: CreateTubeStatusDto,
+  ): Promise<ITubeStatusResponce> {
     const res = await $apiTubes.post(`/statuses/varnish`, dto);
     return res.data;
   }
 
-  static async createOffsetStatus(dto: CreateTubeStatusDto): Promise<ITubeStatusResponce> {
+  static async createOffsetStatus(
+    dto: CreateTubeStatusDto,
+  ): Promise<ITubeStatusResponce> {
     const res = await $apiTubes.post(`/statuses/offset`, dto);
     return res.data;
   }
 
-  static async createSealantStatus(dto: CreateTubeStatusDto): Promise<ITubeStatusResponce> {
+  static async createSealantStatus(
+    dto: CreateTubeStatusDto,
+  ): Promise<ITubeStatusResponce> {
     const res = await $apiTubes.post(`/statuses/sealant`, dto);
     return res.data;
   }

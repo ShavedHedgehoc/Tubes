@@ -8,9 +8,15 @@ import { useVarnishCloseConfirmModalStore } from "../../store/use-varnish-modal-
 import { useVarnishInputStore } from "../../store/use-varnish-input-store";
 
 export default function VarnishCloseConfirmModal() {
-  const open = useVarnishCloseConfirmModalStore(useShallow((state) => state.open));
-  const setOpen = useVarnishCloseConfirmModalStore(useShallow((state) => state.setOpen));
-  const varnishConveyor = useVarnishConveyorStore(useShallow((state) => state.varnishConveyor));
+  const open = useVarnishCloseConfirmModalStore(
+    useShallow((state) => state.open),
+  );
+  const setOpen = useVarnishCloseConfirmModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const varnishConveyor = useVarnishConveyorStore(
+    useShallow((state) => state.varnishConveyor),
+  );
   const initData = useVarnishInputStore(useShallow((state) => state.initData));
   const navigate = useNavigate();
 
@@ -21,7 +27,8 @@ export default function VarnishCloseConfirmModal() {
 
   const alertModalProps: AlertModalProps = {
     title: "Закрыть",
-    message: "Вы действительно хотите вернуться на главную? Все введенные параметры будут очищены.",
+    message:
+      "Вы действительно хотите вернуться на главную? Все введенные параметры будут очищены.",
     actionButtonValue: "Закрыть",
     cancelButtonValue: "Остаться",
     open: open,

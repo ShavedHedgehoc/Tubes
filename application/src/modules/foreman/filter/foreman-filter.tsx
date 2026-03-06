@@ -14,12 +14,22 @@ import { ForemanFilterParams } from "./foreman-filter-params";
 
 export default function ForemanFilter() {
   const user = useAuthStore(useShallow((state) => state.user));
-  const changeFilter = useForemanFilterStore(useShallow((state) => state.changeFilter));
-  const plantSelectorOptions = useForemanFilterStore(useShallow((state) => state.plantSelectorOptions));
-  const setSelectedPlant = useForemanFilterStore(useShallow((state) => state.setSelectedPlant));
+  const changeFilter = useForemanFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
+  const plantSelectorOptions = useForemanFilterStore(
+    useShallow((state) => state.plantSelectorOptions),
+  );
+  const setSelectedPlant = useForemanFilterStore(
+    useShallow((state) => state.setSelectedPlant),
+  );
   const plant_id = user?.settings?.plant_id || plantSelectorOptions[0].id;
   setSelectedPlant(plant_id);
-  changeFilter({ key: ForemanFilterParams.PLANT, value: "", values: [plant_id] });
+  changeFilter({
+    key: ForemanFilterParams.PLANT,
+    value: "",
+    values: [plant_id],
+  });
   return (
     <>
       <MobileForemanFilter />

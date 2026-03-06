@@ -27,7 +27,7 @@ export const employeeParamsSchema = {
   page: parseAsInteger.withDefault(1),
 };
 
-export type EmployeeUiParams = inferParserType<typeof employeeUiSchema>;
+// export type EmployeeUiParams = inferParserType<typeof employeeUiSchema>;
 export type EmployeeParams = inferParserType<typeof employeeParamsSchema>;
 export const employeeParamsCache =
   createSearchParamsCache(employeeParamsSchema);

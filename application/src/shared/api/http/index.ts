@@ -34,7 +34,7 @@ $clearApi.interceptors.request.use(
   },
   function (error) {
     return Promise.reject(error);
-  }
+  },
 );
 
 $api.interceptors.request.use(
@@ -44,7 +44,7 @@ $api.interceptors.request.use(
   },
   function (error) {
     return Promise.reject(error);
-  }
+  },
 );
 
 $api.interceptors.response.use(
@@ -53,7 +53,11 @@ $api.interceptors.response.use(
   },
   async function (error) {
     const originalRequest = error.config;
-    if (originalRequest.url !== ApiRoutes.LOGIN && originalRequest.url !== ApiRoutes.LOGOUT && error.response) {
+    if (
+      originalRequest.url !== ApiRoutes.LOGIN &&
+      originalRequest.url !== ApiRoutes.LOGOUT &&
+      error.response
+    ) {
       if (error.response.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
         try {
@@ -67,7 +71,7 @@ $api.interceptors.response.use(
       }
     }
     return Promise.reject(error);
-  }
+  },
 );
 
 export { $api, $clearApi, $apiTubes };

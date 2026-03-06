@@ -1,5 +1,7 @@
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
-import FilterButton, { FilterButtonProps } from "../../../shared/ui/filter-button";
+import FilterButton, {
+  FilterButtonProps,
+} from "../../../shared/ui/filter-button";
 import { useShallow } from "zustand/react/shallow";
 import { useTraceBatchWghtReportFilterStore } from "../store/use-trace-batch-wght-report-filter-store";
 import { useTraceBatchWghtReport } from "../use-trace-batch-wght-report";
@@ -7,10 +9,20 @@ import { useTraceBatchWghtReportPaginationStore } from "../store/use-trace-batch
 import makeXLSXFile from "../make-xlsx";
 
 export default function TraceBatchWghtReportFilterToXlsxButton() {
-  const filter = useTraceBatchWghtReportFilterStore(useShallow((state) => state.filter));
-  const page = useTraceBatchWghtReportPaginationStore(useShallow((state) => state.page));
-  const limit = useTraceBatchWghtReportPaginationStore(useShallow((state) => state.limit));
-  const { data } = useTraceBatchWghtReport({ filter: filter, limit: limit, page: page });
+  const filter = useTraceBatchWghtReportFilterStore(
+    useShallow((state) => state.filter),
+  );
+  const page = useTraceBatchWghtReportPaginationStore(
+    useShallow((state) => state.page),
+  );
+  const limit = useTraceBatchWghtReportPaginationStore(
+    useShallow((state) => state.limit),
+  );
+  const { data } = useTraceBatchWghtReport({
+    filter: filter,
+    limit: limit,
+    page: page,
+  });
 
   const handleClick = () => {
     if (data && data.rows.length) {

@@ -1,4 +1,12 @@
-import { Box, CircularProgress, DialogContent, Modal, ModalDialog, ModalOverflow, Typography } from "@mui/joy";
+import {
+  Box,
+  CircularProgress,
+  DialogContent,
+  Modal,
+  ModalDialog,
+  ModalOverflow,
+  Typography,
+} from "@mui/joy";
 import * as React from "react";
 
 export default function LoginPendingModal({ open }: { open: boolean }) {

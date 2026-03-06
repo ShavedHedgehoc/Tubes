@@ -6,15 +6,25 @@ import type { AddParameterCardProps } from "../../../shared/components/cards/add
 import { VStack, HStack } from "@chakra-ui/react";
 import AddParameterCard from "../../../shared/components/cards/add-parameter-card";
 import { PARAMETER_UNITS } from "@/shared/helpers/parameter-units";
-import { useVarnishInputStore, VarnishInputParams } from "../store/use-varnish-input-store";
+import {
+  useVarnishInputStore,
+  VarnishInputParams,
+} from "../store/use-varnish-input-store";
 import useVarnishEntriesHandleCardsClick from "./use-varnish-entries-handle-cards-click";
 
-export default function VarnishEntries({ summaryData }: { summaryData: ISummary | null }) {
+export default function VarnishEntries({
+  summaryData,
+}: {
+  summaryData: ISummary | null;
+}) {
   const data = useVarnishInputStore(useShallow((state) => state.data));
-  const { handleCardClick, handleIntegerCardClick, handleBooleanCardClick } = useVarnishEntriesHandleCardsClick();
+  const { handleCardClick, handleIntegerCardClick, handleBooleanCardClick } =
+    useVarnishEntriesHandleCardsClick();
 
   const tresholdsData = summaryData?.tresholds || null;
-  const lastCounterValue = summaryData?.varnishParams ? summaryData.varnishParams.counter_value : null;
+  const lastCounterValue = summaryData?.varnishParams
+    ? summaryData.varnishParams.counter_value
+    : null;
 
   const counterValueCardProps: AddParameterCardProps = {
     id: VarnishInputParams.COUNTER_VALUE,
@@ -59,7 +69,8 @@ export default function VarnishEntries({ summaryData }: { summaryData: ISummary 
   };
   const nozzleRegulatorAirpressureCardProps: AddParameterCardProps = {
     id: VarnishInputParams.NOZZLE_REGULATOR_AIR_PRESSURE,
-    title: VARNISH_PARAMETER_NAMES[VarnishInputParams.NOZZLE_REGULATOR_AIR_PRESSURE],
+    title:
+      VARNISH_PARAMETER_NAMES[VarnishInputParams.NOZZLE_REGULATOR_AIR_PRESSURE],
     value: Number(data.nozzle_regulator_air_pressure) || null,
     minValue: tresholdsData?.varnish_nozzle_regulator_air_pressure_min || null,
     maxValue: tresholdsData?.varnish_nozzle_regulator_air_pressure_max || null,
@@ -79,7 +90,8 @@ export default function VarnishEntries({ summaryData }: { summaryData: ISummary 
   };
   const injectionAStartPositionCardProps: AddParameterCardProps = {
     id: VarnishInputParams.INJECTION_A_START_POSITION,
-    title: VARNISH_PARAMETER_NAMES[VarnishInputParams.INJECTION_A_START_POSITION],
+    title:
+      VARNISH_PARAMETER_NAMES[VarnishInputParams.INJECTION_A_START_POSITION],
     value: Number(data.injection_a_start_position) || null,
     minValue: tresholdsData?.varnish_injection_a_start_position_min || null,
     maxValue: tresholdsData?.varnish_injection_a_start_position_max || null,
@@ -89,7 +101,8 @@ export default function VarnishEntries({ summaryData }: { summaryData: ISummary 
   };
   const injectionBStartPositionCardProps: AddParameterCardProps = {
     id: VarnishInputParams.INJECTION_B_START_POSITION,
-    title: VARNISH_PARAMETER_NAMES[VarnishInputParams.INJECTION_B_START_POSITION],
+    title:
+      VARNISH_PARAMETER_NAMES[VarnishInputParams.INJECTION_B_START_POSITION],
     value: Number(data.injection_b_start_position) || null,
     minValue: tresholdsData?.varnish_injection_b_start_position_min || null,
     maxValue: tresholdsData?.varnish_injection_b_start_position_max || null,
@@ -99,7 +112,8 @@ export default function VarnishEntries({ summaryData }: { summaryData: ISummary 
   };
   const injectionCStartPositionCardProps: AddParameterCardProps = {
     id: VarnishInputParams.INJECTION_C_START_POSITION,
-    title: VARNISH_PARAMETER_NAMES[VarnishInputParams.INJECTION_C_START_POSITION],
+    title:
+      VARNISH_PARAMETER_NAMES[VarnishInputParams.INJECTION_C_START_POSITION],
     value: Number(data.injection_c_start_position) || null,
     minValue: tresholdsData?.varnish_injection_c_start_position_min || null,
     maxValue: tresholdsData?.varnish_injection_c_start_position_max || null,
@@ -109,7 +123,8 @@ export default function VarnishEntries({ summaryData }: { summaryData: ISummary 
   };
   const injectionDStartPositionCardProps: AddParameterCardProps = {
     id: VarnishInputParams.INJECTION_D_START_POSITION,
-    title: VARNISH_PARAMETER_NAMES[VarnishInputParams.INJECTION_D_START_POSITION],
+    title:
+      VARNISH_PARAMETER_NAMES[VarnishInputParams.INJECTION_D_START_POSITION],
     value: Number(data.injection_d_start_position) || null,
     minValue: tresholdsData?.varnish_injection_d_start_position_min || null,
     maxValue: tresholdsData?.varnish_injection_d_start_position_max || null,
@@ -160,7 +175,8 @@ export default function VarnishEntries({ summaryData }: { summaryData: ISummary 
 
   const tubeMoldingStartPositionCardProps: AddParameterCardProps = {
     id: VarnishInputParams.TUBE_MOLDING_START_POSITION,
-    title: VARNISH_PARAMETER_NAMES[VarnishInputParams.TUBE_MOLDING_START_POSITION],
+    title:
+      VARNISH_PARAMETER_NAMES[VarnishInputParams.TUBE_MOLDING_START_POSITION],
     value: Number(data.tube_molding_start_position) || null,
     minValue: tresholdsData?.varnish_tube_molding_start_position_min || null,
     maxValue: tresholdsData?.varnish_tube_molding_start_position_max || null,
@@ -171,7 +187,8 @@ export default function VarnishEntries({ summaryData }: { summaryData: ISummary 
 
   const tubeMoldingEndPositionCardProps: AddParameterCardProps = {
     id: VarnishInputParams.TUBE_MOLDING_END_POSITION,
-    title: VARNISH_PARAMETER_NAMES[VarnishInputParams.TUBE_MOLDING_END_POSITION],
+    title:
+      VARNISH_PARAMETER_NAMES[VarnishInputParams.TUBE_MOLDING_END_POSITION],
     value: Number(data.tube_molding_end_position) || null,
     minValue: tresholdsData?.varnish_tube_molding_end_position_min || null,
     maxValue: tresholdsData?.varnish_tube_molding_end_position_max || null,
@@ -181,7 +198,8 @@ export default function VarnishEntries({ summaryData }: { summaryData: ISummary 
   };
   const polimerizationFurnaceTempCardProps: AddParameterCardProps = {
     id: VarnishInputParams.POLIMERIZATION_FURNACE_TEMP,
-    title: VARNISH_PARAMETER_NAMES[VarnishInputParams.POLIMERIZATION_FURNACE_TEMP],
+    title:
+      VARNISH_PARAMETER_NAMES[VarnishInputParams.POLIMERIZATION_FURNACE_TEMP],
     value: Number(data.polimerization_furnace_temp) || null,
     minValue: tresholdsData?.varnish_polimerization_furnace_temp_min || null,
     maxValue: tresholdsData?.varnish_polimerization_furnace_temp_max || null,
@@ -191,7 +209,8 @@ export default function VarnishEntries({ summaryData }: { summaryData: ISummary 
   };
   const internalVarnishPorosityCardProps: AddParameterCardProps = {
     id: VarnishInputParams.INTERNAL_VARNISH_POROSITY,
-    title: VARNISH_PARAMETER_NAMES[VarnishInputParams.INTERNAL_VARNISH_POROSITY],
+    title:
+      VARNISH_PARAMETER_NAMES[VarnishInputParams.INTERNAL_VARNISH_POROSITY],
     value: Number(data.internal_varnish_porosity) || null,
     minValue: tresholdsData?.varnish_internal_varnish_porosity_min || null,
     maxValue: tresholdsData?.varnish_internal_varnish_porosity_max || null,

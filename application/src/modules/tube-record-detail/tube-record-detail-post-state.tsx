@@ -1,7 +1,11 @@
 import { Stack, Typography } from "@mui/joy";
 import { PostState } from "../../shared/api/services/tube-records-service";
 
-export default function TubeRecordDetailPostState({ state }: { state: PostState | null }) {
+export default function TubeRecordDetailPostState({
+  state,
+}: {
+  state: PostState | null;
+}) {
   const message = state
     ? {
         working: "Работает",

@@ -3,8 +3,6 @@ import { formatKeyboardInput } from "@/shared/helpers/format-keyboard-input";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-
-
 interface ISealantParameterData {
   counter_value: string;
   cap_machine_speed: string;
@@ -30,9 +28,15 @@ interface SealantInputStore {
   data: ISealantParameterData;
   initData: () => void;
   changeData: (value: DataFormField<keyof ISealantParameterData>) => void;
-  clearData: (value: Pick<DataFormField<keyof ISealantParameterData>, 'key'>) => void;
-  sliceData: (value: Pick<DataFormField<keyof ISealantParameterData>, 'key'>) => void;
-  roundData: (value: Pick<DataFormField<keyof ISealantParameterData>, 'key'>) => void;
+  clearData: (
+    value: Pick<DataFormField<keyof ISealantParameterData>, "key">,
+  ) => void;
+  sliceData: (
+    value: Pick<DataFormField<keyof ISealantParameterData>, "key">,
+  ) => void;
+  roundData: (
+    value: Pick<DataFormField<keyof ISealantParameterData>, "key">,
+  ) => void;
   setData: (value: DataFormField<keyof ISealantParameterData>) => void;
 }
 
@@ -81,14 +85,16 @@ export enum SealantInputParams {
 export const useSealantInputStore = create<SealantInputStore>()(
   devtools((set) => ({
     data: initDataValue,
-    initData: () => set(() => ({ data: initDataValue, selectedRondelType: undefined })),
+    initData: () =>
+      set(() => ({ data: initDataValue, selectedRondelType: undefined })),
     clearData: ({ key }) => {
       if (!key) return;
       const fieldKey = key as keyof ISealantParameterData;
       set((state) => ({
         data: {
           ...state.data,
-          [fieldKey]: typeof initDataValue[fieldKey] === "boolean" ? false : "0",
+          [fieldKey]:
+            typeof initDataValue[fieldKey] === "boolean" ? false : "0",
         },
       }));
     },
@@ -162,6 +168,5 @@ export const useSealantInputStore = create<SealantInputStore>()(
         return state;
       });
     },
-
-  }))
+  })),
 );

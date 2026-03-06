@@ -38,7 +38,7 @@ export default function VarnishMenu() {
     title: "Параметры",
     icon: <TbAdjustments />,
     disabled: inputParametersButtonDisabledCondition,
-    action: () => handleOpenParametersClick()
+    action: () => handleOpenParametersClick(),
   };
 
   const scanMaterilButtonProps: MenuButtonProps = {
@@ -52,7 +52,10 @@ export default function VarnishMenu() {
     title: "Операции",
     icon: <TbAutomation />,
     disabled: operationButtonDisabledCondition,
-    action: () => navigate(`${RouteNames.VARNISH_OPERATIONS_ROOT}/${varnishConveyor?.name}`),
+    action: () =>
+      navigate(
+        `${RouteNames.VARNISH_OPERATIONS_ROOT}/${varnishConveyor?.name}`,
+      ),
   };
 
   const sopButtonProps: MenuButtonProps = {
@@ -61,7 +64,9 @@ export default function VarnishMenu() {
     disabled: false,
     action: () =>
       summaryData?.varnishStatus.operation_id
-        ? navigate(`${RouteNames.VARNISH_SOP_ROOT}/${summaryData.varnishStatus.operation_id}`)
+        ? navigate(
+            `${RouteNames.VARNISH_SOP_ROOT}/${summaryData.varnishStatus.operation_id}`,
+          )
         : undefined,
   };
 
@@ -70,7 +75,9 @@ export default function VarnishMenu() {
     icon: <TbLibraryPhoto />,
     disabled: pictureButtonDisabledCondition,
     action: () =>
-      summaryData?.data.product_id ? navigate(`${RouteNames.PICTURES_ROOT}/${summaryData.data.product_id}`) : undefined,
+      summaryData?.data.product_id
+        ? navigate(`${RouteNames.PICTURES_ROOT}/${summaryData.data.product_id}`)
+        : undefined,
   };
 
   const endButtonProps: MenuButtonProps = {
@@ -92,7 +99,9 @@ export default function VarnishMenu() {
       <MenuButton {...inputParametersButtonProps} />
       <MenuButton {...scanMaterilButtonProps} />
       <MenuButton {...operationsButtonProps} />
-      {summaryData && summaryData.varnishStatus.state === "idle" && <MenuButton {...sopButtonProps} />}
+      {summaryData && summaryData.varnishStatus.state === "idle" && (
+        <MenuButton {...sopButtonProps} />
+      )}
       <MenuButton {...picturesButtonProps} />
       <MenuButton {...endButtonProps} />
       <MenuButton {...loginButtonProps} />

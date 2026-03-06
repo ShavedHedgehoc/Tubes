@@ -6,17 +6,32 @@ import { useUpdateTubeEmployee } from "../use-update-tube-employee";
 import { useTubeEmployeesEditModalStore } from "../store/use-tube-employees-edit-modal-store";
 
 export default function TubeEmployeesEditModalButtonComponent() {
-  const setOpen = useTubeEmployeesEditModalStore(useShallow((state) => state.setOpen));
-  const clearData = useTubeEmployeesEditModalStore(useShallow((state) => state.clearData));
+  const setOpen = useTubeEmployeesEditModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const clearData = useTubeEmployeesEditModalStore(
+    useShallow((state) => state.clearData),
+  );
   const id = useTubeEmployeesEditModalStore(useShallow((state) => state.id));
-  const name = useTubeEmployeesEditModalStore(useShallow((state) => state.name));
-  const barcode = useTubeEmployeesEditModalStore(useShallow((state) => state.barcode));
-  const rank = useTubeEmployeesEditModalStore(useShallow((state) => state.rank));
+  const name = useTubeEmployeesEditModalStore(
+    useShallow((state) => state.name),
+  );
+  const barcode = useTubeEmployeesEditModalStore(
+    useShallow((state) => state.barcode),
+  );
+  const rank = useTubeEmployeesEditModalStore(
+    useShallow((state) => state.rank),
+  );
   const { updateTubeEmployee } = useUpdateTubeEmployee();
 
   const handleUpdate = () => {
     if (name !== "" && barcode !== "" && rank && id) {
-      updateTubeEmployee({ id: id, name: name, barcode: barcode, rank_id: rank });
+      updateTubeEmployee({
+        id: id,
+        name: name,
+        barcode: barcode,
+        rank_id: rank,
+      });
       setOpen(false);
       clearData();
     }

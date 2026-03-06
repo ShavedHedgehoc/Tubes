@@ -6,13 +6,18 @@ import TableLayout from "../../../shared/layouts/table-layout";
 import ModalLayout from "../../../shared/layouts/modal-layout";
 import { ITraceCanRecord } from "../../../shared/api/services/trace-cans-service";
 import { Typography } from "@mui/joy";
-import { formatDateToString, formatTimeToString } from "../../../shared/helpers/date-time-formatters";
+import {
+  formatDateToString,
+  formatTimeToString,
+} from "../../../shared/helpers/date-time-formatters";
 
 export default function CansHistoryModal() {
   const open = useCansHistoryModalStore(useShallow((state) => state.open));
   const can_id = useCansHistoryModalStore(useShallow((state) => state.can_id));
   const title = useCansHistoryModalStore(useShallow((state) => state.title));
-  const setOpen = useCansHistoryModalStore(useShallow((state) => state.setOpen));
+  const setOpen = useCansHistoryModalStore(
+    useShallow((state) => state.setOpen),
+  );
   const { isPending, data, isSuccess } = useCanRecords(can_id);
 
   const history_table_thead: TheadProperties[] = [
@@ -37,16 +42,22 @@ export default function CansHistoryModal() {
     return (
       <tr>
         <td style={{ width: 50, textAlign: "center", padding: "18px 6px" }}>
-          <Typography level="body-xs">{formatDateToString(row.CreateDate)}</Typography>
+          <Typography level="body-xs">
+            {formatDateToString(row.CreateDate)}
+          </Typography>
         </td>
         <td style={{ width: 50, textAlign: "center", padding: "18px 6px" }}>
-          <Typography level="body-xs">{formatTimeToString(row.CreateDate)}</Typography>
+          <Typography level="body-xs">
+            {formatTimeToString(row.CreateDate)}
+          </Typography>
         </td>
         <td style={{ width: 100, textAlign: "left", padding: "18px 6px" }}>
           <Typography level="body-xs">{row.stateDescription}</Typography>
         </td>
         <td style={{ width: 50, textAlign: "left", padding: "18px 6px" }}>
-          <Typography level="body-xs">{row.baseContain ? row.baseContain : "-"}</Typography>
+          <Typography level="body-xs">
+            {row.baseContain ? row.baseContain : "-"}
+          </Typography>
         </td>
         <td style={{ width: 80, textAlign: "left", padding: "18px 6px" }}>
           <Typography level="body-xs">{row.authorName}</Typography>
@@ -61,7 +72,10 @@ export default function CansHistoryModal() {
     }
     return (
       <TableLayout thead={history_table_thead}>
-        {isSuccess && data.map((row) => <CansHistoryTableRow row={row} key={row.CanRecordPK} />)}
+        {isSuccess &&
+          data.map((row) => (
+            <CansHistoryTableRow row={row} key={row.CanRecordPK} />
+          ))}
       </TableLayout>
     );
   };

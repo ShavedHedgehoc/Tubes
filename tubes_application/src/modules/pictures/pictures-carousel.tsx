@@ -1,36 +1,57 @@
 import { usePictures } from "@/shared/api/use-pictures";
 import NotFound from "@/shared/components/info/not-found-full-screen";
 import { AppMessages } from "@/shared/resources/app-messages";
-import { Carousel, Box, IconButton, Image, type IconButtonProps, AspectRatio } from "@chakra-ui/react";
+import {
+  Carousel,
+  Box,
+  IconButton,
+  Image,
+  type IconButtonProps,
+  AspectRatio,
+} from "@chakra-ui/react";
 import { forwardRef } from "react";
 import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
 import Loader from "../../shared/components/info/loader";
 import { AssestsFolderUrl } from "@/shared/helpers/assets-folder-url";
 
-export default function PicturesCarousel({ productId }: { productId: number | null }) {
+export default function PicturesCarousel({
+  productId,
+}: {
+  productId: number | null;
+}) {
   const { data, isPending } = usePictures(productId);
-  const ActionButton = forwardRef<HTMLButtonElement, IconButtonProps>(function ActionButton(props, ref) {
-    return (
-      <IconButton
-        {...props}
-        ref={ref}
-        size="xl"
-        variant="outline"
-        rounded="full"
-        position="absolute"
-        zIndex="1"
-        bg="bg"
-      />
-    );
-  });
+  const ActionButton = forwardRef<HTMLButtonElement, IconButtonProps>(
+    function ActionButton(props, ref) {
+      return (
+        <IconButton
+          {...props}
+          ref={ref}
+          size="xl"
+          variant="outline"
+          rounded="full"
+          position="absolute"
+          zIndex="1"
+          bg="bg"
+        />
+      );
+    },
+  );
 
-  const items: string[] = data && data.pictures.length ? data.pictures.map((item) => item.src) : [];
+  const items: string[] =
+    data && data.pictures.length ? data.pictures.map((item) => item.src) : [];
 
   if (isPending) return <Loader />;
   return (
     <>
       {items.length ? (
-        <Carousel.Root slideCount={items.length} maxW="5xl" mx="auto" gap="4" position="relative" colorPalette="white">
+        <Carousel.Root
+          slideCount={items.length}
+          maxW="5xl"
+          mx="auto"
+          gap="4"
+          position="relative"
+          colorPalette="white"
+        >
           <Carousel.Control gap="4" width="full" position="relative">
             <Carousel.PrevTrigger asChild>
               <ActionButton insetStart="4">
@@ -43,7 +64,10 @@ export default function PicturesCarousel({ productId }: { productId: number | nu
                 <Carousel.Item key={index} index={index}>
                   <AspectRatio ratio={1.5 / 1} maxH="80vh" w="full">
                     <Image
-                      src={new URL(`${AssestsFolderUrl}/${name}`, import.meta.url).href}
+                      src={
+                        new URL(`${AssestsFolderUrl}/${name}`, import.meta.url)
+                          .href
+                      }
                       alt={`... ${AssestsFolderUrl}/${name}`}
                       objectFit="contain"
                     />
@@ -64,7 +88,11 @@ export default function PicturesCarousel({ productId }: { productId: number | nu
                 transformOrigin="center"
                 opacity="0.5"
                 boxSize="2"
-                _current={{ width: "10", bg: "colorPalette.subtle", opacity: 1 }}
+                _current={{
+                  width: "10",
+                  bg: "colorPalette.subtle",
+                  opacity: 1,
+                }}
               />
             </Box>
           </Carousel.Control>

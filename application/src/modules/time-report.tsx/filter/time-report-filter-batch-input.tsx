@@ -5,7 +5,9 @@ import { TimeReportFilterParams } from "./time-report-filter-params";
 
 export default function TimeReportFilterBatchInput() {
   const filter = useTimeReportFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useTimeReportFilterStore(useShallow((state) => state.changeFilter));
+  const changeFilter = useTimeReportFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
 
   const inputProps: FilterInputProps = {
     id: TimeReportFilterParams.BOIL,
@@ -13,7 +15,8 @@ export default function TimeReportFilterBatchInput() {
     disabled: filter.boil === "",
     placeholder: "Партия",
     label: "Поиск по партии",
-    changeFilter: ({ key, value }: { key: string; value: string }) => changeFilter({ key, value }),
+    changeFilter: ({ key, value }: { key: string; value: string }) =>
+      changeFilter({ key, value }),
   };
 
   return <FilterInput {...inputProps} />;

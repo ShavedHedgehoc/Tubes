@@ -1,6 +1,13 @@
 import NotFound from "@/shared/components/info/not-found-full-screen";
 import { AppMessages } from "@/shared/resources/app-messages";
-import { Carousel, Box, IconButton, Image, type IconButtonProps, AspectRatio } from "@chakra-ui/react";
+import {
+  Carousel,
+  Box,
+  IconButton,
+  Image,
+  type IconButtonProps,
+  AspectRatio,
+} from "@chakra-ui/react";
 import { forwardRef } from "react";
 import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
 import { AssestsFolderUrl } from "@/shared/helpers/assets-folder-url";
@@ -12,20 +19,22 @@ export interface SopCaruselProps {
 }
 
 export default function SopCarousel(props: SopCaruselProps) {
-  const ActionButton = forwardRef<HTMLButtonElement, IconButtonProps>(function ActionButton(props, ref) {
-    return (
-      <IconButton
-        {...props}
-        ref={ref}
-        size="xl"
-        variant="outline"
-        rounded="full"
-        position="absolute"
-        zIndex="1"
-        bg="bg"
-      />
-    );
-  });
+  const ActionButton = forwardRef<HTMLButtonElement, IconButtonProps>(
+    function ActionButton(props, ref) {
+      return (
+        <IconButton
+          {...props}
+          ref={ref}
+          size="xl"
+          variant="outline"
+          rounded="full"
+          position="absolute"
+          zIndex="1"
+          bg="bg"
+        />
+      );
+    },
+  );
 
   if (props.isPending) return <Loader />;
   return (
@@ -51,7 +60,10 @@ export default function SopCarousel(props: SopCaruselProps) {
                 <Carousel.Item key={index} index={index}>
                   <AspectRatio ratio={1.5 / 1} maxH="80vh" w="full">
                     <Image
-                      src={new URL(`${AssestsFolderUrl}/${name}`, import.meta.url).href}
+                      src={
+                        new URL(`${AssestsFolderUrl}/${name}`, import.meta.url)
+                          .href
+                      }
                       alt={`... ${AssestsFolderUrl}/${name}`}
                       objectFit="contain"
                     />
@@ -72,7 +84,11 @@ export default function SopCarousel(props: SopCaruselProps) {
                 transformOrigin="center"
                 opacity="0.5"
                 boxSize="2"
-                _current={{ width: "10", bg: "colorPalette.subtle", opacity: 1 }}
+                _current={{
+                  width: "10",
+                  bg: "colorPalette.subtle",
+                  opacity: 1,
+                }}
               />
             </Box>
           </Carousel.Control>

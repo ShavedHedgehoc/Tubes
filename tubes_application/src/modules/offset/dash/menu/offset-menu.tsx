@@ -52,7 +52,8 @@ export default function OffsetMenu() {
     title: "Операции",
     icon: <TbAutomation />,
     disabled: operationButtonDisabledCondition,
-    action: () => navigate(`${RouteNames.OFFSET_OPERATIONS_ROOT}/${offsetConveyor?.name}`),
+    action: () =>
+      navigate(`${RouteNames.OFFSET_OPERATIONS_ROOT}/${offsetConveyor?.name}`),
   };
 
   const sopButtonProps: MenuButtonProps = {
@@ -61,7 +62,9 @@ export default function OffsetMenu() {
     disabled: false,
     action: () =>
       summaryData?.offsetStatus.operation_id
-        ? navigate(`${RouteNames.OFFSET_SOP_ROOT}/${summaryData.offsetStatus.operation_id}`)
+        ? navigate(
+            `${RouteNames.OFFSET_SOP_ROOT}/${summaryData.offsetStatus.operation_id}`,
+          )
         : undefined,
   };
 
@@ -70,7 +73,9 @@ export default function OffsetMenu() {
     icon: <TbLibraryPhoto />,
     disabled: pictureButtonDisabledCondition,
     action: () =>
-      summaryData?.data.product_id ? navigate(`${RouteNames.PICTURES_ROOT}/${summaryData.data.product_id}`) : undefined,
+      summaryData?.data.product_id
+        ? navigate(`${RouteNames.PICTURES_ROOT}/${summaryData.data.product_id}`)
+        : undefined,
   };
 
   const endButtonProps: MenuButtonProps = {
@@ -92,7 +97,9 @@ export default function OffsetMenu() {
       <MenuButton {...inputParametersButtonProps} />
       <MenuButton {...scanMaterilButtonProps} />
       <MenuButton {...operationsButtonProps} />
-      {summaryData && summaryData.offsetStatus.state === "idle" && <MenuButton {...sopButtonProps} />}
+      {summaryData && summaryData.offsetStatus.state === "idle" && (
+        <MenuButton {...sopButtonProps} />
+      )}
       <MenuButton {...picturesButtonProps} />
       <MenuButton {...endButtonProps} />
       <MenuButton {...loginButtonProps} />

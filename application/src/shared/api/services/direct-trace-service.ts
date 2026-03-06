@@ -33,7 +33,9 @@ export interface IBoilsUploadResponse {
 }
 
 export default class DirectTraceService {
-  static async uploadBoil(dto: IXLSBoilsRowData): Promise<IBoilsUploadResponse> {
+  static async uploadBoil(
+    dto: IXLSBoilsRowData,
+  ): Promise<IBoilsUploadResponse> {
     const res = await $api.post(`/trace-direct-connection`, dto);
     return res.data;
   }

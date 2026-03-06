@@ -23,7 +23,9 @@ export default function OffsetSop() {
   const params = useParams<Params.OPERATION_ID>();
 
   const { isPending } = useOffsetOperation(params.operation_id ?? null);
-  const operation = useOffsetOperationSopStore(useShallow((state) => state.selectedOperation));
+  const operation = useOffsetOperationSopStore(
+    useShallow((state) => state.selectedOperation),
+  );
 
   if (isPending) return <Loader />;
   if (!operation) return <NotFound message={AppMessages.OPERATION_NOT_FOUND} />;

@@ -159,124 +159,284 @@ export const useTubeVarnishTresholdsStore = create<TubeVarnishTresholdsStore>()(
       switch (key) {
         case VarnishTresholdsParams.PRODUCT_ID:
           set((state) => ({
-            tresholds: { ...state.tresholds, product_id: values?.length ? values[0] : state.tresholds.product_id },
+            tresholds: {
+              ...state.tresholds,
+              product_id: values?.length
+                ? values[0]
+                : state.tresholds.product_id,
+            },
           }));
           break;
         case VarnishTresholdsParams.CONVEYOR_ID:
           set((state) => ({
-            tresholds: { ...state.tresholds, conveyor_id: values?.length ? values[0] : state.tresholds.conveyor_id },
+            tresholds: {
+              ...state.tresholds,
+              conveyor_id: values?.length
+                ? values[0]
+                : state.tresholds.conveyor_id,
+            },
           }));
           break;
         case VarnishTresholdsParams.VARNISH_MACHINE_SPEED_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, varnish_machine_speed_min: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, varnish_machine_speed_min: value },
+          }));
           break;
         case VarnishTresholdsParams.VARNISH_MACHINE_SPEED_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, varnish_machine_speed_max: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, varnish_machine_speed_max: value },
+          }));
           break;
         case VarnishTresholdsParams.TOTAL_AIR_PRESSURE_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, total_air_pressure_min: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, total_air_pressure_min: value },
+          }));
           break;
         case VarnishTresholdsParams.TOTAL_AIR_PRESSURE_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, total_air_pressure_max: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, total_air_pressure_max: value },
+          }));
           break;
         case VarnishTresholdsParams.FEED_CAN_AIR_PRESSURE_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, feed_can_air_pressure_min: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, feed_can_air_pressure_min: value },
+          }));
           break;
         case VarnishTresholdsParams.FEED_CAN_AIR_PRESSURE_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, feed_can_air_pressure_max: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, feed_can_air_pressure_max: value },
+          }));
           break;
         case VarnishTresholdsParams.NOZZLE_REGULATOR_AIR_PRESSURE_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, nozzle_regulator_air_pressure_min: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              nozzle_regulator_air_pressure_min: value,
+            },
+          }));
           break;
         case VarnishTresholdsParams.NOZZLE_REGULATOR_AIR_PRESSURE_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, nozzle_regulator_air_pressure_max: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              nozzle_regulator_air_pressure_max: value,
+            },
+          }));
           break;
         case VarnishTresholdsParams.CELLS_SPEED_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, cells_speed_min: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, cells_speed_min: value },
+          }));
           break;
         case VarnishTresholdsParams.CELLS_SPEED_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, cells_speed_max: value } }));
+          set((state) => ({
+            tresholds: { ...state.tresholds, cells_speed_max: value },
+          }));
           break;
         case VarnishTresholdsParams.INJECTION_A_START_POSITION_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, injection_a_start_position_min: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              injection_a_start_position_min: value,
+            },
+          }));
           break;
         case VarnishTresholdsParams.INJECTION_A_START_POSITION_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, injection_a_start_position_max: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              injection_a_start_position_max: value,
+            },
+          }));
           break;
         case VarnishTresholdsParams.INJECTION_B_START_POSITION_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, injection_b_start_position_min: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              injection_b_start_position_min: value,
+            },
+          }));
           break;
         case VarnishTresholdsParams.INJECTION_B_START_POSITION_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, injection_b_start_position_max: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              injection_b_start_position_max: value,
+            },
+          }));
           break;
         case VarnishTresholdsParams.INJECTION_C_START_POSITION_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, injection_c_start_position_min: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              injection_c_start_position_min: value,
+            },
+          }));
           break;
         case VarnishTresholdsParams.INJECTION_C_START_POSITION_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, injection_c_start_position_max: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              injection_c_start_position_max: value,
+            },
+          }));
           break;
         case VarnishTresholdsParams.INJECTION_D_START_POSITION_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, injection_d_start_position_min: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              injection_d_start_position_min: value,
+            },
+          }));
           break;
         case VarnishTresholdsParams.INJECTION_D_START_POSITION_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, injection_d_start_position_max: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              injection_d_start_position_max: value,
+            },
+          }));
           break;
         case VarnishTresholdsParams.INJECTION_A_END_POSITION_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, injection_a_end_position_min: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              injection_a_end_position_min: value,
+            },
+          }));
           break;
         case VarnishTresholdsParams.INJECTION_A_END_POSITION_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, injection_a_end_position_max: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              injection_a_end_position_max: value,
+            },
+          }));
           break;
         case VarnishTresholdsParams.INJECTION_B_END_POSITION_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, injection_b_end_position_min: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              injection_b_end_position_min: value,
+            },
+          }));
           break;
         case VarnishTresholdsParams.INJECTION_B_END_POSITION_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, injection_b_end_position_max: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              injection_b_end_position_max: value,
+            },
+          }));
           break;
         case VarnishTresholdsParams.INJECTION_C_END_POSITION_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, injection_c_end_position_min: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              injection_c_end_position_min: value,
+            },
+          }));
           break;
         case VarnishTresholdsParams.INJECTION_C_END_POSITION_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, injection_c_end_position_max: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              injection_c_end_position_max: value,
+            },
+          }));
           break;
         case VarnishTresholdsParams.INJECTION_D_END_POSITION_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, injection_d_end_position_min: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              injection_d_end_position_min: value,
+            },
+          }));
           break;
         case VarnishTresholdsParams.INJECTION_D_END_POSITION_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, injection_d_end_position_max: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              injection_d_end_position_max: value,
+            },
+          }));
           break;
         case VarnishTresholdsParams.TUBE_MOLDING_START_POSITION_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, tube_molding_start_position_min: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              tube_molding_start_position_min: value,
+            },
+          }));
           break;
         case VarnishTresholdsParams.TUBE_MOLDING_START_POSITION_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, tube_molding_start_position_max: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              tube_molding_start_position_max: value,
+            },
+          }));
           break;
         case VarnishTresholdsParams.TUBE_MOLDING_END_POSITION_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, tube_molding_end_position_min: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              tube_molding_end_position_min: value,
+            },
+          }));
           break;
         case VarnishTresholdsParams.TUBE_MOLDING_END_POSITION_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, tube_molding_end_position_max: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              tube_molding_end_position_max: value,
+            },
+          }));
           break;
         case VarnishTresholdsParams.POLIMERIZATION_FURNACE_TEMP_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, polimerization_furnace_temp_min: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              polimerization_furnace_temp_min: value,
+            },
+          }));
           break;
         case VarnishTresholdsParams.POLIMERIZATION_FURNACE_TEMP_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, polimerization_furnace_temp_max: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              polimerization_furnace_temp_max: value,
+            },
+          }));
           break;
         case VarnishTresholdsParams.INTERNAL_VARNISH_POROSITY_MIN:
-          set((state) => ({ tresholds: { ...state.tresholds, internal_varnish_porosity_min: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              internal_varnish_porosity_min: value,
+            },
+          }));
           break;
         case VarnishTresholdsParams.INTERNAL_VARNISH_POROSITY_MAX:
-          set((state) => ({ tresholds: { ...state.tresholds, internal_varnish_porosity_max: value } }));
+          set((state) => ({
+            tresholds: {
+              ...state.tresholds,
+              internal_varnish_porosity_max: value,
+            },
+          }));
           break;
         default:
           break;
       }
     },
-    fillConveyorSelectorOptions: (values) => set(() => ({ conveyorSelectorOptions: [...values] })),
-    setSelectedConveyorOption: (value) => set(() => ({ selectedConveyorOption: value })),
-    fillProductSelectorOptions: (values) => set(() => ({ productSelectorOptions: [...values] })),
-    setSelectedProductOption: (value) => set(() => ({ selectedProductOption: value })),
+    fillConveyorSelectorOptions: (values) =>
+      set(() => ({ conveyorSelectorOptions: [...values] })),
+    setSelectedConveyorOption: (value) =>
+      set(() => ({ selectedConveyorOption: value })),
+    fillProductSelectorOptions: (values) =>
+      set(() => ({ productSelectorOptions: [...values] })),
+    setSelectedProductOption: (value) =>
+      set(() => ({ selectedProductOption: value })),
 
     setTreshold: (value) =>
       set((state) => ({
@@ -290,8 +450,10 @@ export const useTubeVarnishTresholdsStore = create<TubeVarnishTresholdsStore>()(
           total_air_pressure_max: value.total_air_pressure_max,
           feed_can_air_pressure_min: value.feed_can_air_pressure_min,
           feed_can_air_pressure_max: value.feed_can_air_pressure_max,
-          nozzle_regulator_air_pressure_min: value.nozzle_regulator_air_pressure_min,
-          nozzle_regulator_air_pressure_max: value.nozzle_regulator_air_pressure_max,
+          nozzle_regulator_air_pressure_min:
+            value.nozzle_regulator_air_pressure_min,
+          nozzle_regulator_air_pressure_max:
+            value.nozzle_regulator_air_pressure_max,
           cells_speed_min: value.cells_speed_min,
           cells_speed_max: value.cells_speed_max,
           injection_a_start_position_min: value.injection_a_start_position_min,
@@ -310,17 +472,21 @@ export const useTubeVarnishTresholdsStore = create<TubeVarnishTresholdsStore>()(
           injection_c_end_position_max: value.injection_c_end_position_max,
           injection_d_end_position_min: value.injection_d_end_position_min,
           injection_d_end_position_max: value.injection_d_end_position_max,
-          tube_molding_start_position_min: value.tube_molding_start_position_min,
-          tube_molding_start_position_max: value.tube_molding_start_position_max,
+          tube_molding_start_position_min:
+            value.tube_molding_start_position_min,
+          tube_molding_start_position_max:
+            value.tube_molding_start_position_max,
           tube_molding_end_position_min: value.tube_molding_end_position_min,
           tube_molding_end_position_max: value.tube_molding_end_position_max,
-          polimerization_furnace_temp_min: value.polimerization_furnace_temp_min,
-          polimerization_furnace_temp_max: value.polimerization_furnace_temp_max,
+          polimerization_furnace_temp_min:
+            value.polimerization_furnace_temp_min,
+          polimerization_furnace_temp_max:
+            value.polimerization_furnace_temp_max,
           internal_varnish_porosity_min: value.internal_varnish_porosity_min,
           internal_varnish_porosity_max: value.internal_varnish_porosity_max,
         },
         selectedProductOption: value.product_id,
         selectedConveyorOption: value.conveyor_id,
       })),
-  }))
+  })),
 );

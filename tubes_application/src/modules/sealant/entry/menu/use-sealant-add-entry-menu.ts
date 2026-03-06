@@ -7,24 +7,30 @@ import { useShallow } from "zustand/shallow";
 import type { ISummary } from "@/shared/api/services/summary-service";
 import { useSealantEmployeeStore } from "../../store/use-sealant-employee-store";
 import { useSealantCloseConfirmModalStore } from "../../store/use-sealant-modal-store";
-import { initDataValue, useSealantInputStore } from "../../store/use-sealant-input-store";
+import {
+  initDataValue,
+  useSealantInputStore,
+} from "../../store/use-sealant-input-store";
 import { useSealantEntryAlertModalStore } from "../../store/use-sealant-entry-alert-modal-store";
 import { useSealantConveyorStore } from "../../store/use-sealant-conveyor-store";
 import { useCreateSealantEntry } from "../../use-create-sealant-entry";
 
 export default function useSealantAddEntryMenu(summaryData: ISummary | null) {
-  const employee = useSealantEmployeeStore(useShallow((state) => state.sealantEmployee));
-  const setOpenConfirm = useSealantCloseConfirmModalStore(useShallow((state) => state.setOpen));
+  const employee = useSealantEmployeeStore(
+    useShallow((state) => state.sealantEmployee),
+  );
+  const setOpenConfirm = useSealantCloseConfirmModalStore(
+    useShallow((state) => state.setOpen),
+  );
   const data = useSealantInputStore(useShallow((state) => state.data));
   const setOpenAlert = useSealantEntryAlertModalStore((state) => state.setOpen);
   const setDto = useSealantEntryAlertModalStore((state) => state.setDto);
   const initData = useSealantInputStore(useShallow((state) => state.initData));
-  const sealantConveyor = useSealantConveyorStore(useShallow((state) => state.sealantConveyor));
+  const sealantConveyor = useSealantConveyorStore(
+    useShallow((state) => state.sealantConveyor),
+  );
   const { createSealantEntry } = useCreateSealantEntry();
   const navigate = useNavigate();
-
-
-
 
   const saveButtonDisabledCondition =
     !employee ||
@@ -49,38 +55,68 @@ export default function useSealantAddEntryMenu(summaryData: ISummary | null) {
 
   const alertDialogCondition =
     tresholdsData &&
-    (Number(data.cap_machine_speed) < tresholdsData.sealant_cap_machine_speed_min ||
-      Number(data.total_air_pressure) < tresholdsData.sealant_total_air_pressure_min ||
-      Number(data.holders_forward) < tresholdsData.sealant_holders_forward_min ||
-      Number(data.holders_opening_left) < tresholdsData.sealant_holders_opening_left_min ||
-      Number(data.holders_opening_right) < tresholdsData.sealant_holders_opening_right_min ||
-      Number(data.holders_closing) < tresholdsData.sealant_holders_closing_min ||
-      Number(data.injection_a_start) < tresholdsData.sealant_injection_a_start_min ||
-      Number(data.injection_b_start) < tresholdsData.sealant_injection_b_start_min ||
-      Number(data.injection_a_end) < tresholdsData.sealant_injection_a_end_min ||
-      Number(data.injection_b_end) < tresholdsData.sealant_injection_b_end_min ||
-      Number(data.injection_tube_orientation_start) < tresholdsData.sealant_injection_tube_orientation_start_min ||
-      Number(data.injection_tube_orientation_end) < tresholdsData.sealant_injection_tube_orientation_end_min ||
-      Number(data.latex_ring_padding) < tresholdsData.sealant_latex_ring_padding_min ||
-      Number(data.latex_ring_width) < tresholdsData.sealant_latex_ring_width_min ||
+    (Number(data.cap_machine_speed) <
+      tresholdsData.sealant_cap_machine_speed_min ||
+      Number(data.total_air_pressure) <
+        tresholdsData.sealant_total_air_pressure_min ||
+      Number(data.holders_forward) <
+        tresholdsData.sealant_holders_forward_min ||
+      Number(data.holders_opening_left) <
+        tresholdsData.sealant_holders_opening_left_min ||
+      Number(data.holders_opening_right) <
+        tresholdsData.sealant_holders_opening_right_min ||
+      Number(data.holders_closing) <
+        tresholdsData.sealant_holders_closing_min ||
+      Number(data.injection_a_start) <
+        tresholdsData.sealant_injection_a_start_min ||
+      Number(data.injection_b_start) <
+        tresholdsData.sealant_injection_b_start_min ||
+      Number(data.injection_a_end) <
+        tresholdsData.sealant_injection_a_end_min ||
+      Number(data.injection_b_end) <
+        tresholdsData.sealant_injection_b_end_min ||
+      Number(data.injection_tube_orientation_start) <
+        tresholdsData.sealant_injection_tube_orientation_start_min ||
+      Number(data.injection_tube_orientation_end) <
+        tresholdsData.sealant_injection_tube_orientation_end_min ||
+      Number(data.latex_ring_padding) <
+        tresholdsData.sealant_latex_ring_padding_min ||
+      Number(data.latex_ring_width) <
+        tresholdsData.sealant_latex_ring_width_min ||
       Number(data.tube_rigidity) < tresholdsData.sealant_tube_rigidity_min ||
-      Number(data.cap_unscrewing_torque) < tresholdsData.sealant_cap_unscrewing_torque_min ||
-      Number(data.cap_machine_speed) > tresholdsData.sealant_cap_machine_speed_max ||
-      Number(data.total_air_pressure) > tresholdsData.sealant_total_air_pressure_max ||
-      Number(data.holders_forward) > tresholdsData.sealant_holders_forward_max ||
-      Number(data.holders_opening_left) > tresholdsData.sealant_holders_opening_left_max ||
-      Number(data.holders_opening_right) > tresholdsData.sealant_holders_opening_right_max ||
-      Number(data.holders_closing) > tresholdsData.sealant_holders_closing_max ||
-      Number(data.injection_a_start) > tresholdsData.sealant_injection_a_start_max ||
-      Number(data.injection_b_start) > tresholdsData.sealant_injection_b_start_max ||
-      Number(data.injection_a_end) > tresholdsData.sealant_injection_a_end_max ||
-      Number(data.injection_b_end) > tresholdsData.sealant_injection_b_end_max ||
-      Number(data.injection_tube_orientation_start) > tresholdsData.sealant_injection_tube_orientation_start_max ||
-      Number(data.injection_tube_orientation_end) > tresholdsData.sealant_injection_tube_orientation_end_max ||
-      Number(data.latex_ring_padding) > tresholdsData.sealant_latex_ring_padding_max ||
-      Number(data.latex_ring_width) > tresholdsData.sealant_latex_ring_width_max ||
+      Number(data.cap_unscrewing_torque) <
+        tresholdsData.sealant_cap_unscrewing_torque_min ||
+      Number(data.cap_machine_speed) >
+        tresholdsData.sealant_cap_machine_speed_max ||
+      Number(data.total_air_pressure) >
+        tresholdsData.sealant_total_air_pressure_max ||
+      Number(data.holders_forward) >
+        tresholdsData.sealant_holders_forward_max ||
+      Number(data.holders_opening_left) >
+        tresholdsData.sealant_holders_opening_left_max ||
+      Number(data.holders_opening_right) >
+        tresholdsData.sealant_holders_opening_right_max ||
+      Number(data.holders_closing) >
+        tresholdsData.sealant_holders_closing_max ||
+      Number(data.injection_a_start) >
+        tresholdsData.sealant_injection_a_start_max ||
+      Number(data.injection_b_start) >
+        tresholdsData.sealant_injection_b_start_max ||
+      Number(data.injection_a_end) >
+        tresholdsData.sealant_injection_a_end_max ||
+      Number(data.injection_b_end) >
+        tresholdsData.sealant_injection_b_end_max ||
+      Number(data.injection_tube_orientation_start) >
+        tresholdsData.sealant_injection_tube_orientation_start_max ||
+      Number(data.injection_tube_orientation_end) >
+        tresholdsData.sealant_injection_tube_orientation_end_max ||
+      Number(data.latex_ring_padding) >
+        tresholdsData.sealant_latex_ring_padding_max ||
+      Number(data.latex_ring_width) >
+        tresholdsData.sealant_latex_ring_width_max ||
       Number(data.tube_rigidity) > tresholdsData.sealant_tube_rigidity_max ||
-      Number(data.cap_unscrewing_torque) > tresholdsData.sealant_cap_unscrewing_torque_max ||
+      Number(data.cap_unscrewing_torque) >
+        tresholdsData.sealant_cap_unscrewing_torque_max ||
       data.is_cap_surface_smooth === false ||
       Number(data.counter_value) > CountersTresholds.COUNTERS_MAX_TRESHOLD ||
       Number(data.counter_value) < CountersTresholds.COUNTERS_MIN_TRESHOLD);
@@ -101,8 +137,12 @@ export default function useSealantAddEntryMenu(summaryData: ISummary | null) {
         injection_b_start: Number(data.injection_b_start),
         injection_a_end: Number(data.injection_a_end),
         injection_b_end: Number(data.injection_b_end),
-        injection_tube_orientation_start: Number(data.injection_tube_orientation_start),
-        injection_tube_orientation_end: Number(data.injection_tube_orientation_end),
+        injection_tube_orientation_start: Number(
+          data.injection_tube_orientation_start,
+        ),
+        injection_tube_orientation_end: Number(
+          data.injection_tube_orientation_end,
+        ),
         latex_ring_padding: Number(data.latex_ring_padding),
         latex_ring_width: Number(data.latex_ring_width),
         tube_rigidity: Number(data.tube_rigidity),
@@ -129,8 +169,6 @@ export default function useSealantAddEntryMenu(summaryData: ISummary | null) {
       navigate(`${RouteNames.SEALANT_ROOT}/${sealantConveyor?.name}`);
     }
   };
-
-
 
   return { saveButtonDisabledCondition, handleSaveClick, handleExitClick };
 }

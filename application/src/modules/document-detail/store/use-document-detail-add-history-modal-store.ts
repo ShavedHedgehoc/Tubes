@@ -9,11 +9,12 @@ interface DocumentDetailAddHistoryModalStore {
   setRow: (value: IDocRow | null) => void;
 }
 
-export const useDocumentDetailAddHistoryModalStore = create<DocumentDetailAddHistoryModalStore>()((set) => ({
-  open: false,
-  user_id: null,
-  row: null,
-  setOpen: (value) => set(() => ({ open: value })),
-  setUserId: (value) => set(() => ({ user_id: value })),
-  setRow: (value) => set(() => ({ row: value })),
-}));
+export const useDocumentDetailAddHistoryModalStore =
+  create<DocumentDetailAddHistoryModalStore>()((set) => ({
+    open: false,
+    user_id: null,
+    row: null,
+    setOpen: (value) => set(() => ({ open: value })),
+    setUserId: (value) => set(() => ({ user_id: value })),
+    setRow: (value) => set(() => ({ row: value })),
+  }));

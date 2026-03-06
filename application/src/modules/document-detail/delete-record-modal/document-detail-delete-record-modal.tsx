@@ -1,7 +1,9 @@
 import * as React from "react";
 import { useShallow } from "zustand/react/shallow";
 import { Box, Button, Typography } from "@mui/joy";
-import ModalLayout, { ModalLayoutProps } from "../../../shared/layouts/modal-layout";
+import ModalLayout, {
+  ModalLayoutProps,
+} from "../../../shared/layouts/modal-layout";
 import { useDocumentDetailDeleteRecordlModalStore } from "../store/use-document-detail-delete-record-modal-store";
 import { useDeleteRecord } from "../use-delete-record";
 
@@ -9,15 +11,21 @@ const ContentComponent = () => {
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-        <Typography level="body-sm">Вы действительно хотите удалить строку?</Typography>
+        <Typography level="body-sm">
+          Вы действительно хотите удалить строку?
+        </Typography>
       </Box>
     </React.Fragment>
   );
 };
 
 const CancelButton = () => {
-  const setOpen = useDocumentDetailDeleteRecordlModalStore(useShallow((state) => state.setOpen));
-  const setId = useDocumentDetailDeleteRecordlModalStore(useShallow((state) => state.setId));
+  const setOpen = useDocumentDetailDeleteRecordlModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const setId = useDocumentDetailDeleteRecordlModalStore(
+    useShallow((state) => state.setId),
+  );
   const handleCancelButtonClick = () => {
     setOpen(false);
     setId(null);
@@ -39,9 +47,15 @@ const CancelButton = () => {
 
 const DeleteButton = () => {
   const { deleteRecord, deletePending } = useDeleteRecord();
-  const id = useDocumentDetailDeleteRecordlModalStore(useShallow((state) => state.id));
-  const setId = useDocumentDetailDeleteRecordlModalStore(useShallow((state) => state.setId));
-  const setOpen = useDocumentDetailDeleteRecordlModalStore(useShallow((state) => state.setOpen));
+  const id = useDocumentDetailDeleteRecordlModalStore(
+    useShallow((state) => state.id),
+  );
+  const setId = useDocumentDetailDeleteRecordlModalStore(
+    useShallow((state) => state.setId),
+  );
+  const setOpen = useDocumentDetailDeleteRecordlModalStore(
+    useShallow((state) => state.setOpen),
+  );
 
   const handleDeleteButtonClick = () => {
     setOpen(false);
@@ -75,8 +89,12 @@ const ButtonsComponent = () => {
 };
 
 export default function DocumentDetailDeleteRecordModal() {
-  const open = useDocumentDetailDeleteRecordlModalStore(useShallow((state) => state.open));
-  const setOpen = useDocumentDetailDeleteRecordlModalStore(useShallow((state) => state.setOpen));
+  const open = useDocumentDetailDeleteRecordlModalStore(
+    useShallow((state) => state.open),
+  );
+  const setOpen = useDocumentDetailDeleteRecordlModalStore(
+    useShallow((state) => state.setOpen),
+  );
 
   const modalProps: ModalLayoutProps = {
     open: open,

@@ -13,23 +13,108 @@ export default function TubeRecordDetailVarnishParamsTable({
     { width: 120, value: "Дата", align: "center", padding: "12px 24px" },
     { width: 120, value: "Время", align: "center", padding: "12px 24px" },
     { width: 200, value: "Оператор" },
-    { width: 120, value: "Показания счетчика", align: "center", padding: "12px 24px" },
-    { width: 120, value: "Скорость лаковой машины", align: "center", padding: "12px 24px" },
-    { width: 120, value: "Давление воздуха общее", align: "center", padding: "12px 24px" },
-    { width: 120, value: "Давление воздуха в загрузочной емкости", align: "center", padding: "12px 24px" },
-    { width: 120, value: "Давление воздуха на регуляторах форсунок", align: "center", padding: "12px 24px" },
-    { width: 120, value: "Скорость ячеек", align: "center", padding: "12px 24px" },
-    { width: 120, value: "Впрыск A,B начальное положение", align: "center", padding: "12px 24px" },
-    { width: 120, value: "Впрыск C,D начальное положение", align: "center", padding: "12px 24px" },
-    { width: 120, value: "Впрыск A,B конечное положение", align: "center", padding: "12px 24px" },
-    { width: 120, value: "Впрыск C,D конечное положение", align: "center", padding: "12px 24px" },
-    { width: 120, value: "Вдув тубы начальное положение", align: "center", padding: "12px 24px" },
-    { width: 120, value: "Вдув тубы конечное положение", align: "center", padding: "12px 24px" },
-    { width: 120, value: "Температура печи полимеризации", align: "center", padding: "12px 24px" },
-    { width: 120, value: "Пористость вн. лакового покрытия", align: "center", padding: "12px 24px" },
-    { width: 120, value: "Внутренний вид тубы в разрезе", align: "center", padding: "12px 24px" },
-    { width: 120, value: "Отсутствие просветов алюминия", align: "center", padding: "12px 24px" },
-    { width: 120, value: "Отсутствие непрокрасов и пятен", align: "center", padding: "12px 24px" },
+    {
+      width: 120,
+      value: "Показания счетчика",
+      align: "center",
+      padding: "12px 24px",
+    },
+    {
+      width: 120,
+      value: "Скорость лаковой машины",
+      align: "center",
+      padding: "12px 24px",
+    },
+    {
+      width: 120,
+      value: "Давление воздуха общее",
+      align: "center",
+      padding: "12px 24px",
+    },
+    {
+      width: 120,
+      value: "Давление воздуха в загрузочной емкости",
+      align: "center",
+      padding: "12px 24px",
+    },
+    {
+      width: 120,
+      value: "Давление воздуха на регуляторах форсунок",
+      align: "center",
+      padding: "12px 24px",
+    },
+    {
+      width: 120,
+      value: "Скорость ячеек",
+      align: "center",
+      padding: "12px 24px",
+    },
+    {
+      width: 120,
+      value: "Впрыск A,B начальное положение",
+      align: "center",
+      padding: "12px 24px",
+    },
+    {
+      width: 120,
+      value: "Впрыск C,D начальное положение",
+      align: "center",
+      padding: "12px 24px",
+    },
+    {
+      width: 120,
+      value: "Впрыск A,B конечное положение",
+      align: "center",
+      padding: "12px 24px",
+    },
+    {
+      width: 120,
+      value: "Впрыск C,D конечное положение",
+      align: "center",
+      padding: "12px 24px",
+    },
+    {
+      width: 120,
+      value: "Вдув тубы начальное положение",
+      align: "center",
+      padding: "12px 24px",
+    },
+    {
+      width: 120,
+      value: "Вдув тубы конечное положение",
+      align: "center",
+      padding: "12px 24px",
+    },
+    {
+      width: 120,
+      value: "Температура печи полимеризации",
+      align: "center",
+      padding: "12px 24px",
+    },
+    {
+      width: 120,
+      value: "Пористость вн. лакового покрытия",
+      align: "center",
+      padding: "12px 24px",
+    },
+    {
+      width: 120,
+      value: "Внутренний вид тубы в разрезе",
+      align: "center",
+      padding: "12px 24px",
+    },
+    {
+      width: 120,
+      value: "Отсутствие просветов алюминия",
+      align: "center",
+      padding: "12px 24px",
+    },
+    {
+      width: 120,
+      value: "Отсутствие непрокрасов и пятен",
+      align: "center",
+      padding: "12px 24px",
+    },
     { width: 120, value: "Материалы", align: "center", padding: "12px 24px" },
   ];
   return (
@@ -40,7 +125,11 @@ export default function TubeRecordDetailVarnishParamsTable({
       ) : (
         <TableFullHeightLayout thead={commonThead}>
           {paramsData.map((row, index) => (
-            <TubeRecordsDetailVarnishParamsRow row={row} key={row.id} index={index} />
+            <TubeRecordsDetailVarnishParamsRow
+              row={row}
+              key={row.id}
+              index={index}
+            />
           ))}
         </TableFullHeightLayout>
       )}

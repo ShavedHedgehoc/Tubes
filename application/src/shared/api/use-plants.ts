@@ -12,15 +12,24 @@ import { useShallow } from "zustand/react/shallow";
 import { useUserUpdateModalStore } from "../../modules/users/store/use-update-user-modal-store";
 
 export const usePlants = () => {
-  const fillDashOptions = useDashFilterStore(useShallow((state) => state.fillPlantSelectorOptions));
-  const { fillPlantSelectorOptions: fillForemanOptions } = useForemanFilterStore();
-  const { fillPlantSelectorOptions: fillRecordsOptions } = useRecordsFilterStore();
+  const fillDashOptions = useDashFilterStore(
+    useShallow((state) => state.fillPlantSelectorOptions),
+  );
+  const { fillPlantSelectorOptions: fillForemanOptions } =
+    useForemanFilterStore();
+  const { fillPlantSelectorOptions: fillRecordsOptions } =
+    useRecordsFilterStore();
   const { fillPlantSelectorOptions: fillBoilsOptions } = useBoilsFilterStore();
-  const { fillPlantSelectorOptions: fillBoilsReportOptions } = useBoilsReportFilterStore();
-  const { fillPlantSelectorOptions: fillDocsUploadOptions } = useDocsUploadFormStore();
-  const { fillPlantSelectorOptions: fillDocumentsOptions } = useDocumentsFilterStore();
-  const { fillPlantSelectorOptions: fillTimeReportOptions } = useTimeReportFilterStore();
-  const { fillPlantSelectorOptions: fillUserUpdateModalOptions } = useUserUpdateModalStore();
+  const { fillPlantSelectorOptions: fillBoilsReportOptions } =
+    useBoilsReportFilterStore();
+  const { fillPlantSelectorOptions: fillDocsUploadOptions } =
+    useDocsUploadFormStore();
+  const { fillPlantSelectorOptions: fillDocumentsOptions } =
+    useDocumentsFilterStore();
+  const { fillPlantSelectorOptions: fillTimeReportOptions } =
+    useTimeReportFilterStore();
+  const { fillPlantSelectorOptions: fillUserUpdateModalOptions } =
+    useUserUpdateModalStore();
 
   return useQuery({
     queryKey: ["plants"],

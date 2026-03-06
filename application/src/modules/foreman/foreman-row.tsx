@@ -12,16 +12,22 @@ import { useAuthStore } from "../auth/store/auth-store";
 import { DigitalMarkingNames } from "../../shared/helpers/digital-marking-names";
 
 const HistoryModalOpenButton = ({ row }: { row: IDocRow }) => {
-  const setOpen = useForemanHistoryModalStore(useShallow((state) => state.setOpen));
-  const setRecordId = useForemanHistoryModalStore(useShallow((state) => state.setRecordId));
-  const setTitle = useForemanHistoryModalStore(useShallow((state) => state.setTitle));
+  const setOpen = useForemanHistoryModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const setRecordId = useForemanHistoryModalStore(
+    useShallow((state) => state.setRecordId),
+  );
+  const setTitle = useForemanHistoryModalStore(
+    useShallow((state) => state.setTitle),
+  );
 
   const setCancelStartButtonEnabled = useForemanHistoryModalStore(
-    useShallow((state) => state.setCancelStartButtonEnabled)
+    useShallow((state) => state.setCancelStartButtonEnabled),
   );
 
   const setCancelFinishButtonEnabled = useForemanHistoryModalStore(
-    useShallow((state) => state.setCancelFinishButtonEnabled)
+    useShallow((state) => state.setCancelFinishButtonEnabled),
   );
 
   const handleOpenHistoryModalButtonClick = () => {
@@ -32,11 +38,17 @@ const HistoryModalOpenButton = ({ row }: { row: IDocRow }) => {
       setCancelStartButtonEnabled(false);
     }
     setRecordId(row.id);
-    setTitle(`Историй статусов по продукту ${row.product}, партия - ${row.boil}`);
+    setTitle(
+      `Историй статусов по продукту ${row.product}, партия - ${row.boil}`,
+    );
     setOpen(true);
   };
   return (
-    <IconButton variant="plain" size="sm" onClick={() => handleOpenHistoryModalButtonClick()}>
+    <IconButton
+      variant="plain"
+      size="sm"
+      onClick={() => handleOpenHistoryModalButtonClick()}
+    >
       <InfoOutlinedIcon />
     </IconButton>
   );
@@ -84,7 +96,10 @@ export default function RowComponent({ row }: { row: IDocRow }) {
         {row.historiesCount !== 0 && <HistoryModalOpenButton row={row} />}
       </td>
       <td style={{ width: 30, textAlign: "center", padding: "18px 6px" }}>
-        <TableState text={digitalMarking ? "Нет" : "Да"} state={digitalMarking ? "fail" : "success"} />
+        <TableState
+          text={digitalMarking ? "Нет" : "Да"}
+          state={digitalMarking ? "fail" : "success"}
+        />
       </td>
 
       <td style={{ width: 80, textAlign: "center", padding: "12px 6px" }}>

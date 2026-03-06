@@ -5,11 +5,15 @@ import { CHECK_INTERVALS } from "@/shared/helpers/check-intervals";
 import useProductionCardData from "./use-production-card-data";
 import { formatTimeToString } from "@/shared/helpers/date-time-formatters";
 
-export default function ProductionCard({ summaryData, postId }: { summaryData: ISummary | null; postId: number }) {
-  const { note, production, lastCheckDate, operationStatus, idleTime, today } = useProductionCardData(
-    postId,
-    summaryData
-  );
+export default function ProductionCard({
+  summaryData,
+  postId,
+}: {
+  summaryData: ISummary | null;
+  postId: number;
+}) {
+  const { note, production, lastCheckDate, operationStatus, idleTime, today } =
+    useProductionCardData(postId, summaryData);
   const locale = "ru";
 
   const inputTimer =
@@ -25,7 +29,9 @@ export default function ProductionCard({ summaryData, postId }: { summaryData: I
           </Text>
           <Text color="fg.a" textStyle="sm">
             {`Длительность:  ${new Date(
-              new Date(today).getTime() - new Date(operationStatus.createdAt).getTime() - 3 * 3600 * 1000
+              new Date(today).getTime() -
+                new Date(operationStatus.createdAt).getTime() -
+                3 * 3600 * 1000,
             ).toLocaleTimeString(locale, {
               hour: "numeric",
               hour12: false,
@@ -35,7 +41,13 @@ export default function ProductionCard({ summaryData, postId }: { summaryData: I
           </Text>
         </Stack>
       ),
-      working: <InputTimer checkInterval={CHECK_INTERVALS.hardware} date={lastCheckDate} idleTime={idleTime} />,
+      working: (
+        <InputTimer
+          checkInterval={CHECK_INTERVALS.hardware}
+          date={lastCheckDate}
+          idleTime={idleTime}
+        />
+      ),
       finished: (
         <Stack>
           <Text color="fg.a" textStyle="xl" animation="colorCycle">
@@ -50,9 +62,16 @@ export default function ProductionCard({ summaryData, postId }: { summaryData: I
 
   if (!summaryData?.tresholds) return;
 
-
   return (
-    <Box backgroundColor="bg.panel" w="full" h="full" rounded="lg" p={8} alignItems="center" justifyContent="center">
+    <Box
+      backgroundColor="bg.panel"
+      w="full"
+      h="full"
+      rounded="lg"
+      p={8}
+      alignItems="center"
+      justifyContent="center"
+    >
       <Stack justify="space-between" h="full" w="full">
         <Stack gap="4">
           <DataList.Root size="lg">

@@ -10,13 +10,12 @@ interface TraceBatchWghtReportDetailDeleteModalStore {
   setTitle: (value: string) => void;
 }
 
-export const useTraceBatchWghtReportDetailDeleteModalStore = create<TraceBatchWghtReportDetailDeleteModalStore>()(
-  (set) => ({
+export const useTraceBatchWghtReportDetailDeleteModalStore =
+  create<TraceBatchWghtReportDetailDeleteModalStore>()((set) => ({
     open: false,
     row: null,
     title: "",
     setOpen: (value) => set(() => ({ open: value })),
     setRow: (value) => set(() => ({ row: value })),
     setTitle: (value) => set(() => ({ title: value })),
-  })
-);
+  }));

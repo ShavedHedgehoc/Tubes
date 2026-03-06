@@ -1,14 +1,20 @@
 import { useShallow } from "zustand/react/shallow";
 
-import ModalLayout, { ModalLayoutProps } from "../../shared/layouts/modal-layout";
+import ModalLayout, {
+  ModalLayoutProps,
+} from "../../shared/layouts/modal-layout";
 import TableLayout from "../../shared/layouts/table-layout";
 import { Typography } from "@mui/joy";
 import { useRegulationsUpsertFormStore } from "./store/use-regulations-upsert-form-store";
 
 export default function RegulationsUpsertErrsModal() {
   const errs = useRegulationsUpsertFormStore(useShallow((state) => state.errs));
-  const setErrsModalShow = useRegulationsUpsertFormStore(useShallow((state) => state.setErrsModalShow));
-  const errsModalShow = useRegulationsUpsertFormStore(useShallow((state) => state.errsModalShow));
+  const setErrsModalShow = useRegulationsUpsertFormStore(
+    useShallow((state) => state.setErrsModalShow),
+  );
+  const errsModalShow = useRegulationsUpsertFormStore(
+    useShallow((state) => state.errsModalShow),
+  );
 
   const modalProps: ModalLayoutProps = {
     open: errsModalShow,
@@ -20,7 +26,9 @@ export default function RegulationsUpsertErrsModal() {
     onlyCloseButton: true,
   };
 
-  const commonThead: TheadProperties[] = [{ width: 280, align: "left", value: "Сообщение" }];
+  const commonThead: TheadProperties[] = [
+    { width: 280, align: "left", value: "Сообщение" },
+  ];
   return (
     <ModalLayout props={modalProps} buttons={<></>}>
       <TableLayout thead={commonThead}>

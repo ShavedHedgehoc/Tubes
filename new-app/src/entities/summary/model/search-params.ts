@@ -30,6 +30,6 @@ export const summaryParamsSchema = {
   page: parseAsInteger.withDefault(1),
 };
 
-export type SummaryUIParams = inferParserType<typeof summaryUiSchema>;
+// export type SummaryUIParams = inferParserType<typeof summaryUiSchema>;
 export type SummaryParams = inferParserType<typeof summaryParamsSchema>;
 export const summaryParamsCache = createSearchParamsCache(summaryParamsSchema);

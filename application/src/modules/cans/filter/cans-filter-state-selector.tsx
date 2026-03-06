@@ -11,9 +11,15 @@ import TraceCanStatesService from "../../../shared/api/services/trace-can-states
 
 export default function CansFilterStateSelector() {
   const filter = useCansFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useCansFilterStore(useShallow((state) => state.changeFilter));
-  const stateSelectorOptions = useCansFilterStore(useShallow((state) => state.stateSelectorOptions));
-  const fillStateSelectorOptions = useCansFilterStore(useShallow((state) => state.fillStateSelectorOptions));
+  const changeFilter = useCansFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
+  const stateSelectorOptions = useCansFilterStore(
+    useShallow((state) => state.stateSelectorOptions),
+  );
+  const fillStateSelectorOptions = useCansFilterStore(
+    useShallow((state) => state.fillStateSelectorOptions),
+  );
 
   useQuery({
     queryKey: ["cans_states_options"],
@@ -42,8 +48,15 @@ export default function CansFilterStateSelector() {
     placeholder: "Выберите статус",
     label: "Поиск по статусу",
     options: stateOptions,
-    changeFilter: ({ key, value, values }: { key: string; value: string; values: number[] | [] }) =>
-      changeFilter({ key, value, values }),
+    changeFilter: ({
+      key,
+      value,
+      values,
+    }: {
+      key: string;
+      value: string;
+      values: number[] | [];
+    }) => changeFilter({ key, value, values }),
   };
 
   return <FilterMultiSelector {...stateSelectorProps} />;

@@ -11,13 +11,25 @@ import UpdateUserModalPlantSelector from "./update-user-modal-plant-selector";
 export default function UpdateUserModalForm() {
   const user = useUserUpdateModalStore(useShallow((state) => state.user));
   const name = useUserUpdateModalStore(useShallow((state) => state.name));
-  const editName = useUserUpdateModalStore(useShallow((state) => state.editName));
-  const resetName = useUserUpdateModalStore(useShallow((state) => state.resetName));
-  const setEditName = useUserUpdateModalStore(useShallow((state) => state.setEditName));
+  const editName = useUserUpdateModalStore(
+    useShallow((state) => state.editName),
+  );
+  const resetName = useUserUpdateModalStore(
+    useShallow((state) => state.resetName),
+  );
+  const setEditName = useUserUpdateModalStore(
+    useShallow((state) => state.setEditName),
+  );
   const email = useUserUpdateModalStore(useShallow((state) => state.email));
-  const editEmail = useUserUpdateModalStore(useShallow((state) => state.editEmail));
-  const setEditEmail = useUserUpdateModalStore(useShallow((state) => state.setEditEmail));
-  const resetEmail = useUserUpdateModalStore(useShallow((state) => state.resetEmail));
+  const editEmail = useUserUpdateModalStore(
+    useShallow((state) => state.editEmail),
+  );
+  const setEditEmail = useUserUpdateModalStore(
+    useShallow((state) => state.setEditEmail),
+  );
+  const resetEmail = useUserUpdateModalStore(
+    useShallow((state) => state.resetEmail),
+  );
   return (
     <form>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
@@ -28,7 +40,11 @@ export default function UpdateUserModalForm() {
             <IconButton size="sm" onClick={() => setEditName(!editName)}>
               {editName ? <EditOffOutlinedIcon /> : <EditOutlinedIcon />}
             </IconButton>
-            <IconButton size="sm" disabled={name === user?.name} onClick={() => resetName()}>
+            <IconButton
+              size="sm"
+              disabled={name === user?.name}
+              onClick={() => resetName()}
+            >
               <CachedOutlinedIcon />
             </IconButton>
           </Box>
@@ -40,7 +56,11 @@ export default function UpdateUserModalForm() {
             <IconButton size="sm" onClick={() => setEditEmail(!editEmail)}>
               {editEmail ? <EditOffOutlinedIcon /> : <EditOutlinedIcon />}
             </IconButton>
-            <IconButton size="sm" disabled={email === user?.email} onClick={() => resetEmail()}>
+            <IconButton
+              size="sm"
+              disabled={email === user?.email}
+              onClick={() => resetEmail()}
+            >
               <CachedOutlinedIcon />
             </IconButton>
           </Box>

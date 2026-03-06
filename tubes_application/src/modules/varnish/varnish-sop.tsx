@@ -23,7 +23,9 @@ export default function VarnishSop() {
   const params = useParams<Params.OPERATION_ID>();
 
   const { isPending } = useVarnishOperation(params.operation_id ?? null);
-  const operation = useVarnishOperationSopStore(useShallow((state) => state.selectedOperation));
+  const operation = useVarnishOperationSopStore(
+    useShallow((state) => state.selectedOperation),
+  );
 
   if (isPending) return <Loader />;
   if (!operation) return <NotFound message={AppMessages.OPERATION_NOT_FOUND} />;
@@ -31,7 +33,9 @@ export default function VarnishSop() {
   const pageLayoutProps: CarouselSopPageLayoutProps = {
     timeComponent: <TimeComponent />,
     headerComponent: <OperationHeaderComponent operation={operation ?? null} />,
-    carouselComponent: <VarnishSopCarousel operationId={operation.id ?? null} />,
+    carouselComponent: (
+      <VarnishSopCarousel operationId={operation.id ?? null} />
+    ),
     menuComponent: <VarnishSopMenu />,
     loaderComponent: <Loader />,
     notFoundComponent: undefined,

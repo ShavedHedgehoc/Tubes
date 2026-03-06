@@ -16,15 +16,33 @@ import { useTubeSealantTresholdsStore } from "./store/use-tube-sealant-tresholds
 import { useTubeCreateSealantTreshold } from "./sealant/use-tube-create-sealant-treshold";
 
 export default function useTresholdsAddModalHandleSubmit() {
-  const setOpen = useTubeTresholdsExtrusionFormModalStore(useShallow((state) => state.setOpen));
-  const extrusionTresholds = useTubeExtrusionTresholdsStore(useShallow((state) => state.tresholds));
-  const clearExtrusionTresholds = useTubeExtrusionTresholdsStore(useShallow((state) => state.clearTresholds));
-  const varnishTresholds = useTubeVarnishTresholdsStore(useShallow((state) => state.tresholds));
-  const clearVarnishTresholds = useTubeVarnishTresholdsStore(useShallow((state) => state.clearTresholds));
-  const offsetTresholds = useTubeOffsetTresholdsStore(useShallow((state) => state.tresholds));
-  const clearOffsetTresholds = useTubeOffsetTresholdsStore(useShallow((state) => state.clearTresholds));
-  const sealantTresholds = useTubeSealantTresholdsStore(useShallow((state) => state.tresholds));
-  const clearSealantTresholds = useTubeSealantTresholdsStore(useShallow((state) => state.clearTresholds));
+  const setOpen = useTubeTresholdsExtrusionFormModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const extrusionTresholds = useTubeExtrusionTresholdsStore(
+    useShallow((state) => state.tresholds),
+  );
+  const clearExtrusionTresholds = useTubeExtrusionTresholdsStore(
+    useShallow((state) => state.clearTresholds),
+  );
+  const varnishTresholds = useTubeVarnishTresholdsStore(
+    useShallow((state) => state.tresholds),
+  );
+  const clearVarnishTresholds = useTubeVarnishTresholdsStore(
+    useShallow((state) => state.clearTresholds),
+  );
+  const offsetTresholds = useTubeOffsetTresholdsStore(
+    useShallow((state) => state.tresholds),
+  );
+  const clearOffsetTresholds = useTubeOffsetTresholdsStore(
+    useShallow((state) => state.clearTresholds),
+  );
+  const sealantTresholds = useTubeSealantTresholdsStore(
+    useShallow((state) => state.tresholds),
+  );
+  const clearSealantTresholds = useTubeSealantTresholdsStore(
+    useShallow((state) => state.clearTresholds),
+  );
 
   const { createExtrusionTreshold } = useTubeCreateExtrusionTreshold();
   const { createVarnishTreshold } = useTubeCreateVarnishTreshold();

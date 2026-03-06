@@ -5,8 +5,12 @@ import { useShallow } from "zustand/shallow";
 import { useVarnishOperationSopStore } from "./store/use-varnish-operation-sop-store";
 
 export const useVarnishOperation = (operationId: string | null) => {
-  const setSelectedOperation = useVarnishOperationSopStore(useShallow((state) => state.setSelectedOperation));
-  const clearSelectedOperation = useVarnishOperationSopStore(useShallow((state) => state.clearSelectedOperation));
+  const setSelectedOperation = useVarnishOperationSopStore(
+    useShallow((state) => state.setSelectedOperation),
+  );
+  const clearSelectedOperation = useVarnishOperationSopStore(
+    useShallow((state) => state.clearSelectedOperation),
+  );
   return useQuery({
     queryKey: ["varnish_sop_operation", operationId],
     queryFn: async () => {

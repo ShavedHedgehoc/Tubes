@@ -7,7 +7,13 @@ export interface FormCardProps {
   centerTitle?: boolean;
 }
 
-export default function FormCard({ props, children }: { props: FormCardProps; children: React.ReactNode }) {
+export default function FormCard({
+  props,
+  children,
+}: {
+  props: FormCardProps;
+  children: React.ReactNode;
+}) {
   return (
     <Box
       sx={{
@@ -26,7 +32,8 @@ export default function FormCard({ props, children }: { props: FormCardProps; ch
       <Box
         sx={{
           display: "flex",
-          justifyContent: props.centerTitle && props.centerTitle ? "center" : "flex-start",
+          justifyContent:
+            props.centerTitle && props.centerTitle ? "center" : "flex-start",
         }}
       >
         <Typography color="neutral" level="h4">

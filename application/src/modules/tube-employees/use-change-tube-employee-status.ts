@@ -7,21 +7,25 @@ import TubeEmployeesService from "../../shared/api/services/tube-employees-servi
 export function useChangeTubeEmployeeStatus() {
   const client = useQueryClient();
 
-  const { mutate: changeTubeEmployeeStatus, isPending: deletePending } = useMutation({
-    mutationFn: TubeEmployeesService.changeBanned,
-    onSuccess: () => {
-      client.invalidateQueries({ queryKey: ["tube_employees"] });
-      enqueueSnackbar(ClientMessages.EMPLOYEE_UPDATED, {
-        variant: "success",
-        anchorOrigin: { vertical: "top", horizontal: "right" },
-      });
-    },
-    onError: (err) => {
-      if (err instanceof Error) {
-        const error = handleError(err);
-        enqueueSnackbar(error, { variant: "error", anchorOrigin: { vertical: "top", horizontal: "right" } });
-      }
-    },
-  });
+  const { mutate: changeTubeEmployeeStatus, isPending: deletePending } =
+    useMutation({
+      mutationFn: TubeEmployeesService.changeBanned,
+      onSuccess: () => {
+        client.invalidateQueries({ queryKey: ["tube_employees"] });
+        enqueueSnackbar(ClientMessages.EMPLOYEE_UPDATED, {
+          variant: "success",
+          anchorOrigin: { vertical: "top", horizontal: "right" },
+        });
+      },
+      onError: (err) => {
+        if (err instanceof Error) {
+          const error = handleError(err);
+          enqueueSnackbar(error, {
+            variant: "error",
+            anchorOrigin: { vertical: "top", horizontal: "right" },
+          });
+        }
+      },
+    });
   return { changeTubeEmployeeStatus, deletePending };
 }

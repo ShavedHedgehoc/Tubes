@@ -34,7 +34,10 @@ export default function DocumentDetailPDFModal() {
   return (
     <ModalLayout props={modalProps} buttons={<></>}>
       {/* <React.Suspense fallback={<div>...</div>}> */}
-      <DocumentDetailPDFView viewerHeight={viewerHeight} viewerWidth={viewerWidth} />
+      <DocumentDetailPDFView
+        viewerHeight={viewerHeight}
+        viewerWidth={viewerWidth}
+      />
       {/* </React.Suspense> */}
     </ModalLayout>
   );

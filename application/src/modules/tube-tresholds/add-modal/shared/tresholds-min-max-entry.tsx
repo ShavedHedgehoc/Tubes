@@ -17,9 +17,16 @@ export function TresholdsMinMaxEntry(props: TresholdsMinMaxEntryProps) {
     <Stack spacing={1}>
       <Stack direction="row" gap={1}>
         <Typography level="title-sm">{props.title}</Typography>
-        {props.required && <span style={{ color: "red", fontWeight: "bold" }}>*</span>}
+        {props.required && (
+          <span style={{ color: "red", fontWeight: "bold" }}>*</span>
+        )}
       </Stack>
-      <Stack spacing={1} direction="row" justifyContent="space-between" alignItems="center">
+      <Stack
+        spacing={1}
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+      >
         <Typography level="body-xs">Минимум</Typography>
         <FormControl>
           <Input
@@ -39,11 +46,18 @@ export function TresholdsMinMaxEntry(props: TresholdsMinMaxEntryProps) {
             }}
             size="sm"
             value={props.minValue}
-            onChange={(e) => props.onChange({ key: props.idMin, value: e.target.value })}
+            onChange={(e) =>
+              props.onChange({ key: props.idMin, value: e.target.value })
+            }
           />
         </FormControl>
       </Stack>
-      <Stack spacing={1} direction="row" justifyContent="space-between" alignItems="center">
+      <Stack
+        spacing={1}
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+      >
         <Typography level="body-xs">Максимум</Typography>
         <FormControl>
           <Input
@@ -63,7 +77,9 @@ export function TresholdsMinMaxEntry(props: TresholdsMinMaxEntryProps) {
             }}
             size="sm"
             value={props.maxValue}
-            onChange={(e) => props.onChange({ key: props.idMax, value: e.target.value })}
+            onChange={(e) =>
+              props.onChange({ key: props.idMax, value: e.target.value })
+            }
           />
         </FormControl>
       </Stack>

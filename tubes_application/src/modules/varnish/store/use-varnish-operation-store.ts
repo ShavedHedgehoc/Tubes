@@ -10,5 +10,5 @@ export const useVarnishOperationStore = create<VarnishOperationStore>()(
   devtools((set) => ({
     selectedOperation: null,
     setSelectedOperation: (value) => set(() => ({ selectedOperation: value })),
-  }))
+  })),
 );

@@ -27,18 +27,37 @@ import PrintModal from "./print/modals/print-modal";
 export default function SealantPrint() {
   const params = useParams<Params.CONVEYOR_NAME>();
   const { isPending } = useConveyor(params.conveyor_name ?? null);
-  const sealantConveyor = useSealantConveyorStore(useShallow((state) => state.sealantConveyor));
-  const employee = useSealantEmployeeStore(useShallow((state) => state.sealantEmployee));
-  const { data: summaryData, isPending: isPendingSummary, isError } = useActiveSummary(sealantConveyor?.id ?? null);
+  const sealantConveyor = useSealantConveyorStore(
+    useShallow((state) => state.sealantConveyor),
+  );
+  const employee = useSealantEmployeeStore(
+    useShallow((state) => state.sealantEmployee),
+  );
+  const {
+    data: summaryData,
+    isPending: isPendingSummary,
+    isError,
+  } = useActiveSummary(sealantConveyor?.id ?? null);
   const { data: printerData } = usePrinter(sealantConveyor?.id ?? null);
 
   if (isPending) return <Loader />;
-  if (!sealantConveyor) return <NotFound message={AppMessages.CONVEYOR_NOT_EXISTS} />;
+  if (!sealantConveyor)
+    return <NotFound message={AppMessages.CONVEYOR_NOT_EXISTS} />;
 
   const pageLayoutProps: PrintPageLayoutProps = {
     timeComponent: <TimeComponent />,
-    headerComponent: <HeaderComponent conveyorName={sealantConveyor.name} postName={PostNames.SEALANT} />,
-    mainComponent: <PrintContent summaryData={summaryData ?? null} printerData={printerData ?? null} />,
+    headerComponent: (
+      <HeaderComponent
+        conveyorName={sealantConveyor.name}
+        postName={PostNames.SEALANT}
+      />
+    ),
+    mainComponent: (
+      <PrintContent
+        summaryData={summaryData ?? null}
+        printerData={printerData ?? null}
+      />
+    ),
     menuComponent: <SealantPrintMenu summaryData={summaryData ?? null} />,
     userComponent: <UserComponent employee={employee} />,
     loaderComponent: <Loader />,

@@ -10,12 +10,20 @@ import AlertModal from "../../../../shared/components/modals/alert-modal";
 import { AppMessages } from "@/shared/resources/app-messages";
 
 export default function ExtrusionEntryAlertModal() {
-  const open = useExtrusionEntryAlertModalStore(useShallow((state) => state.open));
-  const setOpen = useExtrusionEntryAlertModalStore(useShallow((state) => state.setOpen));
+  const open = useExtrusionEntryAlertModalStore(
+    useShallow((state) => state.open),
+  );
+  const setOpen = useExtrusionEntryAlertModalStore(
+    useShallow((state) => state.setOpen),
+  );
   const dto = useExtrusionEntryAlertModalStore((state) => state.dto);
   const clearDto = useExtrusionEntryAlertModalStore((state) => state.clearDto);
-  const initData = useExtrusionInputStore(useShallow((state) => state.initData));
-  const extrusionConveyor = useExtrusionConveyorStore(useShallow((state) => state.extrusionConveyor));
+  const initData = useExtrusionInputStore(
+    useShallow((state) => state.initData),
+  );
+  const extrusionConveyor = useExtrusionConveyorStore(
+    useShallow((state) => state.extrusionConveyor),
+  );
   const { createExtrusionEntry } = useCreateExtrusionEntry();
   const navigate = useNavigate();
 

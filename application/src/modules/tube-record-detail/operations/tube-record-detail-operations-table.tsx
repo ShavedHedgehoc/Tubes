@@ -14,7 +14,12 @@ export default function TubeRecordDetailOperationsTable({
     { width: 40, value: "Время", align: "center", padding: "12px 24px" },
     { width: 40, value: "Код операции", padding: "12px 24px" },
     { width: 200, value: "Операция", align: "left", padding: "12px 24px" },
-    { width: 100, value: "Длительность", align: "center", padding: "12px 24px" },
+    {
+      width: 100,
+      value: "Длительность",
+      align: "center",
+      padding: "12px 24px",
+    },
     { width: 80, value: "Оператор", align: "left", padding: "12px 24px" },
   ];
   return (
@@ -25,7 +30,11 @@ export default function TubeRecordDetailOperationsTable({
       ) : (
         <TableFullHeightLayout thead={commonThead}>
           {operationsData.map((row, index) => (
-            <TubeRecordsDetailOperationRow row={row} key={row.id} index={index} />
+            <TubeRecordsDetailOperationRow
+              row={row}
+              key={row.id}
+              index={index}
+            />
           ))}
         </TableFullHeightLayout>
       )}

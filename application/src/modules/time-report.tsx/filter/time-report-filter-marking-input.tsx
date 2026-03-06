@@ -6,7 +6,9 @@ import { TimeReportFilterParams } from "./time-report-filter-params";
 
 export default function TimeReportFilterMarkingInput() {
   const filter = useTimeReportFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useTimeReportFilterStore(useShallow((state) => state.changeFilter));
+  const changeFilter = useTimeReportFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
 
   const inputProps: FilterInputProps = {
     id: TimeReportFilterParams.MARKING,
@@ -14,7 +16,8 @@ export default function TimeReportFilterMarkingInput() {
     disabled: filter.marking === "",
     label: "Поиск по артикулу",
     placeholder: "Артикул",
-    changeFilter: ({ key, value }: { key: string; value: string }) => changeFilter({ key, value }),
+    changeFilter: ({ key, value }: { key: string; value: string }) =>
+      changeFilter({ key, value }),
   };
 
   return <FilterInput {...inputProps} />;

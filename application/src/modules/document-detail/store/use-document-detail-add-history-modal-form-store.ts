@@ -11,13 +11,16 @@ interface DocumentDetailAddHistoryModalFormStore {
   fillHistoryTypeSelectorOptions: (values: IHistoryType[]) => void;
 }
 
-export const useDocumentDetailAddHistoryModalFormStore = create<DocumentDetailAddHistoryModalFormStore>()(
-  devtools((set) => ({
-    selectedHistoryType: null,
-    historyNote: "",
-    historyTypeSelectorOptions: [],
-    setSelectedHistoryType: (value) => set(() => ({ selectedHistoryType: value })),
-    setHistoryNote: (value) => set(() => ({ historyNote: value })),
-    fillHistoryTypeSelectorOptions: (values) => set(() => ({ historyTypeSelectorOptions: [...values] })),
-  }))
-);
+export const useDocumentDetailAddHistoryModalFormStore =
+  create<DocumentDetailAddHistoryModalFormStore>()(
+    devtools((set) => ({
+      selectedHistoryType: null,
+      historyNote: "",
+      historyTypeSelectorOptions: [],
+      setSelectedHistoryType: (value) =>
+        set(() => ({ selectedHistoryType: value })),
+      setHistoryNote: (value) => set(() => ({ historyNote: value })),
+      fillHistoryTypeSelectorOptions: (values) =>
+        set(() => ({ historyTypeSelectorOptions: [...values] })),
+    })),
+  );

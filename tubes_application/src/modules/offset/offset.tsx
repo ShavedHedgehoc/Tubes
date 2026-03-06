@@ -31,20 +31,40 @@ import OffsetDefectEntryModal from "./dash/modals/offset-defect-entry-modal";
 export default function Offset() {
   const params = useParams<Params.CONVEYOR_NAME>();
   const { isPending } = useConveyor(params.conveyor_name ?? null);
-  const offsetConveyor = useOffsetConveyorStore(useShallow((state) => state.offsetConveyor));
-  const employee = useOffsetEmployeeStore(useShallow((state) => state.offsetEmployee));
-  const { data: summaryData, isPending: isPendingSummary, isError } = useActiveSummary(offsetConveyor?.id ?? null);
+  const offsetConveyor = useOffsetConveyorStore(
+    useShallow((state) => state.offsetConveyor),
+  );
+  const employee = useOffsetEmployeeStore(
+    useShallow((state) => state.offsetEmployee),
+  );
+  const {
+    data: summaryData,
+    isPending: isPendingSummary,
+    isError,
+  } = useActiveSummary(offsetConveyor?.id ?? null);
 
   if (isPending) return <Loader />;
-  if (!offsetConveyor) return <NotFound message={AppMessages.CONVEYOR_NOT_EXISTS} />;
+  if (!offsetConveyor)
+    return <NotFound message={AppMessages.CONVEYOR_NOT_EXISTS} />;
 
   const pageLayoutProps: PageLayoutProps = {
     timeComponent: <TimeComponent />,
-    headerComponent: <HeaderComponent conveyorName={offsetConveyor.name} postName={PostNames.OFFSET} />,
+    headerComponent: (
+      <HeaderComponent
+        conveyorName={offsetConveyor.name}
+        postName={PostNames.OFFSET}
+      />
+    ),
     parameterComponent: <OffsetParameters summaryData={summaryData ?? null} />,
-    materialPieChartComponent: <MaterialPieChartComponent summaryData={summaryData ?? null} postId={3} />,
-    productionLineChartComponent: <ProductionLineChart summaryData={summaryData ?? null} postId={3} />,
-    productionCardComponent: <ProductionCard summaryData={summaryData ?? null} postId={3} />,
+    materialPieChartComponent: (
+      <MaterialPieChartComponent summaryData={summaryData ?? null} postId={3} />
+    ),
+    productionLineChartComponent: (
+      <ProductionLineChart summaryData={summaryData ?? null} postId={3} />
+    ),
+    productionCardComponent: (
+      <ProductionCard summaryData={summaryData ?? null} postId={3} />
+    ),
     menuComponent: <OffsetMenu />,
     userComponent: <UserComponent employee={employee} />,
     loaderComponent: <Loader />,

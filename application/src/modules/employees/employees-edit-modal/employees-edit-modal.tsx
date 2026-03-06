@@ -4,7 +4,9 @@ import FormHelperText from "@mui/joy/FormHelperText";
 import Typography from "@mui/joy/Typography";
 import { useShallow } from "zustand/react/shallow";
 import { useEmployeesEditModalStore } from "../store/use-employees-edit-modal-store";
-import ModalLayout, { ModalLayoutProps } from "../../../shared/layouts/modal-layout";
+import ModalLayout, {
+  ModalLayoutProps,
+} from "../../../shared/layouts/modal-layout";
 import EmployeesEditModalOccupationSelector from "./employees-edit-modal-occupation-selector";
 import EmployeesEditModalButtonComponent from "./employees-edit-modal-buttons";
 import EmployeesEditModalNameInput from "./employees-edit-modal-name-input";
@@ -12,7 +14,9 @@ import EmployeesEditModalBarcodeInput from "./employees-edit-modal-barcode-input
 
 export default function EmployeesEditModal() {
   const open = useEmployeesEditModalStore(useShallow((state) => state.open));
-  const setOpen = useEmployeesEditModalStore(useShallow((state) => state.setOpen));
+  const setOpen = useEmployeesEditModalStore(
+    useShallow((state) => state.setOpen),
+  );
 
   const modalProps: ModalLayoutProps = {
     open: open,
@@ -25,7 +29,10 @@ export default function EmployeesEditModal() {
   };
 
   return (
-    <ModalLayout props={modalProps} buttons={<EmployeesEditModalButtonComponent />}>
+    <ModalLayout
+      props={modalProps}
+      buttons={<EmployeesEditModalButtonComponent />}
+    >
       <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
         <FormControl size="sm">
           <EmployeesEditModalNameInput />

@@ -13,7 +13,12 @@ export default function InventoryDetailHeader() {
   return (
     <React.Fragment>
       <BreadCrumbHeader
-        breadcrumbs={["Переучет", isSuccess && data.id ? `${data.plant_name} - ${formatDateToString(data.date)}` : ""]}
+        breadcrumbs={[
+          "Переучет",
+          isSuccess && data.id
+            ? `${data.plant_name} - ${formatDateToString(data.date)}`
+            : "",
+        ]}
       />
       <MainPageHeader
         pageTitle={`Данные переучета (

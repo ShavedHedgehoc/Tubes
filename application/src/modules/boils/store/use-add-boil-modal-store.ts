@@ -31,5 +31,5 @@ export const useAddBoilModalStore = create<AddBoilModalStore>()(
     setNoteRequired: (value) => set(() => ({ noteRequired: value })),
     setState: (value) => set(() => ({ state: value })),
     setId: (value) => set(() => ({ id: value })),
-  }))
+  })),
 );

@@ -30,7 +30,8 @@ export const useInventoriesFilterStore = create<InventoriesFilterStore>()(
     filter: initFilterValue,
     selectedPlant: 999999,
     plantSelectorOptions: [],
-    clearFilter: () => set(() => ({ filter: initFilterValue, selectedPlant: 999999 })),
+    clearFilter: () =>
+      set(() => ({ filter: initFilterValue, selectedPlant: 999999 })),
     setDayToToday: () =>
       set((state) => ({
         filter: {
@@ -54,7 +55,10 @@ export const useInventoriesFilterStore = create<InventoriesFilterStore>()(
           break;
         case InventoriesFilterParams.PLANTS:
           set((state) => ({
-            filter: { ...state.filter, plants: values ? [...values] : [...state.filter.plants] },
+            filter: {
+              ...state.filter,
+              plants: values ? [...values] : [...state.filter.plants],
+            },
           }));
           break;
 
@@ -64,6 +68,11 @@ export const useInventoriesFilterStore = create<InventoriesFilterStore>()(
     },
     setSelectedPlant: (value) => set(() => ({ selectedPlant: value })),
     fillPlantSelectorOptions: (values) =>
-      set(() => ({ plantSelectorOptions: [{ id: 999999, value: "Все", abb: "" }, ...values] })),
-  }))
+      set(() => ({
+        plantSelectorOptions: [
+          { id: 999999, value: "Все", abb: "" },
+          ...values,
+        ],
+      })),
+  })),
 );

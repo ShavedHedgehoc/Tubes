@@ -10,10 +10,17 @@ const commonThead = [
   { width: 40, value: "Факт" },
 ];
 
-export default function TraceBatchsDetailSummaryTable({ data }: { data: ITraceBatchDetailData }) {
+export default function TraceBatchsDetailSummaryTable({
+  data,
+}: {
+  data: ITraceBatchDetailData;
+}) {
   return (
     <TableLayout thead={commonThead}>
-      {data && data.summary_data.map((row) => <TraceBatchsDetailSummaryTableRow row={row} key={row.b_product_id} />)}
+      {data &&
+        data.summary_data.map((row) => (
+          <TraceBatchsDetailSummaryTableRow row={row} key={row.b_product_id} />
+        ))}
     </TableLayout>
   );
 }

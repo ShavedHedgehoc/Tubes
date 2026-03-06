@@ -4,8 +4,12 @@ import { Input } from "@mui/joy";
 import { useTubeEmployeesAddModalStore } from "../store/use-tube-employees-add-modal-store";
 
 export default function BarcodeInput() {
-  const barcode = useTubeEmployeesAddModalStore(useShallow((state) => state.barcode));
-  const setBarcode = useTubeEmployeesAddModalStore(useShallow((state) => state.setBarcode));
+  const barcode = useTubeEmployeesAddModalStore(
+    useShallow((state) => state.barcode),
+  );
+  const setBarcode = useTubeEmployeesAddModalStore(
+    useShallow((state) => state.setBarcode),
+  );
   return (
     <Input
       sx={{

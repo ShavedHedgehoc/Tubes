@@ -35,6 +35,9 @@ export const useTubeEmployeesAddModalStore = create<AddModalStore>()(
         })),
       fillRankOptions: (values) => set(() => ({ rankOptions: [...values] })),
     }),
-    { name: "TubeEmployeesAddModalStore", store: "useTubeEmployeesAddModalStore" }
-  )
+    {
+      name: "TubeEmployeesAddModalStore",
+      store: "useTubeEmployeesAddModalStore",
+    },
+  ),
 );

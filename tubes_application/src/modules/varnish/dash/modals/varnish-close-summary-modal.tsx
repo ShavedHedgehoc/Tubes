@@ -4,7 +4,14 @@ import CloseSummaryModal from "@/shared/components/modals/close-summary-modal";
 import useVarnishCloseSummaryModal from "./use-varnish-close-summary-modal";
 
 export default function VarnishCloseSummaryModal() {
-  const { open, setOpen, data, clearData, handleAddButtonClick, handleEndButtonClick } = useVarnishCloseSummaryModal();
+  const {
+    open,
+    setOpen,
+    data,
+    clearData,
+    handleAddButtonClick,
+    handleEndButtonClick,
+  } = useVarnishCloseSummaryModal();
   const modalProps: CloseSummaryModalProps = {
     title: PostNames.VARNISH,
     open: open,

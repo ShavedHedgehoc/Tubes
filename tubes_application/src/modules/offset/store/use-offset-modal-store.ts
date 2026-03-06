@@ -6,7 +6,6 @@ interface SimplyModalStore {
   setOpen: (val: boolean) => void;
 }
 
-
 const createModalStore = (name: string) =>
   create<SimplyModalStore>()(
     devtools(
@@ -14,8 +13,8 @@ const createModalStore = (name: string) =>
         open: false,
         setOpen: (value) => set({ open: value }),
       }),
-      { name: `ModalStore/${name}` }
-    )
+      { name: `ModalStore/${name}` },
+    ),
   );
 
 export const useOffsetAuthModalStore = createModalStore("Auth");

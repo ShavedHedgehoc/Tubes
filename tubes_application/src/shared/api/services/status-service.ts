@@ -21,21 +21,29 @@ export interface IStatusResponce {
 }
 
 export default class StatusService {
-  static async createExtrusionStatus(dto: CreateStatusDto): Promise<IStatusResponce> {
+  static async createExtrusionStatus(
+    dto: CreateStatusDto,
+  ): Promise<IStatusResponce> {
     const res = await $api.post(`${ApiRoutes.CREATE_EXTRUSION_STATUS}`, dto);
     return res.data;
   }
-  static async createVarnishStatus(dto: CreateStatusDto): Promise<IStatusResponce> {
+  static async createVarnishStatus(
+    dto: CreateStatusDto,
+  ): Promise<IStatusResponce> {
     const res = await $api.post(`${ApiRoutes.CREATE_VARNISH_STATUS}`, dto);
     return res.data;
   }
 
-  static async createOffsetStatus(dto: CreateStatusDto): Promise<IStatusResponce> {
+  static async createOffsetStatus(
+    dto: CreateStatusDto,
+  ): Promise<IStatusResponce> {
     const res = await $api.post(`${ApiRoutes.CREATE_OFFSET_STATUS}`, dto);
     return res.data;
   }
 
-  static async createSealantStatus(dto: CreateStatusDto): Promise<IStatusResponce> {
+  static async createSealantStatus(
+    dto: CreateStatusDto,
+  ): Promise<IStatusResponce> {
     const res = await $api.post(`${ApiRoutes.CREATE_SEALANT_STATUS}`, dto);
     return res.data;
   }

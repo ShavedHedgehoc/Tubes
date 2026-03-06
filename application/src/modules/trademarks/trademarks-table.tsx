@@ -18,11 +18,23 @@ const commonThead = [
 export default function TrademarksTable() {
   const filter = useTrademarksFilterStore(useShallow((state) => state.filter));
   const page = useTrademarksPaginationStore(useShallow((state) => state.page));
-  const limit = useTrademarksPaginationStore(useShallow((state) => state.limit));
-  const total = useTrademarksPaginationStore(useShallow((state) => state.total));
-  const setTotal = useTrademarksPaginationStore(useShallow((state) => state.setTotal));
-  const setPage = useTrademarksPaginationStore(useShallow((state) => state.setPage));
-  const { isPending, data, isSuccess } = useTrademarks({ filter: filter, limit: limit, page: page });
+  const limit = useTrademarksPaginationStore(
+    useShallow((state) => state.limit),
+  );
+  const total = useTrademarksPaginationStore(
+    useShallow((state) => state.total),
+  );
+  const setTotal = useTrademarksPaginationStore(
+    useShallow((state) => state.setTotal),
+  );
+  const setPage = useTrademarksPaginationStore(
+    useShallow((state) => state.setPage),
+  );
+  const { isPending, data, isSuccess } = useTrademarks({
+    filter: filter,
+    limit: limit,
+    page: page,
+  });
 
   //REmove useeffects
 
@@ -48,7 +60,10 @@ export default function TrademarksTable() {
 
   return (
     <TableLayout thead={commonThead}>
-      {isSuccess && data.rows.map((row) => <TrademarksTableRow row={row} key={row.trademark_name} />)}
+      {isSuccess &&
+        data.rows.map((row) => (
+          <TrademarksTableRow row={row} key={row.trademark_name} />
+        ))}
     </TableLayout>
   );
 }

@@ -9,13 +9,14 @@ interface BooleanEntryModalStore {
   setTitle: (val: string) => void;
   setOpen: (val: boolean) => void;
 }
-export const useVarnishBooleanEntryModalStore = create<BooleanEntryModalStore>()(
-  devtools((set) => ({
-    key: "",
-    title: "",
-    open: false,
-    setKey: (value) => set(() => ({ key: value })),
-    setTitle: (value) => set(() => ({ title: value })),
-    setOpen: (value) => set(() => ({ open: value })),
-  }))
-);
+export const useVarnishBooleanEntryModalStore =
+  create<BooleanEntryModalStore>()(
+    devtools((set) => ({
+      key: "",
+      title: "",
+      open: false,
+      setKey: (value) => set(() => ({ key: value })),
+      setTitle: (value) => set(() => ({ title: value })),
+      setOpen: (value) => set(() => ({ open: value })),
+    })),
+  );

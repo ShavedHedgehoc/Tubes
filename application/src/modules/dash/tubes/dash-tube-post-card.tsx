@@ -19,10 +19,18 @@ export interface DashTubePostCardProps {
 export default function DashTubePostCard(props: DashTubePostCardProps) {
   const { mode } = useColorScheme();
   const user = useAuthStore(useShallow((state) => state.user));
-  const setOpen = useDashTubePostStopModalStore(useShallow((state) => state.setOpen));
-  const setSummaryId = useDashTubePostStopModalStore(useShallow((state) => state.setSummaryId));
-  const setPostId = useDashTubePostStopModalStore(useShallow((state) => state.setPostId));
-  const setTitle = useDashTubePostStopModalStore(useShallow((state) => state.setTitle));
+  const setOpen = useDashTubePostStopModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const setSummaryId = useDashTubePostStopModalStore(
+    useShallow((state) => state.setSummaryId),
+  );
+  const setPostId = useDashTubePostStopModalStore(
+    useShallow((state) => state.setPostId),
+  );
+  const setTitle = useDashTubePostStopModalStore(
+    useShallow((state) => state.setTitle),
+  );
 
   const handleCloseClick = () => {
     setSummaryId(props.summary_id);

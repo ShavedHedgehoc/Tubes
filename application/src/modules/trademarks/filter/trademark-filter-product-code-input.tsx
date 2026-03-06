@@ -5,7 +5,9 @@ import { TrademarksFilterParams } from "./trademarks-filter-params";
 
 export default function TrademarkFilterProductCodeInput() {
   const filter = useTrademarksFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useTrademarksFilterStore(useShallow((state) => state.changeFilter));
+  const changeFilter = useTrademarksFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
 
   const codeInputProps: FilterInputProps = {
     id: TrademarksFilterParams.PRODUCT_CODE,
@@ -13,7 +15,8 @@ export default function TrademarkFilterProductCodeInput() {
     disabled: filter.product_code === "",
     label: "Поиск по коду 1С",
     placeholder: "Код 1С",
-    changeFilter: ({ key, value }: { key: string; value: string }) => changeFilter({ key, value }),
+    changeFilter: ({ key, value }: { key: string; value: string }) =>
+      changeFilter({ key, value }),
   };
 
   return <FilterInput {...codeInputProps} />;

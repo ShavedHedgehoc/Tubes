@@ -9,7 +9,10 @@ import TableLayout from "../../shared/layouts/table-layout";
 
 import { useRecordHistories } from "../../shared/api/use-record-histories";
 import { useRecordHistoryModalStore } from "./store/use-record-history-modal-store";
-import { formatDateToString, formatTimeToString } from "../../shared/helpers/date-time-formatters";
+import {
+  formatDateToString,
+  formatTimeToString,
+} from "../../shared/helpers/date-time-formatters";
 import { rowScope } from "../../shared/helpers/status-conditions";
 import { StyledTypography } from "../../shared/ui/styled-typography";
 
@@ -22,10 +25,16 @@ import { useAuthStore } from "../auth/store/auth-store";
 export default function RecordsHistoryModal() {
   const user = useAuthStore(useShallow((state) => state.user));
   const open = useRecordHistoryModalStore(useShallow((state) => state.open));
-  const cancelButtonEnabled = useRecordHistoryModalStore(useShallow((state) => state.cancelButtonEnabled));
-  const record_id = useRecordHistoryModalStore(useShallow((state) => state.record_id));
+  const cancelButtonEnabled = useRecordHistoryModalStore(
+    useShallow((state) => state.cancelButtonEnabled),
+  );
+  const record_id = useRecordHistoryModalStore(
+    useShallow((state) => state.record_id),
+  );
   const title = useRecordHistoryModalStore(useShallow((state) => state.title));
-  const setOpen = useRecordHistoryModalStore(useShallow((state) => state.setOpen));
+  const setOpen = useRecordHistoryModalStore(
+    useShallow((state) => state.setOpen),
+  );
   const { isPending, data, isSuccess } = useRecordHistories(record_id);
   const addHistoryDirect = useCreateHistoryDirect();
 
@@ -63,7 +72,9 @@ export default function RecordsHistoryModal() {
     }
   };
 
-  const setNoteModalOpen = useNoteModalStore(useShallow((state) => state.setOpen));
+  const setNoteModalOpen = useNoteModalStore(
+    useShallow((state) => state.setOpen),
+  );
   const setNoteId = useNoteModalStore(useShallow((state) => state.setNoteId));
 
   const handleNoteModalButtonClick = (note_id: number) => {
@@ -74,21 +85,49 @@ export default function RecordsHistoryModal() {
     const scope = rowScope(row.historyType.value);
     return (
       <tr key={row.id}>
-        <td scope={scope} style={{ width: 50, textAlign: "center", padding: "18px 6px" }}>
-          <Typography level="body-xs">{formatDateToString(row.createdAt)}</Typography>
+        <td
+          scope={scope}
+          style={{ width: 50, textAlign: "center", padding: "18px 6px" }}
+        >
+          <Typography level="body-xs">
+            {formatDateToString(row.createdAt)}
+          </Typography>
         </td>
-        <td scope={scope} style={{ width: 50, textAlign: "center", padding: "18px 6px" }}>
-          <Typography level="body-xs">{formatTimeToString(row.createdAt)}</Typography>
+        <td
+          scope={scope}
+          style={{ width: 50, textAlign: "center", padding: "18px 6px" }}
+        >
+          <Typography level="body-xs">
+            {formatTimeToString(row.createdAt)}
+          </Typography>
         </td>
-        <td scope={scope} style={{ width: 100, textAlign: "center", padding: "18px 6px" }}>
-          <StyledTypography text={row.historyType.description} state={row.historyType.value} />
+        <td
+          scope={scope}
+          style={{ width: 100, textAlign: "center", padding: "18px 6px" }}
+        >
+          <StyledTypography
+            text={row.historyType.description}
+            state={row.historyType.value}
+          />
         </td>
-        <td scope={scope} style={{ width: 80, textAlign: "center", padding: "18px 6px" }}>
-          <Typography level="body-xs">{row.user ? row.user.name : row.employee ? row.employee.name : "-"}</Typography>
+        <td
+          scope={scope}
+          style={{ width: 80, textAlign: "center", padding: "18px 6px" }}
+        >
+          <Typography level="body-xs">
+            {row.user ? row.user.name : row.employee ? row.employee.name : "-"}
+          </Typography>
         </td>
-        <td scope={scope} style={{ width: 50, textAlign: "center", padding: "6px 6px" }}>
+        <td
+          scope={scope}
+          style={{ width: 50, textAlign: "center", padding: "6px 6px" }}
+        >
           {row.note_id && (
-            <IconButton variant="plain" size="sm" onClick={() => handleNoteModalButtonClick(row.note_id)}>
+            <IconButton
+              variant="plain"
+              size="sm"
+              onClick={() => handleNoteModalButtonClick(row.note_id)}
+            >
               <InfoOutlinedIcon />
             </IconButton>
           )}
@@ -99,7 +138,14 @@ export default function RecordsHistoryModal() {
 
   const ButtonsComponent = () => {
     return (
-      <Box sx={{ display: "flex", alignItems: "center", justifyContent: "flex-start", gap: 1 }}>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-start",
+          gap: 1,
+        }}
+      >
         <Button
           color="neutral"
           variant="outlined"
@@ -130,7 +176,8 @@ export default function RecordsHistoryModal() {
     }
     return (
       <TableLayout thead={history_table_thead}>
-        {isSuccess && data.histories.map((row) => <RowComponent row={row} key={row.id} />)}
+        {isSuccess &&
+          data.histories.map((row) => <RowComponent row={row} key={row.id} />)}
       </TableLayout>
     );
   };

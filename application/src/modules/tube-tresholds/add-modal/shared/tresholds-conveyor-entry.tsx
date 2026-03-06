@@ -10,13 +10,22 @@ interface TresholdsConveyorEntryProps {
   value: number | null;
   options: TubeConveyor[] | [];
   setSelected: (value: number) => void;
-  onChange: ({ key, value, values }: { key: string; value: string; values?: number[] }) => void;
+  onChange: ({
+    key,
+    value,
+    values,
+  }: {
+    key: string;
+    value: string;
+    values?: number[];
+  }) => void;
 }
 
 export function TresholdsConveyorEntry(props: TresholdsConveyorEntryProps) {
   const handleChangeConveyor = (newValue: number | null) => {
     newValue && props.setSelected(newValue);
-    newValue && props.onChange({ key: props.id, value: "", values: [newValue] });
+    newValue &&
+      props.onChange({ key: props.id, value: "", values: [newValue] });
   };
 
   return (
@@ -37,7 +46,10 @@ export function TresholdsConveyorEntry(props: TresholdsConveyorEntryProps) {
           display: "flex",
           flexShrink: 1,
         }}
-        onChange={(event: React.SyntheticEvent | null, newValue: number | null) => {
+        onChange={(
+          event: React.SyntheticEvent | null,
+          newValue: number | null,
+        ) => {
           event && newValue && handleChangeConveyor(newValue);
         }}
         value={props.value}

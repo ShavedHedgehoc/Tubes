@@ -1,11 +1,18 @@
 import { useShallow } from "zustand/react/shallow";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import FilterButton, { FilterButtonProps } from "../../../shared/ui/filter-button";
-import { getFirstDayOfCurrentMonth, getLastDayOfCurrentMonth } from "../../../shared/helpers/date-time-formatters";
+import FilterButton, {
+  FilterButtonProps,
+} from "../../../shared/ui/filter-button";
+import {
+  getFirstDayOfCurrentMonth,
+  getLastDayOfCurrentMonth,
+} from "../../../shared/helpers/date-time-formatters";
 import { useTraceBatchsFilterStore } from "../store/use-trace-batchs-filter-store";
 
 export default function TraceBatchsFilterClearButton() {
-  const clearFilter = useTraceBatchsFilterStore(useShallow((state) => state.clearFilter));
+  const clearFilter = useTraceBatchsFilterStore(
+    useShallow((state) => state.clearFilter),
+  );
   const filter = useTraceBatchsFilterStore(useShallow((state) => state.filter));
 
   const disableDocumentFilterClearButton =

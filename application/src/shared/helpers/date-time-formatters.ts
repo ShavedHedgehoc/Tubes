@@ -7,7 +7,13 @@ export function getTomorrowDate(): string {
 
 export function formatDateToString(dateToFormat: Date) {
   const date = new Date(dateToFormat);
-  return ("0" + date.getDate()).slice(-2) + "/" + ("0" + (date.getMonth() + 1)).slice(-2) + "/" + date.getFullYear();
+  return (
+    ("0" + date.getDate()).slice(-2) +
+    "/" +
+    ("0" + (date.getMonth() + 1)).slice(-2) +
+    "/" +
+    date.getFullYear()
+  );
 }
 
 export function formatTimeToString(dateToFormat: Date) {
@@ -22,11 +28,20 @@ export function formatTimeToString(dateToFormat: Date) {
 }
 
 export function formatTwoDatesDiffTimeToString(startDate: Date, endDate: Date) {
-  const diff = Math.abs(new Date(endDate).getTime() - new Date(startDate).getTime());
+  const diff = Math.abs(
+    new Date(endDate).getTime() - new Date(startDate).getTime(),
+  );
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff - days * 1000 * 60 * 60 * 24) / (1000 * 60 * 60));
-  const minutes = Math.floor((diff - days * 1000 * 60 * 60 * 24 - 60 * 60000 * hours) / 60000);
-  const seconds = Math.trunc((diff - days * 1000 * 60 * 60 * 24 - 60 * 60000 * hours - 60000 * minutes) / 1000);
+  const hours = Math.floor(
+    (diff - days * 1000 * 60 * 60 * 24) / (1000 * 60 * 60),
+  );
+  const minutes = Math.floor(
+    (diff - days * 1000 * 60 * 60 * 24 - 60 * 60000 * hours) / 60000,
+  );
+  const seconds = Math.trunc(
+    (diff - days * 1000 * 60 * 60 * 24 - 60 * 60000 * hours - 60000 * minutes) /
+      1000,
+  );
 
   return (
     (days ? days + " сут., " : "") +

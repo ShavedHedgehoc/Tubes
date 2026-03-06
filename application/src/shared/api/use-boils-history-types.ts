@@ -4,7 +4,8 @@ import { useBoilsReportFilterStore } from "../../modules/boils-report/store/use-
 import { useBoilsFilterStore } from "../../modules/boils/store/use-boils-filter-store";
 
 export const useBoilsHistoryTypes = () => {
-  const { fillStateSelectorOptions: fillBoilsReportOptions } = useBoilsReportFilterStore();
+  const { fillStateSelectorOptions: fillBoilsReportOptions } =
+    useBoilsReportFilterStore();
   const { fillStateSelectorOptions: fillBoilsOptions } = useBoilsFilterStore();
   useQuery({
     queryKey: ["boils_history_types"],

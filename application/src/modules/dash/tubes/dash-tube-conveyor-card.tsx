@@ -7,7 +7,11 @@ import { useShallow } from "zustand/react/shallow";
 import { DbRoles } from "../../../shared/db-roles";
 import { useAuthStore } from "../../auth/store/auth-store";
 
-export default function DashTubeConveyorCard({ conveyor }: { conveyor: IConveyorData }) {
+export default function DashTubeConveyorCard({
+  conveyor,
+}: {
+  conveyor: IConveyorData;
+}) {
   const user = useAuthStore(useShallow((state) => state.user));
   const extrusionPostProps: DashTubePostCardProps = {
     title: "Пост 1",
@@ -67,9 +71,14 @@ export default function DashTubeConveyorCard({ conveyor }: { conveyor: IConveyor
       <Stack sx={{ height: "100%", justifyContent: "space-between" }}>
         {conveyor.summary ? (
           <Stack gap={2}>
-            <Stack direction="row" sx={{ width: "100%", justifyContent: "space-between" }}>
+            <Stack
+              direction="row"
+              sx={{ width: "100%", justifyContent: "space-between" }}
+            >
               <Typography level="h2">{conveyor.name}</Typography>
-              {user?.roles?.includes(DbRoles.TUBE_DASH) && <DashTubeCardMenu conveyor={conveyor} />}
+              {user?.roles?.includes(DbRoles.TUBE_DASH) && (
+                <DashTubeCardMenu conveyor={conveyor} />
+              )}
             </Stack>
             <Stack>
               <Typography level="body-sm">{`${conveyor.summary.product_code} ${conveyor.summary.product_name}`}</Typography>
@@ -79,9 +88,14 @@ export default function DashTubeConveyorCard({ conveyor }: { conveyor: IConveyor
           </Stack>
         ) : (
           <Stack gap={2}>
-            <Stack direction="row" sx={{ width: "100%", justifyContent: "space-between" }}>
+            <Stack
+              direction="row"
+              sx={{ width: "100%", justifyContent: "space-between" }}
+            >
               <Typography level="h2">{conveyor.name}</Typography>
-              {user?.roles?.includes(DbRoles.TUBE_DASH) && <DashTubeCardMenu conveyor={conveyor} />}
+              {user?.roles?.includes(DbRoles.TUBE_DASH) && (
+                <DashTubeCardMenu conveyor={conveyor} />
+              )}
             </Stack>
             <Typography level="body-sm">Нет активной записи сводки</Typography>
           </Stack>

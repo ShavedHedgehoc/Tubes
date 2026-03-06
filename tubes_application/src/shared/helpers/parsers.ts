@@ -1,7 +1,7 @@
-export function parseBarcode(value: string): boolean {
-  const re = /^[0-9]{13}$/;
-  return re.test(value);
-}
+// export function parseBarcode(value: string): boolean {
+//   const re = /^[0-9]{13}$/;
+//   return re.test(value);
+// }
 
 export function parseMaterial(value: string) {
   const re = /^998[0-9]{43}$/;

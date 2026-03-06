@@ -6,7 +6,10 @@ import Button from "@mui/joy/Button";
 import ModalLayout from "../../shared/layouts/modal-layout";
 import TableLayout from "../../shared/layouts/table-layout";
 import TableLoaderComponent from "../../shared/components/table-loader";
-import { formatDateToString, formatTimeToString } from "../../shared/helpers/date-time-formatters";
+import {
+  formatDateToString,
+  formatTimeToString,
+} from "../../shared/helpers/date-time-formatters";
 import { rowScope } from "../../shared/helpers/status-conditions";
 import { StyledTypography } from "../../shared/ui/styled-typography";
 import { useShallow } from "zustand/react/shallow";
@@ -19,11 +22,17 @@ import { useAuthStore } from "../auth/store/auth-store";
 export default function BoilHistoryModal() {
   const open = useBoilHistoryModalStore(useShallow((state) => state.open));
   const boilId = useBoilHistoryModalStore(useShallow((state) => state.boil_id));
-  const boilValue = useBoilHistoryModalStore(useShallow((state) => state.boil_value));
+  const boilValue = useBoilHistoryModalStore(
+    useShallow((state) => state.boil_value),
+  );
 
-  const cancelButtonEnabled = useBoilHistoryModalStore(useShallow((state) => state.cancelButtonEnabled));
+  const cancelButtonEnabled = useBoilHistoryModalStore(
+    useShallow((state) => state.cancelButtonEnabled),
+  );
   const title = useBoilHistoryModalStore(useShallow((state) => state.title));
-  const setOpen = useBoilHistoryModalStore(useShallow((state) => state.setOpen));
+  const setOpen = useBoilHistoryModalStore(
+    useShallow((state) => state.setOpen),
+  );
 
   const { isPending, data, isSuccess } = useBoilsHistories(boilId);
   const addHistoryDirect = useCreateHistoryDirect();
@@ -63,7 +72,9 @@ export default function BoilHistoryModal() {
     }
   };
 
-  const setNoteModalOpen = useNoteModalStore(useShallow((state) => state.setOpen));
+  const setNoteModalOpen = useNoteModalStore(
+    useShallow((state) => state.setOpen),
+  );
   const setNoteId = useNoteModalStore(useShallow((state) => state.setNoteId));
 
   const handleNoteModalButtonClick = (note_id: number) => {
@@ -74,21 +85,49 @@ export default function BoilHistoryModal() {
     const scope = rowScope(row.historyType.value);
     return (
       <tr key={row.id}>
-        <td scope={scope} style={{ width: 50, textAlign: "center", padding: "18px 6px" }}>
-          <Typography level="body-xs">{formatDateToString(row.createdAt)}</Typography>
+        <td
+          scope={scope}
+          style={{ width: 50, textAlign: "center", padding: "18px 6px" }}
+        >
+          <Typography level="body-xs">
+            {formatDateToString(row.createdAt)}
+          </Typography>
         </td>
-        <td scope={scope} style={{ width: 50, textAlign: "center", padding: "18px 6px" }}>
-          <Typography level="body-xs">{formatTimeToString(row.createdAt)}</Typography>
+        <td
+          scope={scope}
+          style={{ width: 50, textAlign: "center", padding: "18px 6px" }}
+        >
+          <Typography level="body-xs">
+            {formatTimeToString(row.createdAt)}
+          </Typography>
         </td>
-        <td scope={scope} style={{ width: 100, textAlign: "center", padding: "18px 6px" }}>
-          <StyledTypography text={row.historyType.description} state={row.historyType.value} />
+        <td
+          scope={scope}
+          style={{ width: 100, textAlign: "center", padding: "18px 6px" }}
+        >
+          <StyledTypography
+            text={row.historyType.description}
+            state={row.historyType.value}
+          />
         </td>
-        <td scope={scope} style={{ width: 80, textAlign: "center", padding: "18px 6px" }}>
-          <Typography level="body-xs">{row.user ? row.user.name : row.employee ? row.employee.name : "-"}</Typography>
+        <td
+          scope={scope}
+          style={{ width: 80, textAlign: "center", padding: "18px 6px" }}
+        >
+          <Typography level="body-xs">
+            {row.user ? row.user.name : row.employee ? row.employee.name : "-"}
+          </Typography>
         </td>
-        <td scope={scope} style={{ width: 50, textAlign: "center", padding: "6px 6px" }}>
+        <td
+          scope={scope}
+          style={{ width: 50, textAlign: "center", padding: "6px 6px" }}
+        >
           {row.note_id && (
-            <IconButton variant="plain" size="sm" onClick={() => handleNoteModalButtonClick(row.note_id)}>
+            <IconButton
+              variant="plain"
+              size="sm"
+              onClick={() => handleNoteModalButtonClick(row.note_id)}
+            >
               <InfoOutlinedIcon />
             </IconButton>
           )}
@@ -99,7 +138,14 @@ export default function BoilHistoryModal() {
 
   const ButtonsComponent = () => {
     return (
-      <Box sx={{ display: "flex", alignItems: "center", justifyContent: "flex-start", gap: 1 }}>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-start",
+          gap: 1,
+        }}
+      >
         <Button
           color="neutral"
           variant="outlined"
@@ -130,7 +176,8 @@ export default function BoilHistoryModal() {
     }
     return (
       <TableLayout thead={history_table_thead}>
-        {isSuccess && data.map((row) => <RowComponent row={row} key={row.id} />)}
+        {isSuccess &&
+          data.map((row) => <RowComponent row={row} key={row.id} />)}
       </TableLayout>
     );
   };

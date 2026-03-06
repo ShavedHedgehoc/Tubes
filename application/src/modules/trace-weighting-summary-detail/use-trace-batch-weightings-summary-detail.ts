@@ -1,7 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import TraceBatchService, { GetWeightingsSummaryDetailDto } from "../../shared/api/services/trace-batchs-service";
+import TraceBatchService, {
+  GetWeightingsSummaryDetailDto,
+} from "../../shared/api/services/trace-batchs-service";
 
-export const useTraceBatchWeightingsSummaryDetail = (dto: GetWeightingsSummaryDetailDto) =>
+export const useTraceBatchWeightingsSummaryDetail = (
+  dto: GetWeightingsSummaryDetailDto,
+) =>
   useQuery({
     queryKey: ["trace_batch_weightings_summary_detail", dto],
     queryFn: () => TraceBatchService.getWeightingsSummaryDetail(dto),

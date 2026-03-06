@@ -4,8 +4,12 @@ import { useTraceBatchWghtReportFilterStore } from "../store/use-trace-batch-wgh
 import { TraceBatchWghtReportFilterParams } from "./trace-batch-wght-report-filter-params";
 
 export default function TraceBatchWghtReportFilterBatchInput() {
-  const filter = useTraceBatchWghtReportFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useTraceBatchWghtReportFilterStore(useShallow((state) => state.changeFilter));
+  const filter = useTraceBatchWghtReportFilterStore(
+    useShallow((state) => state.filter),
+  );
+  const changeFilter = useTraceBatchWghtReportFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
 
   const codeInputProps: FilterInputProps = {
     id: TraceBatchWghtReportFilterParams.BATCH_NAME,
@@ -14,7 +18,8 @@ export default function TraceBatchWghtReportFilterBatchInput() {
     label: "Поиск по партии",
     placeholder: "Партия",
     maxW: 140,
-    changeFilter: ({ key, value }: { key: string; value: string }) => changeFilter({ key, value }),
+    changeFilter: ({ key, value }: { key: string; value: string }) =>
+      changeFilter({ key, value }),
   };
 
   return <FilterInput {...codeInputProps} />;

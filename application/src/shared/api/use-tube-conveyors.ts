@@ -8,12 +8,18 @@ import { useTubeSealantTresholdsStore } from "../../modules/tube-tresholds/add-m
 import { useTubeRecordsListFilterStore } from "../../modules/tube-records-list/store/use-tube-records-list-filter-store";
 
 export const useTubeConveyors = () => {
-  const { fillConveyorSelectorOptions: fillTresholdsFilter } = useTubeTresholdsFilterStore();
-  const { fillConveyorSelectorOptions: fillTubeRecordsListFilter } = useTubeRecordsListFilterStore();
-  const { fillConveyorSelectorOptions: fillExtrusionTresholdsConveyors } = useTubeExtrusionTresholdsStore();
-  const { fillConveyorSelectorOptions: fillVarnishTresholdsConveyors } = useTubeVarnishTresholdsStore();
-  const { fillConveyorSelectorOptions: fillOffsetTresholdsConveyors } = useTubeOffsetTresholdsStore();
-  const { fillConveyorSelectorOptions: fillSealantTresholdsConveyors } = useTubeSealantTresholdsStore();
+  const { fillConveyorSelectorOptions: fillTresholdsFilter } =
+    useTubeTresholdsFilterStore();
+  const { fillConveyorSelectorOptions: fillTubeRecordsListFilter } =
+    useTubeRecordsListFilterStore();
+  const { fillConveyorSelectorOptions: fillExtrusionTresholdsConveyors } =
+    useTubeExtrusionTresholdsStore();
+  const { fillConveyorSelectorOptions: fillVarnishTresholdsConveyors } =
+    useTubeVarnishTresholdsStore();
+  const { fillConveyorSelectorOptions: fillOffsetTresholdsConveyors } =
+    useTubeOffsetTresholdsStore();
+  const { fillConveyorSelectorOptions: fillSealantTresholdsConveyors } =
+    useTubeSealantTresholdsStore();
 
   return useQuery({
     queryKey: ["tube_conveyors"],

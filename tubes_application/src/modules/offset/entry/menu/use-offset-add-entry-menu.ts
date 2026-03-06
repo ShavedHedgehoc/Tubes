@@ -7,20 +7,29 @@ import { useShallow } from "zustand/shallow";
 import { useOffsetConveyorStore } from "../../store/use-offset-conveyor-store";
 import { useOffsetEmployeeStore } from "../../store/use-offset-employee-store";
 
-import { initDataValue, useOffsetInputStore } from "../../store/use-offset-input-store";
+import {
+  initDataValue,
+  useOffsetInputStore,
+} from "../../store/use-offset-input-store";
 import { useOffsetCloseConfirmModalStore } from "../../store/use-offset-modal-store";
 import { useCreateOffsetEntry } from "../../use-create-offset-entry";
 import type { ISummary } from "@/shared/api/services/summary-service";
 import { useEOffsetEntryAlertModalStore } from "../../store/use-offset-entry-alert-modal-store";
 
 export default function useOffsetAddEntryMenu(summaryData: ISummary | null) {
-  const employee = useOffsetEmployeeStore(useShallow((state) => state.offsetEmployee));
-  const setOpenConfirm = useOffsetCloseConfirmModalStore(useShallow((state) => state.setOpen));
+  const employee = useOffsetEmployeeStore(
+    useShallow((state) => state.offsetEmployee),
+  );
+  const setOpenConfirm = useOffsetCloseConfirmModalStore(
+    useShallow((state) => state.setOpen),
+  );
   const data = useOffsetInputStore(useShallow((state) => state.data));
   const setOpenAlert = useEOffsetEntryAlertModalStore((state) => state.setOpen);
   const setDto = useEOffsetEntryAlertModalStore((state) => state.setDto);
   const initData = useOffsetInputStore(useShallow((state) => state.initData));
-  const offsetConveyor = useOffsetConveyorStore(useShallow((state) => state.offsetConveyor));
+  const offsetConveyor = useOffsetConveyorStore(
+    useShallow((state) => state.offsetConveyor),
+  );
   const { createOffsetEntry } = useCreateOffsetEntry();
   const navigate = useNavigate();
 
@@ -58,62 +67,86 @@ export default function useOffsetAddEntryMenu(summaryData: ISummary | null) {
 
   const alertDialogCondition =
     tresholdsData &&
-    (Number(data.printing_machine_speed) < tresholdsData.offset_printing_machine_speed_min ||
-      Number(data.printing_machine_speed) > tresholdsData.offset_printing_machine_speed_max ||
-      Number(data.total_air_pressure) < tresholdsData.offset_total_air_pressure_min ||
-      Number(data.total_air_pressure) > tresholdsData.offset_total_air_pressure_max ||
-      Number(data.padding_furnace_temp) < tresholdsData.offset_padding_furnace_temp_min ||
-      Number(data.padding_furnace_temp) > tresholdsData.offset_padding_furnace_temp_max ||
-      Number(data.offset_furnace_temp) < tresholdsData.offset_offset_furnace_temp_min ||
-      Number(data.offset_furnace_temp) > tresholdsData.offset_offset_furnace_temp_max ||
+    (Number(data.printing_machine_speed) <
+      tresholdsData.offset_printing_machine_speed_min ||
+      Number(data.printing_machine_speed) >
+        tresholdsData.offset_printing_machine_speed_max ||
+      Number(data.total_air_pressure) <
+        tresholdsData.offset_total_air_pressure_min ||
+      Number(data.total_air_pressure) >
+        tresholdsData.offset_total_air_pressure_max ||
+      Number(data.padding_furnace_temp) <
+        tresholdsData.offset_padding_furnace_temp_min ||
+      Number(data.padding_furnace_temp) >
+        tresholdsData.offset_padding_furnace_temp_max ||
+      Number(data.offset_furnace_temp) <
+        tresholdsData.offset_offset_furnace_temp_min ||
+      Number(data.offset_furnace_temp) >
+        tresholdsData.offset_offset_furnace_temp_max ||
       Number(data.printer_motor) < tresholdsData.offset_printer_motor_min ||
       Number(data.printer_motor) > tresholdsData.offset_printer_motor_max ||
-      Number(data.base_covers_holders_motor) < tresholdsData.offset_base_covers_holders_motor_min ||
-      Number(data.base_covers_holders_motor) > tresholdsData.offset_base_covers_holders_motor_max ||
-      Number(data.base_covers_station_motor) < tresholdsData.offset_base_covers_station_motor_min ||
-      Number(data.base_covers_station_motor) > tresholdsData.offset_base_covers_station_motor_max ||
+      Number(data.base_covers_holders_motor) <
+        tresholdsData.offset_base_covers_holders_motor_min ||
+      Number(data.base_covers_holders_motor) >
+        tresholdsData.offset_base_covers_holders_motor_max ||
+      Number(data.base_covers_station_motor) <
+        tresholdsData.offset_base_covers_station_motor_min ||
+      Number(data.base_covers_station_motor) >
+        tresholdsData.offset_base_covers_station_motor_max ||
       //
       (tresholdsData.offset_imprint_quantity_printed_box_1_min &&
         tresholdsData.offset_imprint_quantity_printed_box_1_max &&
-        Number(data.imprint_quantity_printed_box_1) < tresholdsData.offset_imprint_quantity_printed_box_1_min) ||
+        Number(data.imprint_quantity_printed_box_1) <
+          tresholdsData.offset_imprint_quantity_printed_box_1_min) ||
       (tresholdsData.offset_imprint_quantity_printed_box_1_min &&
         tresholdsData.offset_imprint_quantity_printed_box_1_max &&
-        Number(data.imprint_quantity_printed_box_1) > tresholdsData.offset_imprint_quantity_printed_box_1_max) ||
+        Number(data.imprint_quantity_printed_box_1) >
+          tresholdsData.offset_imprint_quantity_printed_box_1_max) ||
       //
       (tresholdsData.offset_imprint_quantity_printed_box_2_min &&
         tresholdsData.offset_imprint_quantity_printed_box_2_max &&
-        Number(data.imprint_quantity_printed_box_2) < tresholdsData.offset_imprint_quantity_printed_box_2_min) ||
+        Number(data.imprint_quantity_printed_box_2) <
+          tresholdsData.offset_imprint_quantity_printed_box_2_min) ||
       (tresholdsData.offset_imprint_quantity_printed_box_2_min &&
         tresholdsData.offset_imprint_quantity_printed_box_2_max &&
-        Number(data.imprint_quantity_printed_box_2) > tresholdsData.offset_imprint_quantity_printed_box_2_max) ||
+        Number(data.imprint_quantity_printed_box_2) >
+          tresholdsData.offset_imprint_quantity_printed_box_2_max) ||
       //
       (tresholdsData.offset_imprint_quantity_printed_box_3_min &&
         tresholdsData.offset_imprint_quantity_printed_box_3_max &&
-        Number(data.imprint_quantity_printed_box_3) < tresholdsData.offset_imprint_quantity_printed_box_3_min) ||
+        Number(data.imprint_quantity_printed_box_3) <
+          tresholdsData.offset_imprint_quantity_printed_box_3_min) ||
       (tresholdsData.offset_imprint_quantity_printed_box_3_min &&
         tresholdsData.offset_imprint_quantity_printed_box_3_max &&
-        Number(data.imprint_quantity_printed_box_3) > tresholdsData.offset_imprint_quantity_printed_box_3_max) ||
+        Number(data.imprint_quantity_printed_box_3) >
+          tresholdsData.offset_imprint_quantity_printed_box_3_max) ||
       //
       (tresholdsData.offset_imprint_quantity_printed_box_4_min &&
         tresholdsData.offset_imprint_quantity_printed_box_4_max &&
-        Number(data.imprint_quantity_printed_box_4) < tresholdsData.offset_imprint_quantity_printed_box_4_min) ||
+        Number(data.imprint_quantity_printed_box_4) <
+          tresholdsData.offset_imprint_quantity_printed_box_4_min) ||
       (tresholdsData.offset_imprint_quantity_printed_box_4_min &&
         tresholdsData.offset_imprint_quantity_printed_box_4_max &&
-        Number(data.imprint_quantity_printed_box_4) > tresholdsData.offset_imprint_quantity_printed_box_4_max) ||
+        Number(data.imprint_quantity_printed_box_4) >
+          tresholdsData.offset_imprint_quantity_printed_box_4_max) ||
       //
       (tresholdsData.offset_imprint_quantity_printed_box_5_min &&
         tresholdsData.offset_imprint_quantity_printed_box_5_max &&
-        Number(data.imprint_quantity_printed_box_5) < tresholdsData.offset_imprint_quantity_printed_box_5_min) ||
+        Number(data.imprint_quantity_printed_box_5) <
+          tresholdsData.offset_imprint_quantity_printed_box_5_min) ||
       (tresholdsData.offset_imprint_quantity_printed_box_5_min &&
         tresholdsData.offset_imprint_quantity_printed_box_5_max &&
-        Number(data.imprint_quantity_printed_box_5) > tresholdsData.offset_imprint_quantity_printed_box_5_max) ||
+        Number(data.imprint_quantity_printed_box_5) >
+          tresholdsData.offset_imprint_quantity_printed_box_5_max) ||
       //
       (tresholdsData.offset_imprint_quantity_printed_box_6_min &&
         tresholdsData.offset_imprint_quantity_printed_box_6_max &&
-        Number(data.imprint_quantity_printed_box_6) < tresholdsData.offset_imprint_quantity_printed_box_6_min) ||
+        Number(data.imprint_quantity_printed_box_6) <
+          tresholdsData.offset_imprint_quantity_printed_box_6_min) ||
       (tresholdsData.offset_imprint_quantity_printed_box_6_min &&
         tresholdsData.offset_imprint_quantity_printed_box_6_max &&
-        Number(data.imprint_quantity_printed_box_6) > tresholdsData.offset_imprint_quantity_printed_box_6_max) ||
+        Number(data.imprint_quantity_printed_box_6) >
+          tresholdsData.offset_imprint_quantity_printed_box_6_max) ||
       //
       Number(data.ink_supply_time) < tresholdsData.offset_ink_supply_time_min ||
       Number(data.ink_supply_time) > tresholdsData.offset_ink_supply_time_max ||
@@ -138,12 +171,24 @@ export default function useOffsetAddEntryMenu(summaryData: ISummary | null) {
         printer_motor: Number(data.printer_motor),
         base_covers_holders_motor: Number(data.base_covers_holders_motor),
         base_covers_station_motor: Number(data.base_covers_station_motor),
-        imprint_quantity_printed_box_1: Number(data.imprint_quantity_printed_box_1),
-        imprint_quantity_printed_box_2: Number(data.imprint_quantity_printed_box_2),
-        imprint_quantity_printed_box_3: Number(data.imprint_quantity_printed_box_3),
-        imprint_quantity_printed_box_4: Number(data.imprint_quantity_printed_box_4),
-        imprint_quantity_printed_box_5: Number(data.imprint_quantity_printed_box_5),
-        imprint_quantity_printed_box_6: Number(data.imprint_quantity_printed_box_6),
+        imprint_quantity_printed_box_1: Number(
+          data.imprint_quantity_printed_box_1,
+        ),
+        imprint_quantity_printed_box_2: Number(
+          data.imprint_quantity_printed_box_2,
+        ),
+        imprint_quantity_printed_box_3: Number(
+          data.imprint_quantity_printed_box_3,
+        ),
+        imprint_quantity_printed_box_4: Number(
+          data.imprint_quantity_printed_box_4,
+        ),
+        imprint_quantity_printed_box_5: Number(
+          data.imprint_quantity_printed_box_5,
+        ),
+        imprint_quantity_printed_box_6: Number(
+          data.imprint_quantity_printed_box_6,
+        ),
         ink_supply_time: Number(data.ink_supply_time),
         design_match: data.design_match,
         tube_appearance: data.tube_appearance,
@@ -166,8 +211,8 @@ export default function useOffsetAddEntryMenu(summaryData: ISummary | null) {
 
   const handleExitClick = () => {
     if (isInputsChanged) {
-      setOpenConfirm(true)
-      return
+      setOpenConfirm(true);
+      return;
     }
     navigate(`${RouteNames.OFFSET_ROOT}/${offsetConveyor?.name}`);
   };

@@ -8,7 +8,9 @@ import TrademarksTable from "./trademarks-table";
 export default function Trademarks() {
   return (
     <React.Fragment>
-      <BreadCrumbHeader breadcrumbs={["Прослеживаемость", "Торговые названия"]} />
+      <BreadCrumbHeader
+        breadcrumbs={["Прослеживаемость", "Торговые названия"]}
+      />
       <MainPageHeader pageTitle={"Торговые названия"} />
       <TrademarksFilter />
       <TrademarksTable />

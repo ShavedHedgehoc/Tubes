@@ -5,8 +5,12 @@ import { useDocumentDetailFilterStore } from "../store/use-document-detail-filte
 import { DocumentDetailFilterParams } from "./document-detail-filter-params";
 
 export default function DocumentDetailFilterBatchInput() {
-  const filter = useDocumentDetailFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useDocumentDetailFilterStore(useShallow((state) => state.changeFilter));
+  const filter = useDocumentDetailFilterStore(
+    useShallow((state) => state.filter),
+  );
+  const changeFilter = useDocumentDetailFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
 
   const inputProps: FilterInputProps = {
     id: DocumentDetailFilterParams.BOIL,
@@ -14,7 +18,8 @@ export default function DocumentDetailFilterBatchInput() {
     disabled: filter.boil === "",
     placeholder: "Партия",
     label: "Поиск по партии",
-    changeFilter: ({ key, value }: { key: string; value: string }) => changeFilter({ key, value }),
+    changeFilter: ({ key, value }: { key: string; value: string }) =>
+      changeFilter({ key, value }),
   };
 
   return <FilterInput {...inputProps} />;

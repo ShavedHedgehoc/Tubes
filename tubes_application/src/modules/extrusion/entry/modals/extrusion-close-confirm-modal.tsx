@@ -8,10 +8,18 @@ import { useExtrusionConveyorStore } from "../../store/use-extrusion-conveyor-st
 import { useExtrusionInputStore } from "../../store/use-extrusion-input-store";
 
 export default function ExtrusionCloseConfirmModal() {
-  const open = useExtrusionCloseConfirmModalStore(useShallow((state) => state.open));
-  const setOpen = useExtrusionCloseConfirmModalStore(useShallow((state) => state.setOpen));
-  const extrusionConveyor = useExtrusionConveyorStore(useShallow((state) => state.extrusionConveyor));
-  const initData = useExtrusionInputStore(useShallow((state) => state.initData));
+  const open = useExtrusionCloseConfirmModalStore(
+    useShallow((state) => state.open),
+  );
+  const setOpen = useExtrusionCloseConfirmModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const extrusionConveyor = useExtrusionConveyorStore(
+    useShallow((state) => state.extrusionConveyor),
+  );
+  const initData = useExtrusionInputStore(
+    useShallow((state) => state.initData),
+  );
   const navigate = useNavigate();
 
   const redirectBack = () => {
@@ -21,7 +29,8 @@ export default function ExtrusionCloseConfirmModal() {
 
   const alertModalProps: AlertModalProps = {
     title: "Закрыть",
-    message: "Вы действительно хотите вернуться на главную? Все введенные параметры будут очищены.",
+    message:
+      "Вы действительно хотите вернуться на главную? Все введенные параметры будут очищены.",
     actionButtonValue: "Закрыть",
     cancelButtonValue: "Остаться",
     open: open,

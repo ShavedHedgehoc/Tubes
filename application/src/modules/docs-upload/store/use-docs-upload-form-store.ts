@@ -67,7 +67,10 @@ export const useDocsUploadFormStore = create<DocsUploadFormStore>()(
       switch (key) {
         case DocsUploadFormParams.PLANT:
           set((state) => ({
-            formData: { ...state.formData, plant: values?.length ? values[0] : state.formData.plant },
+            formData: {
+              ...state.formData,
+              plant: values?.length ? values[0] : state.formData.plant,
+            },
           }));
           break;
 
@@ -78,7 +81,10 @@ export const useDocsUploadFormStore = create<DocsUploadFormStore>()(
           break;
         case DocsUploadFormParams.UPDATE:
           set((state) => ({
-            formData: { ...state.formData, update: value === "true" ? true : false },
+            formData: {
+              ...state.formData,
+              update: value === "true" ? true : false,
+            },
           }));
           break;
         default:
@@ -86,7 +92,8 @@ export const useDocsUploadFormStore = create<DocsUploadFormStore>()(
       }
     },
     setSelectedPlant: (value) => set(() => ({ selectedPlant: value })),
-    fillPlantSelectorOptions: (values) => set(() => ({ plantSelectorOptions: [...values] })),
+    fillPlantSelectorOptions: (values) =>
+      set(() => ({ plantSelectorOptions: [...values] })),
     setIsValid: (value) => set(() => ({ isValid: value })),
     setFile: (value) => set(() => ({ file: value })),
     setFileName: (value) => set(() => ({ fileName: value })),
@@ -106,5 +113,5 @@ export const useDocsUploadFormStore = create<DocsUploadFormStore>()(
       }));
     },
     setDataForUpload: (arr) => set(() => ({ dataForUpload: [...arr] })),
-  }))
+  })),
 );

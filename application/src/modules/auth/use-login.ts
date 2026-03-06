@@ -27,10 +27,13 @@ export function useLogin() {
     onError: (err) => {
       if (err instanceof Error) {
         const error = handleError(err);
-        enqueueSnackbar(Array.isArray(error) ? error.map((item) => item).join(",") : error, {
-          variant: "error",
-          anchorOrigin: { vertical: "top", horizontal: "right" },
-        });
+        enqueueSnackbar(
+          Array.isArray(error) ? error.map((item) => item).join(",") : error,
+          {
+            variant: "error",
+            anchorOrigin: { vertical: "top", horizontal: "right" },
+          },
+        );
       }
     },
   });

@@ -3,11 +3,19 @@ import { useShallow } from "zustand/react/shallow";
 import { useTubeRecordsUploadFormStore } from "./store/use-records-upload-form-store";
 
 export default function TubeRecordsUploadFormFileInput() {
-  const filename = useTubeRecordsUploadFormStore(useShallow((state) => state.fileName));
+  const filename = useTubeRecordsUploadFormStore(
+    useShallow((state) => state.fileName),
+  );
   const file = useTubeRecordsUploadFormStore(useShallow((state) => state.file));
-  const setFileName = useTubeRecordsUploadFormStore(useShallow((state) => state.setFileName));
-  const setFile = useTubeRecordsUploadFormStore(useShallow((state) => state.setFile));
-  const clearData = useTubeRecordsUploadFormStore(useShallow((state) => state.clearData));
+  const setFileName = useTubeRecordsUploadFormStore(
+    useShallow((state) => state.setFileName),
+  );
+  const setFile = useTubeRecordsUploadFormStore(
+    useShallow((state) => state.setFile),
+  );
+  const clearData = useTubeRecordsUploadFormStore(
+    useShallow((state) => state.clearData),
+  );
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFileName(e.target.value);
@@ -15,7 +23,9 @@ export default function TubeRecordsUploadFormFileInput() {
   };
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-      <Typography level="body-sm">{filename.split("\\").slice(-1)[0] || "Файл не выбран"}</Typography>
+      <Typography level="body-sm">
+        {filename.split("\\").slice(-1)[0] || "Файл не выбран"}
+      </Typography>
       <FormControl size="sm">
         <input
           accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
@@ -24,7 +34,9 @@ export default function TubeRecordsUploadFormFileInput() {
           type="file"
           value={filename}
           disabled={file !== undefined}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleFileSelect(e)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            handleFileSelect(e)
+          }
         />
         <label htmlFor="raised-button-file">
           <Button

@@ -1,10 +1,14 @@
 import { useShallow } from "zustand/react/shallow";
 import { useBoilsReportFilterStore } from "../store/use-boils-report-filter-store";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import FilterButton, { FilterButtonProps } from "../../../shared/ui/filter-button";
+import FilterButton, {
+  FilterButtonProps,
+} from "../../../shared/ui/filter-button";
 
 export default function BoilsReportFilterClearButton() {
-  const clearFilter = useBoilsReportFilterStore(useShallow((state) => state.clearFilter));
+  const clearFilter = useBoilsReportFilterStore(
+    useShallow((state) => state.clearFilter),
+  );
   const filter = useBoilsReportFilterStore(useShallow((state) => state.filter));
 
   const disableClearButtonCondition =

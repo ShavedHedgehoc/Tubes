@@ -1,5 +1,11 @@
 import * as React from "react";
-import { Box, DialogContent, Modal, ModalDialog, ModalOverflow } from "@mui/joy";
+import {
+  Box,
+  DialogContent,
+  Modal,
+  ModalDialog,
+  ModalOverflow,
+} from "@mui/joy";
 
 export interface ModalLMobileLayoutProps {
   open: boolean;
@@ -17,7 +23,10 @@ export default function ModalMobileLayout({
     <React.Fragment>
       <Modal
         open={props.open}
-        onClose={(_event: React.MouseEvent<HTMLButtonElement>, reason: string) => {
+        onClose={(
+          _event: React.MouseEvent<HTMLButtonElement>,
+          reason: string,
+        ) => {
           if (reason === "closeClick") {
             props.onClose();
           }

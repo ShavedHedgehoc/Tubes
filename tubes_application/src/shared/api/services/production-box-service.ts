@@ -48,8 +48,12 @@ export default class ProductionBoxService {
     return res.data;
   }
 
-  static async getProductionBoxes(batch_id: number | null): Promise<IProductionBox[] | []> {
-    const res = await $api.get(`${ApiRoutes.PRODUCTION_BOX}?summary_id=${batch_id}`);
+  static async getProductionBoxes(
+    batch_id: number | null,
+  ): Promise<IProductionBox[] | []> {
+    const res = await $api.get(
+      `${ApiRoutes.PRODUCTION_BOX}?summary_id=${batch_id}`,
+    );
     return res.data;
   }
 }

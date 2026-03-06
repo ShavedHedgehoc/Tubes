@@ -12,17 +12,31 @@ interface TresholdsProductEntryProps {
   value: number | null;
   options: TubeProduct[] | [];
   setSelected: (value: number) => void;
-  onChange: ({ key, value, values }: { key: string; value: string; values?: number[] }) => void;
+  onChange: ({
+    key,
+    value,
+    values,
+  }: {
+    key: string;
+    value: string;
+    values?: number[];
+  }) => void;
 }
 
 export function TresholdsProductEntry(props: TresholdsProductEntryProps) {
   const handleChangeProduct = (newValue: number | null) => {
     newValue && props.setSelected(newValue);
-    newValue && props.onChange({ key: props.id, value: "", values: [newValue] });
+    newValue &&
+      props.onChange({ key: props.id, value: "", values: [newValue] });
   };
 
   return (
-    <Stack direction="row" justifyContent="space-between" alignItems="center" gap={2}>
+    <Stack
+      direction="row"
+      justifyContent="space-between"
+      alignItems="center"
+      gap={2}
+    >
       <Stack direction="row" gap={1}>
         <Typography level="title-sm">Продукт:</Typography>
         <span style={{ color: "red", fontWeight: "bold" }}>*</span>
@@ -38,7 +52,10 @@ export function TresholdsProductEntry(props: TresholdsProductEntryProps) {
           flexShrink: 1,
           flexGrow: 1,
         }}
-        onChange={(event: React.SyntheticEvent | null, newValue: number | null) => {
+        onChange={(
+          event: React.SyntheticEvent | null,
+          newValue: number | null,
+        ) => {
           event && newValue && handleChangeProduct(newValue);
         }}
         value={props.value}

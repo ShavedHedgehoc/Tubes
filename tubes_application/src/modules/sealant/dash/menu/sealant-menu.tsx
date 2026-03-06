@@ -54,7 +54,10 @@ export default function SealantMenu() {
     title: "Операции",
     icon: <TbAutomation />,
     disabled: operationButtonDisabledCondition,
-    action: () => navigate(`${RouteNames.SEALANT_OPERATIONS_ROOT}/${sealantConveyor?.name}`),
+    action: () =>
+      navigate(
+        `${RouteNames.SEALANT_OPERATIONS_ROOT}/${sealantConveyor?.name}`,
+      ),
   };
   const sopButtonProps: MenuButtonProps = {
     title: "Инфо",
@@ -62,7 +65,9 @@ export default function SealantMenu() {
     disabled: false,
     action: () =>
       summaryData?.sealantStatus.operation_id
-        ? navigate(`${RouteNames.SEALANT_SOP_ROOT}/${summaryData.sealantStatus.operation_id}`)
+        ? navigate(
+            `${RouteNames.SEALANT_SOP_ROOT}/${summaryData.sealantStatus.operation_id}`,
+          )
         : undefined,
   };
 
@@ -71,7 +76,9 @@ export default function SealantMenu() {
     icon: <TbLibraryPhoto />,
     disabled: pictureButtonDisabledCondition,
     action: () =>
-      summaryData?.data.product_id ? navigate(`${RouteNames.PICTURES_ROOT}/${summaryData.data.product_id}`) : undefined,
+      summaryData?.data.product_id
+        ? navigate(`${RouteNames.PICTURES_ROOT}/${summaryData.data.product_id}`)
+        : undefined,
   };
 
   const endButtonProps: MenuButtonProps = {
@@ -84,7 +91,8 @@ export default function SealantMenu() {
     title: "Печать",
     icon: <TbPrinter />,
     disabled: printButtonDisabledCondition,
-    action: () => navigate(`${RouteNames.SEALANT_PRINT_ROOT}/${sealantConveyor?.name}`),
+    action: () =>
+      navigate(`${RouteNames.SEALANT_PRINT_ROOT}/${sealantConveyor?.name}`),
   };
 
   const loginButtonProps: MenuButtonProps = {
@@ -99,7 +107,9 @@ export default function SealantMenu() {
       <MenuButton {...inputParametersButtonProps} />
       <MenuButton {...scanMaterilButtonProps} />
       <MenuButton {...operationsButtonProps} />
-      {summaryData && summaryData.sealantStatus.state === "idle" && <MenuButton {...sopButtonProps} />}
+      {summaryData && summaryData.sealantStatus.state === "idle" && (
+        <MenuButton {...sopButtonProps} />
+      )}
       <MenuButton {...picturesButtonProps} />
       <MenuButton {...endButtonProps} />
       <MenuButton {...printButtonProps} />

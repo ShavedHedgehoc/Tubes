@@ -37,15 +37,22 @@ export default function CloseSummaryModal(props: CloseSummaryModalProps) {
                 <p>{AppMessages.WANT_TO_CLOSE_PROMPT}</p>
               </Text>
               <Text textStyle="sm" color="fg.muted">
-                <p>Для завершения работы поста необходимо внести количество брака</p>
+                <p>
+                  Для завершения работы поста необходимо внести количество брака
+                </p>
               </Text>
               <HStack w="full" justify="start">
                 <Text textStyle="md" color="fg.a">
-                  Брак: {`${props.defectValue === "0" ? "Не внесено" : props.defectValue + " кг"}`}
+                  Брак:{" "}
+                  {`${props.defectValue === "0" ? "Не внесено" : props.defectValue + " кг"}`}
                 </Text>
               </HStack>
               <HStack mt={2}>
-                <Button variant="outline" onClick={props.onAddButtonClick} px={8}>
+                <Button
+                  variant="outline"
+                  onClick={props.onAddButtonClick}
+                  px={8}
+                >
                   <TbPencil />
                   Брак
                 </Button>
@@ -53,7 +60,11 @@ export default function CloseSummaryModal(props: CloseSummaryModalProps) {
                   <Button variant="outline" onClick={handleCancelclick}>
                     Отмена
                   </Button>
-                  <Button colorPalette="red" disabled={props.defectValue === "0"} onClick={props.onEndButtonClick}>
+                  <Button
+                    colorPalette="red"
+                    disabled={props.defectValue === "0"}
+                    onClick={props.onEndButtonClick}
+                  >
                     Завершить
                   </Button>
                 </HStack>

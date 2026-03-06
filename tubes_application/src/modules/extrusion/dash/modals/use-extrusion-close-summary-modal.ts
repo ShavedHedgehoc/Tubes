@@ -11,13 +11,25 @@ import {
 import { useCreateExtrusionStatus } from "../../use-create-extrusion-status";
 
 export default function useExtrusionCloseSummaryModal() {
-  const open = useExtrusionCloseSummaryModalStore(useShallow((state) => state.open));
-  const setOpen = useExtrusionCloseSummaryModalStore(useShallow((state) => state.setOpen));
-  const setOpenEntryModal = useExtrusionDefectInputModalStore(useShallow((state) => state.setOpen));
-  const clearData = useExtrusionDefectStore(useShallow((state) => state.clearData));
+  const open = useExtrusionCloseSummaryModalStore(
+    useShallow((state) => state.open),
+  );
+  const setOpen = useExtrusionCloseSummaryModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const setOpenEntryModal = useExtrusionDefectInputModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const clearData = useExtrusionDefectStore(
+    useShallow((state) => state.clearData),
+  );
   const data = useExtrusionDefectStore(useShallow((state) => state.data));
-  const employee = useExtrusionEmployeeStore(useShallow((state) => state.extrusionEmployee));
-  const extrusionConveyor = useExtrusionConveyorStore(useShallow((state) => state.extrusionConveyor));
+  const employee = useExtrusionEmployeeStore(
+    useShallow((state) => state.extrusionEmployee),
+  );
+  const extrusionConveyor = useExtrusionConveyorStore(
+    useShallow((state) => state.extrusionConveyor),
+  );
   const { createExtrusionStatus } = useCreateExtrusionStatus();
   const { data: summaryData } = useActiveSummary(extrusionConveyor?.id ?? null);
 
@@ -42,5 +54,12 @@ export default function useExtrusionCloseSummaryModal() {
     setOpenEntryModal(false);
     clearData();
   };
-  return { open, setOpen, data, clearData, handleAddButtonClick, handleEndButtonClick };
+  return {
+    open,
+    setOpen,
+    data,
+    clearData,
+    handleAddButtonClick,
+    handleEndButtonClick,
+  };
 }

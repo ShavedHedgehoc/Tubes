@@ -9,14 +9,26 @@ import { Box, Button } from "@mui/joy";
 import { useDocumentDetailAddHistoryModalStore } from "../store/use-document-detail-add-history-modal-store";
 
 export default function DocumentDetailHistoryModal() {
-  const open = useDocumentDetailHistoryModalStore(useShallow((state) => state.open));
-  const record_id = useDocumentDetailHistoryModalStore(useShallow((state) => state.record_id));
-  const title = useDocumentDetailHistoryModalStore(useShallow((state) => state.title));
-  const addButtonEnabled = useDocumentDetailHistoryModalStore(useShallow((state) => state.addButtonEnabled));
-  const setOpen = useDocumentDetailHistoryModalStore(useShallow((state) => state.setOpen));
+  const open = useDocumentDetailHistoryModalStore(
+    useShallow((state) => state.open),
+  );
+  const record_id = useDocumentDetailHistoryModalStore(
+    useShallow((state) => state.record_id),
+  );
+  const title = useDocumentDetailHistoryModalStore(
+    useShallow((state) => state.title),
+  );
+  const addButtonEnabled = useDocumentDetailHistoryModalStore(
+    useShallow((state) => state.addButtonEnabled),
+  );
+  const setOpen = useDocumentDetailHistoryModalStore(
+    useShallow((state) => state.setOpen),
+  );
   const { isPending, data, isSuccess } = useRecordHistories(record_id);
 
-  const setOpenAddModal = useDocumentDetailAddHistoryModalStore(useShallow((state) => state.setOpen));
+  const setOpenAddModal = useDocumentDetailAddHistoryModalStore(
+    useShallow((state) => state.setOpen),
+  );
   // const setRecordId = useDocumentDetailAddHistoryModalStore(useShallow((state) => state.setRecordId));
 
   const history_table_thead: TheadProperties[] = [
@@ -43,7 +55,14 @@ export default function DocumentDetailHistoryModal() {
       setOpenAddModal(true);
     };
     return (
-      <Box sx={{ display: "flex", alignItems: "center", justifyContent: "flex-start", gap: 1 }}>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-start",
+          gap: 1,
+        }}
+      >
         <Button
           color="neutral"
           variant="outlined"
@@ -76,13 +95,20 @@ export default function DocumentDetailHistoryModal() {
       <TableLayout
         thead={
           addButtonEnabled
-            ? [...history_table_thead, { width: 50, padding: "18px 6px", value: "Действия" }]
+            ? [
+                ...history_table_thead,
+                { width: 50, padding: "18px 6px", value: "Действия" },
+              ]
             : history_table_thead
         }
       >
         {isSuccess &&
           data.histories.map((row) => (
-            <DocumentDetailHistoryModalRow row={row} godmode={addButtonEnabled} key={row.id} />
+            <DocumentDetailHistoryModalRow
+              row={row}
+              godmode={addButtonEnabled}
+              key={row.id}
+            />
           ))}
       </TableLayout>
     );

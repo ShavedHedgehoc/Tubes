@@ -19,14 +19,30 @@ const commonThead: TheadProperties[] = [
 ];
 
 export default function TubeEmployeesTable() {
-  const filter = useTubeEmployeesFilterStore(useShallow((state) => state.filter));
-  const page = useTubeEmployeesPaginationStore(useShallow((state) => state.page));
-  const limit = useTubeEmployeesPaginationStore(useShallow((state) => state.limit));
-  const total = useTubeEmployeesPaginationStore(useShallow((state) => state.total));
-  const setTotal = useTubeEmployeesPaginationStore(useShallow((state) => state.setTotal));
-  const setPage = useTubeEmployeesPaginationStore(useShallow((state) => state.setPage));
+  const filter = useTubeEmployeesFilterStore(
+    useShallow((state) => state.filter),
+  );
+  const page = useTubeEmployeesPaginationStore(
+    useShallow((state) => state.page),
+  );
+  const limit = useTubeEmployeesPaginationStore(
+    useShallow((state) => state.limit),
+  );
+  const total = useTubeEmployeesPaginationStore(
+    useShallow((state) => state.total),
+  );
+  const setTotal = useTubeEmployeesPaginationStore(
+    useShallow((state) => state.setTotal),
+  );
+  const setPage = useTubeEmployeesPaginationStore(
+    useShallow((state) => state.setPage),
+  );
 
-  const { isPending, data, isSuccess } = useTubeEmployees({ filter: filter, limit: limit, page: page });
+  const { isPending, data, isSuccess } = useTubeEmployees({
+    filter: filter,
+    limit: limit,
+    page: page,
+  });
 
   //REmove useeffects
 
@@ -53,7 +69,10 @@ export default function TubeEmployeesTable() {
 
   return (
     <TableLayout thead={commonThead}>
-      {isSuccess && data.employees.map((row) => <TubeEmployeesRow row={row} key={row.id} />)}
+      {isSuccess &&
+        data.employees.map((row) => (
+          <TubeEmployeesRow row={row} key={row.id} />
+        ))}
     </TableLayout>
   );
 }

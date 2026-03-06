@@ -1,4 +1,10 @@
-import { Box, FormControl, FormHelperText, Input, useColorScheme } from "@mui/joy";
+import {
+  Box,
+  FormControl,
+  FormHelperText,
+  Input,
+  useColorScheme,
+} from "@mui/joy";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 
 export interface FilterDateInputProps {
@@ -17,7 +23,9 @@ export default function FilterDateInput(props: FilterDateInputProps) {
           sx={{
             "&:focus-within": {
               "--Input-focusedHighlight":
-                mode === "light" ? "var(--joy-palette-neutral-400)" : "var(--joy-palette-neutral-400)",
+                mode === "light"
+                  ? "var(--joy-palette-neutral-400)"
+                  : "var(--joy-palette-neutral-400)",
             },
             minWidth: "150px",
             maxWidth: "150px",
@@ -27,7 +35,9 @@ export default function FilterDateInput(props: FilterDateInputProps) {
           type="date"
           autoComplete="false"
           value={props.value}
-          onChange={(e) => props.changeFilter({ key: e.target.id, value: e.target.value })}
+          onChange={(e) =>
+            props.changeFilter({ key: e.target.id, value: e.target.value })
+          }
           placeholder={props.placeholder}
           startDecorator={<CalendarMonthOutlinedIcon />}
         />

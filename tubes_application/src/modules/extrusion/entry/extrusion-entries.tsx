@@ -1,24 +1,31 @@
-
 import type { ISummary } from "@/shared/api/services/summary-service";
 import { CountersTresholds } from "@/shared/helpers/counters-tresholds";
 import { EXTRUSION_PARAMETER_NAMES } from "@/shared/helpers/parameter-names";
 import { useShallow } from "zustand/shallow";
 import type { AddParameterCardProps } from "../../../shared/components/cards/add-parameter-card";
-import { useExtrusionInputStore, ExtrusionInputParams } from "../store/use-extrusion-input-store";
+import {
+  useExtrusionInputStore,
+  ExtrusionInputParams,
+} from "../store/use-extrusion-input-store";
 import { VStack, HStack } from "@chakra-ui/react";
 import AddParameterCard from "../../../shared/components/cards/add-parameter-card";
 import { PARAMETER_UNITS } from "@/shared/helpers/parameter-units";
 import useExtrusionEntriesHandleCardsClick from "./use-extrusion-entries-handle-cards-click";
 
-export default function ExtrusionEntries({ summaryData }: { summaryData: ISummary | null }) {
+export default function ExtrusionEntries({
+  summaryData,
+}: {
+  summaryData: ISummary | null;
+}) {
   const data = useExtrusionInputStore(useShallow((state) => state.data));
-
 
   const { handleCardClick, handleBooleanCardClick, handleIntegerCardClick } =
     useExtrusionEntriesHandleCardsClick();
 
   const tresholdsData = summaryData?.tresholds;
-  const lastCounterValue = summaryData?.extrusionParams ? summaryData.extrusionParams.counter_value : null;
+  const lastCounterValue = summaryData?.extrusionParams
+    ? summaryData.extrusionParams.counter_value
+    : null;
 
   const counterValueCardProps: AddParameterCardProps = {
     id: ExtrusionInputParams.COUNTER_VALUE,
@@ -56,7 +63,8 @@ export default function ExtrusionEntries({ summaryData }: { summaryData: ISummar
 
   const turningMachineSpeedCardProps: AddParameterCardProps = {
     id: ExtrusionInputParams.TURNING_MACHINE_SPEED,
-    title: EXTRUSION_PARAMETER_NAMES[ExtrusionInputParams.TURNING_MACHINE_SPEED],
+    title:
+      EXTRUSION_PARAMETER_NAMES[ExtrusionInputParams.TURNING_MACHINE_SPEED],
     value: Number(data.turning_machine_speed) || null,
     minValue: tresholdsData?.extrusion_turning_machine_speed_min ?? 0,
     maxValue: tresholdsData?.extrusion_turning_machine_speed_max ?? 0,
@@ -67,7 +75,8 @@ export default function ExtrusionEntries({ summaryData }: { summaryData: ISummar
 
   const annealingFurnaceTempCardProps: AddParameterCardProps = {
     id: ExtrusionInputParams.ANNEALING_FURNACE_TEMP,
-    title: EXTRUSION_PARAMETER_NAMES[ExtrusionInputParams.ANNEALING_FURNACE_TEMP],
+    title:
+      EXTRUSION_PARAMETER_NAMES[ExtrusionInputParams.ANNEALING_FURNACE_TEMP],
     value: Number(data.annealing_furnace_temp) || null,
     minValue: tresholdsData?.extrusion_annealing_furnace_temp_min ?? 0,
     maxValue: tresholdsData?.extrusion_annealing_furnace_temp_max ?? 0,
@@ -78,7 +87,10 @@ export default function ExtrusionEntries({ summaryData }: { summaryData: ISummar
 
   const tubeCylindricalSectionLengthCardProps: AddParameterCardProps = {
     id: ExtrusionInputParams.TUBE_CYLINDRICAL_SECTION_LENGTH,
-    title: EXTRUSION_PARAMETER_NAMES[ExtrusionInputParams.TUBE_CYLINDRICAL_SECTION_LENGTH],
+    title:
+      EXTRUSION_PARAMETER_NAMES[
+        ExtrusionInputParams.TUBE_CYLINDRICAL_SECTION_LENGTH
+      ],
     value: Number(data.tube_cylindrical_section_length) || null,
     minValue: tresholdsData?.extrusion_tube_cylindrical_section_length_min ?? 0,
     maxValue: tresholdsData?.extrusion_tube_cylindrical_section_length_max ?? 0,
@@ -111,10 +123,15 @@ export default function ExtrusionEntries({ summaryData }: { summaryData: ISummar
 
   const tubeCylindricalThicknessCardProps: AddParameterCardProps = {
     id: ExtrusionInputParams.TUBE_CYLINDRICAL_THICKNESS,
-    title: EXTRUSION_PARAMETER_NAMES[ExtrusionInputParams.TUBE_CYLINDRICAL_THICKNESS],
+    title:
+      EXTRUSION_PARAMETER_NAMES[
+        ExtrusionInputParams.TUBE_CYLINDRICAL_THICKNESS
+      ],
     value: Number(data.tube_cylindrical_thickness) || null,
-    minValue: tresholdsData?.extrusion_tube_cylindrical_section_thickness_min ?? 0,
-    maxValue: tresholdsData?.extrusion_tube_cylindrical_section_thickness_max ?? 0,
+    minValue:
+      tresholdsData?.extrusion_tube_cylindrical_section_thickness_min ?? 0,
+    maxValue:
+      tresholdsData?.extrusion_tube_cylindrical_section_thickness_max ?? 0,
     unit: PARAMETER_UNITS[ExtrusionInputParams.TUBE_CYLINDRICAL_THICKNESS],
     onClick: (val) => handleCardClick(val),
     variant: "numeric",
@@ -149,7 +166,8 @@ export default function ExtrusionEntries({ summaryData }: { summaryData: ISummar
 
   const externalThreadqualityCardProps: AddParameterCardProps = {
     id: ExtrusionInputParams.EXTERNAL_THREAD_QUALITY,
-    title: EXTRUSION_PARAMETER_NAMES[ExtrusionInputParams.EXTERNAL_THREAD_QUALITY],
+    title:
+      EXTRUSION_PARAMETER_NAMES[ExtrusionInputParams.EXTERNAL_THREAD_QUALITY],
     booleanValue: data.external_thread_quality || null,
     stringDefaultValue: tresholdsData?.extrusion_external_thread_value || null,
     onClick: (val) => handleBooleanCardClick(val),

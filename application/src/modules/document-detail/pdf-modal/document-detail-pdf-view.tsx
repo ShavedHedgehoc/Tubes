@@ -1,9 +1,20 @@
 import { Sheet } from "@mui/joy";
-import { Document, Page, PDFViewer, Text, View, Font, StyleSheet } from "@react-pdf/renderer";
+import {
+  Document,
+  Page,
+  PDFViewer,
+  Text,
+  View,
+  Font,
+  StyleSheet,
+} from "@react-pdf/renderer";
 import { usePDFModalStore } from "../store/use-pdf-modal-store";
 import { useShallow } from "zustand/react/shallow";
 import { useRecordHistories } from "../../../shared/api/use-record-histories";
-import { formatDateToString, formatTimeToString } from "../../../shared/helpers/date-time-formatters";
+import {
+  formatDateToString,
+  formatTimeToString,
+} from "../../../shared/helpers/date-time-formatters";
 
 export default function DocumentDetailPDFView({
   viewerWidth,
@@ -120,7 +131,14 @@ export default function DocumentDetailPDFView({
 
   return (
     <Sheet variant="outlined" sx={{ borderRadius: "sm", mb: 1 }}>
-      <PDFViewer style={{ width: viewerWidth, height: viewerHeight, margin: 0, borderRadius: "8px" }}>
+      <PDFViewer
+        style={{
+          width: viewerWidth,
+          height: viewerHeight,
+          margin: 0,
+          borderRadius: "8px",
+        }}
+      >
         <Document>
           <Page size="A4" orientation="portrait" style={styles.body}>
             <Text style={styles.header}>Информация по фасовке</Text>
@@ -134,7 +152,9 @@ export default function DocumentDetailPDFView({
                     <Text style={{ width: 70, textAlign: "center" }}>Дата</Text>
                   </View>
                   <View style={styles.second_cell}>
-                    <Text style={{ width: 60, textAlign: "center" }}>Время</Text>
+                    <Text style={{ width: 60, textAlign: "center" }}>
+                      Время
+                    </Text>
                   </View>
                   <View style={styles.third_cell}>
                     <Text>Статус</Text>
@@ -149,19 +169,31 @@ export default function DocumentDetailPDFView({
                 {data.histories.map((item) => (
                   <View key={item.id} wrap={false} style={styles.table_row}>
                     <View style={styles.first_cell}>
-                      <Text style={{ width: 70, textAlign: "center" }}>{formatDateToString(item.createdAt)}</Text>
+                      <Text style={{ width: 70, textAlign: "center" }}>
+                        {formatDateToString(item.createdAt)}
+                      </Text>
                     </View>
                     <View style={styles.second_cell}>
-                      <Text style={{ width: 60, textAlign: "center" }}>{formatTimeToString(item.createdAt)}</Text>
+                      <Text style={{ width: 60, textAlign: "center" }}>
+                        {formatTimeToString(item.createdAt)}
+                      </Text>
                     </View>
                     <View style={styles.third_cell}>
                       <Text>{item.historyType.description}</Text>
                     </View>
                     <View style={styles.fourth_cell}>
-                      <Text>{item.user ? item.user.name : item.employee ? item.employee.name : "-"}</Text>
+                      <Text>
+                        {item.user
+                          ? item.user.name
+                          : item.employee
+                            ? item.employee.name
+                            : "-"}
+                      </Text>
                     </View>
                     <View style={styles.fifth_cell}>
-                      <Text>{item.history_note ? item.history_note.value : ""}</Text>
+                      <Text>
+                        {item.history_note ? item.history_note.value : ""}
+                      </Text>
                     </View>
                   </View>
                 ))}

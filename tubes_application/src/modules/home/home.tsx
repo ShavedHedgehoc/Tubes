@@ -3,7 +3,16 @@ import { useConveyors } from "@/shared/api/use-conveyors";
 import Loader from "@/shared/components/info/loader";
 import { AppMessages } from "@/shared/resources/app-messages";
 import { RouteNames } from "@/shared/router/route-names";
-import { Theme, Grid, GridItem, Text, Button, VStack, Heading, Center } from "@chakra-ui/react";
+import {
+  Theme,
+  Grid,
+  GridItem,
+  Text,
+  Button,
+  VStack,
+  Heading,
+  Center,
+} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
@@ -13,7 +22,13 @@ export default function Home() {
   return (
     <ColorModeProvider forcedTheme="dark">
       <Theme appearance="dark" colorPalette="gray">
-        <Grid h="100vh" w="100wv" templateRows="repeat(12, 1fr)" templateColumns="repeat(12, 1fr)" gap={2}>
+        <Grid
+          h="100vh"
+          w="100wv"
+          templateRows="repeat(12, 1fr)"
+          templateColumns="repeat(12, 1fr)"
+          gap={2}
+        >
           <GridItem rowSpan={1} colSpan={12}></GridItem>
           <GridItem rowSpan={1} colSpan={12}>
             <VStack>
@@ -32,9 +47,14 @@ export default function Home() {
                       w="full"
                       variant="surface"
                       colorPalette="current"
-                      onClick={() => navigate(`${RouteNames.POSTS_ROOT}/${item.name}`)}
+                      onClick={() =>
+                        navigate(`${RouteNames.POSTS_ROOT}/${item.name}`)
+                      }
                     >
-                      <Text textStyle="2xl" color="fg.subtle">{`Конвейер ${item.name}`}</Text>
+                      <Text
+                        textStyle="2xl"
+                        color="fg.subtle"
+                      >{`Конвейер ${item.name}`}</Text>
                     </Button>
                   ))}
                 </VStack>

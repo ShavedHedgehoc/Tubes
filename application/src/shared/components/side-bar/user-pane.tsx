@@ -18,7 +18,12 @@ export default function UserPane() {
         <Typography level="title-sm">{user?.name}</Typography>
         <Typography level="body-xs">{user?.email}</Typography>
       </Box>
-      <IconButton size="sm" variant="plain" color="neutral" onClick={() => logout()}>
+      <IconButton
+        size="sm"
+        variant="plain"
+        color="neutral"
+        onClick={() => logout()}
+      >
         <LogoutIcon />
       </IconButton>
     </Box>

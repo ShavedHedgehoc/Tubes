@@ -5,11 +5,17 @@ import { useTubeEmployeesAddModalStore } from "../store/use-tube-employees-add-m
 import { useTubeCreateEmployee } from "../use-tube-create-employee";
 
 export default function TubeEmployeesAddModalButtons() {
-  const setOpen = useTubeEmployeesAddModalStore(useShallow((state) => state.setOpen));
-  const clearData = useTubeEmployeesAddModalStore(useShallow((state) => state.clearData));
+  const setOpen = useTubeEmployeesAddModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const clearData = useTubeEmployeesAddModalStore(
+    useShallow((state) => state.clearData),
+  );
 
   const name = useTubeEmployeesAddModalStore(useShallow((state) => state.name));
-  const barcode = useTubeEmployeesAddModalStore(useShallow((state) => state.barcode));
+  const barcode = useTubeEmployeesAddModalStore(
+    useShallow((state) => state.barcode),
+  );
   const rank = useTubeEmployeesAddModalStore(useShallow((state) => state.rank));
 
   const { createEmployee, isPending } = useTubeCreateEmployee();
@@ -34,7 +40,9 @@ export default function TubeEmployeesAddModalButtons() {
         variant="outlined"
         size={"sm"}
         sx={{ fontWeight: "normal", fontSize: "small" }}
-        disabled={!(name !== "" && barcode !== "" && rank !== null) || isPending}
+        disabled={
+          !(name !== "" && barcode !== "" && rank !== null) || isPending
+        }
         onClick={() => handleCreateEmployee()}
       >
         Создать

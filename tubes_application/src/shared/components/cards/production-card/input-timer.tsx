@@ -37,33 +37,41 @@ export default function InputTimer({
       //     : "colorCycle"
       // }
     >
-      <Heading size="sm" w="full">{`${firstString} ${formatTimeToString(date)}`}</Heading>
+      <Heading
+        size="sm"
+        w="full"
+      >{`${firstString} ${formatTimeToString(date)}`}</Heading>
       <Heading size="sm" w="full">
         {`${fourthString} 
-                ${new Date(idleTime - offset * 3600 * 1000).toLocaleTimeString(locale, {
-                  hour: "numeric",
-                  hour12: false,
-                  minute: "numeric",
-                  second: "numeric",
-                })}`}
+                ${new Date(idleTime - offset * 3600 * 1000).toLocaleTimeString(
+                  locale,
+                  {
+                    hour: "numeric",
+                    hour12: false,
+                    minute: "numeric",
+                    second: "numeric",
+                  },
+                )}`}
       </Heading>
       <Heading
         size="sm"
         w="full"
         animation={
-          new Date(date).getTime() + checkInterval * 60 * 1000 + idleTime > new Date(today).getTime()
+          new Date(date).getTime() + checkInterval * 60 * 1000 + idleTime >
+          new Date(today).getTime()
             ? "none"
             : "colorCycle"
         }
       >
-        {new Date(date).getTime() + checkInterval * 60 * 1000 + idleTime > new Date(today).getTime()
+        {new Date(date).getTime() + checkInterval * 60 * 1000 + idleTime >
+        new Date(today).getTime()
           ? `${secondString} 
                 ${new Date(
                   new Date(date).getTime() +
                     checkInterval * 60 * 1000 -
                     new Date(today).getTime() -
                     offset * 3600 * 1000 +
-                    idleTime
+                    idleTime,
                 ).toLocaleTimeString(locale, {
                   hour: "numeric",
                   hour12: false,

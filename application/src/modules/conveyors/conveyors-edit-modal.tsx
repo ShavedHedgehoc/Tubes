@@ -15,7 +15,9 @@ import { enqueueSnackbar } from "notistack";
 import { useEditModalStore } from "./store/use-edit-modal-store";
 import ConveyorService from "../../shared/api/services/conveyor-service";
 import handleError from "../../shared/api/http/handleError";
-import ModalLayout, { ModalLayoutProps } from "../../shared/layouts/modal-layout";
+import ModalLayout, {
+  ModalLayoutProps,
+} from "../../shared/layouts/modal-layout";
 
 const ValueInput = () => {
   const value = useEditModalStore(useShallow((state) => state.value));
@@ -104,7 +106,10 @@ const ButtonComponent = () => {
     onError: (err) => {
       if (err instanceof Error) {
         const error = handleError(err);
-        enqueueSnackbar(error, { variant: "error", anchorOrigin: { vertical: "top", horizontal: "right" } });
+        enqueueSnackbar(error, {
+          variant: "error",
+          anchorOrigin: { vertical: "top", horizontal: "right" },
+        });
       }
     },
   });

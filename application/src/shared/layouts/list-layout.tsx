@@ -2,7 +2,11 @@ import * as React from "react";
 import { SxProps } from "@mui/joy/styles/types";
 import { Sheet, useColorScheme } from "@mui/joy";
 
-export default function ListLayout({ children }: { children: React.ReactNode }) {
+export default function ListLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const { mode } = useColorScheme();
 
   const sheetSxProps: SxProps = [
@@ -18,18 +22,27 @@ export default function ListLayout({ children }: { children: React.ReactNode }) 
       backgroundColor: "background.body",
       "&::-webkit-scrollbar": {
         width: { xs: "0", sm: "0.5rem" },
-        backgroundColor: mode === "light" ? "var(--joy-palette-common-white)" : "var(--joy-palette-common-black)",
+        backgroundColor:
+          mode === "light"
+            ? "var(--joy-palette-common-white)"
+            : "var(--joy-palette-common-black)",
       },
       "&::-webkit-scrollbar-track": {
         borderRadius: "lg",
-        backgroundColor: mode === "light" ? "var(--joy-palette-common-white)" : "var(--joy-palette-common-black)",
+        backgroundColor:
+          mode === "light"
+            ? "var(--joy-palette-common-white)"
+            : "var(--joy-palette-common-black)",
         border:
           mode === "light"
             ? "0.5px solid var(--joy-palette-neutral-300)"
             : "0.5px solid var(--joy-palette-neutral-700)",
       },
       "&::-webkit-scrollbar-thumb": {
-        backgroundColor: mode === "light" ? "var(--joy-palette-neutral-300)" : "var(--joy-palette-neutral-700)",
+        backgroundColor:
+          mode === "light"
+            ? "var(--joy-palette-neutral-300)"
+            : "var(--joy-palette-neutral-700)",
         borderRadius: "lg",
       },
     },

@@ -35,7 +35,9 @@ export interface RegulationResponce {
 }
 
 export default class RegulationService {
-  static async getRegulationByProductId(id: string | null): Promise<RegulationResponce> {
+  static async getRegulationByProductId(
+    id: string | null,
+  ): Promise<RegulationResponce> {
     const res = await $api.get(`/regulations/${id}`);
     return res.data;
   }

@@ -5,15 +5,24 @@ import { Chart, useChart } from "@chakra-ui/charts";
 import { Box, VStack, Text } from "@chakra-ui/react";
 import { CartesianGrid, XAxis, YAxis, LineChart, Line, Legend } from "recharts";
 
-export default function ProductionLineChart({ summaryData, postId }: { summaryData: ISummary | null; postId: number }) {
+export default function ProductionLineChart({
+  summaryData,
+  postId,
+}: {
+  summaryData: ISummary | null;
+  postId: number;
+}) {
   const data = getStatusCountersData(postId, summaryData);
-  const maxCounterValue = data.length > 0 ? data[data.length - 1].counter_value : 0;
+  const maxCounterValue =
+    data.length > 0 ? data[data.length - 1].counter_value : 0;
   const minCounterValue = data.length > 0 ? data[0].counter_value : 0;
-  const chartData: { val: number; idle: number; time: Date }[] = data.map((item) => ({
-    val: item.counter_value,
-    idle: item.idle ? maxCounterValue : minCounterValue,
-    time: item.createdAt,
-  }));
+  const chartData: { val: number; idle: number; time: Date }[] = data.map(
+    (item) => ({
+      val: item.counter_value,
+      idle: item.idle ? maxCounterValue : minCounterValue,
+      time: item.createdAt,
+    }),
+  );
 
   const lineChart = useChart({
     data: chartData,
@@ -26,12 +35,26 @@ export default function ProductionLineChart({ summaryData, postId }: { summaryDa
   if (!summaryData?.tresholds) return;
 
   return (
-    <Box backgroundColor="bg.panel" w="full" h="full" rounded="lg" p={4} alignItems="center" justifyContent="center">
+    <Box
+      backgroundColor="bg.panel"
+      w="full"
+      h="full"
+      rounded="lg"
+      p={4}
+      alignItems="center"
+      justifyContent="center"
+    >
       <VStack h="full" w="full" justify="center">
         {chartData.length ? (
           <Chart.Root boxSize="full" chart={lineChart} animation={"none"}>
-            <LineChart data={lineChart.data} margin={{ top: 25, right: 0, left: 0, bottom: 0 }}>
-              <CartesianGrid stroke={lineChart.color("border")} vertical={true} />
+            <LineChart
+              data={lineChart.data}
+              margin={{ top: 25, right: 0, left: 0, bottom: 0 }}
+            >
+              <CartesianGrid
+                stroke={lineChart.color("border")}
+                vertical={true}
+              />
               <XAxis
                 axisLine={false}
                 dataKey={lineChart.key("time")}
@@ -73,7 +96,7 @@ export default function ProductionLineChart({ summaryData, postId }: { summaryDa
                   // fill={`url(#${item.name}-gradient)`}
                   stroke={lineChart.color(item.color)}
                   strokeWidth={2}
-                // stackId="a"
+                  // stackId="a"
                 />
               ))}
             </LineChart>

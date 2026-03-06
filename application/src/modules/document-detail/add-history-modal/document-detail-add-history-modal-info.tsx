@@ -3,7 +3,9 @@ import { useDocumentDetailAddHistoryModalStore } from "../store/use-document-det
 import { useShallow } from "zustand/react/shallow";
 
 export default function DocumentDetailAddHistoryModalInfo() {
-  const row = useDocumentDetailAddHistoryModalStore(useShallow((state) => state.row));
+  const row = useDocumentDetailAddHistoryModalStore(
+    useShallow((state) => state.row),
+  );
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>

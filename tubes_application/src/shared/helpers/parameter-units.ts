@@ -28,7 +28,6 @@ export const PARAMETER_UNITS = {
   tube_diameter: UNITS.MM,
   tube_cylindrical_thickness: UNITS.MM,
 
-
   // --- VARNISH (VAR_) ---
   varnish_machine_speed: UNITS.PCS_MIN,
   feed_can_air_pressure: UNITS.BAR,
@@ -75,4 +74,3 @@ export const PARAMETER_UNITS = {
 
 // export type ParameterKey = keyof typeof PARAMETER_UNITS;
 // export type UnitValue = (typeof UNITS)[keyof typeof UNITS];
-

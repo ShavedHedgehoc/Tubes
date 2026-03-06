@@ -4,7 +4,9 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import FilterButton, { FilterButtonProps } from "../../shared/ui/filter-button";
 
 export default function RecordsFilterClearButton() {
-  const clearFilter = useRecordsFilterStore(useShallow((state) => state.clearFilter));
+  const clearFilter = useRecordsFilterStore(
+    useShallow((state) => state.clearFilter),
+  );
   const filter = useRecordsFilterStore(useShallow((state) => state.filter));
 
   const disableClearButtonCondition =

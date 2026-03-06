@@ -10,5 +10,5 @@ export const useBoilHistoryNoteStore = create<BoilHistoryNoteStore>()(
   devtools((set) => ({
     historyNote: "",
     setHistoryNote: (value) => set(() => ({ historyNote: value })),
-  }))
+  })),
 );

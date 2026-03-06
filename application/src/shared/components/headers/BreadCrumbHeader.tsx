@@ -9,8 +9,18 @@ export interface BreadCrumbHeaderProps {
 export default function BreadCrumbHeader(props: BreadCrumbHeaderProps) {
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
-      <Breadcrumbs size="sm" aria-label="breadcrumbs" separator={<ChevronRightRoundedIcon />} sx={{ pl: 0 }}>
-        <Link underline="none" color="neutral" href="#some-link" aria-label="Home">
+      <Breadcrumbs
+        size="sm"
+        aria-label="breadcrumbs"
+        separator={<ChevronRightRoundedIcon />}
+        sx={{ pl: 0 }}
+      >
+        <Link
+          underline="none"
+          color="neutral"
+          href="#some-link"
+          aria-label="Home"
+        >
           <HomeRoundedIcon />
         </Link>
         {props.breadcrumbs.map((item) => (

@@ -13,5 +13,5 @@ export const useVarnishEmployeeStore = create<VarnishEmployeeStore>()(
     varnishEmployee: null,
     setVarnishEmployee: (value) => set(() => ({ varnishEmployee: value })),
     clearVarnishEmployee: () => set(() => ({ varnishEmployee: null })),
-  }))
+  })),
 );

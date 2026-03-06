@@ -15,24 +15,42 @@ import Info from "../../shared/components/info/info";
 import { PostNames } from "@/shared/helpers/post-names";
 import { Theme } from "@chakra-ui/react";
 import { ColorModeProvider } from "@/components/ui/color-mode";
-import OperationPageLayout, { type OperationPageLayoutProps } from "@/shared/components/layouts/operation-page-layout";
+import OperationPageLayout, {
+  type OperationPageLayoutProps,
+} from "@/shared/components/layouts/operation-page-layout";
 import OffsetOperationsMenu from "./operations/menu/offset-operations-menu";
 import OffsetOperationContent from "./operations/content/offset-operations-content";
 
 export default function OffsetOperations() {
   const params = useParams<Params.CONVEYOR_NAME>();
   const { isPending } = useConveyor(params.conveyor_name ?? null);
-  const offsetConveyor = useOffsetConveyorStore(useShallow((state) => state.offsetConveyor));
-  const employee = useOffsetEmployeeStore(useShallow((state) => state.offsetEmployee));
-  const { data: summaryData, isPending: isPendingSummary, isError } = useActiveSummary(offsetConveyor?.id ?? null);
+  const offsetConveyor = useOffsetConveyorStore(
+    useShallow((state) => state.offsetConveyor),
+  );
+  const employee = useOffsetEmployeeStore(
+    useShallow((state) => state.offsetEmployee),
+  );
+  const {
+    data: summaryData,
+    isPending: isPendingSummary,
+    isError,
+  } = useActiveSummary(offsetConveyor?.id ?? null);
 
   if (isPending) return <Loader />;
-  if (!offsetConveyor) return <NotFound message={AppMessages.CONVEYOR_NOT_EXISTS} />;
+  if (!offsetConveyor)
+    return <NotFound message={AppMessages.CONVEYOR_NOT_EXISTS} />;
 
   const pageLayoutProps: OperationPageLayoutProps = {
     timeComponent: <TimeComponent />,
-    headerComponent: <HeaderComponent conveyorName={offsetConveyor.name} postName={PostNames.OFFSET} />,
-    operationComponent: <OffsetOperationContent summaryData={summaryData ?? null} />,
+    headerComponent: (
+      <HeaderComponent
+        conveyorName={offsetConveyor.name}
+        postName={PostNames.OFFSET}
+      />
+    ),
+    operationComponent: (
+      <OffsetOperationContent summaryData={summaryData ?? null} />
+    ),
     menuComponent: <OffsetOperationsMenu summaryData={summaryData ?? null} />,
     userComponent: <UserComponent employee={employee} />,
     loaderComponent: <Loader />,

@@ -8,9 +8,15 @@ import { useSealantCloseConfirmModalStore } from "../../store/use-sealant-modal-
 import { useSealantInputStore } from "../../store/use-sealant-input-store";
 
 export default function SealantCloseConfirmModal() {
-  const open = useSealantCloseConfirmModalStore(useShallow((state) => state.open));
-  const setOpen = useSealantCloseConfirmModalStore(useShallow((state) => state.setOpen));
-  const sealantConveyor = useSealantConveyorStore(useShallow((state) => state.sealantConveyor));
+  const open = useSealantCloseConfirmModalStore(
+    useShallow((state) => state.open),
+  );
+  const setOpen = useSealantCloseConfirmModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const sealantConveyor = useSealantConveyorStore(
+    useShallow((state) => state.sealantConveyor),
+  );
   const initData = useSealantInputStore(useShallow((state) => state.initData));
   const navigate = useNavigate();
 
@@ -21,7 +27,8 @@ export default function SealantCloseConfirmModal() {
 
   const alertModalProps: AlertModalProps = {
     title: "Закрыть",
-    message: "Вы действительно хотите вернуться на главную? Все введенные параметры будут очищены.",
+    message:
+      "Вы действительно хотите вернуться на главную? Все введенные параметры будут очищены.",
     actionButtonValue: "Закрыть",
     cancelButtonValue: "Остаться",
     open: open,

@@ -1,6 +1,8 @@
 import { useShallow } from "zustand/react/shallow";
 import { useUserUpdateModalStore } from "../store/use-update-user-modal-store";
-import ModalLayout, { ModalLayoutProps } from "../../../shared/layouts/modal-layout";
+import ModalLayout, {
+  ModalLayoutProps,
+} from "../../../shared/layouts/modal-layout";
 import UpdateUserModalButtons from "./update-user-modal-buttons";
 import UpdateUserModalForm from "./update-user-modal-form";
 

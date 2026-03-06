@@ -3,18 +3,32 @@ import Info from "@/shared/components/info/info";
 import NotFound from "@/shared/components/info/not-found-full-screen";
 import { formatTimeToString } from "@/shared/helpers/date-time-formatters";
 import { AppMessages } from "@/shared/resources/app-messages";
-import { Box, Heading, ScrollArea, SimpleGrid, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  ScrollArea,
+  SimpleGrid,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import useExtrusionOperationsContent from "./use-extrusion-operations-content";
 import OperationCard from "@/shared/components/cards/operation-card";
 
-export default function ExtrusionOperationsContent({ summaryData }: { summaryData: ISummary | null }) {
-  const { items, setSelectedOperation, employee, selectedOperation } = useExtrusionOperationsContent({
-    summaryData: summaryData,
-  });
+export default function ExtrusionOperationsContent({
+  summaryData,
+}: {
+  summaryData: ISummary | null;
+}) {
+  const { items, setSelectedOperation, employee, selectedOperation } =
+    useExtrusionOperationsContent({
+      summaryData: summaryData,
+    });
 
   if (!employee) return <NotFound message={AppMessages.NOT_AUTHORIZED} />;
-  if (!summaryData) return <NotFound message={AppMessages.ACTIVE_SUMMARY_NOT_FOUND} />;
-  if (!summaryData.extrusionOperations.length) return <Info message={AppMessages.OPERATIONS_LIST_NOT_FOUND} />;
+  if (!summaryData)
+    return <NotFound message={AppMessages.ACTIVE_SUMMARY_NOT_FOUND} />;
+  if (!summaryData.extrusionOperations.length)
+    return <Info message={AppMessages.OPERATIONS_LIST_NOT_FOUND} />;
 
   const content = {
     idle: (
@@ -23,10 +37,12 @@ export default function ExtrusionOperationsContent({ summaryData }: { summaryDat
           Статус поста - простой
         </Heading>
         <Heading fontSize="3xl" color="fg.subtle">
-          Выполняемая операция: {summaryData.extrusionStatus.operation_description}
+          Выполняемая операция:{" "}
+          {summaryData.extrusionStatus.operation_description}
         </Heading>
         <Heading fontSize="3xl" color="fg.subtle">
-          Время начала: {formatTimeToString(summaryData.extrusionStatus.createdAt)}
+          Время начала:{" "}
+          {formatTimeToString(summaryData.extrusionStatus.createdAt)}
         </Heading>
       </VStack>
     ),
@@ -36,7 +52,9 @@ export default function ExtrusionOperationsContent({ summaryData }: { summaryDat
           Статус поста - работает
         </Heading>
         <Text color="fg.subtle" textStyle="xl">
-          {selectedOperation ? `Выбранная операция: ${selectedOperation.description}` : "Выберите операцию"}
+          {selectedOperation
+            ? `Выбранная операция: ${selectedOperation.description}`
+            : "Выберите операцию"}
         </Text>
         <ScrollArea.Root height="full" variant={"always"}>
           <ScrollArea.Viewport>
@@ -46,8 +64,15 @@ export default function ExtrusionOperationsContent({ summaryData }: { summaryDat
                   <OperationCard
                     operation={item}
                     onClick={() => setSelectedOperation(item)}
-                    selected={selectedOperation !== null && selectedOperation.id === item.id}
-                    disabled={!employee || !employee.rank || employee.rank.val < item.min_rank}
+                    selected={
+                      selectedOperation !== null &&
+                      selectedOperation.id === item.id
+                    }
+                    disabled={
+                      !employee ||
+                      !employee.rank ||
+                      employee.rank.val < item.min_rank
+                    }
                   />
                 ))}
               </SimpleGrid>

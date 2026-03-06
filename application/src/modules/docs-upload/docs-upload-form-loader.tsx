@@ -7,10 +7,16 @@ import { IDocUploadData } from "../../shared/api/services/record-service";
 
 export default function DocsUploadFormLoader() {
   const { uploadDoc, uploadPending } = useUploadDoc();
-  const formData = useDocsUploadFormStore(useShallow((state) => state.formData));
-  const dataForUpload = useDocsUploadFormStore(useShallow((state) => state.dataForUpload));
+  const formData = useDocsUploadFormStore(
+    useShallow((state) => state.formData),
+  );
+  const dataForUpload = useDocsUploadFormStore(
+    useShallow((state) => state.dataForUpload),
+  );
   const isValid = useDocsUploadFormStore(useShallow((state) => state.isValid));
-  const clearData = useDocsUploadFormStore(useShallow((state) => state.clearData));
+  const clearData = useDocsUploadFormStore(
+    useShallow((state) => state.clearData),
+  );
   const update = useDocsUploadFormStore(useShallow((state) => state.update));
 
   const upload = async () => {

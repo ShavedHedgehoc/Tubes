@@ -28,7 +28,7 @@ services:
     restart: unless-stopped
     networks:
       - postgres
-  
+
   tubes_api:
     container_name: api_tubes
     build:
@@ -45,16 +45,15 @@ services:
       POSTGRES_DB: "tubes_db"
       PORT: "7100"
     volumes:
-      - files-data:/api_tubes/uploads 
+      - files-data:/api_tubes/uploads
     ports:
-      - "7100:7100"    
+      - "7100:7100"
     depends_on:
       - postgres
     restart: always
     networks:
       - postgres
       - general
-
 
   # api:
   #   container_name: api_container
@@ -90,7 +89,7 @@ services:
   #     - "3000:3000"
   #   networks:
   #     - general
-  
+
   nginx-file-server:
     container_name: nginx_file_server_container
     build:

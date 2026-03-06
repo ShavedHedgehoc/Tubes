@@ -48,7 +48,7 @@ export const useTresholdUploadForm = () => {
     };
     upload(dto);
     form.reset();
-    reset()
+    reset();
     setParams({ "upload-treshold": false });
   }
 

@@ -11,13 +11,15 @@ interface CansHistoryModalStore {
   //   setBoilValue: (value: string | null) => void;
 }
 
-export const useCansHistoryModalStore = create<CansHistoryModalStore>()((set) => ({
-  open: false,
-  can_id: null,
-  //   boil_value: null,
-  title: "",
-  setOpen: (value) => set(() => ({ open: value })),
-  setCanId: (value) => set(() => ({ can_id: value })),
-  setTitle: (value) => set(() => ({ title: value })),
-  //   setBoilValue: (value) => set(() => ({ boil_value: value })),
-}));
+export const useCansHistoryModalStore = create<CansHistoryModalStore>()(
+  (set) => ({
+    open: false,
+    can_id: null,
+    //   boil_value: null,
+    title: "",
+    setOpen: (value) => set(() => ({ open: value })),
+    setCanId: (value) => set(() => ({ can_id: value })),
+    setTitle: (value) => set(() => ({ title: value })),
+    //   setBoilValue: (value) => set(() => ({ boil_value: value })),
+  }),
+);

@@ -2,7 +2,11 @@ import { Stack, Typography } from "@mui/joy";
 import { TubeRecordDetailData } from "../../shared/api/services/tube-records-service";
 import TubeRecordDetailXLSXButton from "./tube-record-detail-xlsx-button";
 
-export default function TubeRecordDetailProduct({ productData }: { productData: TubeRecordDetailData }) {
+export default function TubeRecordDetailProduct({
+  productData,
+}: {
+  productData: TubeRecordDetailData;
+}) {
   return (
     <Stack direction="row" justifyContent="space-between" gap={1}>
       <Stack>
@@ -14,7 +18,11 @@ export default function TubeRecordDetailProduct({ productData }: { productData: 
       </Stack>
       <Stack justifyContent="space-between">
         <Typography level="h3">
-          {productData.isFinished ? "Завершена" : productData.isActive ? "В работе" : ""}
+          {productData.isFinished
+            ? "Завершена"
+            : productData.isActive
+              ? "В работе"
+              : ""}
         </Typography>
         <TubeRecordDetailXLSXButton summary_id={String(productData.id)} />
       </Stack>

@@ -13,5 +13,5 @@ export const useExtrusionEmployeeStore = create<ExtrusionEmployeeStore>()(
     extrusionEmployee: null,
     setExtrusionEmployee: (value) => set(() => ({ extrusionEmployee: value })),
     clearExtrusionEmployee: () => set(() => ({ extrusionEmployee: null })),
-  }))
+  })),
 );

@@ -20,23 +20,24 @@ interface DocumentDetailEditRecordlModalStore {
   setRow: (value: IDocRow | null) => void;
 }
 
-export const useDocumentDetailEditRecordlModalStore = create<DocumentDetailEditRecordlModalStore>()(
-  devtools((set) => ({
-    open: false,
-    updated: false,
-    plan: "",
-    apparatus: "",
-    can: "",
-    conveyor: "",
-    note: "",
-    row: null,
-    setOpen: (value) => set(() => ({ open: value })),
-    setUpdated: (value) => set(() => ({ updated: value })),
-    setPlan: (value) => set(() => ({ plan: value })),
-    setApparatus: (value) => set(() => ({ apparatus: value })),
-    setCan: (value) => set(() => ({ can: value })),
-    setConveyor: (value) => set(() => ({ conveyor: value })),
-    setNote: (value) => set(() => ({ note: value })),
-    setRow: (value) => set(() => ({ row: value })),
-  }))
-);
+export const useDocumentDetailEditRecordlModalStore =
+  create<DocumentDetailEditRecordlModalStore>()(
+    devtools((set) => ({
+      open: false,
+      updated: false,
+      plan: "",
+      apparatus: "",
+      can: "",
+      conveyor: "",
+      note: "",
+      row: null,
+      setOpen: (value) => set(() => ({ open: value })),
+      setUpdated: (value) => set(() => ({ updated: value })),
+      setPlan: (value) => set(() => ({ plan: value })),
+      setApparatus: (value) => set(() => ({ apparatus: value })),
+      setCan: (value) => set(() => ({ can: value })),
+      setConveyor: (value) => set(() => ({ conveyor: value })),
+      setNote: (value) => set(() => ({ note: value })),
+      setRow: (value) => set(() => ({ row: value })),
+    })),
+  );

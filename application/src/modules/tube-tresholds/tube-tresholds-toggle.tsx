@@ -1,10 +1,15 @@
 import { useShallow } from "zustand/react/shallow";
-import { TubePostName, useTubeTresholdsPostStore } from "./store/use-tube-tresholds-post-store";
+import {
+  TubePostName,
+  useTubeTresholdsPostStore,
+} from "./store/use-tube-tresholds-post-store";
 import { Button, ToggleButtonGroup } from "@mui/joy";
 
 export default function TubeTresholdsToggle() {
   const post = useTubeTresholdsPostStore(useShallow((state) => state.post));
-  const setPostName = useTubeTresholdsPostStore(useShallow((state) => state.setPostName));
+  const setPostName = useTubeTresholdsPostStore(
+    useShallow((state) => state.setPostName),
+  );
 
   const handleChange = (newValue: TubePostName | null) => {
     newValue && setPostName(newValue);
@@ -13,7 +18,10 @@ export default function TubeTresholdsToggle() {
     <ToggleButtonGroup
       size="md"
       value={post}
-      onChange={(event: React.SyntheticEvent | null, newValue: TubePostName | null) => {
+      onChange={(
+        event: React.SyntheticEvent | null,
+        newValue: TubePostName | null,
+      ) => {
         event && newValue && handleChange(newValue);
       }}
     >

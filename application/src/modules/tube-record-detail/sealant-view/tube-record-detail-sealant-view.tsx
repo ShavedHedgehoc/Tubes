@@ -17,7 +17,9 @@ export default function TubeRecordDetailSealantView({
       <TubeRecordDetailPostState state={sealantData.status} />
       <TubeRecordDetailSealantParamsTable paramsData={sealantData.params} />
       <TubeRecordDetailDefect defect={sealantData.defect} />
-      <TubeRecordDetailOperationsTable operationsData={sealantData.operations} />
+      <TubeRecordDetailOperationsTable
+        operationsData={sealantData.operations}
+      />
     </TubeDetailViewLayout>
   );
 }

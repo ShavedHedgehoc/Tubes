@@ -13,5 +13,5 @@ export const usePictureProductStore = create<PictureProductStore>()(
     pictureProduct: null,
     setPictureProduct: (value) => set(() => ({ pictureProduct: value })),
     clearPictureProduct: () => set(() => ({ pictureProduct: null })),
-  }))
+  })),
 );

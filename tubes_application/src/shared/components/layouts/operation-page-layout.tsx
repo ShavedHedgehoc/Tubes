@@ -15,7 +15,13 @@ export interface OperationPageLayoutProps {
 export default function OperationPageLayout(props: OperationPageLayoutProps) {
   return (
     <Theme appearance="dark">
-      <Grid h="100vh" w="100wv" templateRows="repeat(28, 1fr)" templateColumns="repeat(24, 1fr)" gap={2}>
+      <Grid
+        h="100vh"
+        w="100wv"
+        templateRows="repeat(28, 1fr)"
+        templateColumns="repeat(24, 1fr)"
+        gap={2}
+      >
         <GridItem rowSpan={1} colSpan={24}>
           {props.timeComponent}
         </GridItem>

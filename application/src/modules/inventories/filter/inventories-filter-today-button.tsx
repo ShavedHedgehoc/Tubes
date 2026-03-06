@@ -1,12 +1,16 @@
 import { useShallow } from "zustand/react/shallow";
 
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
-import FilterButton, { FilterButtonProps } from "../../../shared/ui/filter-button";
+import FilterButton, {
+  FilterButtonProps,
+} from "../../../shared/ui/filter-button";
 import { getCurrentDay } from "../../../shared/helpers/date-time-formatters";
 import { useInventoriesFilterStore } from "../store/use-inventories-filter-store";
 
 export default function InventoriesFilterTodayButton() {
-  const setDayToToday = useInventoriesFilterStore(useShallow((state) => state.setDayToToday));
+  const setDayToToday = useInventoriesFilterStore(
+    useShallow((state) => state.setDayToToday),
+  );
   const filter = useInventoriesFilterStore(useShallow((state) => state.filter));
 
   const disableDocumentFilterTodayButton =

@@ -7,8 +7,12 @@ import { AppMessages } from "@/shared/resources/app-messages";
 
 export default function SealantLogoutAlertModal() {
   const open = useSealantLogoutModalStore(useShallow((state) => state.open));
-  const setOpen = useSealantLogoutModalStore(useShallow((state) => state.setOpen));
-  const logout = useSealantEmployeeStore(useShallow((state) => state.clearSealantEmployee));
+  const setOpen = useSealantLogoutModalStore(
+    useShallow((state) => state.setOpen),
+  );
+  const logout = useSealantEmployeeStore(
+    useShallow((state) => state.clearSealantEmployee),
+  );
 
   const alertModalProps: AlertModalProps = {
     title: "Выход пользователя",

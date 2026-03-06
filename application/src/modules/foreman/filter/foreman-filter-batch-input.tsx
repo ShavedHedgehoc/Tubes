@@ -5,7 +5,9 @@ import FilterInput, { FilterInputProps } from "../../../shared/ui/filter-input";
 
 export default function ForemanFilterBatchInput() {
   const filter = useForemanFilterStore(useShallow((state) => state.filter));
-  const changeFilter = useForemanFilterStore(useShallow((state) => state.changeFilter));
+  const changeFilter = useForemanFilterStore(
+    useShallow((state) => state.changeFilter),
+  );
 
   const inputProps: FilterInputProps = {
     id: ForemanFilterParams.BOIL,
@@ -13,7 +15,8 @@ export default function ForemanFilterBatchInput() {
     disabled: filter.boil === "",
     placeholder: "Партия",
     label: "Поиск по партии",
-    changeFilter: ({ key, value }: { key: string; value: string }) => changeFilter({ key, value }),
+    changeFilter: ({ key, value }: { key: string; value: string }) =>
+      changeFilter({ key, value }),
   };
 
   return <FilterInput {...inputProps} />;

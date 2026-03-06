@@ -8,9 +8,13 @@ import DashHistoryModalRow from "./dash-history-modal-row";
 
 export default function DashHistoryModal() {
   const open = useDashHistoryModalStore(useShallow((state) => state.open));
-  const record_id = useDashHistoryModalStore(useShallow((state) => state.record_id));
+  const record_id = useDashHistoryModalStore(
+    useShallow((state) => state.record_id),
+  );
   const title = useDashHistoryModalStore(useShallow((state) => state.title));
-  const setOpen = useDashHistoryModalStore(useShallow((state) => state.setOpen));
+  const setOpen = useDashHistoryModalStore(
+    useShallow((state) => state.setOpen),
+  );
   const { isPending, data, isSuccess } = useRecordHistories(record_id);
 
   const history_table_thead: TheadProperties[] = [
@@ -37,7 +41,10 @@ export default function DashHistoryModal() {
     }
     return (
       <TableLayout thead={history_table_thead}>
-        {isSuccess && data.histories.map((row) => <DashHistoryModalRow row={row} key={row.id} />)}
+        {isSuccess &&
+          data.histories.map((row) => (
+            <DashHistoryModalRow row={row} key={row.id} />
+          ))}
       </TableLayout>
     );
   };

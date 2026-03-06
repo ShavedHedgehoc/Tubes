@@ -10,8 +10,12 @@ import TraceBatchWghtReportDetailDeleteModal from "./trace-batch-wght-report-det
 export default function TraceBatchWghtReportDetail() {
   const [searchParams] = useSearchParams();
 
-  const batchName: string | null = searchParams.get(Params.TRACE_BATCH_PARAMS_DETAIL_BATCH);
-  const productId: string | null = searchParams.get(Params.TRACE_BATCH_PARAMS_DETAIL_PRODUCT);
+  const batchName: string | null = searchParams.get(
+    Params.TRACE_BATCH_PARAMS_DETAIL_BATCH,
+  );
+  const productId: string | null = searchParams.get(
+    Params.TRACE_BATCH_PARAMS_DETAIL_PRODUCT,
+  );
 
   if (!(batchName && productId)) {
     return <TableNotFoundComponent />;
