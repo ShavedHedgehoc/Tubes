@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -22,9 +18,7 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     },
     "esModuleInterop": true
   },
@@ -42,8 +36,7 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.mts",
-    ".next/types/**/*.ts" // Оставляем только типы роутов, если нужно
-    ,
+    ".next/types/**/*.ts", // Оставляем только типы роутов, если нужно
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
