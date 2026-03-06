@@ -1,50 +1,34 @@
-name: Release & Versioning
+name: Release & Sync Version
 
 on:
   push:
-    branches: [release] # Срабатывает при слиянии в release
+    branches: [release]
 
 jobs:
-  bump-and-tag:
+  bump-and-sync:
+    # Важно: запускаем только если коммит не автоматический
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Нужно для истории коммитов
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
+          fetch-depth: 0
+          token: ${{ secrets.MY_GITHUB_PAT }}
 
       - name: Git Config
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Bump Version
-        # --include-workspace-root обновит версию во всём монорепозитории (api, app, dash)
-        # patch увеличит 1.0.0 -> 1.0.1
-        run: npm version patch --include-workspace-root --workspaces
-
-      - name: Push Changes & Tags
+      - name: Bump & Push to Release
         run: |
-          git push origin release
-          git push --tags
+          npm version patch --include-workspace-root --workspaces -m "chore: release %s [skip ci]"
+          git push origin release --follow-tags
 
       - name: Sync version to Main
         run: |
-          # Переключаемся на main (fetch-depth: 0 уже есть в начале)
           git fetch origin main
           git checkout main
-
-          # Вливаем изменения из release (где уже поднята версия) в main
-          # --ff-only гарантирует, что мы не создадим лишний merge-коммит, 
-          # если ветки не разошлись. Если разошлись — будет ошибка.
-          git merge release --ff-only 
-
-          # Пушим обновленный package.json в main
+          # Синхронизируем main с release
+          git merge release --no-ff -m "chore: sync version from release [skip ci]"
           git push origin main

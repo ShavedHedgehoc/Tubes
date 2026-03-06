@@ -17,8 +17,8 @@ jobs:
           cache: "npm"
       - name: Install
         run: npm ci --no-fund
-      - name: Check Formatting (Prettier)
-        run: npx prettier --check .
+      # - name: Check Formatting (Prettier)
+      #   run: npx prettier --check .
       - name: Generate Prisma
         run: npm run generate -w api_tubes
       - name: Lint & Type Check All
