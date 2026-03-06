@@ -16,7 +16,7 @@ jobs:
           node-version: "20"
           cache: "npm"
       - name: Install
-        run: npm ci
+        run: npm ci --no-fund
       - name: Check Formatting (Prettier)
         run: npx prettier --check .
       - name: Generate Prisma
@@ -43,7 +43,7 @@ jobs:
           node-version: "20"
           cache: "npm"
       - name: Install
-        run: npm ci
+        run: npm ci --no-fund
       - name: Generate Prisma (only for API)
         if: matrix.package == 'api_tubes'
         run: npm run generate -w api_tubes
