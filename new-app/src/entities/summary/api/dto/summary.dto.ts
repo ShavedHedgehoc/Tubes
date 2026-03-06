@@ -39,5 +39,3 @@ export type SummaryDto = {
   shift: number;
   _count: TubePostStatusRecordCount;
 };
-
-

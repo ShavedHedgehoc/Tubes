@@ -22,12 +22,14 @@ import { useMemo } from "react";
 
 export default function RankCombobox({ items }: { items: RankEntity[] }) {
   const { params, setParams } = useEmployeeSearchParams();
-  if (items.length === 0) return null
+
 
   const idToDesc = useMemo(
     () => new Map(items.map((i) => [i.id.toString(), i.description])),
     [items],
   );
+
+  if (items.length === 0) return null;
 
   const selectedIds = params.ranks ?? [];
 

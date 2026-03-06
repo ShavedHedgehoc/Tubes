@@ -11,7 +11,7 @@ export class ApiClient {
 
   constructor(url: string) {
     this.baseUrl = url;
-    console.log('Client initialized with:', this.baseUrl);
+    console.log("Client initialized with:", this.baseUrl);
   }
 
   private buildUrl(endpoint: string, queryParams?: QueryParams): string {

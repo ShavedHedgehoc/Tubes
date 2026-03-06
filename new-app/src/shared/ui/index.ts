@@ -28,9 +28,8 @@ export * from "./file-input-with-icon";
 export * from "./loader-card";
 export * from "./date-picker";
 export * from "./form-close-button";
-export * from "./modal-layout"
-export * from "./form-layout"
-export * from "./toggle-group"
-export * from "./toggle"
-export * from "./time-display"
-export * from "./chart"
+export * from "./modal-layout";
+export * from "./form-layout";
+export * from "./toggle-group";
+export * from "./toggle";
+export * from "./chart";

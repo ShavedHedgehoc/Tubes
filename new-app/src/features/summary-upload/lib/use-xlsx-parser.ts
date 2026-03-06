@@ -22,22 +22,28 @@ export function useXlsxParser() {
     return new Promise<boolean>((resolve) => {
       setIsPending(true);
       const reader = new FileReader();
-
       reader.onload = (event) => {
         const result = event.target?.result;
         if (!result) return;
-
         const currentErrors: ValError[] = [];
-
-
         try {
           const wb = read(result);
           const ws = wb.Sheets[wb.SheetNames[0]];
           const json = utils.sheet_to_json<SummaryUploadDataRow>(ws, {
             raw: false,
           });
-
-
+          if (json.length === 0) {
+            setErrors([
+              {
+                row: 0,
+                field: "file",
+                error: "Файл не содержит данных или заполнен неверно",
+              },
+            ]);
+            setIsValid(false);
+            setIsPending(false);
+            return resolve(false);
+          }
           json.forEach((row, i) => {
             const isRowValid = parse(row);
             if (!isRowValid) {

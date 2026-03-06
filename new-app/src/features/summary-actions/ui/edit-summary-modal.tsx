@@ -10,13 +10,12 @@ import { useModalState } from "@/shared/lib";
 import { EditSummaryForm } from "./edit-summary-form";
 
 export function EditSummaryModal() {
-
   const { params, setParams } = useSummaryUiParams();
-  const { data: editId, isOpen, onOpenChange } = useModalState(
-    params,
-    setParams,
-    "edit-summary"
-  );
+  const {
+    data: editId,
+    isOpen,
+    onOpenChange,
+  } = useModalState(params, setParams, "edit-summary");
   const { data, isPending, isError, isSuccess } = useQuery(
     summaryApi.summaryQueries.detail(editId),
   );
@@ -24,12 +23,12 @@ export function EditSummaryModal() {
   useEffect(() => {
     if (isSuccess && !data && editId) {
       toast.error("Данные сводки не найдены");
-      onOpenChange(false)
+      onOpenChange(false);
     }
     if (isError && editId) {
       toast.error("Ошибка при загрузке данных");
 
-      onOpenChange(false)
+      onOpenChange(false);
     }
   }, [isSuccess, data, editId, isError, onOpenChange]);
 
@@ -43,6 +42,5 @@ export function EditSummaryModal() {
       {isPending && editId && <LoaderCard />}
       {data && <EditSummaryForm data={data} />}
     </ModalLayout>
-
   );
 }

@@ -1,1 +1,1 @@
-export { TresholdFilter } from "./ui/treshold-filter"
+export { TresholdFilter } from "./ui/treshold-filter";

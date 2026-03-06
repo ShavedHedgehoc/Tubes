@@ -1,8 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { vi, describe, it, expect } from "vitest";
 
-
-
 import { CellContext, ColumnDef, Row } from "@tanstack/react-table";
 import { EmployeeEntity } from "@/entities/employee";
 import { columns } from "./columns";

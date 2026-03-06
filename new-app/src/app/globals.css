@@ -189,7 +189,6 @@
   --sidebar-ring: oklch(0.421 0.095 57.708);
   --scanned: oklch(0.627 0.194 149.214);
   --missing: oklch(0.645 0.246 16.439);
-
 }
 
 @layer base {

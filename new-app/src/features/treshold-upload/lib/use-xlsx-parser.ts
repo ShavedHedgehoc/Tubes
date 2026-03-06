@@ -2,9 +2,12 @@ import { useState } from "react";
 import { read, utils } from "xlsx";
 import Ajv from "ajv";
 import ajvErrors from "ajv-errors";
-import { tresholdsValidationSchema, TresholdUploadDataRow, TresholdUploadTableRow, ValError } from "@/entities/treshold";
-
-
+import {
+  tresholdsValidationSchema,
+  TresholdUploadDataRow,
+  TresholdUploadTableRow,
+  ValError,
+} from "@/entities/treshold";
 
 const ajv = new Ajv({ allErrors: true });
 ajvErrors(ajv);
@@ -20,33 +23,38 @@ export function useXlsxParser() {
     return new Promise<boolean>((resolve) => {
       setIsPending(true);
       const reader = new FileReader();
-
       reader.onload = (event) => {
         const result = event.target?.result;
         if (!result) return;
-
         const currentErrors: ValError[] = [];
-
-
         try {
-          let json: TresholdUploadDataRow[] = []
+          let json: TresholdUploadDataRow[] = [];
           const wb = read(result);
-          const wbSheetsNames = wb.SheetNames
-          const wbSheetsCount = wbSheetsNames.length
           wb.SheetNames.forEach((sheetName) => {
             const ws = wb.Sheets[sheetName];
             const tableJson = utils.sheet_to_json<TresholdUploadTableRow>(ws, {
-              raw: false, range: 4
+              raw: false,
+              range: 4,
             });
-            const resultJson: TresholdUploadDataRow[] = tableJson.map((item) => { return { ...item, conveyor_name: sheetName } })
-            json = [...json, ...resultJson]
-
-          })
-
-
-
-
-
+            const resultJson: TresholdUploadDataRow[] = tableJson.map(
+              (item) => {
+                return { ...item, conveyor_name: sheetName };
+              },
+            );
+            json = [...json, ...resultJson];
+          });
+          if (json.length === 0) {
+            setErrors([
+              {
+                row: 0,
+                field: "file",
+                error: "Файл не содержит данных или заполнен неверно",
+              },
+            ]);
+            setIsValid(false);
+            setIsPending(false);
+            return resolve(false);
+          }
           json.forEach((row, i) => {
             const isRowValid = parse(row);
             if (!isRowValid) {
@@ -59,17 +67,13 @@ export function useXlsxParser() {
               });
             }
           });
-
-
-
           const hasErrors = currentErrors.length > 0;
           setErrors(currentErrors);
           setIsValid(!hasErrors);
           setData(hasErrors ? [] : json);
           setIsPending(false);
           resolve(!hasErrors);
-          console.log(currentErrors);
-
+          // console.log(currentErrors);
         } catch (e) {
           console.error("XLSX Read Error", e);
           setIsValid(false);

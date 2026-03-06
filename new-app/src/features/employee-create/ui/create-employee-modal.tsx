@@ -10,7 +10,11 @@ import { toast } from "sonner";
 
 export function CreateEmployeeModal({ ranks }: { ranks: RankEntity[] }) {
   const { params, setParams } = useEmployeeUiParams();
-  const { isOpen, onOpenChange } = useModalState(params, setParams, "create-employee")
+  const { isOpen, onOpenChange } = useModalState(
+    params,
+    setParams,
+    "create-employee",
+  );
 
   useEffect(() => {
     if (isOpen && ranks.length === 0) {
@@ -18,7 +22,6 @@ export function CreateEmployeeModal({ ranks }: { ranks: RankEntity[] }) {
       onOpenChange(false);
       return;
     }
-
   }, [ranks.length, isOpen, onOpenChange]);
 
   return (
@@ -30,7 +33,5 @@ export function CreateEmployeeModal({ ranks }: { ranks: RankEntity[] }) {
     >
       <CreateEmployeeForm ranks={ranks} />
     </ModalLayout>
-  )
+  );
 }
-
-

@@ -9,9 +9,9 @@ export async function Employees({ props }: { props: EmployeeParams }) {
   await queryClient.prefetchQuery(
     employeeApi.employeeQueries.list(props, { isServer: true }),
   );
-  const rankListItems = await queryClient.fetchQuery(
-    rankApi.ranksQueries.list({ isServer: true }),
-  ).catch(() => ({ ranks: [] }));
+  const rankListItems = await queryClient
+    .fetchQuery(rankApi.ranksQueries.list({ isServer: true }))
+    .catch(() => ({ ranks: [] }));
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

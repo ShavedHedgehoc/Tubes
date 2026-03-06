@@ -33,4 +33,14 @@ jobs:
       - name: Push Changes & Tags
         run: |
           git push origin release
-          git push --tags
+          git push --tags      
+
+      # Создаем PR для синхронизации main
+      - name: Create Pull Request to Main
+        uses: repo-sync/pull-request@v2
+        with:
+          source_branch: "release"
+          destination_branch: "main"
+          pr_title: "chore: sync version [release -> main]"
+          pr_body: "Автоматическое обновление версий после релиза."
+          github_token: ${{ secrets.GITHUB_TOKEN }}
