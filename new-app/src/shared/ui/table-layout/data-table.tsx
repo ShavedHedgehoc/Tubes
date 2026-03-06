@@ -37,18 +37,18 @@ export function DataTable<TData, TValue>({
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup, groupIndex) => (
-            <TableRow key={headerGroup.id} className={cn(
-              // groupIndex === 0 ? "border-b-0" : "border-b"
-              "border-b-0"
-            )}>
+            <TableRow
+              key={headerGroup.id}
+              className={cn(
+                // groupIndex === 0 ? "border-b-0" : "border-b"
+                "border-b-0",
+              )}
+            >
               {headerGroup.headers.map((header) => {
-
                 const isGroup = header.column.getLeafColumns().length > 1;
                 const isSingle = !header.column.parent && !isGroup;
 
-
                 if (groupIndex === 1 && isSingle) return null;
-
 
                 const rowSpan = isSingle && groupIndex === 0 ? 2 : 1;
                 return (
@@ -59,12 +59,12 @@ export function DataTable<TData, TValue>({
                     className={cn(
                       "text-center align-middle  bg-muted/20",
                       "h-auto py-2",
-                      groupIndex === 0 && isGroup ? "border-b-0" : "border-b"
+                      groupIndex === 0 && isGroup ? "border-b-0" : "border-b",
                     )}
                   >
                     {flexRender(
                       header.column.columnDef.header,
-                      header.getContext()
+                      header.getContext(),
                     )}
                   </TableHead>
                 );
@@ -72,8 +72,6 @@ export function DataTable<TData, TValue>({
             </TableRow>
           ))}
         </TableHeader>
-
-
 
         <TableBody>
           {table.getRowModel().rows?.length ? (

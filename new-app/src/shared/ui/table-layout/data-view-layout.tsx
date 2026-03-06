@@ -9,12 +9,13 @@ import {
   CardHeader,
   CardTitle,
   SkeletonTable,
-  DataTable, TablePagination,
-  DataViewLayoutProps, PaginationParams
+  DataTable,
+  TablePagination,
+  DataViewLayoutProps,
+  PaginationParams,
 } from "@/shared/ui";
 import { cn } from "@/shared/lib";
 import { motion, AnimatePresence } from "framer-motion";
-
 
 export function DataViewLayout<TData, T extends PaginationParams>(
   props: DataViewLayoutProps<TData, T>,

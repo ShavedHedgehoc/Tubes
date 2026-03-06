@@ -9,11 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "@/shared/ui";
-import {
-  MoreHorizontal,
-  Pencil,
-  Trash,
-} from "lucide-react";
+import { MoreHorizontal, Pencil, Trash } from "lucide-react";
 import { useDeleteSummary } from "../model";
 import { useSummaryUiParams } from "@/entities/summary";
 

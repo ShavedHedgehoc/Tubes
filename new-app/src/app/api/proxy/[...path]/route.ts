@@ -14,18 +14,21 @@ interface RouteContext {
 async function handleProxy(
   request: NextRequest,
   params: Promise<{ path: string[] }>,
-  method: string
+  method: string,
 ) {
   try {
     const { path: pathArray } = await params;
-    if (!pathArray) return NextResponse.json({ error: "Path is required" }, { status: 400 });
+    if (!pathArray)
+      return NextResponse.json({ error: "Path is required" }, { status: 400 });
 
     const path = pathArray.join("/");
     const { searchParams } = new URL(request.url);
 
     // Формируем безопасный URL
-    const base = externalApiUrl?.endsWith('/') ? externalApiUrl : `${externalApiUrl}/`;
-    const targetUrl = new URL(path.replace(/^\//, ''), base); // убираем ведущий слеш если есть
+    const base = externalApiUrl?.endsWith("/")
+      ? externalApiUrl
+      : `${externalApiUrl}/`;
+    const targetUrl = new URL(path.replace(/^\//, ""), base); // убираем ведущий слеш если есть
     targetUrl.search = searchParams.toString();
 
     const hasBody = ["POST", "PATCH", "PUT"].includes(method);
@@ -58,8 +61,6 @@ async function handleProxy(
 
     const data = await response.json();
     return NextResponse.json(data);
-
-
   } catch (error) {
     console.error("Proxy error:", error);
     return NextResponse.json(
@@ -69,12 +70,14 @@ async function handleProxy(
   }
 }
 
-export const GET = (req: NextRequest, ctx: RouteContext) => handleProxy(req, ctx.params, "GET");
-export const POST = (req: NextRequest, ctx: RouteContext) => handleProxy(req, ctx.params, "POST");
-export const DELETE = (req: NextRequest, ctx: RouteContext) => handleProxy(req, ctx.params, "DELETE");
-export const PATCH = (req: NextRequest, ctx: RouteContext) => handleProxy(req, ctx.params, "PATCH");
-
-
+export const GET = (req: NextRequest, ctx: RouteContext) =>
+  handleProxy(req, ctx.params, "GET");
+export const POST = (req: NextRequest, ctx: RouteContext) =>
+  handleProxy(req, ctx.params, "POST");
+export const DELETE = (req: NextRequest, ctx: RouteContext) =>
+  handleProxy(req, ctx.params, "DELETE");
+export const PATCH = (req: NextRequest, ctx: RouteContext) =>
+  handleProxy(req, ctx.params, "PATCH");
 
 // export async function GET(
 //   request: NextRequest,
@@ -87,11 +90,6 @@ export const PATCH = (req: NextRequest, ctx: RouteContext) => handleProxy(req, c
 //     if (!pathArray) {
 //       return NextResponse.json({ error: "Path is required" }, { status: 400 });
 //     }
-
-
-
-
-
 
 //     const path = pathArray.join("/");
 //     const { searchParams } = new URL(request.url);
@@ -233,8 +231,6 @@ export const PATCH = (req: NextRequest, ctx: RouteContext) => handleProxy(req, c
 //     );
 //   }
 // }
-
-
 
 // export async function POST(
 //   request: NextRequest,

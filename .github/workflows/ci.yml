@@ -7,28 +7,7 @@ on:
     branches: [ main, release ]
 
 jobs:
-  # --- Job для NestJS (api_tubes) ---
-  api-check:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-      - name: Install & Prisma
-        run: |
-          npm ci
-          npm run generate -w api_tubes
-      - name: Type Check & Lint
-        run: |
-          npm run lint:types -w api_tubes
-          npm run lint -w api_tubes
-      - name: Build
-        run: npm run build -w api_tubes
-
-  # --- Job для Dashboard (tubes_application - Vite) ---
-  dash-check:
+  pre-flight:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -38,14 +17,21 @@ jobs:
           cache: 'npm'
       - name: Install
         run: npm ci
-      - name: Build (Check 300kb chunk)
+      - name: Generate Prisma
+        run: npm run generate -w api_tubes
+      - name: Lint & Type Check All
         run: |
-          npm run lint:types -w tubes_application
-          npm run build -w tubes_application
+          npm run lint:all
+          npm run types:all
 
-  # --- Job для Client App (new_app - Next.js) ---
-  next-check:
+  # --- Сборка всех пакетов параллельно ---
+  build:
+    needs: pre-flight
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Используем матрицу, чтобы не дублировать код джоб
+        package: [api_tubes, tubes_application, new-app]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -54,5 +40,8 @@ jobs:
           cache: 'npm'
       - name: Install
         run: npm ci
-      - name: Build
-        run: npm run build -w new-app
+      - name: Generate Prisma (only for API)
+        if: matrix.package == 'api_tubes'
+        run: npm run generate -w api_tubes
+      - name: Build ${{ matrix.package }}
+        run: npm run build -w ${{ matrix.package }}

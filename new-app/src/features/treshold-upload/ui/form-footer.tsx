@@ -2,34 +2,34 @@ import { Button, Field } from "@/shared/ui";
 import { useFormContext } from "react-hook-form";
 
 export function FormFooter({
-    fileInputRef,
-    resetCustom,
-    resetDisable,
-    submitDisable,
+  fileInputRef,
+  resetCustom,
+  resetDisable,
+  submitDisable,
 }: {
-    fileInputRef: React.RefObject<HTMLInputElement | null>;
-    resetCustom: () => void;
-    resetDisable: boolean;
-    submitDisable: boolean;
+  fileInputRef: React.RefObject<HTMLInputElement | null>;
+  resetCustom: () => void;
+  resetDisable: boolean;
+  submitDisable: boolean;
 }) {
-    const { reset } = useFormContext();
-    const handleFullReset = () => {
-        reset();
-        resetCustom();
-        if (fileInputRef.current) fileInputRef.current.value = "";
-    };
+  const { reset } = useFormContext();
+  const handleFullReset = () => {
+    reset();
+    resetCustom();
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
 
-    return (
-        <Field
-            orientation="horizontal"
-            className="justify-end flex flex-row w-full gap-2"
-        >
-            <Button variant="ghost" disabled={resetDisable} onClick={handleFullReset}>
-                Очистить
-            </Button>
-            <Button type="submit" form="form-rhf-demo" disabled={submitDisable}>
-                Загрузить
-            </Button>
-        </Field>
-    );
+  return (
+    <Field
+      orientation="horizontal"
+      className="justify-end flex flex-row w-full gap-2"
+    >
+      <Button variant="ghost" disabled={resetDisable} onClick={handleFullReset}>
+        Очистить
+      </Button>
+      <Button type="submit" form="form-rhf-demo" disabled={submitDisable}>
+        Загрузить
+      </Button>
+    </Field>
+  );
 }

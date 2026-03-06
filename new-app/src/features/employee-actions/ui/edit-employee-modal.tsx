@@ -10,15 +10,13 @@ import { employeeApi, useEmployeeUiParams } from "@/entities/employee";
 import { RankEntity } from "@/entities/rank";
 import { useModalState } from "@/shared/lib";
 
-
 export function EditEmployeeModal({ ranks }: { ranks: RankEntity[] }) {
-
-  const { params, setParams } = useEmployeeUiParams()
-  const { data: editId, isOpen, onOpenChange } = useModalState(
-    params,
-    setParams,
-    "edit-employee"
-  );
+  const { params, setParams } = useEmployeeUiParams();
+  const {
+    data: editId,
+    isOpen,
+    onOpenChange,
+  } = useModalState(params, setParams, "edit-employee");
   const { data, isPending, isError, isSuccess } = useQuery(
     employeeApi.employeeQueries.detail(editId),
   );
@@ -31,13 +29,13 @@ export function EditEmployeeModal({ ranks }: { ranks: RankEntity[] }) {
     }
     if (isSuccess && !data && editId) {
       toast.error("Данные сотрудника не найдены");
-      onOpenChange(false)
+      onOpenChange(false);
     }
     if (isError && editId) {
       toast.error("Ошибка при загрузке данных");
-      onOpenChange(false)
+      onOpenChange(false);
     }
-  }, [ranks.length, isSuccess, data, editId, isError, onOpenChange]);
+  }, [ranks.length, isSuccess, data, editId, isError, onOpenChange, isOpen]);
 
   return (
     <ModalLayout
@@ -49,5 +47,5 @@ export function EditEmployeeModal({ ranks }: { ranks: RankEntity[] }) {
       {isPending && editId && <LoaderCard />}
       {data && <EditEmployeeForm ranks={ranks} data={data} />}
     </ModalLayout>
-  )
+  );
 }

@@ -41,10 +41,7 @@ export function FileField({
     <Controller
       name="file"
       control={control}
-      render={({
-        field: { onChange, onBlur, name, ref },
-        fieldState,
-      }) => (
+      render={({ field: { onChange, onBlur, name, ref }, fieldState }) => (
         <Field data-invalid={fieldState.invalid}>
           <FieldLabel htmlFor="form-rhf-file">Файл сводки</FieldLabel>
           <FileInputWithIcon
@@ -54,11 +51,12 @@ export function FileField({
               // Объединяем рефы: от RHF и ваш внешний fileInputRef
               ref(instance);
               if (fileInputRef) {
-                (fileInputRef as React.RefObject<HTMLInputElement | null>).current = instance;
+                (
+                  fileInputRef as React.RefObject<HTMLInputElement | null>
+                ).current = instance;
               }
             }}
             id="form-rhf-file"
-
             accept={acceptedFiles}
             onChange={(e) => {
               const file = e.target.files?.[0];

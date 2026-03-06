@@ -7,7 +7,10 @@ type HealthCheck = {
 export async function getHealthCheck(options?: {
   isServer: boolean;
 }): Promise<HealthCheck> {
-  if (options?.isServer && process.env.NEXT_PHASE === 'phase-production-build') {
+  if (
+    options?.isServer &&
+    process.env.NEXT_PHASE === "phase-production-build"
+  ) {
     return { status: "ok" };
   }
   const client = options?.isServer ? apiClient : proxyApiClient;
@@ -18,7 +21,6 @@ export async function getHealthCheck(options?: {
 
   return response || { status: "ok" };
 }
-
 
 // export async function getHealthCheck(options?: {
 //   isServer: boolean;

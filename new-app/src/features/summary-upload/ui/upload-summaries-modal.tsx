@@ -7,14 +7,15 @@ import { useModalState } from "@/shared/lib";
 
 export function UploadSummariesModal() {
   const { params, setParams } = useSummaryUiParams();
-  const modal = useModalState(params, setParams, "upload-summary")
+  const modal = useModalState(params, setParams, "upload-summary");
 
   return (
     <ModalLayout
       title="Загрузка сводок"
       description=" Выберите файл, дату и загрузите данные"
-      {...modal} >
+      {...modal}
+    >
       <UploadSummariesForm />
     </ModalLayout>
-  )
+  );
 }

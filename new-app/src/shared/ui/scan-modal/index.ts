@@ -1,1 +1,1 @@
-export { ScanModal } from "./scan-modal"
+export { ScanModal } from "./scan-modal";
