@@ -1,44 +1,62 @@
-# --- Этап сборки (Builder) ---
+# FROM node:20 AS builder
+
+# WORKDIR /api_tubes
+# COPY ./api_tubes/package*.json ./
+# COPY ./api_tubes/tsconfig*.json ./
+# COPY ./api_tubes/src ./src
+# RUN npm ci
+# COPY ./api_tubes .
+# RUN npx prisma generate
+# RUN npm run build
+
+# FROM node:20-alpine AS runtime
+
+# WORKDIR /api_tubes
+# COPY --from=builder /api_tubes/package*.json ./
+# COPY --from=builder /api_tubes/tscongig*.json ./
+# COPY --from=builder /api_tubes/prisma ./prisma
+
+# RUN npm ci --omit=dev
+# COPY --from=builder /api_tubes/dist ./dist
+# CMD ["npm", "run", "start:migrate:prod"]
+
+# --- Этап сборки ---
 FROM node:20-slim AS builder
+# Для Prisma на Linux нужны зависимости
 RUN apt-get update && apt-get install -y openssl python3 make g++ && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-# 1. Копируем КОРНЕВЫЕ манифесты
+# Копируем корневые файлы и манифесты нужных воркспейсов
 COPY package.json package-lock.json ./
-# 2. Копируем манифест API
 COPY api_tubes/package.json ./api_tubes/
 
-# 3. Устанавливаем всё (включая dev-зависимости для генерации и билда)
+# Устанавливаем зависимости только для API (используя общий замок)
 RUN npm ci -w api_tubes
 
-# 4. Копируем исходники API
+# Копируем исходники API
 COPY api_tubes/ ./api_tubes/
 
-# 5. Генерируем Prisma (явно указываем путь к схеме, т.к. мы в /app)
-RUN npx prisma generate --schema=./api_tubes/prisma/schema.prisma
+# Собираем
+WORKDIR /app/api_tubes
+RUN npx prisma generate
+RUN npm run build
 
-# 6. Собираем проект
-RUN npm run build -w api_tubes
 
 
-# --- Этап выполнения (Runtime) ---
+# --- Этап выполнения ---
 FROM node:20-slim AS runtime
 RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
 
-# ВАЖНО: Работаем от корня /app, чтобы сохранить иерархию монорепозитория
-WORKDIR /app
-
-# 1. Копируем КОРНЕВЫЕ node_modules (там лежит бинарник prisma и клиент)
-COPY --from=builder /app/node_modules ./node_modules
-
-# 2. Копируем всё содержимое воркспейса (dist, prisma, package.json)
-COPY --from=builder /app/api_tubes ./api_tubes
-
-# 3. Переходим в папку API для запуска команд
 WORKDIR /app/api_tubes
 
-EXPOSE 7100
+# Копируем только необходимое из builder
+COPY --from=builder /app/node_modules /app/node_modules
+COPY --from=builder /app/api_tubes/dist ./dist
+COPY --from=builder /app/api_tubes/package.json ./package.json
+COPY --from=builder /app/api_tubes/prisma ./prisma
 
-# Теперь npx найдет бинарник в ../node_modules/.bin и НЕ будет ничего скачивать
+EXPOSE 7100
 CMD ["npm", "run", "start:migrate:prod"]
+
+
