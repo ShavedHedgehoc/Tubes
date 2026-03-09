@@ -16,6 +16,7 @@ import { CreateSummaryDto } from "./dto/create-summary.dto";
 import { ChangeSummaryStateDto } from "./dto/change-summary-state.dto";
 import { GetSummariesListDto } from "./dto/get-summaries-list.dto";
 import { DeleteSummaryDto } from "./dto/delete-summary.dto";
+import { AvailableSummariesResponse } from "./dto/available-summaries.response";
 // import { GetDetailDto } from "./dto/get-detail.dto";
 
 //move to dto
@@ -62,11 +63,11 @@ export class SummariesController {
     );
   }
 
-  @ApiOperation({ summary: "Получить активную сводку по id конвейера" })
+  @ApiOperation({ summary: "Получить доступные сводки по id конвейера" })
   @Get("/available")
   getAvailableSummariesRecordByConveyorId(
     @Query("conveyor_id") conveyor_id: string,
-  ) {
+  ): Promise<AvailableSummariesResponse> {
     return this.summaryService.getAvailableSummariesRecordByConveyorId(
       Number(conveyor_id),
     );

@@ -19,7 +19,6 @@ export function CreateEmployeeForm({ ranks }: { ranks: RankEntity[] }) {
         onClose={handleClose}
         footer={<FormFooter createPending={state.createPending} />}
       >
-        {" "}
         <form id="form-rhf-demo" onSubmit={form.handleSubmit(onSubmit)}>
           <FieldGroup>
             <div className="flex flex-col gap-4">

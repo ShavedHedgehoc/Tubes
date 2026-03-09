@@ -1,10 +1,9 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import { vi, describe, it, expect, beforeEach } from "vitest";
-
 import { format } from "date-fns";
-import { columns } from "./columns";
 import { SummaryEntity } from "@/entities/summary/model/types";
 import { CellContext, ColumnDef, Row } from "@tanstack/react-table";
+import { getSummariesColumns } from "./columns";
 
 // 1. Мокаем RowDropdown, так как это отдельный сложный компонент
 vi.mock("@/features/summaries/_ui/row-dropdown", () => ({
@@ -44,22 +43,7 @@ describe("Summary Columns", () => {
     },
   };
 
-  // // // Хелпер для рендера ячейки
-  // const renderCell = (accessor: string | number, summary: SummaryEntity) => {
-  //     // Находим нужную колонку
-  //     const column = columns.find((c) => (c as any).accessorKey === accessor || c.id === accessor);
-  //     if (!column || !column.cell) throw new Error(`Column ${accessor} not found`);
-
-  //     // Имитируем объект row от react-table
-  //     const row = {
-  //         original: summary,
-  //         getValue: (key: string) => (summary as any)[key],
-  //     };
-
-  //     const Cell = column.cell as any;
-  //     return render(<Cell row={row} />);
-  // };
-
+  const columns = getSummariesColumns();
   const renderCell = (accessor: string, summary: SummaryEntity) => {
     // Ищем колонку с проверкой типа
     const column = columns.find(

@@ -1,9 +1,6 @@
 "use server";
+import { Dash } from "@/widgets/dash";
 
-export default async function Home() {
-  return (
-    <>
-      <h1 className="text-3xl mb-2">home</h1>
-    </>
-  );
+export default async function DashPage() {
+  return <Dash />;
 }

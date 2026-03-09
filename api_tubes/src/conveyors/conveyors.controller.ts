@@ -1,6 +1,7 @@
 import { Controller, Get, Param, Query } from "@nestjs/common";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import { ConveyorsService } from "./conveyors.service";
+import { ConveyorsDataResponse } from "./dto/conveyors-data.response";
 
 @ApiTags("Конвейеры")
 @Controller("conveyors")
@@ -13,7 +14,7 @@ export class ConveyorsController {
   }
   @ApiOperation({ summary: "Получить данные конвейеров (монитор)" })
   @Get("/all_data")
-  getConveyorsData() {
+  getConveyorsData(): Promise<ConveyorsDataResponse> {
     return this.conveyorService.getConveyorsData();
   }
   @ApiOperation({ summary: "Получить конвейер по id" })

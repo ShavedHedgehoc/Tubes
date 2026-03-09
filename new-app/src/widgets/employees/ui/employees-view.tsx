@@ -1,7 +1,7 @@
 "use client";
 
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { columns } from "./columns";
+import { getEmployeesColumns } from "./columns";
 import { EmployeeIcon } from "@/shared/assets";
 import { RankEntity } from "@/entities/rank";
 import {
@@ -14,6 +14,7 @@ import { DataViewLayout, DataViewLayoutProps } from "@/shared/ui";
 import { EditEmployeeModal } from "@/features/employee-actions";
 import { AddButton, CreateEmployeeModal } from "@/features/employee-create";
 import { EmployeesFilter } from "@/features/employee-filter";
+import { useMemo } from "react";
 
 export default function EmployeesView({
   rankListItems,
@@ -26,6 +27,8 @@ export default function EmployeesView({
 
     placeholderData: keepPreviousData,
   });
+
+  const columns = useMemo(() => getEmployeesColumns(), []);
 
   const dataViewProps: DataViewLayoutProps<EmployeeEntity, EmployeeParams> = {
     title: "Сотрудники",
