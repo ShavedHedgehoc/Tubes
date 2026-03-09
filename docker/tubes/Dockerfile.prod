@@ -1,89 +1,24 @@
-# # FROM node:18-alpine as build-step
-
-# # WORKDIR /tubes_application
-
-# # ENV PATH /tubes_application/node_modules/.bin:$PATH
-
-# # COPY ./tubes_application/package*.json ./
-# # COPY ./tubes_application/tsconfig*.json ./
-# # COPY ./tubes_application/vite.config*.json ./
-# # COPY ./tubes_application/src ./src
-# # RUN npm ci
-# # COPY ./tubes_application .
-# # RUN npm run build
-
-# # FROM nginx:stable
-# # COPY --from=build-step /tubes_application/dist /usr/share/nginx/html
-# # COPY docker/tubes/nginx.conf /etc/nginx/nginx.conf
-# # Stage 1: Сборка
-# # 18=>20
-# FROM node:20-alpine as build-step 
-
-# WORKDIR /app
-
-# # Копируем только файлы зависимостей для кэширования слоев
-# COPY ./tubes_application/package*.json ./
-# # Устанавливаем зависимости (ci быстрее и чище для продакшена)
-# RUN npm ci
-
-# # Копируем остальные исходники (убедись, что vite.config.ts/js попадает сюда)
-# COPY ./tubes_application/ ./
-
-# # Собираем проект (Vite по умолчанию кладет билд в папку /dist)
-# RUN npm run build
-
-# # Stage 2: Раздача статики
-# FROM nginx:stable-alpine
-
-# # Очищаем дефолтную папку nginx
-# RUN rm -rf /usr/share/nginx/html/*
-
-# # Копируем билд из первой стадии
-# COPY --from=build-step /app/dist /usr/share/nginx/html
-
-# # Копируем твой кастомный конфиг, который мы правили ранее
-# COPY docker/tubes/nginx.conf /etc/nginx/nginx.conf
-
-# EXPOSE 3000
-
-# CMD ["nginx", "-g", "daemon off;"]
-# Stage 1: Сборка (Builder)
 FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-# 1. Копируем КОРНЕВЫЕ файлы манифеста и замок
 COPY package.json package-lock.json ./
-
-# 2. Копируем манифест конкретного воркспейса
 COPY tubes_application/package.json ./tubes_application/
 
-# 3. Устанавливаем зависимости для воркспейса (используя общий замок)
 RUN npm ci -w tubes_application
 
-# 4. Копируем исходники приложения
 COPY tubes_application/ ./tubes_application/
 
-# 5. Собираем проект
 WORKDIR /app/tubes_application
 RUN npm run build
 
-# Stage 2: Раздача статики (Nginx)
 FROM nginx:stable-alpine
 
-# Очищаем дефолтную папку nginx
 RUN rm -rf /usr/share/nginx/html/*
 
-# Копируем билд из папки воркспейса первой стадии
-# Vite по умолчанию кладет результат в папку dist
 COPY --from=builder /app/tubes_application/dist /usr/share/nginx/html
-
-# Копируем твой кастомный конфиг Nginx
-# ВАЖНО: убедись, что путь к конфигу верный относительно корня контекста
 COPY docker/tubes/nginx.conf /etc/nginx/nginx.conf
 
-# В Docker-сети Nginx обычно слушает 80, 
-# а ты пробрасываешь порты в docker-compose
 EXPOSE 3000
 
 CMD ["nginx", "-g", "daemon off;"]
