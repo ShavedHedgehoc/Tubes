@@ -1,44 +1,102 @@
+# FROM node:20-alpine AS deps
+# WORKDIR /new-app
+# COPY ./new-app/package*.json  ./
+# RUN npm ci
+
+# # 2. Stage: Сборка проекта
+# FROM node:20-alpine AS builder
+# WORKDIR /new-app
+# COPY --from=deps /new-app/node_modules ./node_modules
+# COPY ./new-app .
+
+# ARG NEXT_PUBLIC_API_URL
+# ARG INTERNAL_API_URL
+
+# ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+# ENV INTERNAL_API_URL=$INTERNAL_API_URL
+# # Отключаем телеметрию Next.js во время сборки
+# ENV NEXT_TELEMETRY_DISABLED 1
+# RUN npm run build
+
+# # 3. Stage: Финальный образ (Runner)
+# FROM node:20-alpine AS runner
+# WORKDIR /new-app
+
+# ENV NODE_ENV production
+# ENV NEXT_TELEMETRY_DISABLED 1
+
+# # Создаем пользователя для безопасности
+# RUN addgroup --system --gid 1001 nodejs
+# RUN adduser --system --uid 1001 nextjs
+
+# # Копируем только необходимые файлы из builder
+# COPY --from=builder /new-app/public ./public
+# COPY --from=builder --chown=nextjs:nodejs /new-app/.next/standalone ./
+# COPY --from=builder --chown=nextjs:nodejs /new-app/.next/static ./.next/static
+
+# USER nextjs
+
+# EXPOSE 3000
+# ENV PORT 3000
+
+# CMD ["node", "server.js"]
+
+
+# 1. Stage: Установка зависимостей
 FROM node:20-alpine AS deps
-WORKDIR /new-app
-COPY ./new-app/package*.json  ./
-RUN npm ci
+# Для некоторых нативных модулей (sharp, canvas) могут понадобиться зависимости:
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+
+# В монорепозитории копируем КОРНЕВОЙ замок и манифест
+COPY package.json package-lock.json ./
+# Копируем манифест конкретного воркспейса
+COPY new-app/package.json ./new-app/
+
+# Устанавливаем зависимости только для нужного воркспейса
+# Это создаст правильный node_modules в корне /app
+RUN npm ci -w new-app
 
 # 2. Stage: Сборка проекта
 FROM node:20-alpine AS builder
-WORKDIR /new-app
-COPY --from=deps /new-app/node_modules ./node_modules
-COPY ./new-app .
+WORKDIR /app
+# Копируем зависимости из этапа deps
+COPY --from=deps /app/node_modules ./node_modules
+# Копируем исходники приложения
+COPY new-app ./new-app
+# Копируем корневые конфиги (если Next.js их использует, например tsconfig)
+COPY package.json ./ 
 
 ARG NEXT_PUBLIC_API_URL
 ARG INTERNAL_API_URL
-
 ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 ENV INTERNAL_API_URL=$INTERNAL_API_URL
-# Отключаем телеметрию Next.js во время сборки
 ENV NEXT_TELEMETRY_DISABLED 1
+
+WORKDIR /app/new-app
 RUN npm run build
 
 # 3. Stage: Финальный образ (Runner)
 FROM node:20-alpine AS runner
-WORKDIR /new-app
+WORKDIR /app
 
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
 
-# Создаем пользователя для безопасности
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-# Копируем только необходимые файлы из builder
-COPY --from=builder /new-app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /new-app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /new-app/.next/static ./.next/static
+# В режиме standalone Next.js копирует всё необходимое в .next/standalone
+# В монорепозитории структура путей внутри standalone сохраняется
+COPY --from=builder /app/new-app/public ./new-app/public
+COPY --from=builder --chown=nextjs:nodejs /app/new-app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/new-app/.next/static ./new-app/.next/static
 
 USER nextjs
 
 EXPOSE 3000
 ENV PORT 3000
+ENV HOSTNAME "0.0.0.0"
 
-CMD ["node", "server.js"]
-
-
+# В монорепозитории точка входа будет находиться в папке воркспейса внутри standalone
+CMD ["node", "new-app/server.js"]
