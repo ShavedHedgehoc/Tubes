@@ -30,11 +30,20 @@ export default async function RootLayout({
 }) {
   await getHealthCheck({ isServer: true });
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      className={cn(geistSans.variable, geistMono.variable)}
+      suppressHydrationWarning
+    >
       <body
+        // className={cn(
+        //   "bg-background font-sans antialiased flex flex-col h-dvh ",
+        //   `${geistSans.variable} ${geistMono.variable} antialiased`,
+        // )}
         className={cn(
-          "bg-background font-sans antialiased flex flex-col h-dvh ",
-          `${geistSans.variable} ${geistMono.variable} antialiased`,
+          "bg-background antialiased flex flex-col h-dvh",
+          // 2. Указываем Tailwind использовать именно этот шрифт
+          "font-sans",
         )}
       >
         <AppProvider>{children}</AppProvider>

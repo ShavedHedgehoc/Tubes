@@ -28,6 +28,3 @@ jobs:
         run: |
           # Прямой пуш из release в main, чтобы они стали идентичны
           git push origin release:main
-
-
-      

@@ -2,6 +2,7 @@ import { queryOptions } from "@tanstack/react-query";
 import { getSummaries } from "./get-summaries";
 import { SummaryParams } from "../model";
 import { getSummary } from "./get-summary";
+import { getAvailableSummaries } from "./get-available-summaries";
 
 export const summaryQueries = {
   all: () => ["summaries"],
@@ -26,6 +27,13 @@ export const summaryQueries = {
           ...params,
           options,
         }),
+      staleTime: 60 * 1000,
+    }),
+  available: (conveyorId: number | null, options?: { isServer: boolean }) =>
+    queryOptions({
+      queryKey: [...summaryQueries.all(), "available", conveyorId],
+      queryFn: () => getAvailableSummaries({ conveyorId, options }),
+      enabled: !!conveyorId,
       staleTime: 60 * 1000,
     }),
   details: () => [...summaryQueries.all(), "detail"],

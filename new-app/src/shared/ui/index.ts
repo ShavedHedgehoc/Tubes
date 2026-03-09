@@ -33,3 +33,5 @@ export * from "./form-layout";
 export * from "./toggle-group";
 export * from "./toggle";
 export * from "./chart";
+export * from "./scroll-area";
+export * from "./alert-dialog";
