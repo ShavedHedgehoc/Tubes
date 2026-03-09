@@ -19,6 +19,7 @@
     "pre-flight": "npm run prettier:check && npm run types:all && npm run lint:all && npm run knip && npm run build:all"
   },
   "devDependencies": {
+    "@oxc-resolver/binding-linux-x64-gnu": "^11.19.1",
     "knip": "^5.85.0",
     "prettier": "^3.8.1",
     "typescript": "^5.9.3"
