@@ -20,27 +20,54 @@
 # COPY --from=builder /api_tubes/dist ./dist
 # CMD ["npm", "run", "start:migrate:prod"]
 
-# --- Этап сборки ---
+# # --- Этап сборки ---
+# FROM node:20-slim AS builder
+# # Для Prisma на Linux нужны зависимости
+# RUN apt-get update && apt-get install -y openssl python3 make g++ && rm -rf /var/lib/apt/lists/*
+
+# WORKDIR /app
+
+# # Копируем корневые файлы и манифесты нужных воркспейсов
+# COPY package.json package-lock.json ./
+# COPY api_tubes/package.json ./api_tubes/
+
+# # Устанавливаем зависимости только для API (используя общий замок)
+# RUN npm ci -w api_tubes
+
+# # Копируем исходники API
+# COPY api_tubes/ ./api_tubes/
+
+# # Собираем
+# WORKDIR /app/api_tubes
+# RUN npx prisma generate
+# RUN npm run build
+
+# --- Этап сборки (Builder) ---
 FROM node:20-slim AS builder
-# Для Prisma на Linux нужны зависимости
+# Установка системных зависимостей для Prisma и сборки нативных модулей
 RUN apt-get update && apt-get install -y openssl python3 make g++ && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-# Копируем корневые файлы и манифесты нужных воркспейсов
+# 1. Копируем корневые конфиги (lock-файл обязателен для npm ci)
 COPY package.json package-lock.json ./
-COPY api_tubes/package.json ./api_tubes/
 
-# Устанавливаем зависимости только для API (используя общий замок)
-RUN npm ci -w api_tubes
-
-# Копируем исходники API
+# 2. Копируем манифест и саму папку воркспейса
+# (Копируем всё сразу, чтобы подтянулись tsconfig и prisma/schema.prisma)
 COPY api_tubes/ ./api_tubes/
 
-# Собираем
-WORKDIR /app/api_tubes
-RUN npx prisma generate
-RUN npm run build
+# 3. Устанавливаем зависимости для воркспейса из КОРНЯ
+# npm ci прочитает корневой lock и установит всё в /app/node_modules
+RUN npm ci -w api_tubes
+
+# 4. Генерируем Prisma Client
+# Явно указываем путь к схеме, так как мы в корне /app
+RUN npx prisma generate --schema=./api_tubes/prisma/schema.prisma
+
+# 5. Собираем проект
+RUN npm run build -w api_tubes
+
+
 
 # --- Этап выполнения ---
 FROM node:20-slim AS runtime
