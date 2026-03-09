@@ -62,8 +62,9 @@ RUN npm ci -w api_tubes
 
 # 4. Генерируем Prisma Client
 # Явно указываем путь к схеме, так как мы в корне /app
-RUN npm install -g prisma
-RUN npx prisma generate --schema=./api_tubes/prisma/schema.prisma
+# Мы находимся в /app, поэтому путь к бинарнику будет таким:
+RUN ./node_modules/.bin/prisma generate --schema=./api_tubes/prisma/schema.prisma
+
 
 # 5. Собираем проект
 RUN npm run build -w api_tubes
