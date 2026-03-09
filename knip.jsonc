@@ -19,5 +19,4 @@
   },
   "ignoreExportsUsedInFile": true,
   "ignore": ["new-app/src/shared/ui/**"],
-  "ignoreDependencies": ["@oxc-resolver/binding-linux-x64-gnu"],
 }

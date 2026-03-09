@@ -1,6 +1,8 @@
 {
   "name": "tubes-monorepo",
+  "version": "0.1.0",
   "private": true,
+  "description": "Tubes production monitoring monorepo",
   "workspaces": [
     "api_tubes",
     "tubes_application",
@@ -19,15 +21,27 @@
     "pre-flight": "npm run prettier:check && npm run types:all && npm run lint:all && npm run knip && npm run build:all"
   },
   "devDependencies": {
-    "@oxc-resolver/binding-linux-x64-gnu": "^11.19.1",
     "knip": "^5.85.0",
     "prettier": "^3.8.1",
     "typescript": "^5.9.3"
   },
-  "version": "0.1.0",
   "optionalDependencies": {
-    "@oxc-resolver/binding-linux-x64-gnu": "11.19.1",
-    "@rollup/rollup-linux-x64-gnu": "4.59.0",
-    "lightningcss-linux-x64-gnu": "1.32.0"
-  }
+    "@oxc-resolver/binding-linux-x64-gnu": "1.0.0",
+    "@rollup/rollup-linux-x64-gnu": "4.12.0",
+    "lightningcss-linux-x64-gnu": "1.24.1",
+    "@tailwindcss/oxide-linux-x64-gnu": "4.0.0"
+  },
+  "overrides": {
+    "@oxc-resolver/binding-linux-x64-gnu": "$@oxc-resolver/binding-linux-x64-gnu",
+    "@rollup/rollup-linux-x64-gnu": "$@rollup/rollup-linux-x64-gnu",
+    "lightningcss-linux-x64-gnu": "$lightningcss-linux-x64-gnu",
+    "@tailwindcss/oxide-linux-x64-gnu": "$@tailwindcss/oxide-linux-x64-gnu"
+  },
+  "os": [
+    "win32",
+    "linux"
+  ],
+  "cpu": [
+    "x64"
+  ]
 }
