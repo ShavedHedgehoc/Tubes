@@ -1,0 +1,53 @@
+FROM node:20-alpine AS deps
+# libc6-compat нужен для корректной работы некоторых зависимостей на alpine
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+COPY new-app/package.json ./new-app/
+
+# 1. Кэшируем загрузку пакетов npm
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci -w new-app
+
+
+FROM node:20-alpine AS builder
+WORKDIR /app
+
+COPY --from=deps /app/node_modules ./node_modules
+COPY new-app ./new-app
+COPY package.json ./ 
+
+ARG NEXT_PUBLIC_API_URL
+ARG INTERNAL_API_URL
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL \
+    INTERNAL_API_URL=$INTERNAL_API_URL \
+    NEXT_TELEMETRY_DISABLED=1
+
+WORKDIR /app/new-app
+
+# 2. Кэшируем .next/cache для ускорения инкрементальных сборок
+RUN --mount=type=cache,target=/app/new-app/.next/cache \
+    npm run build
+
+
+FROM node:20-alpine AS runner
+WORKDIR /app
+
+ENV NODE_ENV=production \
+    NEXT_TELEMETRY_DISABLED=1 \
+    PORT=3000 \
+    HOSTNAME="0.0.0.0"
+
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nextjs
+
+# В режиме standalone Next.js копирует необходимые файлы в .next/standalone
+COPY --from=builder /app/new-app/public ./new-app/public
+COPY --from=builder --chown=nextjs:nodejs /app/new-app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/new-app/.next/static ./new-app/.next/static
+
+USER nextjs
+EXPOSE 3000
+
+CMD ["node", "new-app/server.js"]
