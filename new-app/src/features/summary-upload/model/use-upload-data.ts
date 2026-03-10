@@ -1,3 +1,4 @@
+import { conveyorApi } from "@/entities/conveyor";
 import { summaryApi } from "@/entities/summary";
 import { handleError } from "@/shared/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -10,6 +11,9 @@ export function useUploadSummaryData() {
     onSuccess: async () => {
       await client.invalidateQueries({
         queryKey: summaryApi.summaryQueries.lists(),
+      });
+      await client.invalidateQueries({
+        queryKey: conveyorApi.conveyorQueries.views(),
       });
       toast.success("Данные загружены");
     },

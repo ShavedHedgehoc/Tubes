@@ -10,7 +10,6 @@ type Conveyor = {
 
 export async function Tresholds({ props }: { props: TresholdParams }) {
   const queryClient = getQueryClient();
-  //conveyors
   await queryClient.prefetchQuery(
     tresholdApi.tresholdQueries.list(props, { isServer: true }),
   );

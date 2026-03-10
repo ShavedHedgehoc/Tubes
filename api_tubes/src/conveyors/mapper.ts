@@ -25,8 +25,9 @@ export interface IMappedSummary {
   batch_id: number | null;
   batch_name: string | null;
   plan: number;
-
-  // isActive: boolean;
+  shift: number | null;
+  // isActive: bo
+  // olean;
   // isFinished: boolean;
 
   extrusion: IPostData | null;
@@ -124,6 +125,7 @@ export const mappedConveyors = ({
         product_code: product ? product.code : null,
         product_name: product ? product.name : null,
         plan: summary.plan,
+        shift: summary.shift,
         batch_id: batch ? batch.id : null,
         batch_name: batch ? batch.name : null,
         extrusion: mappedExtrusionStatus,

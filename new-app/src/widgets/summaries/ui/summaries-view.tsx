@@ -1,7 +1,7 @@
 "use client";
 
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { columns } from "./columns";
+import { getSummariesColumns } from "./columns";
 import { SummaryFilter } from "@/features/summary-filter";
 import { DataViewLayout, DataViewLayoutProps } from "@/shared/ui";
 import { PlantIcon } from "@/shared/assets";
@@ -13,6 +13,7 @@ import {
 } from "@/entities/summary";
 import { UploadButton } from "@/features/summary-upload";
 import { EditSummaryModal } from "@/features/summary-actions";
+import { useMemo } from "react";
 
 export default function SummariesView() {
   const { params, setParams } = useSummarySearchParams();
@@ -21,6 +22,8 @@ export default function SummariesView() {
     ...summaryApi.summaryQueries.list(params, { isServer: false }),
     placeholderData: keepPreviousData,
   });
+
+  const columns = useMemo(() => getSummariesColumns(), []);
 
   const dataViewProps: DataViewLayoutProps<SummaryEntity, SummaryParams> = {
     title: "Сводки",

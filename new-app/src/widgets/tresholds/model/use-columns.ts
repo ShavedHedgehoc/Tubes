@@ -15,16 +15,6 @@ export const useTresholdColumns = (): ColumnDef<TresholdEntity>[] => {
   return useMemo(() => {
     const selectedColumns =
       baseTresholdColumns[activeColumnSet] || baseTresholdColumns["extrusion"];
-    return [
-      ...selectedColumns,
-      // {
-      //     id: "actions",
-      //     cell: ({ row }) => {
-      //         const summary = row.original;
-      //         // Ваша логика RowDropdown здесь
-      //         return <div className="text-center">...</div>;
-      //     },
-      // },
-    ];
-  }, [activeColumnSet]); // Пересчитываем только при смене набора
+    return [...selectedColumns];
+  }, [activeColumnSet]);
 };

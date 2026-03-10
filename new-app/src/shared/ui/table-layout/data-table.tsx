@@ -37,13 +37,7 @@ export function DataTable<TData, TValue>({
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup, groupIndex) => (
-            <TableRow
-              key={headerGroup.id}
-              className={cn(
-                // groupIndex === 0 ? "border-b-0" : "border-b"
-                "border-b-0",
-              )}
-            >
+            <TableRow key={headerGroup.id} className={cn("border-b-0")}>
               {headerGroup.headers.map((header) => {
                 const isGroup = header.column.getLeafColumns().length > 1;
                 const isSingle = !header.column.parent && !isGroup;

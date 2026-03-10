@@ -1,19 +1,31 @@
 // move to product entity
-type ProductEntity = {
+type Product = {
   id: number;
   code: string;
   marking: string;
   name: string;
 };
 // move to batch entity
-type BatchEntity = {
+type Batch = {
   id: number;
   name: string;
 };
 //move to conveyor entity
-type ConveyorEntity = {
+type Conveyor = {
   id: number;
   name: string;
+};
+
+export type SummaryBase = {
+  id: number;
+  product_id: number;
+  batch_id: number;
+  conveyor_id: number;
+  plan: number;
+  isActive: boolean;
+  isFinished: boolean;
+  date: Date;
+  shift: number;
 };
 
 type PostStatusCount = {
@@ -23,7 +35,7 @@ type PostStatusCount = {
   sealant_statuses: number;
 };
 
-export type SummaryEntity = {
+type AvailableSummaryRow = {
   id: number;
   product_id: number;
   batch_id: number;
@@ -31,11 +43,20 @@ export type SummaryEntity = {
   plan: number;
   isActive: boolean;
   isFinished: boolean;
-  product: ProductEntity;
-  batch: BatchEntity;
-  conveyor: ConveyorEntity;
   date: Date;
   shift: number;
+  product: Product;
+  batch: Batch;
+};
+
+export type SummaryAvailable = SummaryBase & {
+  product: Product;
+  batch: Batch;
+};
+
+// Полная сущность с отношениями
+export type SummaryEntity = SummaryAvailable & {
+  conveyor: Conveyor;
   _count: PostStatusCount;
 };
 
@@ -44,6 +65,10 @@ export type SummaryResponse = {
   summaries: SummaryEntity[];
   total: number;
   totalPages: number;
+};
+
+export type SummuryAvailableResponse = {
+  summaries: AvailableSummaryRow[];
 };
 
 export type SummaryUploadDataRow = {
