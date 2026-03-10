@@ -1,49 +1,82 @@
+# FROM node:20-slim AS builder
+
+# RUN apt-get update && apt-get install -y openssl python3 make g++ && rm -rf /var/lib/apt/lists/*
+
+# WORKDIR /app
+
+# COPY package.json package-lock.json ./
+# COPY api_tubes/package.json ./api_tubes/
+
+# COPY api_tubes/prisma ./api_tubes/prisma/
+
+# RUN --mount=type=cache,target=/root/.npm \
+#     npm ci -w api_tubes
+
+# # 2. Генерируем Prisma Client (результат будет в node_modules, которые мы скопируем)
+# WORKDIR /app/api_tubes
+# RUN npx prisma generate
+
+# # 3. Копируем исходники и собираем
+# WORKDIR /app
+# COPY api_tubes/ ./api_tubes/
+# WORKDIR /app/api_tubes
+
+# # Кэшируем билд (например, для TS или NestJS)
+# RUN --mount=type=cache,target=/app/api_tubes/.npm_cache \
+#     npm run build
+
+# FROM node:20-slim AS runtime
+# RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
+
+# WORKDIR /app
+# ENV PATH="/app/node_modules/.bin:${PATH}"
+# ENV NODE_ENV=production
+
+# # Копируем только продакшн зависимости и скомпилированные файлы
+# COPY --from=builder /app/node_modules ./node_modules
+# COPY --from=builder /app/api_tubes/dist ./api_tubes/dist
+# COPY --from=builder /app/api_tubes/package.json ./api_tubes/
+# COPY --from=builder /app/api_tubes/prisma ./api_tubes/prisma/
+
+# WORKDIR /app/api_tubes
+
+# EXPOSE 7100
+
+# # Используем прямой запуск для лучшей обработки сигналов завершения
+# CMD ["npm", "run", "start:migrate:prod"]
 FROM node:20-slim AS builder
 
-# Устанавливаем системные зависимости
 RUN apt-get update && apt-get install -y openssl python3 make g++ && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-# Копируем файлы манифестов
 COPY package.json package-lock.json ./
 COPY api_tubes/package.json ./api_tubes/
-# Копируем схему Prisma заранее, чтобы закэшировать генерацию клиента
-COPY api_tubes/prisma ./api_tubes/prisma/
 
-# 1. Кэшируем npm зависимости
-RUN --mount=type=cache,target=/root/.npm \
-    npm ci -w api_tubes
+# RUN npm ci -w api_tubes
 
-# 2. Генерируем Prisma Client (результат будет в node_modules, которые мы скопируем)
-WORKDIR /app/api_tubes
-RUN npx prisma generate
-
-# 3. Копируем исходники и собираем
-WORKDIR /app
-COPY api_tubes/ ./api_tubes/
-WORKDIR /app/api_tubes
-
-# Кэшируем билд (например, для TS или NestJS)
 RUN --mount=type=cache,target=/app/api_tubes/.npm_cache \
     npm run build
+
+COPY api_tubes/ ./api_tubes/
+
+WORKDIR /app/api_tubes
+RUN npx prisma generate
+RUN npm run build
 
 FROM node:20-slim AS runtime
 RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /app
-ENV PATH="/app/node_modules/.bin:${PATH}"
-ENV NODE_ENV=production
 
-# Копируем только продакшн зависимости и скомпилированные файлы
+WORKDIR /app
+
+ENV PATH="/app/node_modules/.bin:${PATH}"
+
 COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/api_tubes/dist ./api_tubes/dist
-COPY --from=builder /app/api_tubes/package.json ./api_tubes/
-COPY --from=builder /app/api_tubes/prisma ./api_tubes/prisma/
+COPY --from=builder /app/api_tubes ./api_tubes
 
 WORKDIR /app/api_tubes
 
 EXPOSE 7100
 
-# Используем прямой запуск для лучшей обработки сигналов завершения
 CMD ["npm", "run", "start:migrate:prod"]
