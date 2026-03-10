@@ -1,22 +1,32 @@
-FROM node:20-alpine AS build-step 
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-COPY ./tubes_application/package*.json ./
+# Копируем только файлы манифестов для кэширования зависимостей
+COPY package.json package-lock.json ./
+COPY tubes_application/package.json ./tubes_application/
 
+# 1. Кэшируем загрузку пакетов npm (BuildKit cache)
 RUN --mount=type=cache,target=/root/.npm \
-    npm ci
+    npm ci -w tubes_application
 
-COPY ./tubes_application/ ./
+# Копируем исходный код
+COPY tubes_application/ ./tubes_application/
 
-RUN --mount=type=cache,target=/app/node_modules/.vite \
+WORKDIR /app/tubes_application
+
+# 2. Кэшируем папку node_modules/.vite для ускорения инкрементальной сборки
+RUN --mount=type=cache,target=/app/tubes_application/node_modules/.cache \
     npm run build
-
 
 FROM nginx:stable-alpine
 
+# Очищаем дефолтный контент
 RUN rm -rf /usr/share/nginx/html/*
-COPY --from=build-step /app/dist /usr/share/nginx/html
+
+# Копируем результат сборки
+COPY --from=builder /app/tubes_application/dist /usr/share/nginx/html
+# Копируем конфиг nginx
 COPY docker/tubes/nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 3000
