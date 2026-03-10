@@ -55,8 +55,8 @@ COPY api_tubes/package.json ./api_tubes/
 
 # RUN npm ci -w api_tubes
 
-RUN --mount=type=cache,target=/app/api_tubes/.npm_cache \
-    npm run build
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci -w api_tubes
 
 COPY api_tubes/ ./api_tubes/
 
