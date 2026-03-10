@@ -1,17 +1,22 @@
-# 1. Stage: Установка зависимостей
 FROM node:20-alpine AS deps
-WORKDIR /new-app
-COPY ./new-app/package*.json ./
+# libc6-compat нужен для корректной работы некоторых зависимостей на alpine
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
 
-# Используем BuildKit cache для npm
+COPY package.json package-lock.json ./
+COPY new-app/package.json ./new-app/
+
+# 1. Кэшируем загрузку пакетов npm
 RUN --mount=type=cache,target=/root/.npm \
-    npm ci
+    npm ci -w new-app
 
-# 2. Stage: Сборка проекта
+
 FROM node:20-alpine AS builder
-WORKDIR /new-app
-COPY --from=deps /new-app/node_modules ./node_modules
-COPY ./new-app .
+WORKDIR /app
+
+COPY --from=deps /app/node_modules ./node_modules
+COPY new-app ./new-app
+COPY package.json ./ 
 
 ARG NEXT_PUBLIC_API_URL
 ARG INTERNAL_API_URL
@@ -19,27 +24,30 @@ ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL \
     INTERNAL_API_URL=$INTERNAL_API_URL \
     NEXT_TELEMETRY_DISABLED=1
 
-# Кэшируем .next/cache для инкрементальных сборок
-RUN --mount=type=cache,target=/new-app/.next/cache \
+WORKDIR /app/new-app
+
+# 2. Кэшируем .next/cache для ускорения инкрементальных сборок
+RUN --mount=type=cache,target=/app/new-app/.next/cache \
     npm run build
 
-# 3. Stage: Финальный образ (Runner)
+
 FROM node:20-alpine AS runner
-WORKDIR /new-app
+WORKDIR /app
 
 ENV NODE_ENV=production \
     NEXT_TELEMETRY_DISABLED=1 \
-    PORT=3000
+    PORT=3000 \
+    HOSTNAME="0.0.0.0"
 
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs
 
-# Копируем standalone сборку
-COPY --from=builder /new-app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /new-app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /new-app/.next/static ./.next/static
+# В режиме standalone Next.js копирует необходимые файлы в .next/standalone
+COPY --from=builder /app/new-app/public ./new-app/public
+COPY --from=builder --chown=nextjs:nodejs /app/new-app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/new-app/.next/static ./new-app/.next/static
 
 USER nextjs
 EXPOSE 3000
 
-CMD ["node", "server.js"]
+CMD ["node", "new-app/server.js"]
