@@ -1,0 +1,49 @@
+# syntax=docker/dockerfile:1
+
+# --- Этап сборки ---
+FROM node:20-slim AS builder
+RUN apt-get update && apt-get install -y openssl python3 make g++ && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# 1. Сначала копируем ТОЛЬКО файлы манифестов (самый важный шаг для кэша)
+COPY package.json package-lock.json ./
+COPY api_tubes/package.json ./api_tubes/
+
+# 2. Используем Mount Cache для npm. 
+# Это позволит не скачивать пакеты заново, если изменилась одна зависимость.
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci -w api_tubes
+
+# 3. Копируем ТОЛЬКО необходимые файлы для Prisma и билда
+# (Не копируем всё подряд, чтобы изменения в README не сбрасывали кэш)
+COPY api_tubes/prisma ./api_tubes/prisma
+COPY api_tubes/tsconfig.json ./api_tubes/
+COPY api_tubes/src ./api_tubes/src
+
+# 4. Генерируем Prisma (используем прямой путь к бинарнику для скорости)
+RUN ./node_modules/.bin/prisma generate --schema=./api_tubes/prisma/schema.prisma
+
+# 5. Собираем проект
+RUN npm run build -w api_tubes
+
+# --- Этап выполнения ---
+FROM node:20-slim AS runtime
+RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+ENV PATH="/app/node_modules/.bin:${PATH}"
+
+# 6. Копируем node_modules (они уже готовы)
+COPY --from=builder /app/node_modules ./node_modules
+
+# 7. Из api_tubes копируем ТОЛЬКО результат сборки и нужные файлы
+# (Это сильно уменьшает размер итогового образа)
+COPY --from=builder /app/api_tubes/dist ./api_tubes/dist
+COPY --from=builder /app/api_tubes/package.json ./api_tubes/
+COPY --from=builder /app/api_tubes/prisma ./api_tubes/prisma
+
+WORKDIR /app/api_tubes
+EXPOSE 7100
+
+CMD ["npm", "run", "start:migrate:prod"]

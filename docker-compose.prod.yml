@@ -42,7 +42,7 @@ services:
     container_name: api_tubes
     build:
       context: .
-      dockerfile: docker/api_tubes/Dockerfile.prod
+      dockerfile: docker/api_tubes/Dockerfile.fast
       args:
         - NODE_ENV=production
     environment:
@@ -65,7 +65,7 @@ services:
     container_name: new_app
     build:
       context: .
-      dockerfile: docker/new-app/Dockerfile.prod
+      dockerfile: docker/new-app/Dockerfile.fast
       args:
         - NODE_ENV=production
         - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
@@ -88,7 +88,7 @@ services:
     container_name: tubes_dash
     build:
       context: .
-      dockerfile: docker/tubes/Dockerfile.prod
+      dockerfile: docker/tubes/Dockerfile.fast
       args:
         - NODE_ENV=production
     logging:

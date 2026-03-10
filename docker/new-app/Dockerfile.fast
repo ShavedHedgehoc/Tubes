@@ -1,0 +1,45 @@
+# 1. Stage: Установка зависимостей
+FROM node:20-alpine AS deps
+WORKDIR /new-app
+COPY ./new-app/package*.json ./
+
+# Используем BuildKit cache для npm
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci
+
+# 2. Stage: Сборка проекта
+FROM node:20-alpine AS builder
+WORKDIR /new-app
+COPY --from=deps /new-app/node_modules ./node_modules
+COPY ./new-app .
+
+ARG NEXT_PUBLIC_API_URL
+ARG INTERNAL_API_URL
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL \
+    INTERNAL_API_URL=$INTERNAL_API_URL \
+    NEXT_TELEMETRY_DISABLED=1
+
+# Кэшируем .next/cache для инкрементальных сборок
+RUN --mount=type=cache,target=/new-app/.next/cache \
+    npm run build
+
+# 3. Stage: Финальный образ (Runner)
+FROM node:20-alpine AS runner
+WORKDIR /new-app
+
+ENV NODE_ENV=production \
+    NEXT_TELEMETRY_DISABLED=1 \
+    PORT=3000
+
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nextjs
+
+# Копируем standalone сборку
+COPY --from=builder /new-app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /new-app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /new-app/.next/static ./.next/static
+
+USER nextjs
+EXPOSE 3000
+
+CMD ["node", "server.js"]
