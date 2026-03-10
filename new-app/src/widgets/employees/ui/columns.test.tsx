@@ -3,7 +3,7 @@ import { vi, describe, it, expect } from "vitest";
 
 import { CellContext, ColumnDef, Row } from "@tanstack/react-table";
 import { EmployeeEntity } from "@/entities/employee";
-import { columns } from "./columns";
+import { getEmployeesColumns } from "./columns";
 
 // 1. Мокаем RowDropdown, так как это отдельный сложный компонент
 vi.mock("@/features/employees/_ui/row-dropdown", () => ({
@@ -20,25 +20,7 @@ describe("Employee Columns", () => {
     rank: { id: 1, description: "Разряд 1", val: 1 },
   };
 
-  //   // Хелпер для рендера ячейки
-  //   const renderCell = (accessor: string | number, employee: EmployeeEntity) => {
-  //     // Находим нужную колонку
-  //     const column = columns.find(
-  //       (c) => (c as any).accessorKey === accessor || c.id === accessor,
-  //     );
-  //     if (!column || !column.cell)
-  //       throw new Error(`Column ${accessor} not found`);
-
-  //     // Имитируем объект row от react-table
-  //     const row = {
-  //       original: employee,
-  //       getValue: (key: string) => (employee as any)[key],
-  //     };
-
-  //     const Cell = column.cell as any;
-  //     return render(<Cell row={row} />);
-  //   };
-
+  const columns = getEmployeesColumns();
   const renderCell = (accessor: string, summary: EmployeeEntity) => {
     // Ищем колонку с проверкой типа
     const column = columns.find(

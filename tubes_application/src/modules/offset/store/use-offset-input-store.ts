@@ -110,6 +110,11 @@ export const useOffsetInputStore = create<OffsetInputStore>()(
       const fieldKey = key as keyof IOffsetParameterData;
       set((state) => {
         const currentVal = state.data[fieldKey];
+        if (currentVal == null) {
+          return {
+            data: { ...state.data, [fieldKey]: "0" },
+          };
+        }
         if (typeof currentVal !== "string") return state;
 
         return {
@@ -124,6 +129,14 @@ export const useOffsetInputStore = create<OffsetInputStore>()(
       set((state) => {
         const fieldKey = key as keyof IOffsetParameterData;
         const currentValue = state.data[fieldKey];
+        if (currentValue === null) {
+          return {
+            data: {
+              ...state.data,
+              [fieldKey]: formatKeyboardInput("0", value),
+            },
+          };
+        }
         if (typeof currentValue === "string") {
           return {
             data: {

@@ -20,6 +20,7 @@ import {
   ActiveSummaryResponse,
   BaseStatus,
 } from "./dto/active-summary.response";
+import { AvailableSummariesResponse } from "./dto/available-summaries.response";
 
 type StatusTable =
   | "extrusionStatus"
@@ -460,7 +461,9 @@ export class SummariesService {
     };
   }
 
-  async getAvailableSummariesRecordByConveyorId(conveyor_id: number) {
+  async getAvailableSummariesRecordByConveyorId(
+    conveyor_id: number,
+  ): Promise<AvailableSummariesResponse> {
     const today = new Date();
     today.setHours(12, 0, 0, 0);
 

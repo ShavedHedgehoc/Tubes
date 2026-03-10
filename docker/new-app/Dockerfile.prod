@@ -1,44 +1,48 @@
 FROM node:20-alpine AS deps
-WORKDIR /new-app
-COPY ./new-app/package*.json  ./
-RUN npm ci
 
-# 2. Stage: Сборка проекта
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+
+
+COPY package.json package-lock.json ./
+COPY new-app/package.json ./new-app/
+
+RUN npm ci -w new-app
+
+
 FROM node:20-alpine AS builder
-WORKDIR /new-app
-COPY --from=deps /new-app/node_modules ./node_modules
-COPY ./new-app .
+WORKDIR /app
+
+COPY --from=deps /app/node_modules ./node_modules
+COPY new-app ./new-app
+COPY package.json ./ 
 
 ARG NEXT_PUBLIC_API_URL
 ARG INTERNAL_API_URL
-
 ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 ENV INTERNAL_API_URL=$INTERNAL_API_URL
-# Отключаем телеметрию Next.js во время сборки
 ENV NEXT_TELEMETRY_DISABLED 1
+
+WORKDIR /app/new-app
 RUN npm run build
 
-# 3. Stage: Финальный образ (Runner)
 FROM node:20-alpine AS runner
-WORKDIR /new-app
+WORKDIR /app
 
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
 
-# Создаем пользователя для безопасности
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-# Копируем только необходимые файлы из builder
-COPY --from=builder /new-app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /new-app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /new-app/.next/static ./.next/static
+COPY --from=builder /app/new-app/public ./new-app/public
+COPY --from=builder --chown=nextjs:nodejs /app/new-app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/new-app/.next/static ./new-app/.next/static
 
 USER nextjs
 
 EXPOSE 3000
 ENV PORT 3000
+ENV HOSTNAME "0.0.0.0"
 
-CMD ["node", "server.js"]
-
-
+CMD ["node", "new-app/server.js"]
