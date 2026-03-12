@@ -15,12 +15,24 @@ export class StatusesService {
         },
       });
 
-      if (!lastStatusEntry)
+      if (!lastStatusEntry) {
+        if (dto.idle) {
+          return await tx.extrusionStatus.create({
+            data: {
+              summary_id: dto.summary_id,
+              operation_id: dto.operation_id,
+              idle: dto.idle,
+              finished: dto.finished,
+              employee_id: dto.employee_id,
+              counter_value: 0,
+            },
+          });
+        }
         throw new HttpException(
           ApiMessages.PREVISIOUS_STATUS_NOT_FOUND,
           HttpStatus.BAD_REQUEST,
         );
-
+      }
       if (lastStatusEntry.idle) {
         const timeDelta = Date.now() - lastStatusEntry.createdAt.getTime();
         await tx.extrusionStatus.update({
@@ -59,11 +71,24 @@ export class StatusesService {
         },
       });
 
-      if (!lastStatusEntry)
+      if (!lastStatusEntry) {
+        if (dto.idle) {
+          return await tx.varnishStatus.create({
+            data: {
+              summary_id: dto.summary_id,
+              operation_id: dto.operation_id,
+              idle: dto.idle,
+              finished: dto.finished,
+              employee_id: dto.employee_id,
+              counter_value: 0,
+            },
+          });
+        }
         throw new HttpException(
           ApiMessages.PREVISIOUS_STATUS_NOT_FOUND,
           HttpStatus.BAD_REQUEST,
         );
+      }
 
       if (lastStatusEntry.idle) {
         const timeDelta = Date.now() - lastStatusEntry.createdAt.getTime();
@@ -103,11 +128,24 @@ export class StatusesService {
         },
       });
 
-      if (!lastStatusEntry)
+      if (!lastStatusEntry) {
+        if (dto.idle) {
+          return await tx.offsetStatus.create({
+            data: {
+              summary_id: dto.summary_id,
+              operation_id: dto.operation_id,
+              idle: dto.idle,
+              finished: dto.finished,
+              employee_id: dto.employee_id,
+              counter_value: 0,
+            },
+          });
+        }
         throw new HttpException(
           ApiMessages.PREVISIOUS_STATUS_NOT_FOUND,
           HttpStatus.BAD_REQUEST,
         );
+      }
 
       if (lastStatusEntry.idle) {
         const timeDelta = Date.now() - lastStatusEntry.createdAt.getTime();
@@ -116,6 +154,7 @@ export class StatusesService {
           data: { idle_time: timeDelta },
         });
       }
+
       if (dto.defect_value) {
         await tx.offsetDefect.upsert({
           where: { summary_id: dto.summary_id },
@@ -147,11 +186,24 @@ export class StatusesService {
         },
       });
 
-      if (!lastStatusEntry)
+      if (!lastStatusEntry) {
+        if (dto.idle) {
+          return await tx.sealantStatus.create({
+            data: {
+              summary_id: dto.summary_id,
+              operation_id: dto.operation_id,
+              idle: dto.idle,
+              finished: dto.finished,
+              employee_id: dto.employee_id,
+              counter_value: 0,
+            },
+          });
+        }
         throw new HttpException(
           ApiMessages.PREVISIOUS_STATUS_NOT_FOUND,
           HttpStatus.BAD_REQUEST,
         );
+      }
 
       if (lastStatusEntry.idle) {
         const timeDelta = Date.now() - lastStatusEntry.createdAt.getTime();
