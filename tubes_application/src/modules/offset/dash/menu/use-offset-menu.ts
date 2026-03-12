@@ -56,7 +56,7 @@ export default function useOffsetMenu() {
   const operationButtonDisabledCondition =
     !employee ||
     !summaryData ||
-    !summaryData.offsetStatus.createdAt ||
+    // !summaryData.offsetStatus.createdAt ||
     summaryData.offsetStatus.finished;
 
   const pictureButtonDisabledCondition = summaryData === null;

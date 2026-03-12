@@ -70,9 +70,7 @@ export default function PrintModal({
     useShallow((state) => state.sealantConveyor),
   );
   const { data: printerData } = usePrinter(sealantConveyor?.id ?? null);
-  const { data: boxData } = useProductionBoxes(
-    summaryData?.data.batch_id ?? null,
-  );
+  const { data: boxData } = useProductionBoxes(summaryData?.data.id ?? null);
 
   const { printZPL } = usePrintZpl();
   const handleOpenchange = (e: DialogOpenChangeDetails) => {

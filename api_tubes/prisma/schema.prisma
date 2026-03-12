@@ -295,7 +295,7 @@ model ExtrusionParam {
   blow_time                          Int
   turning_machine_speed              Int
   annealing_furnace_temp             Int
-  tube_cylindrical_section_length    Int
+  tube_cylindrical_section_length    Float
   membrane_thickness                 Float
   tube_diameter                      Float
   tube_cylindrical_section_thickness Float

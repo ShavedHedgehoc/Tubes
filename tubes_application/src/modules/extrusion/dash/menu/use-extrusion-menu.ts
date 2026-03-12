@@ -58,7 +58,7 @@ export default function useExtrusionMenu() {
   const operationButtonDisabledCondition =
     !employee ||
     !summaryData ||
-    !summaryData.extrusionStatus.createdAt ||
+    // !summaryData.extrusionStatus.createdAt ||
     summaryData.extrusionStatus.finished;
 
   const pictureButtonDisabledCondition = summaryData === null;

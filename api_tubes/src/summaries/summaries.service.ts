@@ -502,6 +502,18 @@ export class SummariesService {
     return summary;
   }
 
+  async getSummaryById(id: number) {
+    const record = await this.prisma.summary.findUnique({
+      where: { id: id },
+      include: {
+        batch: true,
+        product: true,
+        conveyor: true,
+      },
+    });
+    return record;
+  }
+
   // private async getConsumedMaterial({ id, date }: { id: number; date: Date }) {
   //   const record = await this.prisma.consumedMaterial.findFirst({
   //     where: {

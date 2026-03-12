@@ -77,17 +77,16 @@ export default function NumericEntryModal<T>(props: NumericEntryModalProps<T>) {
                   <Heading color="fg.muted">{props.title}</Heading>
                   <Status.Root
                     colorPalette={
-                      props.data &&
-                      typeof props.maxValue === "number" &&
-                      typeof props.minValue === "number" &&
-                      props.data !== "0"
-                        ? Number(props.data) > props.maxValue ||
-                          Number(props.data) < props.minValue
-                          ? "red"
-                          : "green"
-                        : props.data && props.data !== "0"
-                          ? "gray"
-                          : "yellow"
+                      // Проверяем наличие введенных данных (не null/undefined)
+                      props.data !== null && props.data !== undefined
+                        ? typeof props.maxValue === "number" &&
+                          typeof props.minValue === "number"
+                          ? Number(props.data) > props.maxValue ||
+                            Number(props.data) < props.minValue
+                            ? "red"
+                            : "green"
+                          : "gray" // Если лимиты не заданы, но данные есть
+                        : "yellow" // Если данных нет
                     }
                     alignItems="end"
                     size="lg"
@@ -105,11 +104,14 @@ export default function NumericEntryModal<T>(props: NumericEntryModalProps<T>) {
                     borderWidth="1px"
                   >
                     <Text textStyle="3xl" color="fg.a">
-                      {props.data ? props.data : "0"}
+                      {/* {props.data ? props.data : "0"} */}
+                      {props.data !== null && props.data !== undefined
+                        ? props.data
+                        : "0"}
                     </Text>
                   </HStack>
                   <Text textStyle="md" color="fg.subtle">
-                    {props.minValue && props.maxValue
+                    {props.minValue !== null && props.maxValue !== null
                       ? `Регламентные значения от ${props.minValue} до ${props.maxValue} ${props.unit ?? ""}`
                       : `Регламентные значения не заданы`}
                   </Text>
