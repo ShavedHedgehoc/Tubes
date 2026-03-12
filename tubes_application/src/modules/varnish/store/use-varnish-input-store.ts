@@ -125,11 +125,13 @@ export const useVarnishInputStore = create<VarnishInputStore>()(
       set((state) => {
         const fieldKey = key as keyof IVarnishParameterData;
         const currentValue = state.data[fieldKey];
-        if (typeof currentValue === "string") {
+        if (currentValue === null || typeof currentValue === "string") {
+          const currentString =
+            currentValue !== null ? String(currentValue) : "";
           return {
             data: {
               ...state.data,
-              [fieldKey]: formatKeyboardInput(currentValue, value),
+              [fieldKey]: formatKeyboardInput(currentString, value),
             },
           };
         }
