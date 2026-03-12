@@ -49,10 +49,10 @@ export default class ProductionBoxService {
   }
 
   static async getProductionBoxes(
-    batch_id: number | null,
+    summary_id: number | null,
   ): Promise<IProductionBox[] | []> {
     const res = await $api.get(
-      `${ApiRoutes.PRODUCTION_BOX}?summary_id=${batch_id}`,
+      `${ApiRoutes.PRODUCTION_BOX}?summary_id=${summary_id}`,
     );
     return res.data;
   }

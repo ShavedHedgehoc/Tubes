@@ -17,16 +17,10 @@ import { ChangeSummaryStateDto } from "./dto/change-summary-state.dto";
 import { GetSummariesListDto } from "./dto/get-summaries-list.dto";
 import { DeleteSummaryDto } from "./dto/delete-summary.dto";
 import { AvailableSummariesResponse } from "./dto/available-summaries.response";
+import { GetDetailDto } from "./dto/get-detail.dto";
 // import { GetDetailDto } from "./dto/get-detail.dto";
 
 //move to dto
-// export class GetDetailDto {
-//   @ApiProperty({ example: 1, description: "id записи" })
-//   @IsNotEmpty()
-//   @Type(() => Number)
-//   @IsNumber()
-//   readonly id: number;
-// }
 
 @ApiTags("Сводки")
 @Controller("summaries")
@@ -44,14 +38,14 @@ export class SummariesController {
   // !!!!!!!!!!!!
   // Надо добавить ручку для формы редактирования
 
-  // @ApiOperation({
-  //   summary: "Получить детали cводку по id (для подробного отчета)",
-  // })
-  // @Get("detail/:id")
-  // @UsePipes(new ValidationPipe({ transform: true }))
-  // getSummaryById(@Param() params: GetDetailDto) {
-  //   return this.summaryService.getSummaryById(params.id);
-  // }
+  @ApiOperation({
+    summary: "Получить детали cводку по id (для подробного отчета)",
+  })
+  @Get("detail/:id")
+  @UsePipes(new ValidationPipe({ transform: true }))
+  getSummaryById(@Param() params: GetDetailDto) {
+    return this.summaryService.getSummaryById(params.id);
+  }
 
   @ApiOperation({ summary: "Получить активную сводку по id конвейера" })
   @Get("/active")

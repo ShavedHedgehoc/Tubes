@@ -16,7 +16,13 @@ export const baseAvailableSummariesColumns: ColumnDef<SummaryAvailable>[] = [
     accessorKey: "shift",
     header: () => <div className="text-center">Смена</div>,
     cell: ({ row }) => (
-      <div className="text-center opacity-80">{row.original.shift}</div>
+      <div className="text-center opacity-80">
+        {row.original.shift === 1
+          ? "День"
+          : row.original.shift === 2
+            ? "Ночь"
+            : "-"}
+      </div>
     ),
   },
   {

@@ -68,7 +68,11 @@ export default function ConveyorCard({
               <p>
                 <span>Смена: </span>
                 <span className="text-foreground font-bold">
-                  {conveyorData.summary.shift || "-"}
+                  {conveyorData.summary.shift === 1
+                    ? "День"
+                    : conveyorData.summary.shift === 2
+                      ? "Ночь"
+                      : "-"}
                 </span>
               </p>
             </div>

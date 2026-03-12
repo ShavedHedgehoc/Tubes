@@ -41,7 +41,7 @@ export default function SealantBoxConfirmModal() {
       };
       createProductionBox(dto);
     } else {
-      enqueueSnackbar(AppMessages.MATERIAL_SCAN_ERROR, {
+      enqueueSnackbar(AppMessages.PRODUCTION_BOX_SCAN_ERROR, {
         variant: "error",
         anchorOrigin: { vertical: "top", horizontal: "right" },
       });

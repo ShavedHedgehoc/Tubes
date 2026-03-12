@@ -95,7 +95,7 @@ export default function ExtrusionEntries({
     minValue: tresholdsData?.extrusion_tube_cylindrical_section_length_min ?? 0,
     maxValue: tresholdsData?.extrusion_tube_cylindrical_section_length_max ?? 0,
     unit: PARAMETER_UNITS[ExtrusionInputParams.TUBE_CYLINDRICAL_SECTION_LENGTH],
-    onClick: (val) => handleIntegerCardClick(val),
+    onClick: (val) => handleCardClick(val),
     variant: "numeric",
   };
 

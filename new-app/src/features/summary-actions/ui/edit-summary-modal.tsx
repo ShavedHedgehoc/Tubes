@@ -35,7 +35,7 @@ export function EditSummaryModal() {
   return (
     <ModalLayout
       title="Редактирование сводки"
-      description="Измените данные сотрудника и сохраните изменения"
+      description="Измените данные сводки и сохраните изменения"
       isOpen={isOpen}
       onOpenChange={onOpenChange}
     >

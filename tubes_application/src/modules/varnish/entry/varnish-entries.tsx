@@ -215,7 +215,7 @@ export default function VarnishEntries({
     minValue: tresholdsData?.varnish_internal_varnish_porosity_min || null,
     maxValue: tresholdsData?.varnish_internal_varnish_porosity_max || null,
     unit: PARAMETER_UNITS[VarnishInputParams.INTERNAL_VARNISH_POROSITY],
-    onClick: (val) => handleIntegerCardClick(val),
+    onClick: (val) => handleCardClick(val),
     variant: "numeric",
   };
 

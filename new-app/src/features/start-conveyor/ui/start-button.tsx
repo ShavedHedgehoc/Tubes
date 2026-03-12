@@ -63,7 +63,9 @@ export default function StartButton({ row }: { row: SummaryAvailable }) {
                 </div>
                 <div className="text-xs opacity-70 uppercase">
                   ДАТА: {new Date(row.date).toLocaleDateString("ru-RU")} |
-                  СМЕНА: {row.shift} | ПАРТИЯ: {row.batch.name}
+                  СМЕНА:{" "}
+                  {row.shift === 1 ? "День" : row.shift === 2 ? "Ночь" : "-"} |
+                  ПАРТИЯ: {row.batch.name}
                 </div>
               </div>
               <p className="text-destructive font-medium text-xs">

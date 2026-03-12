@@ -26,7 +26,11 @@ export const baseSummaryColumns: ColumnDef<SummaryEntity>[] = [
     header: () => <div className="text-center">Смена</div>,
     cell: ({ row }) => {
       const summary = row.original;
-      return <div className="text-center">{summary.shift}</div>;
+      return (
+        <div className="text-center">
+          {summary.shift === 1 ? "День" : summary.shift === 2 ? "Ночь" : "-"}
+        </div>
+      );
     },
   },
   {
