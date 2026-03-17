@@ -357,15 +357,19 @@ export class SummariesService {
       Promise.all([
         this.prisma.extrusionStatus.findMany({
           where: { summary_id: activeRecord.id },
+          orderBy: { id: "asc" },
         }),
         this.prisma.varnishStatus.findMany({
           where: { summary_id: activeRecord.id },
+          orderBy: { id: "asc" },
         }),
         this.prisma.offsetStatus.findMany({
           where: { summary_id: activeRecord.id },
+          orderBy: { id: "asc" },
         }),
         this.prisma.sealantStatus.findMany({
           where: { summary_id: activeRecord.id },
+          orderBy: { id: "asc" },
         }),
       ]),
       // Операции
