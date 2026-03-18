@@ -45,16 +45,11 @@ const imageFileFilter = (
 @Controller("upload")
 export class UploadController {
   @Post("file")
-  //   @UseInterceptors(
-  //     FileInterceptor("file", {
-  //       dest: "./uploads", // Files will be saved to the 'uploads' directory inside the container
-  //     })
-  //   )
   @UseInterceptors(
     FileInterceptor("file", {
       storage: diskStorage({
-        destination: "./uploads/images", // The mounted volume path inside the container
-        filename: editFileName, // Use the custom filename function
+        destination: "./uploads/images",
+        filename: editFileName,
       }),
       fileFilter: imageFileFilter,
     }),
