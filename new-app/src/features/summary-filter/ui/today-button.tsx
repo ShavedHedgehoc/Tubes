@@ -12,7 +12,7 @@ export default function TodayButton() {
   const isNotToday = params.start_date !== today || params.end_date !== today;
 
   const handleSetToday = () => {
-    setParams({ start_date: today, end_date: today });
+    setParams({ start_date: today, end_date: today, page: 1 });
   };
 
   return (
