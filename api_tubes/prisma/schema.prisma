@@ -61,6 +61,14 @@ model Product {
   @@map("products")
 }
 
+model FilePath {
+  id   Int    @id @default(autoincrement())
+  name String
+  path String
+
+  @@map("file_paths")
+}
+
 model Pictures {
   id         Int     @id @default(autoincrement())
   product    Product @relation(fields: [product_id], references: [id], onDelete: Cascade, onUpdate: Cascade)

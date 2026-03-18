@@ -1,3 +1,4 @@
+import { MainNavLink } from "@/shared/ui";
 import Link from "next/link";
 
 export function MainNav() {
@@ -10,7 +11,6 @@ export function MainNav() {
         className="tracking-[-0.01em]"
         href={{
           pathname: "/employees",
-          // query: { page: 1, limit: 10, name_asc: "true" },
         }}
       >
         Сотрудники
@@ -19,7 +19,6 @@ export function MainNav() {
         className="tracking-[-0.01em]"
         href={{
           pathname: "/summaries",
-          // query: { page: 1, limit: 10, name_asc: "true" },
         }}
       >
         Сводки
@@ -28,11 +27,12 @@ export function MainNav() {
         className="tracking-[-0.01em]"
         href={{
           pathname: "/tresholds",
-          // query: { page: 1, limit: 10, name_asc: "true" },
+
         }}
       >
         Границы
       </Link>
+      <MainNavLink href={"/files"}>Файлы</MainNavLink>
     </nav>
   );
 }

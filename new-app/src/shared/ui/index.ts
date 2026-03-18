@@ -35,3 +35,4 @@ export * from "./toggle";
 export * from "./chart";
 export * from "./scroll-area";
 export * from "./alert-dialog";
+export * from "./main-nav-link";

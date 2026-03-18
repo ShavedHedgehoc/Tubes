@@ -101,10 +101,14 @@ export class ApiClient {
     endpoint: string,
     body: TData,
   ): Promise<TResult> {
+    const isFormData = body instanceof FormData;
+    const headers: HeadersInit = isFormData
+      ? {}
+      : { "Content-Type": "application/json" };
     const response = await fetch(`${this.baseUrl}${endpoint}`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
+      headers: headers,
+      body: isFormData ? (body as unknown as BodyInit) : JSON.stringify(body),
     });
     return this.handleResponse<TResult>(response);
   }

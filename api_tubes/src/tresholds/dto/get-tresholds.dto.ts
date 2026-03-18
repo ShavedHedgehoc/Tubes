@@ -26,22 +26,10 @@ export class GetTresholdsDto {
 
   @ApiPropertyOptional({
     description: "Конвейеры (через запятую: 1,2,3)",
-    type: String, // Swagger будет рисовать текстовое поле ввода
+    type: String,
   })
   @IsOptional()
   @ToNumbersArray()
-  // @Transform(({ value }: { value: unknown }) => {
-  //   if (Array.isArray(value)) {
-  //     return value.map((v) => Number(v)).filter((v) => !isNaN(v));
-  //   }
-  //   if (typeof value === "string" && value.trim().length > 0) {
-  //     return value
-  //       .split(",")
-  //       .map((v) => parseInt(v.trim(), 10))
-  //       .filter((v) => !isNaN(v));
-  //   }
-  //   return value;
-  // })
   @IsArray()
   @IsInt({ each: true })
   readonly conveyors?: number[];
