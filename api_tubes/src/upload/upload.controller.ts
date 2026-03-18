@@ -31,7 +31,12 @@ const editFileName = (
   // You can use just the original name, but adding a timestamp or random string
   // is often safer to prevent overwriting existing files with the same name.
   //   callback(null, `${name}-${randomName}${fileExtName}`);
-  callback(null, file.originalname);
+  const utf8Name = Buffer.from(file.originalname, 'latin1').toString('utf8');
+
+  // Рекомендуется также очистить имя от пробелов и спецсимволов для URL
+  const safeName = utf8Name.replace(/\s+/g, '_');
+  // callback(null, file.originalname);
+  callback(null, safeName);
 };
 
 const imageFileFilter = (
