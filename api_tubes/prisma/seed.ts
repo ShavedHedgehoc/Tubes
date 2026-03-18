@@ -1,6 +1,4 @@
-import { Specification } from "./../generated/prisma/index.d";
 import { PrismaClient } from "../generated/prisma/client";
-import { create } from "domain";
 
 const prisma = new PrismaClient();
 
@@ -56,7 +54,6 @@ async function main() {
   });
 
   // employees
-
   const employees: { name: string; barcode: string; rank_id: number }[] = [
     {
       name: "Скрипковский М.Ю.",
@@ -109,189 +106,18 @@ async function main() {
     { name: "Панарин С.В.", barcode: "2000875313371", rank_id: rank3.id },
     { name: "Скляренко Э.Г.", barcode: "2000875313388", rank_id: rank4.id },
     { name: "Сметанин А.А.", barcode: "2000875313395", rank_id: rank2.id },
+    { name: "Смирнов Д.А.", barcode: "2000875361778", rank_id: rank1.id },
+    { name: "Ефимов А.В.", barcode: "2000875361822", rank_id: rank1.id },
+    { name: "Савельев А.А.", barcode: "2000875361839", rank_id: rank1.id },
+    { name: "Ольшевский Е.А.", barcode: "2000875366292", rank_id: rank1.id },
+    { name: "Виноградов В.И.", barcode: "2000875371906", rank_id: rank1.id },
   ];
-
-  // // raw materials
-  // const materials: { code: string; name: string; post_number: number }[] = [
-  //   {
-  //     code: "063754",
-  //     name: "Бушон РК 214F, белый (LOVE, CELEBRITY)",
-  //     post_number: 4,
-  //   },
-  //   { code: "069579", name: "Бушон РК 214F, черный (ESSEX)", post_number: 4 },
-  //   {
-  //     code: "070321",
-  //     name: "Бушон РК 214F цвет 9-108, серый (LOOKS)",
-  //     post_number: 4,
-  //   },
-  //   {
-  //     code: "063755",
-  //     name: "Бушон РК делюкс-28, черный (DL, SILVER)",
-  //     post_number: 4,
-  //   },
-  //   {
-  //     code: "063756",
-  //     name: "Бушон РК делюкс-35, черный (PRINCE)",
-  //     post_number: 4,
-  //   },
-  //   {
-  //     code: "068813",
-  //     name: "Рондоль D28*L129 АЛЮМАР (27,7*3,4 мм)",
-  //     post_number: 1,
-  //   },
-  //   {
-  //     code: "068866",
-  //     name: "Рондоль D28*L129 ИНКОМПРО (27,7*3,8 мм) ориентированная",
-  //     post_number: 1,
-  //   },
-  //   {
-  //     code: "069527",
-  //     name: "Рондоль D28*L129 NEUMAN (27,7*3,8 мм)",
-  //     post_number: 1,
-  //   },
-  //   {
-  //     code: "069528",
-  //     name: "Рондоль D28*L149 NEUMAN (27,7*4,2 мм)",
-  //     post_number: 1,
-  //   },
-  //   {
-  //     code: "068811",
-  //     name: "Рондоль D35*L160 АЛЮМАР (34,75*3,6 мм)",
-  //     post_number: 1,
-  //   },
-  //   {
-  //     code: "068868",
-  //     name: "Рондоль D35*L160 ИНКОМПРО(34,7*3,8 мм)",
-  //     post_number: 1,
-  //   },
-  //   {
-  //     code: "069529",
-  //     name: "Рондоль D35*L160 NEUMAN (34,7*4,2 мм)",
-  //     post_number: 1,
-  //   },
-  //   {
-  //     code: "068972",
-  //     name: "Внутренний лак бежевый VPL NOVACAN T-IL300",
-  //     post_number: 2,
-  //   },
-  //   {
-  //     code: "069530",
-  //     name: "Внутренний лак бежевый METLAC 716401",
-  //     post_number: 2,
-  //   },
-  //   {
-  //     code: "069531",
-  //     name: "Внутренний лак золотистый METALL DECOR SJ-3701785",
-  //     post_number: 2,
-  //   },
-  //   {
-  //     code: "068817",
-  //     name: "Растворитель для внутреннего лака  VPL NOVACAN V200",
-  //     post_number: 2,
-  //   },
-  //   {
-  //     code: "069532",
-  //     name: "Растворитель для внутреннего лака METLAC 766015",
-  //     post_number: 2,
-  //   },
-  //   {
-  //     code: "069533",
-  //     name: "Растворитель для внутреннего лака METALL DECOR RS-1",
-  //     post_number: 2,
-  //   },
-  //   {
-  //     code: "068815",
-  //     name: "Внешний белый грунт VPL NOVACAN T-W 100/1",
-  //     post_number: 3,
-  //   },
-  //   {
-  //     code: "069534",
-  //     name: "Внешний белый грунт METALL DECOR CC-4215",
-  //     post_number: 3,
-  //   },
-  //   {
-  //     code: "068816",
-  //     name: "Внешний прозрачный грунт VPL NOVACAN C-EOE 160",
-  //     post_number: 3,
-  //   },
-  //   {
-  //     code: "069535",
-  //     name: "Внешний прозрачный грунт METALL DECOR CC-4010",
-  //     post_number: 3,
-  //   },
-  //   {
-  //     code: "069537",
-  //     name: "Растворитель для внешнего грунта METALL DECOR BS-277",
-  //     post_number: 3,
-  //   },
-  //   {
-  //     code: "068971",
-  //     name: "Латексная паста-герметик VPL NOVACAN T-D 125",
-  //     post_number: 4,
-  //   },
-  //   {
-  //     code: "071056",
-  //     name: "Латексная паста-герметик ЛПУ-3М ВВ",
-  //     post_number: 4,
-  //   },
-  //   { code: "071076", name: "Дисперсия акриловая Акрэмос 306", post_number: 4 },
-  //   { code: "067792", name: "Cтеарат цинка", post_number: 1 },
-  //   {
-  //     code: "069538",
-  //     name: "Арахинат цинка (ZINKARACHINAT SW)",
-  //     post_number: 1,
-  //   },
-  //   {
-  //     code: "068818",
-  //     name: "Краска Белая TV-900 Opaque white	",
-  //     post_number: 3,
-  //   },
-  //   {
-  //     code: "068822",
-  //     name: "Краска Голубая TV-Pantone 5117 Process Cyan C",
-  //     post_number: 3,
-  //   },
-  //   { code: "071055", name: "Краска Золотая TV-Pantone 876C", post_number: 3 },
-  //   {
-  //     code: "069336",
-  //     name: "Краска Оливково-серая TV-Pantone 8003C	",
-  //     post_number: 3,
-  //   },
-  //   { code: "071240", name: "Краска TV-3110 Orange 021C", post_number: 3 },
-  //   {
-  //     code: "068819",
-  //     name: "Краска Серая TV-Pantone Cool Gray 7C",
-  //     post_number: 3,
-  //   },
-  //   { code: "071241", name: "Краска TV-Pantone 10394C", post_number: 3 },
-  //   { code: "071054", name: "Краска Синяя TV-Pantone 2387C", post_number: 3 },
-  //   { code: "069193", name: "Краска Синия TV-Pantone 2758C", post_number: 3 },
-  //   { code: "068823", name: "Краска Синяя TV-Pantone 302C", post_number: 3 },
-  //   { code: "068820", name: "Краска Синяя TV-Pantone 7684C", post_number: 3 },
-  //   {
-  //     code: "070177",
-  //     name: "Краска Тёмно-серая TV-Pantone 8604C",
-  //     post_number: 3,
-  //   },
-  //   { code: "068821", name: "Краска Черная TV-9075 Black C", post_number: 3 },
-  //   {
-  //     code: "056448",
-  //     name: "Пигмент Colorstream T10-02 Arctic Fire",
-  //     post_number: 3,
-  //   },
-  // ];
 
   for (let index = 0; index < employees.length; index++) {
     await prisma.employee.create({
       data: employees[index],
     });
   }
-
-  // for (let index = 0; index < materials.length; index++) {
-  //   await prisma.material.create({
-  //     data: materials[index],
-  //   });
-  // }
 
   const ext_operations: string[] = [
     "Замена пуансона",
