@@ -13,7 +13,7 @@ export const baseFileColumns: ColumnDef<FileEntity>[] = [
     accessorKey: "description",
     header: () => <div className="text-left">Описание</div>,
     cell: ({ row }) => {
-      return <div className="text-left"> {row.original.description} </div>;
+      return <div className="text-left"> {row.original.description === "" ? "-" : row.original.description} </div>;
     },
   },
 ];
