@@ -24,7 +24,7 @@ export function ModalLayout({
   isOpen,
   onOpenChange,
   className,
-  children, // Извлекаем children
+  children,
 }: ModalLayoutProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>

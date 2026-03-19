@@ -24,6 +24,7 @@ export function FileViewModal() {
             description="Закройте после просмотра"
             isOpen={isOpen}
             onOpenChange={handleOpenChange}
+            className="sm:max-w-[90vw] max-w-[95vw] h-[90vh] flex flex-col justify-center"
         >
             <div className={cn("relative w-full",
                 // "min-h-[400px]", 
