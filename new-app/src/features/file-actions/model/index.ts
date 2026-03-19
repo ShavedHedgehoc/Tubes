@@ -1,1 +1,1 @@
-export * from "./use-delete-file"
+export * from "./use-delete-file";

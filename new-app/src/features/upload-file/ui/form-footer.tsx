@@ -2,32 +2,32 @@ import { Button, Field } from "@/shared/ui";
 import { useFormContext } from "react-hook-form";
 
 export function FormFooter({
-    fileInputRef,
-    resetDisable,
-    submitDisable,
+  fileInputRef,
+  resetDisable,
+  submitDisable,
 }: {
-    fileInputRef: React.RefObject<HTMLInputElement | null>;
+  fileInputRef: React.RefObject<HTMLInputElement | null>;
 
-    resetDisable: boolean;
-    submitDisable: boolean;
+  resetDisable: boolean;
+  submitDisable: boolean;
 }) {
-    const { reset } = useFormContext();
-    const handleFullReset = () => {
-        reset();
-        if (fileInputRef.current) fileInputRef.current.value = "";
-    };
+  const { reset } = useFormContext();
+  const handleFullReset = () => {
+    reset();
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
 
-    return (
-        <Field
-            orientation="horizontal"
-            className="justify-end flex flex-row w-full gap-2"
-        >
-            <Button variant="ghost" disabled={resetDisable} onClick={handleFullReset}>
-                Очистить
-            </Button>
-            <Button type="submit" form="form-rhf-demo" disabled={submitDisable}>
-                Загрузить
-            </Button>
-        </Field>
-    );
+  return (
+    <Field
+      orientation="horizontal"
+      className="justify-end flex flex-row w-full gap-2"
+    >
+      <Button variant="ghost" disabled={resetDisable} onClick={handleFullReset}>
+        Очистить
+      </Button>
+      <Button type="submit" form="form-rhf-demo" disabled={submitDisable}>
+        Загрузить
+      </Button>
+    </Field>
+  );
 }

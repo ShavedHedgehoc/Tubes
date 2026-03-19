@@ -11,5 +11,5 @@ export enum ApiMessages {
   FILE_NOT_FOUND = "Файл не найден",
   FILE_DELETE_SUCCESSFULLY = "Файл успешно удален",
   FILE_DELETE_ERROR = "Ошибка удаления файла",
-  FILE_IS_MISSING_OR_INVALID = "Файл отсутствует или поврежден"
+  FILE_IS_MISSING_OR_INVALID = "Файл отсутствует или поврежден",
 }

@@ -1,9 +1,10 @@
 import { ApiProperty } from "@nestjs/swagger";
 
 export class FilePathRow {
-    id: number
-    name: string
+    id: number;
+    name: string;
     path: string
+    description: string;
 }
 
 export class GetFilePathsResponse {

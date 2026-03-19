@@ -27,7 +27,6 @@ export function MainNav() {
         className="tracking-[-0.01em]"
         href={{
           pathname: "/tresholds",
-
         }}
       >
         Границы

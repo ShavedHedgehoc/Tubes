@@ -15,9 +15,9 @@ export const getSummariesColumns = (): ColumnDef<SummaryEntity>[] => {
               id={summary.id}
               isCanDelete={
                 summary._count.extrusion_statuses +
-                summary._count.varnish_statuses +
-                summary._count.offset_statuses +
-                summary._count.sealant_statuses ===
+                  summary._count.varnish_statuses +
+                  summary._count.offset_statuses +
+                  summary._count.sealant_statuses ===
                 0
               }
             />

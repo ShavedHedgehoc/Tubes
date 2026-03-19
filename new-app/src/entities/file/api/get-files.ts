@@ -5,23 +5,24 @@ import { FilesWithPaginationDto } from "./dto/files-with-pagination.dto";
 import { FILE_ENDPOINTS } from "./endpoint";
 
 export type GetFilesArgs = FileParams & {
-    options?: { isServer: boolean };
+  options?: { isServer: boolean };
 };
 
 export async function getFiles({
-    options,
-    ...params
+  options,
+  ...params
 }: GetFilesArgs): Promise<FilesResponse> {
-    const client = options?.isServer ? apiClient : proxyApiClient;
-    const res = await client.get<FilesWithPaginationDto>(
-        FILE_ENDPOINTS.LIST,
-        params,
-    );
-    return {
-        files: res.rows.map(item => {
-            return { ...item, filename: item.name }
-        }) ?? [],
-        total: res.total,
-        totalPages: Math.ceil(res.total / (params.limit || DEFAULT_PAGE_LIMIT)),
-    };
+  const client = options?.isServer ? apiClient : proxyApiClient;
+  const res = await client.get<FilesWithPaginationDto>(
+    FILE_ENDPOINTS.LIST,
+    params,
+  );
+  return {
+    files:
+      res.rows.map((item) => {
+        return { ...item, filename: item.name };
+      }) ?? [],
+    total: res.total,
+    totalPages: Math.ceil(res.total / (params.limit || DEFAULT_PAGE_LIMIT)),
+  };
 }

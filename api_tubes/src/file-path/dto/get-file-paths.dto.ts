@@ -10,6 +10,13 @@ export class GetFilePathsDto {
     @IsOptional()
     readonly filename?: string;
 
+    @ApiPropertyOptional({
+        description: "Описание",
+    })
+    @IsString()
+    @IsOptional()
+    readonly description?: string;
+
     @ApiProperty({
         description: "На странице",
     })

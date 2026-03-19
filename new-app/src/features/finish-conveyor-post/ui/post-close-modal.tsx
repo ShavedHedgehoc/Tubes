@@ -5,7 +5,6 @@ import { useModalState } from "@/shared/lib";
 import { useConveyorUiParams } from "@/entities/conveyor";
 import { PostCloseForm } from "./post-close-form";
 
-
 export function PostCloseModal() {
   const { params, setParams } = useConveyorUiParams();
   const { isOpen } = useModalState(params, setParams, "close-post");

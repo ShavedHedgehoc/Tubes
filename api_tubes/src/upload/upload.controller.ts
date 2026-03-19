@@ -8,6 +8,7 @@ import {
   HttpStatus,
   Delete,
   Param,
+  Body,
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { Express, Request } from "express";
@@ -20,9 +21,9 @@ const editFileName = (
   file: Express.Multer.File,
   callback: (error: Error | null, filename: string) => void,
 ) => {
-  const utf8Name = Buffer.from(file.originalname, 'latin1').toString('utf8');
-  const safeName = utf8Name.replace(/\s+/g, '_');
-  const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+  const utf8Name = Buffer.from(file.originalname, "latin1").toString("utf8");
+  const safeName = utf8Name.replace(/\s+/g, "_");
+  const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
   callback(null, `${uniqueSuffix}-${safeName}`);
 };
 
@@ -53,15 +54,18 @@ export class UploadController {
       fileFilter: imageFileFilter,
     }),
   )
-  async uploadFile(@UploadedFile() file: Express.Multer.File) {
+  async uploadFile(@UploadedFile() file: Express.Multer.File, @Body('description') description: string,) {
     if (!file) {
-      throw new HttpException(ApiMessages.FILE_IS_MISSING_OR_INVALID, HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        ApiMessages.FILE_IS_MISSING_OR_INVALID,
+        HttpStatus.BAD_REQUEST,
+      );
     }
-    return this.uploadService.uploadFile(file)
+    return this.uploadService.uploadFile(file);
   }
 
   @Delete(":id")
   async deleteFile(@Param("id") id: string) {
-    return this.uploadService.deleteFile(Number(id))
+    return this.uploadService.deleteFile(Number(id));
   }
 }

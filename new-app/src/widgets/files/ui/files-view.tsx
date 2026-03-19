@@ -1,13 +1,15 @@
 "use client";
 
-
 import { DataViewLayout, DataViewLayoutProps } from "@/shared/ui";
-import { PlantIcon } from "@/shared/assets";
-
-
+import { ImageIcon } from "@/shared/assets";
 
 import { useMemo } from "react";
-import { fileApi, FileEntity, FileParams, useFilesSearchParams } from "@/entities/file";
+import {
+    fileApi,
+    FileEntity,
+    FileParams,
+    useFilesSearchParams,
+} from "@/entities/file";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { getFilesColumns } from "./columns";
 import { FilesFilter } from "@/features/file-filter/ui/files-filter";
@@ -31,7 +33,7 @@ export default function FilesView() {
         columns: columns,
         total: data?.total ?? 0,
         totalPages: data?.totalPages ?? 0,
-        picture: <PlantIcon />,
+        picture: <ImageIcon />,
         filter: <FilesFilter actions={<UploadButton />} />,
         params: params,
         setParams: setParams,

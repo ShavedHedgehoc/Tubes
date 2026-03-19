@@ -39,8 +39,6 @@ async function handleProxy(
 
     // console.log(`[PROXY ${method}]:`, targetUrl.toString());
 
-
-
     const headers = new Headers(request.headers);
     headers.delete("host");
     headers.delete("connection");
@@ -81,7 +79,8 @@ async function handleProxy(
     }
     // const contentType = response.headers.get("content-type");
     const responseContentType = response.headers.get("content-type") || "";
-    const isJson = responseContentType && responseContentType.includes("application/json");
+    const isJson =
+      responseContentType && responseContentType.includes("application/json");
 
     if (response.status === 204 || !isJson) {
       return new NextResponse(null, { status: response.status });
@@ -106,4 +105,3 @@ export const DELETE = (req: NextRequest, ctx: RouteContext) =>
   handleProxy(req, ctx.params, "DELETE");
 export const PATCH = (req: NextRequest, ctx: RouteContext) =>
   handleProxy(req, ctx.params, "PATCH");
-

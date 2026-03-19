@@ -62,9 +62,10 @@ model Product {
 }
 
 model FilePath {
-  id   Int    @id @default(autoincrement())
-  name String
-  path String
+  id          Int    @id @default(autoincrement())
+  name        String
+  path        String
+  description String @db.VarChar(300)
 
   @@map("file_paths")
 }

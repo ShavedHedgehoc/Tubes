@@ -10,7 +10,7 @@ import {
 
 @Injectable()
 export class TresholdsService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
   //
 
   // Загрузка всех границ из нового приложения
