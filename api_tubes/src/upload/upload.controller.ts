@@ -61,7 +61,7 @@ export class UploadController {
         HttpStatus.BAD_REQUEST,
       );
     }
-    return this.uploadService.uploadFile(file);
+    return this.uploadService.uploadFile(file, description);
   }
 
   @Delete(":id")
