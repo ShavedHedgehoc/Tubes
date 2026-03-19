@@ -11,11 +11,9 @@ import {
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { Express, Request } from "express";
-import { unlink } from "fs/promises";
 import { diskStorage } from "multer";
-
-import { PrismaService } from "src/prisma/prisma.service";
 import { ApiMessages } from "src/resources/api-messages";
+import { UploadService } from "./upload.service";
 
 const editFileName = (
   _req: Request,
@@ -24,7 +22,8 @@ const editFileName = (
 ) => {
   const utf8Name = Buffer.from(file.originalname, 'latin1').toString('utf8');
   const safeName = utf8Name.replace(/\s+/g, '_');
-  callback(null, safeName);
+  const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+  callback(null, `${uniqueSuffix}-${safeName}`);
 };
 
 const imageFileFilter = (
@@ -43,7 +42,7 @@ const imageFileFilter = (
 
 @Controller("upload")
 export class UploadController {
-  constructor(private prisma: PrismaService) { }
+  constructor(private uploadService: UploadService) { }
   @Post("file")
   @UseInterceptors(
     FileInterceptor("file", {
@@ -55,40 +54,14 @@ export class UploadController {
     }),
   )
   async uploadFile(@UploadedFile() file: Express.Multer.File) {
-    console.log('RECEIVED FILE:', file);
     if (!file) {
-      throw new BadRequestException("File is missing or invalid");
+      throw new HttpException(ApiMessages.FILE_IS_MISSING_OR_INVALID, HttpStatus.BAD_REQUEST);
     }
-    try {
-      const savedFile = await this.prisma.filePath.create({ data: { name: file.filename, path: file.path } })
-      return {
-        message: "File uploaded successfully",
-        data: savedFile
-      };
-    } catch (error) {
-      await unlink(file.path)
-      throw new HttpException(ApiMessages.FILE_NOT_SAVED, HttpStatus.BAD_REQUEST)
-    }
-
+    return this.uploadService.uploadFile(file)
   }
 
   @Delete(":id")
   async deleteFile(@Param("id") id: string) {
-    const fileRecord = await this.prisma.filePath.findUnique({
-      where: { id: Number(id) }
-    });
-
-    if (!fileRecord) {
-      throw new HttpException(ApiMessages.FILE_NOT_FOUND, HttpStatus.NOT_FOUND)
-    }
-    try {
-      await this.prisma.filePath.delete({
-        where: { id: Number(id) }
-      });
-      await unlink(fileRecord.path);
-      return { message: ApiMessages.FILE_DELETE_SUCCESSFULLY };
-    } catch (error) {
-      throw new HttpException(ApiMessages.FILE_DELETE_ERROR, HttpStatus.INTERNAL_SERVER_ERROR)
-    }
+    return this.uploadService.deleteFile(Number(id))
   }
 }

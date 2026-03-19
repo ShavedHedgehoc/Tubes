@@ -1,5 +1,5 @@
 export type FileDto = {
     id: number
-    filename: string
+    name: string
     path: string
 }

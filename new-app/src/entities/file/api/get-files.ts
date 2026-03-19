@@ -18,7 +18,9 @@ export async function getFiles({
         params,
     );
     return {
-        files: res.rows ?? [],
+        files: res.rows.map(item => {
+            return { ...item, filename: item.name }
+        }) ?? [],
         total: res.total,
         totalPages: Math.ceil(res.total / (params.limit || DEFAULT_PAGE_LIMIT)),
     };
