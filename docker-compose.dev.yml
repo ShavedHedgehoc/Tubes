@@ -29,31 +29,31 @@ services:
     networks:
       - postgres
 
-  tubes_api:
-    container_name: api_tubes
-    build:
-      context: .
-      dockerfile: docker/api_tubes/Dockerfile.prod
-      args:
-        - NODE_ENV=production
-    environment:
-      DATABASE_URL: postgresql://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@postgres:5432/tubesdb?schema=public
-      POSTGRES_HOST: postgres
-      POSTGRES_PORT: "5432"
-      POSTGRES_USERNAME: ${POSTGRES_USERNAME}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: "tubes_db"
-      PORT: "7100"
-    volumes:
-      - files-data:/api_tubes/uploads
-    ports:
-      - "7100:7100"
-    depends_on:
-      - postgres
-    restart: always
-    networks:
-      - postgres
-      - general
+  # tubes_api:
+  #   container_name: api_tubes
+  #   build:
+  #     context: .
+  #     dockerfile: docker/api_tubes/Dockerfile.prod
+  #     args:
+  #       - NODE_ENV=production
+  #   environment:
+  #     DATABASE_URL: postgresql://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@postgres:5432/tubesdb?schema=public
+  #     POSTGRES_HOST: postgres
+  #     POSTGRES_PORT: "5432"
+  #     POSTGRES_USERNAME: ${POSTGRES_USERNAME}
+  #     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  #     POSTGRES_DB: "tubes_db"
+  #     PORT: "7100"
+  #   volumes:
+  #     - files-data:/api_tubes/uploads
+  #   ports:
+  #     - "7100:7100"
+  #   depends_on:
+  #     - postgres
+  #   restart: always
+  #   networks:
+  #     - postgres
+  #     - general
 
   # api:
   #   container_name: api_container
@@ -101,9 +101,9 @@ services:
         max-size: "10m"
         max-file: "3"
     volumes:
-      - files-data:/usr/share/nginx/files
+      - files-data:/usr/share/nginx/files/uploads
     ports:
-      - "8080:8080"
+      - "8080:80"
     restart: always
     networks:
       - postgres
