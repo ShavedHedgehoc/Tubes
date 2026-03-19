@@ -36,3 +36,4 @@ export * from "./chart";
 export * from "./scroll-area";
 export * from "./alert-dialog";
 export * from "./main-nav-link";
+export * from "./image-card"
