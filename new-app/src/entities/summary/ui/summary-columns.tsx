@@ -89,19 +89,19 @@ export const baseSummaryColumns: ColumnDef<SummaryEntity>[] = [
       );
     },
   },
-  {
-    accessorKey: "records",
-    header: () => <div className="text-center">Статус</div>,
-    cell: ({ row }) => {
-      const summary = row.original;
-      return (
-        <div className="text-center">
-          {summary._count.extrusion_statuses +
-            summary._count.varnish_statuses +
-            summary._count.offset_statuses +
-            summary._count.sealant_statuses}
-        </div>
-      );
-    },
-  },
+  // {
+  //   accessorKey: "records",
+  //   header: () => <div className="text-center">Статус</div>,
+  //   cell: ({ row }) => {
+  //     const summary = row.original;
+  //     return (
+  //       <div className="text-center">
+  //         {summary._count.extrusion_statuses +
+  //           summary._count.varnish_statuses +
+  //           summary._count.offset_statuses +
+  //           summary._count.sealant_statuses}
+  //       </div>
+  //     );
+  //   },
+  // },
 ];

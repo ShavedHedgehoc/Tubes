@@ -22,20 +22,8 @@ const editFileName = (
   file: Express.Multer.File,
   callback: (error: Error | null, filename: string) => void,
 ) => {
-  //   const name = file.originalname.split(".")[0];
-  //   const fileExtName = extname(file.originalname);
-  //   const randomName = Array(32)
-  //     .fill(null)
-  //     .map(() => Math.round(Math.random() * 16))
-  //     .join("");
-  // You can use just the original name, but adding a timestamp or random string
-  // is often safer to prevent overwriting existing files with the same name.
-  //   callback(null, `${name}-${randomName}${fileExtName}`);
   const utf8Name = Buffer.from(file.originalname, 'latin1').toString('utf8');
-
-  // Рекомендуется также очистить имя от пробелов и спецсимволов для URL
   const safeName = utf8Name.replace(/\s+/g, '_');
-  // callback(null, file.originalname);
   callback(null, safeName);
 };
 
@@ -45,13 +33,11 @@ const imageFileFilter = (
   callback: (error: Error | null, acceptFile: boolean) => void,
 ) => {
   if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
-    // If the file extension is not valid, reject the file
     return callback(
       new BadRequestException("Only image files are allowed!"),
       false,
     );
   }
-  // Accept the file
   callback(null, true);
 };
 
@@ -62,7 +48,7 @@ export class UploadController {
   @UseInterceptors(
     FileInterceptor("file", {
       storage: diskStorage({
-        destination: "./uploads/images",
+        destination: "./uploads",
         filename: editFileName,
       }),
       fileFilter: imageFileFilter,

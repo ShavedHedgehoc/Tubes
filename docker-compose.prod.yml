@@ -134,7 +134,7 @@ services:
         max-size: "10m"
         max-file: "3"
     volumes:
-      - files-data:/usr/share/nginx/files
+      - files-data:/usr/share/nginx/files/uploads
     ports:
       - "8080:8080"
     restart: always
