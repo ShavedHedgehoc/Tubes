@@ -1,7 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { baseFileColumns, FileEntity } from "@/entities/file";
+import { baseFileColumns, FileEntity, PreviewCell } from "@/entities/file";
 import { RowDropdown } from "@/features/file-actions";
-import { ImageCard } from "@/shared/ui";
 
 export const getFilesColumns = (): ColumnDef<FileEntity>[] => {
     return [
@@ -9,9 +8,7 @@ export const getFilesColumns = (): ColumnDef<FileEntity>[] => {
             id: "preview",
             cell: ({ row }) => {
                 const file = row.original;
-                return (
-                    <ImageCard url={`/images/${file.filename}`} />
-                );
+                return <PreviewCell file={file} />
             },
         },
         ...baseFileColumns,

@@ -2,7 +2,7 @@ import { parseAsString, parseAsInteger, createSearchParamsCache, inferParserType
 
 export const fileUiSchema = {
     "upload-file": parseAsBoolean.withDefault(false),
-
+    "view-file": parseAsString,
 };
 
 export const fileParamsSchema = {

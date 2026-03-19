@@ -12,6 +12,7 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { getFilesColumns } from "./columns";
 import { FilesFilter } from "@/features/file-filter/ui/files-filter";
 import { UploadButton } from "@/features/upload-file";
+import { FileViewModal } from "@/features/file-view";
 
 export default function FilesView() {
     const { params, setParams } = useFilesSearchParams();
@@ -40,6 +41,7 @@ export default function FilesView() {
     return (
         <div>
             <DataViewLayout {...dataViewProps} />
+            <FileViewModal />
         </div>
     );
 }
