@@ -136,7 +136,7 @@ services:
     volumes:
       - files-data:/usr/share/nginx/files/uploads
     ports:
-      - "8080:8080"
+      - "8080:80"
     restart: always
     networks:
       - general
