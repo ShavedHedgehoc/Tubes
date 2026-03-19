@@ -8,6 +8,7 @@ export function ImageCard({ url }: { url: string }) {
                 alt="Product Image"
                 width={64}
                 height={64}
+                unoptimized
                 className="object-cover transition-transform hover:scale-110"
             />
         </div>
