@@ -6,14 +6,14 @@ export const baseFileColumns: ColumnDef<FileEntity>[] = [
         accessorKey: "filename",
         header: () => <div className="text-left pl-6">Имя файла </div>,
         cell: ({ row }) => {
-            return <div className="text-left pl-6" > {row.getValue("filename")} </div>;
+            return <div className="text-left pl-6" > {row.original.filename} </div>;
         },
     },
     {
         accessorKey: "path",
         header: () => <div className="text-center">Путь</div>,
         cell: ({ row }) => {
-            return <div className="text-center" > {row.getValue("path")} </div>;
+            return <div className="text-center" > {row.original.path} </div>;
         },
     },
 
