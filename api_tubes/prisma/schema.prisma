@@ -65,7 +65,7 @@ model FilePath {
   id          Int    @id @default(autoincrement())
   name        String
   path        String
-  description String @db.VarChar(300)
+  description String @default("") @db.VarChar(300)
 
   @@map("file_paths")
 }
