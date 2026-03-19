@@ -24,14 +24,10 @@ export function FileViewModal() {
             description="Закройте после просмотра"
             isOpen={isOpen}
             onOpenChange={handleOpenChange}
-            // className="sm:max-w-[90vw] max-w-[95vw] h-[90vh] flex flex-col justify-center"
-            className="sm:max-w-[95vw] w-full max-h-[95vh] p-4 bg-white shadow-2xl"
+            className="sm:max-w-[95vw] w-full max-h-[95vh] p-4 bg-background/50 shadow-2xl"
         >
             <div className={cn("relative w-full",
-                // "min-h-[400px]", 
                 "aspect-video min-h-[500px] max-h-[85vh]"
-                // "h-[80vh]",
-                // "flex items-center justify-center bg-muted/30 rounded-lg overflow-hidden"
             )}>
                 {viewUrl && (
                     <Image
