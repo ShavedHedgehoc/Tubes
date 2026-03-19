@@ -1,5 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { baseFileColumns, FileEntity } from "@/entities/file";
+import { RowDropdown } from "@/features/file-actions";
 
 export const getFilesColumns = (): ColumnDef<FileEntity>[] => {
     return [
@@ -7,10 +8,10 @@ export const getFilesColumns = (): ColumnDef<FileEntity>[] => {
         {
             id: "actions",
             cell: ({ row }) => {
-                const summary = row.original;
+                const file = row.original;
                 return (
                     <div className="text-center">
-                        Actions
+                        <RowDropdown id={file.id} />
                     </div>
                 );
             },
