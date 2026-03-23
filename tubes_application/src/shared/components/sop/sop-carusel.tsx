@@ -71,7 +71,8 @@ export default function SopCarousel(props: SopCaruselProps) {
                     justifyContent="center"
                   >
                     <Image
-                      src={`${AssestsFolderUrl}/${name}`}
+                      // src={`${AssestsFolderUrl}/${name}`}
+                      src={new URL(`${AssestsFolderUrl}/${name}`, import.meta.url).href}
                       alt={name}
                       width="full"
                       height="full"
