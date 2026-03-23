@@ -1,7 +1,6 @@
 import type { CreateStatusDto } from "@/shared/api/services/status-service";
 import { useActiveSummary } from "@/shared/api/use-active-summary";
 import { useShallow } from "zustand/shallow";
-import { useCreateSealantStatus } from "../../use-create-sealant-status";
 import {
   useSealantCloseSummaryModalStore,
   useSealantDefectInputModalStore,
@@ -9,6 +8,7 @@ import {
 import { useSealantDefectStore } from "../../store/use-sealant-defect-store";
 import { useSealantEmployeeStore } from "../../store/use-sealant-employee-store";
 import { useSealantConveyorStore } from "../../store/use-sealant-conveyor-store";
+import { useCreateStatus } from "@/shared/api/use-create-status";
 
 export default function useSealantCloseSummaryModal() {
   const open = useSealantCloseSummaryModalStore(
@@ -30,7 +30,7 @@ export default function useSealantCloseSummaryModal() {
   const sealantConveyor = useSealantConveyorStore(
     useShallow((state) => state.sealantConveyor),
   );
-  const { createSealantStatus } = useCreateSealantStatus();
+  const { createStatus } = useCreateStatus();
   const { data: summaryData } = useActiveSummary(sealantConveyor?.id ?? null);
 
   const handleAddButtonClick = () => {
@@ -41,6 +41,7 @@ export default function useSealantCloseSummaryModal() {
     if (summaryData && employee) {
       const dto: CreateStatusDto = {
         summary_id: summaryData.data.id,
+        post_val: 4,
         employee_id: employee.id,
         operation_id: null,
         idle: false,
@@ -48,7 +49,7 @@ export default function useSealantCloseSummaryModal() {
         defect_value: data,
       };
 
-      createSealantStatus(dto);
+      createStatus(dto);
     }
     setOpen(false);
     setOpenEntryModal(false);

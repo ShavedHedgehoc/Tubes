@@ -43,7 +43,7 @@ const imageFileFilter = (
 
 @Controller("upload")
 export class UploadController {
-  constructor(private uploadService: UploadService) { }
+  constructor(private uploadService: UploadService) {}
   @Post("file")
   @UseInterceptors(
     FileInterceptor("file", {
@@ -54,7 +54,10 @@ export class UploadController {
       fileFilter: imageFileFilter,
     }),
   )
-  async uploadFile(@UploadedFile() file: Express.Multer.File, @Body('description') description: string,) {
+  async uploadFile(
+    @UploadedFile() file: Express.Multer.File,
+    @Body("description") description: string,
+  ) {
     if (!file) {
       throw new HttpException(
         ApiMessages.FILE_IS_MISSING_OR_INVALID,

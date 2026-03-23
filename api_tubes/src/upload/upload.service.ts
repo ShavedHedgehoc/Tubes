@@ -5,18 +5,22 @@ import { ApiMessages } from "src/resources/api-messages";
 
 @Injectable()
 export class UploadService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
   async uploadFile(file: Express.Multer.File, description?: string) {
     try {
       const savedFile = await this.prisma.filePath.create({
-        data: { name: file.filename, path: file.path, description: description || "" },
+        data: {
+          name: file.filename,
+          path: file.path,
+          description: description || "",
+        },
       });
       return {
-        message: "File uploaded successfully",
+        message: ApiMessages.FILE_UPLOAD_SUCCESSFULLY,
         data: savedFile,
       };
-    } catch (error) {
-      if (file.path) await unlink(file.path).catch(() => { });
+    } catch (_error) {
+      if (file.path) await unlink(file.path).catch(() => {});
 
       throw new HttpException(
         ApiMessages.FILE_NOT_SAVED,
@@ -35,12 +39,12 @@ export class UploadService {
       await this.prisma.filePath.delete({
         where: { id: Number(id) },
       });
-      await unlink(fileRecord.path).catch(() => { });
+      await unlink(fileRecord.path).catch(() => {});
       return { message: ApiMessages.FILE_DELETE_SUCCESSFULLY };
-    } catch (error) {
+    } catch (_error) {
       throw new HttpException(
         ApiMessages.FILE_DELETE_ERROR,
-        HttpStatus.INTERNAL_SERVER_ERROR,
+        HttpStatus.BAD_REQUEST,
       );
     }
   }

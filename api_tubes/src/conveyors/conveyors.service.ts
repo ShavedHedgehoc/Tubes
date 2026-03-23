@@ -1,7 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
 import { mappedConveyors } from "./mapper";
-import { Employee } from "generated/prisma";
 import { ConveyorsDataResponse } from "./dto/conveyors-data.response";
 
 @Injectable()
@@ -34,26 +33,30 @@ export class ConveyorsService {
           include: {
             batch: true,
             product: true,
-            extrusion_statuses: {
+            statuses: {
               include: { employee: true },
               orderBy: { id: "desc" },
-              take: 1,
             },
-            varnish_statuses: {
-              include: { employee: true },
-              orderBy: { id: "desc" },
-              take: 1,
-            },
-            offset_statuses: {
-              include: { employee: true },
-              orderBy: { id: "desc" },
-              take: 1,
-            },
-            sealant_statuses: {
-              include: { employee: true },
-              orderBy: { id: "desc" },
-              take: 1,
-            },
+            // extrusion_statuses: {
+            //   include: { employee: true },
+            //   orderBy: { id: "desc" },
+            //   take: 1,
+            // },
+            // varnish_statuses: {
+            //   include: { employee: true },
+            //   orderBy: { id: "desc" },
+            //   take: 1,
+            // },
+            // offset_statuses: {
+            //   include: { employee: true },
+            //   orderBy: { id: "desc" },
+            //   take: 1,
+            // },
+            // sealant_statuses: {
+            //   include: { employee: true },
+            //   orderBy: { id: "desc" },
+            //   take: 1,
+            // },
           },
         },
       },
@@ -61,22 +64,34 @@ export class ConveyorsService {
     return {
       conveyors: conveyors.map((conveyor) => {
         const summary = conveyor.summaries[0] || null;
-
+        const allStatuses = summary?.statuses || [];
         // Вспомогательная функция для извлечения статуса и сотрудника
-        const getStatusData = <T extends { employee: Employee | null }>(
-          statusArray?: T[] | null,
-        ) => {
-          const lastStatus = statusArray?.[0] ?? null;
+        // const getStatusData = <T extends { employee: Employee | null }>(
+        //   statusArray?: T[] | null,
+        // ) => {
+        //   const lastStatus = statusArray?.[0] ?? null;
+        //   return {
+        //     status: lastStatus,
+        //     employee: lastStatus?.employee ?? null,
+        //   };
+        // };
+
+        const getLastStatusByPost = (postId: number) => {
+          const status = allStatuses.find((s) => s.post_id === postId) || null;
           return {
-            status: lastStatus,
-            employee: lastStatus?.employee ?? null,
+            status: status,
+            employee: status?.employee || null,
           };
         };
 
-        const extrusion = getStatusData(summary?.extrusion_statuses);
-        const varnish = getStatusData(summary?.varnish_statuses);
-        const offset = getStatusData(summary?.offset_statuses);
-        const sealant = getStatusData(summary?.sealant_statuses);
+        // const extrusion = getStatusData(summary?.extrusion_statuses);
+        // const varnish = getStatusData(summary?.varnish_statuses);
+        // const offset = getStatusData(summary?.offset_statuses);
+        // const sealant = getStatusData(summary?.sealant_statuses);
+        const extrusion = getLastStatusByPost(1);
+        const varnish = getLastStatusByPost(2);
+        const offset = getLastStatusByPost(3);
+        const sealant = getLastStatusByPost(4);
 
         return mappedConveyors({
           conveyor,

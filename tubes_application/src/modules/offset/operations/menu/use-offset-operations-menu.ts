@@ -7,7 +7,7 @@ import type { ISummary } from "@/shared/api/services/summary-service";
 import type { CreateStatusDto } from "@/shared/api/services/status-service";
 import { useOffsetEmployeeStore } from "../../store/use-offset-employee-store";
 import { useOffsetOperationStore } from "../../store/use-offset-operation-store";
-import { useCreateOffsetStatus } from "../../use-create-offset-status";
+import { useCreateStatus } from "@/shared/api/use-create-status";
 
 export default function useOffsetOperationsMenu(summaryData: ISummary | null) {
   const offsetConveyor = useOffsetConveyorStore(
@@ -22,7 +22,7 @@ export default function useOffsetOperationsMenu(summaryData: ISummary | null) {
   const setSelectedOperation = useOffsetOperationStore(
     useShallow((state) => state.setSelectedOperation),
   );
-  const { createOffsetStatus } = useCreateOffsetStatus();
+  const { createStatus } = useCreateStatus();
   const navigate = useNavigate();
 
   const setIdleButtonVisibleCondition =
@@ -56,12 +56,13 @@ export default function useOffsetOperationsMenu(summaryData: ISummary | null) {
     if (summaryData && employee && selectedOperation) {
       const dto: CreateStatusDto = {
         summary_id: summaryData.data.id,
+        post_val: 3,
         employee_id: employee.id,
         operation_id: Number(selectedOperation.id),
         idle: true,
         finished: false,
       };
-      createOffsetStatus(dto);
+      createStatus(dto);
       navigate(`${RouteNames.OFFSET_ROOT}/${offsetConveyor?.name}`);
       setSelectedOperation(null);
     }
@@ -71,12 +72,13 @@ export default function useOffsetOperationsMenu(summaryData: ISummary | null) {
     if (summaryData && employee) {
       const dto: CreateStatusDto = {
         summary_id: summaryData.data.id,
+        post_val: 3,
         employee_id: employee.id,
         operation_id: null,
         idle: false,
         finished: false,
       };
-      createOffsetStatus(dto);
+      createStatus(dto);
       navigate(`${RouteNames.OFFSET_ROOT}/${offsetConveyor?.name}`);
       setSelectedOperation(null);
     }

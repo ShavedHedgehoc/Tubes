@@ -55,41 +55,6 @@ services:
   #     - postgres
   #     - general
 
-  # api:
-  #   container_name: api_container
-  #   build:
-  #     context: .
-  #     dockerfile: docker/api/Dockerfile.dev
-  #     args:
-  #       - NODE_ENV=development
-  #   environment:
-  #     POSTGRESHOST: "postgres"
-  #     POSTGRES_PORT: "5432"
-  #     POSTGRES_USERNAME: "admin"
-  #     POSTGRES_PASSWORD: "password"
-  #     POSTGRES_DB: "summary"
-  #     PORT: "7000"
-  #   depends_on:
-  #     - postgres
-  #   restart: always
-  #   ports:
-  #     - "7000:7000"
-  #   networks:
-  #     - postgres
-  #     - general
-
-  # app:
-  #   container_name: app_container
-  #   build:
-  #     context: .
-  #     dockerfile: docker/app/Dockerfile.dev
-  #     args:
-  #       - NODE_ENV=development
-  #   ports:
-  #     - "3000:3000"
-  #   networks:
-  #     - general
-
   nginx-file-server:
     container_name: nginx_file_server_container
     build:

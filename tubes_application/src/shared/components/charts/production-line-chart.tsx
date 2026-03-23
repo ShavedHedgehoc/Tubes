@@ -13,6 +13,7 @@ import {
   Legend,
   ReferenceLine,
   ReferenceArea,
+  ResponsiveContainer,
 } from "recharts";
 
 export default function ProductionLineChart({
@@ -73,79 +74,84 @@ export default function ProductionLineChart({
 
   return (
     <Box backgroundColor="bg.panel" w="full" h="full" rounded="lg" p={4}>
-      <VStack h="full" w="full" justify="center">
+      <VStack h="full" w="full" justify="center" align="stretch">
         {chartData.length ? (
-          <Chart.Root boxSize="full" chart={lineChart} animation="none">
-            <LineChart
-              data={lineChart.data}
-              margin={{ top: 25, right: 20, left: 0, bottom: 0 }}
-            >
-              <CartesianGrid
-                stroke={lineChart.color("border")}
-                vertical={true}
-              />
+          <Box h="300px" w="full">
+            <Chart.Root boxSize="full" chart={lineChart} animation="none">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart
+                  data={lineChart.data}
+                  margin={{ top: 25, right: 20, left: 0, bottom: 0 }}
+                >
+                  <CartesianGrid
+                    stroke={lineChart.color("border")}
+                    vertical={true}
+                  />
 
-              <XAxis
-                type="number"
-                domain={["dataMin", "dataMax"]}
-                dataKey={lineChart.key("time")}
-                tickFormatter={(val) => formatTimeOnly(new Date(val))}
-                stroke={lineChart.color("border")}
-              />
+                  <XAxis
+                    type="number"
+                    domain={["dataMin", "dataMax"]}
+                    dataKey={lineChart.key("time")}
+                    tickFormatter={(val) => formatTimeOnly(new Date(val))}
+                    stroke={lineChart.color("border")}
+                  />
 
-              <YAxis
-                yAxisId="left"
-                dataKey={lineChart.key("val")}
-                stroke={lineChart.color("border")}
-              />
+                  <YAxis
+                    yAxisId="left"
+                    dataKey={lineChart.key("val")}
+                    stroke={lineChart.color("border")}
+                  />
 
-              {idleIntervals.map((interval, idx) => {
-                const isLastAndActive =
-                  idx === idleIntervals.length - 1 &&
-                  processedData[processedData.length - 1].idle;
+                  {idleIntervals.map((interval, idx) => {
+                    const isLastAndActive =
+                      idx === idleIntervals.length - 1 &&
+                      processedData[processedData.length - 1].idle;
 
-                return (
-                  <React.Fragment key={idx}>
-                    <ReferenceLine
-                      x={interval.start}
-                      stroke={orangeColor}
-                      strokeWidth={2}
-                      yAxisId="left"
-                    />
-                    {!isLastAndActive && (
-                      <ReferenceLine
-                        x={interval.end}
-                        stroke={orangeColor}
-                        strokeWidth={2}
-                        yAxisId="left"
-                      />
-                    )}
-                    <ReferenceArea
-                      x1={interval.start}
-                      x2={interval.end}
-                      yAxisId="left"
-                      fill={orangeColor}
-                      fillOpacity={0.15}
-                      strokeOpacity={0}
-                    />
-                  </React.Fragment>
-                );
-              })}
+                    return (
+                      <React.Fragment key={idx}>
+                        <ReferenceLine
+                          x={interval.start}
+                          stroke={orangeColor}
+                          strokeWidth={2}
+                          yAxisId="left"
+                        />
+                        {!isLastAndActive && (
+                          <ReferenceLine
+                            x={interval.end}
+                            stroke={orangeColor}
+                            strokeWidth={2}
+                            yAxisId="left"
+                          />
+                        )}
+                        <ReferenceArea
+                          x1={interval.start}
+                          x2={interval.end}
+                          yAxisId="left"
+                          fill={orangeColor}
+                          fillOpacity={0.15}
+                          strokeOpacity={0}
+                        />
+                      </React.Fragment>
+                    );
+                  })}
 
-              <Legend content={<Chart.Legend />} />
+                  <Legend content={<Chart.Legend />} />
 
-              <Line
-                yAxisId="left"
-                dot={false}
-                type="stepAfter"
-                dataKey={lineChart.key("val")}
-                stroke={lineChart.color("teal.solid")}
-                strokeWidth={2}
-                isAnimationActive={false}
-                connectNulls={false}
-              />
-            </LineChart>
-          </Chart.Root>
+                  <Line
+                    yAxisId="left"
+                    dot={false}
+                    type="stepAfter"
+                    dataKey={lineChart.key("val")}
+                    stroke={lineChart.color("teal.solid")}
+                    strokeWidth={2}
+                    isAnimationActive={false}
+                    connectNulls={false}
+                    activeDot={false}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </Chart.Root>
+          </Box>
         ) : (
           <Text color="fg.subtle">Записи не найдены</Text>
         )}

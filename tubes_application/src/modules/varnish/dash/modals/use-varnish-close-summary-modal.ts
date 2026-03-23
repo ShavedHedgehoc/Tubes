@@ -1,7 +1,6 @@
 import type { CreateStatusDto } from "@/shared/api/services/status-service";
 import { useActiveSummary } from "@/shared/api/use-active-summary";
 import { useShallow } from "zustand/shallow";
-import { useCreateVarnishStatus } from "../../use-create-varnish-status";
 import {
   useVarnishCloseSummaryModalStore,
   useVarnishDefectInputModalStore,
@@ -9,6 +8,7 @@ import {
 import { useVarnishDefectStore } from "../../store/use-varnish-defect-store";
 import { useVarnishEmployeeStore } from "../../store/use-varnish-employee-store";
 import { useVarnishConveyorStore } from "../../store/use-varnish-conveyor-store";
+import { useCreateStatus } from "@/shared/api/use-create-status";
 
 export default function useVarnishCloseSummaryModal() {
   const open = useVarnishCloseSummaryModalStore(
@@ -30,7 +30,7 @@ export default function useVarnishCloseSummaryModal() {
   const varnishConveyor = useVarnishConveyorStore(
     useShallow((state) => state.varnishConveyor),
   );
-  const { createVarnishStatus } = useCreateVarnishStatus();
+  const { createStatus } = useCreateStatus();
   const { data: summaryData } = useActiveSummary(varnishConveyor?.id ?? null);
 
   const handleAddButtonClick = () => {
@@ -41,6 +41,7 @@ export default function useVarnishCloseSummaryModal() {
     if (summaryData && employee) {
       const dto: CreateStatusDto = {
         summary_id: summaryData.data.id,
+        post_val: 2,
         employee_id: employee.id,
         operation_id: null,
         idle: false,
@@ -48,7 +49,7 @@ export default function useVarnishCloseSummaryModal() {
         defect_value: data,
       };
 
-      createVarnishStatus(dto);
+      createStatus(dto);
     }
     setOpen(false);
     setOpenEntryModal(false);

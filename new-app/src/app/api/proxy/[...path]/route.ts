@@ -24,45 +24,31 @@ async function handleProxy(
     const path = pathArray.join("/");
     const { searchParams } = new URL(request.url);
 
-    // Формируем безопасный URL
     const base = externalApiUrl?.endsWith("/")
       ? externalApiUrl
       : `${externalApiUrl}/`;
     const targetUrl = new URL(path.replace(/^\//, ""), base); // убираем ведущий слеш если есть
     targetUrl.search = searchParams.toString();
 
-    // const headers = new Headers(request.headers);
-    // headers.delete("host");
-
-    // const hasBody = ["POST", "PATCH", "PUT"].includes(method);
-    // const body = hasBody ? await request.text() : undefined;
-
-    // console.log(`[PROXY ${method}]:`, targetUrl.toString());
-
     const headers = new Headers(request.headers);
     headers.delete("host");
     headers.delete("connection");
 
-    // 2. Определяем, как читать тело запроса
-    let body: any = null;
+    // let body: any = null;
+    let body: BodyInit | null = null;
     const contentType = request.headers.get("content-type") || "";
 
     if (["POST", "PATCH", "PUT"].includes(method)) {
       if (contentType.includes("multipart/form-data")) {
-        // Для файлов: берем бинарные данные (ArrayBuffer)
-        // Это самый надежный способ пробросить файл через Next.js прокси
         body = await request.arrayBuffer();
       } else if (contentType.includes("application/json")) {
-        // Для обычного JSON: берем текст (или тоже arrayBuffer)
         body = await request.text();
       } else {
-        // На случай других типов (текст, blob)
         body = await request.arrayBuffer();
       }
     }
     const response = await fetch(targetUrl.toString(), {
       method,
-      // headers: { "Content-Type": "application/json" },
       headers,
       body,
     });
@@ -77,13 +63,18 @@ async function handleProxy(
         { status: response.status },
       );
     }
-    // const contentType = response.headers.get("content-type");
+
     const responseContentType = response.headers.get("content-type") || "";
     const isJson =
       responseContentType && responseContentType.includes("application/json");
 
     if (response.status === 204 || !isJson) {
-      return new NextResponse(null, { status: response.status });
+      // return new NextResponse(null, { status: response.status });
+      const blob = await response.blob();
+      return new NextResponse(blob, {
+        status: response.status,
+        headers: { "Content-Type": responseContentType },
+      });
     }
 
     const data = await response.json();

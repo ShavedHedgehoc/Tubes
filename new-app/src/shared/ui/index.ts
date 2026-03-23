@@ -37,3 +37,4 @@ export * from "./scroll-area";
 export * from "./alert-dialog";
 export * from "./main-nav-link";
 export * from "./image-card";
+export * from "./select-image-card";

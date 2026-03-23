@@ -1,7 +1,6 @@
 import type { CreateStatusDto } from "@/shared/api/services/status-service";
 import { useActiveSummary } from "@/shared/api/use-active-summary";
 import { useShallow } from "zustand/shallow";
-import { useCreateOffsetStatus } from "../../use-create-offset-status";
 import {
   useOffsetCloseSummaryModalStore,
   useOffsetDefectInputModalStore,
@@ -9,6 +8,7 @@ import {
 import { useOffsetDefectStore } from "../../store/use-offset-defect-store";
 import { useOffsetEmployeeStore } from "../../store/use-offset-employee-store";
 import { useOffsetConveyorStore } from "../../store/use-offset-conveyor-store";
+import { useCreateStatus } from "@/shared/api/use-create-status";
 
 export default function useOffsetCloseSummaryModal() {
   const open = useOffsetCloseSummaryModalStore(
@@ -30,7 +30,7 @@ export default function useOffsetCloseSummaryModal() {
   const offsetConveyor = useOffsetConveyorStore(
     useShallow((state) => state.offsetConveyor),
   );
-  const { createOffsetStatus } = useCreateOffsetStatus();
+  const { createStatus } = useCreateStatus();
   const { data: summaryData } = useActiveSummary(offsetConveyor?.id ?? null);
 
   const handleAddButtonClick = () => {
@@ -41,6 +41,7 @@ export default function useOffsetCloseSummaryModal() {
     if (summaryData && employee) {
       const dto: CreateStatusDto = {
         summary_id: summaryData.data.id,
+        post_val: 3,
         employee_id: employee.id,
         operation_id: null,
         idle: false,
@@ -48,7 +49,7 @@ export default function useOffsetCloseSummaryModal() {
         defect_value: data,
       };
 
-      createOffsetStatus(dto);
+      createStatus(dto);
     }
     setOpen(false);
     setOpenEntryModal(false);

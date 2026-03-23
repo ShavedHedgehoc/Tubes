@@ -29,10 +29,7 @@ export type SummaryBase = {
 };
 
 type PostStatusCount = {
-  extrusion_statuses: number;
-  varnish_statuses: number;
-  offset_statuses: number;
-  sealant_statuses: number;
+  statuses: number;
 };
 
 type AvailableSummaryRow = {

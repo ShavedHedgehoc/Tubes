@@ -29,9 +29,10 @@ export const summaryQueries = {
         }),
       staleTime: 60 * 1000,
     }),
+  availables: () => [...summaryQueries.all(), "available"],
   available: (conveyorId: number | null, options?: { isServer: boolean }) =>
     queryOptions({
-      queryKey: [...summaryQueries.all(), "available", conveyorId],
+      queryKey: [...summaryQueries.availables(), conveyorId],
       queryFn: () => getAvailableSummaries({ conveyorId, options }),
       enabled: !!conveyorId,
       staleTime: 60 * 1000,

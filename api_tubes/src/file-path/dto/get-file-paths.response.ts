@@ -1,14 +1,14 @@
 import { ApiProperty } from "@nestjs/swagger";
 
 export class FilePathRow {
-    id: number;
-    name: string;
-    path: string
-    description: string;
+  id: number;
+  name: string;
+  path: string;
+  description: string;
 }
 
 export class GetFilePathsResponse {
-    @ApiProperty({ isArray: true })
-    rows: FilePathRow[];
-    total: number;
+  @ApiProperty({ isArray: true })
+  rows: FilePathRow[];
+  total: number;
 }

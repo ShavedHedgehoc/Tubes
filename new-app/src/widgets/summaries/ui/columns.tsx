@@ -13,13 +13,7 @@ export const getSummariesColumns = (): ColumnDef<SummaryEntity>[] => {
           <div className="text-center">
             <RowDropdown
               id={summary.id}
-              isCanDelete={
-                summary._count.extrusion_statuses +
-                  summary._count.varnish_statuses +
-                  summary._count.offset_statuses +
-                  summary._count.sealant_statuses ===
-                0
-              }
+              isCanDelete={summary._count.statuses === 0}
             />
           </div>
         );

@@ -1,15 +1,4 @@
-import {
-  ExtrusionOperation,
-  ExtrusionStatus,
-  OffsetOperation,
-  OffsetStatus,
-  Product,
-  SealantOperation,
-  SealantStatus,
-  Summary,
-  VarnishOperation,
-  VarnishStatus,
-} from "./../../generated/prisma/index.d";
+import { Product, Summary } from "./../../generated/prisma/index.d";
 import { Batch } from "./../../generated/prisma/index.d";
 
 export interface IMappedSummary {
@@ -129,17 +118,6 @@ export interface IMappedSealantParams {
   createdAt: Date;
 }
 
-type state = "idle" | "working" | "finished";
-
-export interface IMappedOperation {
-  idle: boolean;
-  finished: boolean;
-  state: state;
-  operation_description: string;
-  createdAt: Date | null;
-  operation_id: number | null;
-}
-
 export const mappedSummary = ({
   summary,
   batch,
@@ -176,41 +154,3 @@ export function mapParams<T>(params: T | null): T | null {
   const { summary: _s, employee: _e, ...data } = params as PrismaEntity;
   return data as T;
 }
-
-export const mappedStatus = ({
-  status,
-  operation,
-}: {
-  status: ExtrusionStatus | SealantStatus | VarnishStatus | OffsetStatus | null;
-  operation:
-    | ExtrusionOperation
-    | VarnishOperation
-    | OffsetOperation
-    | SealantOperation
-    | null;
-}): IMappedOperation => {
-  if (!status) {
-    return {
-      idle: false,
-      finished: false,
-      state: "working",
-      operation_description: "-",
-      createdAt: null,
-      operation_id: null,
-    };
-  }
-
-  return {
-    idle: status.idle,
-    finished: status.finished,
-    state:
-      status.finished === true
-        ? "finished"
-        : status.idle === true
-          ? "idle"
-          : "working",
-    createdAt: status.createdAt,
-    operation_description: operation ? operation.description : "-",
-    operation_id: operation ? operation.id : null,
-  };
-};

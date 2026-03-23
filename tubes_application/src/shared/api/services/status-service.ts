@@ -3,6 +3,7 @@ import { ApiRoutes } from "./api-routes";
 
 export interface CreateStatusDto {
   summary_id: number;
+  post_val: number;
   operation_id: number | null;
   idle: boolean;
   finished: boolean;
@@ -13,6 +14,7 @@ export interface CreateStatusDto {
 export interface IStatusResponce {
   id: number;
   summary_id: number;
+  post_id: number;
   operation_id: number | null;
   idle: boolean;
   employee_id: number;
@@ -21,30 +23,8 @@ export interface IStatusResponce {
 }
 
 export default class StatusService {
-  static async createExtrusionStatus(
-    dto: CreateStatusDto,
-  ): Promise<IStatusResponce> {
-    const res = await $api.post(`${ApiRoutes.CREATE_EXTRUSION_STATUS}`, dto);
-    return res.data;
-  }
-  static async createVarnishStatus(
-    dto: CreateStatusDto,
-  ): Promise<IStatusResponce> {
-    const res = await $api.post(`${ApiRoutes.CREATE_VARNISH_STATUS}`, dto);
-    return res.data;
-  }
-
-  static async createOffsetStatus(
-    dto: CreateStatusDto,
-  ): Promise<IStatusResponce> {
-    const res = await $api.post(`${ApiRoutes.CREATE_OFFSET_STATUS}`, dto);
-    return res.data;
-  }
-
-  static async createSealantStatus(
-    dto: CreateStatusDto,
-  ): Promise<IStatusResponce> {
-    const res = await $api.post(`${ApiRoutes.CREATE_SEALANT_STATUS}`, dto);
+  static async createStatus(dto: CreateStatusDto): Promise<IStatusResponce> {
+    const res = await $api.post(`${ApiRoutes.CREATE_STATUS}`, dto);
     return res.data;
   }
 }

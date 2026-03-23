@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { fileApi } from "@/entities/file";
+import { handleError } from "@/shared/api";
 
 export function useDeleteFile() {
   const client = useQueryClient();
@@ -13,7 +14,8 @@ export function useDeleteFile() {
       toast.success("Файл успешно удален");
     },
     onError: (err) => {
-      toast.error(err.message);
+      const errMessage = handleError(err);
+      toast.error(errMessage);
     },
   });
   return { deleteFile, deletePending };

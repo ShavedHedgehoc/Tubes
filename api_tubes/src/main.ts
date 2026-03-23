@@ -1,4 +1,4 @@
-import { HttpAdapterHost, NestFactory } from "@nestjs/core";
+import { NestFactory } from "@nestjs/core";
 import * as cookieParser from "cookie-parser";
 import * as express from "express";
 import { AppModule } from "./app.module";
@@ -10,7 +10,8 @@ async function bootstrap() {
   const PORT = process.env.PORT || 8000;
   const app = await NestFactory.create(AppModule, { logger: ["error"] });
 
-  const { httpAdapter } = app.get(HttpAdapterHost);
+  const httpAdapter = app.getHttpAdapter();
+
   app.useGlobalFilters(new PrismaClientExceptionFilter(httpAdapter));
 
   app.setGlobalPrefix("api_tubes");

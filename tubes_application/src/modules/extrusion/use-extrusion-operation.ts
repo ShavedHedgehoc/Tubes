@@ -13,8 +13,7 @@ export const useExtrusionOperation = (operationId: string | null) => {
   return useQuery({
     queryKey: ["extrusion_sop_operation", operationId],
     queryFn: async () => {
-      const data =
-        await OperationService.getExtrusionOperationById(operationId);
+      const data = await OperationService.getOperationById(operationId);
       if (data.length > 0) {
         setSelectedOperation(data[0]);
       } else {

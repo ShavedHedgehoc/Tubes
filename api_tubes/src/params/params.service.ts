@@ -21,9 +21,20 @@ export class ParamsService {
           ApiMessages.COUNTER_LESS_THEN_LAST_VALUE,
           HttpStatus.BAD_REQUEST,
         );
-      await tx.extrusionStatus.create({
+      const post = await tx.post.findUnique({
+        where: { value: 1 },
+      });
+
+      if (!post) {
+        throw new HttpException(
+          ApiMessages.POST_NOT_FOUND,
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+      await tx.status.create({
         data: {
           summary_id: dto.summary_id,
+          post_id: post.id,
           employee_id: dto.employee_id,
           counter_value: dto.counter_value,
         },
@@ -45,9 +56,20 @@ export class ParamsService {
           ApiMessages.COUNTER_LESS_THEN_LAST_VALUE,
           HttpStatus.BAD_REQUEST,
         );
-      await tx.varnishStatus.create({
+      const post = await tx.post.findUnique({
+        where: { value: 2 },
+      });
+
+      if (!post) {
+        throw new HttpException(
+          ApiMessages.POST_NOT_FOUND,
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+      await tx.status.create({
         data: {
           summary_id: dto.summary_id,
+          post_id: post.id,
           employee_id: dto.employee_id,
           counter_value: dto.counter_value,
         },
@@ -69,9 +91,20 @@ export class ParamsService {
           ApiMessages.COUNTER_LESS_THEN_LAST_VALUE,
           HttpStatus.BAD_REQUEST,
         );
-      await tx.offsetStatus.create({
+      const post = await tx.post.findUnique({
+        where: { value: 3 },
+      });
+
+      if (!post) {
+        throw new HttpException(
+          ApiMessages.POST_NOT_FOUND,
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+      await tx.status.create({
         data: {
           summary_id: dto.summary_id,
+          post_id: post.id,
           employee_id: dto.employee_id,
           counter_value: dto.counter_value,
         },
@@ -93,9 +126,20 @@ export class ParamsService {
           ApiMessages.COUNTER_LESS_THEN_LAST_VALUE,
           HttpStatus.BAD_REQUEST,
         );
-      await tx.sealantStatus.create({
+      const post = await tx.post.findUnique({
+        where: { value: 4 },
+      });
+
+      if (!post) {
+        throw new HttpException(
+          ApiMessages.POST_NOT_FOUND,
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+      await tx.status.create({
         data: {
           summary_id: dto.summary_id,
+          post_id: post.id,
           employee_id: dto.employee_id,
           counter_value: dto.counter_value,
         },

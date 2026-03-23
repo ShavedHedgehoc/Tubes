@@ -1,91 +1,56 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
+import { GetOperationsListDto } from "./dto/get-operations-list.dto";
+import { Prisma } from "generated/prisma";
 
 @Injectable()
 export class OperationsService {
   constructor(private prisma: PrismaService) {}
 
-  async getExtrusionOperations({
-    rank,
-    id,
-  }: {
-    rank: string | undefined;
-    id: string | undefined;
-  }) {
-    let filter = {};
-    if (rank) {
-      filter = { ...filter, min_rank: { lte: Number(rank) } };
-    }
-    if (id) {
-      filter = { ...filter, id: Number(id) };
-    }
-    const operations = await this.prisma.extrusionOperation.findMany({
-      where: { ...filter },
-      orderBy: { id: "asc" },
-    });
-    return operations;
+  async getOperationList(query: GetOperationsListDto) {
+    type OperationWhere = Prisma.Args<
+      typeof this.prisma.operation,
+      "findMany"
+    >["where"];
+
+    const where: OperationWhere = {};
+
+    const [count, operations] = await Promise.all([
+      this.prisma.operation.count({ where }),
+      this.prisma.operation.findMany({
+        where,
+        include: {
+          post: true,
+          min_rank: true,
+          operation_pictures: {
+            include: {
+              file_path: true,
+            },
+          },
+        },
+        take: query.limit,
+        skip: query.limit * (query.page - 1),
+      }),
+    ]);
+    return { total: count, rows: operations };
   }
 
-  async getVarnishOperations({
-    rank,
-    id,
-  }: {
-    rank: string | undefined;
-    id: string | undefined;
-  }) {
-    let filter = {};
-    if (rank) {
-      filter = { ...filter, min_rank: { lte: Number(rank) } };
-    }
-    if (id) {
-      filter = { ...filter, id: Number(id) };
-    }
-    const operations = await this.prisma.varnishOperation.findMany({
-      where: { ...filter },
-      orderBy: { id: "asc" },
+  // use only in sop pictures page in tubes application
+  async getOperationById(operation_id: number) {
+    const operations = await this.prisma.operation.findMany({
+      where: { id: operation_id },
+      include: { min_rank: true },
     });
-    return operations;
-  }
 
-  async getOffsetOperations({
-    rank,
-    id,
-  }: {
-    rank: string | undefined;
-    id: string | undefined;
-  }) {
-    let filter = {};
-    if (rank) {
-      filter = { ...filter, min_rank: { lte: Number(rank) } };
-    }
-    if (id) {
-      filter = { ...filter, id: Number(id) };
-    }
-    const operations = await this.prisma.offsetOperation.findMany({
-      where: { ...filter },
-      orderBy: { id: "asc" },
+    const mappedOperation = operations.map((op) => {
+      return {
+        id: op.id,
+        value: op.value,
+        description: op.description,
+        min_rank: op.min_rank.val,
+      };
     });
-    return operations;
-  }
 
-  async getSealantOperations({
-    rank,
-    id,
-  }: {
-    rank: string | undefined;
-    id: string | undefined;
-  }) {
-    let filter = {};
-    if (rank) {
-      filter = { ...filter, min_rank: { lte: Number(rank) } };
-    }
-    if (id) {
-      filter = { ...filter, id: Number(id) };
-    }
-    const operations = await this.prisma.sealantOperation.findMany({
-      where: { ...filter },
-      orderBy: { id: "asc" },
-    });
-    return operations;
+    return mappedOperation;
   }
 }

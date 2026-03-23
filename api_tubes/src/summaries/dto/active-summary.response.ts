@@ -1,22 +1,22 @@
 import { ITreshold } from "src/tresholds/dto/get-tresholds.response";
 
-export class BaseStatus {
-  id: number;
-  createdAt: Date;
-  summary_id: number;
-  counter_value: number;
-  employee_id: number | null;
-  operation_id: number | null;
-  idle: boolean;
-  idle_time: number | null;
-  finished: boolean;
-  operation?: {
-    value: string;
-    id: number;
-    min_rank: number;
-    description: string;
-  } | null;
-}
+// class BaseStatus {
+//   id: number;
+//   createdAt: Date;
+//   summary_id: number;
+//   counter_value: number;
+//   employee_id: number | null;
+//   operation_id: number | null;
+//   idle: boolean;
+//   idle_time: number | null;
+//   finished: boolean;
+//   operation?: {
+//     value: string;
+//     id: number;
+//     min_rank: number;
+//     description: string;
+//   } | null;
+// }
 
 // move to dto
 type state = "idle" | "working" | "finished";
@@ -27,7 +27,7 @@ class IMaterial {
   scanned: boolean;
 }
 
-class IStatusCounter {
+export class IStatusCounter {
   counter_value: number;
   idle: boolean;
   createdAt: Date;
@@ -39,7 +39,7 @@ class IOperation {
   description: string;
   min_rank: number;
 }
-class IStatus {
+export class IStatus {
   idle: boolean;
   finished: boolean;
   state: state;
