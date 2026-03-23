@@ -69,6 +69,7 @@ services:
     build:
       context: .
       dockerfile: docker/new-app/Dockerfile.fast
+      networ: host
       args:
         - NODE_ENV=production
         - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
