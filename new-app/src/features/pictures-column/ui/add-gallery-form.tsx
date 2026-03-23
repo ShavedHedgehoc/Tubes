@@ -99,8 +99,7 @@ export function AddGalleryForm({
                   />
                   <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
                     {isSelected && (
-                      <div className="flex h-16 w-16 items-center rounded-full justify-center p-4 bg-muted shadow-2xl">
-                        {/* animate-in zoom-in-50 duration-200"> */}
+                      <div className="flex h-16 w-16 items-center rounded-full justify-center p-4 bg-muted shadow-2xl animate-in zoom-in-50 duration-200">
                         <CheckIcon className="h-10 w-10 text-muted stroke-[5px]" />
                       </div>
                     )}
