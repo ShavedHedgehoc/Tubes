@@ -1,1 +1,1 @@
-export { PictureModal } from "./picture-modal"
+export { PictureModal } from "./picture-modal";

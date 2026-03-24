@@ -4,14 +4,13 @@ import { PictureModal } from "@/shared/ui";
 import { useModalState } from "@/shared/lib";
 import { useFileUiParams } from "@/entities/file";
 
-
 export function FileViewModal() {
   const { params, setParams } = useFileUiParams();
-  const { data: filename, isOpen, onOpenChange } = useModalState(
-    params,
-    setParams,
-    "view-file",
-  );
+  const {
+    data: filename,
+    isOpen,
+    onOpenChange,
+  } = useModalState(params, setParams, "view-file");
 
   return (
     <PictureModal
@@ -21,6 +20,5 @@ export function FileViewModal() {
       onOpenChange={onOpenChange}
       src={filename}
     />
-
   );
 }

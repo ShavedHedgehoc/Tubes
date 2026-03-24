@@ -45,7 +45,7 @@ export function AddGalleryForm({
           Добавление картинки
         </CardTitle>
         <CardDescription>
-          <span>Выберите картинку и нажмите "Сохранить"</span>
+          <span>Выберите картинку и нажмите &quot;Сохранить&quot;</span>
         </CardDescription>
       </CardHeader>
       <CardContent className="flex-1 min-h-0 p-4 w-full overflow-hidden">

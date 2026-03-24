@@ -4,7 +4,6 @@ import { PictureModal } from "@/shared/ui";
 import { useModalState } from "@/shared/lib";
 import { useGalleryUiParams } from "../lib/use-gallery-ui-params";
 
-
 export function PictureViewModal() {
   const { params, setParams } = useGalleryUiParams();
   const {

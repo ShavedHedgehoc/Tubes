@@ -2,10 +2,8 @@ export function useModalState<
   T extends string,
   P extends Record<T, string | number | boolean | null | undefined>,
 >(params: P, setParams: (val: Partial<P>) => void, key: T) {
-
   const isOpen =
     params[key] !== null && params[key] !== undefined && params[key] !== false;
-
 
   const data = (isOpen ? params[key] : null) as P[T] | null;
 
