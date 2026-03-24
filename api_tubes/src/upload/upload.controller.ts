@@ -4,26 +4,27 @@ import {
   UseInterceptors,
   UploadedFile,
   BadRequestException,
+  HttpException,
+  HttpStatus,
+  Delete,
+  Param,
+  Body,
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { Express, Request } from "express";
 import { diskStorage } from "multer";
+import { ApiMessages } from "src/resources/api-messages";
+import { UploadService } from "./upload.service";
 
 const editFileName = (
   _req: Request,
   file: Express.Multer.File,
   callback: (error: Error | null, filename: string) => void,
 ) => {
-  //   const name = file.originalname.split(".")[0];
-  //   const fileExtName = extname(file.originalname);
-  //   const randomName = Array(32)
-  //     .fill(null)
-  //     .map(() => Math.round(Math.random() * 16))
-  //     .join("");
-  // You can use just the original name, but adding a timestamp or random string
-  // is often safer to prevent overwriting existing files with the same name.
-  //   callback(null, `${name}-${randomName}${fileExtName}`);
-  callback(null, file.originalname);
+  const utf8Name = Buffer.from(file.originalname, "latin1").toString("utf8");
+  const safeName = utf8Name.replace(/\s+/g, "_");
+  const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+  callback(null, `${uniqueSuffix}-${safeName}`);
 };
 
 const imageFileFilter = (
@@ -32,41 +33,42 @@ const imageFileFilter = (
   callback: (error: Error | null, acceptFile: boolean) => void,
 ) => {
   if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
-    // If the file extension is not valid, reject the file
     return callback(
       new BadRequestException("Only image files are allowed!"),
       false,
     );
   }
-  // Accept the file
   callback(null, true);
 };
 
 @Controller("upload")
 export class UploadController {
+  constructor(private uploadService: UploadService) {}
   @Post("file")
-  //   @UseInterceptors(
-  //     FileInterceptor("file", {
-  //       dest: "./uploads", // Files will be saved to the 'uploads' directory inside the container
-  //     })
-  //   )
   @UseInterceptors(
     FileInterceptor("file", {
       storage: diskStorage({
-        destination: "./uploads/images", // The mounted volume path inside the container
-        filename: editFileName, // Use the custom filename function
+        destination: "./uploads",
+        filename: editFileName,
       }),
       fileFilter: imageFileFilter,
     }),
   )
-  uploadFile(@UploadedFile() file: Express.Multer.File) {
+  async uploadFile(
+    @UploadedFile() file: Express.Multer.File,
+    @Body("description") description: string,
+  ) {
     if (!file) {
-      throw new BadRequestException("File is missing or invalid");
+      throw new HttpException(
+        ApiMessages.FILE_IS_MISSING_OR_INVALID,
+        HttpStatus.BAD_REQUEST,
+      );
     }
-    return {
-      message: "File uploaded successfully",
-      filename: file.filename,
-      path: file.path,
-    };
+    return this.uploadService.uploadFile(file, description);
+  }
+
+  @Delete(":id")
+  async deleteFile(@Param("id") id: string) {
+    return this.uploadService.deleteFile(Number(id));
   }
 }

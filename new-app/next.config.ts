@@ -2,12 +2,22 @@ import type { NextConfig } from "next";
 import path from "path";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   reactCompiler: true,
   output: "standalone",
   turbopack: {
-    // Ensure this is an absolute path to your repository root
     root: path.join(__dirname, ".."),
+  },
+
+  async rewrites() {
+    if (process.env.NODE_ENV !== "production") {
+      return [
+        {
+          source: "/images/:path*",
+          destination: "http://localhost:8000/uploads/:path*",
+        },
+      ];
+    }
+    return [];
   },
 };
 

@@ -45,6 +45,9 @@ services:
       dockerfile: docker/api_tubes/Dockerfile.fast
       args:
         - NODE_ENV=production
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/${POSTGRES_DB}?schema=public
       POSTGRES_HOST: ${POSTGRES_HOST}
@@ -54,7 +57,7 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       PORT: "7100"
     volumes:
-      - files-data:/api_tubes/uploads
+      - files-data:/app/api_tubes/uploads
     depends_on:
       - postgres
     restart: always
@@ -66,6 +69,7 @@ services:
     build:
       context: .
       dockerfile: docker/new-app/Dockerfile.fast
+      network: host
       args:
         - NODE_ENV=production
         - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
@@ -131,9 +135,9 @@ services:
         max-size: "10m"
         max-file: "3"
     volumes:
-      - files-data:/usr/share/nginx/files
+      - files-data:/usr/share/nginx/files/uploads
     ports:
-      - "8080:8080"
+      - "8080:80"
     restart: always
     networks:
       - general

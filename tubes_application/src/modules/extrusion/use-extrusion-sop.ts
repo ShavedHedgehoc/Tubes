@@ -4,6 +4,6 @@ import SopService from "@/shared/api/services/sop-service";
 export const useExtrusionSop = (operationId: number | null) =>
   useQuery({
     queryKey: ["extrusion_sop", operationId],
-    queryFn: () => SopService.getExtrusionSopPictures(operationId),
+    queryFn: () => SopService.getSopPictures(operationId),
     enabled: !!operationId,
   });

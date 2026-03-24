@@ -1,38 +1,15 @@
-import Link from "next/link";
+import { MainNavLink } from "@/shared/ui";
 
 export function MainNav() {
   return (
     <nav className="flex items-start md:items-center gap-6 text-md font-medium flex-col md:flex-row ">
-      <Link className="tracking-[-0.01em]" href="/">
-        Главная
-      </Link>
-      <Link
-        className="tracking-[-0.01em]"
-        href={{
-          pathname: "/employees",
-          // query: { page: 1, limit: 10, name_asc: "true" },
-        }}
-      >
-        Сотрудники
-      </Link>
-      <Link
-        className="tracking-[-0.01em]"
-        href={{
-          pathname: "/summaries",
-          // query: { page: 1, limit: 10, name_asc: "true" },
-        }}
-      >
-        Сводки
-      </Link>
-      <Link
-        className="tracking-[-0.01em]"
-        href={{
-          pathname: "/tresholds",
-          // query: { page: 1, limit: 10, name_asc: "true" },
-        }}
-      >
-        Границы
-      </Link>
+      <MainNavLink href={"/"}>Главная</MainNavLink>
+      <MainNavLink href={"/employees"}>Сотрудники</MainNavLink>
+      <MainNavLink href={"/summaries"}>Сводки</MainNavLink>
+      <MainNavLink href={"/tresholds"}>Границы</MainNavLink>
+      <MainNavLink href={"/products"}>Продукция</MainNavLink>
+      <MainNavLink href={"/operations"}>Операции</MainNavLink>
+      <MainNavLink href={"/files"}>Файлы</MainNavLink>
     </nav>
   );
 }

@@ -9,31 +9,8 @@ export interface IOperation {
 }
 
 export default class OperationService {
-  static async getExtrusionOperationById(
-    id: string | null,
-  ): Promise<IOperation[]> {
-    const res = await $api.get(
-      `${ApiRoutes.GET_EXTRUSION_OPERATIONS}?id=${id}`,
-    );
-    return res.data;
-  }
-
-  static async getVarnishOperationById(
-    id: string | null,
-  ): Promise<IOperation[]> {
-    const res = await $api.get(`${ApiRoutes.GET_VARNISH_OPERATIONS}?id=${id}`);
-    return res.data;
-  }
-  static async getOffsetOperationById(
-    id: string | null,
-  ): Promise<IOperation[]> {
-    const res = await $api.get(`${ApiRoutes.GET_OFFSET_OPERATIONS}?id=${id}`);
-    return res.data;
-  }
-  static async getSealantOperationById(
-    id: string | null,
-  ): Promise<IOperation[]> {
-    const res = await $api.get(`${ApiRoutes.GET_SEALANT_OPERATIONS}?id=${id}`);
+  static async getOperationById(id: string | null): Promise<IOperation[]> {
+    const res = await $api.get(`${ApiRoutes.GET_OPERATIONS}/${id}`);
     return res.data;
   }
 }

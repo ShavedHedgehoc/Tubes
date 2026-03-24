@@ -27,10 +27,7 @@ export const getSummary = async ({
   const conveyor = { id: res.conveyor_id, name: res.conveyor_name };
   // Временно
   const count = {
-    extrusion_statuses: 0,
-    varnish_statuses: 0,
-    offset_statuses: 0,
-    sealant_statuses: 0,
+    statuses: 0,
   };
   return {
     ...res,

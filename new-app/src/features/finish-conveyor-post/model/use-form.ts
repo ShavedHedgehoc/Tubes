@@ -29,7 +29,7 @@ export const usePostCloseForm = () => {
   async function onSubmit(data: PostCloseFormValues) {
     if (postId !== null && summaryId !== null) {
       const dto: CreatePostStatusData = {
-        postId: postId,
+        post_val: postId,
         summary_id: summaryId,
         operation_id: null,
         idle: false,

@@ -36,10 +36,7 @@ describe("Summary Columns", () => {
     date: new Date("2026-01-01"),
     shift: 2,
     _count: {
-      extrusion_statuses: 1,
-      varnish_statuses: 2,
-      offset_statuses: 3,
-      sealant_statuses: 4,
+      statuses: 1,
     },
   };
 

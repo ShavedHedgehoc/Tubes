@@ -7,7 +7,7 @@ import type { ISummary } from "@/shared/api/services/summary-service";
 import type { CreateStatusDto } from "@/shared/api/services/status-service";
 import { useSealantEmployeeStore } from "../../store/use-sealant-employee-store";
 import { useSealantOperationStore } from "../../store/use-sealant-operation-store";
-import { useCreateSealantStatus } from "../../use-create-sealant-status";
+import { useCreateStatus } from "@/shared/api/use-create-status";
 
 export default function useSealantOperationsMenu(summaryData: ISummary | null) {
   const sealantConveyor = useSealantConveyorStore(
@@ -22,7 +22,7 @@ export default function useSealantOperationsMenu(summaryData: ISummary | null) {
   const setSelectedOperation = useSealantOperationStore(
     useShallow((state) => state.setSelectedOperation),
   );
-  const { createSealantStatus } = useCreateSealantStatus();
+  const { createStatus } = useCreateStatus();
   const navigate = useNavigate();
 
   const setIdleButtonVisibleCondition =
@@ -56,12 +56,13 @@ export default function useSealantOperationsMenu(summaryData: ISummary | null) {
     if (summaryData && employee && selectedOperation) {
       const dto: CreateStatusDto = {
         summary_id: summaryData.data.id,
+        post_val: 4,
         employee_id: employee.id,
         operation_id: Number(selectedOperation.id),
         idle: true,
         finished: false,
       };
-      createSealantStatus(dto);
+      createStatus(dto);
       navigate(`${RouteNames.SEALANT_ROOT}/${sealantConveyor?.name}`);
       setSelectedOperation(null);
     }
@@ -71,12 +72,13 @@ export default function useSealantOperationsMenu(summaryData: ISummary | null) {
     if (summaryData && employee) {
       const dto: CreateStatusDto = {
         summary_id: summaryData.data.id,
+        post_val: 4,
         employee_id: employee.id,
         operation_id: null,
         idle: false,
         finished: false,
       };
-      createSealantStatus(dto);
+      createStatus(dto);
       navigate(`${RouteNames.SEALANT_ROOT}/${sealantConveyor?.name}`);
       setSelectedOperation(null);
     }

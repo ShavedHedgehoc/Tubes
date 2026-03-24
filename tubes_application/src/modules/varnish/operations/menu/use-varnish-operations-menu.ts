@@ -7,7 +7,7 @@ import type { ISummary } from "@/shared/api/services/summary-service";
 import type { CreateStatusDto } from "@/shared/api/services/status-service";
 import { useVarnishEmployeeStore } from "../../store/use-varnish-employee-store";
 import { useVarnishOperationStore } from "../../store/use-varnish-operation-store";
-import { useCreateVarnishStatus } from "../../use-create-varnish-status";
+import { useCreateStatus } from "@/shared/api/use-create-status";
 
 export default function useVarnishOperationsMenu(summaryData: ISummary | null) {
   const varnishConveyor = useVarnishConveyorStore(
@@ -22,7 +22,7 @@ export default function useVarnishOperationsMenu(summaryData: ISummary | null) {
   const setSelectedOperation = useVarnishOperationStore(
     useShallow((state) => state.setSelectedOperation),
   );
-  const { createVarnishStatus } = useCreateVarnishStatus();
+  const { createStatus } = useCreateStatus();
   const navigate = useNavigate();
 
   const setIdleButtonVisibleCondition =
@@ -56,12 +56,13 @@ export default function useVarnishOperationsMenu(summaryData: ISummary | null) {
     if (summaryData && employee && selectedOperation) {
       const dto: CreateStatusDto = {
         summary_id: summaryData.data.id,
+        post_val: 2,
         employee_id: employee.id,
         operation_id: Number(selectedOperation.id),
         idle: true,
         finished: false,
       };
-      createVarnishStatus(dto);
+      createStatus(dto);
       navigate(`${RouteNames.VARNISH_ROOT}/${varnishConveyor?.name}`);
       setSelectedOperation(null);
     }
@@ -71,12 +72,13 @@ export default function useVarnishOperationsMenu(summaryData: ISummary | null) {
     if (summaryData && employee) {
       const dto: CreateStatusDto = {
         summary_id: summaryData.data.id,
+        post_val: 2,
         employee_id: employee.id,
         operation_id: null,
         idle: false,
         finished: false,
       };
-      createVarnishStatus(dto);
+      createStatus(dto);
       navigate(`${RouteNames.VARNISH_ROOT}/${varnishConveyor?.name}`);
       setSelectedOperation(null);
     }

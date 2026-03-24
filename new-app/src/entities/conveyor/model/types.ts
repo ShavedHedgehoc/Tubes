@@ -35,4 +35,4 @@ export type ConveyorsViewResponse = {
   conveyors: ConveyorData[];
 };
 
-export type CreatePostStatusData = { postId: number } & CreateStatusDto;
+export type CreatePostStatusData = { post_val: number } & CreateStatusDto;

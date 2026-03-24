@@ -7,4 +7,11 @@ export enum ApiMessages {
   PREVISIOUS_STATUS_NOT_FOUND = "Не найдена предыдущая запись статуса",
   BOX_ALREADY_IN_DATABASE = "Короб уже записан в базу данных",
   CONVEYOR_NOT_FOUND = "Конвейер не найден",
+  FILE_NOT_SAVED = "Ошибка загрузки файла",
+  FILE_NOT_FOUND = "Файл не найден",
+  FILE_UPLOAD_SUCCESSFULLY = "Файл успешно загружен",
+  FILE_DELETE_SUCCESSFULLY = "Файл успешно удален",
+  FILE_DELETE_ERROR = "Ошибка удаления файла",
+  FILE_IS_MISSING_OR_INVALID = "Файл отсутствует или поврежден",
+  POST_NOT_FOUND = "Пост не найден",
 }

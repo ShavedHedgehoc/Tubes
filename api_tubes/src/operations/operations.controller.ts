@@ -1,44 +1,34 @@
-import { Controller, Get, Query } from "@nestjs/common";
-import { ApiOperation, ApiQuery, ApiTags } from "@nestjs/swagger";
+import {
+  Controller,
+  Get,
+  Param,
+  Query,
+  UsePipes,
+  ValidationPipe,
+} from "@nestjs/common";
+import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import { OperationsService } from "./operations.service";
+import { GetOperationsListDto } from "./dto/get-operations-list.dto";
+import { GetOperationDto } from "./dto/get-operation.dto";
 
 @ApiTags("Операции")
 @Controller("operations")
 export class OperationsController {
-  constructor(private readonly operationsService: OperationsService) {}
+  constructor(private readonly operationService: OperationsService) {}
 
-  @Get("/extrusion")
-  @ApiOperation({ summary: "Получить операции поста 1" })
-  @ApiQuery({ name: "rank", required: false, type: String })
-  @ApiQuery({ name: "id", required: false, type: String })
-  getExtrusionOperations(
-    @Query("rank") rank?: string,
-    @Query("id") id?: string,
+  @Get()
+  @ApiOperation({ summary: "Получить список операций с параметрами" })
+  @Get()
+  getOperationList(
+    @Query(new ValidationPipe({ transform: true })) query: GetOperationsListDto,
   ) {
-    return this.operationsService.getExtrusionOperations({
-      rank: rank,
-      id: id,
-    });
+    return this.operationService.getOperationList(query);
   }
-  @Get("/varnish")
-  @ApiOperation({ summary: "Получить операции поста 2" })
-  @ApiQuery({ name: "rank", required: false, type: String })
-  @ApiQuery({ name: "id", required: false, type: String })
-  getVarnishOperations(@Query("rank") rank?: string, @Query("id") id?: string) {
-    return this.operationsService.getVarnishOperations({ rank: rank, id: id });
-  }
-  @Get("/offset")
-  @ApiOperation({ summary: "Получить операции поста 3" })
-  @ApiQuery({ name: "rank", required: false, type: String })
-  @ApiQuery({ name: "id", required: false, type: String })
-  getOffsetOperations(@Query("rank") rank?: string, @Query("id") id?: string) {
-    return this.operationsService.getOffsetOperations({ rank: rank, id: id });
-  }
-  @Get("/sealant")
-  @ApiOperation({ summary: "Получить операции поста 4" })
-  @ApiQuery({ name: "rank", required: false, type: String })
-  @ApiQuery({ name: "id", required: false, type: String })
-  getSealantOperations(@Query("rank") rank?: string, @Query("id") id?: string) {
-    return this.operationsService.getSealantOperations({ rank: rank, id: id });
+
+  @ApiOperation({ summary: "Получить операцию по id" })
+  @Get("/by_id/:id")
+  @UsePipes(new ValidationPipe({ transform: true }))
+  getEmployeeById(@Param() params: GetOperationDto) {
+    return this.operationService.getOperationById(params.id);
   }
 }

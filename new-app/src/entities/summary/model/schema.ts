@@ -17,7 +17,7 @@ export const uploadSummariesFormSchema = z.object({
     }, `Max file size is 3MB.`)
     .refine((file) => {
       return ACCEPTED_FILE_TYPES.includes(file.type);
-    }, "Only .png and .jpeg formats are accepted."),
+    }, "Only .xls and .xlsx formats are accepted."),
 });
 
 export type UploadSummariesFormValues = z.infer<
