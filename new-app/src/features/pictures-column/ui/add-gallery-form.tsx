@@ -36,7 +36,7 @@ export function AddGalleryForm({
           className="h-8 w-8 rounded-full hover:bg-muted transition-colors"
           onClick={onClose}
         >
-          <X className="h-4 w-4 text-muted-foreground" />
+          <X className="h-4 w-4 text-foreground" />
           <span className="sr-only">Закрыть</span>
         </Button>
       </div>
@@ -105,7 +105,7 @@ export function AddGalleryForm({
                     )}
                     {isAlreadyAccepted && (
                       <div className="flex  w-full items-center bg-muted mx-2 rounded-lg justify-center p-4 ">
-                        <span className="text-muted-foreground text-4xl ">
+                        <span className="text-foreground text-4xl ">
                           Уже назначено
                         </span>
                       </div>
