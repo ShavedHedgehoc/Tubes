@@ -35,17 +35,17 @@ export default defineConfig({
       },
     },
   },
-  // server: {
-  //   host: true,
-  //   port: 3001,
-  //   proxy: {
-  //     "/api_tubes": {
-  //       target: "http://localhost:8000",
-  //     },
-  //     "/images": {
-  //       target: "http://localhost:8000/uploads",
-  //       rewrite: (path) => path.replace(/^\/images/, ""),
-  //     },
-  //   },
-  // },
+  server: {
+    host: true,
+    port: 3001,
+    proxy: {
+      "/api_tubes": {
+        target: "http://localhost:8000",
+      },
+      "/images": {
+        target: "http://localhost:8000/uploads",
+        rewrite: (path) => path.replace(/^\/images/, ""),
+      },
+    },
+  },
 });

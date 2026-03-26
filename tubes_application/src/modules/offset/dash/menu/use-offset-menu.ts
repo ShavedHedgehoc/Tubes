@@ -54,10 +54,7 @@ export default function useOffsetMenu() {
     !summaryData.tresholds;
 
   const operationButtonDisabledCondition =
-    !employee ||
-    !summaryData ||
-    // !summaryData.offsetStatus.createdAt ||
-    summaryData.offsetStatus.finished;
+    !employee || !summaryData || summaryData.offsetStatus.finished;
 
   const pictureButtonDisabledCondition = summaryData === null;
 

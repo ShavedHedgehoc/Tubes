@@ -28,7 +28,7 @@ export function PictureModal({
       onOpenChange={onOpenChange}
       className="sm:max-w-[95vw] w-full max-h-[95vh] p-4 "
     >
-      <Card className="relative">
+      <Card className="relative ">
         <div className="absolute right-3 top-3 z-50">
           <Button
             variant="ghost"

@@ -7,25 +7,18 @@ import { PostCloseForm } from "./post-close-form";
 
 export function PostCloseModal() {
   const { params, setParams } = useConveyorUiParams();
-  const { isOpen } = useModalState(params, setParams, "close-post");
-
-  const handleOpenChange = (open: boolean) => {
-    if (!open) {
-      setParams({
-        "close-post": null,
-        "summary-id": null,
-        "post-id": null,
-        "post-title": null,
-      });
-    }
-  };
+  const { isOpen, onOpenChange } = useModalState(
+    params,
+    setParams,
+    "close-post",
+  );
 
   return (
     <ModalLayout
       title="Окончание работы поста"
-      description="Заполните данные и создайте ззакончите работу поста"
+      description="Заполните данные и создайте закончите работу поста"
       isOpen={isOpen}
-      onOpenChange={handleOpenChange}
+      onOpenChange={onOpenChange}
     >
       <PostCloseForm />
     </ModalLayout>

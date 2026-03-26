@@ -98,7 +98,6 @@ export function EditEmployeeForm({
             <form id="form-rhf-demo" onSubmit={form.handleSubmit(onSubmit)}>
               <FieldGroup>
                 <div className="flex flex-col gap-4">
-                  {/* form fields */}
                   <Controller
                     name="name"
                     control={form.control}
@@ -180,20 +179,17 @@ export function EditEmployeeForm({
                             </SelectGroup>
                           </SelectContent>
                         </Select>
-
                         {fieldState.invalid && (
                           <FieldError errors={[fieldState.error]} />
                         )}
                       </Field>
                     )}
                   />
-                  {/* form-field */}
                 </div>
               </FieldGroup>
             </form>
           </CardContent>
           <CardFooter className="mt-2">
-            {/* card footer */}
             <Field
               orientation="horizontal"
               className="justify-end flex flex-row"
@@ -216,7 +212,6 @@ export function EditEmployeeForm({
                 {updatePending ? "Изменение..." : "Изменить"}
               </Button>
             </Field>
-            {/* card footer */}
           </CardFooter>
         </div>
       </Card>

@@ -9,6 +9,11 @@ import {
   AvailableSummariesModal,
 } from "@/features/start-conveyor";
 import { FinishButton } from "@/features/finish-conveyor";
+import { PostDropdown } from "@/widgets/post-actions";
+
+import { PostChartModal } from "@/features/post-chart";
+import { PostTableModal } from "@/features/post-table";
+import { PostCloseModal } from "@/features/finish-conveyor-post";
 
 export default function DashView() {
   const { data, isLoading, isError } = useQuery({
@@ -51,6 +56,21 @@ export default function DashView() {
                 key={conveyor.id}
                 conveyorData={conveyor}
                 menuPermission={true}
+                renderPostAction={(
+                  summaryId,
+                  postId,
+                  postName,
+                  postState,
+                  conveyorName,
+                ) => (
+                  <PostDropdown
+                    summaryId={summaryId}
+                    postId={postId}
+                    postName={postName}
+                    postState={postState}
+                    conveyorName={conveyorName}
+                  />
+                )}
                 menuActionButton={
                   conveyor.summary ? (
                     <FinishButton conveyorData={conveyor} />
@@ -64,6 +84,9 @@ export default function DashView() {
         </div>
       </div>
       <AvailableSummariesModal />
+      <PostCloseModal />
+      <PostChartModal />
+      <PostTableModal />
     </div>
   );
 }

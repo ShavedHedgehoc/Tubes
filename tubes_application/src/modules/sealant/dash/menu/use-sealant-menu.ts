@@ -56,10 +56,7 @@ export default function useSealantMenu() {
     !summaryData.tresholds;
 
   const operationButtonDisabledCondition =
-    !employee ||
-    !summaryData ||
-    // !summaryData.sealantStatus.createdAt ||
-    summaryData.sealantStatus.finished;
+    !employee || !summaryData || summaryData.sealantStatus.finished;
 
   const pictureButtonDisabledCondition = summaryData === null;
 
