@@ -56,10 +56,7 @@ export default function useVarnishMenu() {
     !summaryData.tresholds;
 
   const operationButtonDisabledCondition =
-    !employee ||
-    !summaryData ||
-    // !summaryData.varnishStatus.createdAt ||
-    summaryData.varnishStatus.finished;
+    !employee || !summaryData || summaryData.varnishStatus.finished;
 
   const pictureButtonDisabledCondition = summaryData === null;
 

@@ -2,17 +2,25 @@ import { Card } from "@/shared/ui";
 import { ConveyorData, POST_NAMES } from "../model";
 import PostCard from "./post-card";
 import { formatNumber } from "@/shared/lib";
-
+type IState = "working" | "idle" | "finished" | "no_data";
 type Props = {
   conveyorData: ConveyorData;
   menuActionButton: React.ReactNode;
   menuPermission: boolean;
+  renderPostAction?: (
+    summaryId: number,
+    postId: number,
+    postName: string,
+    postState: IState,
+    conveyorName: string,
+  ) => React.ReactNode;
 };
 
 export default function ConveyorCard({
   conveyorData,
   menuActionButton,
   menuPermission,
+  renderPostAction,
 }: Props) {
   const postsConfig = [
     {
@@ -96,6 +104,13 @@ export default function ConveyorCard({
               post_id={post.id}
               post_name={post.name}
               closePermission={menuPermission ?? true}
+              action={renderPostAction?.(
+                conveyorData.summary!.id,
+                post.id,
+                post.name,
+                post.data?.postState ?? "no_data",
+                conveyorData.name,
+              )}
             />
           ))}
         </div>

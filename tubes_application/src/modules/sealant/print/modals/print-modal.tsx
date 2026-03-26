@@ -23,6 +23,29 @@ import { makeBoxReceipt } from "@/shared/helpers/make-zpl-receipt";
 import type { PrintReceiptDto } from "@/shared/api/services/zpl-service";
 import { TbPrinter } from "react-icons/tb";
 
+const BUTTON_LAYOUT = [
+  { label: "C", action: "clear", col: 4 },
+  { label: "<<", action: "slice", col: 8 },
+  { label: "7" },
+  { label: "8" },
+  { label: "9" },
+  { label: "4" },
+  { label: "5" },
+  { label: "6" },
+  { label: "1" },
+  { label: "2" },
+  { label: "3" },
+  { label: "." },
+  { label: "0", col: 8 },
+  {
+    label: "Печать",
+    col: 12,
+    action: "close",
+    icon: <TbPrinter />,
+    canDisable: true,
+  },
+];
+
 interface AddEntryModalButtonProps {
   value: string;
   disabled: boolean;
@@ -30,7 +53,12 @@ interface AddEntryModalButtonProps {
   onClick: (val: string) => void;
 }
 
-function AddEntryModalButton({ props }: { props: AddEntryModalButtonProps }) {
+function AddEntryModalButton({
+  value,
+  disabled,
+  icon,
+  onClick,
+}: AddEntryModalButtonProps) {
   return (
     <Button
       size="2xl"
@@ -38,11 +66,11 @@ function AddEntryModalButton({ props }: { props: AddEntryModalButtonProps }) {
       variant="outline"
       rounded="md"
       color="fg.subtle"
-      disabled={props.disabled}
-      onClick={() => props.onClick(props.value)}
+      disabled={disabled}
+      onClick={() => onClick(value)}
     >
-      {props.icon}
-      {props.value}
+      {icon}
+      {value}
     </Button>
   );
 }
@@ -150,131 +178,22 @@ export default function PrintModal({
           </Dialog.Header>
 
           <Dialog.Body backgroundColor="bg.panel" rounded="lg">
-            <Grid
-              maxH="100%"
-              w="100%"
-              templateRows="repeat(15, 1fr)"
-              templateColumns="repeat(12, 1fr)"
-              gap={2}
-            >
-              <GridItem colSpan={4} rowSpan={3}>
-                <AddEntryModalButton
-                  props={{
-                    disabled: false,
-                    value: "C",
-                    onClick: () => clearData(),
-                  }}
-                />
-              </GridItem>
-              <GridItem colSpan={8} rowSpan={3}>
-                <AddEntryModalButton
-                  props={{
-                    disabled: false,
-                    value: "<<",
-                    onClick: () => sliceData(),
-                  }}
-                />
-              </GridItem>
-              <GridItem colSpan={4} rowSpan={3}>
-                <AddEntryModalButton
-                  props={{
-                    disabled: false,
-                    value: "7",
-                    onClick: () => changeData("7"),
-                  }}
-                />
-              </GridItem>
-              <GridItem colSpan={4} rowSpan={3}>
-                <AddEntryModalButton
-                  props={{
-                    disabled: false,
-                    value: "8",
-                    onClick: () => changeData("8"),
-                  }}
-                />
-              </GridItem>
-              <GridItem colSpan={4} rowSpan={3}>
-                <AddEntryModalButton
-                  props={{
-                    disabled: false,
-                    value: "9",
-                    onClick: () => changeData("9"),
-                  }}
-                />
-              </GridItem>
-              <GridItem colSpan={4} rowSpan={3}>
-                <AddEntryModalButton
-                  props={{
-                    disabled: false,
-                    value: "4",
-                    onClick: () => changeData("4"),
-                  }}
-                />
-              </GridItem>
-              <GridItem colSpan={4} rowSpan={3}>
-                <AddEntryModalButton
-                  props={{
-                    disabled: false,
-                    value: "5",
-                    onClick: () => changeData("5"),
-                  }}
-                />
-              </GridItem>
-              <GridItem colSpan={4} rowSpan={3}>
-                <AddEntryModalButton
-                  props={{
-                    disabled: false,
-                    value: "6",
-                    onClick: () => changeData("6"),
-                  }}
-                />
-              </GridItem>
-              <GridItem colSpan={4} rowSpan={3}>
-                <AddEntryModalButton
-                  props={{
-                    disabled: false,
-                    value: "1",
-                    onClick: () => changeData("1"),
-                  }}
-                />
-              </GridItem>
-              <GridItem colSpan={4} rowSpan={3}>
-                <AddEntryModalButton
-                  props={{
-                    disabled: false,
-                    value: "2",
-                    onClick: () => changeData("2"),
-                  }}
-                />
-              </GridItem>
-              <GridItem colSpan={4} rowSpan={3}>
-                <AddEntryModalButton
-                  props={{
-                    disabled: false,
-                    value: "3",
-                    onClick: () => changeData("3"),
-                  }}
-                />
-              </GridItem>
-              <GridItem colSpan={6} rowSpan={3}>
-                <AddEntryModalButton
-                  props={{
-                    disabled: false,
-                    value: "0",
-                    onClick: () => changeData("0"),
-                  }}
-                />
-              </GridItem>
-              <GridItem colSpan={6} rowSpan={3}>
-                <AddEntryModalButton
-                  props={{
-                    disabled: disabledCondition,
-                    value: "Печать",
-                    icon: <TbPrinter />,
-                    onClick: () => handleClose(),
-                  }}
-                />
-              </GridItem>
+            <Grid w="100%" templateColumns="repeat(12, 1fr)" gap={2}>
+              {BUTTON_LAYOUT.map((btn) => (
+                <GridItem key={btn.label} colSpan={btn.col ?? 4}>
+                  <AddEntryModalButton
+                    icon={btn.icon ?? null}
+                    value={btn.label}
+                    disabled={btn.canDisable ? disabledCondition : false}
+                    onClick={(val) => {
+                      if (btn.action === "clear") return clearData();
+                      if (btn.action === "slice") return sliceData();
+                      if (btn.action === "close") return handleClose();
+                      changeData(val);
+                    }}
+                  />
+                </GridItem>
+              ))}
             </Grid>
           </Dialog.Body>
         </Dialog.Content>

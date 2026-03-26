@@ -1,24 +1,5 @@
 import { ITreshold } from "src/tresholds/dto/get-tresholds.response";
 
-// class BaseStatus {
-//   id: number;
-//   createdAt: Date;
-//   summary_id: number;
-//   counter_value: number;
-//   employee_id: number | null;
-//   operation_id: number | null;
-//   idle: boolean;
-//   idle_time: number | null;
-//   finished: boolean;
-//   operation?: {
-//     value: string;
-//     id: number;
-//     min_rank: number;
-//     description: string;
-//   } | null;
-// }
-
-// move to dto
 type state = "idle" | "working" | "finished";
 
 class IMaterial {
@@ -70,8 +51,6 @@ class IExtrusionParams {
   blow_time: number;
   turning_machine_speed: number;
   annealing_furnace_temp: number;
-
-  // rondel_id: number;
   tube_cylindrical_section_length: number;
   membrane_thickness: number;
   tube_diameter: number;
@@ -83,7 +62,6 @@ class IExtrusionParams {
   external_thread_quality: boolean;
   employee_id: number;
   createdAt: Date;
-  // rondel: string;
 }
 
 class IVarnishParams {

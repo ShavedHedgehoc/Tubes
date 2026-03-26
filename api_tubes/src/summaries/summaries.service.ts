@@ -20,6 +20,7 @@ import {
   IStatus,
 } from "./dto/active-summary.response";
 import { AvailableSummariesResponse } from "./dto/available-summaries.response";
+import { GetPostStatusesDto } from "./dto/get-post-statuses.dto";
 
 type FullSpecification = Prisma.SpecificationGetPayload<{
   include: { material: { include: { consumed_materials: true } } };
@@ -489,5 +490,17 @@ export class SummariesService {
       },
     });
     return record;
+  }
+
+  async getPostStatuses(query: GetPostStatusesDto) {
+    const statuses = await this.prisma.status.findMany({
+      where: {
+        summary_id: query.summary_id,
+        post: { value: query.post_val },
+      },
+      include: { operation: true, employee: true },
+      orderBy: [{ createdAt: "asc" }],
+    });
+    return { statuses };
   }
 }

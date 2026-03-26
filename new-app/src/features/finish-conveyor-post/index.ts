@@ -1,1 +1,1 @@
-export { PostCloseButton } from "./ui/post-close-button";
+export { PostCloseModal } from "./ui/post-close-modal";

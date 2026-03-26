@@ -9,15 +9,13 @@ export class StatusesService {
 
   async createStatus(dto: CreateStatusDto) {
     return await this.prisma.$transaction(async (tx) => {
-      const lastStatusEntry = await tx.status.findFirst({
-        where: { summary_id: dto.summary_id, post: { value: dto.post_val } },
-        orderBy: {
-          id: "desc",
-        },
-      });
-      const post = await tx.post.findUnique({
-        where: { value: dto.post_val },
-      });
+      const [post, lastStatusEntry] = await Promise.all([
+        tx.post.findUnique({ where: { value: dto.post_val } }),
+        tx.status.findFirst({
+          where: { summary_id: dto.summary_id, post: { value: dto.post_val } },
+          orderBy: { id: "desc" },
+        }),
+      ]);
 
       if (!post) {
         throw new HttpException(
@@ -27,23 +25,23 @@ export class StatusesService {
       }
 
       if (!lastStatusEntry) {
-        if (dto.idle) {
-          return await tx.status.create({
-            data: {
-              summary_id: dto.summary_id,
-              operation_id: dto.operation_id,
-              idle: dto.idle,
-              finished: dto.finished,
-              employee_id: dto.employee_id,
-              counter_value: 0,
-              post_id: post.id,
-            },
-          });
+        if (!dto.idle) {
+          throw new HttpException(
+            ApiMessages.PREVISIOUS_STATUS_NOT_FOUND,
+            HttpStatus.BAD_REQUEST,
+          );
         }
-        throw new HttpException(
-          ApiMessages.PREVISIOUS_STATUS_NOT_FOUND,
-          HttpStatus.BAD_REQUEST,
-        );
+        return tx.status.create({
+          data: {
+            summary_id: dto.summary_id,
+            operation_id: dto.operation_id,
+            idle: dto.idle,
+            finished: dto.finished,
+            employee_id: dto.employee_id,
+            counter_value: 0,
+            post_id: post.id,
+          },
+        });
       }
 
       if (lastStatusEntry.idle) {
@@ -52,6 +50,20 @@ export class StatusesService {
           where: { id: lastStatusEntry.id },
           data: { idle_time: timeDelta },
         });
+
+        if (dto.defect_value) {
+          await tx.status.create({
+            data: {
+              summary_id: dto.summary_id,
+              post_id: post.id,
+              operation_id: dto.operation_id,
+              idle: false,
+              finished: false,
+              employee_id: dto.employee_id,
+              counter_value: lastStatusEntry.counter_value,
+            },
+          });
+        }
       }
 
       if (dto.defect_value) {
@@ -70,7 +82,8 @@ export class StatusesService {
           },
         });
       }
-      return await tx.status.create({
+
+      return tx.status.create({
         data: {
           summary_id: dto.summary_id,
           post_id: post.id,

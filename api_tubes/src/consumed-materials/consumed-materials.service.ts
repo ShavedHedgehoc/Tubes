@@ -10,7 +10,10 @@ export class ConsumedMaterialsService {
   async createConsumedMaterial(dto: CreateConsumedMaterialDto) {
     const material_in_specification = await this.prisma.specification.findFirst(
       {
-        where: { material: { code: dto.code } },
+        where: {
+          summary_id: dto.summary_id,
+          material: { code: dto.code },
+        },
       },
     );
 
@@ -22,7 +25,10 @@ export class ConsumedMaterialsService {
 
     const material_in_specification_by_post =
       await this.prisma.specification.findFirst({
-        where: { material: { code: dto.code, post_number: dto.post_id } },
+        where: {
+          summary_id: dto.summary_id,
+          material: { code: dto.code, post_number: dto.post_id },
+        },
       });
 
     if (!material_in_specification_by_post)
