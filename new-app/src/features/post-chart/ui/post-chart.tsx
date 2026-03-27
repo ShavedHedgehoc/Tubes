@@ -1,5 +1,5 @@
 import React from "react";
-import { ChartConfig, ChartContainer } from "@/shared/ui";
+import { ChartConfig, ChartContainer, ChartTooltip } from "@/shared/ui";
 import {
   CartesianGrid,
   Line,
@@ -124,11 +124,28 @@ export function PostChart({
           type="stepAfter"
           stroke={colors.production}
           strokeWidth={2}
-          dot={false}
+          dot={{ r: 2, stroke: colors.production }}
+          activeDot={{ r: 6, stroke: colors.production }}
           connectNulls={false}
           isAnimationActive={false}
+
           // strokeLinejoin="round"
           // strokeLinecap="round"
+        />
+        <ChartTooltip
+          cursor={false}
+          content={({ active, payload }) => {
+            if (active && payload && payload.length) {
+              const data = payload[0].payload;
+              return (
+                <div className="text-lg">
+                  {data.isIdle && <span> {data.description}</span>}
+                  {!data.isIdle && <span>{data.val}</span>}
+                </div>
+              );
+            }
+            return null;
+          }}
         />
       </LineChart>
     </ChartContainer>

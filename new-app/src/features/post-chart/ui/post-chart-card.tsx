@@ -1,3 +1,4 @@
+"use client";
 import { StatusEntity } from "@/entities/status";
 import {
   Button,
@@ -20,10 +21,12 @@ export function PostChartCard({
   statuses,
   postTitle,
   conveyorName,
+  disableClose = false,
 }: {
   statuses: StatusEntity[];
   postTitle: string | null;
   conveyorName: string | null;
+  disableClose?: boolean;
 }) {
   const {
     chartData,
@@ -38,17 +41,19 @@ export function PostChartCard({
   const { handleOpenChange } = useHandleOpenChange();
   return (
     <Card className="relative">
-      <div className="absolute right-3 top-3 z-50">
-        <Button
-          variant="ghost"
-          size="icon"
-          className="h-8 w-8 rounded-full hover:bg-muted transition-colors "
-          onClick={() => handleOpenChange(false)}
-        >
-          <X className="h-4 w-4 text-foreground" />
-          <span className="sr-only">Закрыть</span>
-        </Button>
-      </div>
+      {!disableClose && (
+        <div className="absolute right-3 top-3 z-50">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-8 w-8 rounded-full hover:bg-muted transition-colors "
+            onClick={() => handleOpenChange(false)}
+          >
+            <X className="h-4 w-4 text-foreground" />
+            <span className="sr-only">Закрыть</span>
+          </Button>
+        </div>
+      )}
       <CardHeader>
         <CardTitle>График работы поста</CardTitle>
         <CardDescription>
@@ -57,39 +62,32 @@ export function PostChartCard({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        {chartData.length > 0 ? (
-          <PostChart
-            chartData={chartData}
-            idleIntervals={idleIntervals}
-            processedData={processedData}
-          />
-        ) : (
-          <div className="flex justify-center items-center py-10">
-            <span className="font-light text-muted">Данных не найдено</span>
-          </div>
-        )}
+        <PostChart
+          chartData={chartData}
+          idleIntervals={idleIntervals}
+          processedData={processedData}
+        />
       </CardContent>
-      {chartData.length > 0 && (
-        <CardFooter className="flex-col items-start gap-2 text-sm">
-          <div className="flex gap-2 leading-none font-medium">
-            <TrendingUp className="h-4 w-4" /> Последнее значение выпуска:{" "}
-            {chartData[chartData.length - 1].val ?? 0}
-          </div>
-          <div className="leading-none text-muted-foreground">
-            Начало работы: {startDate ? format(startDate, "HH:mm:ss") : "-"}
-          </div>
-          <div className="leading-none text-muted-foreground">
-            Общее время простоя: {formatDuration(totalIdleTimes ?? 0) ?? "-"}{" "}
-            {`(${idlePercent}%)`}
-          </div>
-          <div className="leading-none text-muted-foreground">
-            Общее время работы: {formatDuration(totalTime ?? 0) ?? "-"}
-          </div>
-          <div className="leading-none text-muted-foreground">
-            Конец работы: {endDate ? format(endDate, "HH:mm:ss") : "-"}
-          </div>
-        </CardFooter>
-      )}
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="flex gap-2 leading-none font-medium">
+          <TrendingUp className="h-4 w-4" /> Последнее значение выпуска:{" "}
+          {chartData.length ? (chartData[chartData.length - 1].val ?? 0) : "-"}
+        </div>
+        <div className="leading-none text-muted-foreground">
+          Начало работы: {startDate ? format(startDate, "HH:mm:ss") : "-"}
+        </div>
+        <div className="leading-none text-muted-foreground">
+          Общее время простоя:{" "}
+          {totalIdleTimes ? formatDuration(totalIdleTimes) : "-"}{" "}
+          {idlePercent !== undefined && `(${idlePercent}%)`}
+        </div>
+        <div className="leading-none text-muted-foreground">
+          Общее время работы: {totalTime ? formatDuration(totalTime) : "-"}
+        </div>
+        <div className="leading-none text-muted-foreground">
+          Конец работы: {endDate ? format(endDate, "HH:mm:ss") : "-"}
+        </div>
+      </CardFooter>
     </Card>
   );
 }

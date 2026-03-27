@@ -87,7 +87,12 @@ export function usePostChartCardData(statuses: StatusEntity[] = []) {
         ? Number(((totalIdleTimes / totalTime) * 100).toFixed(2))
         : 0;
     const chartData = processedData.map((item) => {
-      return { time: item.time, val: item.counter_value };
+      return {
+        time: item.time,
+        val: item.counter_value,
+        description: item.operation_description,
+        isIdle: item.idle,
+      };
     });
 
     return {

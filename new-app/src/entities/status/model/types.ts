@@ -2,6 +2,7 @@ export type StatusEntity = {
   id: number;
   summary_id: number;
   post_id: number;
+  post_val: number;
   counter_value: number;
   operation_id: number | null;
   operation_description: string | null;

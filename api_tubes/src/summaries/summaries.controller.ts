@@ -19,6 +19,7 @@ import { DeleteSummaryDto } from "./dto/delete-summary.dto";
 import { AvailableSummariesResponse } from "./dto/available-summaries.response";
 import { GetDetailDto } from "./dto/get-detail.dto";
 import { GetPostStatusesDto } from "./dto/get-post-statuses.dto";
+import { GetStatusesDto } from "./dto/get-statuses.dto";
 // import { GetDetailDto } from "./dto/get-detail.dto";
 
 //move to dto
@@ -38,10 +39,18 @@ export class SummariesController {
 
   @ApiOperation({ summary: "Получить статусы поста" })
   @Get("/post_statuses")
-  getSummaryist(
+  getPostStatuses(
     @Query(new ValidationPipe({ transform: true })) query: GetPostStatusesDto,
   ) {
     return this.summaryService.getPostStatuses(query);
+  }
+
+  @ApiOperation({ summary: "Получить статусы сводки" })
+  @Get("/summary_statuses")
+  getSummaryStatuses(
+    @Query(new ValidationPipe({ transform: true })) query: GetStatusesDto,
+  ) {
+    return this.summaryService.getPostStatusesWithData(query);
   }
 
   // !!!!!!!!!!!!

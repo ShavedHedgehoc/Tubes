@@ -1,4 +1,17 @@
-import { StatusDto } from "./status.dto";
+import { SummaryDto } from "./summary.dto";
+
+type StatusDto = {
+  id: number;
+  summary_id: number;
+  post_id: number;
+  counter_value: number;
+  operation_id: number | null;
+  idle: false;
+  employee_id: number | null;
+  idle_time: number | null;
+  finished: boolean;
+  createdAt: Date;
+};
 
 type Employee = {
   id: number;
@@ -27,6 +40,8 @@ type StatusRow = StatusDto & {
   operation: Operation | null;
   post: Post;
 };
-export type StatusResponseDto = {
+
+export type SummaryStatusesDto = {
+  summary: Omit<SummaryDto, "_count">;
   statuses: StatusRow[];
 };

@@ -84,3 +84,31 @@ export type ValError = {
   field: string;
   error: string;
 };
+
+type SummaryWithStatusesBase = SummaryBase & {
+  conveyorName: string;
+  batchName: string;
+  productName: string;
+  productCode: string;
+  productMarking: string;
+};
+
+type StatusRow = {
+  id: number;
+  summary_id: number;
+  post_id: number;
+  post_val: number;
+  counter_value: number;
+  operation_id: number | null;
+  operation_description: string | null;
+  idle: false;
+  employee_id: number | null;
+  employee_name: string | null;
+  idle_time: number | null;
+  finished: boolean;
+  createdAt: Date;
+};
+
+export type SummaryStatusesResponse = SummaryWithStatusesBase & {
+  statuses: StatusRow[];
+};
