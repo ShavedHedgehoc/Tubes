@@ -21,6 +21,7 @@ import {
 } from "./dto/active-summary.response";
 import { AvailableSummariesResponse } from "./dto/available-summaries.response";
 import { GetPostStatusesDto } from "./dto/get-post-statuses.dto";
+import { GetStatusesDto } from "./dto/get-statuses.dto";
 
 type FullSpecification = Prisma.SpecificationGetPayload<{
   include: { material: { include: { consumed_materials: true } } };
@@ -496,11 +497,30 @@ export class SummariesService {
     const statuses = await this.prisma.status.findMany({
       where: {
         summary_id: query.summary_id,
-        post: { value: query.post_val },
+        // post: { value: query.post_val },
+        post: query.post_val ? { value: query.post_val } : undefined,
       },
-      include: { operation: true, employee: true },
+      include: { operation: true, employee: true, post: true },
       orderBy: [{ createdAt: "asc" }],
     });
     return { statuses };
+  }
+
+  async getPostStatusesWithData(query: GetStatusesDto) {
+    const [summary, statuses] = await Promise.all([
+      this.prisma.summary.findUnique({
+        where: { id: query.summary_id },
+        include: { conveyor: true, batch: true, product: true },
+      }),
+      this.prisma.status.findMany({
+        where: {
+          summary_id: query.summary_id,
+        },
+        include: { operation: true, employee: true, post: true },
+        orderBy: [{ createdAt: "asc" }],
+      }),
+    ]);
+
+    return { summary, statuses };
   }
 }

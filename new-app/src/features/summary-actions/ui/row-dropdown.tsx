@@ -9,9 +9,10 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "@/shared/ui";
-import { MoreHorizontal, Pencil, Trash } from "lucide-react";
+import { MoreHorizontal, Pencil, Trash, TrendingUp } from "lucide-react";
 import { useDeleteSummary } from "../model";
 import { useSummaryUiParams } from "@/entities/summary";
+import { useRouter } from "next/navigation";
 
 export function RowDropdown({
   id,
@@ -22,8 +23,12 @@ export function RowDropdown({
 }) {
   const { setParams } = useSummaryUiParams();
   const { deleteSummary } = useDeleteSummary();
+  const router = useRouter();
   const handleDeleteClick = () => deleteSummary(id);
   const handleEditClick = () => setParams({ "edit-summary": id.toString() });
+  const handleNavigateToCharts = () => {
+    router.push(`/summaries/charts/${id}`);
+  };
 
   return (
     <DropdownMenu>
@@ -36,11 +41,17 @@ export function RowDropdown({
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>Действия</DropdownMenuLabel>
         <DropdownMenuSeparator />
+        <DropdownMenuItem
+          onClick={handleNavigateToCharts}
+          disabled={isCanDelete}
+        >
+          <TrendingUp />
+          График
+        </DropdownMenuItem>
         <DropdownMenuItem onClick={handleEditClick}>
           <Pencil />
           Изменить
         </DropdownMenuItem>
-
         <DropdownMenuItem
           variant={"destructive"}
           onClick={handleDeleteClick}

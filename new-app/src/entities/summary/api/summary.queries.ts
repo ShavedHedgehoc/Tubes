@@ -1,8 +1,9 @@
 import { queryOptions } from "@tanstack/react-query";
 import { getSummaries } from "./get-summaries";
-import { SummaryParams } from "../model";
+import { SummaryDetailParams, SummaryParams } from "../model";
 import { getSummary } from "./get-summary";
 import { getAvailableSummaries } from "./get-available-summaries";
+import { getSummaryStatuses } from "./get-summary-statuses";
 
 export const summaryQueries = {
   all: () => ["summaries"],
@@ -44,5 +45,12 @@ export const summaryQueries = {
       queryFn: () => getSummary({ id, options }),
       enabled: !!id,
       staleTime: 5 * 60 * 1000,
+    }),
+  statuses: () => [...summaryQueries.all(), "statuses"],
+  status: (params: SummaryDetailParams, options?: { isServer: boolean }) =>
+    queryOptions({
+      queryKey: [...summaryQueries.statuses(), { ...params }],
+      queryFn: () => getSummaryStatuses({ ...params, options }),
+      staleTime: 30 * 1000,
     }),
 };

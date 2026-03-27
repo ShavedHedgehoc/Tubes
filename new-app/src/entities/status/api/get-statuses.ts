@@ -20,11 +20,12 @@ export async function getStatuses({
   );
 
   const mappedStatuses = res.statuses.map((status) => {
-    const { employee, operation, ...rest } = status;
+    const { employee, operation, post, ...rest } = status;
     return {
       ...rest,
       operation_description: operation?.description ?? null,
       employee_name: employee?.name ?? null,
+      post_val: post.value,
     };
   });
   return {
