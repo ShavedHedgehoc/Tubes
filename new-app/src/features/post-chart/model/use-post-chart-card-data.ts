@@ -91,6 +91,7 @@ export function usePostChartCardData(statuses: StatusEntity[] = []) {
         time: item.time,
         val: item.counter_value,
         description: item.operation_description,
+        employee: item.employee_name,
         isIdle: item.idle,
       };
     });

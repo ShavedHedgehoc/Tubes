@@ -4,7 +4,7 @@ import { format } from "date-fns";
 import { getToday } from "@/shared/lib";
 import { useSummarySearchParams } from "@/entities/summary";
 import { Button } from "@/shared/ui/button";
-import { Trash } from "lucide-react";
+import { Calendar1 } from "lucide-react";
 
 export default function TodayButton() {
   const { params, setParams } = useSummarySearchParams();
@@ -23,7 +23,7 @@ export default function TodayButton() {
       onClick={handleSetToday}
       disabled={!isNotToday}
     >
-      <Trash /> Сегодня
+      <Calendar1 /> Сегодня
     </Button>
   );
 }
