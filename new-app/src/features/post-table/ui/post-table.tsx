@@ -32,8 +32,8 @@ export function PostTable<TData, TValue>({
 
   return (
     <div className="w-full max-h-[60vh] overflow-auto rounded-md border relative">
-      <Table className="w-full border-separate border-spacing-0">
-        <TableHeader className="sticky top-0 z-10 bg-background shadow-sm">
+      <Table className="w-full">
+        <TableHeader className="sticky top-0 z-10">
           {table.getHeaderGroups().map((headerGroup, groupIndex) => (
             <TableRow key={headerGroup.id} className={cn("border-b-0")}>
               {headerGroup.headers.map((header) => {

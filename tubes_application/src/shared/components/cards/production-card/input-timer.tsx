@@ -1,24 +1,46 @@
 import { formatTimeToString } from "@/shared/helpers/date-time-formatters";
 import { useDate } from "@/shared/helpers/use-date";
 import { VStack, Heading } from "@chakra-ui/react";
+import { useMemo } from "react";
 
 export default function InputTimer({
   date,
   idleTime,
   checkInterval,
 }: {
-  date: Date | undefined;
-  idleTime: number;
-  checkInterval: number;
+  date: Date | undefined; // время псоледнего внесения параметров
+  idleTime: number; // продолжительность последнего простоя
+  checkInterval: number; // частота проверки в минутах
 }) {
   const { today } = useDate();
-  const locale = "ru";
   const notFoundString = "Данных о внесении параметров не найдено";
   const firstString = "Время внесения параметров: ";
   const secondString = "Следующее внесение через: ";
   const thirdString = "ВНЕСИТЕ ПАРАМЕТРЫ!";
   const fourthString = "Время простоя с последнего внесения: ";
-  const offset = 3;
+
+  const { isOverdue, formattedTimeLeft, formattedIdle } = useMemo(() => {
+    if (!date) return {};
+
+    const now = today.getTime();
+    const last = new Date(date).getTime();
+    const deadline = last + checkInterval * 60 * 1000 + idleTime;
+
+    const formatDuration = (ms: number) => {
+      const seconds = Math.max(0, Math.floor((ms / 1000) % 60));
+      const minutes = Math.max(0, Math.floor((ms / (1000 * 60)) % 60));
+      const hours = Math.max(0, Math.floor(ms / (1000 * 60 * 60)));
+      return [hours, minutes, seconds]
+        .map((v) => v.toString().padStart(2, "0"))
+        .join(":");
+    };
+
+    return {
+      isOverdue: now > deadline,
+      formattedTimeLeft: formatDuration(deadline - now),
+      formattedIdle: formatDuration(idleTime),
+    };
+  }, [date, today, idleTime, checkInterval]);
 
   if (!date)
     return (
@@ -29,56 +51,15 @@ export default function InputTimer({
       </VStack>
     );
   return (
-    <VStack
-      justify="space-betweens"
-      // animation={
-      //   new Date(date).getTime() + checkInterval * 60 * 1000 + idleTime > new Date(today).getTime()
-      //     ? "none"
-      //     : "colorCycle"
-      // }
-    >
+    <VStack justify="space-between">
+      <Heading size="sm">{`${firstString} ${formatTimeToString(date)}`}</Heading>
+      <Heading size="sm">{`${fourthString} ${formattedIdle}`}</Heading>
       <Heading
         size="sm"
-        w="full"
-      >{`${firstString} ${formatTimeToString(date)}`}</Heading>
-      <Heading size="sm" w="full">
-        {`${fourthString} 
-                ${new Date(idleTime - offset * 3600 * 1000).toLocaleTimeString(
-                  locale,
-                  {
-                    hour: "numeric",
-                    hour12: false,
-                    minute: "numeric",
-                    second: "numeric",
-                  },
-                )}`}
-      </Heading>
-      <Heading
-        size="sm"
-        w="full"
-        animation={
-          new Date(date).getTime() + checkInterval * 60 * 1000 + idleTime >
-          new Date(today).getTime()
-            ? "none"
-            : "colorCycle"
-        }
+        animation={isOverdue ? "colorCycle 2s infinite" : "none"}
+        color={isOverdue ? "red.500" : "inherit"}
       >
-        {new Date(date).getTime() + checkInterval * 60 * 1000 + idleTime >
-        new Date(today).getTime()
-          ? `${secondString} 
-                ${new Date(
-                  new Date(date).getTime() +
-                    checkInterval * 60 * 1000 -
-                    new Date(today).getTime() -
-                    offset * 3600 * 1000 +
-                    idleTime,
-                ).toLocaleTimeString(locale, {
-                  hour: "numeric",
-                  hour12: false,
-                  minute: "numeric",
-                  second: "numeric",
-                })}`
-          : thirdString}
+        {isOverdue ? thirdString : `${secondString} ${formattedTimeLeft}`}
       </Heading>
     </VStack>
   );

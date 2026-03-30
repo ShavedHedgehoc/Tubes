@@ -10,6 +10,7 @@ import {
   YAxis,
 } from "recharts";
 import { formatTimeOnly } from "@/shared/lib";
+import { format } from "date-fns";
 
 const colors = {
   production: "#0d9488",
@@ -26,6 +27,9 @@ const chartConfig = {
 type chartDataType = {
   time: number;
   val: number | null;
+  description: string | null;
+  employee: string | null;
+  isIdle?: boolean;
 };
 
 type idleIntervalType = {
@@ -138,9 +142,15 @@ export function PostChart({
             if (active && payload && payload.length) {
               const data = payload[0].payload;
               return (
-                <div className="text-lg">
-                  {data.isIdle && <span> {data.description}</span>}
-                  {!data.isIdle && <span>{data.val}</span>}
+                <div className="flex flex-col">
+                  <div className="text-lg">
+                    {data.isIdle && <span> {data.description}</span>}
+                    {!data.isIdle && <span>{data.val}</span>}
+                  </div>
+                  <div className="flex flex-row gap-1">
+                    {<span>{data.employee ?? "Неизвестно"}</span>}
+                    {<span>({format(data.time, "HH:mm:ss")})</span>}
+                  </div>
                 </div>
               );
             }
