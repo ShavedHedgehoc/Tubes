@@ -51,7 +51,7 @@ export default function InputTimer({
       </VStack>
     );
   return (
-    <VStack justify="space-between">
+    <VStack justify="space-between" align="flex-start">
       <Heading size="sm">{`${firstString} ${formatTimeToString(date)}`}</Heading>
       <Heading size="sm">{`${fourthString} ${formattedIdle}`}</Heading>
       <Heading

@@ -19,6 +19,7 @@ export function AddGalleryForm({
   onSelect,
   onConfirm,
   alreadyAcceptedIds = [],
+  loadMoreRef,
 }: {
   files: FileEntity[];
   onClose: () => void;
@@ -26,9 +27,37 @@ export function AddGalleryForm({
   onSelect: (id: number | null) => void;
   onConfirm: () => void;
   alreadyAcceptedIds?: number[];
+  loadMoreRef?: React.Ref<HTMLDivElement>;
 }) {
+  if (files.length === 0)
+    return (
+      <div className="h-full w-full flex flex-1 items-center justify-center ">
+        <Card className="px-3 border-0 overflow-hidden shadow-none sm:border relative flex flex-col w-1/4">
+          <div className="absolute right-2 top-2">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-8 w-8 rounded-full hover:bg-muted transition-colors"
+              onClick={onClose}
+            >
+              <X className="h-4 w-4 text-foreground" />
+              <span className="sr-only">Закрыть</span>
+            </Button>
+          </div>
+
+          <CardHeader>
+            <CardTitle className="text-2xl font-semibold">
+              Файлы отсутствуют
+            </CardTitle>
+            <CardDescription>
+              <span>Сначала загрузите файлы</span>
+            </CardDescription>
+          </CardHeader>
+        </Card>
+      </div>
+    );
   return (
-    <Card className="w-full  h-full px-3  border-0 overflow-hidden shadow-none sm:border relative">
+    <Card className="w-full h-full px-3 border-0 overflow-hidden shadow-none sm:border relative flex flex-col">
       <div className="absolute right-3 top-3">
         <Button
           variant="ghost"
@@ -48,7 +77,7 @@ export function AddGalleryForm({
           <span>Выберите картинку и нажмите &quot;Сохранить&quot;</span>
         </CardDescription>
       </CardHeader>
-      <CardContent className="flex-1 min-h-0 p-4 w-full overflow-hidden">
+      <CardContent className="flex-1 min-h-0 p-4 w-full overflow-hidden flex flex-col">
         <div className="h-full w-full overflow-y-auto pr-2">
           <div
             className="grid gap-4 content-start p-1"
@@ -115,6 +144,8 @@ export function AddGalleryForm({
               );
             })}
           </div>
+
+          <div ref={loadMoreRef} className="h-px w-full invisible" />
         </div>
       </CardContent>
       <CardFooter className="px-0 pb-0 pt-4">

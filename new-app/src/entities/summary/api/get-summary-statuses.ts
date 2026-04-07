@@ -35,6 +35,7 @@ export const getSummaryStatuses = async ({
     return {
       ...rest,
       operation_description: operation?.description ?? null,
+      operation_value: operation?.value ?? null,
       employee_name: employee?.name ?? null,
       post_val: post.value,
     };

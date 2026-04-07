@@ -9,18 +9,26 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "@/shared/ui";
-import { MoreHorizontal, Pencil, Trash, TrendingUp } from "lucide-react";
+import { MoreHorizontal, Pencil, Sheet, Trash, TrendingUp } from "lucide-react";
 import { useDeleteSummary } from "../model";
-import { useSummaryUiParams } from "@/entities/summary";
+import { summaryApi, useSummaryUiParams } from "@/entities/summary";
 import { useRouter } from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
+import { makeXLSX } from "../lib/make-xlsx";
 
 export function RowDropdown({
   id,
   isCanDelete,
+  isReportAvailable,
 }: {
   id: number;
   isCanDelete: boolean;
+  isReportAvailable: boolean;
 }) {
+  const { refetch } = useQuery({
+    ...summaryApi.summaryQueries.report(id.toString(), { isServer: false }),
+    enabled: false,
+  });
   const { setParams } = useSummaryUiParams();
   const { deleteSummary } = useDeleteSummary();
   const router = useRouter();
@@ -28,6 +36,13 @@ export function RowDropdown({
   const handleEditClick = () => setParams({ "edit-summary": id.toString() });
   const handleNavigateToCharts = () => {
     router.push(`/summaries/charts/${id}`);
+  };
+
+  const handleMakeXLSX = async () => {
+    const { data } = await refetch();
+    if (data) {
+      makeXLSX(data);
+    }
   };
 
   return (
@@ -41,6 +56,13 @@ export function RowDropdown({
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>Действия</DropdownMenuLabel>
         <DropdownMenuSeparator />
+        <DropdownMenuItem
+          onClick={handleMakeXLSX}
+          disabled={!isReportAvailable}
+        >
+          <Sheet />
+          XLSX
+        </DropdownMenuItem>
         <DropdownMenuItem
           onClick={handleNavigateToCharts}
           disabled={isCanDelete}

@@ -35,7 +35,7 @@ type Post = {
   name: string;
 };
 
-type StatusRow = StatusDto & {
+export type StatusRow = StatusDto & {
   employee: Employee | null;
   operation: Operation | null;
   post: Post;

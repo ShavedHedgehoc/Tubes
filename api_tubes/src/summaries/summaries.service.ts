@@ -13,7 +13,7 @@ import { CreateSummaryDto } from "./dto/create-summary.dto";
 import { parseAssemblies, parsedAssembly } from "src/helpers/parse-assemblies";
 import { ChangeSummaryStateDto } from "./dto/change-summary-state.dto";
 import { GetSummariesListDto } from "./dto/get-summaries-list.dto";
-import { Prisma } from "generated/prisma";
+import { Prisma, Treshold } from "generated/prisma";
 import {
   ActiveSummaryResponse,
   IStatusCounter,
@@ -26,6 +26,10 @@ import { GetStatusesDto } from "./dto/get-statuses.dto";
 type FullSpecification = Prisma.SpecificationGetPayload<{
   include: { material: { include: { consumed_materials: true } } };
 }>;
+
+interface HasCreatedAt {
+  createdAt: Date;
+}
 
 const summaryInclude = {
   batch: true,
@@ -522,5 +526,91 @@ export class SummariesService {
     ]);
 
     return { summary, statuses };
+  }
+
+  async getSummaryDetail(id: number) {
+    const summary = await this.prisma.summary.findUnique({
+      where: { id: id },
+      include: { conveyor: true, batch: true, product: true },
+    });
+
+    if (!summary)
+      throw new HttpException("Сводка не найдена", HttpStatus.NOT_FOUND);
+
+    const [
+      thresholds,
+      statuses,
+      defects,
+      consumed_materials,
+      extrusion,
+      varnish,
+      offset,
+      sealant,
+    ] = await Promise.all([
+      this.prisma.treshold.findMany({
+        where: {
+          conveyor_id: summary.conveyor_id,
+          product_id: summary.product_id,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      this.prisma.status.findMany({
+        where: { summary_id: id },
+        include: { operation: true, employee: true, post: true },
+        orderBy: { createdAt: "asc" },
+      }),
+      this.prisma.defect.findMany({
+        where: { summary_id: id },
+        include: { post: true },
+      }),
+      this.prisma.consumedMaterial.findMany({
+        where: { summary_id: id },
+        include: { material: true, lot: true },
+      }),
+      this.prisma.extrusionParam.findMany({
+        where: { summary_id: id },
+        include: { employee: true },
+        orderBy: { createdAt: "asc" },
+      }),
+      this.prisma.varnishParam.findMany({
+        where: { summary_id: id },
+        include: { employee: true },
+        orderBy: { createdAt: "asc" },
+      }),
+      this.prisma.offsetParam.findMany({
+        where: { summary_id: id },
+        include: { employee: true },
+        orderBy: { createdAt: "asc" },
+      }),
+      this.prisma.sealantParam.findMany({
+        where: { summary_id: id },
+        include: { employee: true },
+        orderBy: { createdAt: "asc" },
+      }),
+    ]);
+
+    function withActualThreshold<T extends HasCreatedAt>(
+      record: T,
+      allTresholds: Treshold[],
+    ) {
+      const treshold =
+        allTresholds.find((t) => t.createdAt <= record.createdAt) || null;
+      return {
+        ...record,
+        treshold,
+      };
+    }
+
+    return {
+      summary,
+      statuses,
+      defects,
+      consumed_materials,
+      tresholds: thresholds[0] ?? null,
+      extrusionParams: extrusion.map((p) => withActualThreshold(p, thresholds)),
+      varnishParams: varnish.map((p) => withActualThreshold(p, thresholds)),
+      offsetParams: offset.map((p) => withActualThreshold(p, thresholds)),
+      sealantParams: sealant.map((p) => withActualThreshold(p, thresholds)),
+    };
   }
 }

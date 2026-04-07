@@ -1,19 +1,10 @@
-// move to product entity
-type Product = {
+import { StatusRow } from "./summary-statuses.dto";
+import { SummaryDto } from "./summary.dto";
+
+type LotEntity = {
   id: number;
-  code: string;
-  marking: string;
-  name: string;
-};
-// move to batch entity
-type Batch = {
-  id: number;
-  name: string;
-};
-//move to conveyor entity
-type Conveyor = {
-  id: number;
-  name: string;
+  material_id: number;
+  value: string;
 };
 
 type Employee = {
@@ -24,127 +15,27 @@ type Employee = {
   banned: boolean;
 };
 
-export type SummaryBase = {
+type MaterialEntity = {
   id: number;
-  product_id: number;
-  batch_id: number;
-  conveyor_id: number;
-  plan: number;
-  isActive: boolean;
-  isFinished: boolean;
-  date: Date;
-  shift: number;
+  code: string;
+  name: string;
+  post_number: number;
 };
 
-type PostStatusCount = {
-  statuses: number;
-};
-
-type AvailableSummaryRow = {
-  id: number;
-  product_id: number;
-  batch_id: number;
-  conveyor_id: number;
-  plan: number;
-  isActive: boolean;
-  isFinished: boolean;
-  date: Date;
-  shift: number;
-  product: Product;
-  batch: Batch;
-};
-
-export type SummaryAvailable = SummaryBase & {
-  product: Product;
-  batch: Batch;
-};
-
-// Полная сущность с отношениями
-export type SummaryEntity = SummaryAvailable & {
-  conveyor: Conveyor;
-  _count: PostStatusCount;
-};
-
-//тип для фронтенда
-export type SummaryResponse = {
-  summaries: SummaryEntity[];
-  total: number;
-  totalPages: number;
-};
-
-export type SummuryAvailableResponse = {
-  summaries: AvailableSummaryRow[];
-};
-
-export type SummaryUploadDataRow = {
-  code1C: string;
-  product_marking: string;
-  product_name: string;
-  batch: string;
-  plan: string;
-  conveyor: string;
-  specification: string;
-  shift: string;
-};
-
-export type ValError = {
-  row: number;
-  field: string;
-  error: string;
-};
-
-type SummaryWithStatusesBase = SummaryBase & {
-  conveyorName: string;
-  batchName: string;
-  productName: string;
-  productCode: string;
-  productMarking: string;
-};
-
-type StatusRow = {
+type ConsumedMaterialEntity = {
   id: number;
   summary_id: number;
-  post_id: number;
-  post_val: number;
-  counter_value: number;
-  operation_id: number | null;
-  operation_value: string | null;
-  operation_description: string | null;
-  idle: false;
-  employee_id: number | null;
-  employee_name: string | null;
-  idle_time: number | null;
-  finished: boolean;
-  createdAt: Date;
-};
-
-export type SummaryStatusesResponse = SummaryWithStatusesBase & {
-  statuses: StatusRow[];
-};
-type SummaryReportBase = SummaryBase & {
-  conveyorName: string;
-  productCode: string;
-  productName: string;
-  productMarking: string;
-  batchName: string;
-};
-
-type Defect = {
-  postId: number;
-  postValue: number;
-  value: number;
-};
-
-type ConsumedMaterial = {
+  material_id: number;
+  lot_id: number;
   employee_id: number;
   createdAt: Date;
-  materialCode: string;
-  materialName: string;
-  postNumber: number;
-  lotName: string;
+};
+type ConsumedMaterialRow = ConsumedMaterialEntity & {
+  material: MaterialEntity;
+  lot: LotEntity;
 };
 
-export type Treshold = {
+type TresholdEntity = {
   id: number;
   product_id: number;
   conveyor_id: number;
@@ -261,10 +152,10 @@ export type Treshold = {
   sealant_tube_rigidity_max: number;
   sealant_cap_unscrewing_torque_min: number;
   sealant_cap_unscrewing_torque_max: number;
-  createdAt: Date;
+  createdAt: string;
 };
 
-type ExtrusionParams = {
+type ExtrusionParamsEntity = {
   id: number;
   summary_id: number;
   counter_value: number;
@@ -285,7 +176,7 @@ type ExtrusionParams = {
   createdAt: Date;
 };
 
-type VarnishParams = {
+type VarnishParamsEntity = {
   id: number;
   summary_id: number;
   counter_value: number;
@@ -312,8 +203,7 @@ type VarnishParams = {
   employee_id: number;
   createdAt: Date;
 };
-
-type OffsetParams = {
+type OffsetParamsEntity = {
   id: number;
   summary_id: number;
   counter_value: number;
@@ -339,8 +229,7 @@ type OffsetParams = {
   employee_id: number;
   createdAt: Date;
 };
-
-type SealantParams = {
+type SealantParamsEntity = {
   id: number;
   summary_id: number;
   counter_value: number;
@@ -367,22 +256,157 @@ type SealantParams = {
 
 type ParamsAddition = {
   employee: Employee;
-  treshold: Treshold;
+  treshold: TresholdEntity;
 };
 
-type ExtrusionParamsRow = ExtrusionParams & ParamsAddition;
-type VarnishParamsRow = VarnishParams & ParamsAddition;
-type OffsetParamsRow = OffsetParams & ParamsAddition;
-type SealantParamsRow = SealantParams & ParamsAddition;
+type ExtrusionParamsDto = ExtrusionParamsEntity & ParamsAddition;
+type VarnishParamsDto = VarnishParamsEntity & ParamsAddition;
+type OffsetParamsDto = OffsetParamsEntity & ParamsAddition;
+type SealantParamsDto = SealantParamsEntity & ParamsAddition;
+type Post = {
+  id: number;
+  value: number;
+  name: string;
+};
+type Defect = {
+  id: number;
+  summary_id: number;
+  post_id: number;
+  value: number;
+  post: Post;
+};
+type TresholdDto = {
+  id: number;
+  product_id: number;
+  conveyor_id: number;
+  extrusion_press_speed_min: number;
+  extrusion_press_speed_max: number;
+  extrusion_blow_time_min: number;
+  extrusion_blow_time_max: number;
+  extrusion_turning_machine_speed_min: number;
+  extrusion_turning_machine_speed_max: number;
+  extrusion_annealing_furnace_temp_min: number;
+  extrusion_annealing_furnace_temp_max: number;
+  extrusion_tube_cylindrical_section_length_min: number;
+  extrusion_tube_cylindrical_section_length_max: number;
+  extrusion_membrane_thickness_min: number;
+  extrusion_membrane_thickness_max: number;
+  extrusion_tube_diameter_min: number;
+  extrusion_tube_diameter_max: number;
+  extrusion_tube_cylindrical_section_thickness_min: number;
+  extrusion_tube_cylindrical_section_thickness_max: number;
+  extrusion_tube_rigidity_min: number;
+  extrusion_tube_rigidity_max: number;
+  extrusion_external_thread_value: string;
+  varnish_varnish_machine_speed_min: number;
+  varnish_varnish_machine_speed_max: number;
+  varnish_total_air_pressure_min: number;
+  varnish_total_air_pressure_max: number;
+  varnish_feed_can_air_pressure_min: number;
+  varnish_feed_can_air_pressure_max: number;
+  varnish_nozzle_regulator_air_pressure_min: number;
+  varnish_nozzle_regulator_air_pressure_max: number;
+  varnish_cells_speed_min: number;
+  varnish_cells_speed_max: number;
+  varnish_injection_a_start_position_min: number;
+  varnish_injection_a_start_position_max: number;
+  varnish_injection_b_start_position_min: number;
+  varnish_injection_b_start_position_max: number;
+  varnish_injection_c_start_position_min: number;
+  varnish_injection_c_start_position_max: number;
+  varnish_injection_d_start_position_min: number;
+  varnish_injection_d_start_position_max: number;
+  varnish_injection_a_end_position_min: number;
+  varnish_injection_a_end_position_max: number;
+  varnish_injection_b_end_position_min: number;
+  varnish_injection_b_end_position_max: number;
+  varnish_injection_c_end_position_min: number;
+  varnish_injection_c_end_position_max: number;
+  varnish_injection_d_end_position_min: number;
+  varnish_injection_d_end_position_max: number;
+  varnish_tube_molding_start_position_min: number;
+  varnish_tube_molding_start_position_max: number;
+  varnish_tube_molding_end_position_min: number;
+  varnish_tube_molding_end_position_max: number;
+  varnish_polimerization_furnace_temp_min: number;
+  varnish_polimerization_furnace_temp_max: number;
+  varnish_internal_varnish_porosity_min: number;
+  varnish_internal_varnish_porosity_max: number;
+  offset_printing_machine_speed_min: number;
+  offset_printing_machine_speed_max: number;
+  offset_total_air_pressure_min: number;
+  offset_total_air_pressure_max: number;
+  offset_padding_furnace_temp_min: number;
+  offset_padding_furnace_temp_max: number;
+  offset_offset_furnace_temp_min: number;
+  offset_offset_furnace_temp_max: number;
+  offset_printer_motor_min: number;
+  offset_printer_motor_max: number;
+  offset_base_covers_holders_motor_min: number;
+  offset_base_covers_holders_motor_max: number;
+  offset_base_covers_station_motor_min: number;
+  offset_base_covers_station_motor_max: number;
+  offset_imprint_quantity_printed_box_1_min: number | null;
+  offset_imprint_quantity_printed_box_1_max: number | null;
+  offset_imprint_quantity_printed_box_2_min: number | null;
+  offset_imprint_quantity_printed_box_2_max: number | null;
+  offset_imprint_quantity_printed_box_3_min: number | null;
+  offset_imprint_quantity_printed_box_3_max: number | null;
+  offset_imprint_quantity_printed_box_4_min: number | null;
+  offset_imprint_quantity_printed_box_4_max: number | null;
+  offset_imprint_quantity_printed_box_5_min: number | null;
+  offset_imprint_quantity_printed_box_5_max: number | null;
+  offset_imprint_quantity_printed_box_6_min: number | null;
+  offset_imprint_quantity_printed_box_6_max: number | null;
+  offset_ink_supply_time_min: number;
+  offset_ink_supply_time_max: number;
+  sealant_cap_machine_speed_min: number;
+  sealant_cap_machine_speed_max: number;
+  sealant_total_air_pressure_min: number;
+  sealant_total_air_pressure_max: number;
+  sealant_holders_forward_min: number;
+  sealant_holders_forward_max: number;
+  sealant_holders_opening_left_min: number;
+  sealant_holders_opening_left_max: number;
+  sealant_holders_opening_right_min: number;
+  sealant_holders_opening_right_max: number;
+  sealant_holders_closing_min: number;
+  sealant_holders_closing_max: number;
+  sealant_injection_a_start_min: number;
+  sealant_injection_a_start_max: number;
+  sealant_injection_b_start_min: number;
+  sealant_injection_b_start_max: number;
+  sealant_injection_a_end_min: number;
+  sealant_injection_a_end_max: number;
+  sealant_injection_b_end_min: number;
+  sealant_injection_b_end_max: number;
+  sealant_injection_tube_orientation_start_min: number;
+  sealant_injection_tube_orientation_start_max: number;
+  sealant_injection_tube_orientation_end_min: number;
+  sealant_injection_tube_orientation_end_max: number;
+  sealant_latex_ring_padding_min: number;
+  sealant_latex_ring_padding_max: number;
+  sealant_latex_ring_width_min: number;
+  sealant_latex_ring_width_max: number;
+  sealant_tube_rigidity_min: number;
+  sealant_tube_rigidity_max: number;
+  sealant_cap_unscrewing_torque_min: number;
+  sealant_cap_unscrewing_torque_max: number;
+  createdAt: string;
+  product_code: string;
+  product_name: string;
+  product_marking: string;
+  conveyor_name: string;
+};
 
-export type SummaryReportEntity = {
-  summary: SummaryReportBase;
+export type SummaryReportDto = {
+  summary: Omit<SummaryDto, "_count">;
   statuses: StatusRow[];
   defects: Defect[];
-  tresholds: Treshold | null;
-  consumedMaterials: ConsumedMaterial[];
-  extrusionParams: ExtrusionParamsRow[];
-  varnishParams: VarnishParamsRow[];
-  offsetParams: OffsetParamsRow[];
-  sealantParams: SealantParamsRow[];
+  tresholds: TresholdDto;
+  consumed_materials: ConsumedMaterialRow[];
+  extrusionParams: ExtrusionParamsDto[];
+  varnishParams: VarnishParamsDto[];
+  offsetParams: OffsetParamsDto[];
+  sealantParams: SealantParamsDto[];
 };

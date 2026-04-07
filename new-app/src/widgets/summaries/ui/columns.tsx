@@ -18,6 +18,7 @@ export const getSummariesColumns = (): ColumnDef<SummaryEntity>[] => {
                 !summary.isActive &&
                 !summary.isFinished
               }
+              isReportAvailable={summary.isFinished}
             />
           </div>
         );
