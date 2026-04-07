@@ -57,12 +57,21 @@ export class SummariesController {
   // Надо добавить ручку для формы редактирования
 
   @ApiOperation({
-    summary: "Получить детали cводку по id (для подробного отчета)",
+    summary: "Получить детали cводку по id (для редактирования)",
   })
   @Get("detail/:id")
   @UsePipes(new ValidationPipe({ transform: true }))
   getSummaryById(@Param() params: GetDetailDto) {
     return this.summaryService.getSummaryById(params.id);
+  }
+
+  @ApiOperation({
+    summary: "Получить детали cводку по id (подробного отчета)",
+  })
+  @Get("full_detail/:id")
+  @UsePipes(new ValidationPipe({ transform: true }))
+  getSummaryReportById(@Param() params: GetDetailDto) {
+    return this.summaryService.getSummaryDetail(params.id);
   }
 
   @ApiOperation({ summary: "Получить активную сводку по id конвейера" })

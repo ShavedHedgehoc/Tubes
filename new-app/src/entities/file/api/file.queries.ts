@@ -11,7 +11,6 @@ export const fileQueries = {
         ...fileQueries.lists(),
         {
           ...params,
-
           filename: params.filename ?? null,
         },
       ],

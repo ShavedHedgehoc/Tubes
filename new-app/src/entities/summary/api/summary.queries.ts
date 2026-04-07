@@ -4,6 +4,7 @@ import { SummaryDetailParams, SummaryParams } from "../model";
 import { getSummary } from "./get-summary";
 import { getAvailableSummaries } from "./get-available-summaries";
 import { getSummaryStatuses } from "./get-summary-statuses";
+import { getSummaryReport } from "./get-summary-report";
 
 export const summaryQueries = {
   all: () => ["summaries"],
@@ -51,6 +52,14 @@ export const summaryQueries = {
     queryOptions({
       queryKey: [...summaryQueries.statuses(), { ...params }],
       queryFn: () => getSummaryStatuses({ ...params, options }),
+      staleTime: 30 * 1000,
+    }),
+  reports: () => [...summaryQueries.all(), "reports"],
+  report: (id: string | null, options?: { isServer: boolean }) =>
+    queryOptions({
+      queryKey: [...summaryQueries.reports(), id],
+      queryFn: () => getSummaryReport({ id, options }),
+      enabled: !!id,
       staleTime: 30 * 1000,
     }),
 };

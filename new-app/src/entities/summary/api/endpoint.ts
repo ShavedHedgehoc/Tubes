@@ -3,6 +3,7 @@ export const SUMMARY_ENDPOINTS = {
   UPLOAD: "/summaries",
   DELETE: "/summaries",
   DETAIL: "/summaries/detail",
+  FULL_DETAIL: "/summaries/full_detail",
   STATUSES: "/summaries/summary_statuses",
   AVAILABLE: "/summaries/available?conveyor_id=",
   SET_ACTIVE: "/summaries/set_active",

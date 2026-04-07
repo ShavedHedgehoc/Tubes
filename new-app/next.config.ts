@@ -3,6 +3,7 @@ import path from "path";
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
+  reactStrictMode: false,
   output: "standalone",
   turbopack: {
     root: path.join(__dirname, ".."),
