@@ -49,6 +49,7 @@ const imports: Array<Type<unknown> | DynamicModule | Promise<DynamicModule>> = [
   FilePathModule,
   ProductPictureModule,
   OperationPictureModule,
+  AuthModule,
 ];
 
 if (process.env.NODE_ENV !== "production") {

@@ -91,12 +91,43 @@ model Status {
 
 // Пользователи
 model User {
-  id       Int    @id @default(autoincrement())
-  name     String
-  email    String @unique
-  password String
+  id         Int        @id @default(autoincrement())
+  name       String
+  email      String     @unique
+  password   String
+  banned     Boolean    @default(false)
+  user_roles UserRole[]
+  token      Token?
 
   @@map("users")
+}
+
+model Role {
+  id          Int        @id @default(autoincrement())
+  value       String     @unique
+  description String     @unique
+  user_roles  UserRole[]
+
+  @@map("roles")
+}
+
+model UserRole {
+  id      Int  @id @default(autoincrement())
+  user    User @relation(fields: [user_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  user_id Int
+  role    Role @relation(fields: [role_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  role_id Int
+
+  @@map("user_roles")
+}
+
+model Token {
+  id      Int    @id @default(autoincrement())
+  user    User   @relation(fields: [user_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  user_id Int    @unique
+  token   String
+
+  @@map("tokens")
 }
 
 // Сотрудники

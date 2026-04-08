@@ -73,7 +73,6 @@ export function useXlsxParser() {
           setData(hasErrors ? [] : json);
           setIsPending(false);
           resolve(!hasErrors);
-          // console.log(currentErrors);
         } catch (e) {
           console.error("XLSX Read Error", e);
           setIsValid(false);

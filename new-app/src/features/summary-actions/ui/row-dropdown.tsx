@@ -15,6 +15,7 @@ import { summaryApi, useSummaryUiParams } from "@/entities/summary";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { makeXLSX } from "../lib/make-xlsx";
+import { useRoles } from "@/features/auth/hooks";
 
 export function RowDropdown({
   id,
@@ -25,6 +26,7 @@ export function RowDropdown({
   isCanDelete: boolean;
   isReportAvailable: boolean;
 }) {
+  const { isPlanner } = useRoles();
   const { refetch } = useQuery({
     ...summaryApi.summaryQueries.report(id.toString(), { isServer: false }),
     enabled: false,
@@ -74,14 +76,16 @@ export function RowDropdown({
           <Pencil />
           Изменить
         </DropdownMenuItem>
-        <DropdownMenuItem
-          variant={"destructive"}
-          onClick={handleDeleteClick}
-          disabled={!isCanDelete}
-        >
-          <Trash />
-          Удалить
-        </DropdownMenuItem>
+        {isPlanner && (
+          <DropdownMenuItem
+            variant={"destructive"}
+            onClick={handleDeleteClick}
+            disabled={!isCanDelete}
+          >
+            <Trash />
+            Удалить
+          </DropdownMenuItem>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );
