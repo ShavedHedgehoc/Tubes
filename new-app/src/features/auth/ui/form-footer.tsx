@@ -35,7 +35,7 @@ export function FormFooter({
           {isRegister ? "Уже зарегистрированы? " : "Нет аккаунта? "}
           <span
             onClick={toggle}
-            className="text-primary font-bold  border-foreground border-b-2 cursor-pointer  transition-colors leading-none pb-0.5"
+            className="text-primary font-bold  cursor-pointer  transition-colors leading-none pb-0.5"
           >
             {isRegister ? "Войти" : "Создать"}
           </span>
