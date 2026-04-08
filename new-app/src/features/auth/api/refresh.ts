@@ -8,7 +8,7 @@ interface RefreshResponse {
 export const refresh = async (
   refreshToken: string,
 ): Promise<RefreshResponse> => {
-  const response = await apiClient.post<RefreshResponse>(`auth/refresh`, {
+  const response = await apiClient.post<RefreshResponse>(`/auth/refresh`, {
     refreshToken,
   });
   return response;
