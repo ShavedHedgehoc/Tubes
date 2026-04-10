@@ -95,6 +95,7 @@ model User {
   name       String
   email      String     @unique
   password   String
+  avatar_url String?
   banned     Boolean    @default(false)
   user_roles UserRole[]
   token      Token?

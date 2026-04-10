@@ -48,7 +48,6 @@ export function FileField({
             name={name}
             onBlur={onBlur}
             ref={(instance) => {
-              // Объединяем рефы: от RHF и ваш внешний fileInputRef
               ref(instance);
               if (fileInputRef) {
                 (

@@ -30,7 +30,7 @@ export const AuthForm = () => {
       )}
       <FormLayout
         title={isRegister ? "Регистрация" : "Вход в приложение"}
-        description=""
+        description="Войдите в аккаунт или зарегистрируйтесь"
         footer={
           <FormFooter
             createPending={state.isSubmitting}
@@ -41,7 +41,7 @@ export const AuthForm = () => {
       >
         <form id="form-rhf-demo" onSubmit={form.handleSubmit(onSubmit)}>
           <FieldGroup>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-6">
               {isRegister && <NameField />}
               <EmailField />
               <PasswordField />

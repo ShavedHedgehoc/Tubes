@@ -39,3 +39,5 @@ export * from "./main-nav-link";
 export * from "./image-card";
 export * from "./select-image-card";
 export * from "./picture-modal";
+export * from "./tooltip"
+export * from "./avatar"

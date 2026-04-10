@@ -5,7 +5,7 @@ import {
   UnauthorizedException,
 } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
-import { CreateUserDto } from "src/users/dto/create-user.dto";
+import { RegisterDto } from "src/auth/dto/register.dto";
 import * as bcrypt from "bcryptjs";
 import { LoginDto } from "./dto/login.dto";
 import { JwtService } from "@nestjs/jwt";
@@ -24,7 +24,7 @@ export class AuthService {
   constructor(
     private prisma: PrismaService,
     private jwtService: JwtService,
-  ) {}
+  ) { }
 
   private async validateUser(dto: LoginDto): Promise<UserWithRoles> {
     const user = await this.prisma.user.findUnique({
@@ -70,7 +70,7 @@ export class AuthService {
     };
   }
 
-  async register(dto: CreateUserDto) {
+  async register(dto: RegisterDto) {
     const candidate = await this.prisma.user.findUnique({
       where: { email: dto.email },
     });
@@ -136,7 +136,6 @@ export class AuthService {
       const tokenData = await this.prisma.token.findFirst({
         where: {
           user_id: payload.id,
-          //  token: refreshToken
         },
       });
 

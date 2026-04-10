@@ -25,7 +25,7 @@ export function DataViewLayout<TData, T extends PaginationParams>(
   return (
     <div
       className={cn(
-        "container mx-auto py-10 transition-all duration-500 relative",
+        "container mx-auto py-6 transition-all duration-500 relative",
         props.className,
         isPending && "opacity-60 grayscale-50 pointer-events-none",
       )}

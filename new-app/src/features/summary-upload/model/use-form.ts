@@ -60,10 +60,15 @@ export const useSummaryUploadForm = () => {
     setParams({ "upload-summary": false });
   };
 
+  const handleErrorView = () => {
+    setParams({ "view-errors": true });
+  }
+
   return {
     form,
     uploadPending,
     handleClose,
+    handleErrorView,
     onSubmit,
     validate,
     reset,

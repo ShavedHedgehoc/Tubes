@@ -8,11 +8,13 @@ export interface ValidationButtonProps extends React.ButtonHTMLAttributes<HTMLBu
   isValid: boolean;
   isPending: boolean;
   errors: ValError[] | null;
+  handleClick: () => void
 }
 export function ValidationStatusButton({
   isValid,
   isPending,
   errors,
+  handleClick,
   className,
   ...props
 }: ValidationButtonProps) {
@@ -22,6 +24,7 @@ export function ValidationStatusButton({
   return (
     <Button
       variant="ghost"
+      onClick={handleClick}
       {...props}
       disabled={!enabledCondition}
       className={cn(
@@ -44,7 +47,7 @@ export function ValidationStatusButton({
             Успешная проверка. Можно загружать.
           </div>
         ) : errors?.length ? (
-          <div className="flex flex-row gap-2 w-full items-center justify-left  text-destructive">
+          <div className="flex flex-row gap-2 w-full items-center justify-left  text-destructive cursor-pointer" >
             <Ban className="h-8 w-8" />
             {`В файле ${errors.length} ошибок. ${errors.length < MAX_ERRORS_LENGTH ? "Нажмите для просмотра" : "Просмотр не доступен"}`}
           </div>

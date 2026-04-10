@@ -1,6 +1,6 @@
 "use client";
 
-import { useAppSession } from "@/entities/user";
+import { useAppSession } from "./use-app-session";
 
 export function useRoles() {
   const { data: session, status } = useAppSession();
@@ -9,7 +9,7 @@ export function useRoles() {
   return {
     roles,
     isUser: roles.includes("USER"),
-    isPlanner: roles.includes("Planner"),
+    isPlanner: roles.includes("PLANNER"),
     isAdmin: roles.includes("ADMIN"),
 
     isLoading,

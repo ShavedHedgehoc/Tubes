@@ -26,6 +26,7 @@ export default function CodeInput() {
   return (
     <ButtonGroup className="h-8 ">
       <Input
+        id={"summary-filter-name-input"}
         placeholder="Поиск по коду...  "
         value={value}
         onChange={handleChangeCode}
