@@ -3,6 +3,7 @@ import { PrismaService } from "src/prisma/prisma.service";
 import { GetEmployeesListDto } from "./dto/get-employees-list.dto";
 import { CreateEmployeeDto } from "./dto/create-employee.dto";
 import { UpdateEmployeeDto } from "./dto/update-employee.dto";
+import { Prisma } from "generated/prisma";
 
 @Injectable()
 export class EmployeesService {
@@ -20,32 +21,33 @@ export class EmployeesService {
   }
 
   async getEmployeeList(query: GetEmployeesListDto) {
-    let filter = {};
+    const where: Prisma.EmployeeWhereInput = {};
+
     if (query.name) {
-      filter = {
-        ...filter,
-        name: { contains: query.name, mode: "insensitive" },
-      };
+      where.name = { contains: query.name, mode: "insensitive" };
     }
 
     if (query.banned && query.banned.length > 0) {
-      const bannedFilter = query.banned[0] === 1 ? false : true;
-      filter = { ...filter, banned: bannedFilter };
+      where.banned = query.banned[0] !== 1;
     }
 
     if (query.ranks && query.ranks.length > 0) {
-      filter = { ...filter, rank_id: { in: query.ranks } };
+      where.rank_id = { in: query.ranks };
     }
 
-    const total = await this.prisma.employee.count({ where: { ...filter } });
-    const employees = await this.prisma.employee.findMany({
-      where: { ...filter },
-      include: { rank: true },
-      orderBy: { name: query.name_asc ? "asc" : "desc" },
-      take: query.limit,
-      skip: query.limit * (query.page - 1),
-    });
-    return { employees: employees, total: total };
+    const { limit = 10, page = 1, name_asc } = query;
+
+    const [total, employees] = await Promise.all([
+      this.prisma.employee.count({ where }),
+      this.prisma.employee.findMany({
+        where,
+        include: { rank: true },
+        orderBy: { name: name_asc ? "asc" : "desc" },
+        take: limit,
+        skip: limit * (page - 1),
+      }),
+    ]);
+    return { employees, total: total };
   }
 
   async getEmployeeById(employee_id: number) {

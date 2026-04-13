@@ -4,7 +4,6 @@ import { summaryApi, SummaryDetailParams } from "@/entities/summary";
 import { SummaryChartView } from "./summary-chart-view";
 
 export async function SummaryCharts({ props }: { props: SummaryDetailParams }) {
-  console.log(props);
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery(
     summaryApi.summaryQueries.status(props, { isServer: true }),

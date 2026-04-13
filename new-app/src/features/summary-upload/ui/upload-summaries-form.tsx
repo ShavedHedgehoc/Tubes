@@ -6,12 +6,14 @@ import { useSummaryUploadForm } from "../model/use-form";
 import { DateField, FileField } from "./form-fields";
 import { FormProvider } from "react-hook-form";
 import { FormFooter } from "./form-footer";
+import { UploadErrorsModal } from "./upload-errors-modal";
 
 export function UploadSummariesForm() {
   const {
     form,
     uploadPending,
     handleClose,
+    handleErrorView,
     onSubmit,
     validate,
     reset,
@@ -50,11 +52,13 @@ export function UploadSummariesForm() {
                 isValid={state.isValid}
                 isPending={state.isPending}
                 errors={state.errors}
+                handleClick={handleErrorView}
               />
             </div>
           </FieldGroup>
         </form>
       </FormLayout>
+      <UploadErrorsModal parserErrors={state.errors} />
     </FormProvider>
   );
 }

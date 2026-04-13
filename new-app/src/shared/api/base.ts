@@ -97,14 +97,34 @@ export class ApiClient {
     return this.handleResponse<TResult>(response);
   }
 
+  // public async post<TResult = unknown, TData = unknown>(
+  //   endpoint: string,
+  //   body: TData,
+  // ): Promise<TResult> {
+  //   const isFormData = body instanceof FormData;
+  //   const headers: HeadersInit = isFormData
+  //     ? {}
+  //     : { "Content-Type": "application/json" };
+  //   const response = await fetch(`${this.baseUrl}${endpoint}`, {
+  //     method: "POST",
+  //     headers: headers,
+  //     body: isFormData ? (body as unknown as BodyInit) : JSON.stringify(body),
+  //   });
+  //   return this.handleResponse<TResult>(response);
+  // }
+
+  // В классе вашего proxyApiClient
   public async post<TResult = unknown, TData = unknown>(
     endpoint: string,
     body: TData,
+    options?: { headers?: Record<string, string> }, // Добавляем опции
   ): Promise<TResult> {
     const isFormData = body instanceof FormData;
-    const headers: HeadersInit = isFormData
-      ? {}
-      : { "Content-Type": "application/json" };
+    const headers: HeadersInit = {
+      ...(isFormData ? {} : { "Content-Type": "application/json" }),
+      ...options?.headers, // Примешиваем внешние заголовки
+    };
+
     const response = await fetch(`${this.baseUrl}${endpoint}`, {
       method: "POST",
       headers: headers,

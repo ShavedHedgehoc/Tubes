@@ -9,7 +9,6 @@ import { useShallow } from "zustand/react/shallow";
 import type { PageLayoutProps } from "../../shared/components/layouts/page-layout";
 import PageLayout from "../../shared/components/layouts/page-layout";
 import TimeComponent from "../../shared/components/lines/time-component";
-import HeaderComponent from "../../shared/components/headers/header-component";
 import UserComponent from "../../shared/components/lines/user-component";
 import { useExtrusionEmployeeStore } from "./store/use-extrusion-employee-store";
 import ProductionCard from "../../shared/components/cards/production-card/production-card";
@@ -27,6 +26,8 @@ import { Theme } from "@chakra-ui/react";
 import { ColorModeProvider } from "@/components/ui/color-mode";
 import ExtrusionCloseSummaryModal from "./dash/modals/extrusion-close-summary-modal";
 import ExtrusionDefectEntryModal from "./dash/modals/extrusion-defect-enter-modal";
+import PostIndicator from "@/shared/components/cards/post-indicator";
+import HeaderWithIndicatorComponent from "@/shared/components/headers/header-with-indicator";
 
 export default function Extrusion() {
   const params = useParams<Params.CONVEYOR_NAME>();
@@ -50,9 +51,10 @@ export default function Extrusion() {
   const pageLayoutProps: PageLayoutProps = {
     timeComponent: <TimeComponent />,
     headerComponent: (
-      <HeaderComponent
+      <HeaderWithIndicatorComponent
         conveyorName={extrusionConveyor.name}
         postName={PostNames.EXTRUSION}
+        postIndicator={<PostIndicator postId={1} data={summaryData ?? null} />}
       />
     ),
     parameterComponent: (
