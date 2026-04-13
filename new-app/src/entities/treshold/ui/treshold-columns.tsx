@@ -319,10 +319,10 @@ const uniqueColumns: Record<string, ColumnDef<TresholdEntity>[]> = {
       160,
     ),
     tresholdGroup(
-      "Давление воздуха общее, Бар.",
+      "Давление воздуха управления форсунок, Бар.",
       "sealant_total_air_pressure_min",
       "sealant_total_air_pressure_max",
-      140,
+      200,
     ),
     tresholdGroup(
       "Захваты вперед, ед.",

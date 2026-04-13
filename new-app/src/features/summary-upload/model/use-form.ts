@@ -62,7 +62,7 @@ export const useSummaryUploadForm = () => {
 
   const handleErrorView = () => {
     setParams({ "view-errors": true });
-  }
+  };
 
   return {
     form,

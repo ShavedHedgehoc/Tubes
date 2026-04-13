@@ -25,7 +25,7 @@ import { AuthModule } from "./auth/auth.module";
 import { FilePathModule } from "./file-path/file-path.module";
 import { ProductPictureModule } from "./product-picture/product-picture.module";
 import { OperationPictureModule } from "./operation-picture/operation-picture.module";
-import { RolesModule } from './roles/roles.module';
+import { RolesModule } from "./roles/roles.module";
 
 const imports: Array<Type<unknown> | DynamicModule | Promise<DynamicModule>> = [
   ConfigModule.forRoot(),
@@ -51,7 +51,7 @@ const imports: Array<Type<unknown> | DynamicModule | Promise<DynamicModule>> = [
   ProductPictureModule,
   OperationPictureModule,
   AuthModule,
-  RolesModule
+  RolesModule,
 ];
 
 if (process.env.NODE_ENV !== "production") {
@@ -72,4 +72,4 @@ if (process.env.NODE_ENV !== "production") {
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

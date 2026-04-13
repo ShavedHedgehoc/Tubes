@@ -1,2 +1,2 @@
 export * as roleApi from "./api";
-export * from "./model"
+export * from "./model";

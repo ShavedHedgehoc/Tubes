@@ -24,7 +24,7 @@ export class AuthService {
   constructor(
     private prisma: PrismaService,
     private jwtService: JwtService,
-  ) { }
+  ) {}
 
   private async validateUser(dto: LoginDto): Promise<UserWithRoles> {
     const user = await this.prisma.user.findUnique({

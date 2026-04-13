@@ -10,7 +10,7 @@ declare module "next-auth" {
     name: string;
     email: string;
     roles: string[];
-    avatar_url: string
+    avatar_url: string;
   }
 
   /**
@@ -46,6 +46,7 @@ declare module "next-auth/jwt" {
       name: string;
       email: string;
       roles: string[];
+      avatar_url: string;
     };
     expiresAt: number; // Добавлено: для логики рефреша
     error?: "RefreshAccessTokenError";

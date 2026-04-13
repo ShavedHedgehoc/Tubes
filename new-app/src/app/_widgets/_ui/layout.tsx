@@ -33,7 +33,9 @@ export function Layout({
             <SheetContent side="left">
               <SheetHeader className=" border-b pb-5 mb-5">
                 <SheetTitle>{logo}</SheetTitle>
-                <SheetDescription className="sr-only">Mobile menu</SheetDescription>
+                <SheetDescription className="sr-only">
+                  Mobile menu
+                </SheetDescription>
               </SheetHeader>
               {nav}
             </SheetContent>

@@ -8,7 +8,6 @@ import { useShallow } from "zustand/react/shallow";
 import type { PageLayoutProps } from "../../shared/components/layouts/page-layout";
 import PageLayout from "../../shared/components/layouts/page-layout";
 import TimeComponent from "../../shared/components/lines/time-component";
-import HeaderComponent from "../../shared/components/headers/header-component";
 import UserComponent from "../../shared/components/lines/user-component";
 import ProductionCard from "../../shared/components/cards/production-card/production-card";
 import MaterialPieChartComponent from "../../shared/components/charts/material-pie-chart-component";
@@ -27,6 +26,8 @@ import OffsetMaterialScanModal from "./dash/modals/offset-material-scan-modal";
 import OffsetParameters from "./dash/offset-parameters";
 import OffsetCloseSummaryModal from "./dash/modals/offset-close-summary-modal";
 import OffsetDefectEntryModal from "./dash/modals/offset-defect-entry-modal";
+import PostIndicator from "@/shared/components/cards/post-indicator";
+import HeaderWithIndicatorComponent from "@/shared/components/headers/header-with-indicator";
 
 export default function Offset() {
   const params = useParams<Params.CONVEYOR_NAME>();
@@ -50,9 +51,10 @@ export default function Offset() {
   const pageLayoutProps: PageLayoutProps = {
     timeComponent: <TimeComponent />,
     headerComponent: (
-      <HeaderComponent
+      <HeaderWithIndicatorComponent
         conveyorName={offsetConveyor.name}
         postName={PostNames.OFFSET}
+        postIndicator={<PostIndicator postId={3} data={summaryData ?? null} />}
       />
     ),
     parameterComponent: <OffsetParameters summaryData={summaryData ?? null} />,

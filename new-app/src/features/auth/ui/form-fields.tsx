@@ -1,6 +1,13 @@
 import { Controller, useFormContext } from "react-hook-form";
 import { LoginFormValues } from "../model/schema";
-import { Button, ButtonGroup, Field, FieldError, FieldLabel, Input } from "@/shared/ui";
+import {
+  Button,
+  ButtonGroup,
+  Field,
+  FieldError,
+  FieldLabel,
+  Input,
+} from "@/shared/ui";
 import { cn } from "@/shared/lib";
 import { useState } from "react";
 import { Eye } from "lucide-react";
@@ -71,7 +78,7 @@ export function PasswordField() {
       render={({ field, fieldState }) => (
         <Field data-invalid={fieldState.invalid}>
           <FieldLabel htmlFor="login-form-password">Пароль</FieldLabel>
-          <ButtonGroup >
+          <ButtonGroup>
             <Input
               {...field}
               id="login-form-password"
@@ -92,8 +99,8 @@ export function PasswordField() {
                 "focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none",
               )}
               onClick={(e) => {
-                e.preventDefault()
-                setIsVisible(!isVisible)
+                e.preventDefault();
+                setIsVisible(!isVisible);
               }}
             >
               <Eye />

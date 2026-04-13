@@ -3,9 +3,9 @@ import { Type } from "class-transformer";
 import { IsNotEmpty, IsNumber } from "class-validator";
 
 export class GetUserDto {
-    @ApiProperty({ example: 1, description: "id сотрудника" })
-    @IsNotEmpty()
-    @Type(() => Number)
-    @IsNumber()
-    id: number;
+  @ApiProperty({ example: 1, description: "id сотрудника" })
+  @IsNotEmpty()
+  @Type(() => Number)
+  @IsNumber()
+  id: number;
 }

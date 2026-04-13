@@ -11,38 +11,37 @@ import { userApi } from "@/entities/user";
 import { EditUserForm } from "./edit-user-form";
 
 export function EditUserModal() {
-    const { params, setParams } = useUserUiParams();
-    const {
-        data: editId,
-        isOpen,
-        onOpenChange,
-    } = useModalState(params, setParams, "edit-user");
+  const { params, setParams } = useUserUiParams();
+  const {
+    data: editId,
+    isOpen,
+    onOpenChange,
+  } = useModalState(params, setParams, "edit-user");
 
-    const { data, isPending, isError, isSuccess } = useQuery(
-        userApi.userQueries.detail(editId),
-    );
+  const { data, isPending, isError, isSuccess } = useQuery(
+    userApi.userQueries.detail(editId),
+  );
 
-    useEffect(() => {
+  useEffect(() => {
+    if (isSuccess && !data && editId) {
+      toast.error("Данные пользователя не найдены");
+      onOpenChange(false);
+    }
+    if (isError && editId) {
+      toast.error("Ошибка при загрузке данных");
+      onOpenChange(false);
+    }
+  }, [isSuccess, data, editId, isError, onOpenChange, isOpen]);
 
-        if (isSuccess && !data && editId) {
-            toast.error("Данные пользователя не найдены");
-            onOpenChange(false);
-        }
-        if (isError && editId) {
-            toast.error("Ошибка при загрузке данных");
-            onOpenChange(false);
-        }
-    }, [isSuccess, data, editId, isError, onOpenChange, isOpen]);
-
-    return (
-        <ModalLayout
-            title="Редактирование пользователя"
-            description="Измените данные пользователя и сохраните изменения"
-            isOpen={isOpen}
-            onOpenChange={onOpenChange}
-        >
-            {isPending && editId && <LoaderCard />}
-            {data && <EditUserForm data={data} />}
-        </ModalLayout>
-    );
+  return (
+    <ModalLayout
+      title="Редактирование пользователя"
+      description="Измените данные пользователя и сохраните изменения"
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+    >
+      {isPending && editId && <LoaderCard />}
+      {data && <EditUserForm data={data} />}
+    </ModalLayout>
+  );
 }

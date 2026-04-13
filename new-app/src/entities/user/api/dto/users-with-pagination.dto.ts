@@ -1,6 +1,6 @@
-import { UserDto } from "./user.dto"
+import { UserDto } from "./user.dto";
 
 export type UsersWithPaginationDto = {
-    users: UserDto[]
-    total: number
-}
+  users: UserDto[];
+  total: number;
+};

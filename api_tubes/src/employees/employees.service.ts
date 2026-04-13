@@ -7,7 +7,7 @@ import { Prisma } from "generated/prisma";
 
 @Injectable()
 export class EmployeesService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   // use in employee auth
   async getEmployeeByBarcode(barcode: string) {
@@ -21,7 +21,7 @@ export class EmployeesService {
   }
 
   async getEmployeeList(query: GetEmployeesListDto) {
-    const where: Prisma.EmployeeWhereInput = {}
+    const where: Prisma.EmployeeWhereInput = {};
 
     if (query.name) {
       where.name = { contains: query.name, mode: "insensitive" };

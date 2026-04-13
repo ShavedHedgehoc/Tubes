@@ -54,7 +54,10 @@ export const FileInputWithIcon = React.forwardRef<
           onKeyDown={(e) => e.key === "Enter" && handleIconClick()}
         >
           <Folder className="h-4 w-4  mr-2" />
-          <Label className="pl-1 cursor-pointer font-normal text-sm" htmlFor={props.id}>
+          <Label
+            className="pl-1 cursor-pointer font-normal text-sm"
+            htmlFor={props.id}
+          >
             {fileName ? fileName : label}
           </Label>
         </div>

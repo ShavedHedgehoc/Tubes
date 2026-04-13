@@ -10,10 +10,16 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "@/shared/ui";
-import { Ban, MoreHorizontal, Pencil, RotateCcw, Trash, UserCheck } from "lucide-react";
+import {
+  Ban,
+  MoreHorizontal,
+  Pencil,
+  RotateCcw,
+  Trash,
+  UserCheck,
+} from "lucide-react";
 import { useChangeAccessUser, useResetUserPassword } from "../model";
 import { useDeleteUser } from "../model/use-delete-user";
-
 
 export function RowDropdown({ id, banned }: { id: number; banned: boolean }) {
   const { setParams } = useUserUiParams();
@@ -50,7 +56,8 @@ export function RowDropdown({ id, banned }: { id: number; banned: boolean }) {
             {banned ? <UserCheck /> : <Ban />}
             {banned ? "Разблокировать" : "Заблокировать"}
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={handleResetClick}
+          <DropdownMenuItem
+            onClick={handleResetClick}
             disabled={resetPasswordPending}
           >
             <RotateCcw />

@@ -1,4 +1,4 @@
 export type UpdateRolesDto = {
-    id: number
-    roles: number[]
-}
+  id: number;
+  roles: number[];
+};

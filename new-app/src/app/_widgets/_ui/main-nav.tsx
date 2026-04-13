@@ -16,7 +16,9 @@ export async function MainNav() {
       <MainNavLink href={"/products"}>Продукция</MainNavLink>
       <MainNavLink href={"/operations"}>Операции</MainNavLink>
       <MainNavLink href={"/files"}>Файлы</MainNavLink>
-      {hasRole("ADMIN") && <MainNavLink href={"/users"}>Пользователи</MainNavLink>}
+      {hasRole("ADMIN") && (
+        <MainNavLink href={"/users"}>Пользователи</MainNavLink>
+      )}
     </nav>
   );
 }

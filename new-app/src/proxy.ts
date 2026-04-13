@@ -10,8 +10,7 @@ export default withAuth(
 
     const path = req.nextUrl.pathname;
     const adminRoutes = ["/users"];
-    const isAdminRoute = adminRoutes.some(route => path.startsWith(route));
-
+    const isAdminRoute = adminRoutes.some((route) => path.startsWith(route));
 
     if (isAdminRoute && !isAdmin) {
       return NextResponse.redirect(new URL("/", req.url));
@@ -24,7 +23,7 @@ export default withAuth(
     callbacks: {
       authorized: ({ token }) => !!token,
     },
-  }
+  },
 );
 
 export const config = {
@@ -32,4 +31,3 @@ export const config = {
     "/((?!login|api|register|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };
-

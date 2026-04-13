@@ -1,8 +1,8 @@
 export type RoleEntity = {
-    id: number;
-    value: string;
-    description: string;
+  id: number;
+  value: string;
+  description: string;
 };
 export type RolesResponce = {
-    roles: RoleEntity[] | [];
+  roles: RoleEntity[] | [];
 };
