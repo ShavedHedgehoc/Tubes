@@ -20,23 +20,26 @@ model Conveyor {
 }
 
 model Post {
-  id         Int         @id @default(autoincrement())
-  value      Int         @unique
-  name       String      @unique
-  operations Operation[]
-  statuses   Status[]
-  defects    Defect[]
-  notes      Note[]
+  id                   Int                  @id @default(autoincrement())
+  value                Int                  @unique
+  name                 String               @unique
+  operations           Operation[]
+  statuses             Status[]
+  defects              Defect[]
+  notes                Note[]
+  maintenances         Maintenance[]
+  maintenance_sessions MaintenanceSession[]
 
   @@map("posts")
 }
 
 model Rank {
-  id          Int         @id @default(autoincrement())
-  val         Int
-  description String
-  employees   Employee[]
-  operations  Operation[]
+  id           Int           @id @default(autoincrement())
+  val          Int
+  description  String
+  employees    Employee[]
+  operations   Operation[]
+  maintenances Maintenance[]
 
   @@map("ranks")
 }
@@ -51,6 +54,7 @@ model Operation {
   operation_pictures OperationPicture[]
   post               Post               @relation(fields: [post_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
   post_id            Int
+  isInactive         Boolean            @default(false)
 
   @@map("operations")
 }
@@ -68,25 +72,95 @@ model OperationPicture {
 }
 
 model Status {
-  id            Int        @id @default(autoincrement())
-  summary       Summary    @relation(fields: [summary_id], references: [id], onUpdate: Cascade, onDelete: Restrict)
-  summary_id    Int
-  post          Post       @relation(fields: [post_id], references: [id], onUpdate: Cascade, onDelete: Restrict)
-  post_id       Int
-  counter_value Int
-  operation     Operation? @relation(fields: [operation_id], references: [id], onUpdate: Cascade, onDelete: Restrict)
-  operation_id  Int?
-  idle          Boolean    @default(false)
-  employee      Employee?  @relation(fields: [employee_id], references: [id], onUpdate: Cascade, onDelete: Restrict)
-  employee_id   Int?
-  idle_time     Int?
-  finished      Boolean    @default(false)
-  createdAt     DateTime   @default(now())
+  id                     Int                 @id @default(autoincrement())
+  summary                Summary             @relation(fields: [summary_id], references: [id], onUpdate: Cascade, onDelete: Restrict)
+  summary_id             Int
+  post                   Post                @relation(fields: [post_id], references: [id], onUpdate: Cascade, onDelete: Restrict)
+  post_id                Int
+  counter_value          Int
+  operation              Operation?          @relation(fields: [operation_id], references: [id], onUpdate: Cascade, onDelete: Restrict)
+  operation_id           Int?
+  idle                   Boolean             @default(false)
+  employee               Employee?           @relation(fields: [employee_id], references: [id], onUpdate: Cascade, onDelete: Restrict)
+  employee_id            Int?
+  idle_time              BigInt?
+  finished               Boolean             @default(false)
+  createdAt              DateTime            @default(now())
+  maintenance_session    MaintenanceSession? @relation(fields: [maintenance_session_id], references: [id])
+  maintenance_session_id Int?
 
   @@index([summary_id])
   @@index([post_id, createdAt])
   @@index([createdAt])
+  @@index([maintenance_session_id])
   @@map("statuses")
+}
+
+// Шаблон обслуживания (например: "Ежедневное ТО", "ТО-10000")
+model Maintenance {
+  id                   Int                  @id @default(autoincrement())
+  value                String
+  description          String
+  post                 Post                 @relation(fields: [post_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  post_id              Int
+  min_rank             Rank                 @relation(fields: [min_rank_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  min_rank_id          Int
+  tasks                MaintenanceTask[]
+  maintenance_sessions MaintenanceSession[]
+
+  @@map("maintenances")
+}
+
+// Список задач для конкретного шаблона (Layout)
+model MaintenanceTask {
+  id              Int              @id @default(autoincrement())
+  maintenance     Maintenance      @relation(fields: [maintenance_id], references: [id])
+  maintenance_id  Int
+  title           String
+  order           Int              @default(0)
+  maintenanceLogs MaintenanceLog[]
+
+  @@index([maintenance_id])
+  @@map("maintenance_tasks")
+}
+
+// Сеанс обслуживания
+model MaintenanceSession {
+  id               Int              @id @default(autoincrement())
+  maintenance      Maintenance      @relation(fields: [maintenance_id], references: [id])
+  maintenance_id   Int
+  post             Post             @relation(fields: [post_id], references: [id])
+  post_id          Int
+  maintenance_logs MaintenanceLog[]
+  statuses         Status[]
+  start_time       DateTime         @default(now())
+  end_time         DateTime?
+  total_duration   BigInt?
+  work_duration    BigInt?
+
+  @@index([post_id])
+  @@index([maintenance_id])
+  @@index([start_time])
+  @@map("maintenance_sessions")
+}
+
+// 4. Лог выполнения задачи
+model MaintenanceLog {
+  id         Int                @id @default(autoincrement())
+  session    MaintenanceSession @relation(fields: [session_id], references: [id])
+  session_id Int
+  title      String
+  task_id    Int
+  task       MaintenanceTask    @relation(fields: [task_id], references: [id], onDelete: Restrict)
+  start_time DateTime?
+  end_time   DateTime?
+  duration   BigInt?
+  is_done    Boolean            @default(false)
+
+  @@index([session_id])
+  @@index([task_id])
+  @@index([task_id, start_time])
+  @@map("maintenance_logs")
 }
 
 // Пользователи

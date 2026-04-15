@@ -44,6 +44,7 @@ export default function useSealantCloseSummaryModal() {
         post_val: 4,
         employee_id: employee.id,
         operation_id: null,
+        maintenance_id: null,
         idle: false,
         finished: true,
         defect_value: data,

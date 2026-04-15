@@ -20,7 +20,7 @@ export function usePostTableCardData(statuses: StatusEntity[] = []) {
         date: item.createdAt,
         employee: item.employee_name,
         state: state as StatusTableRowState,
-        operation: item.operation_description,
+        operation: item.operation_description || item.maintenance_description,
       };
     });
 

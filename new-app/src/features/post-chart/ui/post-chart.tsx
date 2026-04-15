@@ -132,9 +132,6 @@ export function PostChart({
           activeDot={{ r: 6, stroke: colors.production }}
           connectNulls={false}
           isAnimationActive={false}
-
-          // strokeLinejoin="round"
-          // strokeLinecap="round"
         />
         <ChartTooltip
           cursor={false}

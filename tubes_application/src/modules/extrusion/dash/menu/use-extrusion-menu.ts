@@ -58,7 +58,13 @@ export default function useExtrusionMenu() {
   const operationButtonDisabledCondition =
     !employee ||
     !summaryData ||
-    // !summaryData.extrusionStatus.createdAt ||
+    summaryData.extrusionStatus.maintenance_session_id !== null ||
+    summaryData.extrusionStatus.finished;
+
+  const maintenanceButtonDisabledCondition =
+    !employee ||
+    !summaryData ||
+    summaryData.extrusionStatus.operation_id !== null ||
     summaryData.extrusionStatus.finished;
 
   const pictureButtonDisabledCondition = summaryData === null;
@@ -111,6 +117,7 @@ export default function useExtrusionMenu() {
     handleOpenParametersClick,
     inputParametersButtonDisabledCondition,
     scanMaterialsButtonDisabledCondition,
+    maintenanceButtonDisabledCondition,
     operationButtonDisabledCondition,
     pictureButtonDisabledCondition,
     endButtonDisabledCondition,

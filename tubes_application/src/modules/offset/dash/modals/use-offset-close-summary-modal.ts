@@ -44,6 +44,7 @@ export default function useOffsetCloseSummaryModal() {
         post_val: 3,
         employee_id: employee.id,
         operation_id: null,
+        maintenance_id: null,
         idle: false,
         finished: true,
         defect_value: data,

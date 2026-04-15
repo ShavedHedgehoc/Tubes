@@ -5,6 +5,7 @@ export interface CreateStatusDto {
   summary_id: number;
   post_val: number;
   operation_id: number | null;
+  maintenance_id: number | null;
   idle: boolean;
   finished: boolean;
   employee_id: number;

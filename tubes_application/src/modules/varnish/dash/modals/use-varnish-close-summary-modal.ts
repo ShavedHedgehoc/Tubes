@@ -44,6 +44,7 @@ export default function useVarnishCloseSummaryModal() {
         post_val: 2,
         employee_id: employee.id,
         operation_id: null,
+        maintenance_id: null,
         idle: false,
         finished: true,
         defect_value: data,

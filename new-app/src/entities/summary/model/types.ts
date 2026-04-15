@@ -110,6 +110,9 @@ type StatusRow = {
   operation_id: number | null;
   operation_value: string | null;
   operation_description: string | null;
+  maintenance_session_id: number | null;
+  maintenance_value: string | null;
+  maintenance_description: string | null;
   idle: false;
   employee_id: number | null;
   employee_name: string | null;

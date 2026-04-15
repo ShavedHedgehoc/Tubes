@@ -44,6 +44,7 @@ export default function useExtrusionCloseSummaryModal() {
         post_val: 1,
         employee_id: employee.id,
         operation_id: null,
+        maintenance_id: null,
         idle: false,
         finished: true,
         defect_value: data,

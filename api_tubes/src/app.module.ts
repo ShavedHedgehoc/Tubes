@@ -26,6 +26,7 @@ import { FilePathModule } from "./file-path/file-path.module";
 import { ProductPictureModule } from "./product-picture/product-picture.module";
 import { OperationPictureModule } from "./operation-picture/operation-picture.module";
 import { RolesModule } from "./roles/roles.module";
+import { MaintenanceLogModule } from "./maintenance-log/maintenance-log.module";
 
 const imports: Array<Type<unknown> | DynamicModule | Promise<DynamicModule>> = [
   ConfigModule.forRoot(),
@@ -52,6 +53,7 @@ const imports: Array<Type<unknown> | DynamicModule | Promise<DynamicModule>> = [
   OperationPictureModule,
   AuthModule,
   RolesModule,
+  MaintenanceLogModule,
 ];
 
 if (process.env.NODE_ENV !== "production") {

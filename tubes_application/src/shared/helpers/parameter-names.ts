@@ -56,7 +56,7 @@ export const OFFSET_PARAMETER_NAMES = {
   imprint_quantity_printed_box_5: "5 печатный ящик (отпечатков)", //-количество отпечатков ", //not required
   imprint_quantity_printed_box_6: "6 печатный ящик (отпечатков)", //-количество отпечатков ", //not required
   ink_supply_time: "Время подачи чернил", // decimal
-  design_match: "Соответсвие дизайну и контрольному образцу", //boolean
+  design_match: "Соответствие дизайну и контрольному образцу", //boolean
   tube_appearance:
     "Внешний вид тубы (разнотон, нечеткий текст, двоение печати)", //boolean
   tube_edge_deformation_lack: "Отсутствие деформации края тубы", //boolean

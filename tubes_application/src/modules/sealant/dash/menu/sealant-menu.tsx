@@ -9,6 +9,7 @@ import {
   TbLogin2,
   TbLogout2,
   TbPrinter,
+  TbSettingsExclamation,
 } from "react-icons/tb";
 import MenuButton from "../../../../shared/components/menu/menu-button";
 import { TbStopwatch } from "react-icons/tb";
@@ -33,6 +34,7 @@ export default function SealantMenu() {
     pictureButtonDisabledCondition,
     printButtonDisabledCondition,
     endButtonDisabledCondition,
+    maintenanceButtonDisabledCondition,
   } = useSealantMenu();
   const { data: summaryData } = useActiveSummary(sealantConveyor?.id ?? null);
 
@@ -48,6 +50,16 @@ export default function SealantMenu() {
     icon: <TbBarcode />,
     disabled: scanMaterialsButtonDisabledCondition,
     action: () => setOpenMaterialScan(true),
+  };
+
+  const maintenanceButtonProps: MenuButtonProps = {
+    title: "ТО",
+    icon: <TbSettingsExclamation />,
+    disabled: maintenanceButtonDisabledCondition,
+    action: () =>
+      navigate(
+        `${RouteNames.SEALANT_MAINTENANCE_ROOT}/${sealantConveyor?.name}`,
+      ),
   };
 
   const operationsButtonProps: MenuButtonProps = {
@@ -106,6 +118,7 @@ export default function SealantMenu() {
     <Menu>
       <MenuButton {...inputParametersButtonProps} />
       <MenuButton {...scanMaterilButtonProps} />
+      <MenuButton {...maintenanceButtonProps} />
       <MenuButton {...operationsButtonProps} />
       {summaryData && summaryData.sealantStatus.state === "idle" && (
         <MenuButton {...sopButtonProps} />

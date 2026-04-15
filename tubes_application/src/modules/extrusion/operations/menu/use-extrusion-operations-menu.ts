@@ -60,6 +60,7 @@ export default function useExtrusionOperationsMenu(
         post_val: 1,
         employee_id: employee.id,
         operation_id: selectedOperation.id,
+        maintenance_id: null,
         idle: true,
         finished: false,
       };
@@ -76,6 +77,7 @@ export default function useExtrusionOperationsMenu(
         post_val: 1,
         employee_id: employee.id,
         operation_id: null,
+        maintenance_id: null,
         idle: false,
         finished: false,
       };

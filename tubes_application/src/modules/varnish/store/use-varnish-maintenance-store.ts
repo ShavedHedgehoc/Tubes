@@ -1,0 +1,15 @@
+import type { IMaintenance } from "@/shared/api/services/summary-service";
+import { create } from "zustand";
+import { devtools } from "zustand/middleware";
+
+interface VarnishMaintenanceStore {
+  selectedMaintenance: IMaintenance | null;
+  setSelectedMaintenance: (val: IMaintenance | null) => void;
+}
+export const useVarnishMaintenanceStore = create<VarnishMaintenanceStore>()(
+  devtools((set) => ({
+    selectedMaintenance: null,
+    setSelectedMaintenance: (value) =>
+      set(() => ({ selectedMaintenance: value })),
+  })),
+);

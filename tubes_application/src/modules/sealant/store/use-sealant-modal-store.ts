@@ -27,3 +27,4 @@ export const useSealantCloseSummaryModalStore =
   createModalStore("CloseSummary");
 export const useSealantDefectInputModalStore = createModalStore("DefectInput");
 export const useSealantBoxConfirmModalStore = createModalStore("BoxConfirm");
+export const useSealantMaintenanceModalStore = createModalStore("Maintenance");

@@ -9,6 +9,7 @@ export class StatusesService {
 
   async createStatus(dto: CreateStatusDto) {
     return await this.prisma.$transaction(async (tx) => {
+      const now = new Date();
       const [post, lastStatusEntry] = await Promise.all([
         tx.post.findUnique({ where: { value: dto.post_val } }),
         tx.status.findFirst({
@@ -24,6 +25,28 @@ export class StatusesService {
         );
       }
 
+      let maintenanceSessionId: number | null = null;
+      if (dto.maintenance_id) {
+        const commonTasks = await tx.maintenanceTask.findMany({
+          where: { maintenance_id: dto.maintenance_id },
+        });
+        const maintenanceSession = await tx.maintenanceSession.create({
+          data: {
+            maintenance_id: dto.maintenance_id,
+            post_id: post.id,
+            start_time: now,
+            maintenance_logs: {
+              create: commonTasks.map((task) => ({
+                title: task.title,
+                task_id: task.id,
+                is_done: false,
+              })),
+            },
+          },
+        });
+        maintenanceSessionId = maintenanceSession.id;
+      }
+
       if (!lastStatusEntry) {
         if (!dto.idle) {
           throw new HttpException(
@@ -35,6 +58,7 @@ export class StatusesService {
           data: {
             summary_id: dto.summary_id,
             operation_id: dto.operation_id,
+            maintenance_session_id: maintenanceSessionId,
             idle: dto.idle,
             finished: dto.finished,
             employee_id: dto.employee_id,
@@ -45,7 +69,32 @@ export class StatusesService {
       }
 
       if (lastStatusEntry.idle) {
-        const timeDelta = Date.now() - lastStatusEntry.createdAt.getTime();
+        const timeDelta = now.getTime() - lastStatusEntry.createdAt.getTime();
+
+        if (lastStatusEntry.maintenance_session_id) {
+          const session = await tx.maintenanceSession.findUnique({
+            where: { id: lastStatusEntry.maintenance_session_id },
+          });
+
+          if (session) {
+            const sessionDuration =
+              now.getTime() - session.start_time.getTime();
+            const aggregate = await tx.maintenanceLog.aggregate({
+              _sum: { duration: true },
+              where: { session_id: session.id },
+            });
+
+            await tx.maintenanceSession.update({
+              where: { id: session.id },
+              data: {
+                end_time: now,
+                total_duration: sessionDuration,
+                work_duration: aggregate._sum.duration ?? 0,
+              },
+            });
+          }
+        }
+
         await tx.status.update({
           where: { id: lastStatusEntry.id },
           data: { idle_time: timeDelta },
@@ -82,16 +131,17 @@ export class StatusesService {
           },
         });
       }
-
+      const isIdle = !!(maintenanceSessionId || dto.operation_id || dto.idle);
       return tx.status.create({
         data: {
           summary_id: dto.summary_id,
           post_id: post.id,
           operation_id: dto.operation_id,
-          idle: dto.idle,
+          idle: isIdle,
           finished: dto.finished,
           employee_id: dto.employee_id,
           counter_value: lastStatusEntry.counter_value,
+          maintenance_session_id: maintenanceSessionId,
         },
       });
     });

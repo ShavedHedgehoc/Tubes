@@ -8,6 +8,7 @@ import {
   TbLibraryPhoto,
   TbLogin2,
   TbLogout2,
+  TbSettingsExclamation,
 } from "react-icons/tb";
 import MenuButton from "../../../../shared/components/menu/menu-button";
 import { TbStopwatch } from "react-icons/tb";
@@ -31,6 +32,7 @@ export default function OffsetMenu() {
     operationButtonDisabledCondition,
     pictureButtonDisabledCondition,
     endButtonDisabledCondition,
+    maintenanceButtonDisabledCondition,
   } = useOffsetMenu();
   const { data: summaryData } = useActiveSummary(offsetConveyor?.id ?? null);
 
@@ -46,6 +48,14 @@ export default function OffsetMenu() {
     icon: <TbBarcode />,
     disabled: scanMaterialsButtonDisabledCondition,
     action: () => setOpenMaterialScan(true),
+  };
+
+  const maintenanceButtonProps: MenuButtonProps = {
+    title: "ТО",
+    icon: <TbSettingsExclamation />,
+    disabled: maintenanceButtonDisabledCondition,
+    action: () =>
+      navigate(`${RouteNames.OFFSET_MAINTENANCE_ROOT}/${offsetConveyor?.name}`),
   };
 
   const operationsButtonProps: MenuButtonProps = {
@@ -96,6 +106,7 @@ export default function OffsetMenu() {
     <Menu>
       <MenuButton {...inputParametersButtonProps} />
       <MenuButton {...scanMaterilButtonProps} />
+      <MenuButton {...maintenanceButtonProps} />
       <MenuButton {...operationsButtonProps} />
       {summaryData && summaryData.offsetStatus.state === "idle" && (
         <MenuButton {...sopButtonProps} />
