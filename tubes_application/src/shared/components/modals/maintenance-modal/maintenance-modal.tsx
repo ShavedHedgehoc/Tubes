@@ -84,6 +84,7 @@ export default function MaintenanceModal({
                   variant={!allDone ? "ghost" : "outline"}
                   size="md"
                   onClick={undefined}
+                  disabled={true}
                 >
                   <TbInfoTriangle />
                   Инфо

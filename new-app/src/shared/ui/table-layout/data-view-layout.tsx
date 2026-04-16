@@ -76,7 +76,11 @@ export function DataViewLayout<TData, T extends PaginationParams>(
                 transition={{ duration: 0.2 }}
               >
                 <div className={cn(isPending && "pointer-events-none")}>
-                  <DataTable columns={props.columns} data={props.data!} />
+                  <DataTable
+                    columns={props.columns}
+                    data={props.data!}
+                    getRowClassName={props.getRowClassName}
+                  />
                 </div>
               </motion.div>
             )}

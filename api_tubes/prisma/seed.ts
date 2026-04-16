@@ -73,312 +73,312 @@ async function main() {
     description: string;
     min_rank_id: number;
   }[] = [
-      {
-        post_id: postMap.get(1)!,
-        description: "Замена пуансона",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(1)!,
-        description: "Настройка вылета носика",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(1)!,
-        description: "Замена матрицы и внутреннего формирователя",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(1)!,
-        description: "Позиционирование матрицы",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(1)!,
-        description: "Настройка датчика наличия тубы",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(1)!,
-        description: "Настройка толкателя туб",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(1)!,
-        description: "Настройка длины отреза",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(1)!,
-        description: "Настройка высоты резца",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(1)!,
-        description: "Настройка накатных роликов",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(1)!,
-        description: "Замена полировочной щетки",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(1)!,
-        description: "Настройка входного и выходного барабана",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(1)!,
-        description: "Синхронизация печей",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(1)!,
-        description: "Натяжка цепей",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(1)!,
-        description: "ТО №1",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(1)!,
-        description: "ТО №2",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(1)!,
-        description: "ТО №3",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(1)!,
-        description: "Прочее",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(1)!,
-        description: "Простой",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(2)!,
-        description: "Настройка вдува",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(2)!,
-        description: "Настройка положения форсунок",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(2)!,
-        description: "Настройка давления впрыска",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(2)!,
-        description: "Настройка входного и выходного барабана",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(2)!,
-        description: "Синхронизация печей",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(2)!,
-        description: "Натяжка цепей",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(2)!,
-        description: "Замена лака и прокачка системы",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(2)!,
-        description: "ТО №1",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(2)!,
-        description: "ТО №2",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(2)!,
-        description: "ТО №3",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(2)!,
-        description: "Прочее",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(2)!,
-        description: "Простой",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(3)!,
-        description: "Настройка положения валов",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(3)!,
-        description: "Регулировка высоты поддона с грунтом",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(3)!,
-        description: "Замена клише",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(3)!,
-        description: "Настройка количества отпечатков",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(3)!,
-        description: "Настройка положения анилоксового вала",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(3)!,
-        description: "Настройка положения формного вала",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(3)!,
-        description: "Настройка параллельности станины принтера",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(3)!,
-        description: "Настройка входного и выходного барабана",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(3)!,
-        description: "Синхронизация печей",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(3)!,
-        description: "Натяжка цепей",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(3)!,
-        description: "Регулировка толщины слоя краски",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(3)!,
-        description: "Замена офсетного полотна",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(3)!,
-        description: "ТО №1",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(3)!,
-        description: "ТО №2",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(3)!,
-        description: "ТО №3",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(3)!,
-        description: "Прочее",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(3)!,
-        description: "Простой",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(4)!,
-        description: "Настройка высоты колпачка",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(4)!,
-        description: "Настройка затяжки колпачка",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(4)!,
-        description: "Разборка форсунки",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(4)!,
-        description: "Сборка форсунки",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(4)!,
-        description: "Настройка распыления герметика",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(4)!,
-        description: "Замена герметика и прокачка системы",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(4)!,
-        description: "Настройка толкателя тубы",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(4)!,
-        description: "Настройка входного и выходного барабана",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(4)!,
-        description: "Натяжка цепей",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(4)!,
-        description: "ТО №1",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(4)!,
-        description: "ТО №2",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(4)!,
-        description: "ТО №3",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(4)!,
-        description: "Прочее",
-        min_rank_id: ranksMap.get(1)!,
-      },
-      {
-        post_id: postMap.get(4)!,
-        description: "Простой",
-        min_rank_id: ranksMap.get(1)!,
-      },
-    ];
+    {
+      post_id: postMap.get(1)!,
+      description: "Замена пуансона",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(1)!,
+      description: "Настройка вылета носика",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(1)!,
+      description: "Замена матрицы и внутреннего формирователя",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(1)!,
+      description: "Позиционирование матрицы",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(1)!,
+      description: "Настройка датчика наличия тубы",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(1)!,
+      description: "Настройка толкателя туб",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(1)!,
+      description: "Настройка длины отреза",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(1)!,
+      description: "Настройка высоты резца",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(1)!,
+      description: "Настройка накатных роликов",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(1)!,
+      description: "Замена полировочной щетки",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(1)!,
+      description: "Настройка входного и выходного барабана",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(1)!,
+      description: "Синхронизация печей",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(1)!,
+      description: "Натяжка цепей",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(1)!,
+      description: "ТО №1",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(1)!,
+      description: "ТО №2",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(1)!,
+      description: "ТО №3",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(1)!,
+      description: "Прочее",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(1)!,
+      description: "Простой",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(2)!,
+      description: "Настройка вдува",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(2)!,
+      description: "Настройка положения форсунок",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(2)!,
+      description: "Настройка давления впрыска",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(2)!,
+      description: "Настройка входного и выходного барабана",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(2)!,
+      description: "Синхронизация печей",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(2)!,
+      description: "Натяжка цепей",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(2)!,
+      description: "Замена лака и прокачка системы",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(2)!,
+      description: "ТО №1",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(2)!,
+      description: "ТО №2",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(2)!,
+      description: "ТО №3",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(2)!,
+      description: "Прочее",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(2)!,
+      description: "Простой",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(3)!,
+      description: "Настройка положения валов",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(3)!,
+      description: "Регулировка высоты поддона с грунтом",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(3)!,
+      description: "Замена клише",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(3)!,
+      description: "Настройка количества отпечатков",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(3)!,
+      description: "Настройка положения анилоксового вала",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(3)!,
+      description: "Настройка положения формного вала",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(3)!,
+      description: "Настройка параллельности станины принтера",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(3)!,
+      description: "Настройка входного и выходного барабана",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(3)!,
+      description: "Синхронизация печей",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(3)!,
+      description: "Натяжка цепей",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(3)!,
+      description: "Регулировка толщины слоя краски",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(3)!,
+      description: "Замена офсетного полотна",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(3)!,
+      description: "ТО №1",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(3)!,
+      description: "ТО №2",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(3)!,
+      description: "ТО №3",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(3)!,
+      description: "Прочее",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(3)!,
+      description: "Простой",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(4)!,
+      description: "Настройка высоты колпачка",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(4)!,
+      description: "Настройка затяжки колпачка",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(4)!,
+      description: "Разборка форсунки",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(4)!,
+      description: "Сборка форсунки",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(4)!,
+      description: "Настройка распыления герметика",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(4)!,
+      description: "Замена герметика и прокачка системы",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(4)!,
+      description: "Настройка толкателя тубы",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(4)!,
+      description: "Настройка входного и выходного барабана",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(4)!,
+      description: "Натяжка цепей",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(4)!,
+      description: "ТО №1",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(4)!,
+      description: "ТО №2",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(4)!,
+      description: "ТО №3",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(4)!,
+      description: "Прочее",
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      post_id: postMap.get(4)!,
+      description: "Простой",
+      min_rank_id: ranksMap.get(1)!,
+    },
+  ];
 
   await prisma.operation.createMany({
     data: operations.map((item, idx) => {
@@ -393,7 +393,12 @@ async function main() {
     skipDuplicates: true,
   });
 
-  const maintenances: { value: string, description: string, post_id: number, min_rank_id: number }[] = [
+  const maintenances: {
+    value: string;
+    description: string;
+    post_id: number;
+    min_rank_id: number;
+  }[] = [
     {
       value: "1011",
       description: "ТО №1 (Пост 1)",
@@ -442,8 +447,7 @@ async function main() {
       post_id: postMap.get(4)!,
       min_rank_id: ranksMap.get(1)!,
     },
-
-  ]
+  ];
 
   await prisma.maintenance.createMany({
     data: maintenances,
@@ -453,66 +457,72 @@ async function main() {
   const allMaintenances = await prisma.maintenance.findMany();
   const MaintenancesMap = new Map(allMaintenances.map((m) => [m.value, m.id]));
 
-  const maintenanceTasks: { maintenance_id: number, title: string, order: number }[] = [
+  const maintenanceTasks: {
+    maintenance_id: number;
+    title: string;
+    order: number;
+  }[] = [
     {
       maintenance_id: MaintenancesMap.get("1011")!,
       title: "Протирка мандрел, штока пуансона и съемника туб.",
-      order: 1
+      order: 1,
     },
     {
       maintenance_id: MaintenancesMap.get("1011")!,
       title: "Проверка затяжки пуансона и штока пуансона.",
-      order: 2
+      order: 2,
     },
     {
       maintenance_id: MaintenancesMap.get("1011")!,
-      title: "Проверка узла подачи рондолей(жесткость подачи, состояние и положение пятака).",
-      order: 3
+      title:
+        "Проверка узла подачи рондолей(жесткость подачи, состояние и положение пятака).",
+      order: 3,
     },
     {
       maintenance_id: MaintenancesMap.get("1011")!,
       title: "Протяжка крепежа наконечников мандрел. ",
-      order: 4
+      order: 4,
     },
     {
       maintenance_id: MaintenancesMap.get("1011")!,
       title: "Визуальный осмотр состояния приводных ремней.",
-      order: 5
+      order: 5,
     },
     {
       maintenance_id: MaintenancesMap.get("1011")!,
       title: "Очистка и смазка опорных пятаков мандрел.",
-      order: 6
+      order: 6,
     },
     {
       maintenance_id: MaintenancesMap.get("1011")!,
       title: "Очистка и смазка направляющих триммера.",
-      order: 7
+      order: 7,
     },
     {
       maintenance_id: MaintenancesMap.get("1011")!,
       title: "Проверка состояния тормозных колодок.",
-      order: 8
+      order: 8,
     },
     {
       maintenance_id: MaintenancesMap.get("1011")!,
       title: "Очистка и визуальный осмотр направляющих и подшипников пресса.",
-      order: 9
+      order: 9,
     },
     {
       maintenance_id: MaintenancesMap.get("1011")!,
       title: "Осмотр масляного фильтра на прессе, очистка при необходимости.",
-      order: 10
+      order: 10,
     },
     {
       maintenance_id: MaintenancesMap.get("1011")!,
-      title: "Осмотр состояния натяжителей цепей печи отжига, при обнаружение рывков и биений пружины, проверить чистоту звездочек внутри печи.",
-      order: 11
+      title:
+        "Осмотр состояния натяжителей цепей печи отжига, при обнаружение рывков и биений пружины, проверить чистоту звездочек внутри печи.",
+      order: 11,
     },
     {
       maintenance_id: MaintenancesMap.get("1011")!,
       title: "Очистка приемного барабана триммера.",
-      order: 1
+      order: 1,
     },
 
     {
@@ -527,7 +537,8 @@ async function main() {
     },
     {
       maintenance_id: MaintenancesMap.get("1021")!,
-      title: "Смазка цепного привода перемещателя тубы и привода конвейера пресса. ",
+      title:
+        "Смазка цепного привода перемещателя тубы и привода конвейера пресса. ",
       order: 3,
     },
     {
@@ -557,7 +568,8 @@ async function main() {
     },
     {
       maintenance_id: MaintenancesMap.get("1021")!,
-      title: "Очистка ножей и посадочных мест, проверка крепления и износа режущих элементов, регулировка положения ножей при необходимости.",
+      title:
+        "Очистка ножей и посадочных мест, проверка крепления и износа режущих элементов, регулировка положения ножей при необходимости.",
       order: 9,
     },
     {
@@ -578,7 +590,8 @@ async function main() {
     },
     {
       maintenance_id: MaintenancesMap.get("2031")!,
-      title: "Протирка распылителей форсунок (внешняя часть, без разборки и снятия).",
+      title:
+        "Протирка распылителей форсунок (внешняя часть, без разборки и снятия).",
       order: 3,
     },
     {
@@ -615,52 +628,53 @@ async function main() {
     {
       maintenance_id: MaintenancesMap.get("2041")!,
       title: "Очистка и смазка кареток перемещения форсунок.",
-      order: 1
+      order: 1,
     },
     {
       maintenance_id: MaintenancesMap.get("2041")!,
       title: "Промывка форсунок с полной разборкой, контроль распыления сопла.",
-      order: 2
+      order: 2,
     },
     {
       maintenance_id: MaintenancesMap.get("2041")!,
       title: "Очистка отстойника под каплесъемником.",
-      order: 3
+      order: 3,
     },
     {
       maintenance_id: MaintenancesMap.get("2041")!,
       title: "Очистка фильтра вакуумного насоса.",
-      order: 4
+      order: 4,
     },
     {
       maintenance_id: MaintenancesMap.get("2041")!,
       title: "Очистка печи полимеризации (звездочки, люльки, зольник).",
-      order: 5
+      order: 5,
     },
     {
       maintenance_id: MaintenancesMap.get("2041")!,
       title: "Проверка трубок подачи лака, при необходимости замена.",
-      order: 6
+      order: 6,
     },
     {
       maintenance_id: MaintenancesMap.get("2041")!,
-      title: "Протирка спиц аккумулятора, входного и выходного конвейера печи, выходного барабана.",
-      order: 7
+      title:
+        "Протирка спиц аккумулятора, входного и выходного конвейера печи, выходного барабана.",
+      order: 7,
     },
     {
       maintenance_id: MaintenancesMap.get("2041")!,
       title: "Очистка защитных стекол и ограждений.",
-      order: 8
+      order: 8,
     },
     {
       maintenance_id: MaintenancesMap.get("2041")!,
       title: "Очистка каплесъемника и замена при необходимости.",
-      order: 9
+      order: 9,
     },
     {
       maintenance_id: MaintenancesMap.get("2041")!,
       title: "Очистка поддона и сеток под вытяжным двигателем.",
-      order: 10
+      order: 10,
     },
     {
       maintenance_id: MaintenancesMap.get("3051")!,
@@ -674,7 +688,8 @@ async function main() {
     },
     {
       maintenance_id: MaintenancesMap.get("3051")!,
-      title: "Проверка затяжки стопоров на фиксирующих гайках рамы и затяжки рамы.",
+      title:
+        "Проверка затяжки стопоров на фиксирующих гайках рамы и затяжки рамы.",
       order: 3,
     },
     {
@@ -715,126 +730,128 @@ async function main() {
 
     {
       maintenance_id: MaintenancesMap.get("3061")!,
-      title: "Долив смазки в систему подачи смазки направляющих рельс рамы принтера.",
-      order: 1
+      title:
+        "Долив смазки в систему подачи смазки направляющих рельс рамы принтера.",
+      order: 1,
     },
     {
       maintenance_id: MaintenancesMap.get("3061")!,
       title: "Промывка валов офсетной и грунтовальной машины.",
-      order: 2
+      order: 2,
     },
     {
       maintenance_id: MaintenancesMap.get("3061")!,
       title: "Очистка фильтра вакуумного насоса.",
-      order: 3
+      order: 3,
     },
     {
       maintenance_id: MaintenancesMap.get("3061")!,
       title: "Очистка печи полимеризации (звездочки, спицы, зольник).",
-      order: 4
+      order: 4,
     },
     {
       maintenance_id: MaintenancesMap.get("3061")!,
       title: "Проверка состояния ракельного ножа, очистка.",
-      order: 5
+      order: 5,
     },
     {
       maintenance_id: MaintenancesMap.get("3061")!,
       title: "Протирка выходного конвейера печи.",
-      order: 6
+      order: 6,
     },
     {
       maintenance_id: MaintenancesMap.get("3061")!,
       title: "Смазка направляющих штоков съемника тубы.",
-      order: 7
+      order: 7,
     },
     {
       maintenance_id: MaintenancesMap.get("3061")!,
       title: "Замена офсетного полотна при необходимости.",
-      order: 8
+      order: 8,
     },
     {
       maintenance_id: MaintenancesMap.get("4071")!,
       title: "Протирка мандрел на  укупорочной машине.",
-      order: 1
+      order: 1,
     },
     {
       maintenance_id: MaintenancesMap.get("4071")!,
       title: "Визуальный осмотр состояния приводных ремней.",
-      order: 2
+      order: 2,
     },
     {
       maintenance_id: MaintenancesMap.get("4071")!,
       title: "Проверка затяжки стопоров.",
-      order: 3
+      order: 3,
     },
     {
       maintenance_id: MaintenancesMap.get("4071")!,
       title: "Проверка и по необходимости смазка  и натяжка цепей.",
-      order: 4
+      order: 4,
     },
     {
       maintenance_id: MaintenancesMap.get("4071")!,
       title: "Проверка прижимных валов тубы к мандреле.",
-      order: 5
+      order: 5,
     },
     {
       maintenance_id: MaintenancesMap.get("4071")!,
       title: "Осмотр пневмосистемы.",
-      order: 6
+      order: 6,
     },
     {
       maintenance_id: MaintenancesMap.get("4071")!,
-      title: "Промывка форсунок и защитных кожухов форсунки, емкости с герметиком.",
-      order: 7
+      title:
+        "Промывка форсунок и защитных кожухов форсунки, емкости с герметиком.",
+      order: 7,
     },
     {
       maintenance_id: MaintenancesMap.get("4071")!,
       title: "Уборка зоны подачи колпачков, зажимов колпачков.",
-      order: 8
+      order: 8,
     },
 
     {
       maintenance_id: MaintenancesMap.get("4081")!,
       title: "Промывка форсунок с полной разборкой, контроль распыления сопла.",
-      order: 1
+      order: 1,
     },
     {
       maintenance_id: MaintenancesMap.get("4081")!,
       title: "Очистка фильтра вакуумного насоса.",
-      order: 2
+      order: 2,
     },
     {
       maintenance_id: MaintenancesMap.get("4081")!,
       title: "Очистка конвейера подачи колпачков.",
-      order: 3
+      order: 3,
     },
     {
       maintenance_id: MaintenancesMap.get("4081")!,
       title: "Проверка трубок подачи герметика, при необходимости замена.",
-      order: 4
+      order: 4,
     },
     {
       maintenance_id: MaintenancesMap.get("4081")!,
       title: "Протирка спиц аккумулятора, входного и выходного барабана.",
-      order: 5
+      order: 5,
     },
     {
       maintenance_id: MaintenancesMap.get("4081")!,
       title: "Смазка направляющих сдвига упаковочной машины.",
-      order: 6
+      order: 6,
     },
     {
       maintenance_id: MaintenancesMap.get("4081")!,
       title: "Очистка узлов ориентации и подачи колпачков.",
-      order: 7
+      order: 7,
     },
     {
       maintenance_id: MaintenancesMap.get("4081")!,
       title: "Проверка работы толкателей тубы.",
-      order: 8
+      order: 8,
     },
-  ]
+  ];
 
   await prisma.maintenanceTask.createMany({
     data: maintenanceTasks,

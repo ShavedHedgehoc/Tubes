@@ -1,7 +1,6 @@
 import type { IMaintenanceLog } from "@/shared/api/services/summary-service";
 import {
   Badge,
-  Box,
   Button,
   Card,
   Circle,
@@ -50,23 +49,32 @@ export function MaintenanceModalCard({
             <Circle
               size="8"
               bg={
-                isCompleted ? "green.100" : isActive ? "green.100" : "gray.100"
+                // isCompleted ? "green.100" : isActive ? "green.100" : "gray.100"
+                isCompleted ? "green.100" : "gray.100"
               }
               color={
-                isCompleted ? "green.600" : isActive ? "green.600" : "gray.400"
+                // isCompleted ? "green.600" : isActive ? "green.600" : "gray.400"
+                isCompleted ? "green.600" : "gray.400"
               }
             >
-              {isCompleted ? (
-                <CheckIcon size={16} />
-              ) : isActive ? (
-                <Box animation="breath 2s ease-in-out infinite">
-                  <PlayIcon size={16} />
-                </Box>
-              ) : (
-                <Text fontSize="md" fontWeight="bold" color="bg">
-                  {item.order ?? "-"}
-                </Text>
-              )}
+              {
+                isCompleted ? (
+                  <CheckIcon size={16} />
+                ) : (
+                  <Text fontSize="md" fontWeight="bold" color="bg">
+                    {item.order ?? "-"}
+                  </Text>
+                )
+                //   isActive ? (
+                //     <Box animation="breath 2s ease-in-out infinite">
+                //       <PlayIcon size={16} />
+                //     </Box>
+                //   ) : (
+                //     <Text fontSize="md" fontWeight="bold" color="bg">
+                //       {item.order ?? "-"}
+                //     </Text>
+                //   )
+              }
             </Circle>
             <VStack align="start" gap={0}>
               <Text

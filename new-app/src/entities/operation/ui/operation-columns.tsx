@@ -1,5 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { OperationRow } from "../model";
+import { Ban, Check } from "lucide-react";
 
 export const baseOperationColumns: ColumnDef<OperationRow>[] = [
   {
@@ -29,6 +30,28 @@ export const baseOperationColumns: ColumnDef<OperationRow>[] = [
     cell: ({ row }) => {
       return (
         <div className="text-center"> {row.original.min_rank_description} </div>
+      );
+    },
+  },
+  {
+    header: () => <div className="text-center">Активная</div>,
+    id: "banned",
+    cell: ({ row }) => {
+      const operation = row.original;
+      return (
+        <div className="text-center">
+          {operation.isInactive ? (
+            <span className="inline-flex items-center gap-2 ">
+              <Ban className="h-4 w-4" />
+              <span className="leading-none">Нет</span>
+            </span>
+          ) : (
+            <span className="inline-flex items-center gap-2 ">
+              <Check className="h-4 w-4 " />
+              <span className="leading-none">Да</span>
+            </span>
+          )}
+        </div>
       );
     },
   },

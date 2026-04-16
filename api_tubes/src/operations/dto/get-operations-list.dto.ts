@@ -25,6 +25,13 @@ export class GetOperationsListDto {
   @IsOptional()
   readonly description?: string;
 
+  @ApiPropertyOptional({ description: "Активность" })
+  @IsOptional()
+  @ToNumbersArray()
+  @IsArray()
+  @IsInt({ each: true })
+  readonly isInactive?: number[];
+
   @ApiPropertyOptional({ description: "Разряды" })
   @IsOptional()
   @ToNumbersArray()

@@ -13,6 +13,7 @@ export const fileUiSchema = {
 
 export const fileParamsSchema = {
   filename: parseAsString,
+  description: parseAsString,
   limit: parseAsInteger.withDefault(10),
   page: parseAsInteger.withDefault(1),
 };

@@ -46,7 +46,7 @@ const summaryInclude = {
     include: {
       tresholds: {
         orderBy: { createdAt: "desc" as const },
-        take: 1,
+        // take: 1,
       },
     },
   },
@@ -276,15 +276,22 @@ export class SummariesService {
 
   private mapMaterialsByPost(
     specs: FullSpecification[],
+    currentSummaryId: number,
     postNumber: number,
   ): IMappedMaterial[] {
     return specs
       .filter((s) => s.material.post_number === postNumber)
-      .map((s) => ({
-        code: s.material.code,
-        name: s.material.name,
-        scanned: s.material.consumed_materials.length > 0,
-      }));
+      .map((s) => {
+        const hasBeenScannedInThisSummary = s.material.consumed_materials.some(
+          (cm) => cm.summary_id === currentSummaryId,
+        );
+        return {
+          code: s.material.code,
+          name: s.material.name,
+          // scanned: s.material.consumed_materials.length > 0,
+          scanned: hasBeenScannedInThisSummary,
+        };
+      });
   }
 
   async getActiveSummaryRecordByConveyorId(
@@ -487,15 +494,22 @@ export class SummariesService {
 
       extrusion_materials: this.mapMaterialsByPost(
         activeRecord.specifications,
+        activeRecord.id,
         1,
       ),
       varnish_materials: this.mapMaterialsByPost(
         activeRecord.specifications,
+        activeRecord.id,
         2,
       ),
-      offset_materials: this.mapMaterialsByPost(activeRecord.specifications, 3),
+      offset_materials: this.mapMaterialsByPost(
+        activeRecord.specifications,
+        activeRecord.id,
+        3,
+      ),
       sealant_materials: this.mapMaterialsByPost(
         activeRecord.specifications,
+        activeRecord.id,
         4,
       ),
 

@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
 import { GetOperationsListDto } from "./dto/get-operations-list.dto";
 import { Prisma } from "generated/prisma";
@@ -13,7 +13,16 @@ export class OperationsService {
       "findMany"
     >["where"];
 
-    const where: OperationWhere = {};
+    const where: OperationWhere = {
+      value: { contains: query.value, mode: "insensitive" },
+      description: { contains: query.description, mode: "insensitive" },
+      min_rank_id: { in: query.min_ranks },
+      post_id: { in: query.posts },
+      isInactive:
+        query.isInactive?.length === 1
+          ? { equals: query.isInactive[0] === 2 }
+          : undefined,
+    };
 
     const [count, operations] = await Promise.all([
       this.prisma.operation.count({ where }),
@@ -52,5 +61,20 @@ export class OperationsService {
     });
 
     return mappedOperation;
+  }
+
+  async changeActive(operation_id: number) {
+    const operation = await this.prisma.operation.findUnique({
+      where: { id: operation_id },
+    });
+    if (!operation)
+      throw new HttpException("Операция не найдена", HttpStatus.NOT_FOUND);
+    const updateEmployee = await this.prisma.operation.update({
+      where: { id: operation_id },
+      data: {
+        isInactive: !operation.isInactive,
+      },
+    });
+    return updateEmployee;
   }
 }

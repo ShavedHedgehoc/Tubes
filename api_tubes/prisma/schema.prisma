@@ -35,7 +35,7 @@ model Post {
 
 model Rank {
   id           Int           @id @default(autoincrement())
-  val          Int
+  val          Int           @unique
   description  String
   employees    Employee[]
   operations   Operation[]
@@ -46,7 +46,7 @@ model Rank {
 
 model Operation {
   id                 Int                @id @default(autoincrement())
-  value              String
+  value              String             @unique
   min_rank           Rank               @relation(fields: [min_rank_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
   min_rank_id        Int
   description        String
@@ -99,7 +99,7 @@ model Status {
 // Шаблон обслуживания (например: "Ежедневное ТО", "ТО-10000")
 model Maintenance {
   id                   Int                  @id @default(autoincrement())
-  value                String
+  value                String               @unique
   description          String
   post                 Post                 @relation(fields: [post_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
   post_id              Int
@@ -120,6 +120,7 @@ model MaintenanceTask {
   order           Int              @default(0)
   maintenanceLogs MaintenanceLog[]
 
+  @@unique(name: "maintenance_title", [maintenance_id, title])
   @@index([maintenance_id])
   @@map("maintenance_tasks")
 }
