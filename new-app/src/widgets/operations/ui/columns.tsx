@@ -2,6 +2,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { PicturesColumn } from "@/features/pictures-column";
 import { baseOperationColumns, OperationRow } from "@/entities/operation";
 import { useDeleteOperationPictureRecord } from "@/features/operation-picture-record-actions";
+import { RowDropdown } from "@/features/operation-actions";
 
 const ActionsCell = ({ operation }: { operation: OperationRow }) => {
   const { deleteRecord } = useDeleteOperationPictureRecord();
@@ -28,8 +29,21 @@ export const getOperationsColumns = (): ColumnDef<OperationRow>[] => {
   return [
     ...baseOperationColumns,
     {
-      id: "actions",
+      id: "picture_actions",
       cell: ({ row }) => <ActionsCell operation={row.original} />,
+    },
+    {
+      id: "actions",
+      cell: ({ row }) => {
+        return (
+          <div className="text-center">
+            <RowDropdown
+              id={row.original.id}
+              isInactive={row.original.isInactive}
+            />
+          </div>
+        );
+      },
     },
   ];
 };

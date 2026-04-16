@@ -24,43 +24,6 @@ export function usePostChartCardData(statuses: StatusEntity[] = []) {
         idleIntervals.push({ start: currentStart, end: item.time });
       }
     });
-
-    // const chartData = processedData.reduce(
-    //     (acc, item, index, array) => {
-    //         const prevItem = array[index - 1];
-    //         let currentTime = item.time;
-
-    //         if (prevItem && prevItem.time === currentTime) {
-    //             currentTime += 1;
-    //         }
-    //         if (prevItem && !prevItem.idle && item.idle) {
-    //             acc.push({
-    //                 time: currentTime - 1,
-    //                 val: prevItem.counter_value,
-    //             });
-    //             acc.push({
-    //                 time: currentTime,
-    //                 val: null,
-    //             });
-    //         } else if (prevItem && prevItem.idle && !item.idle) {
-    //             acc.push({
-    //                 time: currentTime - 1,
-    //                 val: null,
-    //             });
-    //             acc.push({
-    //                 time: currentTime,
-    //                 val: item.counter_value,
-    //             });
-    //         } else {
-    //             acc.push({
-    //                 time: currentTime,
-    //                 val: item.idle ? null : item.counter_value,
-    //             });
-    //         }
-    //         return acc;
-    //     },
-    //     [] as { time: number; val: number | null }[],
-    // );
     const totalIdleTimes = statuses.reduce(
       (acc, item) => acc + (item.idle_time ?? 0),
       0,
@@ -90,7 +53,7 @@ export function usePostChartCardData(statuses: StatusEntity[] = []) {
       return {
         time: item.time,
         val: item.counter_value,
-        description: item.operation_description,
+        description: item.operation_description || item.maintenance_description,
         employee: item.employee_name,
         isIdle: item.idle,
       };

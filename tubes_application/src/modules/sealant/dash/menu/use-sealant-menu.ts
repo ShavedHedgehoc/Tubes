@@ -56,7 +56,16 @@ export default function useSealantMenu() {
     !summaryData.tresholds;
 
   const operationButtonDisabledCondition =
-    !employee || !summaryData || summaryData.sealantStatus.finished;
+    !employee ||
+    !summaryData ||
+    summaryData.sealantStatus.maintenance_session_id !== null ||
+    summaryData.sealantStatus.finished;
+
+  const maintenanceButtonDisabledCondition =
+    !employee ||
+    !summaryData ||
+    summaryData.sealantStatus.operation_id !== null ||
+    summaryData.sealantStatus.finished;
 
   const pictureButtonDisabledCondition = summaryData === null;
 
@@ -133,5 +142,6 @@ export default function useSealantMenu() {
     pictureButtonDisabledCondition,
     endButtonDisabledCondition,
     printButtonDisabledCondition,
+    maintenanceButtonDisabledCondition,
   };
 }

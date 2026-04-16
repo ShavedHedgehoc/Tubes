@@ -19,12 +19,19 @@ const ExtrusionAddEntry = lazy(
 const ExtrusionOperations = lazy(
   () => import("../../modules/extrusion/extrusion-operations"),
 );
+
+const ExtrusionMaintenance = lazy(
+  () => import("../../modules/extrusion/extrusion-maintenance"),
+);
 const ExtrusionSop = lazy(
   () => import("../../modules/extrusion/extrusion-sop"),
 );
 const Varnish = lazy(() => import("../../modules/varnish/varnish"));
 const VarnishAddEntry = lazy(
   () => import("../../modules/varnish/varnish-add-entry"),
+);
+const VarnishMaintenance = lazy(
+  () => import("../../modules/varnish/varnish-maintenance"),
 );
 const VarnishOperations = lazy(
   () => import("../../modules/varnish/varnish-operations"),
@@ -34,6 +41,9 @@ const Offset = lazy(() => import("../../modules/offset/offset"));
 const OffsetAddEntry = lazy(
   () => import("../../modules/offset/offset-add-entry"),
 );
+const OffsetMaintenance = lazy(
+  () => import("../../modules/offset/offset-maintenance"),
+);
 const OffsetOperations = lazy(
   () => import("../../modules/offset/offset-operations"),
 );
@@ -41,6 +51,10 @@ const OffsetSop = lazy(() => import("../../modules/offset/offset-sop"));
 const Sealant = lazy(() => import("../../modules/sealant/sealant"));
 const SealantAddEntry = lazy(
   () => import("../../modules/sealant/sealant-add-entry"),
+);
+
+const SealantMaintenance = lazy(
+  () => import("../../modules/sealant/sealant-maintenance"),
 );
 const SealantOperations = lazy(
   () => import("../../modules/sealant/sealant-operations"),
@@ -79,6 +93,10 @@ const AppRouter = () => {
               element={<RouteSuspense children={<ExtrusionAddEntry />} />}
             />
             <Route
+              path={RouteNames.EXTRUSION_MAINTENANCE}
+              element={<RouteSuspense children={<ExtrusionMaintenance />} />}
+            />
+            <Route
               path={RouteNames.EXTRUSION_OPERATIONS}
               element={<RouteSuspense children={<ExtrusionOperations />} />}
             />
@@ -93,6 +111,10 @@ const AppRouter = () => {
             <Route
               path={RouteNames.VARNISH_ADD_ENTRY}
               element={<RouteSuspense children={<VarnishAddEntry />} />}
+            />
+            <Route
+              path={RouteNames.VARNISH_MAINTENANCE}
+              element={<RouteSuspense children={<VarnishMaintenance />} />}
             />
             <Route
               path={RouteNames.VARNISH_OPERATIONS}
@@ -111,6 +133,10 @@ const AppRouter = () => {
               element={<RouteSuspense children={<OffsetAddEntry />} />}
             />
             <Route
+              path={RouteNames.OFFSET_MAINTENANCE}
+              element={<RouteSuspense children={<OffsetMaintenance />} />}
+            />
+            <Route
               path={RouteNames.OFFSET_OPERATIONS}
               element={<RouteSuspense children={<OffsetOperations />} />}
             />
@@ -125,6 +151,10 @@ const AppRouter = () => {
             <Route
               path={RouteNames.SEALANT_ADD_ENTRY}
               element={<RouteSuspense children={<SealantAddEntry />} />}
+            />
+            <Route
+              path={RouteNames.SEALANT_MAINTENANCE}
+              element={<RouteSuspense children={<SealantMaintenance />} />}
             />
             <Route
               path={RouteNames.SEALANT_OPERATIONS}

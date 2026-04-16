@@ -14,8 +14,17 @@ import {
 } from "@/entities/operation";
 import { useCreateOperationPictureRecord } from "@/features/operation-picture-record-actions";
 import { OperationsIcon } from "@/shared/assets/operations-icon";
+import { OperationsFilter } from "@/features/operation-filter";
+import { RankEntity } from "@/entities/rank";
+import { PostEntity } from "@/entities/post";
 
-export default function OperationsView() {
+export default function OperationsView({
+  rankListItems,
+  postListItems,
+}: {
+  rankListItems: RankEntity[] | [];
+  postListItems: PostEntity[] | [];
+}) {
   const { params, setParams } = useOperationSearchParams();
   const { params: galleryUiParams } = useGalleryUiParams();
 
@@ -56,10 +65,17 @@ export default function OperationsView() {
     total: data?.total ?? 0,
     totalPages: data?.totalPages ?? 0,
     picture: <OperationsIcon />,
-    filter: <></>,
+    filter: (
+      <OperationsFilter
+        postListItems={postListItems}
+        rankListItems={rankListItems}
+        actions={<></>}
+      />
+    ),
     params: params,
     setParams: setParams,
     isFetching: isFetching || isPlaceholderData,
+    getRowClassName: (row) => (row.isInactive ? "opacity-50 grayscale" : ""),
   };
 
   return (

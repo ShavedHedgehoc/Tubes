@@ -59,6 +59,10 @@ export const getSummaryReport = async ({
       operation_id: status.operation_id,
       operation_value: status.operation?.value ?? null,
       operation_description: status.operation?.description ?? null,
+      maintenance_session_id: status.maintenance_session_id ?? null,
+      maintenance_value: status.maintenance_session?.maintenance?.value ?? null,
+      maintenance_description:
+        status.maintenance_session?.maintenance?.description ?? null,
       idle: status.idle,
       employee_id: status.employee_id,
       employee_name: status.employee?.name ?? null,

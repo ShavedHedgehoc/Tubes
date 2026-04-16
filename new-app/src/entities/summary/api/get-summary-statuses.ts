@@ -31,11 +31,14 @@ export const getSummaryStatuses = async ({
   };
 
   const mappedStatuses = statuses.map((status) => {
-    const { employee, operation, post, ...rest } = status;
+    const { employee, operation, maintenance_session, post, ...rest } = status;
     return {
       ...rest,
       operation_description: operation?.description ?? null,
       operation_value: operation?.value ?? null,
+      maintenance_value: maintenance_session?.maintenance?.value ?? null,
+      maintenance_description:
+        maintenance_session?.maintenance?.description ?? null,
       employee_name: employee?.name ?? null,
       post_val: post.value,
     };

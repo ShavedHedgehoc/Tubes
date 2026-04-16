@@ -16,6 +16,7 @@ type OperationDto = {
   min_rank_id: number;
   description: string;
   post_id: number;
+  isInactive: boolean;
 };
 
 type OperationWithRanksAndPostsDto = OperationDto & {

@@ -264,6 +264,7 @@ export interface IStatus {
   createdAt: Date;
   state: state;
   operation_id: number | null;
+  maintenance_session_id: number | null;
 }
 
 export interface IOperation {
@@ -271,6 +272,32 @@ export interface IOperation {
   value: string;
   description: string;
   min_rank: number;
+}
+
+export interface IMaintenance {
+  id: number;
+  value: string;
+  description: string;
+  min_rank: number;
+  task_count: number;
+}
+
+export interface IMaintenanceLog {
+  id: number;
+  title: string;
+  start_time: Date | null;
+  end_time: Date | null;
+  is_done: boolean;
+  order: number;
+}
+
+export interface IMaintenanceSession {
+  id: number;
+  maintenance_value: string;
+  maintenance_description: string;
+  maintenance_logs: IMaintenanceLog[];
+  start_time: Date | null;
+  end_time: Date | null;
 }
 
 export interface ISummary {
@@ -288,6 +315,14 @@ export interface ISummary {
   varnish_materials: IMaterial[] | [];
   offset_materials: IMaterial[] | [];
   sealant_materials: IMaterial[] | [];
+  extrusionMaintenances: IMaintenance[] | [];
+  varnishMaintenances: IMaintenance[] | [];
+  offsetMaintenances: IMaintenance[] | [];
+  sealantMaintenances: IMaintenance[] | [];
+  extrusionMaintenanceSession: IMaintenanceSession | null;
+  varnishMaintenanceSession: IMaintenanceSession | null;
+  offsetMaintenanceSession: IMaintenanceSession | null;
+  sealantMaintenanceSession: IMaintenanceSession | null;
   extrusionStatus: IStatus;
   extrusionOperations: IOperation[] | [];
   varnishStatus: IStatus;

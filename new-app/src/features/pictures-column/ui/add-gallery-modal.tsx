@@ -37,8 +37,12 @@ export function AddGalleryModal({
     isFetchingNextPage,
   } = useInfiniteQuery({
     queryKey: [
-      ...fileApi.fileQueries.list({ limit: LIMIT, filename: null, page: 1 })
-        .queryKey,
+      ...fileApi.fileQueries.list({
+        limit: LIMIT,
+        description: null,
+        filename: null,
+        page: 1,
+      }).queryKey,
       "infinite",
     ],
 
@@ -46,6 +50,7 @@ export function AddGalleryModal({
       fileApi.getFiles({
         limit: LIMIT,
         page: pageParam,
+        description: null,
         filename: null,
       }),
 

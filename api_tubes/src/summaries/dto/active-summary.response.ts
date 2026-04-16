@@ -27,6 +27,7 @@ export class IStatus {
   operation_description: string;
   createdAt: Date | null;
   operation_id: number | null;
+  maintenance_session_id: number | null;
 }
 class ISummaryData {
   id: number;
@@ -143,6 +144,32 @@ class ISealantParams {
   createdAt: Date;
 }
 
+class IMaintenance {
+  id: number;
+  value: string;
+  description: string;
+  min_rank: number;
+  task_count: number;
+}
+
+class IMaintenanceLog {
+  id: number;
+  title: string;
+  start_time: Date | null;
+  end_time: Date | null;
+  is_done: boolean;
+  order: number;
+}
+
+class IMaintenanceSession {
+  id: number;
+  maintenance_value: string;
+  maintenance_description: string;
+  maintenance_logs: IMaintenanceLog[];
+  start_time: Date | null;
+  end_time: Date | null;
+}
+
 export class ActiveSummaryResponse {
   data: ISummaryData;
   extrusionParams: IExtrusionParams | null;
@@ -158,6 +185,14 @@ export class ActiveSummaryResponse {
   varnish_materials: IMaterial[] | [];
   offset_materials: IMaterial[] | [];
   sealant_materials: IMaterial[] | [];
+  extrusionMaintenances: IMaintenance[] | [];
+  varnishMaintenances: IMaintenance[] | [];
+  offsetMaintenances: IMaintenance[] | [];
+  sealantMaintenances: IMaintenance[] | [];
+  extrusionMaintenanceSession: IMaintenanceSession | null;
+  varnishMaintenanceSession: IMaintenanceSession | null;
+  offsetMaintenanceSession: IMaintenanceSession | null;
+  sealantMaintenanceSession: IMaintenanceSession | null;
   extrusionStatus: IStatus;
   extrusionOperations: IOperation[] | [];
   varnishStatus: IStatus;

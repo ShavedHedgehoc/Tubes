@@ -56,7 +56,16 @@ export default function useVarnishMenu() {
     !summaryData.tresholds;
 
   const operationButtonDisabledCondition =
-    !employee || !summaryData || summaryData.varnishStatus.finished;
+    !employee ||
+    !summaryData ||
+    summaryData.varnishStatus.maintenance_session_id !== null ||
+    summaryData.varnishStatus.finished;
+
+  const maintenanceButtonDisabledCondition =
+    !employee ||
+    !summaryData ||
+    summaryData.varnishStatus.operation_id !== null ||
+    summaryData.varnishStatus.finished;
 
   const pictureButtonDisabledCondition = summaryData === null;
 
@@ -154,5 +163,6 @@ export default function useVarnishMenu() {
     operationButtonDisabledCondition,
     pictureButtonDisabledCondition,
     endButtonDisabledCondition,
+    maintenanceButtonDisabledCondition,
   };
 }

@@ -27,3 +27,5 @@ export const useExtrusionCloseSummaryModalStore =
   createModalStore("CloseSummary");
 export const useExtrusionDefectInputModalStore =
   createModalStore("DefectInput");
+export const useExtrusionMaintenanceModalStore =
+  createModalStore("Maintenance");

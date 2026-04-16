@@ -37,6 +37,7 @@ const summaryInclude = {
   statuses: {
     include: {
       operation: { include: { min_rank: true } },
+      maintenance_session: { include: { maintenance: true } },
       post: true,
     },
     orderBy: { id: "asc" as const },
@@ -45,7 +46,7 @@ const summaryInclude = {
     include: {
       tresholds: {
         orderBy: { createdAt: "desc" as const },
-        take: 1,
+        // take: 1,
       },
     },
   },
@@ -270,20 +271,27 @@ export class SummariesService {
       },
     });
 
-    return aggregate._sum.idle_time ?? 0;
+    return Number(aggregate._sum.idle_time ?? 0n);
   }
 
   private mapMaterialsByPost(
     specs: FullSpecification[],
+    currentSummaryId: number,
     postNumber: number,
   ): IMappedMaterial[] {
     return specs
       .filter((s) => s.material.post_number === postNumber)
-      .map((s) => ({
-        code: s.material.code,
-        name: s.material.name,
-        scanned: s.material.consumed_materials.length > 0,
-      }));
+      .map((s) => {
+        const hasBeenScannedInThisSummary = s.material.consumed_materials.some(
+          (cm) => cm.summary_id === currentSummaryId,
+        );
+        return {
+          code: s.material.code,
+          name: s.material.name,
+          // scanned: s.material.consumed_materials.length > 0,
+          scanned: hasBeenScannedInThisSummary,
+        };
+      });
   }
 
   async getActiveSummaryRecordByConveyorId(
@@ -311,9 +319,28 @@ export class SummariesService {
     const offsetParams = mapParams<IMappedOffsetParams>(firstOffset);
     const sealantParams = mapParams<IMappedSealantParams>(firstSealant);
 
-    const [allOperations, idleTimesRaw] = await Promise.all([
+    const [
+      allOperations,
+      allMaintenances,
+      allMaintenanceSessions,
+      idleTimesRaw,
+    ] = await Promise.all([
       this.prisma.operation.findMany({
+        where: { isInactive: false },
         include: { post: true, min_rank: true },
+        orderBy: { id: "asc" },
+      }),
+      this.prisma.maintenance.findMany({
+        include: { post: true, min_rank: true, tasks: true },
+        orderBy: { id: "asc" },
+      }),
+      this.prisma.maintenanceSession.findMany({
+        where: { end_time: null },
+        include: {
+          post: true,
+          maintenance: true,
+          maintenance_logs: { include: { task: true }, orderBy: { id: "asc" } },
+        },
         orderBy: { id: "asc" },
       }),
       Promise.all([
@@ -341,9 +368,12 @@ export class SummariesService {
                   ? "idle"
                   : "working",
             operation_description:
-              last.operation?.description ?? "Нет описания",
+              last.operation?.description ??
+              last.maintenance_session?.maintenance?.description ??
+              "Нет описания",
             createdAt: last.createdAt,
             operation_id: last.operation_id,
+            maintenance_session_id: last.maintenance_session_id,
           }
         : {
             idle: false,
@@ -352,6 +382,7 @@ export class SummariesService {
             operation_description: "-",
             createdAt: null,
             operation_id: null,
+            maintenance_session_id: null,
           };
 
       const counters: IStatusCounter[] = postStatuses.map((s) => ({
@@ -374,6 +405,32 @@ export class SummariesService {
       description: op.description,
       min_rank: op.min_rank?.val ?? 0,
       post_value: op.post?.value,
+    }));
+
+    const flatMaints = allMaintenances.map((m) => ({
+      id: m.id,
+      value: m.value,
+      description: m.description,
+      min_rank: m.min_rank?.val ?? 0,
+      post_value: m.post?.value,
+      task_count: m.tasks?.length ?? 0,
+    }));
+
+    const flatMaintSessions = allMaintenanceSessions.map((s) => ({
+      id: s.id,
+      maintenance_value: s.maintenance?.value,
+      maintenance_description: s.maintenance?.description,
+      start_time: s.start_time,
+      end_time: s.end_time,
+      post_value: s.post?.value,
+      maintenance_logs: s.maintenance_logs.map((l) => ({
+        id: l.id,
+        title: l.title,
+        start_time: l.start_time,
+        end_time: l.end_time,
+        is_done: l.is_done,
+        order: l.task.order,
+      })),
     }));
 
     const notesMap = activeRecord.notes.reduce(
@@ -410,30 +467,49 @@ export class SummariesService {
       extrusionStatus: ext.current,
       extrusionStatusCounters: ext.counters,
       extrusionOperations: flatOps.filter((o) => o.post_value === 1),
+      extrusionMaintenances: flatMaints.filter((m) => m.post_value === 1),
+      extrusionMaintenanceSession:
+        flatMaintSessions.find((m) => m.post_value === 1) || null,
 
       varnishStatus: varn.current,
       varnishStatusCounters: varn.counters,
       varnishOperations: flatOps.filter((o) => o.post_value === 2),
+      varnishMaintenances: flatMaints.filter((m) => m.post_value === 2),
+      varnishMaintenanceSession:
+        flatMaintSessions.find((m) => m.post_value === 2) || null,
 
       offsetStatus: off.current,
       offsetStatusCounters: off.counters,
       offsetOperations: flatOps.filter((o) => o.post_value === 3),
+      offsetMaintenances: flatMaints.filter((m) => m.post_value === 3),
+      offsetMaintenanceSession:
+        flatMaintSessions.find((m) => m.post_value === 3) || null,
 
       sealantStatus: seal.current,
       sealantStatusCounters: seal.counters,
       sealantOperations: flatOps.filter((o) => o.post_value === 4),
+      sealantMaintenances: flatMaints.filter((m) => m.post_value === 4),
+      sealantMaintenanceSession:
+        flatMaintSessions.find((m) => m.post_value === 4) || null,
 
       extrusion_materials: this.mapMaterialsByPost(
         activeRecord.specifications,
+        activeRecord.id,
         1,
       ),
       varnish_materials: this.mapMaterialsByPost(
         activeRecord.specifications,
+        activeRecord.id,
         2,
       ),
-      offset_materials: this.mapMaterialsByPost(activeRecord.specifications, 3),
+      offset_materials: this.mapMaterialsByPost(
+        activeRecord.specifications,
+        activeRecord.id,
+        3,
+      ),
       sealant_materials: this.mapMaterialsByPost(
         activeRecord.specifications,
+        activeRecord.id,
         4,
       ),
 
@@ -501,10 +577,14 @@ export class SummariesService {
     const statuses = await this.prisma.status.findMany({
       where: {
         summary_id: query.summary_id,
-        // post: { value: query.post_val },
         post: query.post_val ? { value: query.post_val } : undefined,
       },
-      include: { operation: true, employee: true, post: true },
+      include: {
+        operation: true,
+        employee: true,
+        post: true,
+        maintenance_session: { include: { maintenance: true } },
+      },
       orderBy: [{ createdAt: "asc" }],
     });
     return { statuses };
@@ -520,7 +600,12 @@ export class SummariesService {
         where: {
           summary_id: query.summary_id,
         },
-        include: { operation: true, employee: true, post: true },
+        include: {
+          operation: true,
+          employee: true,
+          post: true,
+          maintenance_session: { include: { maintenance: true } },
+        },
         orderBy: [{ createdAt: "asc" }],
       }),
     ]);

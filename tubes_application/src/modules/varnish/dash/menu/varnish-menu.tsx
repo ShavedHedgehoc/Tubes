@@ -8,6 +8,7 @@ import {
   TbLibraryPhoto,
   TbLogin2,
   TbLogout2,
+  TbSettingsExclamation,
 } from "react-icons/tb";
 import MenuButton from "../../../../shared/components/menu/menu-button";
 import { TbStopwatch } from "react-icons/tb";
@@ -31,6 +32,7 @@ export default function VarnishMenu() {
     operationButtonDisabledCondition,
     pictureButtonDisabledCondition,
     endButtonDisabledCondition,
+    maintenanceButtonDisabledCondition,
   } = useVarnishMenu();
   const { data: summaryData } = useActiveSummary(varnishConveyor?.id ?? null);
 
@@ -46,6 +48,16 @@ export default function VarnishMenu() {
     icon: <TbBarcode />,
     disabled: scanMaterialsButtonDisabledCondition,
     action: () => setOpenMaterialScan(true),
+  };
+
+  const maintenanceButtonProps: MenuButtonProps = {
+    title: "ТО",
+    icon: <TbSettingsExclamation />,
+    disabled: maintenanceButtonDisabledCondition,
+    action: () =>
+      navigate(
+        `${RouteNames.VARNISH_MAINTENANCE_ROOT}/${varnishConveyor?.name}`,
+      ),
   };
 
   const operationsButtonProps: MenuButtonProps = {
@@ -98,6 +110,7 @@ export default function VarnishMenu() {
     <Menu>
       <MenuButton {...inputParametersButtonProps} />
       <MenuButton {...scanMaterilButtonProps} />
+      <MenuButton {...maintenanceButtonProps} />
       <MenuButton {...operationsButtonProps} />
       {summaryData && summaryData.varnishStatus.state === "idle" && (
         <MenuButton {...sopButtonProps} />

@@ -4,6 +4,7 @@ import {
   createSearchParamsCache,
   inferParserType,
   parseAsNativeArrayOf,
+  parseAsArrayOf,
 } from "nuqs/server";
 
 export const operationParamsSchema = {
@@ -15,6 +16,7 @@ export const operationParamsSchema = {
   min_ranks: parseAsNativeArrayOf(parseAsString).withDefault(
     undefined as unknown as string[],
   ),
+  isInactive: parseAsArrayOf(parseAsString),
   limit: parseAsInteger.withDefault(10),
   page: parseAsInteger.withDefault(1),
 };

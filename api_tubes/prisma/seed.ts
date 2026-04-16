@@ -393,6 +393,470 @@ async function main() {
     skipDuplicates: true,
   });
 
+  const maintenances: {
+    value: string;
+    description: string;
+    post_id: number;
+    min_rank_id: number;
+  }[] = [
+    {
+      value: "1011",
+      description: "ТО №1 (Пост 1)",
+      post_id: postMap.get(1)!,
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      value: "1021",
+      description: "ТО №2 (Пост 1)",
+      post_id: postMap.get(1)!,
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      value: "2031",
+      description: "ТО №1 (Пост 2)",
+      post_id: postMap.get(2)!,
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      value: "2041",
+      description: "ТО №2 (Пост 2)",
+      post_id: postMap.get(2)!,
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      value: "3051",
+      description: "ТО №1 (Пост 3)",
+      post_id: postMap.get(3)!,
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      value: "3061",
+      description: "ТО №2 (Пост 3)",
+      post_id: postMap.get(3)!,
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      value: "4071",
+      description: "ТО №1 (Пост 4)",
+      post_id: postMap.get(4)!,
+      min_rank_id: ranksMap.get(1)!,
+    },
+    {
+      value: "4081",
+      description: "ТО №2 (Пост 4)",
+      post_id: postMap.get(4)!,
+      min_rank_id: ranksMap.get(1)!,
+    },
+  ];
+
+  await prisma.maintenance.createMany({
+    data: maintenances,
+    skipDuplicates: true,
+  });
+
+  const allMaintenances = await prisma.maintenance.findMany();
+  const MaintenancesMap = new Map(allMaintenances.map((m) => [m.value, m.id]));
+
+  const maintenanceTasks: {
+    maintenance_id: number;
+    title: string;
+    order: number;
+  }[] = [
+    {
+      maintenance_id: MaintenancesMap.get("1011")!,
+      title: "Протирка мандрел, штока пуансона и съемника туб.",
+      order: 1,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("1011")!,
+      title: "Проверка затяжки пуансона и штока пуансона.",
+      order: 2,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("1011")!,
+      title:
+        "Проверка узла подачи рондолей(жесткость подачи, состояние и положение пятака).",
+      order: 3,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("1011")!,
+      title: "Протяжка крепежа наконечников мандрел. ",
+      order: 4,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("1011")!,
+      title: "Визуальный осмотр состояния приводных ремней.",
+      order: 5,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("1011")!,
+      title: "Очистка и смазка опорных пятаков мандрел.",
+      order: 6,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("1011")!,
+      title: "Очистка и смазка направляющих триммера.",
+      order: 7,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("1011")!,
+      title: "Проверка состояния тормозных колодок.",
+      order: 8,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("1011")!,
+      title: "Очистка и визуальный осмотр направляющих и подшипников пресса.",
+      order: 9,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("1011")!,
+      title: "Осмотр масляного фильтра на прессе, очистка при необходимости.",
+      order: 10,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("1011")!,
+      title:
+        "Осмотр состояния натяжителей цепей печи отжига, при обнаружение рывков и биений пружины, проверить чистоту звездочек внутри печи.",
+      order: 11,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("1011")!,
+      title: "Очистка приемного барабана триммера.",
+      order: 1,
+    },
+
+    {
+      maintenance_id: MaintenancesMap.get("1021")!,
+      title: "Промывка масляного фильтра на маслоприемнике пресса.",
+      order: 1,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("1021")!,
+      title: "Протяжка основания цангового патрона на прессе.",
+      order: 2,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("1021")!,
+      title:
+        "Смазка цепного привода перемещателя тубы и привода конвейера пресса. ",
+      order: 3,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("1021")!,
+      title: "Проверка редуктора со вскрытием инспекционного люка на триммере.",
+      order: 4,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("1021")!,
+      title: "Очистка масляной ванны в зоне коленорычажного механизма.",
+      order: 5,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("1021")!,
+      title: "Протирка спиц аккумулятора, входного и выходного конвейера печи.",
+      order: 6,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("1021")!,
+      title: "Очистка сетки фильтра вакуумного насоса.",
+      order: 7,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("1021")!,
+      title: "Очистка печи отжига (звездочки, люльки, зольник).",
+      order: 8,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("1021")!,
+      title:
+        "Очистка ножей и посадочных мест, проверка крепления и износа режущих элементов, регулировка положения ножей при необходимости.",
+      order: 9,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("1021")!,
+      title: "Продувка внутренних каналов приемного барабана триммера",
+      order: 10,
+    },
+
+    {
+      maintenance_id: MaintenancesMap.get("2031")!,
+      title: "Очистка транспортировочных ячеек (стаканов).",
+      order: 1,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("2031")!,
+      title: "Визуальный осмотр состояния приводных ремней.",
+      order: 2,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("2031")!,
+      title:
+        "Протирка распылителей форсунок (внешняя часть, без разборки и снятия).",
+      order: 3,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("2031")!,
+      title: "Проверка распыления форсунок.",
+      order: 4,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("2031")!,
+      title: "Очистка защитных фартуков и каплесъемника.",
+      order: 5,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("2031")!,
+      title: "Очистка и визуальный осмотр направляющей и подшипников каретки.",
+      order: 6,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("2031")!,
+      title: "Осмотр состояния натяжителей цепей печи полимеризации.",
+      order: 7,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("2031")!,
+      title: "Протирка входного и выходного конвейера печи и лаковой машины.",
+      order: 8,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("2031")!,
+      title: "Протирка датчиков тубы.",
+      order: 9,
+    },
+
+    {
+      maintenance_id: MaintenancesMap.get("2041")!,
+      title: "Очистка и смазка кареток перемещения форсунок.",
+      order: 1,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("2041")!,
+      title: "Промывка форсунок с полной разборкой, контроль распыления сопла.",
+      order: 2,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("2041")!,
+      title: "Очистка отстойника под каплесъемником.",
+      order: 3,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("2041")!,
+      title: "Очистка фильтра вакуумного насоса.",
+      order: 4,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("2041")!,
+      title: "Очистка печи полимеризации (звездочки, люльки, зольник).",
+      order: 5,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("2041")!,
+      title: "Проверка трубок подачи лака, при необходимости замена.",
+      order: 6,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("2041")!,
+      title:
+        "Протирка спиц аккумулятора, входного и выходного конвейера печи, выходного барабана.",
+      order: 7,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("2041")!,
+      title: "Очистка защитных стекол и ограждений.",
+      order: 8,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("2041")!,
+      title: "Очистка каплесъемника и замена при необходимости.",
+      order: 9,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("2041")!,
+      title: "Очистка поддона и сеток под вытяжным двигателем.",
+      order: 10,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("3051")!,
+      title: "Протирка мандрел на печатной и грунтовальной машине.",
+      order: 1,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("3051")!,
+      title: "Визуальный осмотр состояния приводных ремней.",
+      order: 2,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("3051")!,
+      title:
+        "Проверка затяжки стопоров на фиксирующих гайках рамы и затяжки рамы.",
+      order: 3,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("3051")!,
+      title: "Проверка и по необходимости натяжка цепи.",
+      order: 4,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("3051")!,
+      title: "Проверка затяжки стопоров на регулировке формного вала.",
+      order: 5,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("3051")!,
+      title: "Замывка офсетного полотна и клише.",
+      order: 6,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("3051")!,
+      title: "Проверка прижимных валов, визуальный контроль передачи краски.",
+      order: 7,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("3051")!,
+      title: "Подкачка смазки на направляющие рамы принтера.",
+      order: 8,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("3051")!,
+      title: "Очистка внешних загрязнений печатной и грунтовальной машины.",
+      order: 9,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("3051")!,
+      title: "	Протирка датчиков тубы.",
+      order: 10,
+    },
+
+    {
+      maintenance_id: MaintenancesMap.get("3061")!,
+      title:
+        "Долив смазки в систему подачи смазки направляющих рельс рамы принтера.",
+      order: 1,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("3061")!,
+      title: "Промывка валов офсетной и грунтовальной машины.",
+      order: 2,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("3061")!,
+      title: "Очистка фильтра вакуумного насоса.",
+      order: 3,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("3061")!,
+      title: "Очистка печи полимеризации (звездочки, спицы, зольник).",
+      order: 4,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("3061")!,
+      title: "Проверка состояния ракельного ножа, очистка.",
+      order: 5,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("3061")!,
+      title: "Протирка выходного конвейера печи.",
+      order: 6,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("3061")!,
+      title: "Смазка направляющих штоков съемника тубы.",
+      order: 7,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("3061")!,
+      title: "Замена офсетного полотна при необходимости.",
+      order: 8,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("4071")!,
+      title: "Протирка мандрел на  укупорочной машине.",
+      order: 1,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("4071")!,
+      title: "Визуальный осмотр состояния приводных ремней.",
+      order: 2,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("4071")!,
+      title: "Проверка затяжки стопоров.",
+      order: 3,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("4071")!,
+      title: "Проверка и по необходимости смазка  и натяжка цепей.",
+      order: 4,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("4071")!,
+      title: "Проверка прижимных валов тубы к мандреле.",
+      order: 5,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("4071")!,
+      title: "Осмотр пневмосистемы.",
+      order: 6,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("4071")!,
+      title:
+        "Промывка форсунок и защитных кожухов форсунки, емкости с герметиком.",
+      order: 7,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("4071")!,
+      title: "Уборка зоны подачи колпачков, зажимов колпачков.",
+      order: 8,
+    },
+
+    {
+      maintenance_id: MaintenancesMap.get("4081")!,
+      title: "Промывка форсунок с полной разборкой, контроль распыления сопла.",
+      order: 1,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("4081")!,
+      title: "Очистка фильтра вакуумного насоса.",
+      order: 2,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("4081")!,
+      title: "Очистка конвейера подачи колпачков.",
+      order: 3,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("4081")!,
+      title: "Проверка трубок подачи герметика, при необходимости замена.",
+      order: 4,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("4081")!,
+      title: "Протирка спиц аккумулятора, входного и выходного барабана.",
+      order: 5,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("4081")!,
+      title: "Смазка направляющих сдвига упаковочной машины.",
+      order: 6,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("4081")!,
+      title: "Очистка узлов ориентации и подачи колпачков.",
+      order: 7,
+    },
+    {
+      maintenance_id: MaintenancesMap.get("4081")!,
+      title: "Проверка работы толкателей тубы.",
+      order: 8,
+    },
+  ];
+
+  await prisma.maintenanceTask.createMany({
+    data: maintenanceTasks,
+    skipDuplicates: true,
+  });
   // employees
   const employees: { name: string; barcode: string; rank_id: number }[] = [
     {

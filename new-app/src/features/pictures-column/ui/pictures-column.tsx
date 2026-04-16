@@ -36,7 +36,6 @@ export function PicturesColumn({
 
   const openPreview = (filename: string) =>
     setParams({ previewFileName: filename });
-
   return (
     <div className="flex flex-row gap-2 items-start">
       {visiblePictures.map((item) => (

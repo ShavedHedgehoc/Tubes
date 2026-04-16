@@ -15,6 +15,7 @@ export enum ApiRoutes {
   PRODUCTION_BOX = "production-box",
   GET_PICTURES = "product-picture",
   GET_SOP_PICTURES = "operation-picture",
+  UPDATE_MAINTENANCE_LOG = "maintenance-log",
   // GET_EXTRUSION_SOP_PICTURES = "sop/extrusion",
   // GET_VARNISH_SOP_PICTURES = "sop/varnish",
   // GET_OFFSET_SOP_PICTURES = "sop/offset",

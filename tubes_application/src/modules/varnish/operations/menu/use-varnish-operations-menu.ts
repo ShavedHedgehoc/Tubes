@@ -59,6 +59,7 @@ export default function useVarnishOperationsMenu(summaryData: ISummary | null) {
         post_val: 2,
         employee_id: employee.id,
         operation_id: Number(selectedOperation.id),
+        maintenance_id: null,
         idle: true,
         finished: false,
       };
@@ -75,6 +76,7 @@ export default function useVarnishOperationsMenu(summaryData: ISummary | null) {
         post_val: 2,
         employee_id: employee.id,
         operation_id: null,
+        maintenance_id: null,
         idle: false,
         finished: false,
       };

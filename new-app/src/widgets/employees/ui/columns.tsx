@@ -18,17 +18,3 @@ export const getEmployeesColumns = (): ColumnDef<EmployeeEntity>[] => {
     },
   ];
 };
-// export const columns: ColumnDef<EmployeeEntity>[] = [
-//   ...baseEmployeeColumns,
-//   {
-//     id: "actions",
-//     cell: ({ row }) => {
-//       const employee = row.original;
-//       return (
-//         <div className="text-center">
-//           <RowDropdown id={employee.id} banned={employee.banned} />
-//         </div>
-//       );
-//     },
-//   },
-// ];

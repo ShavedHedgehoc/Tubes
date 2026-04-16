@@ -134,7 +134,8 @@ export default function makeOperationReportPage({
       const endDate = addMilliseconds(startDate, row.idle_time!);
       return {
         code: row.operation_value ?? "-",
-        description: row.operation_description ?? "-",
+        description:
+          row.operation_description ?? row.maintenance_description ?? "-",
         start: format(startDate, "HH:mm:ss"),
         end: format(endDate, "HH:mm:ss"),
         length: formatDuration(row.idle_time!),
