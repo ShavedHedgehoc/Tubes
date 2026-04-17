@@ -337,7 +337,14 @@ export class SummariesService {
         orderBy: { id: "asc" },
       }),
       this.prisma.maintenanceSession.findMany({
-        where: { end_time: null },
+        where: {
+          end_time: null,
+          statuses: {
+            some: {
+              summary_id: activeRecord.id,
+            },
+          },
+        },
         include: {
           post: true,
           maintenance: true,
