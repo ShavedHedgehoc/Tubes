@@ -1,0 +1,1 @@
+export { getParamsRouteByIds } from "./get-params-route-by-ids"

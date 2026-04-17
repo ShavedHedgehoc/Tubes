@@ -23,6 +23,7 @@ export async function getStatuses({
     const { employee, operation, maintenance_session, post, ...rest } = status;
     return {
       ...rest,
+
       operation_description: operation?.description ?? null,
       maintenance_description:
         maintenance_session?.maintenance?.description ?? null,

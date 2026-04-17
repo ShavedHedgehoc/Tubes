@@ -15,18 +15,33 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { useMemo } from "react";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  renderRowAction?: (row: TData) => React.ReactNode;
 }
 export function PostTable<TData, TValue>({
   columns,
   data,
+  renderRowAction
 }: DataTableProps<TData, TValue>) {
+  const finalColumns = useMemo(() => {
+    if (!renderRowAction) return columns;
+
+    return [
+      ...columns,
+      {
+        id: "actions",
+        header: "Действия",
+        cell: ({ row }) => renderRowAction(row.original),
+      } as ColumnDef<TData, TValue>,
+    ];
+  }, [columns, renderRowAction]);
   // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable({
     data,
-    columns,
+    columns: finalColumns,
     getCoreRowModel: getCoreRowModel(),
   });
 

@@ -1,6 +1,6 @@
 import { StatusEntity } from "@/entities/status";
 import { useMemo } from "react";
-import { StatusTableRow, StatusTableRowState } from "./types";
+import { Ids, StatusTableRow, StatusTableRowState } from "./types";
 
 export function usePostTableCardData(statuses: StatusEntity[] = []) {
   return useMemo(() => {
@@ -15,12 +15,20 @@ export function usePostTableCardData(statuses: StatusEntity[] = []) {
         state = "Конец операции";
       }
 
+      const ids: Ids = {
+        extrusion_param_id: item.extrusion_param_id,
+        varnish_param_id: item.varnish_param_id,
+        offset_param_id: item.offset_param_id,
+        sealant_param_id: item.sealant_param_id
+      }
+
       return {
         id: item.id,
         date: item.createdAt,
         employee: item.employee_name,
         state: state as StatusTableRowState,
         operation: item.operation_description || item.maintenance_description,
+        ids: ids
       };
     });
 
