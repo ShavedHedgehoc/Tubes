@@ -79,7 +79,7 @@ export interface IMappedMaterial {
 
 @Injectable()
 export class SummariesService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   private async createSpecifications(
     { summaryId, value }: { summaryId: number; value: string },
@@ -218,8 +218,8 @@ export class SummariesService {
       }),
       product: query.code
         ? {
-          code: { contains: query.code, mode: "insensitive" },
-        }
+            code: { contains: query.code, mode: "insensitive" },
+          }
         : undefined,
       ...(query.states?.includes(2) && { isFinished: true }),
       ...(query.states?.includes(1) && { isActive: true }),
@@ -285,7 +285,7 @@ export class SummariesService {
         const hasBeenScannedInThisSummary = material.consumed_materials.some(
           (cm) =>
             cm.summary_id === currentSummaryId &&
-            cm.material_id === material.id
+            cm.material_id === material.id,
         );
         return {
           code: material.code,
@@ -361,31 +361,31 @@ export class SummariesService {
 
       const current: IStatus | null = last
         ? {
-          idle: last.idle ?? false,
-          finished: last.finished ?? false,
-          state:
-            last.finished === true
-              ? "finished"
-              : last.idle === true
-                ? "idle"
-                : "working",
-          operation_description:
-            last.operation?.description ??
-            last.maintenance_session?.maintenance?.description ??
-            "Нет описания",
-          createdAt: last.createdAt,
-          operation_id: last.operation_id,
-          maintenance_session_id: last.maintenance_session_id,
-        }
+            idle: last.idle ?? false,
+            finished: last.finished ?? false,
+            state:
+              last.finished === true
+                ? "finished"
+                : last.idle === true
+                  ? "idle"
+                  : "working",
+            operation_description:
+              last.operation?.description ??
+              last.maintenance_session?.maintenance?.description ??
+              "Нет описания",
+            createdAt: last.createdAt,
+            operation_id: last.operation_id,
+            maintenance_session_id: last.maintenance_session_id,
+          }
         : {
-          idle: false,
-          finished: false,
-          state: "working",
-          operation_description: "-",
-          createdAt: null,
-          operation_id: null,
-          maintenance_session_id: null,
-        };
+            idle: false,
+            finished: false,
+            state: "working",
+            operation_description: "-",
+            createdAt: null,
+            operation_id: null,
+            maintenance_session_id: null,
+          };
 
       const counters: IStatusCounter[] = postStatuses.map((s) => ({
         counter_value: Number(s.counter_value) || 0,

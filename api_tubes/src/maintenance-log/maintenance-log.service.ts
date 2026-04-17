@@ -16,20 +16,30 @@ export class MaintenanceLogService {
       throw new HttpException("Задача не найдена", HttpStatus.NOT_FOUND);
     }
 
-    if (dto.end_time && !log.start_time && !dto.start_time) {
+    const startTime = dto.start_time
+      ? new Date(dto.start_time)
+      : log.start_time;
+    const endTime = dto.end_time ? new Date(dto.end_time) : log.end_time;
+
+    const duration =
+      startTime && endTime
+        ? new Date(endTime).getTime() - new Date(startTime).getTime()
+        : null;
+
+    if (endTime && !startTime) {
       throw new HttpException(
         "Нельзя завершить задачу, которая еще не началась",
         HttpStatus.BAD_REQUEST,
       );
     }
-    const isDone = dto.end_time !== undefined ? !!dto.end_time : !!log.end_time;
 
     return await this.prisma.maintenanceLog.update({
       where: { id: dto.id },
       data: {
-        start_time: dto.start_time,
-        end_time: dto.end_time,
-        is_done: isDone,
+        start_time: startTime,
+        end_time: endTime,
+        duration: duration,
+        is_done: !!endTime,
       },
     });
   }
