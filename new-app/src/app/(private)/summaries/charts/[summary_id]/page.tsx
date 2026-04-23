@@ -15,7 +15,7 @@ export default async function SummaryChartsPage({
 
   const combinedParams = {
     ...filters,
-    summary_id, // Перезаписываем или добавляем ID из пути
+    summary_id,
   };
   return <SummaryCharts props={combinedParams} />;
 }

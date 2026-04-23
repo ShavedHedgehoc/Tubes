@@ -1,1 +1,1 @@
-export { ExtrusionParamsView } from "./ui/extrusion-params-view"
+export { ExtrusionParams } from "./ui/extrusion-params";

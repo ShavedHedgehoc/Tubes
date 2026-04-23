@@ -1,1 +1,1 @@
-export { VarnishParamsView } from "./ui/varnish-params-view"
+export { VarnishParams } from "./ui/varnish-params";

@@ -1,1 +1,2 @@
-export { getParamsRouteByIds } from "./get-params-route-by-ids"
+export { getParamProps } from "./get-param-props";
+export type { ParamConfig } from "./get-param-props";

@@ -1,3 +1,3 @@
-export * from "./lib"
-export * from "./model"
-export { ParameterDetails } from "./ui/parameter-details"
+export * from "./model";
+export { ParameterDetails } from "./ui/parameter-details";
+export * as parameterApi from "./api";

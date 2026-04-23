@@ -1,1 +1,1 @@
-export { OffsetParamsView } from "./ui/offset-params-view"
+export { OffsetParams } from "./ui/offset-params";

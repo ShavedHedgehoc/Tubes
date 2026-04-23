@@ -6,8 +6,8 @@ import makeVarnishPage from "./make-varnish-page";
 import makeOffsetPage from "./make-offset-page";
 import makeSealantPage from "./make-sealant-page";
 
-import { POST_NAMES } from "@/entities/conveyor";
 import makeOperationReportPage from "./make-operations-report";
+import { POST_NAMES } from "@/shared/config";
 
 export async function makeXLSX(data: SummaryReportEntity) {
   const workbook = new ExcelJS.Workbook();

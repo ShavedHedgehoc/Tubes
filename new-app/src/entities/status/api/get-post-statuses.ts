@@ -9,7 +9,7 @@ export type GetStatusesArgs = {
   options?: { isServer: boolean };
 };
 
-export async function getStatuses({
+export async function getPostStatuses({
   options,
   ...params
 }: GetStatusesArgs): Promise<StatusResponse> {

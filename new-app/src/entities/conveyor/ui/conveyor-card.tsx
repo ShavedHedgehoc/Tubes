@@ -1,7 +1,8 @@
 import { Card } from "@/shared/ui";
-import { ConveyorData, POST_NAMES } from "../model";
+import { ConveyorData } from "../model";
 import PostCard from "./post-card";
 import { formatNumber } from "@/shared/lib";
+import { POST_NAMES } from "@/shared/config";
 type IState = "working" | "idle" | "finished" | "no_data";
 type Props = {
   conveyorData: ConveyorData;

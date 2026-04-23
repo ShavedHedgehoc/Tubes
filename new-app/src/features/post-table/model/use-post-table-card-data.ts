@@ -19,8 +19,9 @@ export function usePostTableCardData(statuses: StatusEntity[] = []) {
         extrusion_param_id: item.extrusion_param_id,
         varnish_param_id: item.varnish_param_id,
         offset_param_id: item.offset_param_id,
-        sealant_param_id: item.sealant_param_id
-      }
+        sealant_param_id: item.sealant_param_id,
+        maintenance_session_id: item.maintenance_session_id,
+      };
 
       return {
         id: item.id,
@@ -28,7 +29,7 @@ export function usePostTableCardData(statuses: StatusEntity[] = []) {
         employee: item.employee_name,
         state: state as StatusTableRowState,
         operation: item.operation_description || item.maintenance_description,
-        ids: ids
+        ids: ids,
       };
     });
 

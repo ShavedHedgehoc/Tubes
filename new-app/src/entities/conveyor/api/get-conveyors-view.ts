@@ -27,7 +27,7 @@ export async function getConveyorsView({
         ...item,
         summary: item.summary
           ? {
-              ...item.summary, // Сохраняем остальные поля (batch, product и т.д.)
+              ...item.summary,
               extrusion: mapPost(item.summary.extrusion),
               varnish: mapPost(item.summary.varnish),
               offset: mapPost(item.summary.offset),

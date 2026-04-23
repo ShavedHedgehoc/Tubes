@@ -17,7 +17,7 @@ export function PostChartModal() {
   const conveyor_name = params["conveyor_name"];
   const { isOpen } = useModalState(params, setParams, "open-chart");
   const { data, isPending, isError, isSuccess } = useQuery(
-    statusApi.statusQueries.list({ summary_id, post_val }),
+    statusApi.statusQueries.post_list({ summary_id, post_val }),
   );
 
   const { handleOpenChange } = useHandleOpenChange();

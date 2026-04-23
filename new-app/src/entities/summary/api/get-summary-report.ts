@@ -1,7 +1,7 @@
 import { apiClient, proxyApiClient } from "@/shared/api";
 import { SummaryReportDto } from "./dto";
 import { SUMMARY_ENDPOINTS } from "./endpoint";
-import { SummaryReportEntity, Treshold } from "../model";
+import { StatusRow, SummaryReportEntity, Treshold } from "../model";
 
 export type GetSummaryReportArgs = {
   id: string | null;
@@ -49,7 +49,7 @@ export const getSummaryReport = async ({
     };
   });
 
-  const parsedStatuses = statuses.map((status) => {
+  const parsedStatuses: StatusRow[] = statuses.map((status) => {
     return {
       id: status.id,
       summary_id: status.summary_id,
@@ -69,6 +69,10 @@ export const getSummaryReport = async ({
       idle_time: status.idle_time,
       finished: status.finished,
       createdAt: new Date(status.createdAt),
+      extrusion_param_id: status.extrusion_param_id,
+      varnish_param_id: status.varnish_param_id,
+      offset_param_id: status.offset_param_id,
+      sealant_param_id: status.sealant_param_id,
     };
   });
 

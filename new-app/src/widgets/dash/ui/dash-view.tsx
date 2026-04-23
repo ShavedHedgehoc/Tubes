@@ -13,7 +13,7 @@ import { PostDropdown } from "@/widgets/post-actions";
 
 import { PostChartModal } from "@/features/post-chart";
 import { PostCloseModal } from "@/features/finish-conveyor-post";
-import { PostTableModalWidget } from "@/widgets/post-table-modal-widget/ui/post-table-modal-widget";
+import { PostTableModalWidget } from "@/widgets/post-table-modal-widget";
 
 export default function DashView() {
   const { data, isLoading, isError } = useQuery({

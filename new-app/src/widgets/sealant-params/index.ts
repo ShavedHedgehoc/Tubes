@@ -1,1 +1,1 @@
-export { SealantParamsView } from "./ui/sealant-params-view"
+export { SealantParams } from "./ui/sealant-params";

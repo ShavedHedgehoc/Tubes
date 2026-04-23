@@ -10,7 +10,6 @@ import { PostTableCard } from "./post-table-card";
 import { useHandleOpenChange } from "../model";
 import { StatusTableRow } from "../model/types";
 
-
 interface PostTableModalProps {
   renderRowAction?: (row: StatusTableRow) => React.ReactNode;
 }
@@ -22,7 +21,7 @@ export function PostTableModal({ renderRowAction }: PostTableModalProps) {
   const conveyor_name = params["conveyor_name"];
   const { isOpen } = useModalState(params, setParams, "open-table");
   const { data, isPending, isError, isSuccess } = useQuery(
-    statusApi.statusQueries.list({ summary_id, post_val }),
+    statusApi.statusQueries.post_list({ summary_id, post_val }),
   );
 
   const { handleOpenChange } = useHandleOpenChange();

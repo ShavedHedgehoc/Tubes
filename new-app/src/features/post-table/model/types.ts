@@ -4,13 +4,13 @@ export type StatusTableRowState =
   | "Конец операции"
   | "Окончание работы";
 
-
 export type Ids = {
-  extrusion_param_id: number | null
-  varnish_param_id: number | null
-  offset_param_id: number | null
-  sealant_param_id: number | null
-}
+  extrusion_param_id: number | null;
+  varnish_param_id: number | null;
+  offset_param_id: number | null;
+  sealant_param_id: number | null;
+  maintenance_session_id: number | null;
+};
 
 export type StatusTableRow = {
   id: number;
@@ -18,5 +18,5 @@ export type StatusTableRow = {
   employee: string | null;
   state: StatusTableRowState;
   operation: string | null;
-  ids: Ids
+  ids: Ids;
 };

@@ -8,7 +8,7 @@ import { CreateOffsetEntryDto } from "./dto/create-offset-entry.dto";
 
 @Injectable()
 export class ParamsService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   async createExtrusionEntry(dto: CreateExtrusionEntryDto) {
     return await this.prisma.$transaction(async (tx) => {
@@ -44,7 +44,7 @@ export class ParamsService {
           extrusion_param_id: params.id,
         },
       });
-      return { params }
+      return { params };
     });
   }
 
@@ -82,7 +82,7 @@ export class ParamsService {
           varnish_param_id: params.id,
         },
       });
-      return { params }
+      return { params };
     });
   }
 
@@ -120,7 +120,7 @@ export class ParamsService {
           offset_param_id: params.id,
         },
       });
-      return { params }
+      return { params };
     });
   }
 
@@ -158,7 +158,192 @@ export class ParamsService {
           sealant_param_id: params.id,
         },
       });
-      return { params }
+      return { params };
     });
+  }
+
+  async getExtrusionById(id: number) {
+    const parameters = await this.prisma.extrusionParam.findUnique({
+      where: { id },
+      include: { employee: true },
+    });
+    if (!parameters) {
+      throw new HttpException(
+        ApiMessages.PARAM_NOT_FOUND,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    const summary = await this.prisma.summary.findUnique({
+      where: { id: parameters.summary_id },
+      include: { batch: true, product: true, conveyor: true },
+    });
+    if (!summary) {
+      throw new HttpException("", HttpStatus.BAD_REQUEST);
+    }
+    const tresholds = await this.prisma.treshold.findFirst({
+      where: {
+        product_id: summary.product_id,
+        conveyor_id: summary.conveyor_id,
+        createdAt: { lte: parameters.createdAt },
+      },
+      orderBy: { id: "desc" },
+    });
+
+    const prev = await this.prisma.extrusionParam.findFirst({
+      where: { id: { lt: id }, summary_id: parameters.summary_id },
+      orderBy: { id: "desc" },
+      select: { id: true },
+    });
+
+    const next = await this.prisma.extrusionParam.findFirst({
+      where: { id: { gt: id }, summary_id: parameters.summary_id },
+      orderBy: { id: "asc" },
+      select: { id: true },
+    });
+    return {
+      summary,
+      parameters,
+      tresholds,
+      prev: prev?.id ?? null,
+      next: next?.id ?? null,
+    };
+  }
+  async getVarnishById(id: number) {
+    const parameters = await this.prisma.varnishParam.findUnique({
+      where: { id },
+      include: { employee: true },
+    });
+    if (!parameters) {
+      throw new HttpException(
+        ApiMessages.PARAM_NOT_FOUND,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    const summary = await this.prisma.summary.findUnique({
+      where: { id: parameters.summary_id },
+      include: { batch: true, product: true, conveyor: true },
+    });
+    if (!summary) {
+      throw new HttpException("", HttpStatus.BAD_REQUEST);
+    }
+    const tresholds = await this.prisma.treshold.findFirst({
+      where: {
+        product_id: summary.product_id,
+        conveyor_id: summary.conveyor_id,
+        createdAt: { lte: parameters.createdAt },
+      },
+      orderBy: { id: "desc" },
+    });
+
+    const prev = await this.prisma.varnishParam.findFirst({
+      where: { id: { lt: id }, summary_id: parameters.summary_id },
+      orderBy: { id: "desc" },
+      select: { id: true },
+    });
+
+    const next = await this.prisma.varnishParam.findFirst({
+      where: { id: { gt: id }, summary_id: parameters.summary_id },
+      orderBy: { id: "asc" },
+      select: { id: true },
+    });
+    return {
+      summary,
+      parameters,
+      tresholds,
+      prev: prev?.id ?? null,
+      next: next?.id ?? null,
+    };
+  }
+  async getOffsetById(id: number) {
+    const parameters = await this.prisma.offsetParam.findUnique({
+      where: { id },
+      include: { employee: true },
+    });
+    if (!parameters) {
+      throw new HttpException(
+        ApiMessages.PARAM_NOT_FOUND,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    const summary = await this.prisma.summary.findUnique({
+      where: { id: parameters.summary_id },
+      include: { batch: true, product: true, conveyor: true },
+    });
+    if (!summary) {
+      throw new HttpException("", HttpStatus.BAD_REQUEST);
+    }
+    const tresholds = await this.prisma.treshold.findFirst({
+      where: {
+        product_id: summary.product_id,
+        conveyor_id: summary.conveyor_id,
+        createdAt: { lte: parameters.createdAt },
+      },
+      orderBy: { id: "desc" },
+    });
+
+    const prev = await this.prisma.offsetParam.findFirst({
+      where: { id: { lt: id }, summary_id: parameters.summary_id },
+      orderBy: { id: "desc" },
+      select: { id: true },
+    });
+
+    const next = await this.prisma.offsetParam.findFirst({
+      where: { id: { gt: id }, summary_id: parameters.summary_id },
+      orderBy: { id: "asc" },
+      select: { id: true },
+    });
+    return {
+      summary,
+      parameters,
+      tresholds,
+      prev: prev?.id ?? null,
+      next: next?.id ?? null,
+    };
+  }
+  async getSealantById(id: number) {
+    const parameters = await this.prisma.sealantParam.findUnique({
+      where: { id },
+      include: { employee: true },
+    });
+    if (!parameters) {
+      throw new HttpException(
+        ApiMessages.PARAM_NOT_FOUND,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    const summary = await this.prisma.summary.findUnique({
+      where: { id: parameters.summary_id },
+      include: { batch: true, product: true, conveyor: true },
+    });
+    if (!summary) {
+      throw new HttpException("", HttpStatus.BAD_REQUEST);
+    }
+    const tresholds = await this.prisma.treshold.findFirst({
+      where: {
+        product_id: summary.product_id,
+        conveyor_id: summary.conveyor_id,
+        createdAt: { lte: parameters.createdAt },
+      },
+      orderBy: { id: "desc" },
+    });
+
+    const prev = await this.prisma.sealantParam.findFirst({
+      where: { id: { lt: id }, summary_id: parameters.summary_id },
+      orderBy: { id: "desc" },
+      select: { id: true },
+    });
+
+    const next = await this.prisma.sealantParam.findFirst({
+      where: { id: { gt: id }, summary_id: parameters.summary_id },
+      orderBy: { id: "asc" },
+      select: { id: true },
+    });
+    return {
+      summary,
+      parameters,
+      tresholds,
+      prev: prev?.id ?? null,
+      next: next?.id ?? null,
+    };
   }
 }

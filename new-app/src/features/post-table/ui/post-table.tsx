@@ -24,7 +24,7 @@ interface DataTableProps<TData, TValue> {
 export function PostTable<TData, TValue>({
   columns,
   data,
-  renderRowAction
+  renderRowAction,
 }: DataTableProps<TData, TValue>) {
   const finalColumns = useMemo(() => {
     if (!renderRowAction) return columns;

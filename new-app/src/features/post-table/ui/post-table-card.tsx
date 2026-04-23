@@ -21,7 +21,7 @@ export function PostTableCard({
   statuses,
   postTitle,
   conveyorName,
-  renderRowAction
+  renderRowAction,
 }: {
   statuses: StatusEntity[];
   postTitle: string | null;
@@ -57,7 +57,11 @@ export function PostTableCard({
       <CardContent className="flex-1 min-h-0 p-4 overflow-hidden flex flex-col">
         {statuses.length > 0 ? (
           <div className="flex-1 overflow-y-auto pr-2 scrollbar-thin">
-            <PostTable data={data} columns={columns} renderRowAction={(row) => renderRowAction?.(row)} />
+            <PostTable
+              data={data}
+              columns={columns}
+              renderRowAction={(row) => renderRowAction?.(row)}
+            />
           </div>
         ) : (
           <div className="flex justify-center items-center py-10">
