@@ -15,9 +15,9 @@ export type ParamsIds = {
 };
 
 export function getRouteByStatusIds(ids: ParamsIds): string | null {
-  if (ids.maintenance_session_id) {
-    return `${PARAMS_ROUTES.MAINTENANCE_SESSION}/${ids.maintenance_session_id}`;
-  }
+  // if (ids.maintenance_session_id) {
+  //   return `${PARAMS_ROUTES.MAINTENANCE_SESSION}/${ids.maintenance_session_id}`;
+  // }
   if (ids.extrusion_param_id)
     return `${PARAMS_ROUTES.EXTRUSION_PARAMS}/${ids.extrusion_param_id}`;
   if (ids.varnish_param_id)

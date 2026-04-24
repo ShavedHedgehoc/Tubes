@@ -32,7 +32,7 @@ export const baseStatusColumns: ColumnDef<StatusWithIdsEntity>[] = [
     header: () => <div className="text-center">Пост</div>,
     cell: ({ row }) => {
       const status = row.original;
-      return <div className="text-center">{status.post_val}</div>;
+      return <div className="text-center">{`Пост ${status.post_val}`}</div>;
     },
   },
   {

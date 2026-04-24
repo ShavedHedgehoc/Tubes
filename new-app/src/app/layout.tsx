@@ -9,17 +9,32 @@ export const metadata: Metadata = {
   description: "Tubes application",
 };
 
-import { Geist, Geist_Mono } from "next/font/google";
+// import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 
-const geistSans = Geist({
+// const geistSans = Geist({
+//   variable: "--font-sans",
+//   subsets: ["latin", "cyrillic"],
+//   display: "swap",
+// });
+
+const geistSans = localFont({
+  src: "./fonts/Geist[wght].woff2",
   variable: "--font-sans",
-  subsets: ["latin", "cyrillic"],
+  weight: "100 900",
   display: "swap",
 });
 
-const geistMono = Geist_Mono({
+// const geistMono = Geist_Mono({
+//   variable: "--font-mono",
+//   subsets: ["latin", "cyrillic"],
+//   display: "swap",
+// });
+
+const geistMono = localFont({
+  src: "./fonts/GeistMono[wght].woff2",
   variable: "--font-mono",
-  subsets: ["latin", "cyrillic"],
+  weight: "100 900",
   display: "swap",
 });
 
@@ -36,13 +51,8 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <body
-        // className={cn(
-        //   "bg-background font-sans antialiased flex flex-col h-dvh ",
-        //   `${geistSans.variable} ${geistMono.variable} antialiased`,
-        // )}
         className={cn(
           "bg-background antialiased flex flex-col h-dvh",
-          // 2. Указываем Tailwind использовать именно этот шрифт
           "font-sans",
         )}
       >
