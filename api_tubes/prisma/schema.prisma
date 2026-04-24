@@ -88,6 +88,16 @@ model Status {
   createdAt              DateTime            @default(now())
   maintenance_session    MaintenanceSession? @relation(fields: [maintenance_session_id], references: [id])
   maintenance_session_id Int?
+  extrusion_param        ExtrusionParam?     @relation(fields: [extrusion_param_id], references: [id])
+  extrusion_param_id     Int?
+  varnish_param          VarnishParam?       @relation(fields: [varnish_param_id], references: [id])
+  varnish_param_id       Int?
+  offset_param           OffsetParam?        @relation(fields: [offset_param_id], references: [id])
+  offset_param_id        Int?
+  sealant_param          SealantParam?       @relation(fields: [sealant_param_id], references: [id])
+  sealant_param_id       Int?
+
+  // add link to paramaters to show in post card
 
   @@index([summary_id])
   @@index([post_id, createdAt])
@@ -433,6 +443,7 @@ model ExtrusionParam {
   employee                           Employee @relation(fields: [employee_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
   employee_id                        Int
   createdAt                          DateTime @default(now())
+  statuses                           Status[]
 
   @@index([summary_id])
   @@map("extrusion_params")
@@ -467,6 +478,7 @@ model VarnishParam {
   employee                      Employee @relation(fields: [employee_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
   employee_id                   Int
   createdAt                     DateTime @default(now())
+  statuses                      Status[]
 
   @@index([summary_id])
   @@map("varnish_params")
@@ -500,6 +512,7 @@ model OffsetParam {
   employee                       Employee @relation(fields: [employee_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
   employee_id                    Int
   createdAt                      DateTime @default(now())
+  statuses                       Status[]
 
   @@index([summary_id])
   @@map("offset_params")
@@ -532,6 +545,7 @@ model SealantParam {
   employee                         Employee @relation(fields: [employee_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
   employee_id                      Int
   createdAt                        DateTime @default(now())
+  statuses                         Status[]
 
   @@index([summary_id])
   @@map("sealant_params")

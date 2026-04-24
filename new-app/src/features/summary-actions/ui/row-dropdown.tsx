@@ -9,7 +9,14 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "@/shared/ui";
-import { MoreHorizontal, Pencil, Sheet, Trash, TrendingUp } from "lucide-react";
+import {
+  List,
+  MoreHorizontal,
+  Pencil,
+  Sheet,
+  Trash,
+  TrendingUp,
+} from "lucide-react";
 import { useDeleteSummary } from "../model";
 import { summaryApi, useSummaryUiParams } from "@/entities/summary";
 import { useRouter } from "next/navigation";
@@ -38,6 +45,10 @@ export function RowDropdown({
   const handleEditClick = () => setParams({ "edit-summary": id.toString() });
   const handleNavigateToCharts = () => {
     router.push(`/summaries/charts/${id}`);
+  };
+
+  const handleNavigateToStatuses = () => {
+    router.push(`/summaries/statuses/${id}`);
   };
 
   const handleMakeXLSX = async () => {
@@ -71,6 +82,13 @@ export function RowDropdown({
         >
           <TrendingUp />
           График
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={handleNavigateToStatuses}
+          disabled={isCanDelete}
+        >
+          <List />
+          Статусы
         </DropdownMenuItem>
         <DropdownMenuItem onClick={handleEditClick}>
           <Pencil />

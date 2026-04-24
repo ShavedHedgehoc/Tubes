@@ -15,15 +15,18 @@ import { formatTimeOnly } from "@/shared/lib";
 import { PostTable } from "./post-table";
 import { useMemo } from "react";
 import { statusTableColumns } from "./columns";
+import { StatusTableRow } from "../model/types";
 
 export function PostTableCard({
   statuses,
   postTitle,
   conveyorName,
+  renderRowAction,
 }: {
   statuses: StatusEntity[];
   postTitle: string | null;
   conveyorName: string | null;
+  renderRowAction?: (row: StatusTableRow) => React.ReactNode;
 }) {
   const { handleOpenChange } = useHandleOpenChange();
   const columns = useMemo(() => {
@@ -54,7 +57,11 @@ export function PostTableCard({
       <CardContent className="flex-1 min-h-0 p-4 overflow-hidden flex flex-col">
         {statuses.length > 0 ? (
           <div className="flex-1 overflow-y-auto pr-2 scrollbar-thin">
-            <PostTable data={data} columns={columns} />
+            <PostTable
+              data={data}
+              columns={columns}
+              renderRowAction={(row) => renderRowAction?.(row)}
+            />
           </div>
         ) : (
           <div className="flex justify-center items-center py-10">

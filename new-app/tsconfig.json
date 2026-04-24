@@ -37,7 +37,8 @@
     "**/*.tsx",
     "**/*.mts",
     ".next/types/**/*.ts", // Оставляем только типы роутов, если нужно
-    ".next/dev/types/**/*.ts"
+    ".next/dev/types/**/*.ts",
+    "src/widgets/sealant-params"
   ],
   "exclude": [
     "node_modules",

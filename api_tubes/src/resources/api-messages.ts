@@ -14,4 +14,5 @@ export enum ApiMessages {
   FILE_DELETE_ERROR = "Ошибка удаления файла",
   FILE_IS_MISSING_OR_INVALID = "Файл отсутствует или поврежден",
   POST_NOT_FOUND = "Пост не найден",
+  PARAM_NOT_FOUND = "Параметр не найден",
 }

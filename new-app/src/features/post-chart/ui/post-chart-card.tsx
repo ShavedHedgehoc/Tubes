@@ -40,7 +40,7 @@ export function PostChartCard({
   } = usePostChartCardData(statuses);
   const { handleOpenChange } = useHandleOpenChange();
   return (
-    <Card className="relative">
+    <Card className="relative shadow-none">
       {!disableClose && (
         <div className="absolute right-3 top-3 z-50">
           <Button

@@ -1,10 +1,35 @@
 import { queryOptions } from "@tanstack/react-query";
-import { getStatuses } from "./get-statuses";
+import { getPostStatuses } from "./get-post-statuses";
+import { StatusParams } from "../model";
+import { getStatusesList } from "./get-statuses-list";
 
 export const statusQueries = {
   all: () => ["statuses"],
   lists: () => [...statusQueries.all(), "list"],
-  list: (
+  list: (params: StatusParams, options?: { isServer: boolean }) =>
+    queryOptions({
+      queryKey: [
+        ...statusQueries.lists(),
+        {
+          ...params,
+          posts: Array.isArray(params.posts)
+            ? [...params.posts].sort()
+            : (params.posts ?? null),
+          // states: Array.isArray(params.states)
+          //   ? [...params.states].sort()
+          //   : (params.states ?? null),
+          // code: params.code ?? null,
+        },
+      ],
+      queryFn: () =>
+        getStatusesList({
+          ...params,
+          options,
+        }),
+      staleTime: 60 * 1000,
+    }),
+  post_lists: () => [...statusQueries.all(), "post_list"],
+  post_list: (
     {
       summary_id,
       post_val,
@@ -13,14 +38,14 @@ export const statusQueries = {
   ) =>
     queryOptions({
       queryKey: [
-        ...statusQueries.lists(),
+        ...statusQueries.post_lists(),
         {
           summary_id,
           post_val,
         },
       ],
       queryFn: () =>
-        getStatuses({
+        getPostStatuses({
           summary_id: summary_id,
           post_val: post_val,
           options,

@@ -2,6 +2,8 @@ import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
 import { ApiMessages } from "src/resources/api-messages";
 import { CreateStatusDto } from "./dto/create-status.dto";
+import { GetStatusesDto } from "./dto/get-statuses.dto";
+import { Prisma } from "generated/prisma";
 
 @Injectable()
 export class StatusesService {
@@ -145,5 +147,41 @@ export class StatusesService {
         },
       });
     });
+  }
+
+  async getStatuses(query: GetStatusesDto) {
+    type StatusWhere = Prisma.Args<
+      typeof this.prisma.status,
+      "findMany"
+    >["where"];
+    const summary = await this.prisma.summary.findUnique({
+      where: { id: query.summary_id },
+      include: { conveyor: true, batch: true, product: true },
+    });
+    if (!summary) throw new HttpException("", HttpStatus.NOT_FOUND);
+    const where: StatusWhere = {
+      summary_id: query.summary_id,
+      ...(query.posts?.length && {
+        post_id: { in: query.posts },
+      }),
+    };
+
+    const [total, statuses] = await Promise.all([
+      this.prisma.status.count({ where }),
+      this.prisma.status.findMany({
+        where,
+        include: {
+          operation: true,
+          employee: true,
+          post: true,
+          maintenance_session: { include: { maintenance: true } },
+        },
+        orderBy: [{ createdAt: "asc" }],
+        take: query.limit,
+        skip: query.limit * (query.page - 1),
+      }),
+    ]);
+
+    return { summary, statuses, total };
   }
 }

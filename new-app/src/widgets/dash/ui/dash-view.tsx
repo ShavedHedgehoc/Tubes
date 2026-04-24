@@ -12,8 +12,8 @@ import { FinishButton } from "@/features/finish-conveyor";
 import { PostDropdown } from "@/widgets/post-actions";
 
 import { PostChartModal } from "@/features/post-chart";
-import { PostTableModal } from "@/features/post-table";
 import { PostCloseModal } from "@/features/finish-conveyor-post";
+import { PostTableModalWidget } from "@/widgets/post-table-modal-widget";
 
 export default function DashView() {
   const { data, isLoading, isError } = useQuery({
@@ -86,7 +86,7 @@ export default function DashView() {
       <AvailableSummariesModal />
       <PostCloseModal />
       <PostChartModal />
-      <PostTableModal />
+      <PostTableModalWidget />
     </div>
   );
 }

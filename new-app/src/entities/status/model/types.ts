@@ -14,8 +14,58 @@ export type StatusEntity = {
   idle_time: number | null;
   finished: boolean;
   createdAt: Date;
+  extrusion_param_id: number | null;
+  varnish_param_id: number | null;
+  offset_param_id: number | null;
+  sealant_param_id: number | null;
+};
+
+type StatusTableRowState =
+  | "Внесение параметров"
+  | "Начало операции"
+  | "Конец операции"
+  | "Окончание работы";
+
+export type Ids = {
+  extrusion_param_id: number | null;
+  varnish_param_id: number | null;
+  offset_param_id: number | null;
+  sealant_param_id: number | null;
+  maintenance_session_id: number | null;
+};
+
+export type StatusWithIdsEntity = StatusEntity & {
+  ids: Ids;
+  state: StatusTableRowState;
 };
 
 export type StatusResponse = {
   statuses: StatusEntity[];
+};
+
+type SummaryBase = {
+  id: number;
+  product_id: number;
+  batch_id: number;
+  conveyor_id: number;
+  plan: number;
+  isActive: boolean;
+  isFinished: boolean;
+  date: Date;
+  shift: number;
+};
+
+export type SummaryReportBase = SummaryBase & {
+  conveyorName: string;
+  productCode: string;
+  productName: string;
+  productMarking: string;
+  batchName: string;
+};
+
+export type AllStatusResponse = {
+  summary: SummaryReportBase;
+  statuses: StatusWithIdsEntity[];
+  total: number;
+  totalPages: number;
 };
