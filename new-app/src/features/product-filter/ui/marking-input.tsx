@@ -7,8 +7,9 @@ import { throttle } from "nuqs";
 
 export default function MarkingInput() {
   const { params, setParams } = useProductSearchParams();
-
   const value = params.marking || "";
+
+  const inputId = "product-filter-marking-input";
 
   const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
@@ -25,6 +26,8 @@ export default function MarkingInput() {
   return (
     <ButtonGroup className="h-8 ">
       <Input
+        id={inputId}
+        name="productMarking"
         placeholder="Поиск по артикулу...  "
         value={value}
         onChange={handleChangeName}

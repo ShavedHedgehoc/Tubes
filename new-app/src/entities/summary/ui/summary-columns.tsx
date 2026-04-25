@@ -1,6 +1,8 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { SummaryEntity } from "../model/types";
+import { cn } from "@/shared/lib";
+import { EXECUTION_LIMIT } from "../model";
 
 export const baseSummaryColumns: ColumnDef<SummaryEntity>[] = [
   {
@@ -19,6 +21,14 @@ export const baseSummaryColumns: ColumnDef<SummaryEntity>[] = [
     cell: ({ row }) => {
       const summary = row.original;
       return <div className="text-center">{summary.conveyor.name}</div>;
+    },
+  },
+  {
+    accessorKey: "crew",
+    header: () => <div className="text-center">Бригада</div>,
+    cell: ({ row }) => {
+      const summary = row.original;
+      return <div className="text-center">{summary.crewName ?? "-"}</div>;
     },
   },
   {
@@ -74,6 +84,36 @@ export const baseSummaryColumns: ColumnDef<SummaryEntity>[] = [
     },
   },
   {
+    accessorKey: "production",
+    header: () => <div className="text-center">Выпуск</div>,
+    cell: ({ row }) => {
+      const summary = row.original;
+      return <div className="text-center">{summary.production ?? 0}</div>;
+    },
+  },
+  {
+    accessorKey: "execution",
+    header: () => <div className="text-center">%</div>,
+    cell: ({ row }) => {
+      const summary = row.original;
+      return (
+        <div
+          className={cn(
+            "text-center",
+            summary.execution &&
+              summary.execution < EXECUTION_LIMIT &&
+              "text-destructive",
+          )}
+        >
+          {summary.execution ?? "-"}
+        </div>
+      );
+    },
+  },
+];
+
+export const lastSummaryColumns: ColumnDef<SummaryEntity>[] = [
+  {
     accessorKey: "state",
     header: () => <div className="text-center">Статус</div>,
     cell: ({ row }) => {
@@ -89,19 +129,4 @@ export const baseSummaryColumns: ColumnDef<SummaryEntity>[] = [
       );
     },
   },
-  // {
-  //   accessorKey: "records",
-  //   header: () => <div className="text-center">Статус</div>,
-  //   cell: ({ row }) => {
-  //     const summary = row.original;
-  //     return (
-  //       <div className="text-center">
-  //         {summary._count.extrusion_statuses +
-  //           summary._count.varnish_statuses +
-  //           summary._count.offset_statuses +
-  //           summary._count.sealant_statuses}
-  //       </div>
-  //     );
-  //   },
-  // },
 ];

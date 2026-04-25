@@ -62,7 +62,31 @@ export type SummaryAvailable = SummaryBase & {
 // Полная сущность с отношениями
 export type SummaryEntity = SummaryAvailable & {
   conveyor: Conveyor;
+  production: number | null;
+  execution: number | null;
+  defectPercent: number | null;
+  unitWeight: number | null;
+  crewName: string | null;
+
   _count: PostStatusCount;
+};
+
+export type SummaryDetailEntity = {
+  id: number;
+  product_id: number;
+  batch_id: number;
+  conveyor_id: number;
+  plan: number;
+  isActive: boolean;
+  isFinished: boolean;
+  date: Date;
+  batch_name: string;
+  product_code: string;
+  product_name: string;
+  marking: string;
+  conveyor_name: string;
+  shift: number;
+  crew_id: number | null;
 };
 
 //тип для фронтенда

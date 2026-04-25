@@ -1,31 +1,43 @@
 "use client";
 
-import { SummaryEntity, useSummaryUiParams } from "@/entities/summary";
+import { SummaryDetailEntity } from "@/entities/summary";
 import { useEditSummaryForm } from "../model/use-form";
-import { FormLayout } from "@/shared/ui";
+import { FieldGroup, FormLayout } from "@/shared/ui";
+import { CrewEntity } from "@/entities/crew";
+import { FormProvider } from "react-hook-form";
+import { FormFooter } from "./form-footer";
+import { CrewsComboboxField, PlanField } from "./form-fields";
+import { FormHeader } from "./form-header";
 
-export function EditSummaryForm({ data }: { data: SummaryEntity }) {
-  const { params } = useSummaryUiParams();
-  const { form, onSubmit, handleClose } = useEditSummaryForm();
+interface Props {
+  crews: CrewEntity[];
+  data: SummaryDetailEntity;
+}
 
-  const editId = params["edit-summary"];
+export function EditSummaryForm({ crews, data }: Props) {
+  const { form, onSubmit, handleClose, ...state } = useEditSummaryForm({
+    data,
+    crews,
+  });
 
   return (
-    <FormLayout
-      title="Редактирование сводки"
-      description="Измените данные и сохраните изменения"
-      onClose={handleClose}
-      footer={undefined}
-    >
-      <form id="form-rhf-demo" onSubmit={form.handleSubmit(onSubmit)}>
-        <p>
-          Здесь будет форма редактирования сводки с id = {editId}, когда мы
-          придумаем, что редактировать
-        </p>
-        <p>
-          {data.product.code} {data.product.marking} {data.batch.name}
-        </p>
-      </form>
-    </FormLayout>
+    <FormProvider {...form}>
+      <FormLayout
+        title="Редактирование сводки"
+        description="Измените данные и сохраните изменения"
+        onClose={handleClose}
+        footer={<FormFooter createPending={state.updatePending} />}
+      >
+        <form id="edit-summary-form" onSubmit={form.handleSubmit(onSubmit)}>
+          <div className="flex flex-col gap-4">
+            <FormHeader summary={data} />
+            <FieldGroup>
+              <PlanField />
+              <CrewsComboboxField crews={crews} />
+            </FieldGroup>
+          </div>
+        </form>
+      </FormLayout>
+    </FormProvider>
   );
 }

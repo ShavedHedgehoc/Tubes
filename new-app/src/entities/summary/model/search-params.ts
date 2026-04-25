@@ -26,6 +26,9 @@ export const summaryParamsSchema = {
   conveyors: parseAsArrayOf(parseAsString).withDefault(
     undefined as unknown as string[],
   ),
+  crews: parseAsArrayOf(parseAsString).withDefault(
+    undefined as unknown as string[],
+  ),
   states: parseAsArrayOf(parseAsString),
   limit: parseAsInteger.withDefault(10),
   page: parseAsInteger.withDefault(1),

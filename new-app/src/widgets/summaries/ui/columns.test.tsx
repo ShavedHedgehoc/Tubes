@@ -19,6 +19,11 @@ describe("Summary Columns", () => {
     plan: 10000,
     isActive: false,
     isFinished: false,
+    production: null,
+    execution: null,
+    defectPercent: null,
+    unitWeight: null,
+    crewName: null,
     product: {
       id: 1,
       code: "057814",

@@ -3,6 +3,7 @@ export type ProductDto = {
   code: string;
   marking: string;
   name: string;
+  unit_weight: number | null;
 };
 
 type FilePath = {

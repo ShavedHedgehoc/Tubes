@@ -32,6 +32,11 @@ export type SummaryDto = {
   product: ProductEntity;
   batch: BatchEntity;
   conveyor: ConveyorEntity;
+  production: number | null;
+  execution: number | null;
+  defectPercent: number | null;
+  unitWeight: number | null;
+  crewName: string | null;
 
   shift: number;
   _count: TubePostStatusRecordCount;

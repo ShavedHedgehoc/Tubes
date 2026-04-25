@@ -5,6 +5,10 @@ import {
   inferParserType,
 } from "nuqs/server";
 
+export const productUiSchema = {
+  "change-product-weight": parseAsString, // ID продукта
+};
+
 export const productParamsSchema = {
   code: parseAsString,
   marking: parseAsString,

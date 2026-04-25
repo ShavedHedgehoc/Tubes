@@ -19,6 +19,7 @@ export async function getProducts({
   );
   const mappedProducts = res.rows.map((product) => {
     const { product_pictures, ...rest } = product;
+
     const pics = (product_pictures || []).map((p) => {
       return {
         picture_record_id: p.id,

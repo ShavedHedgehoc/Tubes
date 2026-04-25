@@ -22,6 +22,10 @@ import {
 import { AvailableSummariesResponse } from "./dto/available-summaries.response";
 import { GetPostStatusesDto } from "./dto/get-post-statuses.dto";
 import { GetStatusesDto } from "./dto/get-statuses.dto";
+import { StartSummaryDto } from "./dto/start-summary.dto";
+import { DataService } from "./data.service";
+import { MutationService } from "./mutation.service";
+import { UpdateSummaryDto } from "./dto/update-summary.dto";
 // import { GetStatusesDto } from "./dto/get-statuses.dto";
 
 type FullSpecification = Prisma.SpecificationGetPayload<{
@@ -30,6 +34,15 @@ type FullSpecification = Prisma.SpecificationGetPayload<{
 
 interface HasCreatedAt {
   createdAt: Date;
+}
+
+interface CrewStat {
+  crew_id: number;
+  crew_name: string;
+  total_weight: number;
+  total_units: number;
+  total_production: number;
+  total_plan: number;
 }
 
 const summaryInclude = {
@@ -80,7 +93,11 @@ export interface IMappedMaterial {
 
 @Injectable()
 export class SummariesService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private dataService: DataService,
+    private mutationService: MutationService,
+  ) {}
 
   private async createSpecifications(
     { summaryId, value }: { summaryId: number; value: string },
@@ -197,60 +214,16 @@ export class SummariesService {
     );
   }
 
+  async updateSummary(dto: UpdateSummaryDto) {
+    return this.mutationService.updateSummary(dto);
+  }
+
   async deleteSummary(id: number) {
     await this.prisma.summary.delete({ where: { id: id } });
   }
 
   async getSummariesList(query: GetSummariesListDto) {
-    const startDate = new Date(new Date(query.start_date).setHours(0));
-    const endDate = new Date(new Date(query.end_date).setHours(23));
-
-    type SummaryWhere = Prisma.Args<
-      typeof this.prisma.summary,
-      "findMany"
-    >["where"];
-    const where: SummaryWhere = {
-      date: {
-        gte: startDate,
-        lte: endDate,
-      },
-      ...(query.conveyors?.length && {
-        conveyor_id: { in: query.conveyors },
-      }),
-      product: query.code
-        ? {
-            code: { contains: query.code, mode: "insensitive" },
-          }
-        : undefined,
-      ...(query.states?.includes(2) && { isFinished: true }),
-      ...(query.states?.includes(1) && { isActive: true }),
-    };
-
-    const [count, summaries] = await Promise.all([
-      this.prisma.summary.count({ where }),
-      this.prisma.summary.findMany({
-        where,
-        include: {
-          product: true,
-          batch: true,
-          conveyor: true,
-          _count: {
-            select: {
-              statuses: true,
-            },
-          },
-        },
-        orderBy: [
-          { date: "asc" },
-          { conveyor: { name: "asc" } },
-          { shift: "asc" },
-        ],
-        take: query.limit,
-        skip: query.limit * (query.page - 1),
-      }),
-    ]);
-
-    return { total: count, rows: summaries };
+    return this.dataService.getSummariesList(query);
   }
 
   private async getIdleTimeSum(
@@ -550,37 +523,15 @@ export class SummariesService {
   }
 
   async finishSummary(dto: ChangeSummaryStateDto) {
-    const summary = await this.prisma.summary.update({
-      where: { id: dto.id },
-      data: {
-        isActive: false,
-        isFinished: true,
-      },
-    });
-    return summary;
+    return this.mutationService.finishSummary(dto);
   }
 
-  async startSummary(dto: ChangeSummaryStateDto) {
-    const summary = await this.prisma.summary.update({
-      where: { id: dto.id },
-      data: {
-        isActive: true,
-        isFinished: false,
-      },
-    });
-    return summary;
+  async startSummary(dto: StartSummaryDto) {
+    return this.mutationService.startSummary(dto);
   }
 
   async getSummaryById(id: number) {
-    const record = await this.prisma.summary.findUnique({
-      where: { id: id },
-      include: {
-        batch: true,
-        product: true,
-        conveyor: true,
-      },
-    });
-    return record;
+    return this.dataService.getSummaryById(id);
   }
 
   async getPostStatuses(query: GetPostStatusesDto) {
@@ -708,4 +659,534 @@ export class SummariesService {
       sealantParams: sealant.map((p) => withActualThreshold(p, thresholds)),
     };
   }
+
+  async getSummaryDefectsList(query: GetSummariesListDto) {
+    const startDate = new Date(new Date(query.start_date).setHours(0));
+    const endDate = new Date(new Date(query.end_date).setHours(23));
+
+    type SummaryWhere = Prisma.Args<
+      typeof this.prisma.summary,
+      "findMany"
+    >["where"];
+    const where: SummaryWhere = {
+      date: {
+        gte: startDate,
+        lte: endDate,
+      },
+      // ...(query.conveyors?.length && {
+      //   conveyor_id: { in: query.conveyors },
+      // }),
+      // product: query.code
+      //   ? {
+      //     code: { contains: query.code, mode: "insensitive" },
+      //   }
+      //   : undefined,
+      // ...(query.states?.includes(2) && { isFinished: true }),
+      // ...(query.states?.includes(1) && { isActive: true }),
+    };
+
+    const [count, summaries, defectsGroupByProduct, productionAgg, planAgg] =
+      await Promise.all([
+        this.prisma.summary.count({ where }),
+        this.prisma.summary.findMany({
+          where,
+          include: {
+            product: {
+              include: { unit_weight: { take: 1, orderBy: [{ id: "desc" }] } },
+            },
+            batch: true,
+            conveyor: true,
+            statuses: {
+              select: { counter_value: true },
+              where: { finished: true, post: { value: 4 } },
+              take: 1,
+              orderBy: [{ id: "desc" }],
+            },
+            defects: {
+              where: {
+                post: {
+                  value: { in: [2, 3, 4] },
+                },
+              },
+            },
+          },
+          orderBy: [
+            { date: "asc" },
+            { conveyor: { name: "asc" } },
+            { shift: "asc" },
+          ],
+          take: query.limit,
+          skip: query.limit * (query.page - 1),
+        }),
+
+        this.prisma.defect.groupBy({
+          by: ["summary_id"],
+          where: {
+            summary: where,
+            post: { value: { in: [2, 3, 4] } },
+          },
+          _sum: { value: true },
+        }),
+        this.prisma.status.aggregate({
+          where: { summary: where, finished: true, post: { value: 4 } },
+          _sum: { counter_value: true },
+        }),
+        this.prisma.summary.aggregate({
+          where: { ...where, isFinished: true },
+          _sum: { plan: true },
+        }),
+      ]);
+
+    const rows = summaries.map((summary) => {
+      const totalDefects =
+        Math.round(
+          summary.defects.reduce((sum, d) => sum + (d.value || 0), 0) * 100,
+        ) / 100;
+      const unitWeight = summary.product.unit_weight?.[0]?.weight ?? null;
+      const production = summary.statuses?.[0]?.counter_value ?? null;
+      const defectsInUnits = unitWeight
+        ? Math.round(totalDefects / unitWeight)
+        : null;
+      const defectPercent =
+        production && defectsInUnits
+          ? Math.round((defectsInUnits / production) * 100 * 100) / 100
+          : null;
+      const execution = production
+        ? Math.round((production / summary.plan) * 100 * 100) / 100
+        : null;
+      const {
+        defects: _defects,
+        statuses: _statuses,
+        product,
+        batch,
+        conveyor: _conveyor,
+        ...rest
+      } = summary;
+      return {
+        ...rest,
+        batch_name: batch.name,
+        product_code: product.code,
+        product_marking: product.marking,
+        product_name: product.name,
+        product_weight: unitWeight,
+        conveyor_name: summary.conveyor.name,
+        totalDefects,
+        production,
+        execution,
+        defectsInUnits,
+        defectPercent,
+      };
+    });
+
+    const summaryIds = defectsGroupByProduct.map((d) => d.summary_id);
+    const summaryWeights = await this.prisma.summary.findMany({
+      where: { id: { in: summaryIds } },
+      select: {
+        id: true,
+        product: {
+          select: { unit_weight: { take: 1, orderBy: { id: "desc" } } },
+        },
+      },
+    });
+
+    let totalGlobalUnits = 0;
+    let totalGlobalWeight = 0;
+
+    defectsGroupByProduct.forEach((def) => {
+      const sWeight = summaryWeights.find((s) => s.id === def.summary_id)
+        ?.product.unit_weight[0]?.weight;
+      const weightSum = def._sum.value || 0;
+      totalGlobalWeight += weightSum;
+      if (sWeight && sWeight > 0) {
+        totalGlobalUnits += Math.round(weightSum / sWeight);
+      }
+    });
+
+    const globalProduction = productionAgg._sum.counter_value || 0;
+    const globalPlan = planAgg._sum.plan || 0;
+    const globalExecution =
+      globalPlan > 0
+        ? Math.round((globalProduction / globalPlan) * 100 * 100) / 100
+        : 0;
+    const globalPercent =
+      globalProduction > 0
+        ? Math.round((totalGlobalUnits / globalProduction) * 10000) / 100
+        : 0;
+
+    return {
+      total: count,
+      rows: rows,
+      aggregates: {
+        total_defect_weight: Math.round(totalGlobalWeight * 100) / 100,
+        total_defect_units: totalGlobalUnits,
+        total_production: globalProduction,
+        total_defect_percent: globalPercent,
+        total_execution: globalExecution,
+      },
+    };
+  }
+
+  // async getSummaryChartData(query: GetSummariesListDto) {
+  //   const startDate = new Date(new Date(query.start_date).setHours(0));
+  //   const endDate = new Date(new Date(query.end_date).setHours(23));
+
+  //   type SummaryWhere = Prisma.Args<
+  //     typeof this.prisma.summary,
+  //     "findMany"
+  //   >["where"];
+  //   const where: SummaryWhere = {
+  //     date: {
+  //       gte: startDate,
+  //       lte: endDate,
+  //     },
+  //     // ...(query.conveyors?.length && {
+  //     //   conveyor_id: { in: query.conveyors },
+  //     // }),
+  //     // product: query.code
+  //     //   ? {
+  //     //     code: { contains: query.code, mode: "insensitive" },
+  //     //   }
+  //     //   : undefined,
+  //     // ...(query.states?.includes(2) && { isFinished: true }),
+  //     // ...(query.states?.includes(1) && { isActive: true }),
+  //   };
+
+  //   const [defectsGroupBySummary, productionByCrew, planByCrew] = await Promise.all([
+
+  //     this.prisma.defect.groupBy({
+  //       by: ['summary_id'],
+  //       where: { summary: where, post: { value: { in: [2, 3, 4] } } },
+  //       _sum: { value: true }
+  //     }),
+
+  //     // 2. Группируем производство по бригадам
+  //     this.prisma.status.groupBy({
+  //       by: ['summary_id'], // Сначала по summary, чтобы вытащить привязку к crew
+  //       where: { summary: where, finished: true, post: { value: 4 } },
+  //       _sum: { counter_value: true }
+  //     }),
+
+  //     // 3. Группируем план по бригадам
+  //     this.prisma.summary.groupBy({
+  //       by: ['crew_id'],
+  //       where: { ...where, isFinished: true },
+  //       _sum: { plan: true }
+  //     })
+
+  //   ]);
+
+  //   const allSummariesInPeriod = await this.prisma.summary.findMany({
+  //     where: { ...where },
+
+  //     select: {
+  //       id: true, crew_id: true, crew: { select: { name: true } }, product: {
+  //         select: {
+  //           unit_weight: { take: 1, orderBy: { id: 'desc' } }
+  //         }
+  //       }
+  //     }
+  //   });
+
+  //   const crewStats: Record<string, CrewStat> = {};
+
+  //   const getInitCrew = (id: number, name: string) => ({
+  //     crew_id: id,
+  //     crew_name: name,
+  //     total_weight: 0,
+  //     total_units: 0,
+  //     total_production: 0,
+  //     total_plan: 0
+  //   });
+
+  //   for (const def of defectsGroupBySummary) {
+  //     const sInfo = allSummariesInPeriod.find(s => s.id === def.summary_id);
+  //     if (!sInfo?.crew_id) continue;
+
+  //     const crewId = sInfo.crew_id;
+  //     if (!crewStats[crewId]) crewStats[crewId] = getInitCrew(crewId, sInfo.crew?.name || 'Н/Д');
+
+  //     const weightSum = def._sum.value || 0;
+  //     const unitWeight = sInfo.product.unit_weight[0]?.weight || 0;
+
+  //     crewStats[crewId].total_weight += weightSum;
+
+  //     if (unitWeight > 0) {
+  //       crewStats[crewId].total_units += Math.round(weightSum / unitWeight);
+  //     }
+  //   }
+
+  //   productionByCrew.forEach(p => {
+  //     const sInfo = allSummariesInPeriod.find(s => s.id === p.summary_id);
+  //     if (sInfo?.crew_id && crewStats[sInfo.crew_id]) {
+  //       crewStats[sInfo.crew_id].total_production += p._sum.counter_value || 0;
+  //     }
+  //   });
+
+  //   // Собираем данные по плану
+  //   planByCrew.forEach(p => {
+  //     if (p.crew_id && crewStats[p.crew_id]) {
+  //       crewStats[p.crew_id].total_plan = p._sum.plan || 0;
+  //     }
+  //   });
+
+  //   const aggregatesByCrew = Object.values(crewStats).map(c => ({
+  //     ...c,
+  //     total_weight: Math.round(c.total_weight * 100) / 100,
+  //     execution: c.total_plan > 0 ? Math.round((c.total_production / c.total_plan) * 10000) / 100 : 0,
+  //     defect_percent: c.total_production > 0 ? Math.round((c.total_units / c.total_production) * 10000) / 100 : 0
+  //   }));
+
+  //   return { aggregatesByCrew };
+  // }
+
+  async getSummaryChartData(query: GetSummariesListDto) {
+    const startDate = new Date(new Date(query.start_date).setHours(0));
+    const endDate = new Date(new Date(query.end_date).setHours(23));
+
+    type SummaryWhere = Prisma.Args<
+      typeof this.prisma.summary,
+      "findMany"
+    >["where"];
+    const where: SummaryWhere = {
+      date: {
+        gte: startDate,
+        lte: endDate,
+      },
+      // ...(query.conveyors?.length && {
+      //   conveyor_id: { in: query.conveyors },
+      // }),
+      // product: query.code
+      //   ? {
+      //     code: { contains: query.code, mode: "insensitive" },
+      //   }
+      //   : undefined,
+      // ...(query.states?.includes(2) && { isFinished: true }),
+      // ...(query.states?.includes(1) && { isActive: true }),
+    };
+
+    const [defectsByS, productionByS, planByCC] = await Promise.all([
+      this.prisma.defect.groupBy({
+        by: ["summary_id"],
+        where: { summary: where, post: { value: { in: [2, 3, 4] } } },
+        _sum: { value: true },
+      }),
+      this.prisma.status.groupBy({
+        by: ["summary_id"],
+        where: { summary: where, finished: true, post: { value: 4 } },
+        _sum: { counter_value: true },
+      }),
+      this.prisma.summary.groupBy({
+        by: ["crew_id", "conveyor_id"],
+        where: { ...where, isFinished: true },
+        _sum: { plan: true },
+      }),
+    ]);
+
+    const allSummaries = await this.prisma.summary.findMany({
+      where,
+      select: {
+        id: true,
+        crew_id: true,
+        conveyor_id: true,
+        crew: { select: { name: true } },
+        conveyor: { select: { name: true } },
+        product: {
+          select: { unit_weight: { take: 1, orderBy: { id: "desc" } } },
+        },
+      },
+    });
+
+    // Хранилище: stats[conveyorId][crewId]
+    const stats: Record<string, Record<number, CrewStat>> = { all: {} };
+
+    const getOrInit = (
+      cId: string | number,
+      crewId: number,
+      crewName: string,
+    ) => {
+      if (!stats[cId]) stats[cId] = {};
+      if (!stats[cId][crewId]) {
+        stats[cId][crewId] = {
+          crew_id: crewId,
+          crew_name: crewName,
+          total_weight: 0,
+          total_units: 0,
+          total_production: 0,
+          total_plan: 0,
+        };
+      }
+      return stats[cId][crewId];
+    };
+
+    // 1. Дефекты (считаем для конкретной линии и для 'all')
+    defectsByS.forEach((def) => {
+      const s = allSummaries.find((x) => x.id === def.summary_id);
+      if (!s || s.crew_id === null || s.conveyor_id === null) return;
+
+      const wSum = def._sum.value || 0;
+      const uW = s.product.unit_weight?.[0]?.weight || 0;
+      const uQty = uW > 0 ? Math.round(wSum / uW) : 0;
+
+      [s.conveyor_id, "all"].forEach((key) => {
+        const target = getOrInit(key, s.crew_id!, s.crew?.name || "Н/Д");
+        target.total_weight += wSum;
+        target.total_units += uQty;
+      });
+    });
+
+    // 2. Производство
+    productionByS.forEach((p) => {
+      const s = allSummaries.find((x) => x.id === p.summary_id);
+      if (!s || s.crew_id === null || s.conveyor_id === null) return;
+      const val = p._sum.counter_value || 0;
+
+      [s.conveyor_id, "all"].forEach((key) => {
+        getOrInit(key, s.crew_id!, s.crew?.name || "Н/Д").total_production +=
+          val;
+      });
+    });
+
+    // 3. Планы (группировка уже по crew/conveyor)
+    planByCC.forEach((p) => {
+      if (!p.crew_id || !p.conveyor_id) return;
+      const val = p._sum.plan || 0;
+      const crewName =
+        allSummaries.find((s) => s.crew_id === p.crew_id)?.crew?.name || "Н/Д";
+
+      // Для конкретной линии
+      getOrInit(p.conveyor_id, p.crew_id, crewName).total_plan += val;
+      // Для 'all'
+      getOrInit("all", p.crew_id, crewName).total_plan += val;
+    });
+
+    // Финальный расчет (проценты)
+    const format = (list: Record<number, CrewStat>) =>
+      Object.values(list).map((c) => ({
+        ...c,
+        total_weight: Math.round(c.total_weight * 100) / 100,
+        execution:
+          c.total_plan > 0
+            ? Math.round((c.total_production / c.total_plan) * 10000) / 100
+            : 0,
+        defect_percent:
+          c.total_production > 0
+            ? Math.round((c.total_units / c.total_production) * 10000) / 100
+            : 0,
+      }));
+
+    // Возвращаем объект, где ключи — это ID конвейеров + 'all'
+    const result: Record<string, any> = {};
+    Object.keys(stats).forEach((key) => {
+      result[key] = format(stats[key]);
+    });
+
+    return result;
+  }
+
+  //   async getSummaryChartData(query: GetSummariesListDto) {
+  //   // ... (startDate, endDate, where остаются прежними)
+
+  //   const [defectsGroupBySummary, productionBySummary, planByCrewAndConveyor] = await Promise.all([
+  //     this.prisma.defect.groupBy({
+  //       by: ['summary_id'],
+  //       where: { summary: where, post: { value: { in: [2, 3, 4] } } },
+  //       _sum: { value: true }
+  //     }),
+  //     this.prisma.status.groupBy({
+  //       by: ['summary_id'],
+  //       where: { summary: where, finished: true, post: { value: 4 } },
+  //       _sum: { counter_value: true }
+  //     }),
+  //     // План группируем и по бригаде, и по конвейеру
+  //     this.prisma.summary.groupBy({
+  //       by: ['crew_id', 'conveyor_id'],
+  //       where: { ...where, isFinished: true },
+  //       _sum: { plan: true }
+  //     })
+  //   ]);
+
+  //   const allSummariesInPeriod = await this.prisma.summary.findMany({
+  //     where: { ...where },
+  //     select: {
+  //       id: true,
+  //       crew_id: true,
+  //       conveyor_id: true, // Добавили конвейер
+  //       crew: { select: { name: true } },
+  //       conveyor: { select: { name: true } }, // Для названий линий
+  //       product: { select: { unit_weight: { take: 1, orderBy: { id: 'desc' } } } }
+  //     }
+  //   });
+
+  //   // Ключ теперь будет составным: crewId_conveyorId
+  //   const stats: Record<string, CrewStat & { conveyor_id: number; conveyor_name: string }> = {};
+
+  //   const getInitStat = (crewId: number, crewName: string, convId: number, convName: string) => ({
+  //     crew_id: crewId,
+  //     crew_name: crewName,
+  //     conveyor_id: convId,
+  //     conveyor_name: convName,
+  //     total_weight: 0,
+  //     total_units: 0,
+  //     total_production: 0,
+  //     total_plan: 0
+  //   });
+
+  //   // 1. Считаем дефекты
+  //   for (const def of defectsGroupBySummary) {
+  //     const sInfo = allSummariesInPeriod.find(s => s.id === def.summary_id);
+  //     if (!sInfo?.crew_id || !sInfo?.conveyor_id) continue;
+
+  //     const key = `${sInfo.crew_id}_${sInfo.conveyor_id}`;
+  //     if (!stats[key]) stats[key] = getInitStat(sInfo.crew_id, sInfo.crew?.name || 'Н/Д', sInfo.conveyor_id, sInfo.conveyor.name);
+
+  //     const weightSum = def._sum.value || 0;
+  //     const unitWeight = sInfo.product.unit_weight[0]?.weight || 0;
+  //     stats[key].total_weight += weightSum;
+  //     if (unitWeight > 0) stats[key].total_units += Math.round(weightSum / unitWeight);
+  //   }
+
+  //   // 2. Считаем производство
+  //   productionBySummary.forEach(p => {
+  //     const sInfo = allSummariesInPeriod.find(s => s.id === p.summary_id);
+  //     if (sInfo?.crew_id && sInfo?.conveyor_id) {
+  //       const key = `${sInfo.crew_id}_${sInfo.conveyor_id}`;
+  //       if (!stats[key]) stats[key] = getInitStat(sInfo.crew_id, sInfo.crew?.name || 'Н/Д', sInfo.conveyor_id, sInfo.conveyor.name);
+  //       stats[key].total_production += p._sum.counter_value || 0;
+  //     }
+  //   });
+
+  //   // 3. Добавляем планы
+  //   planByCrewAndConveyor.forEach(p => {
+  //     if (p.crew_id && p.conveyor_id) {
+  //       const key = `${p.crew_id}_${p.conveyor_id}`;
+  //       if (stats[key]) stats[key].total_plan = p._sum.plan || 0;
+  //     }
+  //   });
+
+  //   // Хелпер для финального расчета
+  //   const formatStat = (c: any) => ({
+  //     ...c,
+  //     total_weight: Math.round(c.total_weight * 100) / 100,
+  //     execution: c.total_plan > 0 ? Math.round((c.total_production / c.total_plan) * 10000) / 100 : 0,
+  //     defect_percent: c.total_production > 0 ? Math.round((c.total_units / c.total_production) * 10000) / 100 : 0
+  //   });
+
+  //   const flatStats = Object.values(stats);
+
+  //   // Группируем результат для фронтенда
+  //   return {
+  //     line1: flatStats.filter(s => s.conveyor_id === 1).map(formatStat),
+  //     line2: flatStats.filter(s => s.conveyor_id === 2).map(formatStat),
+  //     allLines: Object.values(
+  //       flatStats.reduce((acc: any, curr) => {
+  //         if (!acc[curr.crew_id]) acc[curr.crew_id] = { ...curr, conveyor_name: "Все линии", conveyor_id: 0, total_weight: 0, total_units: 0, total_production: 0, total_plan: 0 };
+  //         acc[curr.crew_id].total_weight += curr.total_weight;
+  //         acc[curr.crew_id].total_units += curr.total_units;
+  //         acc[curr.crew_id].total_production += curr.total_production;
+  //         acc[curr.crew_id].total_plan += curr.total_plan;
+  //         return acc;
+  //       }, {})
+  //     ).map(formatStat)
+  //   };
+  // }
 }

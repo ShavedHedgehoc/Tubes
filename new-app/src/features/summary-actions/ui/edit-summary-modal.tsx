@@ -8,8 +8,9 @@ import { LoaderCard } from "@/shared/ui";
 import { summaryApi, useSummaryUiParams } from "@/entities/summary";
 import { useModalState } from "@/shared/lib";
 import { EditSummaryForm } from "./edit-summary-form";
+import { CrewEntity } from "@/entities/crew";
 
-export function EditSummaryModal() {
+export function EditSummaryModal({ crews }: { crews: CrewEntity[] }) {
   const { params, setParams } = useSummaryUiParams();
   const {
     data: editId,
@@ -21,6 +22,11 @@ export function EditSummaryModal() {
   );
 
   useEffect(() => {
+    if (isOpen && crews.length === 0) {
+      toast.error("Список бригад пуст. Редактирование невозможно.");
+      onOpenChange(false);
+      return;
+    }
     if (isSuccess && !data && editId) {
       toast.error("Данные сводки не найдены");
       onOpenChange(false);
@@ -30,7 +36,7 @@ export function EditSummaryModal() {
 
       onOpenChange(false);
     }
-  }, [isSuccess, data, editId, isError, onOpenChange]);
+  }, [isSuccess, data, editId, isError, onOpenChange, isOpen, crews.length]);
 
   return (
     <ModalLayout
@@ -40,7 +46,7 @@ export function EditSummaryModal() {
       onOpenChange={onOpenChange}
     >
       {isPending && editId && <LoaderCard />}
-      {data && <EditSummaryForm data={data} />}
+      {data && <EditSummaryForm data={data} crews={crews} />}
     </ModalLayout>
   );
 }
