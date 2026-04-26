@@ -5,5 +5,3 @@
 // } as const;
 
 export const DEFAULT_PAGE_LIMIT = 10 as const;
-export const EXECUTION_LIMIT = 80 as const;
-export const DEFECT_LIMIT = 10 as const;

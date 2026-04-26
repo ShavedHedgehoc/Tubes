@@ -34,6 +34,19 @@ export const summaryParamsSchema = {
   page: parseAsInteger.withDefault(1),
 };
 
+export const summaryCrewsStatsParamsSchema = {
+  start_date: parseAsString.withDefault(
+    format(getMonthBounds().firstDay, "yyyy-MM-dd"),
+  ),
+  end_date: parseAsString.withDefault(
+    format(getMonthBounds().lastDay, "yyyy-MM-dd"),
+  ),
+};
+
+export const summaryCrewsStatsUiSchema = {
+  isDefect: parseAsBoolean.withDefault(false),
+};
+
 export const summaryDetailParamsSchema = {
   summary_id: parseAsString,
 };
@@ -45,4 +58,10 @@ export type SummaryDetailParams = inferParserType<
 >;
 export const summaryDetailParamsCache = createSearchParamsCache(
   summaryDetailParamsSchema,
+);
+export type SummaryCrewsStatsParams = inferParserType<
+  typeof summaryCrewsStatsParamsSchema
+>;
+export const summaryCrewsStatsParamsCache = createSearchParamsCache(
+  summaryCrewsStatsParamsSchema,
 );

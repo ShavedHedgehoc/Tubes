@@ -67,6 +67,8 @@ export type SummaryEntity = SummaryAvailable & {
   defectPercent: number | null;
   unitWeight: number | null;
   crewName: string | null;
+  defectRateGoal: number | null;
+  executionGoal: number | null;
 
   _count: PostStatusCount;
 };
@@ -417,3 +419,20 @@ export type SummaryReportEntity = {
   offsetParams: OffsetParamsRow[];
   sealantParams: SealantParamsRow[];
 };
+
+export type CrewStat = {
+  crew_id: number;
+  crew_name: string;
+  total_weight: number;
+  total_units: number;
+  total_production: number;
+  total_plan: number;
+  defect_rate_goal: number | null;
+  execution_goal: number | null;
+  execution: number;
+  defect_percent: number;
+};
+
+export type ChartDataResponse = {
+  all: CrewStat[];
+} & Record<string, CrewStat[]>;

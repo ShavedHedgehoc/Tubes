@@ -106,6 +106,16 @@ model Status {
   @@map("statuses")
 }
 
+model Goal {
+  id             Int      @id @default(autoincrement())
+  metric_name    String
+  target_value   Float
+  effective_from DateTime
+  createdAt      DateTime @default(now())
+
+  @@map("goals")
+}
+
 // Шаблон обслуживания (например: "Ежедневное ТО", "ТО-10000")
 model Maintenance {
   id                   Int                  @id @default(autoincrement())

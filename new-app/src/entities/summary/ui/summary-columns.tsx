@@ -2,7 +2,6 @@ import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { SummaryEntity } from "../model/types";
 import { cn } from "@/shared/lib";
-import { EXECUTION_LIMIT } from "../model";
 
 export const baseSummaryColumns: ColumnDef<SummaryEntity>[] = [
   {
@@ -93,19 +92,27 @@ export const baseSummaryColumns: ColumnDef<SummaryEntity>[] = [
   },
   {
     accessorKey: "execution",
-    header: () => <div className="text-center">%</div>,
+    header: () => (
+      <div className="text-center" style={{ width: "60px" }}>
+        План %
+      </div>
+    ),
     cell: ({ row }) => {
-      const summary = row.original;
+      const { execution, executionGoal } = row.original;
+      const isBelowGoal =
+        execution !== null &&
+        executionGoal !== null &&
+        execution < executionGoal;
+
       return (
         <div
           className={cn(
             "text-center",
-            summary.execution &&
-              summary.execution < EXECUTION_LIMIT &&
-              "text-destructive",
+            !executionGoal && "text-muted-foreground/70",
+            isBelowGoal && "text-destructive",
           )}
         >
-          {summary.execution ?? "-"}
+          {execution ?? "-"}
         </div>
       );
     },

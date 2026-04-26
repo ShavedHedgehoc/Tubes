@@ -37,6 +37,8 @@ export type SummaryDto = {
   defectPercent: number | null;
   unitWeight: number | null;
   crewName: string | null;
+  defectRateGoal: number | null;
+  executionGoal: number | null;
 
   shift: number;
   _count: TubePostStatusRecordCount;

@@ -12,6 +12,19 @@ export class DataService {
     const startDate = new Date(new Date(query.start_date).setHours(0));
     const endDate = new Date(new Date(query.end_date).setHours(23));
 
+    const goals = await this.prisma.goal.findMany({
+      where: { effective_from: { lte: endDate } },
+      orderBy: { effective_from: "desc" },
+    });
+
+    const getGoalValue = (metricName: string, date: Date) => {
+      return (
+        goals.find(
+          (g) => g.metric_name === metricName && g.effective_from <= date,
+        )?.target_value ?? null
+      );
+    };
+
     type SummaryWhere = Prisma.Args<
       typeof this.prisma.summary,
       "findMany"
@@ -107,6 +120,8 @@ export class DataService {
         ? Math.round((production / summary.plan) * 100 * 100) / 100
         : null;
       const crewName = crew ? crew.name : null;
+      const defectRateGoal = getGoalValue("defect_rate", summary.date);
+      const executionGoal = getGoalValue("execution_rate", summary.date);
       return {
         ...rest,
         product: productRest,
@@ -115,6 +130,8 @@ export class DataService {
         execution,
         defectPercent,
         crewName,
+        defectRateGoal,
+        executionGoal,
       };
     });
 

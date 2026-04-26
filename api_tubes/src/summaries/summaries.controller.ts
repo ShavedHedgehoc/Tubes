@@ -22,6 +22,8 @@ import { GetPostStatusesDto } from "./dto/get-post-statuses.dto";
 import { GetStatusesDto } from "./dto/get-statuses.dto";
 import { StartSummaryDto } from "./dto/start-summary.dto";
 import { UpdateSummaryDto } from "./dto/update-summary.dto";
+import { CrewStatExtended } from "./chart-data.service";
+import { GetCrewsStatsDto } from "./dto/get-crews-stats.dto";
 // import { GetDetailDto } from "./dto/get-detail.dto";
 
 //move to dto
@@ -50,8 +52,8 @@ export class SummariesController {
   @ApiOperation({ summary: "Графики" })
   @Get("/charts_data")
   getSummaryChartsData(
-    @Query(new ValidationPipe({ transform: true })) query: GetSummariesListDto,
-  ) {
+    @Query(new ValidationPipe({ transform: true })) query: GetCrewsStatsDto,
+  ): Promise<Record<string, CrewStatExtended[]>> {
     return this.summaryService.getSummaryChartData(query);
   }
 

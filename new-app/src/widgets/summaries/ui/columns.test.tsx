@@ -24,6 +24,9 @@ describe("Summary Columns", () => {
     defectPercent: null,
     unitWeight: null,
     crewName: null,
+    defectRateGoal: null,
+    executionGoal: null,
+
     product: {
       id: 1,
       code: "057814",
