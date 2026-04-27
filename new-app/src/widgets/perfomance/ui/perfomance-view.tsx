@@ -22,6 +22,15 @@ export function PerfomanceView() {
   const conveyorKeys = Object.keys(data).filter((key) => key !== "all");
   const allData = data["all"] || [];
 
+  if (allData.length === 0 && conveyorKeys.length === 0) {
+    return (
+      <div className="container mx-auto py-10 space-y-10">
+        <PerfomanceHeader />
+        <div className="p-10 text-center text-muted-foreground">Данные за выбранный период отсутствуют</div>
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto py-10 space-y-10">
       <PerfomanceHeader />
@@ -37,22 +46,24 @@ export function PerfomanceView() {
           />
         </div>
       </section>
-      <hr className="border-muted" />
-      <section>
-        <h2 className="text-xl font-bold mb-6 text-center text-muted-foreground uppercase tracking-wider">
-          По конвейерам
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {conveyorKeys.map((key) => (
-            <CrewsStatsChart
-              key={key}
-              title={`Конвейер ${key}`}
-              chartData={data[key]}
-              isDefect={isDefect}
-            />
-          ))}
-        </div>
-      </section>
+      {conveyorKeys.length > 0 && <hr className="border-muted" />}
+      {conveyorKeys.length > 0 &&
+        <section>
+          <h2 className="text-xl font-bold mb-6 text-center text-muted-foreground uppercase tracking-wider">
+            По конвейерам
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {conveyorKeys.map((key) => (
+              <CrewsStatsChart
+                key={key}
+                title={`Конвейер ${key}`}
+                chartData={data[key]}
+                isDefect={isDefect}
+              />
+            ))}
+          </div>
+        </section>
+      }
     </div>
   );
 }
