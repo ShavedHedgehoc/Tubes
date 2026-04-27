@@ -69,11 +69,9 @@ export function CrewsStatsChart({ title, chartData, isDefect }: Props) {
                   if (typeof value === "number") {
                     return `${value}%`;
                   }
-
                   if (typeof value === "string") {
                     return value;
                   }
-
                   return "";
                 }}
                 style={{ fontSize: "12px", fontWeight: "500", fill: "#666" }}

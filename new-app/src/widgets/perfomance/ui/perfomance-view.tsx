@@ -26,7 +26,9 @@ export function PerfomanceView() {
     return (
       <div className="container mx-auto py-10 space-y-10">
         <PerfomanceHeader />
-        <div className="p-10 text-center text-muted-foreground">Данные за выбранный период отсутствуют</div>
+        <div className="p-10 text-center text-muted-foreground">
+          Данные за выбранный период отсутствуют
+        </div>
       </div>
     );
   }
@@ -47,7 +49,7 @@ export function PerfomanceView() {
         </div>
       </section>
       {conveyorKeys.length > 0 && <hr className="border-muted" />}
-      {conveyorKeys.length > 0 &&
+      {conveyorKeys.length > 0 && (
         <section>
           <h2 className="text-xl font-bold mb-6 text-center text-muted-foreground uppercase tracking-wider">
             По конвейерам
@@ -63,7 +65,7 @@ export function PerfomanceView() {
             ))}
           </div>
         </section>
-      }
+      )}
     </div>
   );
 }
