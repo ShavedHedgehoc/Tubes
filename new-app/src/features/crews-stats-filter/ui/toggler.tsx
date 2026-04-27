@@ -5,11 +5,11 @@ import { ToggleGroup, ToggleGroupItem } from "@/shared/ui";
 export function Toggler() {
   const { params: uiParams, setParams: setUiParams } =
     useSummaryCrewsStatsUiParams();
-  const currentValue = uiParams.isDefect ? "defect" : "plan";
+  const currentValue = uiParams.mode;
 
-  const handleValueChange = (value: string) => {
+  const handleValueChange = (value: "idle" | "plan" | "defect") => {
     if (value) {
-      setUiParams({ isDefect: value === "defect" });
+      setUiParams({ mode: value });
     }
   };
   return (
@@ -33,6 +33,13 @@ export function Toggler() {
         aria-label="defect"
       >
         Брак
+      </ToggleGroupItem>
+      <ToggleGroupItem
+        className="px-4 focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+        value="idle"
+        aria-label="idle"
+      >
+        Простои
       </ToggleGroupItem>
     </ToggleGroup>
   );

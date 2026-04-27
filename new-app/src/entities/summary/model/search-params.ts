@@ -7,6 +7,7 @@ import {
   parseAsBoolean,
   parseAsInteger,
   parseAsString,
+  parseAsStringLiteral,
 } from "nuqs/server";
 
 export const summaryUiSchema = {
@@ -44,7 +45,8 @@ export const summaryCrewsStatsParamsSchema = {
 };
 
 export const summaryCrewsStatsUiSchema = {
-  isDefect: parseAsBoolean.withDefault(false),
+  // isDefect: parseAsBoolean.withDefault(false),
+  mode: parseAsStringLiteral(["plan", "defect", "idle"]).withDefault("plan"),
 };
 
 export const summaryDetailParamsSchema = {

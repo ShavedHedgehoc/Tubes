@@ -420,6 +420,7 @@ export type SummaryReportEntity = {
   sealantParams: SealantParamsRow[];
 };
 
+export type PostIdle = Record<string, number>;
 export type CrewStat = {
   crew_id: number;
   crew_name: string;
@@ -431,6 +432,7 @@ export type CrewStat = {
   execution_goal: number | null;
   execution: number;
   defect_percent: number;
+  idles: PostIdle[];
 };
 
 export type ChartDataResponse = {
