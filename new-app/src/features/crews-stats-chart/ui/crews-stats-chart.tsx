@@ -45,7 +45,7 @@ export function CrewsStatsChart({ title, chartData, isDefect }: Props) {
             <XAxis dataKey="crew_name" />
             <YAxis domain={isDefect ? [0, "auto"] : [0, 110]} />
             <Tooltip cursor={{ fill: "transparent" }} />
-            <Legend />
+            <Legend iconSize={0} />
 
             {currentGoal !== null && (
               <ReferenceLine

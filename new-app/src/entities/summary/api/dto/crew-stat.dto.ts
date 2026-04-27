@@ -9,4 +9,5 @@ export type CrewStatDto = {
   execution_goal: number | null;
   execution: number;
   defect_percent: number;
+  idles: Record<string, number>[];
 };
