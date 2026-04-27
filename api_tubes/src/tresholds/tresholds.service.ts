@@ -113,7 +113,7 @@ export class TresholdsService {
           product: { select: { code: true, name: true, marking: true } },
           conveyor: { select: { name: true } },
         },
-        orderBy: [{ id: "asc" }],
+        orderBy: [{ id: "desc" }],
       }),
     ]);
 
