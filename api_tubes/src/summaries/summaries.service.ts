@@ -22,6 +22,12 @@ import {
 import { AvailableSummariesResponse } from "./dto/available-summaries.response";
 import { GetPostStatusesDto } from "./dto/get-post-statuses.dto";
 import { GetStatusesDto } from "./dto/get-statuses.dto";
+import { StartSummaryDto } from "./dto/start-summary.dto";
+import { DataService } from "./data.service";
+import { MutationService } from "./mutation.service";
+import { UpdateSummaryDto } from "./dto/update-summary.dto";
+import { ChartDataService } from "./chart-data.service";
+import { GetCrewsStatsDto } from "./dto/get-crews-stats.dto";
 // import { GetStatusesDto } from "./dto/get-statuses.dto";
 
 type FullSpecification = Prisma.SpecificationGetPayload<{
@@ -31,6 +37,15 @@ type FullSpecification = Prisma.SpecificationGetPayload<{
 interface HasCreatedAt {
   createdAt: Date;
 }
+
+// interface CrewStat {
+//   crew_id: number;
+//   crew_name: string;
+//   total_weight: number;
+//   total_units: number;
+//   total_production: number;
+//   total_plan: number;
+// }
 
 const summaryInclude = {
   batch: true,
@@ -80,7 +95,12 @@ export interface IMappedMaterial {
 
 @Injectable()
 export class SummariesService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private dataService: DataService,
+    private mutationService: MutationService,
+    private chartDataService: ChartDataService,
+  ) {}
 
   private async createSpecifications(
     { summaryId, value }: { summaryId: number; value: string },
@@ -197,60 +217,16 @@ export class SummariesService {
     );
   }
 
+  async updateSummary(dto: UpdateSummaryDto) {
+    return this.mutationService.updateSummary(dto);
+  }
+
   async deleteSummary(id: number) {
     await this.prisma.summary.delete({ where: { id: id } });
   }
 
   async getSummariesList(query: GetSummariesListDto) {
-    const startDate = new Date(new Date(query.start_date).setHours(0));
-    const endDate = new Date(new Date(query.end_date).setHours(23));
-
-    type SummaryWhere = Prisma.Args<
-      typeof this.prisma.summary,
-      "findMany"
-    >["where"];
-    const where: SummaryWhere = {
-      date: {
-        gte: startDate,
-        lte: endDate,
-      },
-      ...(query.conveyors?.length && {
-        conveyor_id: { in: query.conveyors },
-      }),
-      product: query.code
-        ? {
-            code: { contains: query.code, mode: "insensitive" },
-          }
-        : undefined,
-      ...(query.states?.includes(2) && { isFinished: true }),
-      ...(query.states?.includes(1) && { isActive: true }),
-    };
-
-    const [count, summaries] = await Promise.all([
-      this.prisma.summary.count({ where }),
-      this.prisma.summary.findMany({
-        where,
-        include: {
-          product: true,
-          batch: true,
-          conveyor: true,
-          _count: {
-            select: {
-              statuses: true,
-            },
-          },
-        },
-        orderBy: [
-          { date: "asc" },
-          { conveyor: { name: "asc" } },
-          { shift: "asc" },
-        ],
-        take: query.limit,
-        skip: query.limit * (query.page - 1),
-      }),
-    ]);
-
-    return { total: count, rows: summaries };
+    return this.dataService.getSummariesList(query);
   }
 
   private async getIdleTimeSum(
@@ -550,37 +526,15 @@ export class SummariesService {
   }
 
   async finishSummary(dto: ChangeSummaryStateDto) {
-    const summary = await this.prisma.summary.update({
-      where: { id: dto.id },
-      data: {
-        isActive: false,
-        isFinished: true,
-      },
-    });
-    return summary;
+    return this.mutationService.finishSummary(dto);
   }
 
-  async startSummary(dto: ChangeSummaryStateDto) {
-    const summary = await this.prisma.summary.update({
-      where: { id: dto.id },
-      data: {
-        isActive: true,
-        isFinished: false,
-      },
-    });
-    return summary;
+  async startSummary(dto: StartSummaryDto) {
+    return this.mutationService.startSummary(dto);
   }
 
   async getSummaryById(id: number) {
-    const record = await this.prisma.summary.findUnique({
-      where: { id: id },
-      include: {
-        batch: true,
-        product: true,
-        conveyor: true,
-      },
-    });
-    return record;
+    return this.dataService.getSummaryById(id);
   }
 
   async getPostStatuses(query: GetPostStatusesDto) {
@@ -707,5 +661,175 @@ export class SummariesService {
       offsetParams: offset.map((p) => withActualThreshold(p, thresholds)),
       sealantParams: sealant.map((p) => withActualThreshold(p, thresholds)),
     };
+  }
+
+  async getSummaryDefectsList(query: GetSummariesListDto) {
+    const startDate = new Date(new Date(query.start_date).setHours(0));
+    const endDate = new Date(new Date(query.end_date).setHours(23));
+
+    type SummaryWhere = Prisma.Args<
+      typeof this.prisma.summary,
+      "findMany"
+    >["where"];
+    const where: SummaryWhere = {
+      date: {
+        gte: startDate,
+        lte: endDate,
+      },
+      // ...(query.conveyors?.length && {
+      //   conveyor_id: { in: query.conveyors },
+      // }),
+      // product: query.code
+      //   ? {
+      //     code: { contains: query.code, mode: "insensitive" },
+      //   }
+      //   : undefined,
+      // ...(query.states?.includes(2) && { isFinished: true }),
+      // ...(query.states?.includes(1) && { isActive: true }),
+    };
+
+    const [count, summaries, defectsGroupByProduct, productionAgg, planAgg] =
+      await Promise.all([
+        this.prisma.summary.count({ where }),
+        this.prisma.summary.findMany({
+          where,
+          include: {
+            product: {
+              include: { unit_weight: { take: 1, orderBy: [{ id: "desc" }] } },
+            },
+            batch: true,
+            conveyor: true,
+            statuses: {
+              select: { counter_value: true },
+              where: { finished: true, post: { value: 4 } },
+              take: 1,
+              orderBy: [{ id: "desc" }],
+            },
+            defects: {
+              where: {
+                post: {
+                  value: { in: [2, 3, 4] },
+                },
+              },
+            },
+          },
+          orderBy: [
+            { date: "asc" },
+            { conveyor: { name: "asc" } },
+            { shift: "asc" },
+          ],
+          take: query.limit,
+          skip: query.limit * (query.page - 1),
+        }),
+
+        this.prisma.defect.groupBy({
+          by: ["summary_id"],
+          where: {
+            summary: where,
+            post: { value: { in: [2, 3, 4] } },
+          },
+          _sum: { value: true },
+        }),
+        this.prisma.status.aggregate({
+          where: { summary: where, finished: true, post: { value: 4 } },
+          _sum: { counter_value: true },
+        }),
+        this.prisma.summary.aggregate({
+          where: { ...where, isFinished: true },
+          _sum: { plan: true },
+        }),
+      ]);
+
+    const rows = summaries.map((summary) => {
+      const totalDefects =
+        Math.round(
+          summary.defects.reduce((sum, d) => sum + (d.value || 0), 0) * 100,
+        ) / 100;
+      const unitWeight = summary.product.unit_weight?.[0]?.weight ?? null;
+      const production = summary.statuses?.[0]?.counter_value ?? null;
+      const defectsInUnits = unitWeight
+        ? Math.round(totalDefects / unitWeight)
+        : null;
+      const defectPercent =
+        production && defectsInUnits
+          ? Math.round((defectsInUnits / production) * 100 * 100) / 100
+          : null;
+      const execution = production
+        ? Math.round((production / summary.plan) * 100 * 100) / 100
+        : null;
+      const {
+        defects: _defects,
+        statuses: _statuses,
+        product,
+        batch,
+        conveyor: _conveyor,
+        ...rest
+      } = summary;
+      return {
+        ...rest,
+        batch_name: batch.name,
+        product_code: product.code,
+        product_marking: product.marking,
+        product_name: product.name,
+        product_weight: unitWeight,
+        conveyor_name: summary.conveyor.name,
+        totalDefects,
+        production,
+        execution,
+        defectsInUnits,
+        defectPercent,
+      };
+    });
+
+    const summaryIds = defectsGroupByProduct.map((d) => d.summary_id);
+    const summaryWeights = await this.prisma.summary.findMany({
+      where: { id: { in: summaryIds } },
+      select: {
+        id: true,
+        product: {
+          select: { unit_weight: { take: 1, orderBy: { id: "desc" } } },
+        },
+      },
+    });
+
+    let totalGlobalUnits = 0;
+    let totalGlobalWeight = 0;
+
+    defectsGroupByProduct.forEach((def) => {
+      const sWeight = summaryWeights.find((s) => s.id === def.summary_id)
+        ?.product.unit_weight[0]?.weight;
+      const weightSum = def._sum.value || 0;
+      totalGlobalWeight += weightSum;
+      if (sWeight && sWeight > 0) {
+        totalGlobalUnits += Math.round(weightSum / sWeight);
+      }
+    });
+
+    const globalProduction = productionAgg._sum.counter_value || 0;
+    const globalPlan = planAgg._sum.plan || 0;
+    const globalExecution =
+      globalPlan > 0
+        ? Math.round((globalProduction / globalPlan) * 100 * 100) / 100
+        : 0;
+    const globalPercent =
+      globalProduction > 0
+        ? Math.round((totalGlobalUnits / globalProduction) * 10000) / 100
+        : 0;
+
+    return {
+      total: count,
+      rows: rows,
+      aggregates: {
+        total_defect_weight: Math.round(totalGlobalWeight * 100) / 100,
+        total_defect_units: totalGlobalUnits,
+        total_production: globalProduction,
+        total_defect_percent: globalPercent,
+        total_execution: globalExecution,
+      },
+    };
+  }
+
+  async getSummaryChartData(query: GetCrewsStatsDto) {
+    return this.chartDataService.getSummaryChartData(query);
   }
 }

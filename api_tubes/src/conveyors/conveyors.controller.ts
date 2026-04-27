@@ -7,6 +7,13 @@ import { ConveyorsDataResponse } from "./dto/conveyors-data.response";
 @Controller("conveyors")
 export class ConveyorsController {
   constructor(private readonly conveyorService: ConveyorsService) {}
+  // endpoint for app
+  @ApiOperation({ summary: "Получить все конвейеры" })
+  @Get()
+  getConveyors() {
+    return this.conveyorService.getConveyors();
+  }
+  // endpoint for dash
   @ApiOperation({ summary: "Получить все конвейеры" })
   @Get("/all")
   getAllconveyors() {

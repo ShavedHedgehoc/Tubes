@@ -20,7 +20,7 @@ export async function getStatusesList({
     params,
   );
 
-  const { summary, statuses, ...rest } = res;
+  const { summary, statuses: _statuses, ...rest } = res;
   const { conveyor, batch, product, ...summaryRest } = summary;
   const flattenedSummary = {
     ...summaryRest,
@@ -33,13 +33,19 @@ export async function getStatusesList({
   };
 
   const mappedStatuses = res.statuses.map((status, idx) => {
-    const prevItem = statuses[idx - 1];
+    let prevItemWithSamePost = null;
+    for (let i = idx - 1; i >= 0; i--) {
+      if (res.statuses[i].post.value === status.post.value) {
+        prevItemWithSamePost = res.statuses[i];
+        break;
+      }
+    }
     let state: StatusTableRowState = "Внесение параметров";
     if (status.idle) {
       state = "Начало операции";
     } else if (status.finished) {
       state = "Окончание работы";
-    } else if (prevItem?.idle) {
+    } else if (prevItemWithSamePost?.idle) {
       state = "Конец операции";
     }
     const ids: Ids = {

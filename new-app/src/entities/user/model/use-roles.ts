@@ -11,6 +11,7 @@ export function useRoles() {
     isUser: roles.includes("USER"),
     isPlanner: roles.includes("PLANNER"),
     isAdmin: roles.includes("ADMIN"),
+    isAllowSummaryEdit: roles.includes("SUMMARY_EDIT"),
 
     isLoading,
     hasAnyRole: (requiredRoles: string[]) =>

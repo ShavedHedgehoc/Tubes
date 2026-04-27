@@ -26,9 +26,25 @@ export const summaryParamsSchema = {
   conveyors: parseAsArrayOf(parseAsString).withDefault(
     undefined as unknown as string[],
   ),
+  crews: parseAsArrayOf(parseAsString).withDefault(
+    undefined as unknown as string[],
+  ),
   states: parseAsArrayOf(parseAsString),
   limit: parseAsInteger.withDefault(10),
   page: parseAsInteger.withDefault(1),
+};
+
+export const summaryCrewsStatsParamsSchema = {
+  start_date: parseAsString.withDefault(
+    format(getMonthBounds().firstDay, "yyyy-MM-dd"),
+  ),
+  end_date: parseAsString.withDefault(
+    format(getMonthBounds().lastDay, "yyyy-MM-dd"),
+  ),
+};
+
+export const summaryCrewsStatsUiSchema = {
+  isDefect: parseAsBoolean.withDefault(false),
 };
 
 export const summaryDetailParamsSchema = {
@@ -42,4 +58,10 @@ export type SummaryDetailParams = inferParserType<
 >;
 export const summaryDetailParamsCache = createSearchParamsCache(
   summaryDetailParamsSchema,
+);
+export type SummaryCrewsStatsParams = inferParserType<
+  typeof summaryCrewsStatsParamsSchema
+>;
+export const summaryCrewsStatsParamsCache = createSearchParamsCache(
+  summaryCrewsStatsParamsSchema,
 );

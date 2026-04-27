@@ -23,6 +23,7 @@ class PictureRow extends Picture {
 }
 
 class ProductRow extends Product {
+  unit_weight: number | null;
   product_pictures: PictureRow[];
 }
 

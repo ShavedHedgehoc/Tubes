@@ -62,7 +62,33 @@ export type SummaryAvailable = SummaryBase & {
 // Полная сущность с отношениями
 export type SummaryEntity = SummaryAvailable & {
   conveyor: Conveyor;
+  production: number | null;
+  execution: number | null;
+  defectPercent: number | null;
+  unitWeight: number | null;
+  crewName: string | null;
+  defectRateGoal: number | null;
+  executionGoal: number | null;
+
   _count: PostStatusCount;
+};
+
+export type SummaryDetailEntity = {
+  id: number;
+  product_id: number;
+  batch_id: number;
+  conveyor_id: number;
+  plan: number;
+  isActive: boolean;
+  isFinished: boolean;
+  date: Date;
+  batch_name: string;
+  product_code: string;
+  product_name: string;
+  marking: string;
+  conveyor_name: string;
+  shift: number;
+  crew_id: number | null;
 };
 
 //тип для фронтенда
@@ -393,3 +419,20 @@ export type SummaryReportEntity = {
   offsetParams: OffsetParamsRow[];
   sealantParams: SealantParamsRow[];
 };
+
+export type CrewStat = {
+  crew_id: number;
+  crew_name: string;
+  total_weight: number;
+  total_units: number;
+  total_production: number;
+  total_plan: number;
+  defect_rate_goal: number | null;
+  execution_goal: number | null;
+  execution: number;
+  defect_percent: number;
+};
+
+export type ChartDataResponse = {
+  all: CrewStat[];
+} & Record<string, CrewStat[]>;

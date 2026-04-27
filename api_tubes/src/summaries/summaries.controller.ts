@@ -20,6 +20,10 @@ import { AvailableSummariesResponse } from "./dto/available-summaries.response";
 import { GetDetailDto } from "./dto/get-detail.dto";
 import { GetPostStatusesDto } from "./dto/get-post-statuses.dto";
 import { GetStatusesDto } from "./dto/get-statuses.dto";
+import { StartSummaryDto } from "./dto/start-summary.dto";
+import { UpdateSummaryDto } from "./dto/update-summary.dto";
+import { CrewStatExtended } from "./chart-data.service";
+import { GetCrewsStatsDto } from "./dto/get-crews-stats.dto";
 // import { GetDetailDto } from "./dto/get-detail.dto";
 
 //move to dto
@@ -35,6 +39,22 @@ export class SummariesController {
     @Query(new ValidationPipe({ transform: true })) query: GetSummariesListDto,
   ) {
     return this.summaryService.getSummariesList(query);
+  }
+
+  @ApiOperation({ summary: "Получить список сводок со значением брака" })
+  @Get("/defects")
+  getSummaryDefectList(
+    @Query(new ValidationPipe({ transform: true })) query: GetSummariesListDto,
+  ) {
+    return this.summaryService.getSummaryDefectsList(query);
+  }
+
+  @ApiOperation({ summary: "Графики" })
+  @Get("/charts_data")
+  getSummaryChartsData(
+    @Query(new ValidationPipe({ transform: true })) query: GetCrewsStatsDto,
+  ): Promise<Record<string, CrewStatExtended[]>> {
+    return this.summaryService.getSummaryChartData(query);
   }
 
   @ApiOperation({ summary: "Получить статусы поста" })
@@ -53,8 +73,14 @@ export class SummariesController {
     return this.summaryService.getPostStatusesWithData(query);
   }
 
-  // !!!!!!!!!!!!
-  // Надо добавить ручку для формы редактирования
+  @ApiOperation({ summary: "Обновить данные сводки" })
+  @Patch()
+  @UsePipes(new ValidationPipe({ transform: true }))
+  updateSummary(
+    @Body(new ValidationPipe({ transform: true })) dto: UpdateSummaryDto,
+  ) {
+    return this.summaryService.updateSummary(dto);
+  }
 
   @ApiOperation({
     summary: "Получить детали cводку по id (для редактирования)",
@@ -102,7 +128,7 @@ export class SummariesController {
 
   @ApiOperation({ summary: "Активировать запись сводки" })
   @Patch("/set_active")
-  startSummary(@Body() dto: ChangeSummaryStateDto) {
+  startSummary(@Body() dto: StartSummaryDto) {
     return this.summaryService.startSummary(dto);
   }
 

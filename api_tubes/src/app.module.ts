@@ -28,6 +28,7 @@ import { OperationPictureModule } from "./operation-picture/operation-picture.mo
 import { RolesModule } from "./roles/roles.module";
 import { MaintenanceLogModule } from "./maintenance-log/maintenance-log.module";
 import { PostsModule } from "./posts/post.module";
+import { CrewsModule } from "./crews/crews.module";
 
 const imports: Array<Type<unknown> | DynamicModule | Promise<DynamicModule>> = [
   ConfigModule.forRoot(),
@@ -56,6 +57,7 @@ const imports: Array<Type<unknown> | DynamicModule | Promise<DynamicModule>> = [
   RolesModule,
   MaintenanceLogModule,
   PostsModule,
+  CrewsModule,
 ];
 
 if (process.env.NODE_ENV !== "production") {

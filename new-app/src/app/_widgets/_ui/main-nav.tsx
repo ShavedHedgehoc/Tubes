@@ -19,6 +19,9 @@ export async function MainNav() {
       {hasRole("ADMIN") && (
         <MainNavLink href={"/users"}>Пользователи</MainNavLink>
       )}
+      {hasRole("PERFOMANCE") && (
+        <MainNavLink href={"/perfomance"}>Показатели</MainNavLink>
+      )}
     </nav>
   );
 }

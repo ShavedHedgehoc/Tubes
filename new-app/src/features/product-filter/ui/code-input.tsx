@@ -7,8 +7,9 @@ import { throttle } from "nuqs";
 
 export default function CodeInput() {
   const { params, setParams } = useProductSearchParams();
-
   const value = params.code || "";
+
+  const inputId = "product-filter-code-input";
 
   const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
@@ -25,6 +26,8 @@ export default function CodeInput() {
   return (
     <ButtonGroup className="h-8 ">
       <Input
+        id={inputId}
+        name="productCode"
         placeholder="Поиск по коду...  "
         value={value}
         onChange={handleChangeName}

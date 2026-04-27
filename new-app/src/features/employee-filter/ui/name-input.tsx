@@ -40,6 +40,7 @@ export default function NameInput() {
         )}
       </Button>
       <Input
+        id="employee-filter-name-input"
         placeholder="Поиск по фамилии...  "
         value={value}
         onChange={handleChangeName}

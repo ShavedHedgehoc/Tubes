@@ -67,6 +67,6 @@ export type StatusRow = StatusDto & {
 };
 
 export type SummaryStatusesDto = {
-  summary: Omit<SummaryDto, "_count">;
+  summary: Omit<SummaryDto, "_count" | "defectRateGoal" | "executionGoal">;
   statuses: StatusRow[];
 };

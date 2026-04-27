@@ -6,12 +6,22 @@ import CodeInput from "./code-input";
 import ResetButton from "./reset-button";
 import TodayButton from "./today-button";
 import { DatePicker } from "@/shared/ui";
+import ConveyorCombobox from "./conveyor-combobox";
+import { ConveyorEntity } from "@/entities/conveyor";
+import CrewCombobox from "./crew-combobox";
+import { CrewEntity } from "@/entities/crew";
 
 interface Props {
+  conveyorListItems: ConveyorEntity[];
+  crewListItems: CrewEntity[];
   actions?: React.ReactNode;
 }
 
-export function SummaryFilter({ actions }: Props) {
+export function SummaryFilter({
+  conveyorListItems,
+  crewListItems,
+  actions,
+}: Props) {
   const { params, setParams } = useSummarySearchParams();
 
   return (
@@ -42,6 +52,8 @@ export function SummaryFilter({ actions }: Props) {
               }
             }}
           />
+          <ConveyorCombobox items={conveyorListItems} />
+          <CrewCombobox items={crewListItems} />
           <CodeInput />
           <StateSelector />
         </div>

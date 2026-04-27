@@ -99,3 +99,14 @@ export const summaryValidationSchema: JSONSchemaType<SummaryUploadDataRow> = {
     "shift",
   ],
 };
+
+export const updateSummaryFormSchema = z.object({
+  plan: z
+    .number("Введите число")
+    .min(0, "Должно быть больше нуля.")
+    .max(99999, "Должно быть меньше 99 999."),
+
+  crew_id: z.number().int().nullable().optional(),
+});
+
+export type UpdateSummaryFormValues = z.infer<typeof updateSummaryFormSchema>;

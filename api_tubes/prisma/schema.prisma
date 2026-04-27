@@ -106,6 +106,16 @@ model Status {
   @@map("statuses")
 }
 
+model Goal {
+  id             Int      @id @default(autoincrement())
+  metric_name    String
+  target_value   Float
+  effective_from DateTime
+  createdAt      DateTime @default(now())
+
+  @@map("goals")
+}
+
 // Шаблон обслуживания (например: "Ежедневное ТО", "ТО-10000")
 model Maintenance {
   id                   Int                  @id @default(autoincrement())
@@ -237,15 +247,33 @@ model Employee {
 
 //  Продукция
 model Product {
-  id               Int              @id @default(autoincrement())
-  code             String           @unique
+  id               Int                 @id @default(autoincrement())
+  code             String              @unique
   marking          String
   name             String
   summaries        Summary[]
   product_pictures ProductPicture[]
   tresholds        Treshold[]
+  unit_weight      ProductUnitWeight[]
 
   @@map("products")
+}
+
+model ProductUnitWeight {
+  id         Int     @id @default(autoincrement())
+  product    Product @relation(fields: [product_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  product_id Int
+  weight     Float
+
+  @@map("product_unit_weights")
+}
+
+model Crew {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  summaries Summary[]
+
+  @@map("crews")
 }
 
 // Пути файлов
@@ -350,6 +378,8 @@ model Summary {
   production_boxes   ProductionBox[]
   statuses           Status[]
   defects            Defect[]
+  crew               Crew?              @relation(fields: [crew_id], references: [id])
+  crew_id            Int?
 
   @@index([conveyor_id, isActive])
   @@index([date])

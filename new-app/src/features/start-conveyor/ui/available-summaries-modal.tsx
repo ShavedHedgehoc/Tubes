@@ -21,6 +21,7 @@ export function AvailableSummariesModal() {
     setParams({
       "select-available": null,
       "conveyor-id": null,
+      "crew-id": null,
     });
   }, [setParams]);
 

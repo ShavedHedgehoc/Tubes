@@ -15,20 +15,20 @@ import { ProductFilter } from "@/features/product-filter";
 import { AddGalleryModal, PictureViewModal } from "@/features/pictures-column";
 import { useCreateProductPictureRecord } from "@/features/product-picture-record-actions";
 import { useGalleryUiParams } from "@/features/pictures-column";
+import { ChangeWeightModal } from "@/features/change-weight-button";
+import { useRoles } from "@/entities/user";
 
 export default function ProductsView() {
   const { params, setParams } = useProductSearchParams();
   const { params: galleryUiParams } = useGalleryUiParams();
+  const { isAllowSummaryEdit } = useRoles();
 
   const { data, isPlaceholderData, isFetching } = useQuery({
     ...productApi.productQueries.list(params, { isServer: false }),
     placeholderData: keepPreviousData,
   });
 
-  const {
-    data: existingIds,
-    // isFetching: idsFetching
-  } = useQuery({
+  const { data: existingIds } = useQuery({
     ...productApi.productQueries.picture_id_array(
       galleryUiParams["addGalleryEntityId"],
       { isServer: false },
@@ -71,6 +71,7 @@ export default function ProductsView() {
         onSave={(fileId) => handleSave(fileId)}
         existingIds={existingIds ?? []}
       />
+      {isAllowSummaryEdit && <ChangeWeightModal />}
     </div>
   );
 }
