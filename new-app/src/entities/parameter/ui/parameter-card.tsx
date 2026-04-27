@@ -54,7 +54,6 @@ export function ParameterCard(props: ParameterCardProps) {
     variant === "numeric" &&
     !hasLimits &&
     (value === null || value === undefined || value === 0);
-  console.log(value);
 
   return (
     <div>
