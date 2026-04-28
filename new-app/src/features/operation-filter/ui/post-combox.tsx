@@ -54,7 +54,7 @@ export default function PostCombobox({ items }: { items: PostEntity[] }) {
         <Button
           variant="outline"
           size="sm"
-          className="py-0 px-3 text-xs  rounded-r-none  border-r-0"
+          className="py-0 px-3 text-xs  rounded-r-none rounded-l-none  border-r-0"
         >
           <PlusCircle className="mr-2 h-4 w-4" />
           Посты

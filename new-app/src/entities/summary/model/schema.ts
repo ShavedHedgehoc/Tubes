@@ -54,7 +54,8 @@ export const summaryValidationSchema: JSONSchemaType<SummaryUploadDataRow> = {
     },
     batch: {
       type: "string",
-      pattern: "^[1-9]{1}[0-9]{1,3}[A-L]{1}\\d{1}[R,S,Z,X]{0,1}$",
+      // pattern: "^[1-9]{1}[0-9]{1,3}[A-L]{1}\\d{1}[R,S,Z,X]{0,1}$", //old pattern
+      pattern: "^[1-9]{1}[0-9]{1,3}[A-L]{1}\\d{1,2}[R,S,Z,X]{0,1}$", //new pattern
       errorMessage: { pattern: "Шаблон партии не совпадает" },
     },
     plan: {

@@ -28,7 +28,6 @@ import { MutationService } from "./mutation.service";
 import { UpdateSummaryDto } from "./dto/update-summary.dto";
 import { ChartDataService } from "./chart-data.service";
 import { GetCrewsStatsDto } from "./dto/get-crews-stats.dto";
-// import { GetStatusesDto } from "./dto/get-statuses.dto";
 
 type FullSpecification = Prisma.SpecificationGetPayload<{
   include: { material: { include: { consumed_materials: true } } };
@@ -37,15 +36,6 @@ type FullSpecification = Prisma.SpecificationGetPayload<{
 interface HasCreatedAt {
   createdAt: Date;
 }
-
-// interface CrewStat {
-//   crew_id: number;
-//   crew_name: string;
-//   total_weight: number;
-//   total_units: number;
-//   total_production: number;
-//   total_plan: number;
-// }
 
 const summaryInclude = {
   batch: true,
@@ -62,7 +52,6 @@ const summaryInclude = {
     include: {
       tresholds: {
         orderBy: { createdAt: "desc" as const },
-        // take: 1,
       },
     },
   },
@@ -76,7 +65,6 @@ const summaryInclude = {
         include: {
           consumed_materials: {
             orderBy: { id: "desc" as const },
-            // take: 1,
           },
         },
       },
@@ -267,7 +255,6 @@ export class SummariesService {
         return {
           code: material.code,
           name: material.name,
-          // scanned: s.material.consumed_materials.length > 0,
           scanned: hasBeenScannedInThisSummary,
         };
       });
@@ -676,16 +663,6 @@ export class SummariesService {
         gte: startDate,
         lte: endDate,
       },
-      // ...(query.conveyors?.length && {
-      //   conveyor_id: { in: query.conveyors },
-      // }),
-      // product: query.code
-      //   ? {
-      //     code: { contains: query.code, mode: "insensitive" },
-      //   }
-      //   : undefined,
-      // ...(query.states?.includes(2) && { isFinished: true }),
-      // ...(query.states?.includes(1) && { isActive: true }),
     };
 
     const [count, summaries, defectsGroupByProduct, productionAgg, planAgg] =
