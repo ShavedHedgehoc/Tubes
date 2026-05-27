@@ -150,7 +150,7 @@ services:
     depends_on:
       - tubes_dash
       - new_app
-      - public_api    
+      - public_api
   nginx-file-server:
     container_name: nginx_file_server_container
     build:
