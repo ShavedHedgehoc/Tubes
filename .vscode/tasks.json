@@ -15,6 +15,34 @@
       "command": "npm run prettier:fix",
       "group": "build",
       "problemMatcher": []
+    },
+    {
+      "label": "DEV: Run all",
+      "dependsOn": ["DEV: App 1", "DEV: App 2", "DEV: App 3"],
+      "dependsOrder": "parallel",
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "DEV: App 1",
+      "type": "shell",
+      "command": "npm run dev --workspace=api_tubes",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "DEV: App 2",
+      "type": "shell",
+      "command": "npm run dev --workspace=public_api",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "DEV: App 3",
+      "type": "shell",
+      "command": "npm run dev --workspace=new-app",
+      "isBackground": true,
+      "problemMatcher": []
     }
   ]
 }
@@ -45,7 +73,7 @@
 //       "group": "build",
 //       "detail": "Выгружает типы tRPC в Studio"
 //     },
-//     {
+//    {
 //       "label": "DEV: Run all",
 //       "type": "shell",
 //       "command": "pnpm dev",

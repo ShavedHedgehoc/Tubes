@@ -1,4 +1,4 @@
-FROM node:20-alpine AS deps
+FROM node:20-alpine3.20 AS deps
 # libc6-compat нужен для корректной работы некоторых зависимостей на alpine
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
@@ -11,7 +11,7 @@ RUN --mount=type=cache,target=/root/.npm \
     npm ci -w new-app
 
 
-FROM node:20-alpine AS builder
+FROM node:20-alpine3.20 AS builder
 WORKDIR /app
 
 COPY --from=deps /app/node_modules ./node_modules
@@ -31,7 +31,7 @@ RUN --mount=type=cache,target=/app/new-app/.next/cache \
     npm run build
 
 
-FROM node:20-alpine AS runner
+FROM node:20-alpine3.20 AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production \

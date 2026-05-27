@@ -5,8 +5,9 @@
       "project": ["*.{ts,js,jsonc}"],
     },
     "api_tubes": {
-      "entry": ["src/main.ts!"],
+      "entry": ["src/main.ts"],
       "project": ["src/**/*.ts"],
+      "ignoreBinaries": ["prisma"],
     },
     "tubes_application": {
       "project": ["src/**/*.{ts,tsx}"],
@@ -15,6 +16,10 @@
     "new_app": {
       "entry": ["pages/**/*.{js,jsx,ts,tsx}", "app/**/*.{js,jsx,ts,tsx}"], // Next.js
       "project": ["src/**/*.{ts,tsx}", "app/**/*.{ts,tsx}"],
+    },
+    "db": {
+      "project": [],
+      "ignoreDependencies": ["@prisma/client"],
     },
   },
   "ignoreExportsUsedInFile": true,

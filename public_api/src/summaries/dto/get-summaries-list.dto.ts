@@ -4,11 +4,10 @@ import {
   IsArray,
   IsDate,
   IsNotEmpty,
-  IsNumber,
   IsOptional,
   IsString,
 } from "class-validator";
-import { ToNumber, ToStringArray } from "src/shared";
+import { ToStringArray } from "src/shared";
 
 export class GetSummariesListDto {
   @ApiProperty({ description: "Дата начала", example: "2025-12-19" })
@@ -39,30 +38,4 @@ export class GetSummariesListDto {
   @IsArray()
   @IsString({ each: true })
   readonly conveyors?: string[];
-
-  // @ApiPropertyOptional({ description: "Бригады" })
-  // @IsOptional()
-  // @ToNumbersArray()
-  // @IsArray()
-  // @IsInt({ each: true })
-  // readonly crews?: number[];
-
-  // @ApiPropertyOptional({ description: "Статусы" })
-  // @IsOptional()
-  // @ToNumbersArray()
-  // @IsArray()
-  // @IsInt({ each: true })
-  // readonly states?: number[];
-
-  // @ApiProperty({ description: "На странице", example: 10 })
-  // @IsNotEmpty()
-  // @ToNumber()
-  // @IsNumber({}, { message: "Поле должно быть числом" })
-  // readonly limit: number;
-
-  // @ApiProperty({ description: "Страница", example: 1 })
-  // @IsNotEmpty()
-  // @ToNumber()
-  // @IsNumber({}, { message: "Поле должно быть числом" })
-  // readonly page: number;
 }

@@ -1,4 +1,4 @@
-FROM node:20-slim AS builder
+FROM node:20-alpine3.20 AS builder
 RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -15,7 +15,7 @@ WORKDIR /app/api_tubes
 RUN npx prisma generate
 RUN npm run build
 
-FROM node:20-slim AS runtime
+FROM node:20-alpine3.20 AS runtime
 RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
 
 

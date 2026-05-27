@@ -9,7 +9,7 @@
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "cross-env NODE_ENV=production nest start",
-    "start:dev": "cross-env NODE_ENV=development nest start --watch",
+    "dev": "cross-env NODE_ENV=development nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "start:migrate:prod": "npx prisma migrate deploy --schema=../db/prisma/schema.prisma && node dist/main",
