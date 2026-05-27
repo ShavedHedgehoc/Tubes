@@ -20,7 +20,7 @@ export default function CodeInput() {
   };
 
   const handleReset = () => {
-    setParams({ code: null, page: 1 }, { shallow: false });
+    setParams({ code: null, page: 1 });
   };
 
   return (

@@ -20,7 +20,7 @@ export default function MarkingInput() {
   };
 
   const handleReset = () => {
-    setParams({ marking: null, page: 1 }, { shallow: false });
+    setParams({ marking: null, page: 1 });
   };
 
   return (

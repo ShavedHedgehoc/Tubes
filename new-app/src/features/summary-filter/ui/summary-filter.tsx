@@ -34,9 +34,9 @@ export function SummaryFilter({
             onChange={(val) => {
               const str = val ? format(val, "yyyy-MM-dd") : null;
               if (str && params.end_date && str > params.end_date) {
-                setParams({ start_date: str, end_date: str });
+                setParams({ start_date: str, end_date: str, page: 1 });
               } else {
-                setParams({ start_date: str });
+                setParams({ start_date: str, page: 1 });
               }
             }}
           />
@@ -46,9 +46,9 @@ export function SummaryFilter({
             onChange={(val) => {
               const str = val ? format(val, "yyyy-MM-dd") : null;
               if (str && params.start_date && str < params.start_date) {
-                setParams({ end_date: str, start_date: str });
+                setParams({ end_date: str, start_date: str, page: 1 });
               } else {
-                setParams({ end_date: str });
+                setParams({ end_date: str, page: 1 });
               }
             }}
           />

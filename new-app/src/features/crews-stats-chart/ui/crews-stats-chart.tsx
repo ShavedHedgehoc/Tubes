@@ -20,6 +20,13 @@ interface Props {
   isDefect: boolean;
 }
 
+function getAverage(arr: number[]): number {
+  if (arr.length === 0) return 0; // Защита от деления на 0
+
+  const sum = arr.reduce((acc, num) => acc + num, 0);
+  return sum / arr.length;
+}
+
 export function CrewsStatsChart({ title, chartData, isDefect }: Props) {
   const executionGoal = chartData[0]?.execution_goal ?? 80;
   const defectRateGoal = chartData[0]?.defect_rate_goal ?? 2;
@@ -27,6 +34,8 @@ export function CrewsStatsChart({ title, chartData, isDefect }: Props) {
   const dataKey = isDefect ? "defect_percent" : "execution";
   const currentGoal = isDefect ? defectRateGoal : executionGoal;
   const name = isDefect ? "Брак, %" : "Выполнение плана, %";
+  const average = getAverage(chartData.map((entry) => entry[dataKey] ?? 0));
+  const formattedAverage = Math.round(average * 100) / 100;
 
   return (
     <Card className="w-full shadow-none">
@@ -45,7 +54,19 @@ export function CrewsStatsChart({ title, chartData, isDefect }: Props) {
             <XAxis dataKey="crew_name" />
             <YAxis domain={isDefect ? [0, "auto"] : [0, 110]} />
             <Tooltip cursor={{ fill: "transparent" }} />
-            <Legend iconSize={0} />
+            {/* <Legend iconSize={0} /> */}
+            <Legend
+              verticalAlign="bottom"
+              height={45}
+              content={() => (
+                <div className="flex flex-col items-center justify-center text-sm mt-2">
+                  <span className="">{name}</span>
+                  <span className="text-xs mt-0.5">
+                    Среднее значение: {formattedAverage}%
+                  </span>
+                </div>
+              )}
+            />
 
             {currentGoal !== null && (
               <ReferenceLine

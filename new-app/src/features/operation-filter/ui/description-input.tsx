@@ -20,7 +20,7 @@ export default function DescriptionInput() {
   };
 
   const handleReset = () => {
-    setParams({ description: null, page: 1 }, { shallow: false });
+    setParams({ description: null, page: 1 });
   };
 
   return (

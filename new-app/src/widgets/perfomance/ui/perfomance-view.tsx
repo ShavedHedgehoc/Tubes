@@ -12,7 +12,6 @@ import { CrewsIdlesChart } from "@/features/crews-idles-chart";
 export function PerfomanceView() {
   const { params } = useSummaryCrewsStatsSearchParams();
   const { params: uiParams } = useSummaryCrewsStatsUiParams();
-  // const isDefect = uiParams["isDefect"];
   const mode = uiParams["mode"];
   const { data } = useQuery({
     ...summaryApi.summaryQueries.crewStat(params, { isServer: false }),

@@ -20,7 +20,7 @@ export default function ValueInput() {
   };
 
   const handleReset = () => {
-    setParams({ value: null, page: 1 }, { shallow: false });
+    setParams({ value: null, page: 1 });
   };
 
   return (

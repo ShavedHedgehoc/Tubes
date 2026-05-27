@@ -28,8 +28,16 @@ export function DatePicker({
   ...props
 }: DatePickerProps) {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  const [month, setMonth] = useState<Date | undefined>(value || new Date());
+
+  const handleOpenChange = (open: boolean) => {
+    setIsCalendarOpen(open);
+    if (open && value) {
+      setMonth(value);
+    }
+  };
   return (
-    <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
+    <Popover open={isCalendarOpen} onOpenChange={handleOpenChange}>
       <PopoverTrigger asChild>
         <Button
           {...props}
@@ -50,6 +58,8 @@ export function DatePicker({
           mode="single"
           locale={ru}
           selected={value}
+          month={month}
+          onMonthChange={setMonth}
           onSelect={(date) => {
             onChange(date);
             setIsCalendarOpen(false);

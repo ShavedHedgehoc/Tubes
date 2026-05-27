@@ -28,10 +28,7 @@ export default function StateSelector() {
   }, [currentValue]);
 
   const onValueChange = (value: string) => {
-    setParams(
-      { states: value === "All" ? null : [value], page: 1 },
-      { shallow: false },
-    );
+    setParams({ states: value === "All" ? null : [value], page: 1 });
   };
 
   return (

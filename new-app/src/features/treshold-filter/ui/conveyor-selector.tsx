@@ -41,10 +41,7 @@ export default function ConveyorSelector({
   }, [currentValue, listItems]);
 
   const onValueChange = (value: string) => {
-    setParams(
-      { conveyors: value === "All" ? null : [value], page: 1 },
-      { shallow: false },
-    );
+    setParams({ conveyors: value === "All" ? null : [value], page: 1 });
   };
 
   return (

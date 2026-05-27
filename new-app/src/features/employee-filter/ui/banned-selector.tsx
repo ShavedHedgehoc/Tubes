@@ -34,10 +34,7 @@ export default function BannedSelector({
   }, [currentValue]);
 
   const onValueChange = (value: string) => {
-    setParams(
-      { banned: value === "All" ? null : [value], page: 1 },
-      { shallow: false },
-    );
+    setParams({ banned: value === "All" ? null : [value], page: 1 });
   };
 
   return (

@@ -24,7 +24,7 @@ export function CrewSelector({ crewItems = [] }: Props) {
 
   const currentValue = params["crew-id"]?.[0] ?? undefined;
   const onValueChange = (value: string) => {
-    setParams({ "crew-id": [value] }, { shallow: false });
+    setParams({ "crew-id": [value] });
   };
   return (
     <Select value={currentValue} onValueChange={onValueChange}>

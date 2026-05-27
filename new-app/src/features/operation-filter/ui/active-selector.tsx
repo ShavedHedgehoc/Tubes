@@ -1,7 +1,6 @@
 "use client";
 
 import { useOperationSearchParams } from "@/entities/operation";
-// import { RankEntity } from "@/entities/rank";
 import { cn } from "@/shared/lib";
 import {
   Select,
@@ -20,7 +19,6 @@ const LIST_ITEMS = [
 ];
 
 export default function ActiveSelector() {
-  // {  rankListItems,}: {  rankListItems: RankEntity[];}
   const { params, setParams } = useOperationSearchParams();
   const currentValue = params.isInactive?.[0] ?? "All";
 
@@ -31,10 +29,7 @@ export default function ActiveSelector() {
   }, [currentValue]);
 
   const onValueChange = (value: string) => {
-    setParams(
-      { isInactive: value === "All" ? null : [value], page: 1 },
-      { shallow: false },
-    );
+    setParams({ isInactive: value === "All" ? null : [value], page: 1 });
   };
 
   return (
@@ -43,7 +38,6 @@ export default function ActiveSelector() {
         size="sm"
         className={cn(
           "w-[120px]  text-xs rounded-l-none",
-          //   rankListItems.length !== 0 && "rounded-r-none border-r-0",
           "focus:ring-0 focus:ring-offset-0",
         )}
       >

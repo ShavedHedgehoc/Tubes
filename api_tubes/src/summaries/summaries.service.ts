@@ -411,14 +411,18 @@ export class SummariesService {
       (acc, n) => ({ ...acc, [n.post_id]: n.note }),
       {} as Record<number, string>,
     );
-
+    const tresholds =
+      activeRecord.product.tresholds.find(
+        (x) => x.conveyor_id === conveyor_id,
+      ) ?? null;
     return {
       data: mappedSummary({
         summary: activeRecord,
         batch: activeRecord.batch,
         product: activeRecord.product,
       }),
-      tresholds: activeRecord.product.tresholds[0] ?? null,
+      // tresholds: activeRecord.product.tresholds[0] ?? null,
+      tresholds: tresholds,
 
       extrusionParams: mapParams<IMappedExtrusionParams>(
         activeRecord.extrusion_params[0],
