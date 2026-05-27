@@ -1,25 +1,62 @@
+# FROM node:20-alpine3.20 AS builder
+# # RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
+# RUN apk add --no-cache openssl python3 make g++
+
+# WORKDIR /app
+
+# COPY package.json package-lock.json ./
+# COPY api_tubes/package.json ./api_tubes/
+
+# RUN --mount=type=cache,target=/root/.npm \
+#     npm ci -w api_tubes
+
+# COPY api_tubes/ ./api_tubes/
+
+# WORKDIR /app/api_tubes
+# RUN npx prisma generate
+# RUN npm run build
+
+# FROM node:20-alpine3.20 AS runtime
+# # RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
+# RUN apk add --no-cache openssl
+
+
+# WORKDIR /app
+
+# ENV PATH="/app/node_modules/.bin:${PATH}"
+
+# COPY --from=builder /app/node_modules ./node_modules
+# COPY --from=builder /app/api_tubes ./api_tubes
+
+# WORKDIR /app/api_tubes
+
+# EXPOSE 7100
+
+# CMD ["npm", "run", "start:migrate:prod"]
+
+
 FROM node:20-alpine3.20 AS builder
-# RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
 RUN apk add --no-cache openssl python3 make g++
 
 WORKDIR /app
 
 COPY package.json package-lock.json ./
 COPY api_tubes/package.json ./api_tubes/
+COPY db/package.json ./db/
 
 RUN --mount=type=cache,target=/root/.npm \
-    npm ci -w api_tubes
+    npm ci -w api_tubes -w db
 
+COPY db/ ./db/
 COPY api_tubes/ ./api_tubes/
 
 WORKDIR /app/api_tubes
-RUN npx prisma generate
+RUN npx prisma@6.19.0 generate --schema=../db/prisma/schema.prisma
 RUN npm run build
 
-FROM node:20-alpine3.20 AS runtime
-# RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
-RUN apk add --no-cache openssl
 
+FROM node:20-alpine3.20 AS runtime
+RUN apk add --no-cache openssl
 
 WORKDIR /app
 
@@ -27,6 +64,7 @@ ENV PATH="/app/node_modules/.bin:${PATH}"
 
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/api_tubes ./api_tubes
+COPY --from=builder /app/db ./db
 
 WORKDIR /app/api_tubes
 

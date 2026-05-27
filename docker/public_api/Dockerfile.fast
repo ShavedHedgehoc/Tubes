@@ -6,8 +6,6 @@ WORKDIR /app
 
 
 COPY package.json package-lock.json ./
-
-
 COPY public_api/package.json ./public_api/
 COPY db/package.json ./db/
 
@@ -16,7 +14,7 @@ RUN npm ci -w public_api -w db
 COPY db/ ./db/
 COPY public_api/ ./public_api/
 
-RUN npx prisma generate --schema=./db_package/prisma/schema.prisma
+RUN npx prisma@6.19.0 generate --schema=./db/prisma/schema.prisma
 
 WORKDIR /app/public_api
 RUN npm run build
@@ -39,3 +37,5 @@ WORKDIR /app/public_api
 EXPOSE 7200
 
 CMD ["npm", "run", "start:prod"]
+
+
