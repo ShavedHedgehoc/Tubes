@@ -1,5 +1,4 @@
-import { Product, Summary } from "./../../generated/prisma/index.d";
-import { Batch } from "./../../generated/prisma/index.d";
+import { Product, Summary, Batch } from "db";
 
 export interface IMappedSummary {
   id: number;

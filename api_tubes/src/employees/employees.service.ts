@@ -3,7 +3,7 @@ import { PrismaService } from "src/prisma/prisma.service";
 import { GetEmployeesListDto } from "./dto/get-employees-list.dto";
 import { CreateEmployeeDto } from "./dto/create-employee.dto";
 import { UpdateEmployeeDto } from "./dto/update-employee.dto";
-import { Prisma } from "generated/prisma";
+import { Prisma } from "db";
 
 @Injectable()
 export class EmployeesService {

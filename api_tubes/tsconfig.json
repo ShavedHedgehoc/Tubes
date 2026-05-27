@@ -1,3 +1,33 @@
+// {
+//   "compilerOptions": {
+//     "module": "commonjs",
+//     "declaration": true,
+//     "removeComments": true,
+//     "emitDecoratorMetadata": true,
+//     "experimentalDecorators": true,
+//     "allowSyntheticDefaultImports": true,
+//     "target": "es2022",
+//     "sourceMap": true,
+//     "outDir": "./dist",
+//     // "ignoreDeprecations": "5.0",
+//     // "baseUrl": "./",
+//     "incremental": true,
+//     "skipLibCheck": true,
+//     "strictNullChecks": true,
+//     "forceConsistentCasingInFileNames": true,
+//     "noImplicitAny": false,
+//     "strictBindCallApply": false,
+//     "noFallthroughCasesInSwitch": false,
+//     "paths": {
+//       "src/*": [
+//         "./src/*"
+//       ],
+//       "generated/*": [
+//         "./generated/*"
+//       ]
+//     }
+//   }
+// }
 {
   "compilerOptions": {
     "module": "commonjs",
@@ -9,8 +39,6 @@
     "target": "es2022",
     "sourceMap": true,
     "outDir": "./dist",
-    // "ignoreDeprecations": "5.0",
-    // "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": true,
@@ -18,9 +46,11 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
+    "baseUrl": "./",
+    "preserveSymlinks": true,
     "paths": {
       "src/*": ["./src/*"],
-      "generated/*": ["./generated/*"]
+      "db": ["../db/node_modules/.prisma/client/index.d.ts"]
     }
   }
 }

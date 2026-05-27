@@ -4,11 +4,13 @@
   "workspaces": [
     "api_tubes",
     "tubes_application",
-    "new-app"
+    "new-app",
+    "db",
+    "public_api"
   ],
   "scripts": {
     "install:all": "npm install",
-    "generate": "npm run generate -w api_tubes",
+    "generate": "dotenv -e ./api_tubes/.env -- npm run generate -w db",
     "lint:all": "npm run lint --workspaces",
     "types:all": "npm run lint:types --workspaces",
     "build:all": "npm run build --workspaces",
@@ -19,6 +21,7 @@
     "pre-flight": "npm run prettier:check && npm run types:all && npm run lint:all && npm run knip && npm run build:all"
   },
   "devDependencies": {
+    "dotenv-cli": "^11.0.0",
     "knip": "^5.85.0",
     "prettier": "^3.8.1",
     "typescript": "^5.9.3"

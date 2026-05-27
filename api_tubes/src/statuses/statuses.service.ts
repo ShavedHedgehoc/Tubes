@@ -3,7 +3,7 @@ import { PrismaService } from "src/prisma/prisma.service";
 import { ApiMessages } from "src/resources/api-messages";
 import { CreateStatusDto } from "./dto/create-status.dto";
 import { GetStatusesDto } from "./dto/get-statuses.dto";
-import { Prisma } from "generated/prisma";
+import { Prisma } from "db";
 
 @Injectable()
 export class StatusesService {
