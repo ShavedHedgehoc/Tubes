@@ -1,11 +1,4 @@
-import {
-  Batch,
-  Conveyor,
-  Employee,
-  Product,
-  Status,
-  Summary,
-} from "./../../generated/prisma/index.d";
+import { Batch, Conveyor, Employee, Product, Status, Summary } from "db";
 
 type IState = "idle" | "working" | "finished";
 export interface IPostData {

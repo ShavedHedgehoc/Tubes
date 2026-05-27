@@ -1,0 +1,41 @@
+FROM node:20-alpine3.20 AS builder
+
+# RUN apt-get update && apt-get install -y openssl python3 make g++ && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache openssl python3 make g++
+WORKDIR /app
+
+
+COPY package.json package-lock.json ./
+COPY public_api/package.json ./public_api/
+COPY db/package.json ./db/
+
+RUN npm ci -w public_api -w db
+
+COPY db/ ./db/
+COPY public_api/ ./public_api/
+
+RUN npx prisma@6.19.0 generate --schema=./db/prisma/schema.prisma
+
+WORKDIR /app/public_api
+RUN npm run build
+
+
+FROM node:20-alpine3.20 AS runtime
+# RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache openssl
+
+WORKDIR /app
+
+ENV PATH="/app/node_modules/.bin:${PATH}"
+
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/public_api ./public_api
+COPY --from=builder /app/db ./db
+
+WORKDIR /app/public_api
+
+EXPOSE 7200
+
+CMD ["npm", "run", "start:prod"]
+
+

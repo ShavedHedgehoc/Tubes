@@ -15,5 +15,6 @@
   "prisma.pinToPrisma6": true,
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
-  }
+  },
+  "js/ts.tsdk.path": "node_modules\\typescript\\lib"
 }

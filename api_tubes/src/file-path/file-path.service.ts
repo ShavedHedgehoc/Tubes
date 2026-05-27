@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
 import { GetFilePathsDto } from "./dto/get-file-paths.dto";
-import { Prisma } from "@prisma/client";
+import { Prisma } from "db";
 import { GetFilePathsResponse } from "./dto/get-file-paths.response";
 
 @Injectable()

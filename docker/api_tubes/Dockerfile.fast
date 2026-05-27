@@ -1,76 +1,62 @@
-# FROM node:20-slim AS builder
-
-# RUN apt-get update && apt-get install -y openssl python3 make g++ && rm -rf /var/lib/apt/lists/*
+# FROM node:20-alpine3.20 AS builder
+# # RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
+# RUN apk add --no-cache openssl python3 make g++
 
 # WORKDIR /app
 
 # COPY package.json package-lock.json ./
 # COPY api_tubes/package.json ./api_tubes/
 
-# COPY api_tubes/prisma ./api_tubes/prisma/
-
 # RUN --mount=type=cache,target=/root/.npm \
 #     npm ci -w api_tubes
 
-# # 2. Генерируем Prisma Client (результат будет в node_modules, которые мы скопируем)
+# COPY api_tubes/ ./api_tubes/
+
 # WORKDIR /app/api_tubes
 # RUN npx prisma generate
+# RUN npm run build
 
-# # 3. Копируем исходники и собираем
-# WORKDIR /app
-# COPY api_tubes/ ./api_tubes/
-# WORKDIR /app/api_tubes
+# FROM node:20-alpine3.20 AS runtime
+# # RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
+# RUN apk add --no-cache openssl
 
-# # Кэшируем билд (например, для TS или NestJS)
-# RUN --mount=type=cache,target=/app/api_tubes/.npm_cache \
-#     npm run build
-
-# FROM node:20-slim AS runtime
-# RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
 
 # WORKDIR /app
+
 # ENV PATH="/app/node_modules/.bin:${PATH}"
-# ENV NODE_ENV=production
 
-# # Копируем только продакшн зависимости и скомпилированные файлы
 # COPY --from=builder /app/node_modules ./node_modules
-# COPY --from=builder /app/api_tubes/dist ./api_tubes/dist
-# COPY --from=builder /app/api_tubes/package.json ./api_tubes/
-# COPY --from=builder /app/api_tubes/prisma ./api_tubes/prisma/
+# COPY --from=builder /app/api_tubes ./api_tubes
 
 # WORKDIR /app/api_tubes
 
 # EXPOSE 7100
 
-# # Используем прямой запуск для лучшей обработки сигналов завершения
 # CMD ["npm", "run", "start:migrate:prod"]
-FROM node:20-slim AS builder
 
-# RUN sed -i 's/deb.debian.org/mirror.yandex.ru/g' /etc/apt/sources.list.d/debian.sources || \
-#     sed -i 's/deb.debian.org/mirror.yandex.ru/g' /etc/apt/sources.list
 
-# RUN apt-get update && apt-get install -y openssl python3 make g++ && rm -rf /var/lib/apt/lists/*
-RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
+FROM node:20-alpine3.20 AS builder
+RUN apk add --no-cache openssl python3 make g++
 
 WORKDIR /app
 
 COPY package.json package-lock.json ./
 COPY api_tubes/package.json ./api_tubes/
-
-# RUN npm ci -w api_tubes
+COPY db/package.json ./db/
 
 RUN --mount=type=cache,target=/root/.npm \
-    npm ci -w api_tubes
+    npm ci -w api_tubes -w db
 
+COPY db/ ./db/
 COPY api_tubes/ ./api_tubes/
 
 WORKDIR /app/api_tubes
-RUN npx prisma generate
+RUN npx prisma@6.19.0 generate --schema=../db/prisma/schema.prisma
 RUN npm run build
 
-FROM node:20-slim AS runtime
-RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
 
+FROM node:20-alpine3.20 AS runtime
+RUN apk add --no-cache openssl
 
 WORKDIR /app
 
@@ -78,6 +64,7 @@ ENV PATH="/app/node_modules/.bin:${PATH}"
 
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/api_tubes ./api_tubes
+COPY --from=builder /app/db ./db
 
 WORKDIR /app/api_tubes
 

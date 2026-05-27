@@ -64,6 +64,30 @@ services:
     networks:
       - postgres
       - general
+  public_api:
+    container_name: public
+    build:
+      context: .
+      dockerfile: docker/public_api/Dockerfile.fast
+      args:
+        - NODE_ENV=production
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/${POSTGRES_DB}?schema=public
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: "5432"
+      POSTGRES_USERNAME: ${POSTGRES_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      PORT: "7200"
+    depends_on:
+      - postgres
+    restart: always
+    networks:
+      - postgres
+      - general
   new_app:
     container_name: new_app
     build:
@@ -120,12 +144,13 @@ services:
     ports:
       - "80:80"
       - "3100:3100"
+      - "7200:7200"
     networks:
       - general
     depends_on:
       - tubes_dash
       - new_app
-
+      - public_api
   nginx-file-server:
     container_name: nginx_file_server_container
     build:

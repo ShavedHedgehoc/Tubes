@@ -1,4 +1,4 @@
-import { Prisma } from "generated/prisma";
+import { Prisma } from "db";
 
 export type UserWithRoles = Prisma.UserGetPayload<{
   include: { user_roles: { include: { role: true } } };

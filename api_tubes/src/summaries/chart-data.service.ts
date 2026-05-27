@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
-import { Prisma } from "generated/prisma";
+import { Prisma } from "db";
 import { GetCrewsStatsDto } from "./dto/get-crews-stats.dto";
 
 export interface CrewStat {

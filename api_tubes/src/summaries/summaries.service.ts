@@ -13,7 +13,7 @@ import { CreateSummaryDto } from "./dto/create-summary.dto";
 import { parseAssemblies, parsedAssembly } from "src/helpers/parse-assemblies";
 import { ChangeSummaryStateDto } from "./dto/change-summary-state.dto";
 import { GetSummariesListDto } from "./dto/get-summaries-list.dto";
-import { Prisma, Treshold } from "generated/prisma";
+// import { Prisma, Treshold } from "generated/prisma";
 import {
   ActiveSummaryResponse,
   IStatusCounter,
@@ -28,6 +28,7 @@ import { MutationService } from "./mutation.service";
 import { UpdateSummaryDto } from "./dto/update-summary.dto";
 import { ChartDataService } from "./chart-data.service";
 import { GetCrewsStatsDto } from "./dto/get-crews-stats.dto";
+import { Prisma, Treshold } from "db";
 
 type FullSpecification = Prisma.SpecificationGetPayload<{
   include: { material: { include: { consumed_materials: true } } };
