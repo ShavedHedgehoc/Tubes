@@ -78,7 +78,8 @@ export class DataService {
           defects: {
             where: {
               post: {
-                value: { in: [2, 3, 4] },
+                // value: { in: [2, 3, 4] },
+                value: { in: [1, 2, 3, 4] },
               },
             },
           },
