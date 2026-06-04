@@ -22,7 +22,7 @@ export interface CrewStatExtended extends CrewStat {
 
 @Injectable()
 export class ChartDataService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   async getSummaryChartData(
     query: GetCrewsStatsDto,
@@ -35,7 +35,8 @@ export class ChartDataService {
       "findMany"
     >["where"];
     const where: SummaryWhere = {
-      date: { gte: startDate, lte: endDate },
+      date: { gte: startDate, lte: endDate, },
+      isFinished: true
     };
 
     const [
