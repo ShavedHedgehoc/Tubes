@@ -690,7 +690,8 @@ export class SummariesService {
             defects: {
               where: {
                 post: {
-                  value: { in: [2, 3, 4] },
+                  value: { in: [1, 2, 3, 4] },
+                  // value: { in: [2, 3, 4] },
                 },
               },
             },
@@ -708,7 +709,8 @@ export class SummariesService {
           by: ["summary_id"],
           where: {
             summary: where,
-            post: { value: { in: [2, 3, 4] } },
+            post: { value: { in: [1, 2, 3, 4] } },
+            // post: { value: { in: [2, 3, 4] } },
           },
           _sum: { value: true },
         }),

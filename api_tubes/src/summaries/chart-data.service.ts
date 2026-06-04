@@ -49,7 +49,7 @@ export class ChartDataService {
     ] = await Promise.all([
       this.prisma.defect.groupBy({
         by: ["summary_id"],
-        where: { summary: where, post: { value: { in: [2, 3, 4] } } },
+        where: { summary: where, post: { value: { in: [1, 2, 3, 4] } } },
         _sum: { value: true },
       }),
       this.prisma.status.groupBy({
