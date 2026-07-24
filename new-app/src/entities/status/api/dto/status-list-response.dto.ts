@@ -9,6 +9,7 @@ type StatusDto = {
   employee_id: number | null;
   idle_time: number | null;
   finished: boolean;
+  is_locked: boolean;
   createdAt: Date;
   extrusion_param_id: number | null;
   varnish_param_id: number | null;

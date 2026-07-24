@@ -45,7 +45,7 @@ type processedDataType = {
   counter_value: number;
   operation_id: number | null;
   operation_description: string | null;
-  idle: false;
+  idle: boolean;
   employee_id: number | null;
   employee_name: string | null;
   idle_time: number | null;

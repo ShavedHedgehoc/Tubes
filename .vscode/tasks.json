@@ -18,7 +18,7 @@
     },
     {
       "label": "DEV: Run all",
-      "dependsOn": ["DEV: Api", "DEV: Web", "DEV: Api 2"],
+      "dependsOn": ["DEV: Api", "DEV: Web", "DEV: Stations", "DEV: Api 2"],
       "dependsOrder": "parallel",
       "problemMatcher": [],
       "group": "build"
@@ -41,6 +41,13 @@
       "label": "DEV: Web",
       "type": "shell",
       "command": "npm run dev --workspace=new-app",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "DEV: Stations",
+      "type": "shell",
+      "command": "npm run dev --workspace=tubes_application",
       "isBackground": true,
       "problemMatcher": []
     }

@@ -3,7 +3,7 @@ import { ConveyorData } from "../model";
 import PostCard from "./post-card";
 import { formatNumber } from "@/shared/lib";
 import { POST_NAMES } from "@/shared/config";
-type IState = "working" | "idle" | "finished" | "no_data";
+type IState = "working" | "idle" | "finished" | "locked" | "no_data";
 type Props = {
   conveyorData: ConveyorData;
   menuActionButton: React.ReactNode;

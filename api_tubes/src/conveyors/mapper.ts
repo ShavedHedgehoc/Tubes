@@ -1,6 +1,6 @@
 import { Batch, Conveyor, Employee, Product, Status, Summary } from "db";
 
-type IState = "idle" | "working" | "finished";
+type IState = "idle" | "working" | "finished" | "locked";
 export interface IPostData {
   production: number | null;
   state: IState;
@@ -67,7 +67,9 @@ export const mappedConveyors = ({
           extrusion_status.finished === true
             ? "finished"
             : extrusion_status.idle === true
-              ? "idle"
+              ? extrusion_status.is_locked === true
+                ? "locked"
+                : "idle"
               : "working",
       }
     : null;
@@ -79,7 +81,9 @@ export const mappedConveyors = ({
           varnish_status.finished === true
             ? "finished"
             : varnish_status.idle === true
-              ? "idle"
+              ? varnish_status.is_locked === true
+                ? "locked"
+                : "idle"
               : "working",
       }
     : null;
@@ -91,7 +95,9 @@ export const mappedConveyors = ({
           offset_status.finished === true
             ? "finished"
             : offset_status.idle === true
-              ? "idle"
+              ? offset_status.is_locked === true
+                ? "locked"
+                : "idle"
               : "working",
       }
     : null;
@@ -103,7 +109,9 @@ export const mappedConveyors = ({
           sealant_status.finished === true
             ? "finished"
             : sealant_status.idle === true
-              ? "idle"
+              ? sealant_status.is_locked === true
+                ? "locked"
+                : "idle"
               : "working",
       }
     : null;

@@ -28,6 +28,7 @@ import SealantCloseSummaryModal from "./dash/modals/sealant-close-summary-modal"
 import SealantDefectEntryModal from "./dash/modals/sealant-defect-entry-modal";
 import PostIndicator from "@/shared/components/cards/post-indicator";
 import HeaderWithIndicatorComponent from "@/shared/components/headers/header-with-indicator";
+import LockScreen from "@/shared/components/info/lock-screen";
 
 export default function Sealant() {
   const params = useParams<Params.CONVEYOR_NAME>();
@@ -73,6 +74,8 @@ export default function Sealant() {
     notFoundComponent: <Info message={AppMessages.ACTIVE_SUMMARY_NOT_FOUND} />,
     isLoading: isPendingSummary,
     isNotFound: isError,
+    lockComponent: <LockScreen />,
+    isLocked: summaryData?.sealantStatus.is_locked ?? false,
   };
 
   return (

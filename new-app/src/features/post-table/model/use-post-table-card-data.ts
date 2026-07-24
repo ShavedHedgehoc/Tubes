@@ -7,7 +7,11 @@ export function usePostTableCardData(statuses: StatusEntity[] = []) {
     const data: StatusTableRow[] = (statuses ?? []).map((item, idx) => {
       const prevItem = statuses[idx - 1];
       let state: StatusTableRowState = "Внесение параметров";
-      if (item.idle) {
+      if (item.is_locked) {
+        state = "Блокировка лабораторией";
+      } else if (prevItem?.is_locked) {
+        state = "Конец блокировки";
+      } else if (item.idle) {
         state = "Начало операции";
       } else if (item.finished) {
         state = "Окончание работы";

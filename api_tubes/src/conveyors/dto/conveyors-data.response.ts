@@ -1,4 +1,4 @@
-type State = "idle" | "working" | "finished";
+type State = "idle" | "working" | "finished" | "locked";
 
 class PostData {
   production: number | null;

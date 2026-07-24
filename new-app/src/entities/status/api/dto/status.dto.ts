@@ -5,7 +5,8 @@ export type StatusDto = {
   counter_value: number;
   operation_id: number | null;
   maintenance_session_id: number | null;
-  idle: false;
+  idle: boolean;
+  is_locked: boolean;
   employee_id: number | null;
   idle_time: number | null;
   finished: boolean;

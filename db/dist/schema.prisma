@@ -30,6 +30,7 @@ model Post {
   notes                Note[]
   maintenances         Maintenance[]
   maintenance_sessions MaintenanceSession[]
+  laboratoryLocks      LaboratoryLock[]
 
   @@map("posts")
 }
@@ -97,11 +98,15 @@ model Status {
   offset_param_id        Int?
   sealant_param          SealantParam?       @relation(fields: [sealant_param_id], references: [id])
   sealant_param_id       Int?
+  is_locked              Boolean             @default(false)
+  laboratory_lock        LaboratoryLock?     @relation(fields: [laboratory_lock_id], references: [id], onUpdate: Cascade, onDelete: SetNull)
+  laboratory_lock_id     Int?
 
   @@index([summary_id])
   @@index([post_id, createdAt])
   @@index([createdAt])
   @@index([maintenance_session_id])
+  @@index([laboratory_lock_id])
   @@map("statuses")
 }
 
@@ -365,6 +370,7 @@ model Summary {
   plan               Int
   isActive           Boolean            @default(false)
   isFinished         Boolean            @default(false)
+  // isLocked           Boolean            @default(false)
   date               DateTime
   shift              Int                @default(1)
   specifications     Specification[]
@@ -379,10 +385,49 @@ model Summary {
   defects            Defect[]
   crew               Crew?              @relation(fields: [crew_id], references: [id])
   crew_id            Int?
+  laboratory_locks   LaboratoryLock[]
 
   @@index([conveyor_id, isActive])
   @@index([date])
   @@map("summaries")
+}
+
+// Блокировка
+model LaboratoryLock {
+  id                        Int                  @id @default(autoincrement())
+  // description String?
+  laboratory_lock_reason    LaboratoryLockReason @relation(fields: [laboratory_lock_reason_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  laboratory_lock_reason_id Int
+  laboratory_assistant      LaboratoryAssistant  @relation(fields: [laboratory_assistant_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  laboratory_assistant_id   Int
+  createdAt                 DateTime             @default(now())
+  summary                   Summary              @relation(fields: [summary_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  summary_id                Int
+  post                      Post                 @relation(fields: [post_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  post_id                   Int
+  is_active                 Boolean              @default(false)
+  closedAt                  DateTime?
+  statuses                  Status[]
+
+  @@index([summary_id, post_id])
+  @@index([summary_id])
+  @@map("laboratory_locks")
+}
+
+model LaboratoryLockReason {
+  id              Int              @id @default(autoincrement())
+  value           String           @unique
+  laboratoryLocks LaboratoryLock[]
+
+  @@map("laboratory_lock_reasons")
+}
+
+model LaboratoryAssistant {
+  id              Int              @id @default(autoincrement())
+  name            String           @unique
+  laboratoryLocks LaboratoryLock[]
+
+  @@map("laboratory_assistants")
 }
 
 // Брак

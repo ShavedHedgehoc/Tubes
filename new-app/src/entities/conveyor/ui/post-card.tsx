@@ -1,8 +1,8 @@
-import { Check, CircleDashed, Play, Timer } from "lucide-react";
+import { Ban, Check, CircleDashed, Play, Timer } from "lucide-react";
 import { Card } from "@/shared/ui";
 import { cn } from "@/shared/lib";
 
-type IState = "working" | "idle" | "finished" | "no_data";
+type IState = "working" | "idle" | "finished" | "locked" | "no_data";
 
 export interface PostCardProps {
   title: string;
@@ -36,6 +36,12 @@ const STATE_CONFIG = {
     className:
       "bg-violet-500 dark:bg-violet-600 text-white shadow-[0_8px_20px_-6px_rgba(139,92,246,0.4)]",
   },
+  locked: {
+    label: "Заблокирован",
+    icon: <Ban size={20} strokeWidth={3} />,
+    className:
+      "bg-red-400 dark:bg-red-500 text-white shadow-[0_8px_20px_-6px_rgba(139,92,246,0.4)]",
+  },
   no_data: {
     label: "Нет данных",
     icon: <CircleDashed size={20} className="opacity-20" />,
@@ -47,6 +53,7 @@ const STATE_CONFIG = {
 export default function PostCard(props: PostCardProps) {
   const config = STATE_CONFIG[props.state];
   const isNoData = props.state === "no_data";
+  const isLocked = props.state === "locked";
 
   return (
     <Card
@@ -93,7 +100,11 @@ export default function PostCard(props: PostCardProps) {
       </div>
       <div className="mt-auto   overflow-hidden">
         <p className="text-[11px] font-bold truncate text-center uppercase tracking-tight">
-          {isNoData ? "Нет данных" : props.employee}
+          {isNoData
+            ? "Нет данных"
+            : isLocked
+              ? "Заблокировано"
+              : props.employee}
         </p>
       </div>
     </Card>

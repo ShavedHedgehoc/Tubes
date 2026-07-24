@@ -28,6 +28,7 @@ import OffsetCloseSummaryModal from "./dash/modals/offset-close-summary-modal";
 import OffsetDefectEntryModal from "./dash/modals/offset-defect-entry-modal";
 import PostIndicator from "@/shared/components/cards/post-indicator";
 import HeaderWithIndicatorComponent from "@/shared/components/headers/header-with-indicator";
+import LockScreen from "@/shared/components/info/lock-screen";
 
 export default function Offset() {
   const params = useParams<Params.CONVEYOR_NAME>();
@@ -73,6 +74,8 @@ export default function Offset() {
     notFoundComponent: <Info message={AppMessages.ACTIVE_SUMMARY_NOT_FOUND} />,
     isLoading: isPendingSummary,
     isNotFound: isError,
+    lockComponent: <LockScreen />,
+    isLocked: summaryData?.offsetStatus.is_locked ?? false,
   };
 
   return (

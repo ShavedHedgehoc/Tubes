@@ -28,6 +28,7 @@ import VarnishDefectEntryModal from "./dash/modals/varnish-defect-entry-modal";
 import VarnishCloseSummaryModal from "./dash/modals/varnish-close-summary-modal";
 import PostIndicator from "@/shared/components/cards/post-indicator";
 import HeaderWithIndicatorComponent from "@/shared/components/headers/header-with-indicator";
+import LockScreen from "@/shared/components/info/lock-screen";
 
 export default function Varnish() {
   const params = useParams<Params.CONVEYOR_NAME>();
@@ -73,6 +74,8 @@ export default function Varnish() {
     notFoundComponent: <Info message={AppMessages.ACTIVE_SUMMARY_NOT_FOUND} />,
     isLoading: isPendingSummary,
     isNotFound: isError,
+    lockComponent: <LockScreen />,
+    isLocked: summaryData?.varnishStatus.is_locked ?? false,
   };
 
   return (

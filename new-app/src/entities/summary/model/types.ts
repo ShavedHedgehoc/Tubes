@@ -139,7 +139,8 @@ export type StatusRow = {
   maintenance_session_id: number | null;
   maintenance_value: string | null;
   maintenance_description: string | null;
-  idle: false;
+  idle: boolean;
+  is_locked: boolean;
   employee_id: number | null;
   employee_name: string | null;
   idle_time: number | null;

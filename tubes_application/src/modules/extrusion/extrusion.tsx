@@ -28,6 +28,7 @@ import ExtrusionCloseSummaryModal from "./dash/modals/extrusion-close-summary-mo
 import ExtrusionDefectEntryModal from "./dash/modals/extrusion-defect-enter-modal";
 import PostIndicator from "@/shared/components/cards/post-indicator";
 import HeaderWithIndicatorComponent from "@/shared/components/headers/header-with-indicator";
+import LockScreen from "@/shared/components/info/lock-screen";
 
 export default function Extrusion() {
   const params = useParams<Params.CONVEYOR_NAME>();
@@ -75,6 +76,8 @@ export default function Extrusion() {
     notFoundComponent: <Info message={AppMessages.ACTIVE_SUMMARY_NOT_FOUND} />,
     isLoading: isPendingSummary,
     isNotFound: isError,
+    lockComponent: <LockScreen />,
+    isLocked: summaryData?.extrusionStatus.is_locked ?? false,
   };
 
   return (

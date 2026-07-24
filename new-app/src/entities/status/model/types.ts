@@ -8,7 +8,8 @@ export type StatusEntity = {
   operation_description: string | null;
   maintenance_session_id: number | null;
   maintenance_description: string | null;
-  idle: false;
+  idle: boolean;
+  is_locked: boolean;
   employee_id: number | null;
   employee_name: string | null;
   idle_time: number | null;
@@ -22,6 +23,8 @@ export type StatusEntity = {
 
 type StatusTableRowState =
   | "Внесение параметров"
+  | "Конец блокировки"
+  | "Блокировка лабораторией"
   | "Начало операции"
   | "Конец операции"
   | "Окончание работы";

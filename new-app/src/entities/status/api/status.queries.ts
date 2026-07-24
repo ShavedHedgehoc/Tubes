@@ -15,10 +15,6 @@ export const statusQueries = {
           posts: Array.isArray(params.posts)
             ? [...params.posts].sort()
             : (params.posts ?? null),
-          // states: Array.isArray(params.states)
-          //   ? [...params.states].sort()
-          //   : (params.states ?? null),
-          // code: params.code ?? null,
         },
       ],
       queryFn: () =>

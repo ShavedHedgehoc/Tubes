@@ -69,7 +69,7 @@ export class StatusesService {
           },
         });
       }
-
+      // start idle processing
       if (lastStatusEntry.idle) {
         const timeDelta = now.getTime() - lastStatusEntry.createdAt.getTime();
 
@@ -114,9 +114,46 @@ export class StatusesService {
               counter_value: lastStatusEntry.counter_value,
             },
           });
+        } else {
+          const labLockActive = await tx.laboratoryLock.findFirst({
+            where: {
+              summary_id: dto.summary_id,
+              post_id: post.id,
+              is_active: true,
+            },
+            orderBy: { createdAt: "desc" },
+          });
+          if (labLockActive) {
+            await tx.status.create({
+              data: {
+                summary_id: dto.summary_id,
+                post_id: post.id,
+                operation_id: dto.operation_id,
+                idle: false,
+                finished: false,
+                employee_id: dto.employee_id,
+                counter_value: lastStatusEntry.counter_value,
+                maintenance_session_id: maintenanceSessionId,
+              },
+            });
+            return tx.status.create({
+              data: {
+                summary_id: dto.summary_id,
+                post_id: post.id,
+                operation_id: null,
+                idle: true,
+                finished: false,
+                employee_id: dto.employee_id,
+                counter_value: lastStatusEntry.counter_value,
+                maintenance_session_id: null,
+                laboratory_lock_id: labLockActive.id,
+                is_locked: true,
+              },
+            });
+          }
         }
       }
-
+      // end idle processing
       if (dto.defect_value) {
         await tx.defect.upsert({
           where: {

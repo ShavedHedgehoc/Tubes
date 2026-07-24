@@ -334,13 +334,16 @@ export class SummariesService {
       const current: IStatus | null = last
         ? {
             idle: last.idle ?? false,
+            is_locked: last.is_locked ?? false,
             finished: last.finished ?? false,
             state:
-              last.finished === true
-                ? "finished"
-                : last.idle === true
-                  ? "idle"
-                  : "working",
+              last.is_locked === true
+                ? "locked"
+                : last.finished === true
+                  ? "finished"
+                  : last.idle === true
+                    ? "idle"
+                    : "working",
             operation_description:
               last.operation?.description ??
               last.maintenance_session?.maintenance?.description ??
@@ -351,6 +354,7 @@ export class SummariesService {
           }
         : {
             idle: false,
+            is_locked: false,
             finished: false,
             state: "working",
             operation_description: "-",

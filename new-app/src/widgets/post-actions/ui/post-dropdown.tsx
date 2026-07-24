@@ -14,7 +14,7 @@ import {
 } from "@/shared/ui";
 import { List, SquareMenu, StopCircle, TrendingUp } from "lucide-react";
 
-type IState = "working" | "idle" | "finished" | "no_data";
+type IState = "working" | "idle" | "finished" | "locked" | "no_data";
 type Props = {
   summaryId: number;
   postId: number;

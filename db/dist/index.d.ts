@@ -144,6 +144,21 @@ export type Lot = $Result.DefaultSelection<Prisma.$LotPayload>
  */
 export type Summary = $Result.DefaultSelection<Prisma.$SummaryPayload>
 /**
+ * Model LaboratoryLock
+ * 
+ */
+export type LaboratoryLock = $Result.DefaultSelection<Prisma.$LaboratoryLockPayload>
+/**
+ * Model LaboratoryLockReason
+ * 
+ */
+export type LaboratoryLockReason = $Result.DefaultSelection<Prisma.$LaboratoryLockReasonPayload>
+/**
+ * Model LaboratoryAssistant
+ * 
+ */
+export type LaboratoryAssistant = $Result.DefaultSelection<Prisma.$LaboratoryAssistantPayload>
+/**
  * Model Defect
  * 
  */
@@ -571,6 +586,36 @@ export class PrismaClient<
     * ```
     */
   get summary(): Prisma.SummaryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.laboratoryLock`: Exposes CRUD operations for the **LaboratoryLock** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more LaboratoryLocks
+    * const laboratoryLocks = await prisma.laboratoryLock.findMany()
+    * ```
+    */
+  get laboratoryLock(): Prisma.LaboratoryLockDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.laboratoryLockReason`: Exposes CRUD operations for the **LaboratoryLockReason** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more LaboratoryLockReasons
+    * const laboratoryLockReasons = await prisma.laboratoryLockReason.findMany()
+    * ```
+    */
+  get laboratoryLockReason(): Prisma.LaboratoryLockReasonDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.laboratoryAssistant`: Exposes CRUD operations for the **LaboratoryAssistant** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more LaboratoryAssistants
+    * const laboratoryAssistants = await prisma.laboratoryAssistant.findMany()
+    * ```
+    */
+  get laboratoryAssistant(): Prisma.LaboratoryAssistantDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.defect`: Exposes CRUD operations for the **Defect** model.
@@ -1138,6 +1183,9 @@ export namespace Prisma {
     Printer: 'Printer',
     Lot: 'Lot',
     Summary: 'Summary',
+    LaboratoryLock: 'LaboratoryLock',
+    LaboratoryLockReason: 'LaboratoryLockReason',
+    LaboratoryAssistant: 'LaboratoryAssistant',
     Defect: 'Defect',
     Material: 'Material',
     Specification: 'Specification',
@@ -1166,7 +1214,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "conveyor" | "post" | "rank" | "operation" | "operationPicture" | "status" | "goal" | "maintenance" | "maintenanceTask" | "maintenanceSession" | "maintenanceLog" | "user" | "role" | "userRole" | "token" | "employee" | "product" | "productUnitWeight" | "crew" | "filePath" | "productPicture" | "batch" | "productionBox" | "printer" | "lot" | "summary" | "defect" | "material" | "specification" | "consumedMaterial" | "note" | "extrusionParam" | "varnishParam" | "offsetParam" | "sealantParam" | "treshold"
+      modelProps: "conveyor" | "post" | "rank" | "operation" | "operationPicture" | "status" | "goal" | "maintenance" | "maintenanceTask" | "maintenanceSession" | "maintenanceLog" | "user" | "role" | "userRole" | "token" | "employee" | "product" | "productUnitWeight" | "crew" | "filePath" | "productPicture" | "batch" | "productionBox" | "printer" | "lot" | "summary" | "laboratoryLock" | "laboratoryLockReason" | "laboratoryAssistant" | "defect" | "material" | "specification" | "consumedMaterial" | "note" | "extrusionParam" | "varnishParam" | "offsetParam" | "sealantParam" | "treshold"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3094,6 +3142,228 @@ export namespace Prisma {
           }
         }
       }
+      LaboratoryLock: {
+        payload: Prisma.$LaboratoryLockPayload<ExtArgs>
+        fields: Prisma.LaboratoryLockFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LaboratoryLockFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryLockPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LaboratoryLockFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryLockPayload>
+          }
+          findFirst: {
+            args: Prisma.LaboratoryLockFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryLockPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LaboratoryLockFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryLockPayload>
+          }
+          findMany: {
+            args: Prisma.LaboratoryLockFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryLockPayload>[]
+          }
+          create: {
+            args: Prisma.LaboratoryLockCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryLockPayload>
+          }
+          createMany: {
+            args: Prisma.LaboratoryLockCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.LaboratoryLockCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryLockPayload>[]
+          }
+          delete: {
+            args: Prisma.LaboratoryLockDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryLockPayload>
+          }
+          update: {
+            args: Prisma.LaboratoryLockUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryLockPayload>
+          }
+          deleteMany: {
+            args: Prisma.LaboratoryLockDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LaboratoryLockUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.LaboratoryLockUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryLockPayload>[]
+          }
+          upsert: {
+            args: Prisma.LaboratoryLockUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryLockPayload>
+          }
+          aggregate: {
+            args: Prisma.LaboratoryLockAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLaboratoryLock>
+          }
+          groupBy: {
+            args: Prisma.LaboratoryLockGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LaboratoryLockGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LaboratoryLockCountArgs<ExtArgs>
+            result: $Utils.Optional<LaboratoryLockCountAggregateOutputType> | number
+          }
+        }
+      }
+      LaboratoryLockReason: {
+        payload: Prisma.$LaboratoryLockReasonPayload<ExtArgs>
+        fields: Prisma.LaboratoryLockReasonFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LaboratoryLockReasonFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryLockReasonPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LaboratoryLockReasonFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryLockReasonPayload>
+          }
+          findFirst: {
+            args: Prisma.LaboratoryLockReasonFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryLockReasonPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LaboratoryLockReasonFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryLockReasonPayload>
+          }
+          findMany: {
+            args: Prisma.LaboratoryLockReasonFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryLockReasonPayload>[]
+          }
+          create: {
+            args: Prisma.LaboratoryLockReasonCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryLockReasonPayload>
+          }
+          createMany: {
+            args: Prisma.LaboratoryLockReasonCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.LaboratoryLockReasonCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryLockReasonPayload>[]
+          }
+          delete: {
+            args: Prisma.LaboratoryLockReasonDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryLockReasonPayload>
+          }
+          update: {
+            args: Prisma.LaboratoryLockReasonUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryLockReasonPayload>
+          }
+          deleteMany: {
+            args: Prisma.LaboratoryLockReasonDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LaboratoryLockReasonUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.LaboratoryLockReasonUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryLockReasonPayload>[]
+          }
+          upsert: {
+            args: Prisma.LaboratoryLockReasonUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryLockReasonPayload>
+          }
+          aggregate: {
+            args: Prisma.LaboratoryLockReasonAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLaboratoryLockReason>
+          }
+          groupBy: {
+            args: Prisma.LaboratoryLockReasonGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LaboratoryLockReasonGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LaboratoryLockReasonCountArgs<ExtArgs>
+            result: $Utils.Optional<LaboratoryLockReasonCountAggregateOutputType> | number
+          }
+        }
+      }
+      LaboratoryAssistant: {
+        payload: Prisma.$LaboratoryAssistantPayload<ExtArgs>
+        fields: Prisma.LaboratoryAssistantFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LaboratoryAssistantFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryAssistantPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LaboratoryAssistantFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryAssistantPayload>
+          }
+          findFirst: {
+            args: Prisma.LaboratoryAssistantFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryAssistantPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LaboratoryAssistantFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryAssistantPayload>
+          }
+          findMany: {
+            args: Prisma.LaboratoryAssistantFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryAssistantPayload>[]
+          }
+          create: {
+            args: Prisma.LaboratoryAssistantCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryAssistantPayload>
+          }
+          createMany: {
+            args: Prisma.LaboratoryAssistantCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.LaboratoryAssistantCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryAssistantPayload>[]
+          }
+          delete: {
+            args: Prisma.LaboratoryAssistantDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryAssistantPayload>
+          }
+          update: {
+            args: Prisma.LaboratoryAssistantUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryAssistantPayload>
+          }
+          deleteMany: {
+            args: Prisma.LaboratoryAssistantDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LaboratoryAssistantUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.LaboratoryAssistantUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryAssistantPayload>[]
+          }
+          upsert: {
+            args: Prisma.LaboratoryAssistantUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaboratoryAssistantPayload>
+          }
+          aggregate: {
+            args: Prisma.LaboratoryAssistantAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLaboratoryAssistant>
+          }
+          groupBy: {
+            args: Prisma.LaboratoryAssistantGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LaboratoryAssistantGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LaboratoryAssistantCountArgs<ExtArgs>
+            result: $Utils.Optional<LaboratoryAssistantCountAggregateOutputType> | number
+          }
+        }
+      }
       Defect: {
         payload: Prisma.$DefectPayload<ExtArgs>
         fields: Prisma.DefectFieldRefs
@@ -3956,6 +4226,9 @@ export namespace Prisma {
     printer?: PrinterOmit
     lot?: LotOmit
     summary?: SummaryOmit
+    laboratoryLock?: LaboratoryLockOmit
+    laboratoryLockReason?: LaboratoryLockReasonOmit
+    laboratoryAssistant?: LaboratoryAssistantOmit
     defect?: DefectOmit
     material?: MaterialOmit
     specification?: SpecificationOmit
@@ -4101,6 +4374,7 @@ export namespace Prisma {
     notes: number
     maintenances: number
     maintenance_sessions: number
+    laboratoryLocks: number
   }
 
   export type PostCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4110,6 +4384,7 @@ export namespace Prisma {
     notes?: boolean | PostCountOutputTypeCountNotesArgs
     maintenances?: boolean | PostCountOutputTypeCountMaintenancesArgs
     maintenance_sessions?: boolean | PostCountOutputTypeCountMaintenance_sessionsArgs
+    laboratoryLocks?: boolean | PostCountOutputTypeCountLaboratoryLocksArgs
   }
 
   // Custom InputTypes
@@ -4163,6 +4438,13 @@ export namespace Prisma {
    */
   export type PostCountOutputTypeCountMaintenance_sessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MaintenanceSessionWhereInput
+  }
+
+  /**
+   * PostCountOutputType without action
+   */
+  export type PostCountOutputTypeCountLaboratoryLocksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LaboratoryLockWhereInput
   }
 
 
@@ -4728,6 +5010,7 @@ export namespace Prisma {
     production_boxes: number
     statuses: number
     defects: number
+    laboratory_locks: number
   }
 
   export type SummaryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4741,6 +5024,7 @@ export namespace Prisma {
     production_boxes?: boolean | SummaryCountOutputTypeCountProduction_boxesArgs
     statuses?: boolean | SummaryCountOutputTypeCountStatusesArgs
     defects?: boolean | SummaryCountOutputTypeCountDefectsArgs
+    laboratory_locks?: boolean | SummaryCountOutputTypeCountLaboratory_locksArgs
   }
 
   // Custom InputTypes
@@ -4822,6 +5106,106 @@ export namespace Prisma {
    */
   export type SummaryCountOutputTypeCountDefectsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DefectWhereInput
+  }
+
+  /**
+   * SummaryCountOutputType without action
+   */
+  export type SummaryCountOutputTypeCountLaboratory_locksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LaboratoryLockWhereInput
+  }
+
+
+  /**
+   * Count Type LaboratoryLockCountOutputType
+   */
+
+  export type LaboratoryLockCountOutputType = {
+    statuses: number
+  }
+
+  export type LaboratoryLockCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    statuses?: boolean | LaboratoryLockCountOutputTypeCountStatusesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * LaboratoryLockCountOutputType without action
+   */
+  export type LaboratoryLockCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLockCountOutputType
+     */
+    select?: LaboratoryLockCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * LaboratoryLockCountOutputType without action
+   */
+  export type LaboratoryLockCountOutputTypeCountStatusesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StatusWhereInput
+  }
+
+
+  /**
+   * Count Type LaboratoryLockReasonCountOutputType
+   */
+
+  export type LaboratoryLockReasonCountOutputType = {
+    laboratoryLocks: number
+  }
+
+  export type LaboratoryLockReasonCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    laboratoryLocks?: boolean | LaboratoryLockReasonCountOutputTypeCountLaboratoryLocksArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * LaboratoryLockReasonCountOutputType without action
+   */
+  export type LaboratoryLockReasonCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLockReasonCountOutputType
+     */
+    select?: LaboratoryLockReasonCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * LaboratoryLockReasonCountOutputType without action
+   */
+  export type LaboratoryLockReasonCountOutputTypeCountLaboratoryLocksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LaboratoryLockWhereInput
+  }
+
+
+  /**
+   * Count Type LaboratoryAssistantCountOutputType
+   */
+
+  export type LaboratoryAssistantCountOutputType = {
+    laboratoryLocks: number
+  }
+
+  export type LaboratoryAssistantCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    laboratoryLocks?: boolean | LaboratoryAssistantCountOutputTypeCountLaboratoryLocksArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * LaboratoryAssistantCountOutputType without action
+   */
+  export type LaboratoryAssistantCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryAssistantCountOutputType
+     */
+    select?: LaboratoryAssistantCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * LaboratoryAssistantCountOutputType without action
+   */
+  export type LaboratoryAssistantCountOutputTypeCountLaboratoryLocksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LaboratoryLockWhereInput
   }
 
 
@@ -6315,6 +6699,7 @@ export namespace Prisma {
     notes?: boolean | Post$notesArgs<ExtArgs>
     maintenances?: boolean | Post$maintenancesArgs<ExtArgs>
     maintenance_sessions?: boolean | Post$maintenance_sessionsArgs<ExtArgs>
+    laboratoryLocks?: boolean | Post$laboratoryLocksArgs<ExtArgs>
     _count?: boolean | PostCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["post"]>
 
@@ -6344,6 +6729,7 @@ export namespace Prisma {
     notes?: boolean | Post$notesArgs<ExtArgs>
     maintenances?: boolean | Post$maintenancesArgs<ExtArgs>
     maintenance_sessions?: boolean | Post$maintenance_sessionsArgs<ExtArgs>
+    laboratoryLocks?: boolean | Post$laboratoryLocksArgs<ExtArgs>
     _count?: boolean | PostCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PostIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -6358,6 +6744,7 @@ export namespace Prisma {
       notes: Prisma.$NotePayload<ExtArgs>[]
       maintenances: Prisma.$MaintenancePayload<ExtArgs>[]
       maintenance_sessions: Prisma.$MaintenanceSessionPayload<ExtArgs>[]
+      laboratoryLocks: Prisma.$LaboratoryLockPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -6763,6 +7150,7 @@ export namespace Prisma {
     notes<T extends Post$notesArgs<ExtArgs> = {}>(args?: Subset<T, Post$notesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     maintenances<T extends Post$maintenancesArgs<ExtArgs> = {}>(args?: Subset<T, Post$maintenancesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MaintenancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     maintenance_sessions<T extends Post$maintenance_sessionsArgs<ExtArgs> = {}>(args?: Subset<T, Post$maintenance_sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MaintenanceSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    laboratoryLocks<T extends Post$laboratoryLocksArgs<ExtArgs> = {}>(args?: Subset<T, Post$laboratoryLocksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaboratoryLockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7324,6 +7712,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MaintenanceSessionScalarFieldEnum | MaintenanceSessionScalarFieldEnum[]
+  }
+
+  /**
+   * Post.laboratoryLocks
+   */
+  export type Post$laboratoryLocksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLock
+     */
+    select?: LaboratoryLockSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLock
+     */
+    omit?: LaboratoryLockOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryLockInclude<ExtArgs> | null
+    where?: LaboratoryLockWhereInput
+    orderBy?: LaboratoryLockOrderByWithRelationInput | LaboratoryLockOrderByWithRelationInput[]
+    cursor?: LaboratoryLockWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LaboratoryLockScalarFieldEnum | LaboratoryLockScalarFieldEnum[]
   }
 
   /**
@@ -10786,6 +11198,7 @@ export namespace Prisma {
     varnish_param_id: number | null
     offset_param_id: number | null
     sealant_param_id: number | null
+    laboratory_lock_id: number | null
   }
 
   export type StatusSumAggregateOutputType = {
@@ -10801,6 +11214,7 @@ export namespace Prisma {
     varnish_param_id: number | null
     offset_param_id: number | null
     sealant_param_id: number | null
+    laboratory_lock_id: number | null
   }
 
   export type StatusMinAggregateOutputType = {
@@ -10819,6 +11233,8 @@ export namespace Prisma {
     varnish_param_id: number | null
     offset_param_id: number | null
     sealant_param_id: number | null
+    is_locked: boolean | null
+    laboratory_lock_id: number | null
   }
 
   export type StatusMaxAggregateOutputType = {
@@ -10837,6 +11253,8 @@ export namespace Prisma {
     varnish_param_id: number | null
     offset_param_id: number | null
     sealant_param_id: number | null
+    is_locked: boolean | null
+    laboratory_lock_id: number | null
   }
 
   export type StatusCountAggregateOutputType = {
@@ -10855,6 +11273,8 @@ export namespace Prisma {
     varnish_param_id: number
     offset_param_id: number
     sealant_param_id: number
+    is_locked: number
+    laboratory_lock_id: number
     _all: number
   }
 
@@ -10872,6 +11292,7 @@ export namespace Prisma {
     varnish_param_id?: true
     offset_param_id?: true
     sealant_param_id?: true
+    laboratory_lock_id?: true
   }
 
   export type StatusSumAggregateInputType = {
@@ -10887,6 +11308,7 @@ export namespace Prisma {
     varnish_param_id?: true
     offset_param_id?: true
     sealant_param_id?: true
+    laboratory_lock_id?: true
   }
 
   export type StatusMinAggregateInputType = {
@@ -10905,6 +11327,8 @@ export namespace Prisma {
     varnish_param_id?: true
     offset_param_id?: true
     sealant_param_id?: true
+    is_locked?: true
+    laboratory_lock_id?: true
   }
 
   export type StatusMaxAggregateInputType = {
@@ -10923,6 +11347,8 @@ export namespace Prisma {
     varnish_param_id?: true
     offset_param_id?: true
     sealant_param_id?: true
+    is_locked?: true
+    laboratory_lock_id?: true
   }
 
   export type StatusCountAggregateInputType = {
@@ -10941,6 +11367,8 @@ export namespace Prisma {
     varnish_param_id?: true
     offset_param_id?: true
     sealant_param_id?: true
+    is_locked?: true
+    laboratory_lock_id?: true
     _all?: true
   }
 
@@ -11046,6 +11474,8 @@ export namespace Prisma {
     varnish_param_id: number | null
     offset_param_id: number | null
     sealant_param_id: number | null
+    is_locked: boolean
+    laboratory_lock_id: number | null
     _count: StatusCountAggregateOutputType | null
     _avg: StatusAvgAggregateOutputType | null
     _sum: StatusSumAggregateOutputType | null
@@ -11083,6 +11513,8 @@ export namespace Prisma {
     varnish_param_id?: boolean
     offset_param_id?: boolean
     sealant_param_id?: boolean
+    is_locked?: boolean
+    laboratory_lock_id?: boolean
     summary?: boolean | SummaryDefaultArgs<ExtArgs>
     post?: boolean | PostDefaultArgs<ExtArgs>
     operation?: boolean | Status$operationArgs<ExtArgs>
@@ -11092,6 +11524,7 @@ export namespace Prisma {
     varnish_param?: boolean | Status$varnish_paramArgs<ExtArgs>
     offset_param?: boolean | Status$offset_paramArgs<ExtArgs>
     sealant_param?: boolean | Status$sealant_paramArgs<ExtArgs>
+    laboratory_lock?: boolean | Status$laboratory_lockArgs<ExtArgs>
   }, ExtArgs["result"]["status"]>
 
   export type StatusSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -11110,6 +11543,8 @@ export namespace Prisma {
     varnish_param_id?: boolean
     offset_param_id?: boolean
     sealant_param_id?: boolean
+    is_locked?: boolean
+    laboratory_lock_id?: boolean
     summary?: boolean | SummaryDefaultArgs<ExtArgs>
     post?: boolean | PostDefaultArgs<ExtArgs>
     operation?: boolean | Status$operationArgs<ExtArgs>
@@ -11119,6 +11554,7 @@ export namespace Prisma {
     varnish_param?: boolean | Status$varnish_paramArgs<ExtArgs>
     offset_param?: boolean | Status$offset_paramArgs<ExtArgs>
     sealant_param?: boolean | Status$sealant_paramArgs<ExtArgs>
+    laboratory_lock?: boolean | Status$laboratory_lockArgs<ExtArgs>
   }, ExtArgs["result"]["status"]>
 
   export type StatusSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -11137,6 +11573,8 @@ export namespace Prisma {
     varnish_param_id?: boolean
     offset_param_id?: boolean
     sealant_param_id?: boolean
+    is_locked?: boolean
+    laboratory_lock_id?: boolean
     summary?: boolean | SummaryDefaultArgs<ExtArgs>
     post?: boolean | PostDefaultArgs<ExtArgs>
     operation?: boolean | Status$operationArgs<ExtArgs>
@@ -11146,6 +11584,7 @@ export namespace Prisma {
     varnish_param?: boolean | Status$varnish_paramArgs<ExtArgs>
     offset_param?: boolean | Status$offset_paramArgs<ExtArgs>
     sealant_param?: boolean | Status$sealant_paramArgs<ExtArgs>
+    laboratory_lock?: boolean | Status$laboratory_lockArgs<ExtArgs>
   }, ExtArgs["result"]["status"]>
 
   export type StatusSelectScalar = {
@@ -11164,9 +11603,11 @@ export namespace Prisma {
     varnish_param_id?: boolean
     offset_param_id?: boolean
     sealant_param_id?: boolean
+    is_locked?: boolean
+    laboratory_lock_id?: boolean
   }
 
-  export type StatusOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "summary_id" | "post_id" | "counter_value" | "operation_id" | "idle" | "employee_id" | "idle_time" | "finished" | "createdAt" | "maintenance_session_id" | "extrusion_param_id" | "varnish_param_id" | "offset_param_id" | "sealant_param_id", ExtArgs["result"]["status"]>
+  export type StatusOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "summary_id" | "post_id" | "counter_value" | "operation_id" | "idle" | "employee_id" | "idle_time" | "finished" | "createdAt" | "maintenance_session_id" | "extrusion_param_id" | "varnish_param_id" | "offset_param_id" | "sealant_param_id" | "is_locked" | "laboratory_lock_id", ExtArgs["result"]["status"]>
   export type StatusInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     summary?: boolean | SummaryDefaultArgs<ExtArgs>
     post?: boolean | PostDefaultArgs<ExtArgs>
@@ -11177,6 +11618,7 @@ export namespace Prisma {
     varnish_param?: boolean | Status$varnish_paramArgs<ExtArgs>
     offset_param?: boolean | Status$offset_paramArgs<ExtArgs>
     sealant_param?: boolean | Status$sealant_paramArgs<ExtArgs>
+    laboratory_lock?: boolean | Status$laboratory_lockArgs<ExtArgs>
   }
   export type StatusIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     summary?: boolean | SummaryDefaultArgs<ExtArgs>
@@ -11188,6 +11630,7 @@ export namespace Prisma {
     varnish_param?: boolean | Status$varnish_paramArgs<ExtArgs>
     offset_param?: boolean | Status$offset_paramArgs<ExtArgs>
     sealant_param?: boolean | Status$sealant_paramArgs<ExtArgs>
+    laboratory_lock?: boolean | Status$laboratory_lockArgs<ExtArgs>
   }
   export type StatusIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     summary?: boolean | SummaryDefaultArgs<ExtArgs>
@@ -11199,6 +11642,7 @@ export namespace Prisma {
     varnish_param?: boolean | Status$varnish_paramArgs<ExtArgs>
     offset_param?: boolean | Status$offset_paramArgs<ExtArgs>
     sealant_param?: boolean | Status$sealant_paramArgs<ExtArgs>
+    laboratory_lock?: boolean | Status$laboratory_lockArgs<ExtArgs>
   }
 
   export type $StatusPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11213,6 +11657,7 @@ export namespace Prisma {
       varnish_param: Prisma.$VarnishParamPayload<ExtArgs> | null
       offset_param: Prisma.$OffsetParamPayload<ExtArgs> | null
       sealant_param: Prisma.$SealantParamPayload<ExtArgs> | null
+      laboratory_lock: Prisma.$LaboratoryLockPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -11230,6 +11675,8 @@ export namespace Prisma {
       varnish_param_id: number | null
       offset_param_id: number | null
       sealant_param_id: number | null
+      is_locked: boolean
+      laboratory_lock_id: number | null
     }, ExtArgs["result"]["status"]>
     composites: {}
   }
@@ -11633,6 +12080,7 @@ export namespace Prisma {
     varnish_param<T extends Status$varnish_paramArgs<ExtArgs> = {}>(args?: Subset<T, Status$varnish_paramArgs<ExtArgs>>): Prisma__VarnishParamClient<$Result.GetResult<Prisma.$VarnishParamPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     offset_param<T extends Status$offset_paramArgs<ExtArgs> = {}>(args?: Subset<T, Status$offset_paramArgs<ExtArgs>>): Prisma__OffsetParamClient<$Result.GetResult<Prisma.$OffsetParamPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     sealant_param<T extends Status$sealant_paramArgs<ExtArgs> = {}>(args?: Subset<T, Status$sealant_paramArgs<ExtArgs>>): Prisma__SealantParamClient<$Result.GetResult<Prisma.$SealantParamPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    laboratory_lock<T extends Status$laboratory_lockArgs<ExtArgs> = {}>(args?: Subset<T, Status$laboratory_lockArgs<ExtArgs>>): Prisma__LaboratoryLockClient<$Result.GetResult<Prisma.$LaboratoryLockPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11677,6 +12125,8 @@ export namespace Prisma {
     readonly varnish_param_id: FieldRef<"Status", 'Int'>
     readonly offset_param_id: FieldRef<"Status", 'Int'>
     readonly sealant_param_id: FieldRef<"Status", 'Int'>
+    readonly is_locked: FieldRef<"Status", 'Boolean'>
+    readonly laboratory_lock_id: FieldRef<"Status", 'Int'>
   }
     
 
@@ -12203,6 +12653,25 @@ export namespace Prisma {
      */
     include?: SealantParamInclude<ExtArgs> | null
     where?: SealantParamWhereInput
+  }
+
+  /**
+   * Status.laboratory_lock
+   */
+  export type Status$laboratory_lockArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLock
+     */
+    select?: LaboratoryLockSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLock
+     */
+    omit?: LaboratoryLockOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryLockInclude<ExtArgs> | null
+    where?: LaboratoryLockWhereInput
   }
 
   /**
@@ -33829,6 +34298,7 @@ export namespace Prisma {
     statuses?: boolean | Summary$statusesArgs<ExtArgs>
     defects?: boolean | Summary$defectsArgs<ExtArgs>
     crew?: boolean | Summary$crewArgs<ExtArgs>
+    laboratory_locks?: boolean | Summary$laboratory_locksArgs<ExtArgs>
     _count?: boolean | SummaryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["summary"]>
 
@@ -33895,6 +34365,7 @@ export namespace Prisma {
     statuses?: boolean | Summary$statusesArgs<ExtArgs>
     defects?: boolean | Summary$defectsArgs<ExtArgs>
     crew?: boolean | Summary$crewArgs<ExtArgs>
+    laboratory_locks?: boolean | Summary$laboratory_locksArgs<ExtArgs>
     _count?: boolean | SummaryCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type SummaryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -33927,6 +34398,7 @@ export namespace Prisma {
       statuses: Prisma.$StatusPayload<ExtArgs>[]
       defects: Prisma.$DefectPayload<ExtArgs>[]
       crew: Prisma.$CrewPayload<ExtArgs> | null
+      laboratory_locks: Prisma.$LaboratoryLockPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -34347,6 +34819,7 @@ export namespace Prisma {
     statuses<T extends Summary$statusesArgs<ExtArgs> = {}>(args?: Subset<T, Summary$statusesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StatusPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     defects<T extends Summary$defectsArgs<ExtArgs> = {}>(args?: Subset<T, Summary$defectsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DefectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     crew<T extends Summary$crewArgs<ExtArgs> = {}>(args?: Subset<T, Summary$crewArgs<ExtArgs>>): Prisma__CrewClient<$Result.GetResult<Prisma.$CrewPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    laboratory_locks<T extends Summary$laboratory_locksArgs<ExtArgs> = {}>(args?: Subset<T, Summary$laboratory_locksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaboratoryLockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -35041,6 +35514,30 @@ export namespace Prisma {
   }
 
   /**
+   * Summary.laboratory_locks
+   */
+  export type Summary$laboratory_locksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLock
+     */
+    select?: LaboratoryLockSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLock
+     */
+    omit?: LaboratoryLockOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryLockInclude<ExtArgs> | null
+    where?: LaboratoryLockWhereInput
+    orderBy?: LaboratoryLockOrderByWithRelationInput | LaboratoryLockOrderByWithRelationInput[]
+    cursor?: LaboratoryLockWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LaboratoryLockScalarFieldEnum | LaboratoryLockScalarFieldEnum[]
+  }
+
+  /**
    * Summary without action
    */
   export type SummaryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -35056,6 +35553,3337 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: SummaryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model LaboratoryLock
+   */
+
+  export type AggregateLaboratoryLock = {
+    _count: LaboratoryLockCountAggregateOutputType | null
+    _avg: LaboratoryLockAvgAggregateOutputType | null
+    _sum: LaboratoryLockSumAggregateOutputType | null
+    _min: LaboratoryLockMinAggregateOutputType | null
+    _max: LaboratoryLockMaxAggregateOutputType | null
+  }
+
+  export type LaboratoryLockAvgAggregateOutputType = {
+    id: number | null
+    laboratory_lock_reason_id: number | null
+    laboratory_assistant_id: number | null
+    summary_id: number | null
+    post_id: number | null
+  }
+
+  export type LaboratoryLockSumAggregateOutputType = {
+    id: number | null
+    laboratory_lock_reason_id: number | null
+    laboratory_assistant_id: number | null
+    summary_id: number | null
+    post_id: number | null
+  }
+
+  export type LaboratoryLockMinAggregateOutputType = {
+    id: number | null
+    laboratory_lock_reason_id: number | null
+    laboratory_assistant_id: number | null
+    createdAt: Date | null
+    summary_id: number | null
+    post_id: number | null
+    is_active: boolean | null
+    closedAt: Date | null
+  }
+
+  export type LaboratoryLockMaxAggregateOutputType = {
+    id: number | null
+    laboratory_lock_reason_id: number | null
+    laboratory_assistant_id: number | null
+    createdAt: Date | null
+    summary_id: number | null
+    post_id: number | null
+    is_active: boolean | null
+    closedAt: Date | null
+  }
+
+  export type LaboratoryLockCountAggregateOutputType = {
+    id: number
+    laboratory_lock_reason_id: number
+    laboratory_assistant_id: number
+    createdAt: number
+    summary_id: number
+    post_id: number
+    is_active: number
+    closedAt: number
+    _all: number
+  }
+
+
+  export type LaboratoryLockAvgAggregateInputType = {
+    id?: true
+    laboratory_lock_reason_id?: true
+    laboratory_assistant_id?: true
+    summary_id?: true
+    post_id?: true
+  }
+
+  export type LaboratoryLockSumAggregateInputType = {
+    id?: true
+    laboratory_lock_reason_id?: true
+    laboratory_assistant_id?: true
+    summary_id?: true
+    post_id?: true
+  }
+
+  export type LaboratoryLockMinAggregateInputType = {
+    id?: true
+    laboratory_lock_reason_id?: true
+    laboratory_assistant_id?: true
+    createdAt?: true
+    summary_id?: true
+    post_id?: true
+    is_active?: true
+    closedAt?: true
+  }
+
+  export type LaboratoryLockMaxAggregateInputType = {
+    id?: true
+    laboratory_lock_reason_id?: true
+    laboratory_assistant_id?: true
+    createdAt?: true
+    summary_id?: true
+    post_id?: true
+    is_active?: true
+    closedAt?: true
+  }
+
+  export type LaboratoryLockCountAggregateInputType = {
+    id?: true
+    laboratory_lock_reason_id?: true
+    laboratory_assistant_id?: true
+    createdAt?: true
+    summary_id?: true
+    post_id?: true
+    is_active?: true
+    closedAt?: true
+    _all?: true
+  }
+
+  export type LaboratoryLockAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LaboratoryLock to aggregate.
+     */
+    where?: LaboratoryLockWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LaboratoryLocks to fetch.
+     */
+    orderBy?: LaboratoryLockOrderByWithRelationInput | LaboratoryLockOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LaboratoryLockWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LaboratoryLocks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LaboratoryLocks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned LaboratoryLocks
+    **/
+    _count?: true | LaboratoryLockCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: LaboratoryLockAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: LaboratoryLockSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LaboratoryLockMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LaboratoryLockMaxAggregateInputType
+  }
+
+  export type GetLaboratoryLockAggregateType<T extends LaboratoryLockAggregateArgs> = {
+        [P in keyof T & keyof AggregateLaboratoryLock]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLaboratoryLock[P]>
+      : GetScalarType<T[P], AggregateLaboratoryLock[P]>
+  }
+
+
+
+
+  export type LaboratoryLockGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LaboratoryLockWhereInput
+    orderBy?: LaboratoryLockOrderByWithAggregationInput | LaboratoryLockOrderByWithAggregationInput[]
+    by: LaboratoryLockScalarFieldEnum[] | LaboratoryLockScalarFieldEnum
+    having?: LaboratoryLockScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LaboratoryLockCountAggregateInputType | true
+    _avg?: LaboratoryLockAvgAggregateInputType
+    _sum?: LaboratoryLockSumAggregateInputType
+    _min?: LaboratoryLockMinAggregateInputType
+    _max?: LaboratoryLockMaxAggregateInputType
+  }
+
+  export type LaboratoryLockGroupByOutputType = {
+    id: number
+    laboratory_lock_reason_id: number
+    laboratory_assistant_id: number
+    createdAt: Date
+    summary_id: number
+    post_id: number
+    is_active: boolean
+    closedAt: Date | null
+    _count: LaboratoryLockCountAggregateOutputType | null
+    _avg: LaboratoryLockAvgAggregateOutputType | null
+    _sum: LaboratoryLockSumAggregateOutputType | null
+    _min: LaboratoryLockMinAggregateOutputType | null
+    _max: LaboratoryLockMaxAggregateOutputType | null
+  }
+
+  type GetLaboratoryLockGroupByPayload<T extends LaboratoryLockGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LaboratoryLockGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LaboratoryLockGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LaboratoryLockGroupByOutputType[P]>
+            : GetScalarType<T[P], LaboratoryLockGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LaboratoryLockSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    laboratory_lock_reason_id?: boolean
+    laboratory_assistant_id?: boolean
+    createdAt?: boolean
+    summary_id?: boolean
+    post_id?: boolean
+    is_active?: boolean
+    closedAt?: boolean
+    laboratory_lock_reason?: boolean | LaboratoryLockReasonDefaultArgs<ExtArgs>
+    laboratory_assistant?: boolean | LaboratoryAssistantDefaultArgs<ExtArgs>
+    summary?: boolean | SummaryDefaultArgs<ExtArgs>
+    post?: boolean | PostDefaultArgs<ExtArgs>
+    statuses?: boolean | LaboratoryLock$statusesArgs<ExtArgs>
+    _count?: boolean | LaboratoryLockCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["laboratoryLock"]>
+
+  export type LaboratoryLockSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    laboratory_lock_reason_id?: boolean
+    laboratory_assistant_id?: boolean
+    createdAt?: boolean
+    summary_id?: boolean
+    post_id?: boolean
+    is_active?: boolean
+    closedAt?: boolean
+    laboratory_lock_reason?: boolean | LaboratoryLockReasonDefaultArgs<ExtArgs>
+    laboratory_assistant?: boolean | LaboratoryAssistantDefaultArgs<ExtArgs>
+    summary?: boolean | SummaryDefaultArgs<ExtArgs>
+    post?: boolean | PostDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["laboratoryLock"]>
+
+  export type LaboratoryLockSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    laboratory_lock_reason_id?: boolean
+    laboratory_assistant_id?: boolean
+    createdAt?: boolean
+    summary_id?: boolean
+    post_id?: boolean
+    is_active?: boolean
+    closedAt?: boolean
+    laboratory_lock_reason?: boolean | LaboratoryLockReasonDefaultArgs<ExtArgs>
+    laboratory_assistant?: boolean | LaboratoryAssistantDefaultArgs<ExtArgs>
+    summary?: boolean | SummaryDefaultArgs<ExtArgs>
+    post?: boolean | PostDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["laboratoryLock"]>
+
+  export type LaboratoryLockSelectScalar = {
+    id?: boolean
+    laboratory_lock_reason_id?: boolean
+    laboratory_assistant_id?: boolean
+    createdAt?: boolean
+    summary_id?: boolean
+    post_id?: boolean
+    is_active?: boolean
+    closedAt?: boolean
+  }
+
+  export type LaboratoryLockOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "laboratory_lock_reason_id" | "laboratory_assistant_id" | "createdAt" | "summary_id" | "post_id" | "is_active" | "closedAt", ExtArgs["result"]["laboratoryLock"]>
+  export type LaboratoryLockInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    laboratory_lock_reason?: boolean | LaboratoryLockReasonDefaultArgs<ExtArgs>
+    laboratory_assistant?: boolean | LaboratoryAssistantDefaultArgs<ExtArgs>
+    summary?: boolean | SummaryDefaultArgs<ExtArgs>
+    post?: boolean | PostDefaultArgs<ExtArgs>
+    statuses?: boolean | LaboratoryLock$statusesArgs<ExtArgs>
+    _count?: boolean | LaboratoryLockCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type LaboratoryLockIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    laboratory_lock_reason?: boolean | LaboratoryLockReasonDefaultArgs<ExtArgs>
+    laboratory_assistant?: boolean | LaboratoryAssistantDefaultArgs<ExtArgs>
+    summary?: boolean | SummaryDefaultArgs<ExtArgs>
+    post?: boolean | PostDefaultArgs<ExtArgs>
+  }
+  export type LaboratoryLockIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    laboratory_lock_reason?: boolean | LaboratoryLockReasonDefaultArgs<ExtArgs>
+    laboratory_assistant?: boolean | LaboratoryAssistantDefaultArgs<ExtArgs>
+    summary?: boolean | SummaryDefaultArgs<ExtArgs>
+    post?: boolean | PostDefaultArgs<ExtArgs>
+  }
+
+  export type $LaboratoryLockPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "LaboratoryLock"
+    objects: {
+      laboratory_lock_reason: Prisma.$LaboratoryLockReasonPayload<ExtArgs>
+      laboratory_assistant: Prisma.$LaboratoryAssistantPayload<ExtArgs>
+      summary: Prisma.$SummaryPayload<ExtArgs>
+      post: Prisma.$PostPayload<ExtArgs>
+      statuses: Prisma.$StatusPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      laboratory_lock_reason_id: number
+      laboratory_assistant_id: number
+      createdAt: Date
+      summary_id: number
+      post_id: number
+      is_active: boolean
+      closedAt: Date | null
+    }, ExtArgs["result"]["laboratoryLock"]>
+    composites: {}
+  }
+
+  type LaboratoryLockGetPayload<S extends boolean | null | undefined | LaboratoryLockDefaultArgs> = $Result.GetResult<Prisma.$LaboratoryLockPayload, S>
+
+  type LaboratoryLockCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<LaboratoryLockFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LaboratoryLockCountAggregateInputType | true
+    }
+
+  export interface LaboratoryLockDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['LaboratoryLock'], meta: { name: 'LaboratoryLock' } }
+    /**
+     * Find zero or one LaboratoryLock that matches the filter.
+     * @param {LaboratoryLockFindUniqueArgs} args - Arguments to find a LaboratoryLock
+     * @example
+     * // Get one LaboratoryLock
+     * const laboratoryLock = await prisma.laboratoryLock.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LaboratoryLockFindUniqueArgs>(args: SelectSubset<T, LaboratoryLockFindUniqueArgs<ExtArgs>>): Prisma__LaboratoryLockClient<$Result.GetResult<Prisma.$LaboratoryLockPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one LaboratoryLock that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {LaboratoryLockFindUniqueOrThrowArgs} args - Arguments to find a LaboratoryLock
+     * @example
+     * // Get one LaboratoryLock
+     * const laboratoryLock = await prisma.laboratoryLock.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LaboratoryLockFindUniqueOrThrowArgs>(args: SelectSubset<T, LaboratoryLockFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LaboratoryLockClient<$Result.GetResult<Prisma.$LaboratoryLockPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LaboratoryLock that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaboratoryLockFindFirstArgs} args - Arguments to find a LaboratoryLock
+     * @example
+     * // Get one LaboratoryLock
+     * const laboratoryLock = await prisma.laboratoryLock.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LaboratoryLockFindFirstArgs>(args?: SelectSubset<T, LaboratoryLockFindFirstArgs<ExtArgs>>): Prisma__LaboratoryLockClient<$Result.GetResult<Prisma.$LaboratoryLockPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LaboratoryLock that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaboratoryLockFindFirstOrThrowArgs} args - Arguments to find a LaboratoryLock
+     * @example
+     * // Get one LaboratoryLock
+     * const laboratoryLock = await prisma.laboratoryLock.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LaboratoryLockFindFirstOrThrowArgs>(args?: SelectSubset<T, LaboratoryLockFindFirstOrThrowArgs<ExtArgs>>): Prisma__LaboratoryLockClient<$Result.GetResult<Prisma.$LaboratoryLockPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more LaboratoryLocks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaboratoryLockFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all LaboratoryLocks
+     * const laboratoryLocks = await prisma.laboratoryLock.findMany()
+     * 
+     * // Get first 10 LaboratoryLocks
+     * const laboratoryLocks = await prisma.laboratoryLock.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const laboratoryLockWithIdOnly = await prisma.laboratoryLock.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends LaboratoryLockFindManyArgs>(args?: SelectSubset<T, LaboratoryLockFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaboratoryLockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a LaboratoryLock.
+     * @param {LaboratoryLockCreateArgs} args - Arguments to create a LaboratoryLock.
+     * @example
+     * // Create one LaboratoryLock
+     * const LaboratoryLock = await prisma.laboratoryLock.create({
+     *   data: {
+     *     // ... data to create a LaboratoryLock
+     *   }
+     * })
+     * 
+     */
+    create<T extends LaboratoryLockCreateArgs>(args: SelectSubset<T, LaboratoryLockCreateArgs<ExtArgs>>): Prisma__LaboratoryLockClient<$Result.GetResult<Prisma.$LaboratoryLockPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many LaboratoryLocks.
+     * @param {LaboratoryLockCreateManyArgs} args - Arguments to create many LaboratoryLocks.
+     * @example
+     * // Create many LaboratoryLocks
+     * const laboratoryLock = await prisma.laboratoryLock.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LaboratoryLockCreateManyArgs>(args?: SelectSubset<T, LaboratoryLockCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many LaboratoryLocks and returns the data saved in the database.
+     * @param {LaboratoryLockCreateManyAndReturnArgs} args - Arguments to create many LaboratoryLocks.
+     * @example
+     * // Create many LaboratoryLocks
+     * const laboratoryLock = await prisma.laboratoryLock.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many LaboratoryLocks and only return the `id`
+     * const laboratoryLockWithIdOnly = await prisma.laboratoryLock.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends LaboratoryLockCreateManyAndReturnArgs>(args?: SelectSubset<T, LaboratoryLockCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaboratoryLockPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a LaboratoryLock.
+     * @param {LaboratoryLockDeleteArgs} args - Arguments to delete one LaboratoryLock.
+     * @example
+     * // Delete one LaboratoryLock
+     * const LaboratoryLock = await prisma.laboratoryLock.delete({
+     *   where: {
+     *     // ... filter to delete one LaboratoryLock
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LaboratoryLockDeleteArgs>(args: SelectSubset<T, LaboratoryLockDeleteArgs<ExtArgs>>): Prisma__LaboratoryLockClient<$Result.GetResult<Prisma.$LaboratoryLockPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one LaboratoryLock.
+     * @param {LaboratoryLockUpdateArgs} args - Arguments to update one LaboratoryLock.
+     * @example
+     * // Update one LaboratoryLock
+     * const laboratoryLock = await prisma.laboratoryLock.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LaboratoryLockUpdateArgs>(args: SelectSubset<T, LaboratoryLockUpdateArgs<ExtArgs>>): Prisma__LaboratoryLockClient<$Result.GetResult<Prisma.$LaboratoryLockPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more LaboratoryLocks.
+     * @param {LaboratoryLockDeleteManyArgs} args - Arguments to filter LaboratoryLocks to delete.
+     * @example
+     * // Delete a few LaboratoryLocks
+     * const { count } = await prisma.laboratoryLock.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LaboratoryLockDeleteManyArgs>(args?: SelectSubset<T, LaboratoryLockDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LaboratoryLocks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaboratoryLockUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many LaboratoryLocks
+     * const laboratoryLock = await prisma.laboratoryLock.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LaboratoryLockUpdateManyArgs>(args: SelectSubset<T, LaboratoryLockUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LaboratoryLocks and returns the data updated in the database.
+     * @param {LaboratoryLockUpdateManyAndReturnArgs} args - Arguments to update many LaboratoryLocks.
+     * @example
+     * // Update many LaboratoryLocks
+     * const laboratoryLock = await prisma.laboratoryLock.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more LaboratoryLocks and only return the `id`
+     * const laboratoryLockWithIdOnly = await prisma.laboratoryLock.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends LaboratoryLockUpdateManyAndReturnArgs>(args: SelectSubset<T, LaboratoryLockUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaboratoryLockPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one LaboratoryLock.
+     * @param {LaboratoryLockUpsertArgs} args - Arguments to update or create a LaboratoryLock.
+     * @example
+     * // Update or create a LaboratoryLock
+     * const laboratoryLock = await prisma.laboratoryLock.upsert({
+     *   create: {
+     *     // ... data to create a LaboratoryLock
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the LaboratoryLock we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LaboratoryLockUpsertArgs>(args: SelectSubset<T, LaboratoryLockUpsertArgs<ExtArgs>>): Prisma__LaboratoryLockClient<$Result.GetResult<Prisma.$LaboratoryLockPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of LaboratoryLocks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaboratoryLockCountArgs} args - Arguments to filter LaboratoryLocks to count.
+     * @example
+     * // Count the number of LaboratoryLocks
+     * const count = await prisma.laboratoryLock.count({
+     *   where: {
+     *     // ... the filter for the LaboratoryLocks we want to count
+     *   }
+     * })
+    **/
+    count<T extends LaboratoryLockCountArgs>(
+      args?: Subset<T, LaboratoryLockCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LaboratoryLockCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a LaboratoryLock.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaboratoryLockAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LaboratoryLockAggregateArgs>(args: Subset<T, LaboratoryLockAggregateArgs>): Prisma.PrismaPromise<GetLaboratoryLockAggregateType<T>>
+
+    /**
+     * Group by LaboratoryLock.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaboratoryLockGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LaboratoryLockGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LaboratoryLockGroupByArgs['orderBy'] }
+        : { orderBy?: LaboratoryLockGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LaboratoryLockGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLaboratoryLockGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the LaboratoryLock model
+   */
+  readonly fields: LaboratoryLockFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for LaboratoryLock.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LaboratoryLockClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    laboratory_lock_reason<T extends LaboratoryLockReasonDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LaboratoryLockReasonDefaultArgs<ExtArgs>>): Prisma__LaboratoryLockReasonClient<$Result.GetResult<Prisma.$LaboratoryLockReasonPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    laboratory_assistant<T extends LaboratoryAssistantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LaboratoryAssistantDefaultArgs<ExtArgs>>): Prisma__LaboratoryAssistantClient<$Result.GetResult<Prisma.$LaboratoryAssistantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    summary<T extends SummaryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SummaryDefaultArgs<ExtArgs>>): Prisma__SummaryClient<$Result.GetResult<Prisma.$SummaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    post<T extends PostDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PostDefaultArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    statuses<T extends LaboratoryLock$statusesArgs<ExtArgs> = {}>(args?: Subset<T, LaboratoryLock$statusesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StatusPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the LaboratoryLock model
+   */
+  interface LaboratoryLockFieldRefs {
+    readonly id: FieldRef<"LaboratoryLock", 'Int'>
+    readonly laboratory_lock_reason_id: FieldRef<"LaboratoryLock", 'Int'>
+    readonly laboratory_assistant_id: FieldRef<"LaboratoryLock", 'Int'>
+    readonly createdAt: FieldRef<"LaboratoryLock", 'DateTime'>
+    readonly summary_id: FieldRef<"LaboratoryLock", 'Int'>
+    readonly post_id: FieldRef<"LaboratoryLock", 'Int'>
+    readonly is_active: FieldRef<"LaboratoryLock", 'Boolean'>
+    readonly closedAt: FieldRef<"LaboratoryLock", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * LaboratoryLock findUnique
+   */
+  export type LaboratoryLockFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLock
+     */
+    select?: LaboratoryLockSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLock
+     */
+    omit?: LaboratoryLockOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryLockInclude<ExtArgs> | null
+    /**
+     * Filter, which LaboratoryLock to fetch.
+     */
+    where: LaboratoryLockWhereUniqueInput
+  }
+
+  /**
+   * LaboratoryLock findUniqueOrThrow
+   */
+  export type LaboratoryLockFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLock
+     */
+    select?: LaboratoryLockSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLock
+     */
+    omit?: LaboratoryLockOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryLockInclude<ExtArgs> | null
+    /**
+     * Filter, which LaboratoryLock to fetch.
+     */
+    where: LaboratoryLockWhereUniqueInput
+  }
+
+  /**
+   * LaboratoryLock findFirst
+   */
+  export type LaboratoryLockFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLock
+     */
+    select?: LaboratoryLockSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLock
+     */
+    omit?: LaboratoryLockOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryLockInclude<ExtArgs> | null
+    /**
+     * Filter, which LaboratoryLock to fetch.
+     */
+    where?: LaboratoryLockWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LaboratoryLocks to fetch.
+     */
+    orderBy?: LaboratoryLockOrderByWithRelationInput | LaboratoryLockOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LaboratoryLocks.
+     */
+    cursor?: LaboratoryLockWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LaboratoryLocks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LaboratoryLocks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LaboratoryLocks.
+     */
+    distinct?: LaboratoryLockScalarFieldEnum | LaboratoryLockScalarFieldEnum[]
+  }
+
+  /**
+   * LaboratoryLock findFirstOrThrow
+   */
+  export type LaboratoryLockFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLock
+     */
+    select?: LaboratoryLockSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLock
+     */
+    omit?: LaboratoryLockOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryLockInclude<ExtArgs> | null
+    /**
+     * Filter, which LaboratoryLock to fetch.
+     */
+    where?: LaboratoryLockWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LaboratoryLocks to fetch.
+     */
+    orderBy?: LaboratoryLockOrderByWithRelationInput | LaboratoryLockOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LaboratoryLocks.
+     */
+    cursor?: LaboratoryLockWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LaboratoryLocks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LaboratoryLocks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LaboratoryLocks.
+     */
+    distinct?: LaboratoryLockScalarFieldEnum | LaboratoryLockScalarFieldEnum[]
+  }
+
+  /**
+   * LaboratoryLock findMany
+   */
+  export type LaboratoryLockFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLock
+     */
+    select?: LaboratoryLockSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLock
+     */
+    omit?: LaboratoryLockOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryLockInclude<ExtArgs> | null
+    /**
+     * Filter, which LaboratoryLocks to fetch.
+     */
+    where?: LaboratoryLockWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LaboratoryLocks to fetch.
+     */
+    orderBy?: LaboratoryLockOrderByWithRelationInput | LaboratoryLockOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing LaboratoryLocks.
+     */
+    cursor?: LaboratoryLockWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LaboratoryLocks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LaboratoryLocks.
+     */
+    skip?: number
+    distinct?: LaboratoryLockScalarFieldEnum | LaboratoryLockScalarFieldEnum[]
+  }
+
+  /**
+   * LaboratoryLock create
+   */
+  export type LaboratoryLockCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLock
+     */
+    select?: LaboratoryLockSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLock
+     */
+    omit?: LaboratoryLockOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryLockInclude<ExtArgs> | null
+    /**
+     * The data needed to create a LaboratoryLock.
+     */
+    data: XOR<LaboratoryLockCreateInput, LaboratoryLockUncheckedCreateInput>
+  }
+
+  /**
+   * LaboratoryLock createMany
+   */
+  export type LaboratoryLockCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many LaboratoryLocks.
+     */
+    data: LaboratoryLockCreateManyInput | LaboratoryLockCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * LaboratoryLock createManyAndReturn
+   */
+  export type LaboratoryLockCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLock
+     */
+    select?: LaboratoryLockSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLock
+     */
+    omit?: LaboratoryLockOmit<ExtArgs> | null
+    /**
+     * The data used to create many LaboratoryLocks.
+     */
+    data: LaboratoryLockCreateManyInput | LaboratoryLockCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryLockIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * LaboratoryLock update
+   */
+  export type LaboratoryLockUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLock
+     */
+    select?: LaboratoryLockSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLock
+     */
+    omit?: LaboratoryLockOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryLockInclude<ExtArgs> | null
+    /**
+     * The data needed to update a LaboratoryLock.
+     */
+    data: XOR<LaboratoryLockUpdateInput, LaboratoryLockUncheckedUpdateInput>
+    /**
+     * Choose, which LaboratoryLock to update.
+     */
+    where: LaboratoryLockWhereUniqueInput
+  }
+
+  /**
+   * LaboratoryLock updateMany
+   */
+  export type LaboratoryLockUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update LaboratoryLocks.
+     */
+    data: XOR<LaboratoryLockUpdateManyMutationInput, LaboratoryLockUncheckedUpdateManyInput>
+    /**
+     * Filter which LaboratoryLocks to update
+     */
+    where?: LaboratoryLockWhereInput
+    /**
+     * Limit how many LaboratoryLocks to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * LaboratoryLock updateManyAndReturn
+   */
+  export type LaboratoryLockUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLock
+     */
+    select?: LaboratoryLockSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLock
+     */
+    omit?: LaboratoryLockOmit<ExtArgs> | null
+    /**
+     * The data used to update LaboratoryLocks.
+     */
+    data: XOR<LaboratoryLockUpdateManyMutationInput, LaboratoryLockUncheckedUpdateManyInput>
+    /**
+     * Filter which LaboratoryLocks to update
+     */
+    where?: LaboratoryLockWhereInput
+    /**
+     * Limit how many LaboratoryLocks to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryLockIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * LaboratoryLock upsert
+   */
+  export type LaboratoryLockUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLock
+     */
+    select?: LaboratoryLockSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLock
+     */
+    omit?: LaboratoryLockOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryLockInclude<ExtArgs> | null
+    /**
+     * The filter to search for the LaboratoryLock to update in case it exists.
+     */
+    where: LaboratoryLockWhereUniqueInput
+    /**
+     * In case the LaboratoryLock found by the `where` argument doesn't exist, create a new LaboratoryLock with this data.
+     */
+    create: XOR<LaboratoryLockCreateInput, LaboratoryLockUncheckedCreateInput>
+    /**
+     * In case the LaboratoryLock was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LaboratoryLockUpdateInput, LaboratoryLockUncheckedUpdateInput>
+  }
+
+  /**
+   * LaboratoryLock delete
+   */
+  export type LaboratoryLockDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLock
+     */
+    select?: LaboratoryLockSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLock
+     */
+    omit?: LaboratoryLockOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryLockInclude<ExtArgs> | null
+    /**
+     * Filter which LaboratoryLock to delete.
+     */
+    where: LaboratoryLockWhereUniqueInput
+  }
+
+  /**
+   * LaboratoryLock deleteMany
+   */
+  export type LaboratoryLockDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LaboratoryLocks to delete
+     */
+    where?: LaboratoryLockWhereInput
+    /**
+     * Limit how many LaboratoryLocks to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * LaboratoryLock.statuses
+   */
+  export type LaboratoryLock$statusesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Status
+     */
+    select?: StatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Status
+     */
+    omit?: StatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StatusInclude<ExtArgs> | null
+    where?: StatusWhereInput
+    orderBy?: StatusOrderByWithRelationInput | StatusOrderByWithRelationInput[]
+    cursor?: StatusWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StatusScalarFieldEnum | StatusScalarFieldEnum[]
+  }
+
+  /**
+   * LaboratoryLock without action
+   */
+  export type LaboratoryLockDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLock
+     */
+    select?: LaboratoryLockSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLock
+     */
+    omit?: LaboratoryLockOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryLockInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model LaboratoryLockReason
+   */
+
+  export type AggregateLaboratoryLockReason = {
+    _count: LaboratoryLockReasonCountAggregateOutputType | null
+    _avg: LaboratoryLockReasonAvgAggregateOutputType | null
+    _sum: LaboratoryLockReasonSumAggregateOutputType | null
+    _min: LaboratoryLockReasonMinAggregateOutputType | null
+    _max: LaboratoryLockReasonMaxAggregateOutputType | null
+  }
+
+  export type LaboratoryLockReasonAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type LaboratoryLockReasonSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type LaboratoryLockReasonMinAggregateOutputType = {
+    id: number | null
+    value: string | null
+  }
+
+  export type LaboratoryLockReasonMaxAggregateOutputType = {
+    id: number | null
+    value: string | null
+  }
+
+  export type LaboratoryLockReasonCountAggregateOutputType = {
+    id: number
+    value: number
+    _all: number
+  }
+
+
+  export type LaboratoryLockReasonAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type LaboratoryLockReasonSumAggregateInputType = {
+    id?: true
+  }
+
+  export type LaboratoryLockReasonMinAggregateInputType = {
+    id?: true
+    value?: true
+  }
+
+  export type LaboratoryLockReasonMaxAggregateInputType = {
+    id?: true
+    value?: true
+  }
+
+  export type LaboratoryLockReasonCountAggregateInputType = {
+    id?: true
+    value?: true
+    _all?: true
+  }
+
+  export type LaboratoryLockReasonAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LaboratoryLockReason to aggregate.
+     */
+    where?: LaboratoryLockReasonWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LaboratoryLockReasons to fetch.
+     */
+    orderBy?: LaboratoryLockReasonOrderByWithRelationInput | LaboratoryLockReasonOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LaboratoryLockReasonWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LaboratoryLockReasons from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LaboratoryLockReasons.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned LaboratoryLockReasons
+    **/
+    _count?: true | LaboratoryLockReasonCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: LaboratoryLockReasonAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: LaboratoryLockReasonSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LaboratoryLockReasonMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LaboratoryLockReasonMaxAggregateInputType
+  }
+
+  export type GetLaboratoryLockReasonAggregateType<T extends LaboratoryLockReasonAggregateArgs> = {
+        [P in keyof T & keyof AggregateLaboratoryLockReason]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLaboratoryLockReason[P]>
+      : GetScalarType<T[P], AggregateLaboratoryLockReason[P]>
+  }
+
+
+
+
+  export type LaboratoryLockReasonGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LaboratoryLockReasonWhereInput
+    orderBy?: LaboratoryLockReasonOrderByWithAggregationInput | LaboratoryLockReasonOrderByWithAggregationInput[]
+    by: LaboratoryLockReasonScalarFieldEnum[] | LaboratoryLockReasonScalarFieldEnum
+    having?: LaboratoryLockReasonScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LaboratoryLockReasonCountAggregateInputType | true
+    _avg?: LaboratoryLockReasonAvgAggregateInputType
+    _sum?: LaboratoryLockReasonSumAggregateInputType
+    _min?: LaboratoryLockReasonMinAggregateInputType
+    _max?: LaboratoryLockReasonMaxAggregateInputType
+  }
+
+  export type LaboratoryLockReasonGroupByOutputType = {
+    id: number
+    value: string
+    _count: LaboratoryLockReasonCountAggregateOutputType | null
+    _avg: LaboratoryLockReasonAvgAggregateOutputType | null
+    _sum: LaboratoryLockReasonSumAggregateOutputType | null
+    _min: LaboratoryLockReasonMinAggregateOutputType | null
+    _max: LaboratoryLockReasonMaxAggregateOutputType | null
+  }
+
+  type GetLaboratoryLockReasonGroupByPayload<T extends LaboratoryLockReasonGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LaboratoryLockReasonGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LaboratoryLockReasonGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LaboratoryLockReasonGroupByOutputType[P]>
+            : GetScalarType<T[P], LaboratoryLockReasonGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LaboratoryLockReasonSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    value?: boolean
+    laboratoryLocks?: boolean | LaboratoryLockReason$laboratoryLocksArgs<ExtArgs>
+    _count?: boolean | LaboratoryLockReasonCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["laboratoryLockReason"]>
+
+  export type LaboratoryLockReasonSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    value?: boolean
+  }, ExtArgs["result"]["laboratoryLockReason"]>
+
+  export type LaboratoryLockReasonSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    value?: boolean
+  }, ExtArgs["result"]["laboratoryLockReason"]>
+
+  export type LaboratoryLockReasonSelectScalar = {
+    id?: boolean
+    value?: boolean
+  }
+
+  export type LaboratoryLockReasonOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "value", ExtArgs["result"]["laboratoryLockReason"]>
+  export type LaboratoryLockReasonInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    laboratoryLocks?: boolean | LaboratoryLockReason$laboratoryLocksArgs<ExtArgs>
+    _count?: boolean | LaboratoryLockReasonCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type LaboratoryLockReasonIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type LaboratoryLockReasonIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $LaboratoryLockReasonPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "LaboratoryLockReason"
+    objects: {
+      laboratoryLocks: Prisma.$LaboratoryLockPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      value: string
+    }, ExtArgs["result"]["laboratoryLockReason"]>
+    composites: {}
+  }
+
+  type LaboratoryLockReasonGetPayload<S extends boolean | null | undefined | LaboratoryLockReasonDefaultArgs> = $Result.GetResult<Prisma.$LaboratoryLockReasonPayload, S>
+
+  type LaboratoryLockReasonCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<LaboratoryLockReasonFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LaboratoryLockReasonCountAggregateInputType | true
+    }
+
+  export interface LaboratoryLockReasonDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['LaboratoryLockReason'], meta: { name: 'LaboratoryLockReason' } }
+    /**
+     * Find zero or one LaboratoryLockReason that matches the filter.
+     * @param {LaboratoryLockReasonFindUniqueArgs} args - Arguments to find a LaboratoryLockReason
+     * @example
+     * // Get one LaboratoryLockReason
+     * const laboratoryLockReason = await prisma.laboratoryLockReason.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LaboratoryLockReasonFindUniqueArgs>(args: SelectSubset<T, LaboratoryLockReasonFindUniqueArgs<ExtArgs>>): Prisma__LaboratoryLockReasonClient<$Result.GetResult<Prisma.$LaboratoryLockReasonPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one LaboratoryLockReason that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {LaboratoryLockReasonFindUniqueOrThrowArgs} args - Arguments to find a LaboratoryLockReason
+     * @example
+     * // Get one LaboratoryLockReason
+     * const laboratoryLockReason = await prisma.laboratoryLockReason.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LaboratoryLockReasonFindUniqueOrThrowArgs>(args: SelectSubset<T, LaboratoryLockReasonFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LaboratoryLockReasonClient<$Result.GetResult<Prisma.$LaboratoryLockReasonPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LaboratoryLockReason that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaboratoryLockReasonFindFirstArgs} args - Arguments to find a LaboratoryLockReason
+     * @example
+     * // Get one LaboratoryLockReason
+     * const laboratoryLockReason = await prisma.laboratoryLockReason.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LaboratoryLockReasonFindFirstArgs>(args?: SelectSubset<T, LaboratoryLockReasonFindFirstArgs<ExtArgs>>): Prisma__LaboratoryLockReasonClient<$Result.GetResult<Prisma.$LaboratoryLockReasonPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LaboratoryLockReason that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaboratoryLockReasonFindFirstOrThrowArgs} args - Arguments to find a LaboratoryLockReason
+     * @example
+     * // Get one LaboratoryLockReason
+     * const laboratoryLockReason = await prisma.laboratoryLockReason.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LaboratoryLockReasonFindFirstOrThrowArgs>(args?: SelectSubset<T, LaboratoryLockReasonFindFirstOrThrowArgs<ExtArgs>>): Prisma__LaboratoryLockReasonClient<$Result.GetResult<Prisma.$LaboratoryLockReasonPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more LaboratoryLockReasons that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaboratoryLockReasonFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all LaboratoryLockReasons
+     * const laboratoryLockReasons = await prisma.laboratoryLockReason.findMany()
+     * 
+     * // Get first 10 LaboratoryLockReasons
+     * const laboratoryLockReasons = await prisma.laboratoryLockReason.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const laboratoryLockReasonWithIdOnly = await prisma.laboratoryLockReason.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends LaboratoryLockReasonFindManyArgs>(args?: SelectSubset<T, LaboratoryLockReasonFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaboratoryLockReasonPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a LaboratoryLockReason.
+     * @param {LaboratoryLockReasonCreateArgs} args - Arguments to create a LaboratoryLockReason.
+     * @example
+     * // Create one LaboratoryLockReason
+     * const LaboratoryLockReason = await prisma.laboratoryLockReason.create({
+     *   data: {
+     *     // ... data to create a LaboratoryLockReason
+     *   }
+     * })
+     * 
+     */
+    create<T extends LaboratoryLockReasonCreateArgs>(args: SelectSubset<T, LaboratoryLockReasonCreateArgs<ExtArgs>>): Prisma__LaboratoryLockReasonClient<$Result.GetResult<Prisma.$LaboratoryLockReasonPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many LaboratoryLockReasons.
+     * @param {LaboratoryLockReasonCreateManyArgs} args - Arguments to create many LaboratoryLockReasons.
+     * @example
+     * // Create many LaboratoryLockReasons
+     * const laboratoryLockReason = await prisma.laboratoryLockReason.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LaboratoryLockReasonCreateManyArgs>(args?: SelectSubset<T, LaboratoryLockReasonCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many LaboratoryLockReasons and returns the data saved in the database.
+     * @param {LaboratoryLockReasonCreateManyAndReturnArgs} args - Arguments to create many LaboratoryLockReasons.
+     * @example
+     * // Create many LaboratoryLockReasons
+     * const laboratoryLockReason = await prisma.laboratoryLockReason.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many LaboratoryLockReasons and only return the `id`
+     * const laboratoryLockReasonWithIdOnly = await prisma.laboratoryLockReason.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends LaboratoryLockReasonCreateManyAndReturnArgs>(args?: SelectSubset<T, LaboratoryLockReasonCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaboratoryLockReasonPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a LaboratoryLockReason.
+     * @param {LaboratoryLockReasonDeleteArgs} args - Arguments to delete one LaboratoryLockReason.
+     * @example
+     * // Delete one LaboratoryLockReason
+     * const LaboratoryLockReason = await prisma.laboratoryLockReason.delete({
+     *   where: {
+     *     // ... filter to delete one LaboratoryLockReason
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LaboratoryLockReasonDeleteArgs>(args: SelectSubset<T, LaboratoryLockReasonDeleteArgs<ExtArgs>>): Prisma__LaboratoryLockReasonClient<$Result.GetResult<Prisma.$LaboratoryLockReasonPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one LaboratoryLockReason.
+     * @param {LaboratoryLockReasonUpdateArgs} args - Arguments to update one LaboratoryLockReason.
+     * @example
+     * // Update one LaboratoryLockReason
+     * const laboratoryLockReason = await prisma.laboratoryLockReason.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LaboratoryLockReasonUpdateArgs>(args: SelectSubset<T, LaboratoryLockReasonUpdateArgs<ExtArgs>>): Prisma__LaboratoryLockReasonClient<$Result.GetResult<Prisma.$LaboratoryLockReasonPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more LaboratoryLockReasons.
+     * @param {LaboratoryLockReasonDeleteManyArgs} args - Arguments to filter LaboratoryLockReasons to delete.
+     * @example
+     * // Delete a few LaboratoryLockReasons
+     * const { count } = await prisma.laboratoryLockReason.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LaboratoryLockReasonDeleteManyArgs>(args?: SelectSubset<T, LaboratoryLockReasonDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LaboratoryLockReasons.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaboratoryLockReasonUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many LaboratoryLockReasons
+     * const laboratoryLockReason = await prisma.laboratoryLockReason.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LaboratoryLockReasonUpdateManyArgs>(args: SelectSubset<T, LaboratoryLockReasonUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LaboratoryLockReasons and returns the data updated in the database.
+     * @param {LaboratoryLockReasonUpdateManyAndReturnArgs} args - Arguments to update many LaboratoryLockReasons.
+     * @example
+     * // Update many LaboratoryLockReasons
+     * const laboratoryLockReason = await prisma.laboratoryLockReason.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more LaboratoryLockReasons and only return the `id`
+     * const laboratoryLockReasonWithIdOnly = await prisma.laboratoryLockReason.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends LaboratoryLockReasonUpdateManyAndReturnArgs>(args: SelectSubset<T, LaboratoryLockReasonUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaboratoryLockReasonPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one LaboratoryLockReason.
+     * @param {LaboratoryLockReasonUpsertArgs} args - Arguments to update or create a LaboratoryLockReason.
+     * @example
+     * // Update or create a LaboratoryLockReason
+     * const laboratoryLockReason = await prisma.laboratoryLockReason.upsert({
+     *   create: {
+     *     // ... data to create a LaboratoryLockReason
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the LaboratoryLockReason we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LaboratoryLockReasonUpsertArgs>(args: SelectSubset<T, LaboratoryLockReasonUpsertArgs<ExtArgs>>): Prisma__LaboratoryLockReasonClient<$Result.GetResult<Prisma.$LaboratoryLockReasonPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of LaboratoryLockReasons.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaboratoryLockReasonCountArgs} args - Arguments to filter LaboratoryLockReasons to count.
+     * @example
+     * // Count the number of LaboratoryLockReasons
+     * const count = await prisma.laboratoryLockReason.count({
+     *   where: {
+     *     // ... the filter for the LaboratoryLockReasons we want to count
+     *   }
+     * })
+    **/
+    count<T extends LaboratoryLockReasonCountArgs>(
+      args?: Subset<T, LaboratoryLockReasonCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LaboratoryLockReasonCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a LaboratoryLockReason.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaboratoryLockReasonAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LaboratoryLockReasonAggregateArgs>(args: Subset<T, LaboratoryLockReasonAggregateArgs>): Prisma.PrismaPromise<GetLaboratoryLockReasonAggregateType<T>>
+
+    /**
+     * Group by LaboratoryLockReason.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaboratoryLockReasonGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LaboratoryLockReasonGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LaboratoryLockReasonGroupByArgs['orderBy'] }
+        : { orderBy?: LaboratoryLockReasonGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LaboratoryLockReasonGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLaboratoryLockReasonGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the LaboratoryLockReason model
+   */
+  readonly fields: LaboratoryLockReasonFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for LaboratoryLockReason.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LaboratoryLockReasonClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    laboratoryLocks<T extends LaboratoryLockReason$laboratoryLocksArgs<ExtArgs> = {}>(args?: Subset<T, LaboratoryLockReason$laboratoryLocksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaboratoryLockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the LaboratoryLockReason model
+   */
+  interface LaboratoryLockReasonFieldRefs {
+    readonly id: FieldRef<"LaboratoryLockReason", 'Int'>
+    readonly value: FieldRef<"LaboratoryLockReason", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * LaboratoryLockReason findUnique
+   */
+  export type LaboratoryLockReasonFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLockReason
+     */
+    select?: LaboratoryLockReasonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLockReason
+     */
+    omit?: LaboratoryLockReasonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryLockReasonInclude<ExtArgs> | null
+    /**
+     * Filter, which LaboratoryLockReason to fetch.
+     */
+    where: LaboratoryLockReasonWhereUniqueInput
+  }
+
+  /**
+   * LaboratoryLockReason findUniqueOrThrow
+   */
+  export type LaboratoryLockReasonFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLockReason
+     */
+    select?: LaboratoryLockReasonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLockReason
+     */
+    omit?: LaboratoryLockReasonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryLockReasonInclude<ExtArgs> | null
+    /**
+     * Filter, which LaboratoryLockReason to fetch.
+     */
+    where: LaboratoryLockReasonWhereUniqueInput
+  }
+
+  /**
+   * LaboratoryLockReason findFirst
+   */
+  export type LaboratoryLockReasonFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLockReason
+     */
+    select?: LaboratoryLockReasonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLockReason
+     */
+    omit?: LaboratoryLockReasonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryLockReasonInclude<ExtArgs> | null
+    /**
+     * Filter, which LaboratoryLockReason to fetch.
+     */
+    where?: LaboratoryLockReasonWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LaboratoryLockReasons to fetch.
+     */
+    orderBy?: LaboratoryLockReasonOrderByWithRelationInput | LaboratoryLockReasonOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LaboratoryLockReasons.
+     */
+    cursor?: LaboratoryLockReasonWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LaboratoryLockReasons from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LaboratoryLockReasons.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LaboratoryLockReasons.
+     */
+    distinct?: LaboratoryLockReasonScalarFieldEnum | LaboratoryLockReasonScalarFieldEnum[]
+  }
+
+  /**
+   * LaboratoryLockReason findFirstOrThrow
+   */
+  export type LaboratoryLockReasonFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLockReason
+     */
+    select?: LaboratoryLockReasonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLockReason
+     */
+    omit?: LaboratoryLockReasonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryLockReasonInclude<ExtArgs> | null
+    /**
+     * Filter, which LaboratoryLockReason to fetch.
+     */
+    where?: LaboratoryLockReasonWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LaboratoryLockReasons to fetch.
+     */
+    orderBy?: LaboratoryLockReasonOrderByWithRelationInput | LaboratoryLockReasonOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LaboratoryLockReasons.
+     */
+    cursor?: LaboratoryLockReasonWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LaboratoryLockReasons from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LaboratoryLockReasons.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LaboratoryLockReasons.
+     */
+    distinct?: LaboratoryLockReasonScalarFieldEnum | LaboratoryLockReasonScalarFieldEnum[]
+  }
+
+  /**
+   * LaboratoryLockReason findMany
+   */
+  export type LaboratoryLockReasonFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLockReason
+     */
+    select?: LaboratoryLockReasonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLockReason
+     */
+    omit?: LaboratoryLockReasonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryLockReasonInclude<ExtArgs> | null
+    /**
+     * Filter, which LaboratoryLockReasons to fetch.
+     */
+    where?: LaboratoryLockReasonWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LaboratoryLockReasons to fetch.
+     */
+    orderBy?: LaboratoryLockReasonOrderByWithRelationInput | LaboratoryLockReasonOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing LaboratoryLockReasons.
+     */
+    cursor?: LaboratoryLockReasonWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LaboratoryLockReasons from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LaboratoryLockReasons.
+     */
+    skip?: number
+    distinct?: LaboratoryLockReasonScalarFieldEnum | LaboratoryLockReasonScalarFieldEnum[]
+  }
+
+  /**
+   * LaboratoryLockReason create
+   */
+  export type LaboratoryLockReasonCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLockReason
+     */
+    select?: LaboratoryLockReasonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLockReason
+     */
+    omit?: LaboratoryLockReasonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryLockReasonInclude<ExtArgs> | null
+    /**
+     * The data needed to create a LaboratoryLockReason.
+     */
+    data: XOR<LaboratoryLockReasonCreateInput, LaboratoryLockReasonUncheckedCreateInput>
+  }
+
+  /**
+   * LaboratoryLockReason createMany
+   */
+  export type LaboratoryLockReasonCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many LaboratoryLockReasons.
+     */
+    data: LaboratoryLockReasonCreateManyInput | LaboratoryLockReasonCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * LaboratoryLockReason createManyAndReturn
+   */
+  export type LaboratoryLockReasonCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLockReason
+     */
+    select?: LaboratoryLockReasonSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLockReason
+     */
+    omit?: LaboratoryLockReasonOmit<ExtArgs> | null
+    /**
+     * The data used to create many LaboratoryLockReasons.
+     */
+    data: LaboratoryLockReasonCreateManyInput | LaboratoryLockReasonCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * LaboratoryLockReason update
+   */
+  export type LaboratoryLockReasonUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLockReason
+     */
+    select?: LaboratoryLockReasonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLockReason
+     */
+    omit?: LaboratoryLockReasonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryLockReasonInclude<ExtArgs> | null
+    /**
+     * The data needed to update a LaboratoryLockReason.
+     */
+    data: XOR<LaboratoryLockReasonUpdateInput, LaboratoryLockReasonUncheckedUpdateInput>
+    /**
+     * Choose, which LaboratoryLockReason to update.
+     */
+    where: LaboratoryLockReasonWhereUniqueInput
+  }
+
+  /**
+   * LaboratoryLockReason updateMany
+   */
+  export type LaboratoryLockReasonUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update LaboratoryLockReasons.
+     */
+    data: XOR<LaboratoryLockReasonUpdateManyMutationInput, LaboratoryLockReasonUncheckedUpdateManyInput>
+    /**
+     * Filter which LaboratoryLockReasons to update
+     */
+    where?: LaboratoryLockReasonWhereInput
+    /**
+     * Limit how many LaboratoryLockReasons to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * LaboratoryLockReason updateManyAndReturn
+   */
+  export type LaboratoryLockReasonUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLockReason
+     */
+    select?: LaboratoryLockReasonSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLockReason
+     */
+    omit?: LaboratoryLockReasonOmit<ExtArgs> | null
+    /**
+     * The data used to update LaboratoryLockReasons.
+     */
+    data: XOR<LaboratoryLockReasonUpdateManyMutationInput, LaboratoryLockReasonUncheckedUpdateManyInput>
+    /**
+     * Filter which LaboratoryLockReasons to update
+     */
+    where?: LaboratoryLockReasonWhereInput
+    /**
+     * Limit how many LaboratoryLockReasons to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * LaboratoryLockReason upsert
+   */
+  export type LaboratoryLockReasonUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLockReason
+     */
+    select?: LaboratoryLockReasonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLockReason
+     */
+    omit?: LaboratoryLockReasonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryLockReasonInclude<ExtArgs> | null
+    /**
+     * The filter to search for the LaboratoryLockReason to update in case it exists.
+     */
+    where: LaboratoryLockReasonWhereUniqueInput
+    /**
+     * In case the LaboratoryLockReason found by the `where` argument doesn't exist, create a new LaboratoryLockReason with this data.
+     */
+    create: XOR<LaboratoryLockReasonCreateInput, LaboratoryLockReasonUncheckedCreateInput>
+    /**
+     * In case the LaboratoryLockReason was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LaboratoryLockReasonUpdateInput, LaboratoryLockReasonUncheckedUpdateInput>
+  }
+
+  /**
+   * LaboratoryLockReason delete
+   */
+  export type LaboratoryLockReasonDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLockReason
+     */
+    select?: LaboratoryLockReasonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLockReason
+     */
+    omit?: LaboratoryLockReasonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryLockReasonInclude<ExtArgs> | null
+    /**
+     * Filter which LaboratoryLockReason to delete.
+     */
+    where: LaboratoryLockReasonWhereUniqueInput
+  }
+
+  /**
+   * LaboratoryLockReason deleteMany
+   */
+  export type LaboratoryLockReasonDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LaboratoryLockReasons to delete
+     */
+    where?: LaboratoryLockReasonWhereInput
+    /**
+     * Limit how many LaboratoryLockReasons to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * LaboratoryLockReason.laboratoryLocks
+   */
+  export type LaboratoryLockReason$laboratoryLocksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLock
+     */
+    select?: LaboratoryLockSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLock
+     */
+    omit?: LaboratoryLockOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryLockInclude<ExtArgs> | null
+    where?: LaboratoryLockWhereInput
+    orderBy?: LaboratoryLockOrderByWithRelationInput | LaboratoryLockOrderByWithRelationInput[]
+    cursor?: LaboratoryLockWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LaboratoryLockScalarFieldEnum | LaboratoryLockScalarFieldEnum[]
+  }
+
+  /**
+   * LaboratoryLockReason without action
+   */
+  export type LaboratoryLockReasonDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLockReason
+     */
+    select?: LaboratoryLockReasonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLockReason
+     */
+    omit?: LaboratoryLockReasonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryLockReasonInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model LaboratoryAssistant
+   */
+
+  export type AggregateLaboratoryAssistant = {
+    _count: LaboratoryAssistantCountAggregateOutputType | null
+    _avg: LaboratoryAssistantAvgAggregateOutputType | null
+    _sum: LaboratoryAssistantSumAggregateOutputType | null
+    _min: LaboratoryAssistantMinAggregateOutputType | null
+    _max: LaboratoryAssistantMaxAggregateOutputType | null
+  }
+
+  export type LaboratoryAssistantAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type LaboratoryAssistantSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type LaboratoryAssistantMinAggregateOutputType = {
+    id: number | null
+    name: string | null
+  }
+
+  export type LaboratoryAssistantMaxAggregateOutputType = {
+    id: number | null
+    name: string | null
+  }
+
+  export type LaboratoryAssistantCountAggregateOutputType = {
+    id: number
+    name: number
+    _all: number
+  }
+
+
+  export type LaboratoryAssistantAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type LaboratoryAssistantSumAggregateInputType = {
+    id?: true
+  }
+
+  export type LaboratoryAssistantMinAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type LaboratoryAssistantMaxAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type LaboratoryAssistantCountAggregateInputType = {
+    id?: true
+    name?: true
+    _all?: true
+  }
+
+  export type LaboratoryAssistantAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LaboratoryAssistant to aggregate.
+     */
+    where?: LaboratoryAssistantWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LaboratoryAssistants to fetch.
+     */
+    orderBy?: LaboratoryAssistantOrderByWithRelationInput | LaboratoryAssistantOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LaboratoryAssistantWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LaboratoryAssistants from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LaboratoryAssistants.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned LaboratoryAssistants
+    **/
+    _count?: true | LaboratoryAssistantCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: LaboratoryAssistantAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: LaboratoryAssistantSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LaboratoryAssistantMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LaboratoryAssistantMaxAggregateInputType
+  }
+
+  export type GetLaboratoryAssistantAggregateType<T extends LaboratoryAssistantAggregateArgs> = {
+        [P in keyof T & keyof AggregateLaboratoryAssistant]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLaboratoryAssistant[P]>
+      : GetScalarType<T[P], AggregateLaboratoryAssistant[P]>
+  }
+
+
+
+
+  export type LaboratoryAssistantGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LaboratoryAssistantWhereInput
+    orderBy?: LaboratoryAssistantOrderByWithAggregationInput | LaboratoryAssistantOrderByWithAggregationInput[]
+    by: LaboratoryAssistantScalarFieldEnum[] | LaboratoryAssistantScalarFieldEnum
+    having?: LaboratoryAssistantScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LaboratoryAssistantCountAggregateInputType | true
+    _avg?: LaboratoryAssistantAvgAggregateInputType
+    _sum?: LaboratoryAssistantSumAggregateInputType
+    _min?: LaboratoryAssistantMinAggregateInputType
+    _max?: LaboratoryAssistantMaxAggregateInputType
+  }
+
+  export type LaboratoryAssistantGroupByOutputType = {
+    id: number
+    name: string
+    _count: LaboratoryAssistantCountAggregateOutputType | null
+    _avg: LaboratoryAssistantAvgAggregateOutputType | null
+    _sum: LaboratoryAssistantSumAggregateOutputType | null
+    _min: LaboratoryAssistantMinAggregateOutputType | null
+    _max: LaboratoryAssistantMaxAggregateOutputType | null
+  }
+
+  type GetLaboratoryAssistantGroupByPayload<T extends LaboratoryAssistantGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LaboratoryAssistantGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LaboratoryAssistantGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LaboratoryAssistantGroupByOutputType[P]>
+            : GetScalarType<T[P], LaboratoryAssistantGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LaboratoryAssistantSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    laboratoryLocks?: boolean | LaboratoryAssistant$laboratoryLocksArgs<ExtArgs>
+    _count?: boolean | LaboratoryAssistantCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["laboratoryAssistant"]>
+
+  export type LaboratoryAssistantSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+  }, ExtArgs["result"]["laboratoryAssistant"]>
+
+  export type LaboratoryAssistantSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+  }, ExtArgs["result"]["laboratoryAssistant"]>
+
+  export type LaboratoryAssistantSelectScalar = {
+    id?: boolean
+    name?: boolean
+  }
+
+  export type LaboratoryAssistantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name", ExtArgs["result"]["laboratoryAssistant"]>
+  export type LaboratoryAssistantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    laboratoryLocks?: boolean | LaboratoryAssistant$laboratoryLocksArgs<ExtArgs>
+    _count?: boolean | LaboratoryAssistantCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type LaboratoryAssistantIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type LaboratoryAssistantIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $LaboratoryAssistantPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "LaboratoryAssistant"
+    objects: {
+      laboratoryLocks: Prisma.$LaboratoryLockPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      name: string
+    }, ExtArgs["result"]["laboratoryAssistant"]>
+    composites: {}
+  }
+
+  type LaboratoryAssistantGetPayload<S extends boolean | null | undefined | LaboratoryAssistantDefaultArgs> = $Result.GetResult<Prisma.$LaboratoryAssistantPayload, S>
+
+  type LaboratoryAssistantCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<LaboratoryAssistantFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LaboratoryAssistantCountAggregateInputType | true
+    }
+
+  export interface LaboratoryAssistantDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['LaboratoryAssistant'], meta: { name: 'LaboratoryAssistant' } }
+    /**
+     * Find zero or one LaboratoryAssistant that matches the filter.
+     * @param {LaboratoryAssistantFindUniqueArgs} args - Arguments to find a LaboratoryAssistant
+     * @example
+     * // Get one LaboratoryAssistant
+     * const laboratoryAssistant = await prisma.laboratoryAssistant.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LaboratoryAssistantFindUniqueArgs>(args: SelectSubset<T, LaboratoryAssistantFindUniqueArgs<ExtArgs>>): Prisma__LaboratoryAssistantClient<$Result.GetResult<Prisma.$LaboratoryAssistantPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one LaboratoryAssistant that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {LaboratoryAssistantFindUniqueOrThrowArgs} args - Arguments to find a LaboratoryAssistant
+     * @example
+     * // Get one LaboratoryAssistant
+     * const laboratoryAssistant = await prisma.laboratoryAssistant.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LaboratoryAssistantFindUniqueOrThrowArgs>(args: SelectSubset<T, LaboratoryAssistantFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LaboratoryAssistantClient<$Result.GetResult<Prisma.$LaboratoryAssistantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LaboratoryAssistant that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaboratoryAssistantFindFirstArgs} args - Arguments to find a LaboratoryAssistant
+     * @example
+     * // Get one LaboratoryAssistant
+     * const laboratoryAssistant = await prisma.laboratoryAssistant.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LaboratoryAssistantFindFirstArgs>(args?: SelectSubset<T, LaboratoryAssistantFindFirstArgs<ExtArgs>>): Prisma__LaboratoryAssistantClient<$Result.GetResult<Prisma.$LaboratoryAssistantPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LaboratoryAssistant that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaboratoryAssistantFindFirstOrThrowArgs} args - Arguments to find a LaboratoryAssistant
+     * @example
+     * // Get one LaboratoryAssistant
+     * const laboratoryAssistant = await prisma.laboratoryAssistant.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LaboratoryAssistantFindFirstOrThrowArgs>(args?: SelectSubset<T, LaboratoryAssistantFindFirstOrThrowArgs<ExtArgs>>): Prisma__LaboratoryAssistantClient<$Result.GetResult<Prisma.$LaboratoryAssistantPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more LaboratoryAssistants that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaboratoryAssistantFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all LaboratoryAssistants
+     * const laboratoryAssistants = await prisma.laboratoryAssistant.findMany()
+     * 
+     * // Get first 10 LaboratoryAssistants
+     * const laboratoryAssistants = await prisma.laboratoryAssistant.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const laboratoryAssistantWithIdOnly = await prisma.laboratoryAssistant.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends LaboratoryAssistantFindManyArgs>(args?: SelectSubset<T, LaboratoryAssistantFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaboratoryAssistantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a LaboratoryAssistant.
+     * @param {LaboratoryAssistantCreateArgs} args - Arguments to create a LaboratoryAssistant.
+     * @example
+     * // Create one LaboratoryAssistant
+     * const LaboratoryAssistant = await prisma.laboratoryAssistant.create({
+     *   data: {
+     *     // ... data to create a LaboratoryAssistant
+     *   }
+     * })
+     * 
+     */
+    create<T extends LaboratoryAssistantCreateArgs>(args: SelectSubset<T, LaboratoryAssistantCreateArgs<ExtArgs>>): Prisma__LaboratoryAssistantClient<$Result.GetResult<Prisma.$LaboratoryAssistantPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many LaboratoryAssistants.
+     * @param {LaboratoryAssistantCreateManyArgs} args - Arguments to create many LaboratoryAssistants.
+     * @example
+     * // Create many LaboratoryAssistants
+     * const laboratoryAssistant = await prisma.laboratoryAssistant.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LaboratoryAssistantCreateManyArgs>(args?: SelectSubset<T, LaboratoryAssistantCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many LaboratoryAssistants and returns the data saved in the database.
+     * @param {LaboratoryAssistantCreateManyAndReturnArgs} args - Arguments to create many LaboratoryAssistants.
+     * @example
+     * // Create many LaboratoryAssistants
+     * const laboratoryAssistant = await prisma.laboratoryAssistant.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many LaboratoryAssistants and only return the `id`
+     * const laboratoryAssistantWithIdOnly = await prisma.laboratoryAssistant.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends LaboratoryAssistantCreateManyAndReturnArgs>(args?: SelectSubset<T, LaboratoryAssistantCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaboratoryAssistantPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a LaboratoryAssistant.
+     * @param {LaboratoryAssistantDeleteArgs} args - Arguments to delete one LaboratoryAssistant.
+     * @example
+     * // Delete one LaboratoryAssistant
+     * const LaboratoryAssistant = await prisma.laboratoryAssistant.delete({
+     *   where: {
+     *     // ... filter to delete one LaboratoryAssistant
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LaboratoryAssistantDeleteArgs>(args: SelectSubset<T, LaboratoryAssistantDeleteArgs<ExtArgs>>): Prisma__LaboratoryAssistantClient<$Result.GetResult<Prisma.$LaboratoryAssistantPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one LaboratoryAssistant.
+     * @param {LaboratoryAssistantUpdateArgs} args - Arguments to update one LaboratoryAssistant.
+     * @example
+     * // Update one LaboratoryAssistant
+     * const laboratoryAssistant = await prisma.laboratoryAssistant.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LaboratoryAssistantUpdateArgs>(args: SelectSubset<T, LaboratoryAssistantUpdateArgs<ExtArgs>>): Prisma__LaboratoryAssistantClient<$Result.GetResult<Prisma.$LaboratoryAssistantPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more LaboratoryAssistants.
+     * @param {LaboratoryAssistantDeleteManyArgs} args - Arguments to filter LaboratoryAssistants to delete.
+     * @example
+     * // Delete a few LaboratoryAssistants
+     * const { count } = await prisma.laboratoryAssistant.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LaboratoryAssistantDeleteManyArgs>(args?: SelectSubset<T, LaboratoryAssistantDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LaboratoryAssistants.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaboratoryAssistantUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many LaboratoryAssistants
+     * const laboratoryAssistant = await prisma.laboratoryAssistant.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LaboratoryAssistantUpdateManyArgs>(args: SelectSubset<T, LaboratoryAssistantUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LaboratoryAssistants and returns the data updated in the database.
+     * @param {LaboratoryAssistantUpdateManyAndReturnArgs} args - Arguments to update many LaboratoryAssistants.
+     * @example
+     * // Update many LaboratoryAssistants
+     * const laboratoryAssistant = await prisma.laboratoryAssistant.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more LaboratoryAssistants and only return the `id`
+     * const laboratoryAssistantWithIdOnly = await prisma.laboratoryAssistant.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends LaboratoryAssistantUpdateManyAndReturnArgs>(args: SelectSubset<T, LaboratoryAssistantUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaboratoryAssistantPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one LaboratoryAssistant.
+     * @param {LaboratoryAssistantUpsertArgs} args - Arguments to update or create a LaboratoryAssistant.
+     * @example
+     * // Update or create a LaboratoryAssistant
+     * const laboratoryAssistant = await prisma.laboratoryAssistant.upsert({
+     *   create: {
+     *     // ... data to create a LaboratoryAssistant
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the LaboratoryAssistant we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LaboratoryAssistantUpsertArgs>(args: SelectSubset<T, LaboratoryAssistantUpsertArgs<ExtArgs>>): Prisma__LaboratoryAssistantClient<$Result.GetResult<Prisma.$LaboratoryAssistantPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of LaboratoryAssistants.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaboratoryAssistantCountArgs} args - Arguments to filter LaboratoryAssistants to count.
+     * @example
+     * // Count the number of LaboratoryAssistants
+     * const count = await prisma.laboratoryAssistant.count({
+     *   where: {
+     *     // ... the filter for the LaboratoryAssistants we want to count
+     *   }
+     * })
+    **/
+    count<T extends LaboratoryAssistantCountArgs>(
+      args?: Subset<T, LaboratoryAssistantCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LaboratoryAssistantCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a LaboratoryAssistant.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaboratoryAssistantAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LaboratoryAssistantAggregateArgs>(args: Subset<T, LaboratoryAssistantAggregateArgs>): Prisma.PrismaPromise<GetLaboratoryAssistantAggregateType<T>>
+
+    /**
+     * Group by LaboratoryAssistant.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaboratoryAssistantGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LaboratoryAssistantGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LaboratoryAssistantGroupByArgs['orderBy'] }
+        : { orderBy?: LaboratoryAssistantGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LaboratoryAssistantGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLaboratoryAssistantGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the LaboratoryAssistant model
+   */
+  readonly fields: LaboratoryAssistantFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for LaboratoryAssistant.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LaboratoryAssistantClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    laboratoryLocks<T extends LaboratoryAssistant$laboratoryLocksArgs<ExtArgs> = {}>(args?: Subset<T, LaboratoryAssistant$laboratoryLocksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaboratoryLockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the LaboratoryAssistant model
+   */
+  interface LaboratoryAssistantFieldRefs {
+    readonly id: FieldRef<"LaboratoryAssistant", 'Int'>
+    readonly name: FieldRef<"LaboratoryAssistant", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * LaboratoryAssistant findUnique
+   */
+  export type LaboratoryAssistantFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryAssistant
+     */
+    select?: LaboratoryAssistantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryAssistant
+     */
+    omit?: LaboratoryAssistantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryAssistantInclude<ExtArgs> | null
+    /**
+     * Filter, which LaboratoryAssistant to fetch.
+     */
+    where: LaboratoryAssistantWhereUniqueInput
+  }
+
+  /**
+   * LaboratoryAssistant findUniqueOrThrow
+   */
+  export type LaboratoryAssistantFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryAssistant
+     */
+    select?: LaboratoryAssistantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryAssistant
+     */
+    omit?: LaboratoryAssistantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryAssistantInclude<ExtArgs> | null
+    /**
+     * Filter, which LaboratoryAssistant to fetch.
+     */
+    where: LaboratoryAssistantWhereUniqueInput
+  }
+
+  /**
+   * LaboratoryAssistant findFirst
+   */
+  export type LaboratoryAssistantFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryAssistant
+     */
+    select?: LaboratoryAssistantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryAssistant
+     */
+    omit?: LaboratoryAssistantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryAssistantInclude<ExtArgs> | null
+    /**
+     * Filter, which LaboratoryAssistant to fetch.
+     */
+    where?: LaboratoryAssistantWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LaboratoryAssistants to fetch.
+     */
+    orderBy?: LaboratoryAssistantOrderByWithRelationInput | LaboratoryAssistantOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LaboratoryAssistants.
+     */
+    cursor?: LaboratoryAssistantWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LaboratoryAssistants from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LaboratoryAssistants.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LaboratoryAssistants.
+     */
+    distinct?: LaboratoryAssistantScalarFieldEnum | LaboratoryAssistantScalarFieldEnum[]
+  }
+
+  /**
+   * LaboratoryAssistant findFirstOrThrow
+   */
+  export type LaboratoryAssistantFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryAssistant
+     */
+    select?: LaboratoryAssistantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryAssistant
+     */
+    omit?: LaboratoryAssistantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryAssistantInclude<ExtArgs> | null
+    /**
+     * Filter, which LaboratoryAssistant to fetch.
+     */
+    where?: LaboratoryAssistantWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LaboratoryAssistants to fetch.
+     */
+    orderBy?: LaboratoryAssistantOrderByWithRelationInput | LaboratoryAssistantOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LaboratoryAssistants.
+     */
+    cursor?: LaboratoryAssistantWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LaboratoryAssistants from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LaboratoryAssistants.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LaboratoryAssistants.
+     */
+    distinct?: LaboratoryAssistantScalarFieldEnum | LaboratoryAssistantScalarFieldEnum[]
+  }
+
+  /**
+   * LaboratoryAssistant findMany
+   */
+  export type LaboratoryAssistantFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryAssistant
+     */
+    select?: LaboratoryAssistantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryAssistant
+     */
+    omit?: LaboratoryAssistantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryAssistantInclude<ExtArgs> | null
+    /**
+     * Filter, which LaboratoryAssistants to fetch.
+     */
+    where?: LaboratoryAssistantWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LaboratoryAssistants to fetch.
+     */
+    orderBy?: LaboratoryAssistantOrderByWithRelationInput | LaboratoryAssistantOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing LaboratoryAssistants.
+     */
+    cursor?: LaboratoryAssistantWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LaboratoryAssistants from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LaboratoryAssistants.
+     */
+    skip?: number
+    distinct?: LaboratoryAssistantScalarFieldEnum | LaboratoryAssistantScalarFieldEnum[]
+  }
+
+  /**
+   * LaboratoryAssistant create
+   */
+  export type LaboratoryAssistantCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryAssistant
+     */
+    select?: LaboratoryAssistantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryAssistant
+     */
+    omit?: LaboratoryAssistantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryAssistantInclude<ExtArgs> | null
+    /**
+     * The data needed to create a LaboratoryAssistant.
+     */
+    data: XOR<LaboratoryAssistantCreateInput, LaboratoryAssistantUncheckedCreateInput>
+  }
+
+  /**
+   * LaboratoryAssistant createMany
+   */
+  export type LaboratoryAssistantCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many LaboratoryAssistants.
+     */
+    data: LaboratoryAssistantCreateManyInput | LaboratoryAssistantCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * LaboratoryAssistant createManyAndReturn
+   */
+  export type LaboratoryAssistantCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryAssistant
+     */
+    select?: LaboratoryAssistantSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryAssistant
+     */
+    omit?: LaboratoryAssistantOmit<ExtArgs> | null
+    /**
+     * The data used to create many LaboratoryAssistants.
+     */
+    data: LaboratoryAssistantCreateManyInput | LaboratoryAssistantCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * LaboratoryAssistant update
+   */
+  export type LaboratoryAssistantUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryAssistant
+     */
+    select?: LaboratoryAssistantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryAssistant
+     */
+    omit?: LaboratoryAssistantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryAssistantInclude<ExtArgs> | null
+    /**
+     * The data needed to update a LaboratoryAssistant.
+     */
+    data: XOR<LaboratoryAssistantUpdateInput, LaboratoryAssistantUncheckedUpdateInput>
+    /**
+     * Choose, which LaboratoryAssistant to update.
+     */
+    where: LaboratoryAssistantWhereUniqueInput
+  }
+
+  /**
+   * LaboratoryAssistant updateMany
+   */
+  export type LaboratoryAssistantUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update LaboratoryAssistants.
+     */
+    data: XOR<LaboratoryAssistantUpdateManyMutationInput, LaboratoryAssistantUncheckedUpdateManyInput>
+    /**
+     * Filter which LaboratoryAssistants to update
+     */
+    where?: LaboratoryAssistantWhereInput
+    /**
+     * Limit how many LaboratoryAssistants to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * LaboratoryAssistant updateManyAndReturn
+   */
+  export type LaboratoryAssistantUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryAssistant
+     */
+    select?: LaboratoryAssistantSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryAssistant
+     */
+    omit?: LaboratoryAssistantOmit<ExtArgs> | null
+    /**
+     * The data used to update LaboratoryAssistants.
+     */
+    data: XOR<LaboratoryAssistantUpdateManyMutationInput, LaboratoryAssistantUncheckedUpdateManyInput>
+    /**
+     * Filter which LaboratoryAssistants to update
+     */
+    where?: LaboratoryAssistantWhereInput
+    /**
+     * Limit how many LaboratoryAssistants to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * LaboratoryAssistant upsert
+   */
+  export type LaboratoryAssistantUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryAssistant
+     */
+    select?: LaboratoryAssistantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryAssistant
+     */
+    omit?: LaboratoryAssistantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryAssistantInclude<ExtArgs> | null
+    /**
+     * The filter to search for the LaboratoryAssistant to update in case it exists.
+     */
+    where: LaboratoryAssistantWhereUniqueInput
+    /**
+     * In case the LaboratoryAssistant found by the `where` argument doesn't exist, create a new LaboratoryAssistant with this data.
+     */
+    create: XOR<LaboratoryAssistantCreateInput, LaboratoryAssistantUncheckedCreateInput>
+    /**
+     * In case the LaboratoryAssistant was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LaboratoryAssistantUpdateInput, LaboratoryAssistantUncheckedUpdateInput>
+  }
+
+  /**
+   * LaboratoryAssistant delete
+   */
+  export type LaboratoryAssistantDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryAssistant
+     */
+    select?: LaboratoryAssistantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryAssistant
+     */
+    omit?: LaboratoryAssistantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryAssistantInclude<ExtArgs> | null
+    /**
+     * Filter which LaboratoryAssistant to delete.
+     */
+    where: LaboratoryAssistantWhereUniqueInput
+  }
+
+  /**
+   * LaboratoryAssistant deleteMany
+   */
+  export type LaboratoryAssistantDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LaboratoryAssistants to delete
+     */
+    where?: LaboratoryAssistantWhereInput
+    /**
+     * Limit how many LaboratoryAssistants to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * LaboratoryAssistant.laboratoryLocks
+   */
+  export type LaboratoryAssistant$laboratoryLocksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryLock
+     */
+    select?: LaboratoryLockSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryLock
+     */
+    omit?: LaboratoryLockOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryLockInclude<ExtArgs> | null
+    where?: LaboratoryLockWhereInput
+    orderBy?: LaboratoryLockOrderByWithRelationInput | LaboratoryLockOrderByWithRelationInput[]
+    cursor?: LaboratoryLockWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LaboratoryLockScalarFieldEnum | LaboratoryLockScalarFieldEnum[]
+  }
+
+  /**
+   * LaboratoryAssistant without action
+   */
+  export type LaboratoryAssistantDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaboratoryAssistant
+     */
+    select?: LaboratoryAssistantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaboratoryAssistant
+     */
+    omit?: LaboratoryAssistantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaboratoryAssistantInclude<ExtArgs> | null
   }
 
 
@@ -49409,7 +53237,9 @@ export namespace Prisma {
     extrusion_param_id: 'extrusion_param_id',
     varnish_param_id: 'varnish_param_id',
     offset_param_id: 'offset_param_id',
-    sealant_param_id: 'sealant_param_id'
+    sealant_param_id: 'sealant_param_id',
+    is_locked: 'is_locked',
+    laboratory_lock_id: 'laboratory_lock_id'
   };
 
   export type StatusScalarFieldEnum = (typeof StatusScalarFieldEnum)[keyof typeof StatusScalarFieldEnum]
@@ -49626,6 +53456,36 @@ export namespace Prisma {
   };
 
   export type SummaryScalarFieldEnum = (typeof SummaryScalarFieldEnum)[keyof typeof SummaryScalarFieldEnum]
+
+
+  export const LaboratoryLockScalarFieldEnum: {
+    id: 'id',
+    laboratory_lock_reason_id: 'laboratory_lock_reason_id',
+    laboratory_assistant_id: 'laboratory_assistant_id',
+    createdAt: 'createdAt',
+    summary_id: 'summary_id',
+    post_id: 'post_id',
+    is_active: 'is_active',
+    closedAt: 'closedAt'
+  };
+
+  export type LaboratoryLockScalarFieldEnum = (typeof LaboratoryLockScalarFieldEnum)[keyof typeof LaboratoryLockScalarFieldEnum]
+
+
+  export const LaboratoryLockReasonScalarFieldEnum: {
+    id: 'id',
+    value: 'value'
+  };
+
+  export type LaboratoryLockReasonScalarFieldEnum = (typeof LaboratoryLockReasonScalarFieldEnum)[keyof typeof LaboratoryLockReasonScalarFieldEnum]
+
+
+  export const LaboratoryAssistantScalarFieldEnum: {
+    id: 'id',
+    name: 'name'
+  };
+
+  export type LaboratoryAssistantScalarFieldEnum = (typeof LaboratoryAssistantScalarFieldEnum)[keyof typeof LaboratoryAssistantScalarFieldEnum]
 
 
   export const DefectScalarFieldEnum: {
@@ -50085,6 +53945,7 @@ export namespace Prisma {
     notes?: NoteListRelationFilter
     maintenances?: MaintenanceListRelationFilter
     maintenance_sessions?: MaintenanceSessionListRelationFilter
+    laboratoryLocks?: LaboratoryLockListRelationFilter
   }
 
   export type PostOrderByWithRelationInput = {
@@ -50097,6 +53958,7 @@ export namespace Prisma {
     notes?: NoteOrderByRelationAggregateInput
     maintenances?: MaintenanceOrderByRelationAggregateInput
     maintenance_sessions?: MaintenanceSessionOrderByRelationAggregateInput
+    laboratoryLocks?: LaboratoryLockOrderByRelationAggregateInput
   }
 
   export type PostWhereUniqueInput = Prisma.AtLeast<{
@@ -50112,6 +53974,7 @@ export namespace Prisma {
     notes?: NoteListRelationFilter
     maintenances?: MaintenanceListRelationFilter
     maintenance_sessions?: MaintenanceSessionListRelationFilter
+    laboratoryLocks?: LaboratoryLockListRelationFilter
   }, "id" | "value" | "name">
 
   export type PostOrderByWithAggregationInput = {
@@ -50333,6 +54196,8 @@ export namespace Prisma {
     varnish_param_id?: IntNullableFilter<"Status"> | number | null
     offset_param_id?: IntNullableFilter<"Status"> | number | null
     sealant_param_id?: IntNullableFilter<"Status"> | number | null
+    is_locked?: BoolFilter<"Status"> | boolean
+    laboratory_lock_id?: IntNullableFilter<"Status"> | number | null
     summary?: XOR<SummaryScalarRelationFilter, SummaryWhereInput>
     post?: XOR<PostScalarRelationFilter, PostWhereInput>
     operation?: XOR<OperationNullableScalarRelationFilter, OperationWhereInput> | null
@@ -50342,6 +54207,7 @@ export namespace Prisma {
     varnish_param?: XOR<VarnishParamNullableScalarRelationFilter, VarnishParamWhereInput> | null
     offset_param?: XOR<OffsetParamNullableScalarRelationFilter, OffsetParamWhereInput> | null
     sealant_param?: XOR<SealantParamNullableScalarRelationFilter, SealantParamWhereInput> | null
+    laboratory_lock?: XOR<LaboratoryLockNullableScalarRelationFilter, LaboratoryLockWhereInput> | null
   }
 
   export type StatusOrderByWithRelationInput = {
@@ -50360,6 +54226,8 @@ export namespace Prisma {
     varnish_param_id?: SortOrderInput | SortOrder
     offset_param_id?: SortOrderInput | SortOrder
     sealant_param_id?: SortOrderInput | SortOrder
+    is_locked?: SortOrder
+    laboratory_lock_id?: SortOrderInput | SortOrder
     summary?: SummaryOrderByWithRelationInput
     post?: PostOrderByWithRelationInput
     operation?: OperationOrderByWithRelationInput
@@ -50369,6 +54237,7 @@ export namespace Prisma {
     varnish_param?: VarnishParamOrderByWithRelationInput
     offset_param?: OffsetParamOrderByWithRelationInput
     sealant_param?: SealantParamOrderByWithRelationInput
+    laboratory_lock?: LaboratoryLockOrderByWithRelationInput
   }
 
   export type StatusWhereUniqueInput = Prisma.AtLeast<{
@@ -50390,6 +54259,8 @@ export namespace Prisma {
     varnish_param_id?: IntNullableFilter<"Status"> | number | null
     offset_param_id?: IntNullableFilter<"Status"> | number | null
     sealant_param_id?: IntNullableFilter<"Status"> | number | null
+    is_locked?: BoolFilter<"Status"> | boolean
+    laboratory_lock_id?: IntNullableFilter<"Status"> | number | null
     summary?: XOR<SummaryScalarRelationFilter, SummaryWhereInput>
     post?: XOR<PostScalarRelationFilter, PostWhereInput>
     operation?: XOR<OperationNullableScalarRelationFilter, OperationWhereInput> | null
@@ -50399,6 +54270,7 @@ export namespace Prisma {
     varnish_param?: XOR<VarnishParamNullableScalarRelationFilter, VarnishParamWhereInput> | null
     offset_param?: XOR<OffsetParamNullableScalarRelationFilter, OffsetParamWhereInput> | null
     sealant_param?: XOR<SealantParamNullableScalarRelationFilter, SealantParamWhereInput> | null
+    laboratory_lock?: XOR<LaboratoryLockNullableScalarRelationFilter, LaboratoryLockWhereInput> | null
   }, "id">
 
   export type StatusOrderByWithAggregationInput = {
@@ -50417,6 +54289,8 @@ export namespace Prisma {
     varnish_param_id?: SortOrderInput | SortOrder
     offset_param_id?: SortOrderInput | SortOrder
     sealant_param_id?: SortOrderInput | SortOrder
+    is_locked?: SortOrder
+    laboratory_lock_id?: SortOrderInput | SortOrder
     _count?: StatusCountOrderByAggregateInput
     _avg?: StatusAvgOrderByAggregateInput
     _max?: StatusMaxOrderByAggregateInput
@@ -50443,6 +54317,8 @@ export namespace Prisma {
     varnish_param_id?: IntNullableWithAggregatesFilter<"Status"> | number | null
     offset_param_id?: IntNullableWithAggregatesFilter<"Status"> | number | null
     sealant_param_id?: IntNullableWithAggregatesFilter<"Status"> | number | null
+    is_locked?: BoolWithAggregatesFilter<"Status"> | boolean
+    laboratory_lock_id?: IntNullableWithAggregatesFilter<"Status"> | number | null
   }
 
   export type GoalWhereInput = {
@@ -51574,6 +55450,7 @@ export namespace Prisma {
     statuses?: StatusListRelationFilter
     defects?: DefectListRelationFilter
     crew?: XOR<CrewNullableScalarRelationFilter, CrewWhereInput> | null
+    laboratory_locks?: LaboratoryLockListRelationFilter
   }
 
   export type SummaryOrderByWithRelationInput = {
@@ -51601,6 +55478,7 @@ export namespace Prisma {
     statuses?: StatusOrderByRelationAggregateInput
     defects?: DefectOrderByRelationAggregateInput
     crew?: CrewOrderByWithRelationInput
+    laboratory_locks?: LaboratoryLockOrderByRelationAggregateInput
   }
 
   export type SummaryWhereUniqueInput = Prisma.AtLeast<{
@@ -51631,6 +55509,7 @@ export namespace Prisma {
     statuses?: StatusListRelationFilter
     defects?: DefectListRelationFilter
     crew?: XOR<CrewNullableScalarRelationFilter, CrewWhereInput> | null
+    laboratory_locks?: LaboratoryLockListRelationFilter
   }, "id">
 
   export type SummaryOrderByWithAggregationInput = {
@@ -51665,6 +55544,174 @@ export namespace Prisma {
     date?: DateTimeWithAggregatesFilter<"Summary"> | Date | string
     shift?: IntWithAggregatesFilter<"Summary"> | number
     crew_id?: IntNullableWithAggregatesFilter<"Summary"> | number | null
+  }
+
+  export type LaboratoryLockWhereInput = {
+    AND?: LaboratoryLockWhereInput | LaboratoryLockWhereInput[]
+    OR?: LaboratoryLockWhereInput[]
+    NOT?: LaboratoryLockWhereInput | LaboratoryLockWhereInput[]
+    id?: IntFilter<"LaboratoryLock"> | number
+    laboratory_lock_reason_id?: IntFilter<"LaboratoryLock"> | number
+    laboratory_assistant_id?: IntFilter<"LaboratoryLock"> | number
+    createdAt?: DateTimeFilter<"LaboratoryLock"> | Date | string
+    summary_id?: IntFilter<"LaboratoryLock"> | number
+    post_id?: IntFilter<"LaboratoryLock"> | number
+    is_active?: BoolFilter<"LaboratoryLock"> | boolean
+    closedAt?: DateTimeNullableFilter<"LaboratoryLock"> | Date | string | null
+    laboratory_lock_reason?: XOR<LaboratoryLockReasonScalarRelationFilter, LaboratoryLockReasonWhereInput>
+    laboratory_assistant?: XOR<LaboratoryAssistantScalarRelationFilter, LaboratoryAssistantWhereInput>
+    summary?: XOR<SummaryScalarRelationFilter, SummaryWhereInput>
+    post?: XOR<PostScalarRelationFilter, PostWhereInput>
+    statuses?: StatusListRelationFilter
+  }
+
+  export type LaboratoryLockOrderByWithRelationInput = {
+    id?: SortOrder
+    laboratory_lock_reason_id?: SortOrder
+    laboratory_assistant_id?: SortOrder
+    createdAt?: SortOrder
+    summary_id?: SortOrder
+    post_id?: SortOrder
+    is_active?: SortOrder
+    closedAt?: SortOrderInput | SortOrder
+    laboratory_lock_reason?: LaboratoryLockReasonOrderByWithRelationInput
+    laboratory_assistant?: LaboratoryAssistantOrderByWithRelationInput
+    summary?: SummaryOrderByWithRelationInput
+    post?: PostOrderByWithRelationInput
+    statuses?: StatusOrderByRelationAggregateInput
+  }
+
+  export type LaboratoryLockWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: LaboratoryLockWhereInput | LaboratoryLockWhereInput[]
+    OR?: LaboratoryLockWhereInput[]
+    NOT?: LaboratoryLockWhereInput | LaboratoryLockWhereInput[]
+    laboratory_lock_reason_id?: IntFilter<"LaboratoryLock"> | number
+    laboratory_assistant_id?: IntFilter<"LaboratoryLock"> | number
+    createdAt?: DateTimeFilter<"LaboratoryLock"> | Date | string
+    summary_id?: IntFilter<"LaboratoryLock"> | number
+    post_id?: IntFilter<"LaboratoryLock"> | number
+    is_active?: BoolFilter<"LaboratoryLock"> | boolean
+    closedAt?: DateTimeNullableFilter<"LaboratoryLock"> | Date | string | null
+    laboratory_lock_reason?: XOR<LaboratoryLockReasonScalarRelationFilter, LaboratoryLockReasonWhereInput>
+    laboratory_assistant?: XOR<LaboratoryAssistantScalarRelationFilter, LaboratoryAssistantWhereInput>
+    summary?: XOR<SummaryScalarRelationFilter, SummaryWhereInput>
+    post?: XOR<PostScalarRelationFilter, PostWhereInput>
+    statuses?: StatusListRelationFilter
+  }, "id">
+
+  export type LaboratoryLockOrderByWithAggregationInput = {
+    id?: SortOrder
+    laboratory_lock_reason_id?: SortOrder
+    laboratory_assistant_id?: SortOrder
+    createdAt?: SortOrder
+    summary_id?: SortOrder
+    post_id?: SortOrder
+    is_active?: SortOrder
+    closedAt?: SortOrderInput | SortOrder
+    _count?: LaboratoryLockCountOrderByAggregateInput
+    _avg?: LaboratoryLockAvgOrderByAggregateInput
+    _max?: LaboratoryLockMaxOrderByAggregateInput
+    _min?: LaboratoryLockMinOrderByAggregateInput
+    _sum?: LaboratoryLockSumOrderByAggregateInput
+  }
+
+  export type LaboratoryLockScalarWhereWithAggregatesInput = {
+    AND?: LaboratoryLockScalarWhereWithAggregatesInput | LaboratoryLockScalarWhereWithAggregatesInput[]
+    OR?: LaboratoryLockScalarWhereWithAggregatesInput[]
+    NOT?: LaboratoryLockScalarWhereWithAggregatesInput | LaboratoryLockScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"LaboratoryLock"> | number
+    laboratory_lock_reason_id?: IntWithAggregatesFilter<"LaboratoryLock"> | number
+    laboratory_assistant_id?: IntWithAggregatesFilter<"LaboratoryLock"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"LaboratoryLock"> | Date | string
+    summary_id?: IntWithAggregatesFilter<"LaboratoryLock"> | number
+    post_id?: IntWithAggregatesFilter<"LaboratoryLock"> | number
+    is_active?: BoolWithAggregatesFilter<"LaboratoryLock"> | boolean
+    closedAt?: DateTimeNullableWithAggregatesFilter<"LaboratoryLock"> | Date | string | null
+  }
+
+  export type LaboratoryLockReasonWhereInput = {
+    AND?: LaboratoryLockReasonWhereInput | LaboratoryLockReasonWhereInput[]
+    OR?: LaboratoryLockReasonWhereInput[]
+    NOT?: LaboratoryLockReasonWhereInput | LaboratoryLockReasonWhereInput[]
+    id?: IntFilter<"LaboratoryLockReason"> | number
+    value?: StringFilter<"LaboratoryLockReason"> | string
+    laboratoryLocks?: LaboratoryLockListRelationFilter
+  }
+
+  export type LaboratoryLockReasonOrderByWithRelationInput = {
+    id?: SortOrder
+    value?: SortOrder
+    laboratoryLocks?: LaboratoryLockOrderByRelationAggregateInput
+  }
+
+  export type LaboratoryLockReasonWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    value?: string
+    AND?: LaboratoryLockReasonWhereInput | LaboratoryLockReasonWhereInput[]
+    OR?: LaboratoryLockReasonWhereInput[]
+    NOT?: LaboratoryLockReasonWhereInput | LaboratoryLockReasonWhereInput[]
+    laboratoryLocks?: LaboratoryLockListRelationFilter
+  }, "id" | "value">
+
+  export type LaboratoryLockReasonOrderByWithAggregationInput = {
+    id?: SortOrder
+    value?: SortOrder
+    _count?: LaboratoryLockReasonCountOrderByAggregateInput
+    _avg?: LaboratoryLockReasonAvgOrderByAggregateInput
+    _max?: LaboratoryLockReasonMaxOrderByAggregateInput
+    _min?: LaboratoryLockReasonMinOrderByAggregateInput
+    _sum?: LaboratoryLockReasonSumOrderByAggregateInput
+  }
+
+  export type LaboratoryLockReasonScalarWhereWithAggregatesInput = {
+    AND?: LaboratoryLockReasonScalarWhereWithAggregatesInput | LaboratoryLockReasonScalarWhereWithAggregatesInput[]
+    OR?: LaboratoryLockReasonScalarWhereWithAggregatesInput[]
+    NOT?: LaboratoryLockReasonScalarWhereWithAggregatesInput | LaboratoryLockReasonScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"LaboratoryLockReason"> | number
+    value?: StringWithAggregatesFilter<"LaboratoryLockReason"> | string
+  }
+
+  export type LaboratoryAssistantWhereInput = {
+    AND?: LaboratoryAssistantWhereInput | LaboratoryAssistantWhereInput[]
+    OR?: LaboratoryAssistantWhereInput[]
+    NOT?: LaboratoryAssistantWhereInput | LaboratoryAssistantWhereInput[]
+    id?: IntFilter<"LaboratoryAssistant"> | number
+    name?: StringFilter<"LaboratoryAssistant"> | string
+    laboratoryLocks?: LaboratoryLockListRelationFilter
+  }
+
+  export type LaboratoryAssistantOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    laboratoryLocks?: LaboratoryLockOrderByRelationAggregateInput
+  }
+
+  export type LaboratoryAssistantWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    name?: string
+    AND?: LaboratoryAssistantWhereInput | LaboratoryAssistantWhereInput[]
+    OR?: LaboratoryAssistantWhereInput[]
+    NOT?: LaboratoryAssistantWhereInput | LaboratoryAssistantWhereInput[]
+    laboratoryLocks?: LaboratoryLockListRelationFilter
+  }, "id" | "name">
+
+  export type LaboratoryAssistantOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    _count?: LaboratoryAssistantCountOrderByAggregateInput
+    _avg?: LaboratoryAssistantAvgOrderByAggregateInput
+    _max?: LaboratoryAssistantMaxOrderByAggregateInput
+    _min?: LaboratoryAssistantMinOrderByAggregateInput
+    _sum?: LaboratoryAssistantSumOrderByAggregateInput
+  }
+
+  export type LaboratoryAssistantScalarWhereWithAggregatesInput = {
+    AND?: LaboratoryAssistantScalarWhereWithAggregatesInput | LaboratoryAssistantScalarWhereWithAggregatesInput[]
+    OR?: LaboratoryAssistantScalarWhereWithAggregatesInput[]
+    NOT?: LaboratoryAssistantScalarWhereWithAggregatesInput | LaboratoryAssistantScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"LaboratoryAssistant"> | number
+    name?: StringWithAggregatesFilter<"LaboratoryAssistant"> | string
   }
 
   export type DefectWhereInput = {
@@ -53227,6 +57274,7 @@ export namespace Prisma {
     notes?: NoteCreateNestedManyWithoutPostInput
     maintenances?: MaintenanceCreateNestedManyWithoutPostInput
     maintenance_sessions?: MaintenanceSessionCreateNestedManyWithoutPostInput
+    laboratoryLocks?: LaboratoryLockCreateNestedManyWithoutPostInput
   }
 
   export type PostUncheckedCreateInput = {
@@ -53239,6 +57287,7 @@ export namespace Prisma {
     notes?: NoteUncheckedCreateNestedManyWithoutPostInput
     maintenances?: MaintenanceUncheckedCreateNestedManyWithoutPostInput
     maintenance_sessions?: MaintenanceSessionUncheckedCreateNestedManyWithoutPostInput
+    laboratoryLocks?: LaboratoryLockUncheckedCreateNestedManyWithoutPostInput
   }
 
   export type PostUpdateInput = {
@@ -53250,6 +57299,7 @@ export namespace Prisma {
     notes?: NoteUpdateManyWithoutPostNestedInput
     maintenances?: MaintenanceUpdateManyWithoutPostNestedInput
     maintenance_sessions?: MaintenanceSessionUpdateManyWithoutPostNestedInput
+    laboratoryLocks?: LaboratoryLockUpdateManyWithoutPostNestedInput
   }
 
   export type PostUncheckedUpdateInput = {
@@ -53262,6 +57312,7 @@ export namespace Prisma {
     notes?: NoteUncheckedUpdateManyWithoutPostNestedInput
     maintenances?: MaintenanceUncheckedUpdateManyWithoutPostNestedInput
     maintenance_sessions?: MaintenanceSessionUncheckedUpdateManyWithoutPostNestedInput
+    laboratoryLocks?: LaboratoryLockUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type PostCreateManyInput = {
@@ -53448,6 +57499,7 @@ export namespace Prisma {
     idle_time?: bigint | number | null
     finished?: boolean
     createdAt?: Date | string
+    is_locked?: boolean
     summary: SummaryCreateNestedOneWithoutStatusesInput
     post: PostCreateNestedOneWithoutStatusesInput
     operation?: OperationCreateNestedOneWithoutStatusesInput
@@ -53457,6 +57509,7 @@ export namespace Prisma {
     varnish_param?: VarnishParamCreateNestedOneWithoutStatusesInput
     offset_param?: OffsetParamCreateNestedOneWithoutStatusesInput
     sealant_param?: SealantParamCreateNestedOneWithoutStatusesInput
+    laboratory_lock?: LaboratoryLockCreateNestedOneWithoutStatusesInput
   }
 
   export type StatusUncheckedCreateInput = {
@@ -53475,6 +57528,8 @@ export namespace Prisma {
     varnish_param_id?: number | null
     offset_param_id?: number | null
     sealant_param_id?: number | null
+    is_locked?: boolean
+    laboratory_lock_id?: number | null
   }
 
   export type StatusUpdateInput = {
@@ -53483,6 +57538,7 @@ export namespace Prisma {
     idle_time?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     finished?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
     summary?: SummaryUpdateOneRequiredWithoutStatusesNestedInput
     post?: PostUpdateOneRequiredWithoutStatusesNestedInput
     operation?: OperationUpdateOneWithoutStatusesNestedInput
@@ -53492,6 +57548,7 @@ export namespace Prisma {
     varnish_param?: VarnishParamUpdateOneWithoutStatusesNestedInput
     offset_param?: OffsetParamUpdateOneWithoutStatusesNestedInput
     sealant_param?: SealantParamUpdateOneWithoutStatusesNestedInput
+    laboratory_lock?: LaboratoryLockUpdateOneWithoutStatusesNestedInput
   }
 
   export type StatusUncheckedUpdateInput = {
@@ -53510,6 +57567,8 @@ export namespace Prisma {
     varnish_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     offset_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     sealant_param_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
+    laboratory_lock_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type StatusCreateManyInput = {
@@ -53528,6 +57587,8 @@ export namespace Prisma {
     varnish_param_id?: number | null
     offset_param_id?: number | null
     sealant_param_id?: number | null
+    is_locked?: boolean
+    laboratory_lock_id?: number | null
   }
 
   export type StatusUpdateManyMutationInput = {
@@ -53536,6 +57597,7 @@ export namespace Prisma {
     idle_time?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     finished?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type StatusUncheckedUpdateManyInput = {
@@ -53554,6 +57616,8 @@ export namespace Prisma {
     varnish_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     offset_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     sealant_param_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
+    laboratory_lock_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type GoalCreateInput = {
@@ -54581,6 +58645,7 @@ export namespace Prisma {
     statuses?: StatusCreateNestedManyWithoutSummaryInput
     defects?: DefectCreateNestedManyWithoutSummaryInput
     crew?: CrewCreateNestedOneWithoutSummariesInput
+    laboratory_locks?: LaboratoryLockCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryUncheckedCreateInput = {
@@ -54604,6 +58669,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxUncheckedCreateNestedManyWithoutSummaryInput
     statuses?: StatusUncheckedCreateNestedManyWithoutSummaryInput
     defects?: DefectUncheckedCreateNestedManyWithoutSummaryInput
+    laboratory_locks?: LaboratoryLockUncheckedCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryUpdateInput = {
@@ -54626,6 +58692,7 @@ export namespace Prisma {
     statuses?: StatusUpdateManyWithoutSummaryNestedInput
     defects?: DefectUpdateManyWithoutSummaryNestedInput
     crew?: CrewUpdateOneWithoutSummariesNestedInput
+    laboratory_locks?: LaboratoryLockUpdateManyWithoutSummaryNestedInput
   }
 
   export type SummaryUncheckedUpdateInput = {
@@ -54649,6 +58716,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxUncheckedUpdateManyWithoutSummaryNestedInput
     statuses?: StatusUncheckedUpdateManyWithoutSummaryNestedInput
     defects?: DefectUncheckedUpdateManyWithoutSummaryNestedInput
+    laboratory_locks?: LaboratoryLockUncheckedUpdateManyWithoutSummaryNestedInput
   }
 
   export type SummaryCreateManyInput = {
@@ -54683,6 +58751,152 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     shift?: IntFieldUpdateOperationsInput | number
     crew_id?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type LaboratoryLockCreateInput = {
+    createdAt?: Date | string
+    is_active?: boolean
+    closedAt?: Date | string | null
+    laboratory_lock_reason: LaboratoryLockReasonCreateNestedOneWithoutLaboratoryLocksInput
+    laboratory_assistant: LaboratoryAssistantCreateNestedOneWithoutLaboratoryLocksInput
+    summary: SummaryCreateNestedOneWithoutLaboratory_locksInput
+    post: PostCreateNestedOneWithoutLaboratoryLocksInput
+    statuses?: StatusCreateNestedManyWithoutLaboratory_lockInput
+  }
+
+  export type LaboratoryLockUncheckedCreateInput = {
+    id?: number
+    laboratory_lock_reason_id: number
+    laboratory_assistant_id: number
+    createdAt?: Date | string
+    summary_id: number
+    post_id: number
+    is_active?: boolean
+    closedAt?: Date | string | null
+    statuses?: StatusUncheckedCreateNestedManyWithoutLaboratory_lockInput
+  }
+
+  export type LaboratoryLockUpdateInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    laboratory_lock_reason?: LaboratoryLockReasonUpdateOneRequiredWithoutLaboratoryLocksNestedInput
+    laboratory_assistant?: LaboratoryAssistantUpdateOneRequiredWithoutLaboratoryLocksNestedInput
+    summary?: SummaryUpdateOneRequiredWithoutLaboratory_locksNestedInput
+    post?: PostUpdateOneRequiredWithoutLaboratoryLocksNestedInput
+    statuses?: StatusUpdateManyWithoutLaboratory_lockNestedInput
+  }
+
+  export type LaboratoryLockUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    laboratory_lock_reason_id?: IntFieldUpdateOperationsInput | number
+    laboratory_assistant_id?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    summary_id?: IntFieldUpdateOperationsInput | number
+    post_id?: IntFieldUpdateOperationsInput | number
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    statuses?: StatusUncheckedUpdateManyWithoutLaboratory_lockNestedInput
+  }
+
+  export type LaboratoryLockCreateManyInput = {
+    id?: number
+    laboratory_lock_reason_id: number
+    laboratory_assistant_id: number
+    createdAt?: Date | string
+    summary_id: number
+    post_id: number
+    is_active?: boolean
+    closedAt?: Date | string | null
+  }
+
+  export type LaboratoryLockUpdateManyMutationInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type LaboratoryLockUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    laboratory_lock_reason_id?: IntFieldUpdateOperationsInput | number
+    laboratory_assistant_id?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    summary_id?: IntFieldUpdateOperationsInput | number
+    post_id?: IntFieldUpdateOperationsInput | number
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type LaboratoryLockReasonCreateInput = {
+    value: string
+    laboratoryLocks?: LaboratoryLockCreateNestedManyWithoutLaboratory_lock_reasonInput
+  }
+
+  export type LaboratoryLockReasonUncheckedCreateInput = {
+    id?: number
+    value: string
+    laboratoryLocks?: LaboratoryLockUncheckedCreateNestedManyWithoutLaboratory_lock_reasonInput
+  }
+
+  export type LaboratoryLockReasonUpdateInput = {
+    value?: StringFieldUpdateOperationsInput | string
+    laboratoryLocks?: LaboratoryLockUpdateManyWithoutLaboratory_lock_reasonNestedInput
+  }
+
+  export type LaboratoryLockReasonUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    value?: StringFieldUpdateOperationsInput | string
+    laboratoryLocks?: LaboratoryLockUncheckedUpdateManyWithoutLaboratory_lock_reasonNestedInput
+  }
+
+  export type LaboratoryLockReasonCreateManyInput = {
+    id?: number
+    value: string
+  }
+
+  export type LaboratoryLockReasonUpdateManyMutationInput = {
+    value?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type LaboratoryLockReasonUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    value?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type LaboratoryAssistantCreateInput = {
+    name: string
+    laboratoryLocks?: LaboratoryLockCreateNestedManyWithoutLaboratory_assistantInput
+  }
+
+  export type LaboratoryAssistantUncheckedCreateInput = {
+    id?: number
+    name: string
+    laboratoryLocks?: LaboratoryLockUncheckedCreateNestedManyWithoutLaboratory_assistantInput
+  }
+
+  export type LaboratoryAssistantUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    laboratoryLocks?: LaboratoryLockUpdateManyWithoutLaboratory_assistantNestedInput
+  }
+
+  export type LaboratoryAssistantUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    laboratoryLocks?: LaboratoryLockUncheckedUpdateManyWithoutLaboratory_assistantNestedInput
+  }
+
+  export type LaboratoryAssistantCreateManyInput = {
+    id?: number
+    name: string
+  }
+
+  export type LaboratoryAssistantUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type LaboratoryAssistantUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
   }
 
   export type DefectCreateInput = {
@@ -56612,6 +60826,12 @@ export namespace Prisma {
     none?: MaintenanceSessionWhereInput
   }
 
+  export type LaboratoryLockListRelationFilter = {
+    every?: LaboratoryLockWhereInput
+    some?: LaboratoryLockWhereInput
+    none?: LaboratoryLockWhereInput
+  }
+
   export type OperationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -56633,6 +60853,10 @@ export namespace Prisma {
   }
 
   export type MaintenanceSessionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type LaboratoryLockOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -56897,6 +61121,11 @@ export namespace Prisma {
     isNot?: SealantParamWhereInput | null
   }
 
+  export type LaboratoryLockNullableScalarRelationFilter = {
+    is?: LaboratoryLockWhereInput | null
+    isNot?: LaboratoryLockWhereInput | null
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -56918,6 +61147,8 @@ export namespace Prisma {
     varnish_param_id?: SortOrder
     offset_param_id?: SortOrder
     sealant_param_id?: SortOrder
+    is_locked?: SortOrder
+    laboratory_lock_id?: SortOrder
   }
 
   export type StatusAvgOrderByAggregateInput = {
@@ -56933,6 +61164,7 @@ export namespace Prisma {
     varnish_param_id?: SortOrder
     offset_param_id?: SortOrder
     sealant_param_id?: SortOrder
+    laboratory_lock_id?: SortOrder
   }
 
   export type StatusMaxOrderByAggregateInput = {
@@ -56951,6 +61183,8 @@ export namespace Prisma {
     varnish_param_id?: SortOrder
     offset_param_id?: SortOrder
     sealant_param_id?: SortOrder
+    is_locked?: SortOrder
+    laboratory_lock_id?: SortOrder
   }
 
   export type StatusMinOrderByAggregateInput = {
@@ -56969,6 +61203,8 @@ export namespace Prisma {
     varnish_param_id?: SortOrder
     offset_param_id?: SortOrder
     sealant_param_id?: SortOrder
+    is_locked?: SortOrder
+    laboratory_lock_id?: SortOrder
   }
 
   export type StatusSumOrderByAggregateInput = {
@@ -56984,6 +61220,7 @@ export namespace Prisma {
     varnish_param_id?: SortOrder
     offset_param_id?: SortOrder
     sealant_param_id?: SortOrder
+    laboratory_lock_id?: SortOrder
   }
 
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -58004,6 +62241,111 @@ export namespace Prisma {
     plan?: SortOrder
     shift?: SortOrder
     crew_id?: SortOrder
+  }
+
+  export type LaboratoryLockReasonScalarRelationFilter = {
+    is?: LaboratoryLockReasonWhereInput
+    isNot?: LaboratoryLockReasonWhereInput
+  }
+
+  export type LaboratoryAssistantScalarRelationFilter = {
+    is?: LaboratoryAssistantWhereInput
+    isNot?: LaboratoryAssistantWhereInput
+  }
+
+  export type LaboratoryLockCountOrderByAggregateInput = {
+    id?: SortOrder
+    laboratory_lock_reason_id?: SortOrder
+    laboratory_assistant_id?: SortOrder
+    createdAt?: SortOrder
+    summary_id?: SortOrder
+    post_id?: SortOrder
+    is_active?: SortOrder
+    closedAt?: SortOrder
+  }
+
+  export type LaboratoryLockAvgOrderByAggregateInput = {
+    id?: SortOrder
+    laboratory_lock_reason_id?: SortOrder
+    laboratory_assistant_id?: SortOrder
+    summary_id?: SortOrder
+    post_id?: SortOrder
+  }
+
+  export type LaboratoryLockMaxOrderByAggregateInput = {
+    id?: SortOrder
+    laboratory_lock_reason_id?: SortOrder
+    laboratory_assistant_id?: SortOrder
+    createdAt?: SortOrder
+    summary_id?: SortOrder
+    post_id?: SortOrder
+    is_active?: SortOrder
+    closedAt?: SortOrder
+  }
+
+  export type LaboratoryLockMinOrderByAggregateInput = {
+    id?: SortOrder
+    laboratory_lock_reason_id?: SortOrder
+    laboratory_assistant_id?: SortOrder
+    createdAt?: SortOrder
+    summary_id?: SortOrder
+    post_id?: SortOrder
+    is_active?: SortOrder
+    closedAt?: SortOrder
+  }
+
+  export type LaboratoryLockSumOrderByAggregateInput = {
+    id?: SortOrder
+    laboratory_lock_reason_id?: SortOrder
+    laboratory_assistant_id?: SortOrder
+    summary_id?: SortOrder
+    post_id?: SortOrder
+  }
+
+  export type LaboratoryLockReasonCountOrderByAggregateInput = {
+    id?: SortOrder
+    value?: SortOrder
+  }
+
+  export type LaboratoryLockReasonAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type LaboratoryLockReasonMaxOrderByAggregateInput = {
+    id?: SortOrder
+    value?: SortOrder
+  }
+
+  export type LaboratoryLockReasonMinOrderByAggregateInput = {
+    id?: SortOrder
+    value?: SortOrder
+  }
+
+  export type LaboratoryLockReasonSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type LaboratoryAssistantCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type LaboratoryAssistantAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type LaboratoryAssistantMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type LaboratoryAssistantMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type LaboratoryAssistantSumOrderByAggregateInput = {
+    id?: SortOrder
   }
 
   export type DefectSummary_idPost_idCompoundUniqueInput = {
@@ -59445,6 +63787,13 @@ export namespace Prisma {
     connect?: MaintenanceSessionWhereUniqueInput | MaintenanceSessionWhereUniqueInput[]
   }
 
+  export type LaboratoryLockCreateNestedManyWithoutPostInput = {
+    create?: XOR<LaboratoryLockCreateWithoutPostInput, LaboratoryLockUncheckedCreateWithoutPostInput> | LaboratoryLockCreateWithoutPostInput[] | LaboratoryLockUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: LaboratoryLockCreateOrConnectWithoutPostInput | LaboratoryLockCreateOrConnectWithoutPostInput[]
+    createMany?: LaboratoryLockCreateManyPostInputEnvelope
+    connect?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+  }
+
   export type OperationUncheckedCreateNestedManyWithoutPostInput = {
     create?: XOR<OperationCreateWithoutPostInput, OperationUncheckedCreateWithoutPostInput> | OperationCreateWithoutPostInput[] | OperationUncheckedCreateWithoutPostInput[]
     connectOrCreate?: OperationCreateOrConnectWithoutPostInput | OperationCreateOrConnectWithoutPostInput[]
@@ -59485,6 +63834,13 @@ export namespace Prisma {
     connectOrCreate?: MaintenanceSessionCreateOrConnectWithoutPostInput | MaintenanceSessionCreateOrConnectWithoutPostInput[]
     createMany?: MaintenanceSessionCreateManyPostInputEnvelope
     connect?: MaintenanceSessionWhereUniqueInput | MaintenanceSessionWhereUniqueInput[]
+  }
+
+  export type LaboratoryLockUncheckedCreateNestedManyWithoutPostInput = {
+    create?: XOR<LaboratoryLockCreateWithoutPostInput, LaboratoryLockUncheckedCreateWithoutPostInput> | LaboratoryLockCreateWithoutPostInput[] | LaboratoryLockUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: LaboratoryLockCreateOrConnectWithoutPostInput | LaboratoryLockCreateOrConnectWithoutPostInput[]
+    createMany?: LaboratoryLockCreateManyPostInputEnvelope
+    connect?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
   }
 
   export type OperationUpdateManyWithoutPostNestedInput = {
@@ -59571,6 +63927,20 @@ export namespace Prisma {
     deleteMany?: MaintenanceSessionScalarWhereInput | MaintenanceSessionScalarWhereInput[]
   }
 
+  export type LaboratoryLockUpdateManyWithoutPostNestedInput = {
+    create?: XOR<LaboratoryLockCreateWithoutPostInput, LaboratoryLockUncheckedCreateWithoutPostInput> | LaboratoryLockCreateWithoutPostInput[] | LaboratoryLockUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: LaboratoryLockCreateOrConnectWithoutPostInput | LaboratoryLockCreateOrConnectWithoutPostInput[]
+    upsert?: LaboratoryLockUpsertWithWhereUniqueWithoutPostInput | LaboratoryLockUpsertWithWhereUniqueWithoutPostInput[]
+    createMany?: LaboratoryLockCreateManyPostInputEnvelope
+    set?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    disconnect?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    delete?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    connect?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    update?: LaboratoryLockUpdateWithWhereUniqueWithoutPostInput | LaboratoryLockUpdateWithWhereUniqueWithoutPostInput[]
+    updateMany?: LaboratoryLockUpdateManyWithWhereWithoutPostInput | LaboratoryLockUpdateManyWithWhereWithoutPostInput[]
+    deleteMany?: LaboratoryLockScalarWhereInput | LaboratoryLockScalarWhereInput[]
+  }
+
   export type OperationUncheckedUpdateManyWithoutPostNestedInput = {
     create?: XOR<OperationCreateWithoutPostInput, OperationUncheckedCreateWithoutPostInput> | OperationCreateWithoutPostInput[] | OperationUncheckedCreateWithoutPostInput[]
     connectOrCreate?: OperationCreateOrConnectWithoutPostInput | OperationCreateOrConnectWithoutPostInput[]
@@ -59653,6 +64023,20 @@ export namespace Prisma {
     update?: MaintenanceSessionUpdateWithWhereUniqueWithoutPostInput | MaintenanceSessionUpdateWithWhereUniqueWithoutPostInput[]
     updateMany?: MaintenanceSessionUpdateManyWithWhereWithoutPostInput | MaintenanceSessionUpdateManyWithWhereWithoutPostInput[]
     deleteMany?: MaintenanceSessionScalarWhereInput | MaintenanceSessionScalarWhereInput[]
+  }
+
+  export type LaboratoryLockUncheckedUpdateManyWithoutPostNestedInput = {
+    create?: XOR<LaboratoryLockCreateWithoutPostInput, LaboratoryLockUncheckedCreateWithoutPostInput> | LaboratoryLockCreateWithoutPostInput[] | LaboratoryLockUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: LaboratoryLockCreateOrConnectWithoutPostInput | LaboratoryLockCreateOrConnectWithoutPostInput[]
+    upsert?: LaboratoryLockUpsertWithWhereUniqueWithoutPostInput | LaboratoryLockUpsertWithWhereUniqueWithoutPostInput[]
+    createMany?: LaboratoryLockCreateManyPostInputEnvelope
+    set?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    disconnect?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    delete?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    connect?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    update?: LaboratoryLockUpdateWithWhereUniqueWithoutPostInput | LaboratoryLockUpdateWithWhereUniqueWithoutPostInput[]
+    updateMany?: LaboratoryLockUpdateManyWithWhereWithoutPostInput | LaboratoryLockUpdateManyWithWhereWithoutPostInput[]
+    deleteMany?: LaboratoryLockScalarWhereInput | LaboratoryLockScalarWhereInput[]
   }
 
   export type EmployeeCreateNestedManyWithoutRankInput = {
@@ -59979,6 +64363,12 @@ export namespace Prisma {
     connect?: SealantParamWhereUniqueInput
   }
 
+  export type LaboratoryLockCreateNestedOneWithoutStatusesInput = {
+    create?: XOR<LaboratoryLockCreateWithoutStatusesInput, LaboratoryLockUncheckedCreateWithoutStatusesInput>
+    connectOrCreate?: LaboratoryLockCreateOrConnectWithoutStatusesInput
+    connect?: LaboratoryLockWhereUniqueInput
+  }
+
   export type NullableBigIntFieldUpdateOperationsInput = {
     set?: bigint | number | null
     increment?: bigint | number
@@ -60075,6 +64465,16 @@ export namespace Prisma {
     delete?: SealantParamWhereInput | boolean
     connect?: SealantParamWhereUniqueInput
     update?: XOR<XOR<SealantParamUpdateToOneWithWhereWithoutStatusesInput, SealantParamUpdateWithoutStatusesInput>, SealantParamUncheckedUpdateWithoutStatusesInput>
+  }
+
+  export type LaboratoryLockUpdateOneWithoutStatusesNestedInput = {
+    create?: XOR<LaboratoryLockCreateWithoutStatusesInput, LaboratoryLockUncheckedCreateWithoutStatusesInput>
+    connectOrCreate?: LaboratoryLockCreateOrConnectWithoutStatusesInput
+    upsert?: LaboratoryLockUpsertWithoutStatusesInput
+    disconnect?: LaboratoryLockWhereInput | boolean
+    delete?: LaboratoryLockWhereInput | boolean
+    connect?: LaboratoryLockWhereUniqueInput
+    update?: XOR<XOR<LaboratoryLockUpdateToOneWithWhereWithoutStatusesInput, LaboratoryLockUpdateWithoutStatusesInput>, LaboratoryLockUncheckedUpdateWithoutStatusesInput>
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -61503,6 +65903,13 @@ export namespace Prisma {
     connect?: CrewWhereUniqueInput
   }
 
+  export type LaboratoryLockCreateNestedManyWithoutSummaryInput = {
+    create?: XOR<LaboratoryLockCreateWithoutSummaryInput, LaboratoryLockUncheckedCreateWithoutSummaryInput> | LaboratoryLockCreateWithoutSummaryInput[] | LaboratoryLockUncheckedCreateWithoutSummaryInput[]
+    connectOrCreate?: LaboratoryLockCreateOrConnectWithoutSummaryInput | LaboratoryLockCreateOrConnectWithoutSummaryInput[]
+    createMany?: LaboratoryLockCreateManySummaryInputEnvelope
+    connect?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+  }
+
   export type SpecificationUncheckedCreateNestedManyWithoutSummaryInput = {
     create?: XOR<SpecificationCreateWithoutSummaryInput, SpecificationUncheckedCreateWithoutSummaryInput> | SpecificationCreateWithoutSummaryInput[] | SpecificationUncheckedCreateWithoutSummaryInput[]
     connectOrCreate?: SpecificationCreateOrConnectWithoutSummaryInput | SpecificationCreateOrConnectWithoutSummaryInput[]
@@ -61571,6 +65978,13 @@ export namespace Prisma {
     connectOrCreate?: DefectCreateOrConnectWithoutSummaryInput | DefectCreateOrConnectWithoutSummaryInput[]
     createMany?: DefectCreateManySummaryInputEnvelope
     connect?: DefectWhereUniqueInput | DefectWhereUniqueInput[]
+  }
+
+  export type LaboratoryLockUncheckedCreateNestedManyWithoutSummaryInput = {
+    create?: XOR<LaboratoryLockCreateWithoutSummaryInput, LaboratoryLockUncheckedCreateWithoutSummaryInput> | LaboratoryLockCreateWithoutSummaryInput[] | LaboratoryLockUncheckedCreateWithoutSummaryInput[]
+    connectOrCreate?: LaboratoryLockCreateOrConnectWithoutSummaryInput | LaboratoryLockCreateOrConnectWithoutSummaryInput[]
+    createMany?: LaboratoryLockCreateManySummaryInputEnvelope
+    connect?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
   }
 
   export type ProductUpdateOneRequiredWithoutSummariesNestedInput = {
@@ -61747,6 +66161,20 @@ export namespace Prisma {
     update?: XOR<XOR<CrewUpdateToOneWithWhereWithoutSummariesInput, CrewUpdateWithoutSummariesInput>, CrewUncheckedUpdateWithoutSummariesInput>
   }
 
+  export type LaboratoryLockUpdateManyWithoutSummaryNestedInput = {
+    create?: XOR<LaboratoryLockCreateWithoutSummaryInput, LaboratoryLockUncheckedCreateWithoutSummaryInput> | LaboratoryLockCreateWithoutSummaryInput[] | LaboratoryLockUncheckedCreateWithoutSummaryInput[]
+    connectOrCreate?: LaboratoryLockCreateOrConnectWithoutSummaryInput | LaboratoryLockCreateOrConnectWithoutSummaryInput[]
+    upsert?: LaboratoryLockUpsertWithWhereUniqueWithoutSummaryInput | LaboratoryLockUpsertWithWhereUniqueWithoutSummaryInput[]
+    createMany?: LaboratoryLockCreateManySummaryInputEnvelope
+    set?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    disconnect?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    delete?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    connect?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    update?: LaboratoryLockUpdateWithWhereUniqueWithoutSummaryInput | LaboratoryLockUpdateWithWhereUniqueWithoutSummaryInput[]
+    updateMany?: LaboratoryLockUpdateManyWithWhereWithoutSummaryInput | LaboratoryLockUpdateManyWithWhereWithoutSummaryInput[]
+    deleteMany?: LaboratoryLockScalarWhereInput | LaboratoryLockScalarWhereInput[]
+  }
+
   export type SpecificationUncheckedUpdateManyWithoutSummaryNestedInput = {
     create?: XOR<SpecificationCreateWithoutSummaryInput, SpecificationUncheckedCreateWithoutSummaryInput> | SpecificationCreateWithoutSummaryInput[] | SpecificationUncheckedCreateWithoutSummaryInput[]
     connectOrCreate?: SpecificationCreateOrConnectWithoutSummaryInput | SpecificationCreateOrConnectWithoutSummaryInput[]
@@ -61885,6 +66313,202 @@ export namespace Prisma {
     update?: DefectUpdateWithWhereUniqueWithoutSummaryInput | DefectUpdateWithWhereUniqueWithoutSummaryInput[]
     updateMany?: DefectUpdateManyWithWhereWithoutSummaryInput | DefectUpdateManyWithWhereWithoutSummaryInput[]
     deleteMany?: DefectScalarWhereInput | DefectScalarWhereInput[]
+  }
+
+  export type LaboratoryLockUncheckedUpdateManyWithoutSummaryNestedInput = {
+    create?: XOR<LaboratoryLockCreateWithoutSummaryInput, LaboratoryLockUncheckedCreateWithoutSummaryInput> | LaboratoryLockCreateWithoutSummaryInput[] | LaboratoryLockUncheckedCreateWithoutSummaryInput[]
+    connectOrCreate?: LaboratoryLockCreateOrConnectWithoutSummaryInput | LaboratoryLockCreateOrConnectWithoutSummaryInput[]
+    upsert?: LaboratoryLockUpsertWithWhereUniqueWithoutSummaryInput | LaboratoryLockUpsertWithWhereUniqueWithoutSummaryInput[]
+    createMany?: LaboratoryLockCreateManySummaryInputEnvelope
+    set?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    disconnect?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    delete?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    connect?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    update?: LaboratoryLockUpdateWithWhereUniqueWithoutSummaryInput | LaboratoryLockUpdateWithWhereUniqueWithoutSummaryInput[]
+    updateMany?: LaboratoryLockUpdateManyWithWhereWithoutSummaryInput | LaboratoryLockUpdateManyWithWhereWithoutSummaryInput[]
+    deleteMany?: LaboratoryLockScalarWhereInput | LaboratoryLockScalarWhereInput[]
+  }
+
+  export type LaboratoryLockReasonCreateNestedOneWithoutLaboratoryLocksInput = {
+    create?: XOR<LaboratoryLockReasonCreateWithoutLaboratoryLocksInput, LaboratoryLockReasonUncheckedCreateWithoutLaboratoryLocksInput>
+    connectOrCreate?: LaboratoryLockReasonCreateOrConnectWithoutLaboratoryLocksInput
+    connect?: LaboratoryLockReasonWhereUniqueInput
+  }
+
+  export type LaboratoryAssistantCreateNestedOneWithoutLaboratoryLocksInput = {
+    create?: XOR<LaboratoryAssistantCreateWithoutLaboratoryLocksInput, LaboratoryAssistantUncheckedCreateWithoutLaboratoryLocksInput>
+    connectOrCreate?: LaboratoryAssistantCreateOrConnectWithoutLaboratoryLocksInput
+    connect?: LaboratoryAssistantWhereUniqueInput
+  }
+
+  export type SummaryCreateNestedOneWithoutLaboratory_locksInput = {
+    create?: XOR<SummaryCreateWithoutLaboratory_locksInput, SummaryUncheckedCreateWithoutLaboratory_locksInput>
+    connectOrCreate?: SummaryCreateOrConnectWithoutLaboratory_locksInput
+    connect?: SummaryWhereUniqueInput
+  }
+
+  export type PostCreateNestedOneWithoutLaboratoryLocksInput = {
+    create?: XOR<PostCreateWithoutLaboratoryLocksInput, PostUncheckedCreateWithoutLaboratoryLocksInput>
+    connectOrCreate?: PostCreateOrConnectWithoutLaboratoryLocksInput
+    connect?: PostWhereUniqueInput
+  }
+
+  export type StatusCreateNestedManyWithoutLaboratory_lockInput = {
+    create?: XOR<StatusCreateWithoutLaboratory_lockInput, StatusUncheckedCreateWithoutLaboratory_lockInput> | StatusCreateWithoutLaboratory_lockInput[] | StatusUncheckedCreateWithoutLaboratory_lockInput[]
+    connectOrCreate?: StatusCreateOrConnectWithoutLaboratory_lockInput | StatusCreateOrConnectWithoutLaboratory_lockInput[]
+    createMany?: StatusCreateManyLaboratory_lockInputEnvelope
+    connect?: StatusWhereUniqueInput | StatusWhereUniqueInput[]
+  }
+
+  export type StatusUncheckedCreateNestedManyWithoutLaboratory_lockInput = {
+    create?: XOR<StatusCreateWithoutLaboratory_lockInput, StatusUncheckedCreateWithoutLaboratory_lockInput> | StatusCreateWithoutLaboratory_lockInput[] | StatusUncheckedCreateWithoutLaboratory_lockInput[]
+    connectOrCreate?: StatusCreateOrConnectWithoutLaboratory_lockInput | StatusCreateOrConnectWithoutLaboratory_lockInput[]
+    createMany?: StatusCreateManyLaboratory_lockInputEnvelope
+    connect?: StatusWhereUniqueInput | StatusWhereUniqueInput[]
+  }
+
+  export type LaboratoryLockReasonUpdateOneRequiredWithoutLaboratoryLocksNestedInput = {
+    create?: XOR<LaboratoryLockReasonCreateWithoutLaboratoryLocksInput, LaboratoryLockReasonUncheckedCreateWithoutLaboratoryLocksInput>
+    connectOrCreate?: LaboratoryLockReasonCreateOrConnectWithoutLaboratoryLocksInput
+    upsert?: LaboratoryLockReasonUpsertWithoutLaboratoryLocksInput
+    connect?: LaboratoryLockReasonWhereUniqueInput
+    update?: XOR<XOR<LaboratoryLockReasonUpdateToOneWithWhereWithoutLaboratoryLocksInput, LaboratoryLockReasonUpdateWithoutLaboratoryLocksInput>, LaboratoryLockReasonUncheckedUpdateWithoutLaboratoryLocksInput>
+  }
+
+  export type LaboratoryAssistantUpdateOneRequiredWithoutLaboratoryLocksNestedInput = {
+    create?: XOR<LaboratoryAssistantCreateWithoutLaboratoryLocksInput, LaboratoryAssistantUncheckedCreateWithoutLaboratoryLocksInput>
+    connectOrCreate?: LaboratoryAssistantCreateOrConnectWithoutLaboratoryLocksInput
+    upsert?: LaboratoryAssistantUpsertWithoutLaboratoryLocksInput
+    connect?: LaboratoryAssistantWhereUniqueInput
+    update?: XOR<XOR<LaboratoryAssistantUpdateToOneWithWhereWithoutLaboratoryLocksInput, LaboratoryAssistantUpdateWithoutLaboratoryLocksInput>, LaboratoryAssistantUncheckedUpdateWithoutLaboratoryLocksInput>
+  }
+
+  export type SummaryUpdateOneRequiredWithoutLaboratory_locksNestedInput = {
+    create?: XOR<SummaryCreateWithoutLaboratory_locksInput, SummaryUncheckedCreateWithoutLaboratory_locksInput>
+    connectOrCreate?: SummaryCreateOrConnectWithoutLaboratory_locksInput
+    upsert?: SummaryUpsertWithoutLaboratory_locksInput
+    connect?: SummaryWhereUniqueInput
+    update?: XOR<XOR<SummaryUpdateToOneWithWhereWithoutLaboratory_locksInput, SummaryUpdateWithoutLaboratory_locksInput>, SummaryUncheckedUpdateWithoutLaboratory_locksInput>
+  }
+
+  export type PostUpdateOneRequiredWithoutLaboratoryLocksNestedInput = {
+    create?: XOR<PostCreateWithoutLaboratoryLocksInput, PostUncheckedCreateWithoutLaboratoryLocksInput>
+    connectOrCreate?: PostCreateOrConnectWithoutLaboratoryLocksInput
+    upsert?: PostUpsertWithoutLaboratoryLocksInput
+    connect?: PostWhereUniqueInput
+    update?: XOR<XOR<PostUpdateToOneWithWhereWithoutLaboratoryLocksInput, PostUpdateWithoutLaboratoryLocksInput>, PostUncheckedUpdateWithoutLaboratoryLocksInput>
+  }
+
+  export type StatusUpdateManyWithoutLaboratory_lockNestedInput = {
+    create?: XOR<StatusCreateWithoutLaboratory_lockInput, StatusUncheckedCreateWithoutLaboratory_lockInput> | StatusCreateWithoutLaboratory_lockInput[] | StatusUncheckedCreateWithoutLaboratory_lockInput[]
+    connectOrCreate?: StatusCreateOrConnectWithoutLaboratory_lockInput | StatusCreateOrConnectWithoutLaboratory_lockInput[]
+    upsert?: StatusUpsertWithWhereUniqueWithoutLaboratory_lockInput | StatusUpsertWithWhereUniqueWithoutLaboratory_lockInput[]
+    createMany?: StatusCreateManyLaboratory_lockInputEnvelope
+    set?: StatusWhereUniqueInput | StatusWhereUniqueInput[]
+    disconnect?: StatusWhereUniqueInput | StatusWhereUniqueInput[]
+    delete?: StatusWhereUniqueInput | StatusWhereUniqueInput[]
+    connect?: StatusWhereUniqueInput | StatusWhereUniqueInput[]
+    update?: StatusUpdateWithWhereUniqueWithoutLaboratory_lockInput | StatusUpdateWithWhereUniqueWithoutLaboratory_lockInput[]
+    updateMany?: StatusUpdateManyWithWhereWithoutLaboratory_lockInput | StatusUpdateManyWithWhereWithoutLaboratory_lockInput[]
+    deleteMany?: StatusScalarWhereInput | StatusScalarWhereInput[]
+  }
+
+  export type StatusUncheckedUpdateManyWithoutLaboratory_lockNestedInput = {
+    create?: XOR<StatusCreateWithoutLaboratory_lockInput, StatusUncheckedCreateWithoutLaboratory_lockInput> | StatusCreateWithoutLaboratory_lockInput[] | StatusUncheckedCreateWithoutLaboratory_lockInput[]
+    connectOrCreate?: StatusCreateOrConnectWithoutLaboratory_lockInput | StatusCreateOrConnectWithoutLaboratory_lockInput[]
+    upsert?: StatusUpsertWithWhereUniqueWithoutLaboratory_lockInput | StatusUpsertWithWhereUniqueWithoutLaboratory_lockInput[]
+    createMany?: StatusCreateManyLaboratory_lockInputEnvelope
+    set?: StatusWhereUniqueInput | StatusWhereUniqueInput[]
+    disconnect?: StatusWhereUniqueInput | StatusWhereUniqueInput[]
+    delete?: StatusWhereUniqueInput | StatusWhereUniqueInput[]
+    connect?: StatusWhereUniqueInput | StatusWhereUniqueInput[]
+    update?: StatusUpdateWithWhereUniqueWithoutLaboratory_lockInput | StatusUpdateWithWhereUniqueWithoutLaboratory_lockInput[]
+    updateMany?: StatusUpdateManyWithWhereWithoutLaboratory_lockInput | StatusUpdateManyWithWhereWithoutLaboratory_lockInput[]
+    deleteMany?: StatusScalarWhereInput | StatusScalarWhereInput[]
+  }
+
+  export type LaboratoryLockCreateNestedManyWithoutLaboratory_lock_reasonInput = {
+    create?: XOR<LaboratoryLockCreateWithoutLaboratory_lock_reasonInput, LaboratoryLockUncheckedCreateWithoutLaboratory_lock_reasonInput> | LaboratoryLockCreateWithoutLaboratory_lock_reasonInput[] | LaboratoryLockUncheckedCreateWithoutLaboratory_lock_reasonInput[]
+    connectOrCreate?: LaboratoryLockCreateOrConnectWithoutLaboratory_lock_reasonInput | LaboratoryLockCreateOrConnectWithoutLaboratory_lock_reasonInput[]
+    createMany?: LaboratoryLockCreateManyLaboratory_lock_reasonInputEnvelope
+    connect?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+  }
+
+  export type LaboratoryLockUncheckedCreateNestedManyWithoutLaboratory_lock_reasonInput = {
+    create?: XOR<LaboratoryLockCreateWithoutLaboratory_lock_reasonInput, LaboratoryLockUncheckedCreateWithoutLaboratory_lock_reasonInput> | LaboratoryLockCreateWithoutLaboratory_lock_reasonInput[] | LaboratoryLockUncheckedCreateWithoutLaboratory_lock_reasonInput[]
+    connectOrCreate?: LaboratoryLockCreateOrConnectWithoutLaboratory_lock_reasonInput | LaboratoryLockCreateOrConnectWithoutLaboratory_lock_reasonInput[]
+    createMany?: LaboratoryLockCreateManyLaboratory_lock_reasonInputEnvelope
+    connect?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+  }
+
+  export type LaboratoryLockUpdateManyWithoutLaboratory_lock_reasonNestedInput = {
+    create?: XOR<LaboratoryLockCreateWithoutLaboratory_lock_reasonInput, LaboratoryLockUncheckedCreateWithoutLaboratory_lock_reasonInput> | LaboratoryLockCreateWithoutLaboratory_lock_reasonInput[] | LaboratoryLockUncheckedCreateWithoutLaboratory_lock_reasonInput[]
+    connectOrCreate?: LaboratoryLockCreateOrConnectWithoutLaboratory_lock_reasonInput | LaboratoryLockCreateOrConnectWithoutLaboratory_lock_reasonInput[]
+    upsert?: LaboratoryLockUpsertWithWhereUniqueWithoutLaboratory_lock_reasonInput | LaboratoryLockUpsertWithWhereUniqueWithoutLaboratory_lock_reasonInput[]
+    createMany?: LaboratoryLockCreateManyLaboratory_lock_reasonInputEnvelope
+    set?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    disconnect?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    delete?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    connect?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    update?: LaboratoryLockUpdateWithWhereUniqueWithoutLaboratory_lock_reasonInput | LaboratoryLockUpdateWithWhereUniqueWithoutLaboratory_lock_reasonInput[]
+    updateMany?: LaboratoryLockUpdateManyWithWhereWithoutLaboratory_lock_reasonInput | LaboratoryLockUpdateManyWithWhereWithoutLaboratory_lock_reasonInput[]
+    deleteMany?: LaboratoryLockScalarWhereInput | LaboratoryLockScalarWhereInput[]
+  }
+
+  export type LaboratoryLockUncheckedUpdateManyWithoutLaboratory_lock_reasonNestedInput = {
+    create?: XOR<LaboratoryLockCreateWithoutLaboratory_lock_reasonInput, LaboratoryLockUncheckedCreateWithoutLaboratory_lock_reasonInput> | LaboratoryLockCreateWithoutLaboratory_lock_reasonInput[] | LaboratoryLockUncheckedCreateWithoutLaboratory_lock_reasonInput[]
+    connectOrCreate?: LaboratoryLockCreateOrConnectWithoutLaboratory_lock_reasonInput | LaboratoryLockCreateOrConnectWithoutLaboratory_lock_reasonInput[]
+    upsert?: LaboratoryLockUpsertWithWhereUniqueWithoutLaboratory_lock_reasonInput | LaboratoryLockUpsertWithWhereUniqueWithoutLaboratory_lock_reasonInput[]
+    createMany?: LaboratoryLockCreateManyLaboratory_lock_reasonInputEnvelope
+    set?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    disconnect?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    delete?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    connect?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    update?: LaboratoryLockUpdateWithWhereUniqueWithoutLaboratory_lock_reasonInput | LaboratoryLockUpdateWithWhereUniqueWithoutLaboratory_lock_reasonInput[]
+    updateMany?: LaboratoryLockUpdateManyWithWhereWithoutLaboratory_lock_reasonInput | LaboratoryLockUpdateManyWithWhereWithoutLaboratory_lock_reasonInput[]
+    deleteMany?: LaboratoryLockScalarWhereInput | LaboratoryLockScalarWhereInput[]
+  }
+
+  export type LaboratoryLockCreateNestedManyWithoutLaboratory_assistantInput = {
+    create?: XOR<LaboratoryLockCreateWithoutLaboratory_assistantInput, LaboratoryLockUncheckedCreateWithoutLaboratory_assistantInput> | LaboratoryLockCreateWithoutLaboratory_assistantInput[] | LaboratoryLockUncheckedCreateWithoutLaboratory_assistantInput[]
+    connectOrCreate?: LaboratoryLockCreateOrConnectWithoutLaboratory_assistantInput | LaboratoryLockCreateOrConnectWithoutLaboratory_assistantInput[]
+    createMany?: LaboratoryLockCreateManyLaboratory_assistantInputEnvelope
+    connect?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+  }
+
+  export type LaboratoryLockUncheckedCreateNestedManyWithoutLaboratory_assistantInput = {
+    create?: XOR<LaboratoryLockCreateWithoutLaboratory_assistantInput, LaboratoryLockUncheckedCreateWithoutLaboratory_assistantInput> | LaboratoryLockCreateWithoutLaboratory_assistantInput[] | LaboratoryLockUncheckedCreateWithoutLaboratory_assistantInput[]
+    connectOrCreate?: LaboratoryLockCreateOrConnectWithoutLaboratory_assistantInput | LaboratoryLockCreateOrConnectWithoutLaboratory_assistantInput[]
+    createMany?: LaboratoryLockCreateManyLaboratory_assistantInputEnvelope
+    connect?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+  }
+
+  export type LaboratoryLockUpdateManyWithoutLaboratory_assistantNestedInput = {
+    create?: XOR<LaboratoryLockCreateWithoutLaboratory_assistantInput, LaboratoryLockUncheckedCreateWithoutLaboratory_assistantInput> | LaboratoryLockCreateWithoutLaboratory_assistantInput[] | LaboratoryLockUncheckedCreateWithoutLaboratory_assistantInput[]
+    connectOrCreate?: LaboratoryLockCreateOrConnectWithoutLaboratory_assistantInput | LaboratoryLockCreateOrConnectWithoutLaboratory_assistantInput[]
+    upsert?: LaboratoryLockUpsertWithWhereUniqueWithoutLaboratory_assistantInput | LaboratoryLockUpsertWithWhereUniqueWithoutLaboratory_assistantInput[]
+    createMany?: LaboratoryLockCreateManyLaboratory_assistantInputEnvelope
+    set?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    disconnect?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    delete?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    connect?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    update?: LaboratoryLockUpdateWithWhereUniqueWithoutLaboratory_assistantInput | LaboratoryLockUpdateWithWhereUniqueWithoutLaboratory_assistantInput[]
+    updateMany?: LaboratoryLockUpdateManyWithWhereWithoutLaboratory_assistantInput | LaboratoryLockUpdateManyWithWhereWithoutLaboratory_assistantInput[]
+    deleteMany?: LaboratoryLockScalarWhereInput | LaboratoryLockScalarWhereInput[]
+  }
+
+  export type LaboratoryLockUncheckedUpdateManyWithoutLaboratory_assistantNestedInput = {
+    create?: XOR<LaboratoryLockCreateWithoutLaboratory_assistantInput, LaboratoryLockUncheckedCreateWithoutLaboratory_assistantInput> | LaboratoryLockCreateWithoutLaboratory_assistantInput[] | LaboratoryLockUncheckedCreateWithoutLaboratory_assistantInput[]
+    connectOrCreate?: LaboratoryLockCreateOrConnectWithoutLaboratory_assistantInput | LaboratoryLockCreateOrConnectWithoutLaboratory_assistantInput[]
+    upsert?: LaboratoryLockUpsertWithWhereUniqueWithoutLaboratory_assistantInput | LaboratoryLockUpsertWithWhereUniqueWithoutLaboratory_assistantInput[]
+    createMany?: LaboratoryLockCreateManyLaboratory_assistantInputEnvelope
+    set?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    disconnect?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    delete?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    connect?: LaboratoryLockWhereUniqueInput | LaboratoryLockWhereUniqueInput[]
+    update?: LaboratoryLockUpdateWithWhereUniqueWithoutLaboratory_assistantInput | LaboratoryLockUpdateWithWhereUniqueWithoutLaboratory_assistantInput[]
+    updateMany?: LaboratoryLockUpdateManyWithWhereWithoutLaboratory_assistantInput | LaboratoryLockUpdateManyWithWhereWithoutLaboratory_assistantInput[]
+    deleteMany?: LaboratoryLockScalarWhereInput | LaboratoryLockScalarWhereInput[]
   }
 
   export type SummaryCreateNestedOneWithoutDefectsInput = {
@@ -62724,6 +67348,7 @@ export namespace Prisma {
     statuses?: StatusCreateNestedManyWithoutSummaryInput
     defects?: DefectCreateNestedManyWithoutSummaryInput
     crew?: CrewCreateNestedOneWithoutSummariesInput
+    laboratory_locks?: LaboratoryLockCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryUncheckedCreateWithoutConveyorInput = {
@@ -62746,6 +67371,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxUncheckedCreateNestedManyWithoutSummaryInput
     statuses?: StatusUncheckedCreateNestedManyWithoutSummaryInput
     defects?: DefectUncheckedCreateNestedManyWithoutSummaryInput
+    laboratory_locks?: LaboratoryLockUncheckedCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryCreateOrConnectWithoutConveyorInput = {
@@ -63258,6 +67884,7 @@ export namespace Prisma {
     idle_time?: bigint | number | null
     finished?: boolean
     createdAt?: Date | string
+    is_locked?: boolean
     summary: SummaryCreateNestedOneWithoutStatusesInput
     operation?: OperationCreateNestedOneWithoutStatusesInput
     employee?: EmployeeCreateNestedOneWithoutStatusesInput
@@ -63266,6 +67893,7 @@ export namespace Prisma {
     varnish_param?: VarnishParamCreateNestedOneWithoutStatusesInput
     offset_param?: OffsetParamCreateNestedOneWithoutStatusesInput
     sealant_param?: SealantParamCreateNestedOneWithoutStatusesInput
+    laboratory_lock?: LaboratoryLockCreateNestedOneWithoutStatusesInput
   }
 
   export type StatusUncheckedCreateWithoutPostInput = {
@@ -63283,6 +67911,8 @@ export namespace Prisma {
     varnish_param_id?: number | null
     offset_param_id?: number | null
     sealant_param_id?: number | null
+    is_locked?: boolean
+    laboratory_lock_id?: number | null
   }
 
   export type StatusCreateOrConnectWithoutPostInput = {
@@ -63395,6 +68025,37 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type LaboratoryLockCreateWithoutPostInput = {
+    createdAt?: Date | string
+    is_active?: boolean
+    closedAt?: Date | string | null
+    laboratory_lock_reason: LaboratoryLockReasonCreateNestedOneWithoutLaboratoryLocksInput
+    laboratory_assistant: LaboratoryAssistantCreateNestedOneWithoutLaboratoryLocksInput
+    summary: SummaryCreateNestedOneWithoutLaboratory_locksInput
+    statuses?: StatusCreateNestedManyWithoutLaboratory_lockInput
+  }
+
+  export type LaboratoryLockUncheckedCreateWithoutPostInput = {
+    id?: number
+    laboratory_lock_reason_id: number
+    laboratory_assistant_id: number
+    createdAt?: Date | string
+    summary_id: number
+    is_active?: boolean
+    closedAt?: Date | string | null
+    statuses?: StatusUncheckedCreateNestedManyWithoutLaboratory_lockInput
+  }
+
+  export type LaboratoryLockCreateOrConnectWithoutPostInput = {
+    where: LaboratoryLockWhereUniqueInput
+    create: XOR<LaboratoryLockCreateWithoutPostInput, LaboratoryLockUncheckedCreateWithoutPostInput>
+  }
+
+  export type LaboratoryLockCreateManyPostInputEnvelope = {
+    data: LaboratoryLockCreateManyPostInput | LaboratoryLockCreateManyPostInput[]
+    skipDuplicates?: boolean
+  }
+
   export type OperationUpsertWithWhereUniqueWithoutPostInput = {
     where: OperationWhereUniqueInput
     update: XOR<OperationUpdateWithoutPostInput, OperationUncheckedUpdateWithoutPostInput>
@@ -63458,6 +68119,8 @@ export namespace Prisma {
     varnish_param_id?: IntNullableFilter<"Status"> | number | null
     offset_param_id?: IntNullableFilter<"Status"> | number | null
     sealant_param_id?: IntNullableFilter<"Status"> | number | null
+    is_locked?: BoolFilter<"Status"> | boolean
+    laboratory_lock_id?: IntNullableFilter<"Status"> | number | null
   }
 
   export type DefectUpsertWithWhereUniqueWithoutPostInput = {
@@ -63566,6 +68229,36 @@ export namespace Prisma {
     end_time?: DateTimeNullableFilter<"MaintenanceSession"> | Date | string | null
     total_duration?: BigIntNullableFilter<"MaintenanceSession"> | bigint | number | null
     work_duration?: BigIntNullableFilter<"MaintenanceSession"> | bigint | number | null
+  }
+
+  export type LaboratoryLockUpsertWithWhereUniqueWithoutPostInput = {
+    where: LaboratoryLockWhereUniqueInput
+    update: XOR<LaboratoryLockUpdateWithoutPostInput, LaboratoryLockUncheckedUpdateWithoutPostInput>
+    create: XOR<LaboratoryLockCreateWithoutPostInput, LaboratoryLockUncheckedCreateWithoutPostInput>
+  }
+
+  export type LaboratoryLockUpdateWithWhereUniqueWithoutPostInput = {
+    where: LaboratoryLockWhereUniqueInput
+    data: XOR<LaboratoryLockUpdateWithoutPostInput, LaboratoryLockUncheckedUpdateWithoutPostInput>
+  }
+
+  export type LaboratoryLockUpdateManyWithWhereWithoutPostInput = {
+    where: LaboratoryLockScalarWhereInput
+    data: XOR<LaboratoryLockUpdateManyMutationInput, LaboratoryLockUncheckedUpdateManyWithoutPostInput>
+  }
+
+  export type LaboratoryLockScalarWhereInput = {
+    AND?: LaboratoryLockScalarWhereInput | LaboratoryLockScalarWhereInput[]
+    OR?: LaboratoryLockScalarWhereInput[]
+    NOT?: LaboratoryLockScalarWhereInput | LaboratoryLockScalarWhereInput[]
+    id?: IntFilter<"LaboratoryLock"> | number
+    laboratory_lock_reason_id?: IntFilter<"LaboratoryLock"> | number
+    laboratory_assistant_id?: IntFilter<"LaboratoryLock"> | number
+    createdAt?: DateTimeFilter<"LaboratoryLock"> | Date | string
+    summary_id?: IntFilter<"LaboratoryLock"> | number
+    post_id?: IntFilter<"LaboratoryLock"> | number
+    is_active?: BoolFilter<"LaboratoryLock"> | boolean
+    closedAt?: DateTimeNullableFilter<"LaboratoryLock"> | Date | string | null
   }
 
   export type EmployeeCreateWithoutRankInput = {
@@ -63746,6 +68439,7 @@ export namespace Prisma {
     idle_time?: bigint | number | null
     finished?: boolean
     createdAt?: Date | string
+    is_locked?: boolean
     summary: SummaryCreateNestedOneWithoutStatusesInput
     post: PostCreateNestedOneWithoutStatusesInput
     employee?: EmployeeCreateNestedOneWithoutStatusesInput
@@ -63754,6 +68448,7 @@ export namespace Prisma {
     varnish_param?: VarnishParamCreateNestedOneWithoutStatusesInput
     offset_param?: OffsetParamCreateNestedOneWithoutStatusesInput
     sealant_param?: SealantParamCreateNestedOneWithoutStatusesInput
+    laboratory_lock?: LaboratoryLockCreateNestedOneWithoutStatusesInput
   }
 
   export type StatusUncheckedCreateWithoutOperationInput = {
@@ -63771,6 +68466,8 @@ export namespace Prisma {
     varnish_param_id?: number | null
     offset_param_id?: number | null
     sealant_param_id?: number | null
+    is_locked?: boolean
+    laboratory_lock_id?: number | null
   }
 
   export type StatusCreateOrConnectWithoutOperationInput = {
@@ -63812,6 +68509,7 @@ export namespace Prisma {
     notes?: NoteCreateNestedManyWithoutPostInput
     maintenances?: MaintenanceCreateNestedManyWithoutPostInput
     maintenance_sessions?: MaintenanceSessionCreateNestedManyWithoutPostInput
+    laboratoryLocks?: LaboratoryLockCreateNestedManyWithoutPostInput
   }
 
   export type PostUncheckedCreateWithoutOperationsInput = {
@@ -63823,6 +68521,7 @@ export namespace Prisma {
     notes?: NoteUncheckedCreateNestedManyWithoutPostInput
     maintenances?: MaintenanceUncheckedCreateNestedManyWithoutPostInput
     maintenance_sessions?: MaintenanceSessionUncheckedCreateNestedManyWithoutPostInput
+    laboratoryLocks?: LaboratoryLockUncheckedCreateNestedManyWithoutPostInput
   }
 
   export type PostCreateOrConnectWithoutOperationsInput = {
@@ -63917,6 +68616,7 @@ export namespace Prisma {
     notes?: NoteUpdateManyWithoutPostNestedInput
     maintenances?: MaintenanceUpdateManyWithoutPostNestedInput
     maintenance_sessions?: MaintenanceSessionUpdateManyWithoutPostNestedInput
+    laboratoryLocks?: LaboratoryLockUpdateManyWithoutPostNestedInput
   }
 
   export type PostUncheckedUpdateWithoutOperationsInput = {
@@ -63928,6 +68628,7 @@ export namespace Prisma {
     notes?: NoteUncheckedUpdateManyWithoutPostNestedInput
     maintenances?: MaintenanceUncheckedUpdateManyWithoutPostNestedInput
     maintenance_sessions?: MaintenanceSessionUncheckedUpdateManyWithoutPostNestedInput
+    laboratoryLocks?: LaboratoryLockUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type OperationCreateWithoutOperation_picturesInput = {
@@ -64049,6 +68750,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxCreateNestedManyWithoutSummaryInput
     defects?: DefectCreateNestedManyWithoutSummaryInput
     crew?: CrewCreateNestedOneWithoutSummariesInput
+    laboratory_locks?: LaboratoryLockCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryUncheckedCreateWithoutStatusesInput = {
@@ -64071,6 +68773,7 @@ export namespace Prisma {
     sealant_params?: SealantParamUncheckedCreateNestedManyWithoutSummaryInput
     production_boxes?: ProductionBoxUncheckedCreateNestedManyWithoutSummaryInput
     defects?: DefectUncheckedCreateNestedManyWithoutSummaryInput
+    laboratory_locks?: LaboratoryLockUncheckedCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryCreateOrConnectWithoutStatusesInput = {
@@ -64086,6 +68789,7 @@ export namespace Prisma {
     notes?: NoteCreateNestedManyWithoutPostInput
     maintenances?: MaintenanceCreateNestedManyWithoutPostInput
     maintenance_sessions?: MaintenanceSessionCreateNestedManyWithoutPostInput
+    laboratoryLocks?: LaboratoryLockCreateNestedManyWithoutPostInput
   }
 
   export type PostUncheckedCreateWithoutStatusesInput = {
@@ -64097,6 +68801,7 @@ export namespace Prisma {
     notes?: NoteUncheckedCreateNestedManyWithoutPostInput
     maintenances?: MaintenanceUncheckedCreateNestedManyWithoutPostInput
     maintenance_sessions?: MaintenanceSessionUncheckedCreateNestedManyWithoutPostInput
+    laboratoryLocks?: LaboratoryLockUncheckedCreateNestedManyWithoutPostInput
   }
 
   export type PostCreateOrConnectWithoutStatusesInput = {
@@ -64404,6 +69109,32 @@ export namespace Prisma {
     create: XOR<SealantParamCreateWithoutStatusesInput, SealantParamUncheckedCreateWithoutStatusesInput>
   }
 
+  export type LaboratoryLockCreateWithoutStatusesInput = {
+    createdAt?: Date | string
+    is_active?: boolean
+    closedAt?: Date | string | null
+    laboratory_lock_reason: LaboratoryLockReasonCreateNestedOneWithoutLaboratoryLocksInput
+    laboratory_assistant: LaboratoryAssistantCreateNestedOneWithoutLaboratoryLocksInput
+    summary: SummaryCreateNestedOneWithoutLaboratory_locksInput
+    post: PostCreateNestedOneWithoutLaboratoryLocksInput
+  }
+
+  export type LaboratoryLockUncheckedCreateWithoutStatusesInput = {
+    id?: number
+    laboratory_lock_reason_id: number
+    laboratory_assistant_id: number
+    createdAt?: Date | string
+    summary_id: number
+    post_id: number
+    is_active?: boolean
+    closedAt?: Date | string | null
+  }
+
+  export type LaboratoryLockCreateOrConnectWithoutStatusesInput = {
+    where: LaboratoryLockWhereUniqueInput
+    create: XOR<LaboratoryLockCreateWithoutStatusesInput, LaboratoryLockUncheckedCreateWithoutStatusesInput>
+  }
+
   export type SummaryUpsertWithoutStatusesInput = {
     update: XOR<SummaryUpdateWithoutStatusesInput, SummaryUncheckedUpdateWithoutStatusesInput>
     create: XOR<SummaryCreateWithoutStatusesInput, SummaryUncheckedCreateWithoutStatusesInput>
@@ -64434,6 +69165,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxUpdateManyWithoutSummaryNestedInput
     defects?: DefectUpdateManyWithoutSummaryNestedInput
     crew?: CrewUpdateOneWithoutSummariesNestedInput
+    laboratory_locks?: LaboratoryLockUpdateManyWithoutSummaryNestedInput
   }
 
   export type SummaryUncheckedUpdateWithoutStatusesInput = {
@@ -64456,6 +69188,7 @@ export namespace Prisma {
     sealant_params?: SealantParamUncheckedUpdateManyWithoutSummaryNestedInput
     production_boxes?: ProductionBoxUncheckedUpdateManyWithoutSummaryNestedInput
     defects?: DefectUncheckedUpdateManyWithoutSummaryNestedInput
+    laboratory_locks?: LaboratoryLockUncheckedUpdateManyWithoutSummaryNestedInput
   }
 
   export type PostUpsertWithoutStatusesInput = {
@@ -64477,6 +69210,7 @@ export namespace Prisma {
     notes?: NoteUpdateManyWithoutPostNestedInput
     maintenances?: MaintenanceUpdateManyWithoutPostNestedInput
     maintenance_sessions?: MaintenanceSessionUpdateManyWithoutPostNestedInput
+    laboratoryLocks?: LaboratoryLockUpdateManyWithoutPostNestedInput
   }
 
   export type PostUncheckedUpdateWithoutStatusesInput = {
@@ -64488,6 +69222,7 @@ export namespace Prisma {
     notes?: NoteUncheckedUpdateManyWithoutPostNestedInput
     maintenances?: MaintenanceUncheckedUpdateManyWithoutPostNestedInput
     maintenance_sessions?: MaintenanceSessionUncheckedUpdateManyWithoutPostNestedInput
+    laboratoryLocks?: LaboratoryLockUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type OperationUpsertWithoutStatusesInput = {
@@ -64832,6 +69567,38 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type LaboratoryLockUpsertWithoutStatusesInput = {
+    update: XOR<LaboratoryLockUpdateWithoutStatusesInput, LaboratoryLockUncheckedUpdateWithoutStatusesInput>
+    create: XOR<LaboratoryLockCreateWithoutStatusesInput, LaboratoryLockUncheckedCreateWithoutStatusesInput>
+    where?: LaboratoryLockWhereInput
+  }
+
+  export type LaboratoryLockUpdateToOneWithWhereWithoutStatusesInput = {
+    where?: LaboratoryLockWhereInput
+    data: XOR<LaboratoryLockUpdateWithoutStatusesInput, LaboratoryLockUncheckedUpdateWithoutStatusesInput>
+  }
+
+  export type LaboratoryLockUpdateWithoutStatusesInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    laboratory_lock_reason?: LaboratoryLockReasonUpdateOneRequiredWithoutLaboratoryLocksNestedInput
+    laboratory_assistant?: LaboratoryAssistantUpdateOneRequiredWithoutLaboratoryLocksNestedInput
+    summary?: SummaryUpdateOneRequiredWithoutLaboratory_locksNestedInput
+    post?: PostUpdateOneRequiredWithoutLaboratoryLocksNestedInput
+  }
+
+  export type LaboratoryLockUncheckedUpdateWithoutStatusesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    laboratory_lock_reason_id?: IntFieldUpdateOperationsInput | number
+    laboratory_assistant_id?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    summary_id?: IntFieldUpdateOperationsInput | number
+    post_id?: IntFieldUpdateOperationsInput | number
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type PostCreateWithoutMaintenancesInput = {
     value: number
     name: string
@@ -64840,6 +69607,7 @@ export namespace Prisma {
     defects?: DefectCreateNestedManyWithoutPostInput
     notes?: NoteCreateNestedManyWithoutPostInput
     maintenance_sessions?: MaintenanceSessionCreateNestedManyWithoutPostInput
+    laboratoryLocks?: LaboratoryLockCreateNestedManyWithoutPostInput
   }
 
   export type PostUncheckedCreateWithoutMaintenancesInput = {
@@ -64851,6 +69619,7 @@ export namespace Prisma {
     defects?: DefectUncheckedCreateNestedManyWithoutPostInput
     notes?: NoteUncheckedCreateNestedManyWithoutPostInput
     maintenance_sessions?: MaintenanceSessionUncheckedCreateNestedManyWithoutPostInput
+    laboratoryLocks?: LaboratoryLockUncheckedCreateNestedManyWithoutPostInput
   }
 
   export type PostCreateOrConnectWithoutMaintenancesInput = {
@@ -64951,6 +69720,7 @@ export namespace Prisma {
     defects?: DefectUpdateManyWithoutPostNestedInput
     notes?: NoteUpdateManyWithoutPostNestedInput
     maintenance_sessions?: MaintenanceSessionUpdateManyWithoutPostNestedInput
+    laboratoryLocks?: LaboratoryLockUpdateManyWithoutPostNestedInput
   }
 
   export type PostUncheckedUpdateWithoutMaintenancesInput = {
@@ -64962,6 +69732,7 @@ export namespace Prisma {
     defects?: DefectUncheckedUpdateManyWithoutPostNestedInput
     notes?: NoteUncheckedUpdateManyWithoutPostNestedInput
     maintenance_sessions?: MaintenanceSessionUncheckedUpdateManyWithoutPostNestedInput
+    laboratoryLocks?: LaboratoryLockUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type RankUpsertWithoutMaintenancesInput = {
@@ -65171,6 +69942,7 @@ export namespace Prisma {
     defects?: DefectCreateNestedManyWithoutPostInput
     notes?: NoteCreateNestedManyWithoutPostInput
     maintenances?: MaintenanceCreateNestedManyWithoutPostInput
+    laboratoryLocks?: LaboratoryLockCreateNestedManyWithoutPostInput
   }
 
   export type PostUncheckedCreateWithoutMaintenance_sessionsInput = {
@@ -65182,6 +69954,7 @@ export namespace Prisma {
     defects?: DefectUncheckedCreateNestedManyWithoutPostInput
     notes?: NoteUncheckedCreateNestedManyWithoutPostInput
     maintenances?: MaintenanceUncheckedCreateNestedManyWithoutPostInput
+    laboratoryLocks?: LaboratoryLockUncheckedCreateNestedManyWithoutPostInput
   }
 
   export type PostCreateOrConnectWithoutMaintenance_sessionsInput = {
@@ -65224,6 +69997,7 @@ export namespace Prisma {
     idle_time?: bigint | number | null
     finished?: boolean
     createdAt?: Date | string
+    is_locked?: boolean
     summary: SummaryCreateNestedOneWithoutStatusesInput
     post: PostCreateNestedOneWithoutStatusesInput
     operation?: OperationCreateNestedOneWithoutStatusesInput
@@ -65232,6 +70006,7 @@ export namespace Prisma {
     varnish_param?: VarnishParamCreateNestedOneWithoutStatusesInput
     offset_param?: OffsetParamCreateNestedOneWithoutStatusesInput
     sealant_param?: SealantParamCreateNestedOneWithoutStatusesInput
+    laboratory_lock?: LaboratoryLockCreateNestedOneWithoutStatusesInput
   }
 
   export type StatusUncheckedCreateWithoutMaintenance_sessionInput = {
@@ -65249,6 +70024,8 @@ export namespace Prisma {
     varnish_param_id?: number | null
     offset_param_id?: number | null
     sealant_param_id?: number | null
+    is_locked?: boolean
+    laboratory_lock_id?: number | null
   }
 
   export type StatusCreateOrConnectWithoutMaintenance_sessionInput = {
@@ -65308,6 +70085,7 @@ export namespace Prisma {
     defects?: DefectUpdateManyWithoutPostNestedInput
     notes?: NoteUpdateManyWithoutPostNestedInput
     maintenances?: MaintenanceUpdateManyWithoutPostNestedInput
+    laboratoryLocks?: LaboratoryLockUpdateManyWithoutPostNestedInput
   }
 
   export type PostUncheckedUpdateWithoutMaintenance_sessionsInput = {
@@ -65319,6 +70097,7 @@ export namespace Prisma {
     defects?: DefectUncheckedUpdateManyWithoutPostNestedInput
     notes?: NoteUncheckedUpdateManyWithoutPostNestedInput
     maintenances?: MaintenanceUncheckedUpdateManyWithoutPostNestedInput
+    laboratoryLocks?: LaboratoryLockUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type MaintenanceLogUpsertWithWhereUniqueWithoutSessionInput = {
@@ -66030,6 +70809,7 @@ export namespace Prisma {
     idle_time?: bigint | number | null
     finished?: boolean
     createdAt?: Date | string
+    is_locked?: boolean
     summary: SummaryCreateNestedOneWithoutStatusesInput
     post: PostCreateNestedOneWithoutStatusesInput
     operation?: OperationCreateNestedOneWithoutStatusesInput
@@ -66038,6 +70818,7 @@ export namespace Prisma {
     varnish_param?: VarnishParamCreateNestedOneWithoutStatusesInput
     offset_param?: OffsetParamCreateNestedOneWithoutStatusesInput
     sealant_param?: SealantParamCreateNestedOneWithoutStatusesInput
+    laboratory_lock?: LaboratoryLockCreateNestedOneWithoutStatusesInput
   }
 
   export type StatusUncheckedCreateWithoutEmployeeInput = {
@@ -66055,6 +70836,8 @@ export namespace Prisma {
     varnish_param_id?: number | null
     offset_param_id?: number | null
     sealant_param_id?: number | null
+    is_locked?: boolean
+    laboratory_lock_id?: number | null
   }
 
   export type StatusCreateOrConnectWithoutEmployeeInput = {
@@ -66363,6 +71146,7 @@ export namespace Prisma {
     statuses?: StatusCreateNestedManyWithoutSummaryInput
     defects?: DefectCreateNestedManyWithoutSummaryInput
     crew?: CrewCreateNestedOneWithoutSummariesInput
+    laboratory_locks?: LaboratoryLockCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryUncheckedCreateWithoutProductInput = {
@@ -66385,6 +71169,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxUncheckedCreateNestedManyWithoutSummaryInput
     statuses?: StatusUncheckedCreateNestedManyWithoutSummaryInput
     defects?: DefectUncheckedCreateNestedManyWithoutSummaryInput
+    laboratory_locks?: LaboratoryLockUncheckedCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryCreateOrConnectWithoutProductInput = {
@@ -66840,6 +71625,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxCreateNestedManyWithoutSummaryInput
     statuses?: StatusCreateNestedManyWithoutSummaryInput
     defects?: DefectCreateNestedManyWithoutSummaryInput
+    laboratory_locks?: LaboratoryLockCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryUncheckedCreateWithoutCrewInput = {
@@ -66862,6 +71648,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxUncheckedCreateNestedManyWithoutSummaryInput
     statuses?: StatusUncheckedCreateNestedManyWithoutSummaryInput
     defects?: DefectUncheckedCreateNestedManyWithoutSummaryInput
+    laboratory_locks?: LaboratoryLockUncheckedCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryCreateOrConnectWithoutCrewInput = {
@@ -67083,6 +71870,7 @@ export namespace Prisma {
     statuses?: StatusCreateNestedManyWithoutSummaryInput
     defects?: DefectCreateNestedManyWithoutSummaryInput
     crew?: CrewCreateNestedOneWithoutSummariesInput
+    laboratory_locks?: LaboratoryLockCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryUncheckedCreateWithoutBatchInput = {
@@ -67105,6 +71893,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxUncheckedCreateNestedManyWithoutSummaryInput
     statuses?: StatusUncheckedCreateNestedManyWithoutSummaryInput
     defects?: DefectUncheckedCreateNestedManyWithoutSummaryInput
+    laboratory_locks?: LaboratoryLockUncheckedCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryCreateOrConnectWithoutBatchInput = {
@@ -67197,6 +71986,7 @@ export namespace Prisma {
     statuses?: StatusCreateNestedManyWithoutSummaryInput
     defects?: DefectCreateNestedManyWithoutSummaryInput
     crew?: CrewCreateNestedOneWithoutSummariesInput
+    laboratory_locks?: LaboratoryLockCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryUncheckedCreateWithoutProduction_boxesInput = {
@@ -67219,6 +72009,7 @@ export namespace Prisma {
     sealant_params?: SealantParamUncheckedCreateNestedManyWithoutSummaryInput
     statuses?: StatusUncheckedCreateNestedManyWithoutSummaryInput
     defects?: DefectUncheckedCreateNestedManyWithoutSummaryInput
+    laboratory_locks?: LaboratoryLockUncheckedCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryCreateOrConnectWithoutProduction_boxesInput = {
@@ -67304,6 +72095,7 @@ export namespace Prisma {
     statuses?: StatusUpdateManyWithoutSummaryNestedInput
     defects?: DefectUpdateManyWithoutSummaryNestedInput
     crew?: CrewUpdateOneWithoutSummariesNestedInput
+    laboratory_locks?: LaboratoryLockUpdateManyWithoutSummaryNestedInput
   }
 
   export type SummaryUncheckedUpdateWithoutProduction_boxesInput = {
@@ -67326,6 +72118,7 @@ export namespace Prisma {
     sealant_params?: SealantParamUncheckedUpdateManyWithoutSummaryNestedInput
     statuses?: StatusUncheckedUpdateManyWithoutSummaryNestedInput
     defects?: DefectUncheckedUpdateManyWithoutSummaryNestedInput
+    laboratory_locks?: LaboratoryLockUncheckedUpdateManyWithoutSummaryNestedInput
   }
 
   export type BatchUpsertWithoutProduction_boxesInput = {
@@ -67917,6 +72710,7 @@ export namespace Prisma {
     idle_time?: bigint | number | null
     finished?: boolean
     createdAt?: Date | string
+    is_locked?: boolean
     post: PostCreateNestedOneWithoutStatusesInput
     operation?: OperationCreateNestedOneWithoutStatusesInput
     employee?: EmployeeCreateNestedOneWithoutStatusesInput
@@ -67925,6 +72719,7 @@ export namespace Prisma {
     varnish_param?: VarnishParamCreateNestedOneWithoutStatusesInput
     offset_param?: OffsetParamCreateNestedOneWithoutStatusesInput
     sealant_param?: SealantParamCreateNestedOneWithoutStatusesInput
+    laboratory_lock?: LaboratoryLockCreateNestedOneWithoutStatusesInput
   }
 
   export type StatusUncheckedCreateWithoutSummaryInput = {
@@ -67942,6 +72737,8 @@ export namespace Prisma {
     varnish_param_id?: number | null
     offset_param_id?: number | null
     sealant_param_id?: number | null
+    is_locked?: boolean
+    laboratory_lock_id?: number | null
   }
 
   export type StatusCreateOrConnectWithoutSummaryInput = {
@@ -67987,6 +72784,37 @@ export namespace Prisma {
   export type CrewCreateOrConnectWithoutSummariesInput = {
     where: CrewWhereUniqueInput
     create: XOR<CrewCreateWithoutSummariesInput, CrewUncheckedCreateWithoutSummariesInput>
+  }
+
+  export type LaboratoryLockCreateWithoutSummaryInput = {
+    createdAt?: Date | string
+    is_active?: boolean
+    closedAt?: Date | string | null
+    laboratory_lock_reason: LaboratoryLockReasonCreateNestedOneWithoutLaboratoryLocksInput
+    laboratory_assistant: LaboratoryAssistantCreateNestedOneWithoutLaboratoryLocksInput
+    post: PostCreateNestedOneWithoutLaboratoryLocksInput
+    statuses?: StatusCreateNestedManyWithoutLaboratory_lockInput
+  }
+
+  export type LaboratoryLockUncheckedCreateWithoutSummaryInput = {
+    id?: number
+    laboratory_lock_reason_id: number
+    laboratory_assistant_id: number
+    createdAt?: Date | string
+    post_id: number
+    is_active?: boolean
+    closedAt?: Date | string | null
+    statuses?: StatusUncheckedCreateNestedManyWithoutLaboratory_lockInput
+  }
+
+  export type LaboratoryLockCreateOrConnectWithoutSummaryInput = {
+    where: LaboratoryLockWhereUniqueInput
+    create: XOR<LaboratoryLockCreateWithoutSummaryInput, LaboratoryLockUncheckedCreateWithoutSummaryInput>
+  }
+
+  export type LaboratoryLockCreateManySummaryInputEnvelope = {
+    data: LaboratoryLockCreateManySummaryInput | LaboratoryLockCreateManySummaryInput[]
+    skipDuplicates?: boolean
   }
 
   export type ProductUpsertWithoutSummariesInput = {
@@ -68254,6 +73082,415 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
   }
 
+  export type LaboratoryLockUpsertWithWhereUniqueWithoutSummaryInput = {
+    where: LaboratoryLockWhereUniqueInput
+    update: XOR<LaboratoryLockUpdateWithoutSummaryInput, LaboratoryLockUncheckedUpdateWithoutSummaryInput>
+    create: XOR<LaboratoryLockCreateWithoutSummaryInput, LaboratoryLockUncheckedCreateWithoutSummaryInput>
+  }
+
+  export type LaboratoryLockUpdateWithWhereUniqueWithoutSummaryInput = {
+    where: LaboratoryLockWhereUniqueInput
+    data: XOR<LaboratoryLockUpdateWithoutSummaryInput, LaboratoryLockUncheckedUpdateWithoutSummaryInput>
+  }
+
+  export type LaboratoryLockUpdateManyWithWhereWithoutSummaryInput = {
+    where: LaboratoryLockScalarWhereInput
+    data: XOR<LaboratoryLockUpdateManyMutationInput, LaboratoryLockUncheckedUpdateManyWithoutSummaryInput>
+  }
+
+  export type LaboratoryLockReasonCreateWithoutLaboratoryLocksInput = {
+    value: string
+  }
+
+  export type LaboratoryLockReasonUncheckedCreateWithoutLaboratoryLocksInput = {
+    id?: number
+    value: string
+  }
+
+  export type LaboratoryLockReasonCreateOrConnectWithoutLaboratoryLocksInput = {
+    where: LaboratoryLockReasonWhereUniqueInput
+    create: XOR<LaboratoryLockReasonCreateWithoutLaboratoryLocksInput, LaboratoryLockReasonUncheckedCreateWithoutLaboratoryLocksInput>
+  }
+
+  export type LaboratoryAssistantCreateWithoutLaboratoryLocksInput = {
+    name: string
+  }
+
+  export type LaboratoryAssistantUncheckedCreateWithoutLaboratoryLocksInput = {
+    id?: number
+    name: string
+  }
+
+  export type LaboratoryAssistantCreateOrConnectWithoutLaboratoryLocksInput = {
+    where: LaboratoryAssistantWhereUniqueInput
+    create: XOR<LaboratoryAssistantCreateWithoutLaboratoryLocksInput, LaboratoryAssistantUncheckedCreateWithoutLaboratoryLocksInput>
+  }
+
+  export type SummaryCreateWithoutLaboratory_locksInput = {
+    plan: number
+    isActive?: boolean
+    isFinished?: boolean
+    date: Date | string
+    shift?: number
+    product: ProductCreateNestedOneWithoutSummariesInput
+    batch: BatchCreateNestedOneWithoutSummariesInput
+    conveyor: ConveyorCreateNestedOneWithoutSummariesInput
+    specifications?: SpecificationCreateNestedManyWithoutSummaryInput
+    consumed_materials?: ConsumedMaterialCreateNestedManyWithoutSummaryInput
+    notes?: NoteCreateNestedManyWithoutSummaryInput
+    extrusion_params?: ExtrusionParamCreateNestedManyWithoutSummaryInput
+    varnish_params?: VarnishParamCreateNestedManyWithoutSummaryInput
+    offset_params?: OffsetParamCreateNestedManyWithoutSummaryInput
+    sealant_params?: SealantParamCreateNestedManyWithoutSummaryInput
+    production_boxes?: ProductionBoxCreateNestedManyWithoutSummaryInput
+    statuses?: StatusCreateNestedManyWithoutSummaryInput
+    defects?: DefectCreateNestedManyWithoutSummaryInput
+    crew?: CrewCreateNestedOneWithoutSummariesInput
+  }
+
+  export type SummaryUncheckedCreateWithoutLaboratory_locksInput = {
+    id?: number
+    product_id: number
+    batch_id: number
+    conveyor_id: number
+    plan: number
+    isActive?: boolean
+    isFinished?: boolean
+    date: Date | string
+    shift?: number
+    crew_id?: number | null
+    specifications?: SpecificationUncheckedCreateNestedManyWithoutSummaryInput
+    consumed_materials?: ConsumedMaterialUncheckedCreateNestedManyWithoutSummaryInput
+    notes?: NoteUncheckedCreateNestedManyWithoutSummaryInput
+    extrusion_params?: ExtrusionParamUncheckedCreateNestedManyWithoutSummaryInput
+    varnish_params?: VarnishParamUncheckedCreateNestedManyWithoutSummaryInput
+    offset_params?: OffsetParamUncheckedCreateNestedManyWithoutSummaryInput
+    sealant_params?: SealantParamUncheckedCreateNestedManyWithoutSummaryInput
+    production_boxes?: ProductionBoxUncheckedCreateNestedManyWithoutSummaryInput
+    statuses?: StatusUncheckedCreateNestedManyWithoutSummaryInput
+    defects?: DefectUncheckedCreateNestedManyWithoutSummaryInput
+  }
+
+  export type SummaryCreateOrConnectWithoutLaboratory_locksInput = {
+    where: SummaryWhereUniqueInput
+    create: XOR<SummaryCreateWithoutLaboratory_locksInput, SummaryUncheckedCreateWithoutLaboratory_locksInput>
+  }
+
+  export type PostCreateWithoutLaboratoryLocksInput = {
+    value: number
+    name: string
+    operations?: OperationCreateNestedManyWithoutPostInput
+    statuses?: StatusCreateNestedManyWithoutPostInput
+    defects?: DefectCreateNestedManyWithoutPostInput
+    notes?: NoteCreateNestedManyWithoutPostInput
+    maintenances?: MaintenanceCreateNestedManyWithoutPostInput
+    maintenance_sessions?: MaintenanceSessionCreateNestedManyWithoutPostInput
+  }
+
+  export type PostUncheckedCreateWithoutLaboratoryLocksInput = {
+    id?: number
+    value: number
+    name: string
+    operations?: OperationUncheckedCreateNestedManyWithoutPostInput
+    statuses?: StatusUncheckedCreateNestedManyWithoutPostInput
+    defects?: DefectUncheckedCreateNestedManyWithoutPostInput
+    notes?: NoteUncheckedCreateNestedManyWithoutPostInput
+    maintenances?: MaintenanceUncheckedCreateNestedManyWithoutPostInput
+    maintenance_sessions?: MaintenanceSessionUncheckedCreateNestedManyWithoutPostInput
+  }
+
+  export type PostCreateOrConnectWithoutLaboratoryLocksInput = {
+    where: PostWhereUniqueInput
+    create: XOR<PostCreateWithoutLaboratoryLocksInput, PostUncheckedCreateWithoutLaboratoryLocksInput>
+  }
+
+  export type StatusCreateWithoutLaboratory_lockInput = {
+    counter_value: number
+    idle?: boolean
+    idle_time?: bigint | number | null
+    finished?: boolean
+    createdAt?: Date | string
+    is_locked?: boolean
+    summary: SummaryCreateNestedOneWithoutStatusesInput
+    post: PostCreateNestedOneWithoutStatusesInput
+    operation?: OperationCreateNestedOneWithoutStatusesInput
+    employee?: EmployeeCreateNestedOneWithoutStatusesInput
+    maintenance_session?: MaintenanceSessionCreateNestedOneWithoutStatusesInput
+    extrusion_param?: ExtrusionParamCreateNestedOneWithoutStatusesInput
+    varnish_param?: VarnishParamCreateNestedOneWithoutStatusesInput
+    offset_param?: OffsetParamCreateNestedOneWithoutStatusesInput
+    sealant_param?: SealantParamCreateNestedOneWithoutStatusesInput
+  }
+
+  export type StatusUncheckedCreateWithoutLaboratory_lockInput = {
+    id?: number
+    summary_id: number
+    post_id: number
+    counter_value: number
+    operation_id?: number | null
+    idle?: boolean
+    employee_id?: number | null
+    idle_time?: bigint | number | null
+    finished?: boolean
+    createdAt?: Date | string
+    maintenance_session_id?: number | null
+    extrusion_param_id?: number | null
+    varnish_param_id?: number | null
+    offset_param_id?: number | null
+    sealant_param_id?: number | null
+    is_locked?: boolean
+  }
+
+  export type StatusCreateOrConnectWithoutLaboratory_lockInput = {
+    where: StatusWhereUniqueInput
+    create: XOR<StatusCreateWithoutLaboratory_lockInput, StatusUncheckedCreateWithoutLaboratory_lockInput>
+  }
+
+  export type StatusCreateManyLaboratory_lockInputEnvelope = {
+    data: StatusCreateManyLaboratory_lockInput | StatusCreateManyLaboratory_lockInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type LaboratoryLockReasonUpsertWithoutLaboratoryLocksInput = {
+    update: XOR<LaboratoryLockReasonUpdateWithoutLaboratoryLocksInput, LaboratoryLockReasonUncheckedUpdateWithoutLaboratoryLocksInput>
+    create: XOR<LaboratoryLockReasonCreateWithoutLaboratoryLocksInput, LaboratoryLockReasonUncheckedCreateWithoutLaboratoryLocksInput>
+    where?: LaboratoryLockReasonWhereInput
+  }
+
+  export type LaboratoryLockReasonUpdateToOneWithWhereWithoutLaboratoryLocksInput = {
+    where?: LaboratoryLockReasonWhereInput
+    data: XOR<LaboratoryLockReasonUpdateWithoutLaboratoryLocksInput, LaboratoryLockReasonUncheckedUpdateWithoutLaboratoryLocksInput>
+  }
+
+  export type LaboratoryLockReasonUpdateWithoutLaboratoryLocksInput = {
+    value?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type LaboratoryLockReasonUncheckedUpdateWithoutLaboratoryLocksInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    value?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type LaboratoryAssistantUpsertWithoutLaboratoryLocksInput = {
+    update: XOR<LaboratoryAssistantUpdateWithoutLaboratoryLocksInput, LaboratoryAssistantUncheckedUpdateWithoutLaboratoryLocksInput>
+    create: XOR<LaboratoryAssistantCreateWithoutLaboratoryLocksInput, LaboratoryAssistantUncheckedCreateWithoutLaboratoryLocksInput>
+    where?: LaboratoryAssistantWhereInput
+  }
+
+  export type LaboratoryAssistantUpdateToOneWithWhereWithoutLaboratoryLocksInput = {
+    where?: LaboratoryAssistantWhereInput
+    data: XOR<LaboratoryAssistantUpdateWithoutLaboratoryLocksInput, LaboratoryAssistantUncheckedUpdateWithoutLaboratoryLocksInput>
+  }
+
+  export type LaboratoryAssistantUpdateWithoutLaboratoryLocksInput = {
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type LaboratoryAssistantUncheckedUpdateWithoutLaboratoryLocksInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SummaryUpsertWithoutLaboratory_locksInput = {
+    update: XOR<SummaryUpdateWithoutLaboratory_locksInput, SummaryUncheckedUpdateWithoutLaboratory_locksInput>
+    create: XOR<SummaryCreateWithoutLaboratory_locksInput, SummaryUncheckedCreateWithoutLaboratory_locksInput>
+    where?: SummaryWhereInput
+  }
+
+  export type SummaryUpdateToOneWithWhereWithoutLaboratory_locksInput = {
+    where?: SummaryWhereInput
+    data: XOR<SummaryUpdateWithoutLaboratory_locksInput, SummaryUncheckedUpdateWithoutLaboratory_locksInput>
+  }
+
+  export type SummaryUpdateWithoutLaboratory_locksInput = {
+    plan?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isFinished?: BoolFieldUpdateOperationsInput | boolean
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    shift?: IntFieldUpdateOperationsInput | number
+    product?: ProductUpdateOneRequiredWithoutSummariesNestedInput
+    batch?: BatchUpdateOneRequiredWithoutSummariesNestedInput
+    conveyor?: ConveyorUpdateOneRequiredWithoutSummariesNestedInput
+    specifications?: SpecificationUpdateManyWithoutSummaryNestedInput
+    consumed_materials?: ConsumedMaterialUpdateManyWithoutSummaryNestedInput
+    notes?: NoteUpdateManyWithoutSummaryNestedInput
+    extrusion_params?: ExtrusionParamUpdateManyWithoutSummaryNestedInput
+    varnish_params?: VarnishParamUpdateManyWithoutSummaryNestedInput
+    offset_params?: OffsetParamUpdateManyWithoutSummaryNestedInput
+    sealant_params?: SealantParamUpdateManyWithoutSummaryNestedInput
+    production_boxes?: ProductionBoxUpdateManyWithoutSummaryNestedInput
+    statuses?: StatusUpdateManyWithoutSummaryNestedInput
+    defects?: DefectUpdateManyWithoutSummaryNestedInput
+    crew?: CrewUpdateOneWithoutSummariesNestedInput
+  }
+
+  export type SummaryUncheckedUpdateWithoutLaboratory_locksInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    product_id?: IntFieldUpdateOperationsInput | number
+    batch_id?: IntFieldUpdateOperationsInput | number
+    conveyor_id?: IntFieldUpdateOperationsInput | number
+    plan?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isFinished?: BoolFieldUpdateOperationsInput | boolean
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    shift?: IntFieldUpdateOperationsInput | number
+    crew_id?: NullableIntFieldUpdateOperationsInput | number | null
+    specifications?: SpecificationUncheckedUpdateManyWithoutSummaryNestedInput
+    consumed_materials?: ConsumedMaterialUncheckedUpdateManyWithoutSummaryNestedInput
+    notes?: NoteUncheckedUpdateManyWithoutSummaryNestedInput
+    extrusion_params?: ExtrusionParamUncheckedUpdateManyWithoutSummaryNestedInput
+    varnish_params?: VarnishParamUncheckedUpdateManyWithoutSummaryNestedInput
+    offset_params?: OffsetParamUncheckedUpdateManyWithoutSummaryNestedInput
+    sealant_params?: SealantParamUncheckedUpdateManyWithoutSummaryNestedInput
+    production_boxes?: ProductionBoxUncheckedUpdateManyWithoutSummaryNestedInput
+    statuses?: StatusUncheckedUpdateManyWithoutSummaryNestedInput
+    defects?: DefectUncheckedUpdateManyWithoutSummaryNestedInput
+  }
+
+  export type PostUpsertWithoutLaboratoryLocksInput = {
+    update: XOR<PostUpdateWithoutLaboratoryLocksInput, PostUncheckedUpdateWithoutLaboratoryLocksInput>
+    create: XOR<PostCreateWithoutLaboratoryLocksInput, PostUncheckedCreateWithoutLaboratoryLocksInput>
+    where?: PostWhereInput
+  }
+
+  export type PostUpdateToOneWithWhereWithoutLaboratoryLocksInput = {
+    where?: PostWhereInput
+    data: XOR<PostUpdateWithoutLaboratoryLocksInput, PostUncheckedUpdateWithoutLaboratoryLocksInput>
+  }
+
+  export type PostUpdateWithoutLaboratoryLocksInput = {
+    value?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    operations?: OperationUpdateManyWithoutPostNestedInput
+    statuses?: StatusUpdateManyWithoutPostNestedInput
+    defects?: DefectUpdateManyWithoutPostNestedInput
+    notes?: NoteUpdateManyWithoutPostNestedInput
+    maintenances?: MaintenanceUpdateManyWithoutPostNestedInput
+    maintenance_sessions?: MaintenanceSessionUpdateManyWithoutPostNestedInput
+  }
+
+  export type PostUncheckedUpdateWithoutLaboratoryLocksInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    value?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    operations?: OperationUncheckedUpdateManyWithoutPostNestedInput
+    statuses?: StatusUncheckedUpdateManyWithoutPostNestedInput
+    defects?: DefectUncheckedUpdateManyWithoutPostNestedInput
+    notes?: NoteUncheckedUpdateManyWithoutPostNestedInput
+    maintenances?: MaintenanceUncheckedUpdateManyWithoutPostNestedInput
+    maintenance_sessions?: MaintenanceSessionUncheckedUpdateManyWithoutPostNestedInput
+  }
+
+  export type StatusUpsertWithWhereUniqueWithoutLaboratory_lockInput = {
+    where: StatusWhereUniqueInput
+    update: XOR<StatusUpdateWithoutLaboratory_lockInput, StatusUncheckedUpdateWithoutLaboratory_lockInput>
+    create: XOR<StatusCreateWithoutLaboratory_lockInput, StatusUncheckedCreateWithoutLaboratory_lockInput>
+  }
+
+  export type StatusUpdateWithWhereUniqueWithoutLaboratory_lockInput = {
+    where: StatusWhereUniqueInput
+    data: XOR<StatusUpdateWithoutLaboratory_lockInput, StatusUncheckedUpdateWithoutLaboratory_lockInput>
+  }
+
+  export type StatusUpdateManyWithWhereWithoutLaboratory_lockInput = {
+    where: StatusScalarWhereInput
+    data: XOR<StatusUpdateManyMutationInput, StatusUncheckedUpdateManyWithoutLaboratory_lockInput>
+  }
+
+  export type LaboratoryLockCreateWithoutLaboratory_lock_reasonInput = {
+    createdAt?: Date | string
+    is_active?: boolean
+    closedAt?: Date | string | null
+    laboratory_assistant: LaboratoryAssistantCreateNestedOneWithoutLaboratoryLocksInput
+    summary: SummaryCreateNestedOneWithoutLaboratory_locksInput
+    post: PostCreateNestedOneWithoutLaboratoryLocksInput
+    statuses?: StatusCreateNestedManyWithoutLaboratory_lockInput
+  }
+
+  export type LaboratoryLockUncheckedCreateWithoutLaboratory_lock_reasonInput = {
+    id?: number
+    laboratory_assistant_id: number
+    createdAt?: Date | string
+    summary_id: number
+    post_id: number
+    is_active?: boolean
+    closedAt?: Date | string | null
+    statuses?: StatusUncheckedCreateNestedManyWithoutLaboratory_lockInput
+  }
+
+  export type LaboratoryLockCreateOrConnectWithoutLaboratory_lock_reasonInput = {
+    where: LaboratoryLockWhereUniqueInput
+    create: XOR<LaboratoryLockCreateWithoutLaboratory_lock_reasonInput, LaboratoryLockUncheckedCreateWithoutLaboratory_lock_reasonInput>
+  }
+
+  export type LaboratoryLockCreateManyLaboratory_lock_reasonInputEnvelope = {
+    data: LaboratoryLockCreateManyLaboratory_lock_reasonInput | LaboratoryLockCreateManyLaboratory_lock_reasonInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type LaboratoryLockUpsertWithWhereUniqueWithoutLaboratory_lock_reasonInput = {
+    where: LaboratoryLockWhereUniqueInput
+    update: XOR<LaboratoryLockUpdateWithoutLaboratory_lock_reasonInput, LaboratoryLockUncheckedUpdateWithoutLaboratory_lock_reasonInput>
+    create: XOR<LaboratoryLockCreateWithoutLaboratory_lock_reasonInput, LaboratoryLockUncheckedCreateWithoutLaboratory_lock_reasonInput>
+  }
+
+  export type LaboratoryLockUpdateWithWhereUniqueWithoutLaboratory_lock_reasonInput = {
+    where: LaboratoryLockWhereUniqueInput
+    data: XOR<LaboratoryLockUpdateWithoutLaboratory_lock_reasonInput, LaboratoryLockUncheckedUpdateWithoutLaboratory_lock_reasonInput>
+  }
+
+  export type LaboratoryLockUpdateManyWithWhereWithoutLaboratory_lock_reasonInput = {
+    where: LaboratoryLockScalarWhereInput
+    data: XOR<LaboratoryLockUpdateManyMutationInput, LaboratoryLockUncheckedUpdateManyWithoutLaboratory_lock_reasonInput>
+  }
+
+  export type LaboratoryLockCreateWithoutLaboratory_assistantInput = {
+    createdAt?: Date | string
+    is_active?: boolean
+    closedAt?: Date | string | null
+    laboratory_lock_reason: LaboratoryLockReasonCreateNestedOneWithoutLaboratoryLocksInput
+    summary: SummaryCreateNestedOneWithoutLaboratory_locksInput
+    post: PostCreateNestedOneWithoutLaboratoryLocksInput
+    statuses?: StatusCreateNestedManyWithoutLaboratory_lockInput
+  }
+
+  export type LaboratoryLockUncheckedCreateWithoutLaboratory_assistantInput = {
+    id?: number
+    laboratory_lock_reason_id: number
+    createdAt?: Date | string
+    summary_id: number
+    post_id: number
+    is_active?: boolean
+    closedAt?: Date | string | null
+    statuses?: StatusUncheckedCreateNestedManyWithoutLaboratory_lockInput
+  }
+
+  export type LaboratoryLockCreateOrConnectWithoutLaboratory_assistantInput = {
+    where: LaboratoryLockWhereUniqueInput
+    create: XOR<LaboratoryLockCreateWithoutLaboratory_assistantInput, LaboratoryLockUncheckedCreateWithoutLaboratory_assistantInput>
+  }
+
+  export type LaboratoryLockCreateManyLaboratory_assistantInputEnvelope = {
+    data: LaboratoryLockCreateManyLaboratory_assistantInput | LaboratoryLockCreateManyLaboratory_assistantInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type LaboratoryLockUpsertWithWhereUniqueWithoutLaboratory_assistantInput = {
+    where: LaboratoryLockWhereUniqueInput
+    update: XOR<LaboratoryLockUpdateWithoutLaboratory_assistantInput, LaboratoryLockUncheckedUpdateWithoutLaboratory_assistantInput>
+    create: XOR<LaboratoryLockCreateWithoutLaboratory_assistantInput, LaboratoryLockUncheckedCreateWithoutLaboratory_assistantInput>
+  }
+
+  export type LaboratoryLockUpdateWithWhereUniqueWithoutLaboratory_assistantInput = {
+    where: LaboratoryLockWhereUniqueInput
+    data: XOR<LaboratoryLockUpdateWithoutLaboratory_assistantInput, LaboratoryLockUncheckedUpdateWithoutLaboratory_assistantInput>
+  }
+
+  export type LaboratoryLockUpdateManyWithWhereWithoutLaboratory_assistantInput = {
+    where: LaboratoryLockScalarWhereInput
+    data: XOR<LaboratoryLockUpdateManyMutationInput, LaboratoryLockUncheckedUpdateManyWithoutLaboratory_assistantInput>
+  }
+
   export type SummaryCreateWithoutDefectsInput = {
     plan: number
     isActive?: boolean
@@ -68273,6 +73510,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxCreateNestedManyWithoutSummaryInput
     statuses?: StatusCreateNestedManyWithoutSummaryInput
     crew?: CrewCreateNestedOneWithoutSummariesInput
+    laboratory_locks?: LaboratoryLockCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryUncheckedCreateWithoutDefectsInput = {
@@ -68295,6 +73533,7 @@ export namespace Prisma {
     sealant_params?: SealantParamUncheckedCreateNestedManyWithoutSummaryInput
     production_boxes?: ProductionBoxUncheckedCreateNestedManyWithoutSummaryInput
     statuses?: StatusUncheckedCreateNestedManyWithoutSummaryInput
+    laboratory_locks?: LaboratoryLockUncheckedCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryCreateOrConnectWithoutDefectsInput = {
@@ -68310,6 +73549,7 @@ export namespace Prisma {
     notes?: NoteCreateNestedManyWithoutPostInput
     maintenances?: MaintenanceCreateNestedManyWithoutPostInput
     maintenance_sessions?: MaintenanceSessionCreateNestedManyWithoutPostInput
+    laboratoryLocks?: LaboratoryLockCreateNestedManyWithoutPostInput
   }
 
   export type PostUncheckedCreateWithoutDefectsInput = {
@@ -68321,6 +73561,7 @@ export namespace Prisma {
     notes?: NoteUncheckedCreateNestedManyWithoutPostInput
     maintenances?: MaintenanceUncheckedCreateNestedManyWithoutPostInput
     maintenance_sessions?: MaintenanceSessionUncheckedCreateNestedManyWithoutPostInput
+    laboratoryLocks?: LaboratoryLockUncheckedCreateNestedManyWithoutPostInput
   }
 
   export type PostCreateOrConnectWithoutDefectsInput = {
@@ -68358,6 +73599,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxUpdateManyWithoutSummaryNestedInput
     statuses?: StatusUpdateManyWithoutSummaryNestedInput
     crew?: CrewUpdateOneWithoutSummariesNestedInput
+    laboratory_locks?: LaboratoryLockUpdateManyWithoutSummaryNestedInput
   }
 
   export type SummaryUncheckedUpdateWithoutDefectsInput = {
@@ -68380,6 +73622,7 @@ export namespace Prisma {
     sealant_params?: SealantParamUncheckedUpdateManyWithoutSummaryNestedInput
     production_boxes?: ProductionBoxUncheckedUpdateManyWithoutSummaryNestedInput
     statuses?: StatusUncheckedUpdateManyWithoutSummaryNestedInput
+    laboratory_locks?: LaboratoryLockUncheckedUpdateManyWithoutSummaryNestedInput
   }
 
   export type PostUpsertWithoutDefectsInput = {
@@ -68401,6 +73644,7 @@ export namespace Prisma {
     notes?: NoteUpdateManyWithoutPostNestedInput
     maintenances?: MaintenanceUpdateManyWithoutPostNestedInput
     maintenance_sessions?: MaintenanceSessionUpdateManyWithoutPostNestedInput
+    laboratoryLocks?: LaboratoryLockUpdateManyWithoutPostNestedInput
   }
 
   export type PostUncheckedUpdateWithoutDefectsInput = {
@@ -68412,6 +73656,7 @@ export namespace Prisma {
     notes?: NoteUncheckedUpdateManyWithoutPostNestedInput
     maintenances?: MaintenanceUncheckedUpdateManyWithoutPostNestedInput
     maintenance_sessions?: MaintenanceSessionUncheckedUpdateManyWithoutPostNestedInput
+    laboratoryLocks?: LaboratoryLockUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type SpecificationCreateWithoutMaterialInput = {
@@ -68555,6 +73800,7 @@ export namespace Prisma {
     statuses?: StatusCreateNestedManyWithoutSummaryInput
     defects?: DefectCreateNestedManyWithoutSummaryInput
     crew?: CrewCreateNestedOneWithoutSummariesInput
+    laboratory_locks?: LaboratoryLockCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryUncheckedCreateWithoutSpecificationsInput = {
@@ -68577,6 +73823,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxUncheckedCreateNestedManyWithoutSummaryInput
     statuses?: StatusUncheckedCreateNestedManyWithoutSummaryInput
     defects?: DefectUncheckedCreateNestedManyWithoutSummaryInput
+    laboratory_locks?: LaboratoryLockUncheckedCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryCreateOrConnectWithoutSpecificationsInput = {
@@ -68636,6 +73883,7 @@ export namespace Prisma {
     statuses?: StatusUpdateManyWithoutSummaryNestedInput
     defects?: DefectUpdateManyWithoutSummaryNestedInput
     crew?: CrewUpdateOneWithoutSummariesNestedInput
+    laboratory_locks?: LaboratoryLockUpdateManyWithoutSummaryNestedInput
   }
 
   export type SummaryUncheckedUpdateWithoutSpecificationsInput = {
@@ -68658,6 +73906,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxUncheckedUpdateManyWithoutSummaryNestedInput
     statuses?: StatusUncheckedUpdateManyWithoutSummaryNestedInput
     defects?: DefectUncheckedUpdateManyWithoutSummaryNestedInput
+    laboratory_locks?: LaboratoryLockUncheckedUpdateManyWithoutSummaryNestedInput
   }
 
   export type MaterialUpsertWithoutSpecificationsInput = {
@@ -68707,6 +73956,7 @@ export namespace Prisma {
     statuses?: StatusCreateNestedManyWithoutSummaryInput
     defects?: DefectCreateNestedManyWithoutSummaryInput
     crew?: CrewCreateNestedOneWithoutSummariesInput
+    laboratory_locks?: LaboratoryLockCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryUncheckedCreateWithoutConsumed_materialsInput = {
@@ -68729,6 +73979,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxUncheckedCreateNestedManyWithoutSummaryInput
     statuses?: StatusUncheckedCreateNestedManyWithoutSummaryInput
     defects?: DefectUncheckedCreateNestedManyWithoutSummaryInput
+    laboratory_locks?: LaboratoryLockUncheckedCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryCreateOrConnectWithoutConsumed_materialsInput = {
@@ -68836,6 +74087,7 @@ export namespace Prisma {
     statuses?: StatusUpdateManyWithoutSummaryNestedInput
     defects?: DefectUpdateManyWithoutSummaryNestedInput
     crew?: CrewUpdateOneWithoutSummariesNestedInput
+    laboratory_locks?: LaboratoryLockUpdateManyWithoutSummaryNestedInput
   }
 
   export type SummaryUncheckedUpdateWithoutConsumed_materialsInput = {
@@ -68858,6 +74110,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxUncheckedUpdateManyWithoutSummaryNestedInput
     statuses?: StatusUncheckedUpdateManyWithoutSummaryNestedInput
     defects?: DefectUncheckedUpdateManyWithoutSummaryNestedInput
+    laboratory_locks?: LaboratoryLockUncheckedUpdateManyWithoutSummaryNestedInput
   }
 
   export type MaterialUpsertWithoutConsumed_materialsInput = {
@@ -68967,6 +74220,7 @@ export namespace Prisma {
     statuses?: StatusCreateNestedManyWithoutSummaryInput
     defects?: DefectCreateNestedManyWithoutSummaryInput
     crew?: CrewCreateNestedOneWithoutSummariesInput
+    laboratory_locks?: LaboratoryLockCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryUncheckedCreateWithoutNotesInput = {
@@ -68989,6 +74243,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxUncheckedCreateNestedManyWithoutSummaryInput
     statuses?: StatusUncheckedCreateNestedManyWithoutSummaryInput
     defects?: DefectUncheckedCreateNestedManyWithoutSummaryInput
+    laboratory_locks?: LaboratoryLockUncheckedCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryCreateOrConnectWithoutNotesInput = {
@@ -69004,6 +74259,7 @@ export namespace Prisma {
     defects?: DefectCreateNestedManyWithoutPostInput
     maintenances?: MaintenanceCreateNestedManyWithoutPostInput
     maintenance_sessions?: MaintenanceSessionCreateNestedManyWithoutPostInput
+    laboratoryLocks?: LaboratoryLockCreateNestedManyWithoutPostInput
   }
 
   export type PostUncheckedCreateWithoutNotesInput = {
@@ -69015,6 +74271,7 @@ export namespace Prisma {
     defects?: DefectUncheckedCreateNestedManyWithoutPostInput
     maintenances?: MaintenanceUncheckedCreateNestedManyWithoutPostInput
     maintenance_sessions?: MaintenanceSessionUncheckedCreateNestedManyWithoutPostInput
+    laboratoryLocks?: LaboratoryLockUncheckedCreateNestedManyWithoutPostInput
   }
 
   export type PostCreateOrConnectWithoutNotesInput = {
@@ -69052,6 +74309,7 @@ export namespace Prisma {
     statuses?: StatusUpdateManyWithoutSummaryNestedInput
     defects?: DefectUpdateManyWithoutSummaryNestedInput
     crew?: CrewUpdateOneWithoutSummariesNestedInput
+    laboratory_locks?: LaboratoryLockUpdateManyWithoutSummaryNestedInput
   }
 
   export type SummaryUncheckedUpdateWithoutNotesInput = {
@@ -69074,6 +74332,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxUncheckedUpdateManyWithoutSummaryNestedInput
     statuses?: StatusUncheckedUpdateManyWithoutSummaryNestedInput
     defects?: DefectUncheckedUpdateManyWithoutSummaryNestedInput
+    laboratory_locks?: LaboratoryLockUncheckedUpdateManyWithoutSummaryNestedInput
   }
 
   export type PostUpsertWithoutNotesInput = {
@@ -69095,6 +74354,7 @@ export namespace Prisma {
     defects?: DefectUpdateManyWithoutPostNestedInput
     maintenances?: MaintenanceUpdateManyWithoutPostNestedInput
     maintenance_sessions?: MaintenanceSessionUpdateManyWithoutPostNestedInput
+    laboratoryLocks?: LaboratoryLockUpdateManyWithoutPostNestedInput
   }
 
   export type PostUncheckedUpdateWithoutNotesInput = {
@@ -69106,6 +74366,7 @@ export namespace Prisma {
     defects?: DefectUncheckedUpdateManyWithoutPostNestedInput
     maintenances?: MaintenanceUncheckedUpdateManyWithoutPostNestedInput
     maintenance_sessions?: MaintenanceSessionUncheckedUpdateManyWithoutPostNestedInput
+    laboratoryLocks?: LaboratoryLockUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type SummaryCreateWithoutExtrusion_paramsInput = {
@@ -69127,6 +74388,7 @@ export namespace Prisma {
     statuses?: StatusCreateNestedManyWithoutSummaryInput
     defects?: DefectCreateNestedManyWithoutSummaryInput
     crew?: CrewCreateNestedOneWithoutSummariesInput
+    laboratory_locks?: LaboratoryLockCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryUncheckedCreateWithoutExtrusion_paramsInput = {
@@ -69149,6 +74411,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxUncheckedCreateNestedManyWithoutSummaryInput
     statuses?: StatusUncheckedCreateNestedManyWithoutSummaryInput
     defects?: DefectUncheckedCreateNestedManyWithoutSummaryInput
+    laboratory_locks?: LaboratoryLockUncheckedCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryCreateOrConnectWithoutExtrusion_paramsInput = {
@@ -69194,6 +74457,7 @@ export namespace Prisma {
     idle_time?: bigint | number | null
     finished?: boolean
     createdAt?: Date | string
+    is_locked?: boolean
     summary: SummaryCreateNestedOneWithoutStatusesInput
     post: PostCreateNestedOneWithoutStatusesInput
     operation?: OperationCreateNestedOneWithoutStatusesInput
@@ -69202,6 +74466,7 @@ export namespace Prisma {
     varnish_param?: VarnishParamCreateNestedOneWithoutStatusesInput
     offset_param?: OffsetParamCreateNestedOneWithoutStatusesInput
     sealant_param?: SealantParamCreateNestedOneWithoutStatusesInput
+    laboratory_lock?: LaboratoryLockCreateNestedOneWithoutStatusesInput
   }
 
   export type StatusUncheckedCreateWithoutExtrusion_paramInput = {
@@ -69219,6 +74484,8 @@ export namespace Prisma {
     varnish_param_id?: number | null
     offset_param_id?: number | null
     sealant_param_id?: number | null
+    is_locked?: boolean
+    laboratory_lock_id?: number | null
   }
 
   export type StatusCreateOrConnectWithoutExtrusion_paramInput = {
@@ -69261,6 +74528,7 @@ export namespace Prisma {
     statuses?: StatusUpdateManyWithoutSummaryNestedInput
     defects?: DefectUpdateManyWithoutSummaryNestedInput
     crew?: CrewUpdateOneWithoutSummariesNestedInput
+    laboratory_locks?: LaboratoryLockUpdateManyWithoutSummaryNestedInput
   }
 
   export type SummaryUncheckedUpdateWithoutExtrusion_paramsInput = {
@@ -69283,6 +74551,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxUncheckedUpdateManyWithoutSummaryNestedInput
     statuses?: StatusUncheckedUpdateManyWithoutSummaryNestedInput
     defects?: DefectUncheckedUpdateManyWithoutSummaryNestedInput
+    laboratory_locks?: LaboratoryLockUncheckedUpdateManyWithoutSummaryNestedInput
   }
 
   export type EmployeeUpsertWithoutExtrusion_paramsInput = {
@@ -69358,6 +74627,7 @@ export namespace Prisma {
     statuses?: StatusCreateNestedManyWithoutSummaryInput
     defects?: DefectCreateNestedManyWithoutSummaryInput
     crew?: CrewCreateNestedOneWithoutSummariesInput
+    laboratory_locks?: LaboratoryLockCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryUncheckedCreateWithoutVarnish_paramsInput = {
@@ -69380,6 +74650,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxUncheckedCreateNestedManyWithoutSummaryInput
     statuses?: StatusUncheckedCreateNestedManyWithoutSummaryInput
     defects?: DefectUncheckedCreateNestedManyWithoutSummaryInput
+    laboratory_locks?: LaboratoryLockUncheckedCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryCreateOrConnectWithoutVarnish_paramsInput = {
@@ -69425,6 +74696,7 @@ export namespace Prisma {
     idle_time?: bigint | number | null
     finished?: boolean
     createdAt?: Date | string
+    is_locked?: boolean
     summary: SummaryCreateNestedOneWithoutStatusesInput
     post: PostCreateNestedOneWithoutStatusesInput
     operation?: OperationCreateNestedOneWithoutStatusesInput
@@ -69433,6 +74705,7 @@ export namespace Prisma {
     extrusion_param?: ExtrusionParamCreateNestedOneWithoutStatusesInput
     offset_param?: OffsetParamCreateNestedOneWithoutStatusesInput
     sealant_param?: SealantParamCreateNestedOneWithoutStatusesInput
+    laboratory_lock?: LaboratoryLockCreateNestedOneWithoutStatusesInput
   }
 
   export type StatusUncheckedCreateWithoutVarnish_paramInput = {
@@ -69450,6 +74723,8 @@ export namespace Prisma {
     extrusion_param_id?: number | null
     offset_param_id?: number | null
     sealant_param_id?: number | null
+    is_locked?: boolean
+    laboratory_lock_id?: number | null
   }
 
   export type StatusCreateOrConnectWithoutVarnish_paramInput = {
@@ -69492,6 +74767,7 @@ export namespace Prisma {
     statuses?: StatusUpdateManyWithoutSummaryNestedInput
     defects?: DefectUpdateManyWithoutSummaryNestedInput
     crew?: CrewUpdateOneWithoutSummariesNestedInput
+    laboratory_locks?: LaboratoryLockUpdateManyWithoutSummaryNestedInput
   }
 
   export type SummaryUncheckedUpdateWithoutVarnish_paramsInput = {
@@ -69514,6 +74790,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxUncheckedUpdateManyWithoutSummaryNestedInput
     statuses?: StatusUncheckedUpdateManyWithoutSummaryNestedInput
     defects?: DefectUncheckedUpdateManyWithoutSummaryNestedInput
+    laboratory_locks?: LaboratoryLockUncheckedUpdateManyWithoutSummaryNestedInput
   }
 
   export type EmployeeUpsertWithoutVarnish_paramsInput = {
@@ -69589,6 +74866,7 @@ export namespace Prisma {
     statuses?: StatusCreateNestedManyWithoutSummaryInput
     defects?: DefectCreateNestedManyWithoutSummaryInput
     crew?: CrewCreateNestedOneWithoutSummariesInput
+    laboratory_locks?: LaboratoryLockCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryUncheckedCreateWithoutOffset_paramsInput = {
@@ -69611,6 +74889,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxUncheckedCreateNestedManyWithoutSummaryInput
     statuses?: StatusUncheckedCreateNestedManyWithoutSummaryInput
     defects?: DefectUncheckedCreateNestedManyWithoutSummaryInput
+    laboratory_locks?: LaboratoryLockUncheckedCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryCreateOrConnectWithoutOffset_paramsInput = {
@@ -69656,6 +74935,7 @@ export namespace Prisma {
     idle_time?: bigint | number | null
     finished?: boolean
     createdAt?: Date | string
+    is_locked?: boolean
     summary: SummaryCreateNestedOneWithoutStatusesInput
     post: PostCreateNestedOneWithoutStatusesInput
     operation?: OperationCreateNestedOneWithoutStatusesInput
@@ -69664,6 +74944,7 @@ export namespace Prisma {
     extrusion_param?: ExtrusionParamCreateNestedOneWithoutStatusesInput
     varnish_param?: VarnishParamCreateNestedOneWithoutStatusesInput
     sealant_param?: SealantParamCreateNestedOneWithoutStatusesInput
+    laboratory_lock?: LaboratoryLockCreateNestedOneWithoutStatusesInput
   }
 
   export type StatusUncheckedCreateWithoutOffset_paramInput = {
@@ -69681,6 +74962,8 @@ export namespace Prisma {
     extrusion_param_id?: number | null
     varnish_param_id?: number | null
     sealant_param_id?: number | null
+    is_locked?: boolean
+    laboratory_lock_id?: number | null
   }
 
   export type StatusCreateOrConnectWithoutOffset_paramInput = {
@@ -69723,6 +75006,7 @@ export namespace Prisma {
     statuses?: StatusUpdateManyWithoutSummaryNestedInput
     defects?: DefectUpdateManyWithoutSummaryNestedInput
     crew?: CrewUpdateOneWithoutSummariesNestedInput
+    laboratory_locks?: LaboratoryLockUpdateManyWithoutSummaryNestedInput
   }
 
   export type SummaryUncheckedUpdateWithoutOffset_paramsInput = {
@@ -69745,6 +75029,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxUncheckedUpdateManyWithoutSummaryNestedInput
     statuses?: StatusUncheckedUpdateManyWithoutSummaryNestedInput
     defects?: DefectUncheckedUpdateManyWithoutSummaryNestedInput
+    laboratory_locks?: LaboratoryLockUncheckedUpdateManyWithoutSummaryNestedInput
   }
 
   export type EmployeeUpsertWithoutOffset_paramsInput = {
@@ -69820,6 +75105,7 @@ export namespace Prisma {
     statuses?: StatusCreateNestedManyWithoutSummaryInput
     defects?: DefectCreateNestedManyWithoutSummaryInput
     crew?: CrewCreateNestedOneWithoutSummariesInput
+    laboratory_locks?: LaboratoryLockCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryUncheckedCreateWithoutSealant_paramsInput = {
@@ -69842,6 +75128,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxUncheckedCreateNestedManyWithoutSummaryInput
     statuses?: StatusUncheckedCreateNestedManyWithoutSummaryInput
     defects?: DefectUncheckedCreateNestedManyWithoutSummaryInput
+    laboratory_locks?: LaboratoryLockUncheckedCreateNestedManyWithoutSummaryInput
   }
 
   export type SummaryCreateOrConnectWithoutSealant_paramsInput = {
@@ -69887,6 +75174,7 @@ export namespace Prisma {
     idle_time?: bigint | number | null
     finished?: boolean
     createdAt?: Date | string
+    is_locked?: boolean
     summary: SummaryCreateNestedOneWithoutStatusesInput
     post: PostCreateNestedOneWithoutStatusesInput
     operation?: OperationCreateNestedOneWithoutStatusesInput
@@ -69895,6 +75183,7 @@ export namespace Prisma {
     extrusion_param?: ExtrusionParamCreateNestedOneWithoutStatusesInput
     varnish_param?: VarnishParamCreateNestedOneWithoutStatusesInput
     offset_param?: OffsetParamCreateNestedOneWithoutStatusesInput
+    laboratory_lock?: LaboratoryLockCreateNestedOneWithoutStatusesInput
   }
 
   export type StatusUncheckedCreateWithoutSealant_paramInput = {
@@ -69912,6 +75201,8 @@ export namespace Prisma {
     extrusion_param_id?: number | null
     varnish_param_id?: number | null
     offset_param_id?: number | null
+    is_locked?: boolean
+    laboratory_lock_id?: number | null
   }
 
   export type StatusCreateOrConnectWithoutSealant_paramInput = {
@@ -69954,6 +75245,7 @@ export namespace Prisma {
     statuses?: StatusUpdateManyWithoutSummaryNestedInput
     defects?: DefectUpdateManyWithoutSummaryNestedInput
     crew?: CrewUpdateOneWithoutSummariesNestedInput
+    laboratory_locks?: LaboratoryLockUpdateManyWithoutSummaryNestedInput
   }
 
   export type SummaryUncheckedUpdateWithoutSealant_paramsInput = {
@@ -69976,6 +75268,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxUncheckedUpdateManyWithoutSummaryNestedInput
     statuses?: StatusUncheckedUpdateManyWithoutSummaryNestedInput
     defects?: DefectUncheckedUpdateManyWithoutSummaryNestedInput
+    laboratory_locks?: LaboratoryLockUncheckedUpdateManyWithoutSummaryNestedInput
   }
 
   export type EmployeeUpsertWithoutSealant_paramsInput = {
@@ -70284,6 +75577,7 @@ export namespace Prisma {
     statuses?: StatusUpdateManyWithoutSummaryNestedInput
     defects?: DefectUpdateManyWithoutSummaryNestedInput
     crew?: CrewUpdateOneWithoutSummariesNestedInput
+    laboratory_locks?: LaboratoryLockUpdateManyWithoutSummaryNestedInput
   }
 
   export type SummaryUncheckedUpdateWithoutConveyorInput = {
@@ -70306,6 +75600,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxUncheckedUpdateManyWithoutSummaryNestedInput
     statuses?: StatusUncheckedUpdateManyWithoutSummaryNestedInput
     defects?: DefectUncheckedUpdateManyWithoutSummaryNestedInput
+    laboratory_locks?: LaboratoryLockUncheckedUpdateManyWithoutSummaryNestedInput
   }
 
   export type SummaryUncheckedUpdateManyWithoutConveyorInput = {
@@ -70716,6 +76011,8 @@ export namespace Prisma {
     varnish_param_id?: number | null
     offset_param_id?: number | null
     sealant_param_id?: number | null
+    is_locked?: boolean
+    laboratory_lock_id?: number | null
   }
 
   export type DefectCreateManyPostInput = {
@@ -70744,6 +76041,16 @@ export namespace Prisma {
     end_time?: Date | string | null
     total_duration?: bigint | number | null
     work_duration?: bigint | number | null
+  }
+
+  export type LaboratoryLockCreateManyPostInput = {
+    id?: number
+    laboratory_lock_reason_id: number
+    laboratory_assistant_id: number
+    createdAt?: Date | string
+    summary_id: number
+    is_active?: boolean
+    closedAt?: Date | string | null
   }
 
   export type OperationUpdateWithoutPostInput = {
@@ -70779,6 +76086,7 @@ export namespace Prisma {
     idle_time?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     finished?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
     summary?: SummaryUpdateOneRequiredWithoutStatusesNestedInput
     operation?: OperationUpdateOneWithoutStatusesNestedInput
     employee?: EmployeeUpdateOneWithoutStatusesNestedInput
@@ -70787,6 +76095,7 @@ export namespace Prisma {
     varnish_param?: VarnishParamUpdateOneWithoutStatusesNestedInput
     offset_param?: OffsetParamUpdateOneWithoutStatusesNestedInput
     sealant_param?: SealantParamUpdateOneWithoutStatusesNestedInput
+    laboratory_lock?: LaboratoryLockUpdateOneWithoutStatusesNestedInput
   }
 
   export type StatusUncheckedUpdateWithoutPostInput = {
@@ -70804,6 +76113,8 @@ export namespace Prisma {
     varnish_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     offset_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     sealant_param_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
+    laboratory_lock_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type StatusUncheckedUpdateManyWithoutPostInput = {
@@ -70821,6 +76132,8 @@ export namespace Prisma {
     varnish_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     offset_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     sealant_param_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
+    laboratory_lock_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type DefectUpdateWithoutPostInput = {
@@ -70909,6 +76222,37 @@ export namespace Prisma {
     end_time?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     total_duration?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     work_duration?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  }
+
+  export type LaboratoryLockUpdateWithoutPostInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    laboratory_lock_reason?: LaboratoryLockReasonUpdateOneRequiredWithoutLaboratoryLocksNestedInput
+    laboratory_assistant?: LaboratoryAssistantUpdateOneRequiredWithoutLaboratoryLocksNestedInput
+    summary?: SummaryUpdateOneRequiredWithoutLaboratory_locksNestedInput
+    statuses?: StatusUpdateManyWithoutLaboratory_lockNestedInput
+  }
+
+  export type LaboratoryLockUncheckedUpdateWithoutPostInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    laboratory_lock_reason_id?: IntFieldUpdateOperationsInput | number
+    laboratory_assistant_id?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    summary_id?: IntFieldUpdateOperationsInput | number
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    statuses?: StatusUncheckedUpdateManyWithoutLaboratory_lockNestedInput
+  }
+
+  export type LaboratoryLockUncheckedUpdateManyWithoutPostInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    laboratory_lock_reason_id?: IntFieldUpdateOperationsInput | number
+    laboratory_assistant_id?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    summary_id?: IntFieldUpdateOperationsInput | number
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type EmployeeCreateManyRankInput = {
@@ -71033,6 +76377,8 @@ export namespace Prisma {
     varnish_param_id?: number | null
     offset_param_id?: number | null
     sealant_param_id?: number | null
+    is_locked?: boolean
+    laboratory_lock_id?: number | null
   }
 
   export type OperationPictureCreateManyOperationInput = {
@@ -71047,6 +76393,7 @@ export namespace Prisma {
     idle_time?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     finished?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
     summary?: SummaryUpdateOneRequiredWithoutStatusesNestedInput
     post?: PostUpdateOneRequiredWithoutStatusesNestedInput
     employee?: EmployeeUpdateOneWithoutStatusesNestedInput
@@ -71055,6 +76402,7 @@ export namespace Prisma {
     varnish_param?: VarnishParamUpdateOneWithoutStatusesNestedInput
     offset_param?: OffsetParamUpdateOneWithoutStatusesNestedInput
     sealant_param?: SealantParamUpdateOneWithoutStatusesNestedInput
+    laboratory_lock?: LaboratoryLockUpdateOneWithoutStatusesNestedInput
   }
 
   export type StatusUncheckedUpdateWithoutOperationInput = {
@@ -71072,6 +76420,8 @@ export namespace Prisma {
     varnish_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     offset_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     sealant_param_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
+    laboratory_lock_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type StatusUncheckedUpdateManyWithoutOperationInput = {
@@ -71089,6 +76439,8 @@ export namespace Prisma {
     varnish_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     offset_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     sealant_param_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
+    laboratory_lock_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type OperationPictureUpdateWithoutOperationInput = {
@@ -71236,6 +76588,8 @@ export namespace Prisma {
     varnish_param_id?: number | null
     offset_param_id?: number | null
     sealant_param_id?: number | null
+    is_locked?: boolean
+    laboratory_lock_id?: number | null
   }
 
   export type MaintenanceLogUpdateWithoutSessionInput = {
@@ -71273,6 +76627,7 @@ export namespace Prisma {
     idle_time?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     finished?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
     summary?: SummaryUpdateOneRequiredWithoutStatusesNestedInput
     post?: PostUpdateOneRequiredWithoutStatusesNestedInput
     operation?: OperationUpdateOneWithoutStatusesNestedInput
@@ -71281,6 +76636,7 @@ export namespace Prisma {
     varnish_param?: VarnishParamUpdateOneWithoutStatusesNestedInput
     offset_param?: OffsetParamUpdateOneWithoutStatusesNestedInput
     sealant_param?: SealantParamUpdateOneWithoutStatusesNestedInput
+    laboratory_lock?: LaboratoryLockUpdateOneWithoutStatusesNestedInput
   }
 
   export type StatusUncheckedUpdateWithoutMaintenance_sessionInput = {
@@ -71298,6 +76654,8 @@ export namespace Prisma {
     varnish_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     offset_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     sealant_param_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
+    laboratory_lock_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type StatusUncheckedUpdateManyWithoutMaintenance_sessionInput = {
@@ -71315,6 +76673,8 @@ export namespace Prisma {
     varnish_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     offset_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     sealant_param_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
+    laboratory_lock_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type UserRoleCreateManyUserInput = {
@@ -71485,6 +76845,8 @@ export namespace Prisma {
     varnish_param_id?: number | null
     offset_param_id?: number | null
     sealant_param_id?: number | null
+    is_locked?: boolean
+    laboratory_lock_id?: number | null
   }
 
   export type ConsumedMaterialUpdateWithoutEmployeeInput = {
@@ -71840,6 +77202,7 @@ export namespace Prisma {
     idle_time?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     finished?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
     summary?: SummaryUpdateOneRequiredWithoutStatusesNestedInput
     post?: PostUpdateOneRequiredWithoutStatusesNestedInput
     operation?: OperationUpdateOneWithoutStatusesNestedInput
@@ -71848,6 +77211,7 @@ export namespace Prisma {
     varnish_param?: VarnishParamUpdateOneWithoutStatusesNestedInput
     offset_param?: OffsetParamUpdateOneWithoutStatusesNestedInput
     sealant_param?: SealantParamUpdateOneWithoutStatusesNestedInput
+    laboratory_lock?: LaboratoryLockUpdateOneWithoutStatusesNestedInput
   }
 
   export type StatusUncheckedUpdateWithoutEmployeeInput = {
@@ -71865,6 +77229,8 @@ export namespace Prisma {
     varnish_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     offset_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     sealant_param_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
+    laboratory_lock_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type StatusUncheckedUpdateManyWithoutEmployeeInput = {
@@ -71882,6 +77248,8 @@ export namespace Prisma {
     varnish_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     offset_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     sealant_param_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
+    laboratory_lock_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type SummaryCreateManyProductInput = {
@@ -72045,6 +77413,7 @@ export namespace Prisma {
     statuses?: StatusUpdateManyWithoutSummaryNestedInput
     defects?: DefectUpdateManyWithoutSummaryNestedInput
     crew?: CrewUpdateOneWithoutSummariesNestedInput
+    laboratory_locks?: LaboratoryLockUpdateManyWithoutSummaryNestedInput
   }
 
   export type SummaryUncheckedUpdateWithoutProductInput = {
@@ -72067,6 +77436,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxUncheckedUpdateManyWithoutSummaryNestedInput
     statuses?: StatusUncheckedUpdateManyWithoutSummaryNestedInput
     defects?: DefectUncheckedUpdateManyWithoutSummaryNestedInput
+    laboratory_locks?: LaboratoryLockUncheckedUpdateManyWithoutSummaryNestedInput
   }
 
   export type SummaryUncheckedUpdateManyWithoutProductInput = {
@@ -72499,6 +77869,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxUpdateManyWithoutSummaryNestedInput
     statuses?: StatusUpdateManyWithoutSummaryNestedInput
     defects?: DefectUpdateManyWithoutSummaryNestedInput
+    laboratory_locks?: LaboratoryLockUpdateManyWithoutSummaryNestedInput
   }
 
   export type SummaryUncheckedUpdateWithoutCrewInput = {
@@ -72521,6 +77892,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxUncheckedUpdateManyWithoutSummaryNestedInput
     statuses?: StatusUncheckedUpdateManyWithoutSummaryNestedInput
     defects?: DefectUncheckedUpdateManyWithoutSummaryNestedInput
+    laboratory_locks?: LaboratoryLockUncheckedUpdateManyWithoutSummaryNestedInput
   }
 
   export type SummaryUncheckedUpdateManyWithoutCrewInput = {
@@ -72622,6 +77994,7 @@ export namespace Prisma {
     statuses?: StatusUpdateManyWithoutSummaryNestedInput
     defects?: DefectUpdateManyWithoutSummaryNestedInput
     crew?: CrewUpdateOneWithoutSummariesNestedInput
+    laboratory_locks?: LaboratoryLockUpdateManyWithoutSummaryNestedInput
   }
 
   export type SummaryUncheckedUpdateWithoutBatchInput = {
@@ -72644,6 +78017,7 @@ export namespace Prisma {
     production_boxes?: ProductionBoxUncheckedUpdateManyWithoutSummaryNestedInput
     statuses?: StatusUncheckedUpdateManyWithoutSummaryNestedInput
     defects?: DefectUncheckedUpdateManyWithoutSummaryNestedInput
+    laboratory_locks?: LaboratoryLockUncheckedUpdateManyWithoutSummaryNestedInput
   }
 
   export type SummaryUncheckedUpdateManyWithoutBatchInput = {
@@ -72859,12 +78233,24 @@ export namespace Prisma {
     varnish_param_id?: number | null
     offset_param_id?: number | null
     sealant_param_id?: number | null
+    is_locked?: boolean
+    laboratory_lock_id?: number | null
   }
 
   export type DefectCreateManySummaryInput = {
     id?: number
     post_id: number
     value: number
+  }
+
+  export type LaboratoryLockCreateManySummaryInput = {
+    id?: number
+    laboratory_lock_reason_id: number
+    laboratory_assistant_id: number
+    createdAt?: Date | string
+    post_id: number
+    is_active?: boolean
+    closedAt?: Date | string | null
   }
 
   export type SpecificationUpdateWithoutSummaryInput = {
@@ -73251,6 +78637,7 @@ export namespace Prisma {
     idle_time?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     finished?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
     post?: PostUpdateOneRequiredWithoutStatusesNestedInput
     operation?: OperationUpdateOneWithoutStatusesNestedInput
     employee?: EmployeeUpdateOneWithoutStatusesNestedInput
@@ -73259,6 +78646,7 @@ export namespace Prisma {
     varnish_param?: VarnishParamUpdateOneWithoutStatusesNestedInput
     offset_param?: OffsetParamUpdateOneWithoutStatusesNestedInput
     sealant_param?: SealantParamUpdateOneWithoutStatusesNestedInput
+    laboratory_lock?: LaboratoryLockUpdateOneWithoutStatusesNestedInput
   }
 
   export type StatusUncheckedUpdateWithoutSummaryInput = {
@@ -73276,6 +78664,8 @@ export namespace Prisma {
     varnish_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     offset_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     sealant_param_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
+    laboratory_lock_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type StatusUncheckedUpdateManyWithoutSummaryInput = {
@@ -73293,6 +78683,8 @@ export namespace Prisma {
     varnish_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     offset_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     sealant_param_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
+    laboratory_lock_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type DefectUpdateWithoutSummaryInput = {
@@ -73310,6 +78702,194 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     post_id?: IntFieldUpdateOperationsInput | number
     value?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type LaboratoryLockUpdateWithoutSummaryInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    laboratory_lock_reason?: LaboratoryLockReasonUpdateOneRequiredWithoutLaboratoryLocksNestedInput
+    laboratory_assistant?: LaboratoryAssistantUpdateOneRequiredWithoutLaboratoryLocksNestedInput
+    post?: PostUpdateOneRequiredWithoutLaboratoryLocksNestedInput
+    statuses?: StatusUpdateManyWithoutLaboratory_lockNestedInput
+  }
+
+  export type LaboratoryLockUncheckedUpdateWithoutSummaryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    laboratory_lock_reason_id?: IntFieldUpdateOperationsInput | number
+    laboratory_assistant_id?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    post_id?: IntFieldUpdateOperationsInput | number
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    statuses?: StatusUncheckedUpdateManyWithoutLaboratory_lockNestedInput
+  }
+
+  export type LaboratoryLockUncheckedUpdateManyWithoutSummaryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    laboratory_lock_reason_id?: IntFieldUpdateOperationsInput | number
+    laboratory_assistant_id?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    post_id?: IntFieldUpdateOperationsInput | number
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type StatusCreateManyLaboratory_lockInput = {
+    id?: number
+    summary_id: number
+    post_id: number
+    counter_value: number
+    operation_id?: number | null
+    idle?: boolean
+    employee_id?: number | null
+    idle_time?: bigint | number | null
+    finished?: boolean
+    createdAt?: Date | string
+    maintenance_session_id?: number | null
+    extrusion_param_id?: number | null
+    varnish_param_id?: number | null
+    offset_param_id?: number | null
+    sealant_param_id?: number | null
+    is_locked?: boolean
+  }
+
+  export type StatusUpdateWithoutLaboratory_lockInput = {
+    counter_value?: IntFieldUpdateOperationsInput | number
+    idle?: BoolFieldUpdateOperationsInput | boolean
+    idle_time?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    finished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
+    summary?: SummaryUpdateOneRequiredWithoutStatusesNestedInput
+    post?: PostUpdateOneRequiredWithoutStatusesNestedInput
+    operation?: OperationUpdateOneWithoutStatusesNestedInput
+    employee?: EmployeeUpdateOneWithoutStatusesNestedInput
+    maintenance_session?: MaintenanceSessionUpdateOneWithoutStatusesNestedInput
+    extrusion_param?: ExtrusionParamUpdateOneWithoutStatusesNestedInput
+    varnish_param?: VarnishParamUpdateOneWithoutStatusesNestedInput
+    offset_param?: OffsetParamUpdateOneWithoutStatusesNestedInput
+    sealant_param?: SealantParamUpdateOneWithoutStatusesNestedInput
+  }
+
+  export type StatusUncheckedUpdateWithoutLaboratory_lockInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    summary_id?: IntFieldUpdateOperationsInput | number
+    post_id?: IntFieldUpdateOperationsInput | number
+    counter_value?: IntFieldUpdateOperationsInput | number
+    operation_id?: NullableIntFieldUpdateOperationsInput | number | null
+    idle?: BoolFieldUpdateOperationsInput | boolean
+    employee_id?: NullableIntFieldUpdateOperationsInput | number | null
+    idle_time?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    finished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    maintenance_session_id?: NullableIntFieldUpdateOperationsInput | number | null
+    extrusion_param_id?: NullableIntFieldUpdateOperationsInput | number | null
+    varnish_param_id?: NullableIntFieldUpdateOperationsInput | number | null
+    offset_param_id?: NullableIntFieldUpdateOperationsInput | number | null
+    sealant_param_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type StatusUncheckedUpdateManyWithoutLaboratory_lockInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    summary_id?: IntFieldUpdateOperationsInput | number
+    post_id?: IntFieldUpdateOperationsInput | number
+    counter_value?: IntFieldUpdateOperationsInput | number
+    operation_id?: NullableIntFieldUpdateOperationsInput | number | null
+    idle?: BoolFieldUpdateOperationsInput | boolean
+    employee_id?: NullableIntFieldUpdateOperationsInput | number | null
+    idle_time?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    finished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    maintenance_session_id?: NullableIntFieldUpdateOperationsInput | number | null
+    extrusion_param_id?: NullableIntFieldUpdateOperationsInput | number | null
+    varnish_param_id?: NullableIntFieldUpdateOperationsInput | number | null
+    offset_param_id?: NullableIntFieldUpdateOperationsInput | number | null
+    sealant_param_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type LaboratoryLockCreateManyLaboratory_lock_reasonInput = {
+    id?: number
+    laboratory_assistant_id: number
+    createdAt?: Date | string
+    summary_id: number
+    post_id: number
+    is_active?: boolean
+    closedAt?: Date | string | null
+  }
+
+  export type LaboratoryLockUpdateWithoutLaboratory_lock_reasonInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    laboratory_assistant?: LaboratoryAssistantUpdateOneRequiredWithoutLaboratoryLocksNestedInput
+    summary?: SummaryUpdateOneRequiredWithoutLaboratory_locksNestedInput
+    post?: PostUpdateOneRequiredWithoutLaboratoryLocksNestedInput
+    statuses?: StatusUpdateManyWithoutLaboratory_lockNestedInput
+  }
+
+  export type LaboratoryLockUncheckedUpdateWithoutLaboratory_lock_reasonInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    laboratory_assistant_id?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    summary_id?: IntFieldUpdateOperationsInput | number
+    post_id?: IntFieldUpdateOperationsInput | number
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    statuses?: StatusUncheckedUpdateManyWithoutLaboratory_lockNestedInput
+  }
+
+  export type LaboratoryLockUncheckedUpdateManyWithoutLaboratory_lock_reasonInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    laboratory_assistant_id?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    summary_id?: IntFieldUpdateOperationsInput | number
+    post_id?: IntFieldUpdateOperationsInput | number
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type LaboratoryLockCreateManyLaboratory_assistantInput = {
+    id?: number
+    laboratory_lock_reason_id: number
+    createdAt?: Date | string
+    summary_id: number
+    post_id: number
+    is_active?: boolean
+    closedAt?: Date | string | null
+  }
+
+  export type LaboratoryLockUpdateWithoutLaboratory_assistantInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    laboratory_lock_reason?: LaboratoryLockReasonUpdateOneRequiredWithoutLaboratoryLocksNestedInput
+    summary?: SummaryUpdateOneRequiredWithoutLaboratory_locksNestedInput
+    post?: PostUpdateOneRequiredWithoutLaboratoryLocksNestedInput
+    statuses?: StatusUpdateManyWithoutLaboratory_lockNestedInput
+  }
+
+  export type LaboratoryLockUncheckedUpdateWithoutLaboratory_assistantInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    laboratory_lock_reason_id?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    summary_id?: IntFieldUpdateOperationsInput | number
+    post_id?: IntFieldUpdateOperationsInput | number
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    statuses?: StatusUncheckedUpdateManyWithoutLaboratory_lockNestedInput
+  }
+
+  export type LaboratoryLockUncheckedUpdateManyWithoutLaboratory_assistantInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    laboratory_lock_reason_id?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    summary_id?: IntFieldUpdateOperationsInput | number
+    post_id?: IntFieldUpdateOperationsInput | number
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SpecificationCreateManyMaterialInput = {
@@ -73398,6 +78978,8 @@ export namespace Prisma {
     varnish_param_id?: number | null
     offset_param_id?: number | null
     sealant_param_id?: number | null
+    is_locked?: boolean
+    laboratory_lock_id?: number | null
   }
 
   export type StatusUpdateWithoutExtrusion_paramInput = {
@@ -73406,6 +78988,7 @@ export namespace Prisma {
     idle_time?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     finished?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
     summary?: SummaryUpdateOneRequiredWithoutStatusesNestedInput
     post?: PostUpdateOneRequiredWithoutStatusesNestedInput
     operation?: OperationUpdateOneWithoutStatusesNestedInput
@@ -73414,6 +78997,7 @@ export namespace Prisma {
     varnish_param?: VarnishParamUpdateOneWithoutStatusesNestedInput
     offset_param?: OffsetParamUpdateOneWithoutStatusesNestedInput
     sealant_param?: SealantParamUpdateOneWithoutStatusesNestedInput
+    laboratory_lock?: LaboratoryLockUpdateOneWithoutStatusesNestedInput
   }
 
   export type StatusUncheckedUpdateWithoutExtrusion_paramInput = {
@@ -73431,6 +79015,8 @@ export namespace Prisma {
     varnish_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     offset_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     sealant_param_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
+    laboratory_lock_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type StatusUncheckedUpdateManyWithoutExtrusion_paramInput = {
@@ -73448,6 +79034,8 @@ export namespace Prisma {
     varnish_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     offset_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     sealant_param_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
+    laboratory_lock_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type StatusCreateManyVarnish_paramInput = {
@@ -73465,6 +79053,8 @@ export namespace Prisma {
     extrusion_param_id?: number | null
     offset_param_id?: number | null
     sealant_param_id?: number | null
+    is_locked?: boolean
+    laboratory_lock_id?: number | null
   }
 
   export type StatusUpdateWithoutVarnish_paramInput = {
@@ -73473,6 +79063,7 @@ export namespace Prisma {
     idle_time?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     finished?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
     summary?: SummaryUpdateOneRequiredWithoutStatusesNestedInput
     post?: PostUpdateOneRequiredWithoutStatusesNestedInput
     operation?: OperationUpdateOneWithoutStatusesNestedInput
@@ -73481,6 +79072,7 @@ export namespace Prisma {
     extrusion_param?: ExtrusionParamUpdateOneWithoutStatusesNestedInput
     offset_param?: OffsetParamUpdateOneWithoutStatusesNestedInput
     sealant_param?: SealantParamUpdateOneWithoutStatusesNestedInput
+    laboratory_lock?: LaboratoryLockUpdateOneWithoutStatusesNestedInput
   }
 
   export type StatusUncheckedUpdateWithoutVarnish_paramInput = {
@@ -73498,6 +79090,8 @@ export namespace Prisma {
     extrusion_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     offset_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     sealant_param_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
+    laboratory_lock_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type StatusUncheckedUpdateManyWithoutVarnish_paramInput = {
@@ -73515,6 +79109,8 @@ export namespace Prisma {
     extrusion_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     offset_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     sealant_param_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
+    laboratory_lock_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type StatusCreateManyOffset_paramInput = {
@@ -73532,6 +79128,8 @@ export namespace Prisma {
     extrusion_param_id?: number | null
     varnish_param_id?: number | null
     sealant_param_id?: number | null
+    is_locked?: boolean
+    laboratory_lock_id?: number | null
   }
 
   export type StatusUpdateWithoutOffset_paramInput = {
@@ -73540,6 +79138,7 @@ export namespace Prisma {
     idle_time?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     finished?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
     summary?: SummaryUpdateOneRequiredWithoutStatusesNestedInput
     post?: PostUpdateOneRequiredWithoutStatusesNestedInput
     operation?: OperationUpdateOneWithoutStatusesNestedInput
@@ -73548,6 +79147,7 @@ export namespace Prisma {
     extrusion_param?: ExtrusionParamUpdateOneWithoutStatusesNestedInput
     varnish_param?: VarnishParamUpdateOneWithoutStatusesNestedInput
     sealant_param?: SealantParamUpdateOneWithoutStatusesNestedInput
+    laboratory_lock?: LaboratoryLockUpdateOneWithoutStatusesNestedInput
   }
 
   export type StatusUncheckedUpdateWithoutOffset_paramInput = {
@@ -73565,6 +79165,8 @@ export namespace Prisma {
     extrusion_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     varnish_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     sealant_param_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
+    laboratory_lock_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type StatusUncheckedUpdateManyWithoutOffset_paramInput = {
@@ -73582,6 +79184,8 @@ export namespace Prisma {
     extrusion_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     varnish_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     sealant_param_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
+    laboratory_lock_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type StatusCreateManySealant_paramInput = {
@@ -73599,6 +79203,8 @@ export namespace Prisma {
     extrusion_param_id?: number | null
     varnish_param_id?: number | null
     offset_param_id?: number | null
+    is_locked?: boolean
+    laboratory_lock_id?: number | null
   }
 
   export type StatusUpdateWithoutSealant_paramInput = {
@@ -73607,6 +79213,7 @@ export namespace Prisma {
     idle_time?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     finished?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
     summary?: SummaryUpdateOneRequiredWithoutStatusesNestedInput
     post?: PostUpdateOneRequiredWithoutStatusesNestedInput
     operation?: OperationUpdateOneWithoutStatusesNestedInput
@@ -73615,6 +79222,7 @@ export namespace Prisma {
     extrusion_param?: ExtrusionParamUpdateOneWithoutStatusesNestedInput
     varnish_param?: VarnishParamUpdateOneWithoutStatusesNestedInput
     offset_param?: OffsetParamUpdateOneWithoutStatusesNestedInput
+    laboratory_lock?: LaboratoryLockUpdateOneWithoutStatusesNestedInput
   }
 
   export type StatusUncheckedUpdateWithoutSealant_paramInput = {
@@ -73632,6 +79240,8 @@ export namespace Prisma {
     extrusion_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     varnish_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     offset_param_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
+    laboratory_lock_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type StatusUncheckedUpdateManyWithoutSealant_paramInput = {
@@ -73649,6 +79259,8 @@ export namespace Prisma {
     extrusion_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     varnish_param_id?: NullableIntFieldUpdateOperationsInput | number | null
     offset_param_id?: NullableIntFieldUpdateOperationsInput | number | null
+    is_locked?: BoolFieldUpdateOperationsInput | boolean
+    laboratory_lock_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
 

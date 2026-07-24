@@ -1,6 +1,6 @@
 import { ITreshold } from "src/tresholds/dto/get-tresholds.response";
 
-type state = "idle" | "working" | "finished";
+type state = "idle" | "working" | "finished" | "locked";
 
 class IMaterial {
   code: string;
@@ -22,6 +22,7 @@ class IOperation {
 }
 export class IStatus {
   idle: boolean;
+  is_locked: boolean;
   finished: boolean;
   state: state;
   operation_description: string;

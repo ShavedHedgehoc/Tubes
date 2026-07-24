@@ -18,6 +18,7 @@ export default function PostIndicator({ postId, data }: Props) {
     working: "green.500",
     idle: "yellow.500",
     finished: "purple.500",
+    locked: "red.500",
     error: "red.500",
   };
   return (

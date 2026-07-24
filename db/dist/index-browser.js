@@ -169,7 +169,9 @@ exports.Prisma.StatusScalarFieldEnum = {
   extrusion_param_id: 'extrusion_param_id',
   varnish_param_id: 'varnish_param_id',
   offset_param_id: 'offset_param_id',
-  sealant_param_id: 'sealant_param_id'
+  sealant_param_id: 'sealant_param_id',
+  is_locked: 'is_locked',
+  laboratory_lock_id: 'laboratory_lock_id'
 };
 
 exports.Prisma.GoalScalarFieldEnum = {
@@ -323,6 +325,27 @@ exports.Prisma.SummaryScalarFieldEnum = {
   date: 'date',
   shift: 'shift',
   crew_id: 'crew_id'
+};
+
+exports.Prisma.LaboratoryLockScalarFieldEnum = {
+  id: 'id',
+  laboratory_lock_reason_id: 'laboratory_lock_reason_id',
+  laboratory_assistant_id: 'laboratory_assistant_id',
+  createdAt: 'createdAt',
+  summary_id: 'summary_id',
+  post_id: 'post_id',
+  is_active: 'is_active',
+  closedAt: 'closedAt'
+};
+
+exports.Prisma.LaboratoryLockReasonScalarFieldEnum = {
+  id: 'id',
+  value: 'value'
+};
+
+exports.Prisma.LaboratoryAssistantScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
 };
 
 exports.Prisma.DefectScalarFieldEnum = {
@@ -625,6 +648,9 @@ exports.Prisma.ModelName = {
   Printer: 'Printer',
   Lot: 'Lot',
   Summary: 'Summary',
+  LaboratoryLock: 'LaboratoryLock',
+  LaboratoryLockReason: 'LaboratoryLockReason',
+  LaboratoryAssistant: 'LaboratoryAssistant',
   Defect: 'Defect',
   Material: 'Material',
   Specification: 'Specification',

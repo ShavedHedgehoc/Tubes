@@ -265,6 +265,7 @@ export interface IStatus {
   state: state;
   operation_id: number | null;
   maintenance_session_id: number | null;
+  is_locked: boolean;
 }
 
 export interface IOperation {
