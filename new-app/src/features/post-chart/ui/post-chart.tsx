@@ -15,6 +15,7 @@ import { format } from "date-fns";
 const colors = {
   production: "#0d9488",
   idle: "#f59e0b",
+  lock: "#ef4444",
 };
 
 const chartConfig = {
@@ -51,16 +52,19 @@ type processedDataType = {
   idle_time: number | null;
   finished: boolean;
   createdAt: Date;
+  is_locked: boolean;
 };
 
 export function PostChart({
   chartData,
   idleIntervals,
   processedData,
+  lockIntervals,
 }: {
   chartData: chartDataType[];
   idleIntervals: idleIntervalType[];
   processedData: processedDataType[];
+  lockIntervals?: idleIntervalType[];
 }) {
   return (
     <ChartContainer config={chartConfig}>
@@ -123,6 +127,41 @@ export function PostChart({
             </React.Fragment>
           );
         })}
+
+        {lockIntervals &&
+          lockIntervals.map((interval, idx) => {
+            const isLastAndLocked =
+              idx === lockIntervals.length - 1 &&
+              processedData[processedData.length - 1].is_locked;
+
+            return (
+              <React.Fragment key={`lock-${idx}`}>
+                <ReferenceLine
+                  x={interval.start}
+                  stroke={colors.lock}
+                  strokeWidth={2}
+                  strokeDasharray="3 3"
+                  yAxisId="left"
+                />
+                {!isLastAndLocked && (
+                  <ReferenceLine
+                    x={interval.end}
+                    stroke={colors.lock}
+                    strokeWidth={2}
+                    yAxisId="left"
+                  />
+                )}
+                <ReferenceArea
+                  x1={interval.start}
+                  x2={interval.end}
+                  yAxisId="left"
+                  fill={colors.lock}
+                  fillOpacity={0.18}
+                  strokeOpacity={0}
+                />
+              </React.Fragment>
+            );
+          })}
         <Line
           dataKey="val"
           type="stepAfter"
@@ -141,8 +180,8 @@ export function PostChart({
               return (
                 <div className="flex flex-col">
                   <div className="text-lg">
-                    {data.isIdle && <span> {data.description}</span>}
-                    {!data.isIdle && <span>{data.val}</span>}
+                    {data.description && <span> {data.description}</span>}
+                    {!data.description && <span>{data.val}</span>}
                   </div>
                   <div className="flex flex-row gap-1">
                     {<span>{data.employee ?? "Неизвестно"}</span>}

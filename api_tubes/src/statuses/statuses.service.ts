@@ -72,7 +72,7 @@ export class StatusesService {
       // start idle processing
       if (lastStatusEntry.idle) {
         const timeDelta = now.getTime() - lastStatusEntry.createdAt.getTime();
-
+        // process maintence
         if (lastStatusEntry.maintenance_session_id) {
           const session = await tx.maintenanceSession.findUnique({
             where: { id: lastStatusEntry.maintenance_session_id },
@@ -96,6 +96,17 @@ export class StatusesService {
             });
           }
         }
+        // process close labLock
+        if (lastStatusEntry.laboratory_lock_id) {
+          // close lock record
+          await tx.laboratoryLock.update({
+            where: { id: lastStatusEntry.laboratory_lock_id },
+            data: {
+              is_active: false,
+              closedAt: new Date(),
+            },
+          });
+        }
 
         await tx.status.update({
           where: { id: lastStatusEntry.id },
@@ -112,9 +123,11 @@ export class StatusesService {
               finished: false,
               employee_id: dto.employee_id,
               counter_value: lastStatusEntry.counter_value,
+              laboratory_lock_id: lastStatusEntry.laboratory_lock_id,
             },
           });
         } else {
+          // lock if has active lock
           const labLockActive = await tx.laboratoryLock.findFirst({
             where: {
               summary_id: dto.summary_id,
@@ -212,6 +225,12 @@ export class StatusesService {
           employee: true,
           post: true,
           maintenance_session: { include: { maintenance: true } },
+          laboratory_lock: {
+            include: {
+              laboratory_lock_reason: true,
+              laboratory_assistant: true,
+            },
+          },
         },
         orderBy: [{ createdAt: "asc" }],
         take: query.limit,

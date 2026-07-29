@@ -99,7 +99,11 @@ export function PostDropdown({
         <DropdownMenuItem
           variant={"destructive"}
           onClick={handleClosePost}
-          disabled={postState !== "working" && postState !== "idle"}
+          disabled={
+            postState !== "working" &&
+            postState !== "idle" &&
+            postState !== "locked"
+          }
         >
           <StopCircle />
           <span className="font-semibold"> Закончить</span>

@@ -31,7 +31,14 @@ export const getSummaryStatuses = async ({
   };
 
   const mappedStatuses = statuses.map((status) => {
-    const { employee, operation, maintenance_session, post, ...rest } = status;
+    const {
+      employee,
+      operation,
+      maintenance_session,
+      post,
+      laboratory_lock,
+      ...rest
+    } = status;
     return {
       ...rest,
       operation_description: operation?.description ?? null,
@@ -40,6 +47,11 @@ export const getSummaryStatuses = async ({
       maintenance_description:
         maintenance_session?.maintenance?.description ?? null,
       employee_name: employee?.name ?? null,
+      laboratory_assistant_name:
+        laboratory_lock?.laboratory_assistant?.name ?? null,
+      laboratory_lock_reason:
+        laboratory_lock?.laboratory_lock_reason?.value ?? null,
+      has_laboratory_lock: !!laboratory_lock,
       post_val: post.value,
     };
   });

@@ -76,7 +76,13 @@ export default function Extrusion() {
     notFoundComponent: <Info message={AppMessages.ACTIVE_SUMMARY_NOT_FOUND} />,
     isLoading: isPendingSummary,
     isNotFound: isError,
-    lockComponent: <LockScreen />,
+    lockComponent: (
+      <LockScreen
+        lockReason={summaryData?.extrusionStatus.lock_reason ?? null}
+        labAssistant={summaryData?.extrusionStatus.lab_assistant ?? null}
+        lockDate={summaryData?.extrusionStatus.lock_date ?? null}
+      />
+    ),
     isLocked: summaryData?.extrusionStatus.is_locked ?? false,
   };
 

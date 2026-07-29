@@ -1,5 +1,11 @@
 import { Ban, Check, CircleDashed, Play, Timer } from "lucide-react";
-import { Card } from "@/shared/ui";
+import {
+  Card,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/shared/ui";
 import { cn } from "@/shared/lib";
 
 type IState = "working" | "idle" | "finished" | "locked" | "no_data";
@@ -9,6 +15,8 @@ export interface PostCardProps {
   productionValue: number;
   employee: string;
   state: IState;
+  hasLock: boolean;
+  lockReason: string | null;
   summary_id: number;
   post_id: number;
   post_name: string;
@@ -67,10 +75,48 @@ export default function PostCard(props: PostCardProps) {
       )}
     >
       <div className="absolute top-0 right-0 z-10">{props.action}</div>
-      <div className="mb-auto">
+      <div className="mb-auto flex items-center gap-1.5">
         <h3 className="text-xs font-black uppercase tracking-widest opacity-80">
           {props.title}
         </h3>
+
+        {props.hasLock && (
+          <TooltipProvider>
+            <Tooltip delayDuration={100}>
+              <TooltipTrigger asChild>
+                <button
+                  type="button"
+                  className={cn(
+                    "inline-flex items-center  outline-none cursor-help dynamic-lock-icon",
+                    props.state === "idle"
+                      ? "text-red-500 dark:text-red-600"
+                      : "text-white",
+                  )}
+                >
+                  <svg
+                    xmlns="http://w3.org"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="h-3.5 w-3.5"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M12 1.5a5.25 5.25 0 0 0-5.25 5.25v3a3 3 0 0 0-3 3v6.75a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3v-6.75a3 3 0 0 0-3-3v-3c0-2.9-2.35-5.25-5.25-5.25Zm3.75 8.25v-3a3.75 3.75 0 1 0-7.5 0v3h7.5Z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+              </TooltipTrigger>
+
+              <TooltipContent
+                side="top"
+                className="max-w-xs text-xs font-medium normal-case tracking-normal"
+              >
+                <p>{props.lockReason || "Причина не указана"}</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        )}
       </div>
 
       <div className="flex flex-col items-center justify-center my-2 gap-1">

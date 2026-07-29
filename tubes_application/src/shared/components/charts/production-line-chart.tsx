@@ -45,6 +45,24 @@ export default function ProductionLineChart({
     }
   });
 
+  const lockIntervals: { start: number; end: number }[] = [];
+  let currentLockStart: number | null = null;
+  processedData.forEach((item, index) => {
+    if (item.is_locked) {
+      if (currentLockStart === null) {
+        currentLockStart = item.time;
+      }
+    } else {
+      if (currentLockStart !== null) {
+        lockIntervals.push({ start: currentLockStart, end: item.time });
+        currentLockStart = null;
+      }
+    }
+    if (index === processedData.length - 1 && currentLockStart !== null) {
+      lockIntervals.push({ start: currentLockStart, end: item.time });
+    }
+  });
+
   const chartData = processedData.reduce(
     (acc, item, index, array) => {
       const prevItem = array[index - 1];
@@ -69,6 +87,7 @@ export default function ProductionLineChart({
   });
 
   const orangeColor = lineChart.color("orange.solid");
+  const redColor = lineChart.color("red.solid");
 
   if (!summaryData?.tresholds) return null;
 
@@ -134,6 +153,41 @@ export default function ProductionLineChart({
                       </React.Fragment>
                     );
                   })}
+
+                  {lockIntervals &&
+                    lockIntervals.map((interval, idx) => {
+                      const isLastAndLocked =
+                        idx === lockIntervals.length - 1 &&
+                        processedData[processedData.length - 1].is_locked;
+
+                      return (
+                        <React.Fragment key={`lock-${idx}`}>
+                          <ReferenceLine
+                            x={interval.start}
+                            stroke={redColor}
+                            strokeWidth={2}
+                            // strokeDasharray="3 3"
+                            yAxisId="left"
+                          />
+                          {!isLastAndLocked && (
+                            <ReferenceLine
+                              x={interval.end}
+                              stroke={redColor}
+                              strokeWidth={2}
+                              yAxisId="left"
+                            />
+                          )}
+                          <ReferenceArea
+                            x1={interval.start}
+                            x2={interval.end}
+                            yAxisId="left"
+                            fill={redColor}
+                            fillOpacity={0.28}
+                            strokeOpacity={0}
+                          />
+                        </React.Fragment>
+                      );
+                    })}
 
                   <Legend content={<Chart.Legend />} />
 

@@ -41,7 +41,11 @@ export async function getStatusesList({
       }
     }
     let state: StatusTableRowState = "Внесение параметров";
-    if (status.idle) {
+    if (status.is_locked) {
+      state = "Блокировка лабораторией";
+    } else if (!!status.laboratory_lock && !status.idle) {
+      state = "Конец блокировки";
+    } else if (status.idle) {
       state = "Начало операции";
     } else if (status.finished) {
       state = "Окончание работы";
@@ -55,7 +59,14 @@ export async function getStatusesList({
       sealant_param_id: status.sealant_param_id,
       maintenance_session_id: status.maintenance_session_id,
     };
-    const { employee, operation, maintenance_session, post, ...rest } = status;
+    const {
+      employee,
+      operation,
+      maintenance_session,
+      post,
+      laboratory_lock,
+      ...rest
+    } = status;
     return {
       ...rest,
       operation_description: operation?.description ?? null,
@@ -65,6 +76,11 @@ export async function getStatusesList({
       post_val: post.value,
       ids: ids,
       state: state,
+      laboratory_assistant_name:
+        laboratory_lock?.laboratory_assistant?.name ?? null,
+      laboratory_lock_reason:
+        laboratory_lock?.laboratory_lock_reason?.value ?? null,
+      has_laboratory_lock: !!laboratory_lock,
     };
   });
   return {

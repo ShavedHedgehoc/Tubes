@@ -3,6 +3,8 @@ type State = "idle" | "working" | "finished";
 export type PostData = {
   production: number | null;
   state: State;
+  hasLock: boolean;
+  lockReason: string | null;
   employee: string | null;
 };
 

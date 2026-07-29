@@ -74,7 +74,13 @@ export default function Offset() {
     notFoundComponent: <Info message={AppMessages.ACTIVE_SUMMARY_NOT_FOUND} />,
     isLoading: isPendingSummary,
     isNotFound: isError,
-    lockComponent: <LockScreen />,
+    lockComponent: (
+      <LockScreen
+        lockReason={summaryData?.offsetStatus.lock_reason ?? null}
+        labAssistant={summaryData?.offsetStatus.lab_assistant ?? null}
+        lockDate={summaryData?.offsetStatus.lock_date ?? null}
+      />
+    ),
     isLocked: summaryData?.offsetStatus.is_locked ?? false,
   };
 

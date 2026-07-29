@@ -41,10 +41,34 @@ type MaintenanceSession = {
   maintenance: Maintenance;
 };
 
+type LaboratoryLockReason = {
+  id: number;
+  value: string;
+};
+
+type LaboratoryAssistant = {
+  id: number;
+  name: string;
+};
+
+type LaboratoryLock = {
+  id: number;
+  laboratory_lock_reason_id: number;
+  laboratory_assistant_id: number;
+  createdAt: Date;
+  summary_id: number;
+  post_id: number;
+  is_active: boolean;
+  closedAt: Date | null;
+  laboratory_assistant: LaboratoryAssistant;
+  laboratory_lock_reason: LaboratoryLockReason;
+};
+
 type StatusRow = StatusDto & {
   employee: Employee | null;
   operation: Operation | null;
   maintenance_session: MaintenanceSession | null;
+  laboratory_lock: LaboratoryLock | null;
   post: Post;
 };
 export type StatusResponseDto = {

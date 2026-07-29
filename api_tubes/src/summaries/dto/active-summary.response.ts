@@ -11,6 +11,7 @@ class IMaterial {
 export class IStatusCounter {
   counter_value: number;
   idle: boolean;
+  is_locked: boolean;
   createdAt: Date;
 }
 
@@ -29,6 +30,9 @@ export class IStatus {
   createdAt: Date | null;
   operation_id: number | null;
   maintenance_session_id: number | null;
+  lock_date: Date | null;
+  lock_reason: string | null;
+  lab_assistant: string | null;
 }
 class ISummaryData {
   id: number;

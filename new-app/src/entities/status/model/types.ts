@@ -19,6 +19,10 @@ export type StatusEntity = {
   varnish_param_id: number | null;
   offset_param_id: number | null;
   sealant_param_id: number | null;
+  // added
+  laboratory_lock_reason: string | null;
+  laboratory_assistant_name: string | null;
+  has_laboratory_lock: boolean;
 };
 
 type StatusTableRowState =

@@ -74,7 +74,13 @@ export default function Varnish() {
     notFoundComponent: <Info message={AppMessages.ACTIVE_SUMMARY_NOT_FOUND} />,
     isLoading: isPendingSummary,
     isNotFound: isError,
-    lockComponent: <LockScreen />,
+    lockComponent: (
+      <LockScreen
+        lockReason={summaryData?.varnishStatus.lock_reason ?? null}
+        labAssistant={summaryData?.varnishStatus.lab_assistant ?? null}
+        lockDate={summaryData?.varnishStatus.lock_date ?? null}
+      />
+    ),
     isLocked: summaryData?.varnishStatus.is_locked ?? false,
   };
 

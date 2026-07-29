@@ -101,6 +101,8 @@ export default function ConveyorCard({
               productionValue={post.data?.productionValue ?? 0}
               employee={post.data?.employeeName ?? ""}
               state={post.data?.postState ?? "no_data"}
+              hasLock={post.data?.hasLock ?? false}
+              lockReason={post.data?.lockReason ?? null}
               summary_id={conveyorData.summary!.id}
               post_id={post.id}
               post_name={post.name}

@@ -20,15 +20,26 @@ export async function getPostStatuses({
   );
 
   const mappedStatuses = res.statuses.map((status) => {
-    const { employee, operation, maintenance_session, post, ...rest } = status;
+    const {
+      employee,
+      operation,
+      maintenance_session,
+      post,
+      laboratory_lock,
+      ...rest
+    } = status;
     return {
       ...rest,
-
       operation_description: operation?.description ?? null,
       maintenance_description:
         maintenance_session?.maintenance?.description ?? null,
       employee_name: employee?.name ?? null,
       post_val: post.value,
+      laboratory_lock_reason:
+        laboratory_lock?.laboratory_lock_reason?.value ?? null,
+      laboratory_assistant_name:
+        laboratory_lock?.laboratory_assistant?.name ?? null,
+      has_laboratory_lock: !!status.laboratory_lock,
     };
   });
   return {

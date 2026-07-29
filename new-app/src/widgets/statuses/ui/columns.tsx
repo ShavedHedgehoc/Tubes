@@ -18,6 +18,8 @@ export const getStatusColumns = (): ColumnDef<StatusWithIdsEntity>[] => {
           state: status.state,
           operation: null,
           ids: status.ids,
+          lab_assistant: status.laboratory_assistant_name,
+          lab_lock_reason: status.laboratory_lock_reason,
         };
 
         return (

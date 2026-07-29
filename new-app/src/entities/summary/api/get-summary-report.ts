@@ -74,6 +74,11 @@ export const getSummaryReport = async ({
       varnish_param_id: status.varnish_param_id,
       offset_param_id: status.offset_param_id,
       sealant_param_id: status.sealant_param_id,
+      laboratory_assistant_name:
+        status.laboratory_lock?.laboratory_assistant?.name ?? null,
+      laboratory_lock_reason:
+        status.laboratory_lock?.laboratory_lock_reason?.value ?? null,
+      has_laboratory_lock: !!status.laboratory_lock,
     };
   });
 

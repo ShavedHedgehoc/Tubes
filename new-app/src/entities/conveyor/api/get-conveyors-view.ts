@@ -17,6 +17,8 @@ export async function getConveyorsView({
     if (!post) return null;
     return {
       postState: post.state,
+      hasLock: post.hasLock,
+      lockReason: post.lockReason,
       productionValue: post.production,
       employeeName: post.employee,
     };

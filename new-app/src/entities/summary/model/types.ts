@@ -150,6 +150,9 @@ export type StatusRow = {
   varnish_param_id: number | null;
   offset_param_id: number | null;
   sealant_param_id: number | null;
+  laboratory_assistant_name: string | null;
+  laboratory_lock_reason: string | null;
+  has_laboratory_lock: boolean;
 };
 
 export type SummaryStatusesResponse = SummaryWithStatusesBase & {

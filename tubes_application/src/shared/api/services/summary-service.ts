@@ -246,6 +246,7 @@ interface ISealantParams {
 export interface IStatusCounter {
   counter_value: number;
   idle: boolean;
+  is_locked: boolean;
   createdAt: Date;
 }
 
@@ -266,6 +267,9 @@ export interface IStatus {
   operation_id: number | null;
   maintenance_session_id: number | null;
   is_locked: boolean;
+  lock_date: Date | null;
+  lock_reason: string | null;
+  lab_assistant: string | null;
 }
 
 export interface IOperation {

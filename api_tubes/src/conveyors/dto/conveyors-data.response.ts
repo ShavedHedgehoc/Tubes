@@ -4,6 +4,8 @@ class PostData {
   production: number | null;
   state: State;
   employee: string | null;
+  hasLock: boolean;
+  lockReason: string | null;
 }
 
 class ConveyorSummary {

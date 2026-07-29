@@ -33,9 +33,9 @@ export class SummariesController {
   }
 
   @ApiOperation({
-    summary: "Установить/снять лабораторную блокировку сводки",
+    summary: "Установить/снять лабораторную блокировку поста",
     description:
-      "Переключает флаг isLocked на сводке и генерирует 4 записи блокировки/разблокировки в таблице Status для всех постов.",
+      "Создает запись блокировки/разблокировки в таблице Status для поста с переданным номером.",
   })
   @ApiOkResponse({
     description: "Успешное изменение состояния блокировки",
@@ -43,13 +43,13 @@ export class SummariesController {
       oneOf: [
         {
           example: {
-            message: "Сводка и посты успешно заблокированы",
+            message: "Пост успешно заблокирован",
             lock_id: 123,
           },
           description: "При переданном state: true",
         },
         {
-          example: { message: "Сводка и посты успешно разблокированы" },
+          example: { message: "Посты успешно разблокирован" },
           description: "При переданном state: false",
         },
       ],

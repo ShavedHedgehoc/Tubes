@@ -30,11 +30,7 @@ export const statusTableColumns: ColumnDef<StatusTableRow>[] = [
       const status = row.original;
       return (
         <div className="text-left">
-          {" "}
-          {status.state === "Блокировка лабораторией" ||
-          status.state === "Конец блокировки"
-            ? "-"
-            : status.employee}{" "}
+          {status.lab_assistant ?? status.employee}
         </div>
       );
     },
@@ -52,7 +48,13 @@ export const statusTableColumns: ColumnDef<StatusTableRow>[] = [
     header: () => <div className="text-left">Операция</div>,
     cell: ({ row }) => {
       const status = row.original;
-      return <div className="text-left"> {status.operation} </div>;
+      return (
+        <div className="text-left">
+          {status.state === "Блокировка лабораторией"
+            ? status.lab_lock_reason
+            : status.operation}
+        </div>
+      );
     },
     size: 400,
     minSize: 300,

@@ -31,6 +31,7 @@ export function PostChartCard({
   const {
     chartData,
     idleIntervals,
+    lockIntervals,
     processedData,
     totalIdleTimes,
     totalTime,
@@ -65,6 +66,7 @@ export function PostChartCard({
         <PostChart
           chartData={chartData}
           idleIntervals={idleIntervals}
+          lockIntervals={lockIntervals}
           processedData={processedData}
         />
       </CardContent>

@@ -74,7 +74,13 @@ export default function Sealant() {
     notFoundComponent: <Info message={AppMessages.ACTIVE_SUMMARY_NOT_FOUND} />,
     isLoading: isPendingSummary,
     isNotFound: isError,
-    lockComponent: <LockScreen />,
+    lockComponent: (
+      <LockScreen
+        lockReason={summaryData?.sealantStatus.lock_reason ?? null}
+        labAssistant={summaryData?.sealantStatus.lab_assistant ?? null}
+        lockDate={summaryData?.sealantStatus.lock_date ?? null}
+      />
+    ),
     isLocked: summaryData?.sealantStatus.is_locked ?? false,
   };
 

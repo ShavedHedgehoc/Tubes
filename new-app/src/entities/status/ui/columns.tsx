@@ -40,7 +40,12 @@ export const baseStatusColumns: ColumnDef<StatusWithIdsEntity>[] = [
     header: () => <div className="text-left">Сотрудник</div>,
     cell: ({ row }) => {
       const status = row.original;
-      return <div className="text-left"> {status.employee_name} </div>;
+      return (
+        <div className="text-left">
+          {" "}
+          {status.laboratory_assistant_name ?? status.employee_name}{" "}
+        </div>
+      );
     },
   },
   {
@@ -56,7 +61,15 @@ export const baseStatusColumns: ColumnDef<StatusWithIdsEntity>[] = [
     header: () => <div className="text-left">Операция</div>,
     cell: ({ row }) => {
       const status = row.original;
-      return <div className="text-left"> {status.operation_description} </div>;
+      return (
+        <div className="text-left">
+          {" "}
+          {status.state === "Блокировка лабораторией"
+            ? status.laboratory_lock_reason
+            : status.operation_description ||
+              status.maintenance_description}{" "}
+        </div>
+      );
     },
   },
 ];
