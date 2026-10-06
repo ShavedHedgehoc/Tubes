@@ -1,24 +1,18 @@
-import { RouteNames } from "@/shared/router/route-names";
-import { useNavigate } from "react-router-dom";
-import { useShallow } from "zustand/shallow";
+import { RouteNames } from '@/shared/router/route-names';
+import { useNavigate } from 'react-router-dom';
+import { useShallow } from 'zustand/shallow';
 
-import { useOffsetConveyorStore } from "../../store/use-offset-conveyor-store";
-import type { ISummary } from "@/shared/api/services/summary-service";
-import type { CreateStatusDto } from "@/shared/api/services/status-service";
-import { useOffsetEmployeeStore } from "../../store/use-offset-employee-store";
-import { useOffsetOperationStore } from "../../store/use-offset-operation-store";
-import { useCreateStatus } from "@/shared/api/use-create-status";
+import { useOffsetConveyorStore } from '../../store/use-offset-conveyor-store';
+import type { ISummary } from '@/shared/api/services/summary-service';
+import type { CreateStatusDto } from '@/shared/api/services/status-service';
+import { useOffsetEmployeeStore } from '../../store/use-offset-employee-store';
+import { useOffsetOperationStore } from '../../store/use-offset-operation-store';
+import { useCreateStatus } from '@/shared/api/use-create-status';
 
 export default function useOffsetOperationsMenu(summaryData: ISummary | null) {
-  const offsetConveyor = useOffsetConveyorStore(
-    useShallow((state) => state.offsetConveyor),
-  );
-  const employee = useOffsetEmployeeStore(
-    useShallow((state) => state.offsetEmployee),
-  );
-  const selectedOperation = useOffsetOperationStore(
-    useShallow((state) => state.selectedOperation),
-  );
+  const offsetConveyor = useOffsetConveyorStore(useShallow((state) => state.offsetConveyor));
+  const employee = useOffsetEmployeeStore(useShallow((state) => state.offsetEmployee));
+  const selectedOperation = useOffsetOperationStore(useShallow((state) => state.selectedOperation));
   const setSelectedOperation = useOffsetOperationStore(
     useShallow((state) => state.setSelectedOperation),
   );
@@ -39,11 +33,7 @@ export default function useOffsetOperationsMenu(summaryData: ISummary | null) {
         : false
       : false;
 
-  const setIdleButtonDisableCondition = !(
-    summaryData &&
-    employee &&
-    selectedOperation
-  );
+  const setIdleButtonDisableCondition = !(summaryData && employee && selectedOperation);
 
   const setWorkingButtonDisableCondition = !(summaryData && employee);
 

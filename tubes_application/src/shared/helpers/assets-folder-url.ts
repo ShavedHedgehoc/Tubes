@@ -1,2 +1,2 @@
 // export const AssestsFolderUrl = "../../assets";
-export const AssestsFolderUrl = "/images";
+export const AssestsFolderUrl = '/images';

@@ -1,9 +1,9 @@
-import type { ISummary } from "@/shared/api/services/summary-service";
-import { formatTimeOnly } from "@/shared/helpers/date-time-formatters";
-import { getStatusCountersData } from "@/shared/helpers/summary-data-parsers";
-import { Chart, useChart } from "@chakra-ui/charts";
-import { Box, VStack, Text } from "@chakra-ui/react";
-import React from "react";
+import type { ISummary } from '@/shared/api/services/summary-service';
+import { formatTimeOnly } from '@/shared/helpers/date-time-formatters';
+import { getStatusCountersData } from '@/shared/helpers/summary-data-parsers';
+import { Chart, useChart } from '@chakra-ui/charts';
+import { Box, VStack, Text } from '@chakra-ui/react';
+import React from 'react';
 import {
   CartesianGrid,
   XAxis,
@@ -14,7 +14,7 @@ import {
   ReferenceLine,
   ReferenceArea,
   ResponsiveContainer,
-} from "recharts";
+} from 'recharts';
 
 export default function ProductionLineChart({
   summaryData,
@@ -83,11 +83,11 @@ export default function ProductionLineChart({
 
   const lineChart = useChart({
     data: chartData,
-    series: [{ name: "val", color: "teal.solid", label: "Выработка" }],
+    series: [{ name: 'val', color: 'teal.solid', label: 'Выработка' }],
   });
 
-  const orangeColor = lineChart.color("orange.solid");
-  const redColor = lineChart.color("red.solid");
+  const orangeColor = lineChart.color('orange.solid');
+  const redColor = lineChart.color('red.solid');
 
   if (!summaryData?.tresholds) return null;
 
@@ -102,23 +102,20 @@ export default function ProductionLineChart({
                   data={lineChart.data}
                   margin={{ top: 25, right: 20, left: 0, bottom: 0 }}
                 >
-                  <CartesianGrid
-                    stroke={lineChart.color("border")}
-                    vertical={true}
-                  />
+                  <CartesianGrid stroke={lineChart.color('border')} vertical={true} />
 
                   <XAxis
                     type="number"
-                    domain={["dataMin", "dataMax"]}
-                    dataKey={lineChart.key("time")}
+                    domain={['dataMin', 'dataMax']}
+                    dataKey={lineChart.key('time')}
                     tickFormatter={(val) => formatTimeOnly(new Date(val))}
-                    stroke={lineChart.color("border")}
+                    stroke={lineChart.color('border')}
                   />
 
                   <YAxis
                     yAxisId="left"
-                    dataKey={lineChart.key("val")}
-                    stroke={lineChart.color("border")}
+                    dataKey={lineChart.key('val')}
+                    stroke={lineChart.color('border')}
                   />
 
                   {idleIntervals.map((interval, idx) => {
@@ -195,8 +192,8 @@ export default function ProductionLineChart({
                     yAxisId="left"
                     dot={false}
                     type="stepAfter"
-                    dataKey={lineChart.key("val")}
-                    stroke={lineChart.color("teal.solid")}
+                    dataKey={lineChart.key('val')}
+                    stroke={lineChart.color('teal.solid')}
                     strokeWidth={2}
                     isAnimationActive={false}
                     connectNulls={false}

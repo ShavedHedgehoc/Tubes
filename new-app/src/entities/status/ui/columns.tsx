@@ -43,7 +43,9 @@ export const baseStatusColumns: ColumnDef<StatusWithIdsEntity>[] = [
       return (
         <div className="text-left">
           {" "}
-          {status.laboratory_assistant_name ?? status.employee_name}{" "}
+          {status.laboratory_assistant_name ??
+            status.user_name ??
+            status.employee_name}
         </div>
       );
     },

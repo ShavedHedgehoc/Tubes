@@ -3,7 +3,7 @@ import { getConveyorsView } from "./get-conveyors-view";
 import { getConveyors } from "./get-conveyors";
 
 export const conveyorQueries = {
-  all: () => ["conveyorss"],
+  all: () => ["conveyors"],
   lists: () => [...conveyorQueries.all(), "list"],
   list: (options?: { isServer: boolean }) =>
     queryOptions({

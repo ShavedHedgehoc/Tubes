@@ -1,7 +1,7 @@
-import { formatTimeToString } from "@/shared/helpers/date-time-formatters";
-import { useDate } from "@/shared/helpers/use-date";
-import { VStack, Heading } from "@chakra-ui/react";
-import { useMemo } from "react";
+import { formatTimeToString } from '@/shared/helpers/date-time-formatters';
+import { useDate } from '@/shared/helpers/use-date';
+import { VStack, Heading } from '@chakra-ui/react';
+import { useMemo } from 'react';
 
 export default function InputTimer({
   date,
@@ -13,11 +13,11 @@ export default function InputTimer({
   checkInterval: number; // частота проверки в минутах
 }) {
   const { today } = useDate();
-  const notFoundString = "Данных о внесении параметров не найдено";
-  const firstString = "Время внесения параметров: ";
-  const secondString = "Следующее внесение через: ";
-  const thirdString = "ВНЕСИТЕ ПАРАМЕТРЫ!";
-  const fourthString = "Время простоя с последнего внесения: ";
+  const notFoundString = 'Данных о внесении параметров не найдено';
+  const firstString = 'Время внесения параметров: ';
+  const secondString = 'Следующее внесение через: ';
+  const thirdString = 'ВНЕСИТЕ ПАРАМЕТРЫ!';
+  const fourthString = 'Время простоя с последнего внесения: ';
 
   const { isOverdue, formattedTimeLeft, formattedIdle } = useMemo(() => {
     if (!date) return {};
@@ -30,9 +30,7 @@ export default function InputTimer({
       const seconds = Math.max(0, Math.floor((ms / 1000) % 60));
       const minutes = Math.max(0, Math.floor((ms / (1000 * 60)) % 60));
       const hours = Math.max(0, Math.floor(ms / (1000 * 60 * 60)));
-      return [hours, minutes, seconds]
-        .map((v) => v.toString().padStart(2, "0"))
-        .join(":");
+      return [hours, minutes, seconds].map((v) => v.toString().padStart(2, '0')).join(':');
     };
 
     return {
@@ -56,8 +54,8 @@ export default function InputTimer({
       <Heading size="sm">{`${fourthString} ${formattedIdle}`}</Heading>
       <Heading
         size="sm"
-        animation={isOverdue ? "colorCycle 2s infinite" : "none"}
-        color={isOverdue ? "red.500" : "inherit"}
+        animation={isOverdue ? 'colorCycle 2s infinite' : 'none'}
+        color={isOverdue ? 'red.500' : 'inherit'}
       >
         {isOverdue ? thirdString : `${secondString} ${formattedTimeLeft}`}
       </Heading>

@@ -1,5 +1,5 @@
-import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
 
 interface SimplyModalStore {
   open: boolean;
@@ -17,15 +17,10 @@ const createModalStore = (name: string) =>
     ),
   );
 
-export const useExtrusionAuthModalStore = createModalStore("Auth");
-export const useExtrusionLogoutModalStore = createModalStore("Logout");
-export const useExtrusionCloseConfirmModalStore =
-  createModalStore("CloseConfirm");
-export const useExtrusionMaterialScanModalStore =
-  createModalStore("MaterialScan");
-export const useExtrusionCloseSummaryModalStore =
-  createModalStore("CloseSummary");
-export const useExtrusionDefectInputModalStore =
-  createModalStore("DefectInput");
-export const useExtrusionMaintenanceModalStore =
-  createModalStore("Maintenance");
+export const useExtrusionAuthModalStore = createModalStore('Auth');
+export const useExtrusionLogoutModalStore = createModalStore('Logout');
+export const useExtrusionCloseConfirmModalStore = createModalStore('CloseConfirm');
+export const useExtrusionMaterialScanModalStore = createModalStore('MaterialScan');
+export const useExtrusionCloseSummaryModalStore = createModalStore('CloseSummary');
+export const useExtrusionDefectInputModalStore = createModalStore('DefectInput');
+export const useExtrusionMaintenanceModalStore = createModalStore('Maintenance');

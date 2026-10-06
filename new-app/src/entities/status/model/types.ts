@@ -22,6 +22,7 @@ export type StatusEntity = {
   // added
   laboratory_lock_reason: string | null;
   laboratory_assistant_name: string | null;
+  user_name: string | null;
   has_laboratory_lock: boolean;
 };
 

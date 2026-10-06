@@ -67,6 +67,7 @@ export function usePostChartCardData(statuses: StatusEntity[] = []) {
       totalTime > 0
         ? Number(((totalIdleTimes / totalTime) * 100).toFixed(2))
         : 0;
+
     const chartData = processedData.map((item) => {
       return {
         time: item.time,
@@ -77,7 +78,7 @@ export function usePostChartCardData(statuses: StatusEntity[] = []) {
             ? "Снятие блокировки"
             : item.operation_description || item.maintenance_description,
         employee: item.laboratory_lock_reason
-          ? item.laboratory_assistant_name
+          ? item.laboratory_assistant_name || item.user_name
           : item.employee_name,
         isIdle: item.idle,
       };

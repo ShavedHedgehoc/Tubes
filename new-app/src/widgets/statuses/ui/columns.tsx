@@ -15,6 +15,7 @@ export const getStatusColumns = (): ColumnDef<StatusWithIdsEntity>[] => {
           id: status.id,
           date: status.createdAt,
           employee: status.employee_name,
+          user: status.user_name,
           state: status.state,
           operation: null,
           ids: status.ids,

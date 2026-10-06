@@ -51,16 +51,23 @@ type LaboratoryAssistant = {
   name: string;
 };
 
+type User = {
+  id: number;
+  name: string;
+};
+
 type LaboratoryLock = {
   id: number;
   laboratory_lock_reason_id: number;
-  laboratory_assistant_id: number;
+  laboratory_assistant_id: number | null;
+  user_id: number | null;
   createdAt: Date;
   summary_id: number;
   post_id: number;
   is_active: boolean;
   closedAt: Date | null;
   laboratory_assistant: LaboratoryAssistant;
+  user: User;
   laboratory_lock_reason: LaboratoryLockReason;
 };
 

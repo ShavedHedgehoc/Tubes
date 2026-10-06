@@ -1,30 +1,20 @@
-import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-import { Prisma } from "db";
-import { PrismaService } from "src/prisma/prisma.service";
-import { GetSummariesListDto } from "./dto/get-summaries-list.dto";
-import {
-  SummariesListResponse,
-  SummaryRow,
-} from "./dto/summaries-list.response";
-import { ChangeLockDto } from "./dto/change-lock.dto";
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Prisma } from 'db';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { GetSummariesListDto } from './dto/get-summaries-list.dto';
+import { SummariesListResponse, SummaryRow } from './dto/summaries-list.response';
+import { ChangeLockDto } from './dto/change-lock.dto';
 
 @Injectable()
 export class SummariesService {
   constructor(private prisma: PrismaService) {}
 
   async getList(query: GetSummariesListDto): Promise<SummariesListResponse> {
-    type SummaryWhere = Prisma.Args<
-      typeof this.prisma.summary,
-      "findMany"
-    >["where"];
+    type SummaryWhere = Prisma.Args<typeof this.prisma.summary, 'findMany'>['where'];
     const { startDate, endDate, productCode, batchName, conveyors } = query;
 
-    const correctedStartDate = new Date(
-      new Date(startDate).setHours(0, 0, 0, 0),
-    );
-    const correctedEndDate = new Date(
-      new Date(endDate).setHours(23, 59, 59, 999),
-    );
+    const correctedStartDate = new Date(new Date(startDate).setHours(0, 0, 0, 0));
+    const correctedEndDate = new Date(new Date(endDate).setHours(23, 59, 59, 999));
 
     const where: SummaryWhere = {
       date: {
@@ -76,9 +66,7 @@ export class SummariesService {
       }),
     ]);
 
-    const activeLocksSet = new Set(
-      activeLocks.map((lock) => `${lock.summary_id}_${lock.post_id}`),
-    );
+    const activeLocksSet = new Set(activeLocks.map((lock) => `${lock.summary_id}_${lock.post_id}`));
 
     const mappedSummaries: SummaryRow[] = summaries.map((s) => {
       const postStatuses = allPosts.map((post) => ({
@@ -91,10 +79,10 @@ export class SummariesService {
 
       return {
         id: s.id,
-        conveyorName: s.conveyor?.name ?? "",
-        productCode: s.product?.code ?? "",
-        productName: s.product?.name ?? "",
-        batchName: s.batch?.name ?? "",
+        conveyorName: s.conveyor?.name ?? '',
+        productCode: s.product?.code ?? '',
+        productName: s.product?.name ?? '',
+        batchName: s.batch?.name ?? '',
         plan: s.plan,
         isActive: s.isActive,
         isFinished: s.isFinished,
@@ -124,17 +112,11 @@ export class SummariesService {
       ]);
       // Если сводка не найдена
       if (!summary) {
-        throw new HttpException(
-          `Сводка с ID ${summary_id} не найдена`,
-          HttpStatus.NOT_FOUND,
-        );
+        throw new HttpException(`Сводка с ID ${summary_id} не найдена`, HttpStatus.NOT_FOUND);
       }
       // Если пост не найден
       if (!post) {
-        throw new HttpException(
-          `Пост с таким номером не существует`,
-          HttpStatus.NOT_FOUND,
-        );
+        throw new HttpException(`Пост с таким номером не существует`, HttpStatus.NOT_FOUND);
       }
       // Нельзя менять блокировки у неактивных сводок
       if (!summary.isActive) {
@@ -146,18 +128,18 @@ export class SummariesService {
       // Поиск последней блокировки
       const lockExists = await tx.laboratoryLock.findFirst({
         where: { summary_id, post_id: post.id },
-        orderBy: { createdAt: "desc" },
+        orderBy: { createdAt: 'desc' },
       });
       // Поиск последнего статуса
       const lastStatus = await tx.status.findFirst({
         where: { summary_id, post_id: post.id },
-        orderBy: { createdAt: "desc" },
+        orderBy: { createdAt: 'desc' },
       });
       // Проверка повторного запроса
       const currentLockStatus = lockExists ? lockExists.is_active : false;
       if (currentLockStatus === state) {
         throw new HttpException(
-          `Пост уже находится в состоянии: ${state ? "Заблокирован" : "Разблокирован"}`,
+          `Пост уже находится в состоянии: ${state ? 'Заблокирован' : 'Разблокирован'}`,
           HttpStatus.BAD_REQUEST,
         );
       }
@@ -217,15 +199,12 @@ export class SummariesService {
             },
           });
         }
-        return { message: "Пост успешно заблокирован" };
+        return { message: 'Пост успешно заблокирован' };
       } else {
         // Разблокировка
         // Проверка, заблокирован ли пост
         if (!lockExists) {
-          throw new HttpException(
-            `Не найдена запись блокировки`,
-            HttpStatus.NOT_FOUND,
-          );
+          throw new HttpException(`Не найдена запись блокировки`, HttpStatus.NOT_FOUND);
         }
         await tx.laboratoryLock.update({
           where: { id: lockExists.id },
@@ -239,8 +218,7 @@ export class SummariesService {
         }
 
         const isLockedByMe =
-          lastStatus.is_locked &&
-          lastStatus.laboratory_lock_id === lockExists.id;
+          lastStatus.is_locked && lastStatus.laboratory_lock_id === lockExists.id;
         if (isLockedByMe) {
           const durationMs = now.getTime() - lastStatus.createdAt.getTime();
           await tx.status.update({
@@ -261,7 +239,7 @@ export class SummariesService {
             },
           });
         }
-        return { message: "Пост успешно разблокирован" };
+        return { message: 'Пост успешно разблокирован' };
       }
     });
   }

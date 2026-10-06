@@ -7,8 +7,8 @@ import {
   Heading,
   Status,
   VStack,
-} from "@chakra-ui/react";
-import type { DataFormField } from "../../helpers/data-form-field";
+} from '@chakra-ui/react';
+import type { DataFormField } from '../../helpers/data-form-field';
 
 export interface BooleanEntryModalProps<T> {
   id: string;
@@ -36,7 +36,7 @@ export default function BooleanEntryModal<T>(props: BooleanEntryModalProps<T>) {
           onClick={() =>
             props.changeData({
               key: props.dataKey,
-              value: props.data ? "false" : "true",
+              value: props.data ? 'false' : 'true',
             })
           }
         >
@@ -46,7 +46,7 @@ export default function BooleanEntryModal<T>(props: BooleanEntryModalProps<T>) {
                 <HStack justify="space-between">
                   <Heading color="fg.muted">{props.title}</Heading>
                   <Status.Root
-                    colorPalette={props.data ? "green" : "red"}
+                    colorPalette={props.data ? 'green' : 'red'}
                     alignItems="end"
                     size="lg"
                   >
@@ -64,7 +64,7 @@ export default function BooleanEntryModal<T>(props: BooleanEntryModalProps<T>) {
                 onCheckedChange={(e) =>
                   props.changeData({
                     key: props.dataKey,
-                    value: e.checked ? "true" : "false",
+                    value: e.checked ? 'true' : 'false',
                   })
                 }
               >
@@ -74,8 +74,8 @@ export default function BooleanEntryModal<T>(props: BooleanEntryModalProps<T>) {
                 </Switch.Control>
                 <Switch.Label />
               </Switch.Root>
-              <Heading color={props.data ? "green" : "red"}>
-                {props.data ? "Соответствует" : "Не соответсвует"}
+              <Heading color={props.data ? 'green' : 'red'}>
+                {props.data ? 'Соответствует' : 'Не соответсвует'}
               </Heading>
             </VStack>
           </Dialog.Body>

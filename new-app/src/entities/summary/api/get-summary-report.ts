@@ -27,6 +27,7 @@ export const getSummaryReport = async ({
     offsetParams,
     sealantParams,
     tresholds,
+    boxes,
   } = res;
 
   const parsedDate = new Date(summary.date);
@@ -74,6 +75,7 @@ export const getSummaryReport = async ({
       varnish_param_id: status.varnish_param_id,
       offset_param_id: status.offset_param_id,
       sealant_param_id: status.sealant_param_id,
+      user_name: status.laboratory_lock?.user?.name ?? null,
       laboratory_assistant_name:
         status.laboratory_lock?.laboratory_assistant?.name ?? null,
       laboratory_lock_reason:
@@ -81,7 +83,7 @@ export const getSummaryReport = async ({
       has_laboratory_lock: !!status.laboratory_lock,
     };
   });
-
+  console.log(parsedStatuses);
   const parsedExtrusionParams = extrusionParams.map((i) => {
     return {
       ...i,
@@ -119,6 +121,17 @@ export const getSummaryReport = async ({
     };
   });
 
+  const parsedBoxes = boxes.map((i) => {
+    return {
+      id: i.id,
+      number: i.box_number,
+      uuid: i.uuid,
+      quantity: i.quantity,
+      employee: i.employee?.name ?? "-",
+      createdAt: new Date(i.createdAt),
+    };
+  });
+
   return {
     summary: {
       ...summary,
@@ -139,5 +152,6 @@ export const getSummaryReport = async ({
     varnishParams: parsedVarnishParams,
     offsetParams: parsedOffsetParams,
     sealantParams: parsedSealantParams,
+    boxes: parsedBoxes,
   };
 };

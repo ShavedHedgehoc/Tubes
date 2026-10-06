@@ -1,38 +1,32 @@
-import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
-import { Type } from "class-transformer";
-import {
-  IsArray,
-  IsDate,
-  IsNotEmpty,
-  IsOptional,
-  IsString,
-} from "class-validator";
-import { ToStringArray } from "src/shared";
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
+import { IsArray, IsDate, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { ToStringArray } from 'src/shared';
 
 export class GetSummariesListDto {
-  @ApiProperty({ description: "Дата начала", example: "2025-12-19" })
+  @ApiProperty({ description: 'Дата начала', example: '2025-12-19' })
   @Type(() => Date)
   @IsDate()
   @IsNotEmpty()
   readonly startDate: Date;
 
-  @ApiProperty({ description: "Дата окончания", example: "2026-12-19" })
+  @ApiProperty({ description: 'Дата окончания', example: '2026-12-19' })
   @Type(() => Date)
   @IsDate()
   @IsNotEmpty()
   readonly endDate: Date;
 
-  @ApiPropertyOptional({ description: "Код" })
+  @ApiPropertyOptional({ description: 'Код' })
   @IsString()
   @IsOptional()
   readonly productCode?: string;
 
-  @ApiPropertyOptional({ description: "Партия" })
+  @ApiPropertyOptional({ description: 'Партия' })
   @IsString()
   @IsOptional()
   readonly batchName?: string;
 
-  @ApiPropertyOptional({ description: "Конвейеры" })
+  @ApiPropertyOptional({ description: 'Конвейеры' })
   @IsOptional()
   @ToStringArray()
   @IsArray()

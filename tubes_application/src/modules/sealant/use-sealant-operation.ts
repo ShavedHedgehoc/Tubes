@@ -1,8 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
-import OperationService from "@/shared/api/services/operation-service";
+import { useQuery } from '@tanstack/react-query';
+import OperationService from '@/shared/api/services/operation-service';
 
-import { useShallow } from "zustand/shallow";
-import { useSealantOperationSopStore } from "./store/use-sealant-operation-sop-store";
+import { useShallow } from 'zustand/shallow';
+import { useSealantOperationSopStore } from './store/use-sealant-operation-sop-store';
 
 export const useSealantOperation = (operationId: string | null) => {
   const setSelectedOperation = useSealantOperationSopStore(
@@ -12,7 +12,7 @@ export const useSealantOperation = (operationId: string | null) => {
     useShallow((state) => state.clearSelectedOperation),
   );
   return useQuery({
-    queryKey: ["sealant_sop_operation", operationId],
+    queryKey: ['sealant_sop_operation', operationId],
     queryFn: async () => {
       const data = await OperationService.getOperationById(operationId);
       if (data.length > 0) {

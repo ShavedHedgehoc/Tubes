@@ -1,16 +1,8 @@
-import type { IMaintenanceSession } from "@/shared/api/services/summary-service";
-import {
-  Box,
-  Button,
-  Dialog,
-  HStack,
-  ScrollArea,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
-import { MaintenanceModalCard } from "./maintenance-modal-card";
-import { CheckIcon } from "lucide-react";
-import { TbInfoTriangle } from "react-icons/tb";
+import type { IMaintenanceSession } from '@/shared/api/services/summary-service';
+import { Box, Button, Dialog, HStack, ScrollArea, Text, VStack } from '@chakra-ui/react';
+import { MaintenanceModalCard } from './maintenance-modal-card';
+import { CheckIcon } from 'lucide-react';
+import { TbInfoTriangle } from 'react-icons/tb';
 
 export interface MaintenenceModalProps {
   data: IMaintenanceSession | null;
@@ -43,9 +35,7 @@ export default function MaintenanceModal({
         <Dialog.Content borderRadius="xl" bg="gray.900">
           <Dialog.Header pb={2}>
             <VStack align="left">
-              <Dialog.Title fontSize="xl">
-                {data?.maintenance_description}
-              </Dialog.Title>
+              <Dialog.Title fontSize="xl">{data?.maintenance_description}</Dialog.Title>
               <Text color="fg.subtle">
                 Окончание ТО возможно только после выполниния всех операций
               </Text>
@@ -59,9 +49,7 @@ export default function MaintenanceModal({
                     <MaintenanceModalCard
                       key={item.id || index}
                       item={item}
-                      prevItem={
-                        index > 0 ? data.maintenance_logs[index - 1] : null
-                      }
+                      prevItem={index > 0 ? data.maintenance_logs[index - 1] : null}
                       startTask={startTask}
                       endTask={endTask}
                     />
@@ -76,12 +64,12 @@ export default function MaintenanceModal({
           <Dialog.Footer borderBottomRadius="xl">
             <HStack width="full" justify="space-between">
               <Text fontSize="sm" fontWeight="bold" color="fg.subtle">
-                {data?.maintenance_logs.filter((l) => l.end_time).length} из{" "}
+                {data?.maintenance_logs.filter((l) => l.end_time).length} из{' '}
                 {data?.maintenance_logs.length} выполнено
               </Text>
-              <HStack gap={1} justify={"flex-end"}>
+              <HStack gap={1} justify={'flex-end'}>
                 <Button
-                  variant={!allDone ? "ghost" : "outline"}
+                  variant={!allDone ? 'ghost' : 'outline'}
                   size="md"
                   onClick={undefined}
                   disabled={true}
@@ -90,7 +78,7 @@ export default function MaintenanceModal({
                   Инфо
                 </Button>
                 <Button
-                  variant={!allDone ? "ghost" : "outline"}
+                  variant={!allDone ? 'ghost' : 'outline'}
                   size="md"
                   disabled={!allDone}
                   onClick={handleClose}

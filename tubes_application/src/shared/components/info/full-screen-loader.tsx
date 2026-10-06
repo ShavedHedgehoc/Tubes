@@ -1,5 +1,5 @@
-import { ColorModeProvider } from "@/components/ui/color-mode";
-import { AbsoluteCenter, Box, Spinner, Theme } from "@chakra-ui/react";
+import { ColorModeProvider } from '@/components/ui/color-mode';
+import { AbsoluteCenter, Box, Spinner, Theme } from '@chakra-ui/react';
 
 export default function FullScreenLoader() {
   return (

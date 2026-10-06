@@ -19,6 +19,7 @@ export type StatusTableRow = {
   date: Date;
   employee: string | null;
   lab_assistant: string | null;
+  user: string | null;
   lab_lock_reason: string | null;
   state: StatusTableRowState;
   operation: string | null;

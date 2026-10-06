@@ -13,7 +13,6 @@ import { CreateSummaryDto } from "./dto/create-summary.dto";
 import { parseAssemblies, parsedAssembly } from "src/helpers/parse-assemblies";
 import { ChangeSummaryStateDto } from "./dto/change-summary-state.dto";
 import { GetSummariesListDto } from "./dto/get-summaries-list.dto";
-// import { Prisma, Treshold } from "generated/prisma";
 import {
   ActiveSummaryResponse,
   IStatusCounter,
@@ -29,6 +28,7 @@ import { UpdateSummaryDto } from "./dto/update-summary.dto";
 import { ChartDataService } from "./chart-data.service";
 import { GetCrewsStatsDto } from "./dto/get-crews-stats.dto";
 import { Prisma, Treshold } from "db";
+import { PostStatusesResponse, StatusRow } from "./dto/post-statuses.response";
 
 type FullSpecification = Prisma.SpecificationGetPayload<{
   include: { material: { include: { consumed_materials: true } } };
@@ -545,7 +545,9 @@ export class SummariesService {
     return this.dataService.getSummaryById(id);
   }
 
-  async getPostStatuses(query: GetPostStatusesDto) {
+  async getPostStatuses(
+    query: GetPostStatusesDto,
+  ): Promise<PostStatusesResponse> {
     const statuses = await this.prisma.status.findMany({
       where: {
         summary_id: query.summary_id,
@@ -558,12 +560,38 @@ export class SummariesService {
         maintenance_session: { include: { maintenance: true } },
         // added
         laboratory_lock: {
-          include: { laboratory_assistant: true, laboratory_lock_reason: true },
+          include: {
+            laboratory_assistant: true,
+            laboratory_lock_reason: true,
+            user: { select: { id: true, name: true } },
+          },
         },
       },
       orderBy: [{ createdAt: "asc" }],
     });
-    return { statuses };
+
+    const formattedStatuses = statuses.map((status) => {
+      if (!status.maintenance_session) return status;
+
+      return {
+        ...status,
+        maintenance_session: {
+          ...status.maintenance_session,
+
+          total_duration:
+            status.maintenance_session.total_duration !== null
+              ? Number(status.maintenance_session.total_duration)
+              : null,
+          work_duration:
+            status.maintenance_session.work_duration !== null
+              ? Number(status.maintenance_session.work_duration)
+              : null,
+          // Приводим end_time к Date (из прошлой ошибки), если ваш интерфейс все еще требует строго Date
+          end_time: status.maintenance_session.end_time as Date,
+        },
+      };
+    });
+    return { statuses: formattedStatuses as unknown as StatusRow[] };
   }
 
   async getPostStatusesWithData(query: GetStatusesDto) {
@@ -585,6 +613,7 @@ export class SummariesService {
             include: {
               laboratory_assistant: true,
               laboratory_lock_reason: true,
+              user: { select: { id: true, name: true } },
             },
           },
         },
@@ -613,6 +642,7 @@ export class SummariesService {
       varnish,
       offset,
       sealant,
+      boxes,
     ] = await Promise.all([
       this.prisma.treshold.findMany({
         where: {
@@ -623,7 +653,19 @@ export class SummariesService {
       }),
       this.prisma.status.findMany({
         where: { summary_id: id },
-        include: { operation: true, employee: true, post: true },
+        include: {
+          operation: true,
+          employee: true,
+          post: true,
+          maintenance_session: { include: { maintenance: true } },
+          laboratory_lock: {
+            include: {
+              laboratory_assistant: true,
+              laboratory_lock_reason: true,
+              user: { select: { id: true, name: true } },
+            },
+          },
+        },
         orderBy: { createdAt: "asc" },
       }),
       this.prisma.defect.findMany({
@@ -654,6 +696,11 @@ export class SummariesService {
         include: { employee: true },
         orderBy: { createdAt: "asc" },
       }),
+      this.prisma.productionBox.findMany({
+        where: { summary_id: id },
+        include: { employee: true },
+        orderBy: { createdAt: "asc" },
+      }),
     ]);
 
     function withActualThreshold<T extends HasCreatedAt>(
@@ -678,6 +725,7 @@ export class SummariesService {
       varnishParams: varnish.map((p) => withActualThreshold(p, thresholds)),
       offsetParams: offset.map((p) => withActualThreshold(p, thresholds)),
       sealantParams: sealant.map((p) => withActualThreshold(p, thresholds)),
+      boxes,
     };
   }
 

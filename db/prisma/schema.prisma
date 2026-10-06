@@ -190,14 +190,15 @@ model MaintenanceLog {
 
 // Пользователи
 model User {
-  id         Int        @id @default(autoincrement())
-  name       String
-  email      String     @unique
-  password   String
-  avatar_url String?
-  banned     Boolean    @default(false)
-  user_roles UserRole[]
-  token      Token?
+  id              Int              @id @default(autoincrement())
+  name            String
+  email           String           @unique
+  password        String
+  avatar_url      String?
+  banned          Boolean          @default(false)
+  user_roles      UserRole[]
+  laboratoryLocks LaboratoryLock[]
+  token           Token?
 
   @@map("users")
 }
@@ -395,18 +396,19 @@ model Summary {
 // Блокировка
 model LaboratoryLock {
   id                        Int                  @id @default(autoincrement())
-  // description String?
-  laboratory_lock_reason    LaboratoryLockReason @relation(fields: [laboratory_lock_reason_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
-  laboratory_lock_reason_id Int
-  laboratory_assistant      LaboratoryAssistant  @relation(fields: [laboratory_assistant_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
-  laboratory_assistant_id   Int
-  createdAt                 DateTime             @default(now())
-  summary                   Summary              @relation(fields: [summary_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
   summary_id                Int
-  post                      Post                 @relation(fields: [post_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
   post_id                   Int
+  laboratory_lock_reason_id Int
+  laboratory_assistant_id   Int?
+  user_id                   Int?
   is_active                 Boolean              @default(false)
   closedAt                  DateTime?
+  createdAt                 DateTime             @default(now())
+  laboratory_lock_reason    LaboratoryLockReason @relation(fields: [laboratory_lock_reason_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  laboratory_assistant      LaboratoryAssistant? @relation(fields: [laboratory_assistant_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  user                      User?                @relation(fields: [user_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  summary                   Summary              @relation(fields: [summary_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  post                      Post                 @relation(fields: [post_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
   statuses                  Status[]
 
   @@index([summary_id, post_id])

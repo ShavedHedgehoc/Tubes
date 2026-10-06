@@ -1,11 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
-import HealthService from "./services/health-service";
-import { useHealthStore } from "../router/use-health-store";
+import { useQuery } from '@tanstack/react-query';
+import HealthService from './services/health-service';
+import { useHealthStore } from '../router/use-health-store';
 
 export function useCheckHealth() {
   const { setHealthy, setInit } = useHealthStore();
   return useQuery({
-    queryKey: ["healths"],
+    queryKey: ['healths'],
     queryFn: async () => {
       await HealthService.checkApiHealth()
         .then(() => {

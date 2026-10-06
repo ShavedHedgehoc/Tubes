@@ -1,37 +1,31 @@
-import { useShallow } from "zustand/react/shallow";
-import { useExtrusionConveyorStore } from "../../store/use-extrusion-conveyor-store";
-import { useExtrusionEmployeeStore } from "../../store/use-extrusion-employee-store";
+import { useShallow } from 'zustand/react/shallow';
+import { useExtrusionConveyorStore } from '../../store/use-extrusion-conveyor-store';
+import { useExtrusionEmployeeStore } from '../../store/use-extrusion-employee-store';
 import {
   useExtrusionAuthModalStore,
   useExtrusionMaterialScanModalStore,
   useExtrusionLogoutModalStore,
   useExtrusionCloseSummaryModalStore,
-} from "../../store/use-extrusion-modal-store";
-import { useActiveSummary } from "@/shared/api/use-active-summary";
+} from '../../store/use-extrusion-modal-store';
+import { useActiveSummary } from '@/shared/api/use-active-summary';
 import {
   ExtrusionInputParams,
   useExtrusionInputStore,
-} from "../../store/use-extrusion-input-store";
-import { useNavigate } from "react-router-dom";
-import { RouteNames } from "@/shared/router/route-names";
+} from '../../store/use-extrusion-input-store';
+import { useNavigate } from 'react-router-dom';
+import { RouteNames } from '@/shared/router/route-names';
 
 export default function useExtrusionMenu() {
-  const employee = useExtrusionEmployeeStore(
-    useShallow((state) => state.extrusionEmployee),
-  );
+  const employee = useExtrusionEmployeeStore(useShallow((state) => state.extrusionEmployee));
   const extrusionConveyor = useExtrusionConveyorStore(
     useShallow((state) => state.extrusionConveyor),
   );
   const { data: summaryData } = useActiveSummary(extrusionConveyor?.id ?? null);
-  const setOpenAuth = useExtrusionAuthModalStore(
-    useShallow((state) => state.setOpen),
-  );
+  const setOpenAuth = useExtrusionAuthModalStore(useShallow((state) => state.setOpen));
   const setOpenMaterialScan = useExtrusionMaterialScanModalStore(
     useShallow((state) => state.setOpen),
   );
-  const setOpenLogout = useExtrusionLogoutModalStore(
-    useShallow((state) => state.setOpen),
-  );
+  const setOpenLogout = useExtrusionLogoutModalStore(useShallow((state) => state.setOpen));
   const setOpenCloseSummary = useExtrusionCloseSummaryModalStore(
     useShallow((state) => state.setOpen),
   );
@@ -79,13 +73,13 @@ export default function useExtrusionMenu() {
   const handleOpenParametersClick = () => {
     const params = summaryData?.extrusionParams ?? null;
 
-    const pressSpeed = String(params?.press_speed ?? "0");
-    const blowTime = String(params?.blow_time ?? "0");
-    const turningMachineSpeed = String(params?.turning_machine_speed ?? "0");
+    const pressSpeed = String(params?.press_speed ?? '0');
+    const blowTime = String(params?.blow_time ?? '0');
+    const turningMachineSpeed = String(params?.turning_machine_speed ?? '0');
     // const annealingFurnaceTemp = String(params?.annealing_furnace_temp ?? "0");
     // const tubeCylindricalSectionLength = String(params?.tube_cylindrical_section_length ?? "0");
     // const membraneThickness = String(params?.membrane_thickness ?? "0");
-    const tubeDiameter = String(params?.tube_diameter ?? "0");
+    const tubeDiameter = String(params?.tube_diameter ?? '0');
     // const tubeCylindricalSectionThickness = String(params?.tube_cylindrical_section_thickness ?? "0");
     // const tubeRigidity = String(params?.tube_rigidity ?? "0");
 
@@ -102,9 +96,7 @@ export default function useExtrusionMenu() {
     setData({ key: ExtrusionInputParams.TUBE_DIAMETER, value: tubeDiameter });
     // setData({ key: ExtrusionInputParams.TUBE_CYLINDRICAL_THICKNESS, value: tubeCylindricalSectionThickness })
     // setData({ key: ExtrusionInputParams.TUBE_RIGIDITY, value: tubeRigidity })
-    navigate(
-      `${RouteNames.EXTRUSION_ADD_ENTRY_ROOT}/${extrusionConveyor?.name}`,
-    );
+    navigate(`${RouteNames.EXTRUSION_ADD_ENTRY_ROOT}/${extrusionConveyor?.name}`);
   };
 
   return {

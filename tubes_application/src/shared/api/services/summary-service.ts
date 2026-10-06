@@ -1,5 +1,5 @@
-import { $api } from "../http";
-import { ApiRoutes } from "./api-routes";
+import { $api } from '../http';
+import { ApiRoutes } from './api-routes';
 
 interface ISummaryData {
   id: number;
@@ -256,7 +256,7 @@ export interface IMaterial {
   scanned: boolean;
 }
 
-type state = "idle" | "working" | "finished";
+type state = 'idle' | 'working' | 'finished';
 
 export interface IStatus {
   idle: boolean;
@@ -347,9 +347,7 @@ export interface ISummary {
 }
 
 export default class SummaryService {
-  static async getActiveSummaryRecordByConveyorId(
-    conveyor_id: number | null,
-  ): Promise<ISummary> {
+  static async getActiveSummaryRecordByConveyorId(conveyor_id: number | null): Promise<ISummary> {
     const res = await $api.get(`${ApiRoutes.GET_ACTIVE_SUMMARY}${conveyor_id}`);
     return res.data;
   }

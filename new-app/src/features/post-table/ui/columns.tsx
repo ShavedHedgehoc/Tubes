@@ -30,7 +30,7 @@ export const statusTableColumns: ColumnDef<StatusTableRow>[] = [
       const status = row.original;
       return (
         <div className="text-left">
-          {status.lab_assistant ?? status.employee}
+          {status.lab_assistant ?? status.user ?? status.employee}
         </div>
       );
     },

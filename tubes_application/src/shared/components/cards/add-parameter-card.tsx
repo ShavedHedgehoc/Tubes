@@ -1,5 +1,5 @@
-import { Box } from "@chakra-ui/react";
-import ParameterCard, { type ParameterCardProps } from "./parameter-card";
+import { Box } from '@chakra-ui/react';
+import ParameterCard, { type ParameterCardProps } from './parameter-card';
 
 export interface AddParameterCardProps extends ParameterCardProps {
   id: string;
@@ -26,7 +26,7 @@ export default function AddParameterCard(props: AddParameterCardProps) {
       w="full"
       h="full"
       onClick={() =>
-        !(props.variant === "numeric" && !props.maxValue && !props.minValue)
+        !(props.variant === 'numeric' && !props.maxValue && !props.minValue)
           ? props.onClick({
               id: props.id,
               title: props.title,

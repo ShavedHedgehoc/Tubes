@@ -14,6 +14,7 @@ import { PostDropdown } from "@/widgets/post-actions";
 import { PostChartModal } from "@/features/post-chart";
 import { PostCloseModal } from "@/features/finish-conveyor-post";
 import { PostTableModalWidget } from "@/widgets/post-table-modal-widget";
+import { LockPostModal } from "@/features/lock-post";
 
 export default function DashView() {
   const { data, isLoading, isError } = useQuery({
@@ -62,6 +63,7 @@ export default function DashView() {
                   postName,
                   postState,
                   conveyorName,
+                  hasLock,
                 ) => (
                   <PostDropdown
                     summaryId={summaryId}
@@ -69,6 +71,7 @@ export default function DashView() {
                     postName={postName}
                     postState={postState}
                     conveyorName={conveyorName}
+                    hasLock={hasLock}
                   />
                 )}
                 menuActionButton={
@@ -87,6 +90,7 @@ export default function DashView() {
       <PostCloseModal />
       <PostChartModal />
       <PostTableModalWidget />
+      <LockPostModal />
     </div>
   );
 }

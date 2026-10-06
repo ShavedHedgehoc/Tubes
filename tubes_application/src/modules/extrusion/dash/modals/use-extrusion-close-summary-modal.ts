@@ -1,32 +1,22 @@
-import type { CreateStatusDto } from "@/shared/api/services/status-service";
-import { useActiveSummary } from "@/shared/api/use-active-summary";
-import { useShallow } from "zustand/shallow";
-import { useExtrusionConveyorStore } from "../../store/use-extrusion-conveyor-store";
-import { useExtrusionDefectStore } from "../../store/use-extrusion-defect-store";
-import { useExtrusionEmployeeStore } from "../../store/use-extrusion-employee-store";
+import type { CreateStatusDto } from '@/shared/api/services/status-service';
+import { useActiveSummary } from '@/shared/api/use-active-summary';
+import { useShallow } from 'zustand/shallow';
+import { useExtrusionConveyorStore } from '../../store/use-extrusion-conveyor-store';
+import { useExtrusionDefectStore } from '../../store/use-extrusion-defect-store';
+import { useExtrusionEmployeeStore } from '../../store/use-extrusion-employee-store';
 import {
   useExtrusionCloseSummaryModalStore,
   useExtrusionDefectInputModalStore,
-} from "../../store/use-extrusion-modal-store";
-import { useCreateStatus } from "@/shared/api/use-create-status";
+} from '../../store/use-extrusion-modal-store';
+import { useCreateStatus } from '@/shared/api/use-create-status';
 
 export default function useExtrusionCloseSummaryModal() {
-  const open = useExtrusionCloseSummaryModalStore(
-    useShallow((state) => state.open),
-  );
-  const setOpen = useExtrusionCloseSummaryModalStore(
-    useShallow((state) => state.setOpen),
-  );
-  const setOpenEntryModal = useExtrusionDefectInputModalStore(
-    useShallow((state) => state.setOpen),
-  );
-  const clearData = useExtrusionDefectStore(
-    useShallow((state) => state.clearData),
-  );
+  const open = useExtrusionCloseSummaryModalStore(useShallow((state) => state.open));
+  const setOpen = useExtrusionCloseSummaryModalStore(useShallow((state) => state.setOpen));
+  const setOpenEntryModal = useExtrusionDefectInputModalStore(useShallow((state) => state.setOpen));
+  const clearData = useExtrusionDefectStore(useShallow((state) => state.clearData));
   const data = useExtrusionDefectStore(useShallow((state) => state.data));
-  const employee = useExtrusionEmployeeStore(
-    useShallow((state) => state.extrusionEmployee),
-  );
+  const employee = useExtrusionEmployeeStore(useShallow((state) => state.extrusionEmployee));
   const extrusionConveyor = useExtrusionConveyorStore(
     useShallow((state) => state.extrusionConveyor),
   );

@@ -1,1 +1,1 @@
-export { SealantMaintenanceContent } from "./sealant-maintenance-content";
+export { SealantMaintenanceContent } from './sealant-maintenance-content';

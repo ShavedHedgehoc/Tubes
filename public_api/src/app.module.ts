@@ -1,8 +1,8 @@
-import { DynamicModule, Module, Type } from "@nestjs/common";
-import { ConfigModule } from "@nestjs/config";
-import { AppController } from "./app.controller";
-import { AppService } from "./app.service";
-import { PrismaModule } from "./prisma/prisma.module";
+import { DynamicModule, Module, Type } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { PrismaModule } from './prisma/prisma.module';
 // import { EmployeesModule } from "./employees/employees.module";
 // import { ParamsModule } from "./params/params.module";
 // import { HealthCheckModule } from "./health-check/health-check.module";
@@ -27,7 +27,7 @@ import { PrismaModule } from "./prisma/prisma.module";
 // import { MaintenanceLogModule } from "./maintenance-log/maintenance-log.module";
 // import { PostsModule } from "./posts/post.module";
 // import { CrewsModule } from "./crews/crews.module";
-import { SummariesModule } from "./summaries/summaries.module";
+import { SummariesModule } from './summaries/summaries.module';
 
 const imports: Array<Type<unknown> | DynamicModule | Promise<DynamicModule>> = [
   ConfigModule.forRoot(),

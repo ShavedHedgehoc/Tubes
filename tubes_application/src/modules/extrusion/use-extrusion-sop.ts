@@ -1,9 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
-import SopService from "@/shared/api/services/sop-service";
+import { useQuery } from '@tanstack/react-query';
+import SopService from '@/shared/api/services/sop-service';
 
 export const useExtrusionSop = (operationId: number | null) =>
   useQuery({
-    queryKey: ["extrusion_sop", operationId],
+    queryKey: ['extrusion_sop', operationId],
     queryFn: () => SopService.getSopPictures(operationId),
     enabled: !!operationId,
   });

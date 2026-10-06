@@ -1,10 +1,7 @@
-import BooleanEntryModal from "@/shared/components/modals/boolean-entry-modal";
-import { useShallow } from "zustand/shallow";
-import { useVarnishBooleanEntryModalStore } from "../../store/use-varnish-boolean-entry-modal-store";
-import {
-  useVarnishInputStore,
-  VarnishInputParams,
-} from "../../store/use-varnish-input-store";
+import BooleanEntryModal from '@/shared/components/modals/boolean-entry-modal';
+import { useShallow } from 'zustand/shallow';
+import { useVarnishBooleanEntryModalStore } from '../../store/use-varnish-boolean-entry-modal-store';
+import { useVarnishInputStore, VarnishInputParams } from '../../store/use-varnish-input-store';
 
 export default function VarnishBooleanEntryModal() {
   const { key, title, open, setOpen } = useVarnishBooleanEntryModalStore(
@@ -16,9 +13,7 @@ export default function VarnishBooleanEntryModal() {
     })),
   );
 
-  const changeData = useVarnishInputStore(
-    useShallow((state) => state.changeData),
-  );
+  const changeData = useVarnishInputStore(useShallow((state) => state.changeData));
 
   const data = useVarnishInputStore(
     useShallow((state) => {

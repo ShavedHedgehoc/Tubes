@@ -1,10 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
-import { useShallow } from "zustand/react/shallow";
-import { useExtrusionConveyorStore } from "@/modules/extrusion/store/use-extrusion-conveyor-store";
-import ConveyorService from "./services/conveyor-service";
-import { useOffsetConveyorStore } from "@/modules/offset/store/use-offset-conveyor-store";
-import { useVarnishConveyorStore } from "@/modules/varnish/store/use-varnish-conveyor-store";
-import { useSealantConveyorStore } from "@/modules/sealant/store/use-sealant-conveyor-store";
+import { useQuery } from '@tanstack/react-query';
+import { useShallow } from 'zustand/react/shallow';
+import { useExtrusionConveyorStore } from '@/modules/extrusion/store/use-extrusion-conveyor-store';
+import ConveyorService from './services/conveyor-service';
+import { useOffsetConveyorStore } from '@/modules/offset/store/use-offset-conveyor-store';
+import { useVarnishConveyorStore } from '@/modules/varnish/store/use-varnish-conveyor-store';
+import { useSealantConveyorStore } from '@/modules/sealant/store/use-sealant-conveyor-store';
 
 export const useConveyor = (name: string | null) => {
   const setExtrusionConveyor = useExtrusionConveyorStore(
@@ -13,9 +13,7 @@ export const useConveyor = (name: string | null) => {
   const setVarnishConveyor = useVarnishConveyorStore(
     useShallow((state) => state.setVarnishConveyor),
   );
-  const setOffsetConveyor = useOffsetConveyorStore(
-    useShallow((state) => state.setOffsetConveyor),
-  );
+  const setOffsetConveyor = useOffsetConveyorStore(useShallow((state) => state.setOffsetConveyor));
   const setSealantConveyor = useSealantConveyorStore(
     useShallow((state) => state.setSealantConveyor),
   );
@@ -32,7 +30,7 @@ export const useConveyor = (name: string | null) => {
     useShallow((state) => state.clearSealantConveyor),
   );
   return useQuery({
-    queryKey: ["conveyor"],
+    queryKey: ['conveyor'],
     queryFn: async () => {
       const data = await ConveyorService.getConveyorByName(name);
       if (data) {

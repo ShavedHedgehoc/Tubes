@@ -1,67 +1,55 @@
-import type { CreateVarnishEntryDto } from "@/shared/api/services/params-service";
-import { CountersTresholds } from "@/shared/helpers/counters-tresholds";
-import { RouteNames } from "@/shared/router/route-names";
-import { useNavigate } from "react-router-dom";
-import { useShallow } from "zustand/shallow";
+import type { CreateVarnishEntryDto } from '@/shared/api/services/params-service';
+import { CountersTresholds } from '@/shared/helpers/counters-tresholds';
+import { RouteNames } from '@/shared/router/route-names';
+import { useNavigate } from 'react-router-dom';
+import { useShallow } from 'zustand/shallow';
 
-import type { ISummary } from "@/shared/api/services/summary-service";
-import { useVarnishEmployeeStore } from "../../store/use-varnish-employee-store";
-import { useVarnishCloseConfirmModalStore } from "../../store/use-varnish-modal-store";
-import {
-  initDataValue,
-  useVarnishInputStore,
-} from "../../store/use-varnish-input-store";
-import { useVarnishEntryAlertModalStore } from "../../store/use-varnish-entry-alert-modal-store";
-import { useVarnishConveyorStore } from "../../store/use-varnish-conveyor-store";
-import { useCreateVarnishEntry } from "../../use-create-varnish-entry";
+import type { ISummary } from '@/shared/api/services/summary-service';
+import { useVarnishEmployeeStore } from '../../store/use-varnish-employee-store';
+import { useVarnishCloseConfirmModalStore } from '../../store/use-varnish-modal-store';
+import { initDataValue, useVarnishInputStore } from '../../store/use-varnish-input-store';
+import { useVarnishEntryAlertModalStore } from '../../store/use-varnish-entry-alert-modal-store';
+import { useVarnishConveyorStore } from '../../store/use-varnish-conveyor-store';
+import { useCreateVarnishEntry } from '../../use-create-varnish-entry';
 
 export default function useVarnishAddEntryMenu(summaryData: ISummary | null) {
-  const employee = useVarnishEmployeeStore(
-    useShallow((state) => state.varnishEmployee),
-  );
-  const setOpenConfirm = useVarnishCloseConfirmModalStore(
-    useShallow((state) => state.setOpen),
-  );
+  const employee = useVarnishEmployeeStore(useShallow((state) => state.varnishEmployee));
+  const setOpenConfirm = useVarnishCloseConfirmModalStore(useShallow((state) => state.setOpen));
   const data = useVarnishInputStore(useShallow((state) => state.data));
   const setOpenAlert = useVarnishEntryAlertModalStore((state) => state.setOpen);
   const setDto = useVarnishEntryAlertModalStore((state) => state.setDto);
   const initData = useVarnishInputStore(useShallow((state) => state.initData));
-  const varnishConveyor = useVarnishConveyorStore(
-    useShallow((state) => state.varnishConveyor),
-  );
+  const varnishConveyor = useVarnishConveyorStore(useShallow((state) => state.varnishConveyor));
   const { createVarnishEntry } = useCreateVarnishEntry();
   const navigate = useNavigate();
 
   const saveButtonDisabledCondition =
     !employee ||
-    data.varnish_machine_speed === "0" ||
-    data.total_air_pressure === "0" ||
-    data.feed_can_air_pressure === "0" ||
-    data.nozzle_regulator_air_pressure === "0" ||
-    data.cells_speed === "0" ||
-    data.injection_a_start_position === "0" ||
-    data.injection_b_start_position === "0" ||
-    data.injection_c_start_position === "0" ||
-    data.injection_d_start_position === "0" ||
-    data.injection_a_end_position === "0" ||
-    data.injection_b_end_position === "0" ||
-    data.injection_c_end_position === "0" ||
-    data.injection_d_end_position === "0" ||
-    data.tube_molding_start_position === "0" ||
-    data.tube_molding_end_position === "0" ||
-    data.polimerization_furnace_temp === "0" ||
-    data.internal_varnish_porosity === "0";
+    data.varnish_machine_speed === '0' ||
+    data.total_air_pressure === '0' ||
+    data.feed_can_air_pressure === '0' ||
+    data.nozzle_regulator_air_pressure === '0' ||
+    data.cells_speed === '0' ||
+    data.injection_a_start_position === '0' ||
+    data.injection_b_start_position === '0' ||
+    data.injection_c_start_position === '0' ||
+    data.injection_d_start_position === '0' ||
+    data.injection_a_end_position === '0' ||
+    data.injection_b_end_position === '0' ||
+    data.injection_c_end_position === '0' ||
+    data.injection_d_end_position === '0' ||
+    data.tube_molding_start_position === '0' ||
+    data.tube_molding_end_position === '0' ||
+    data.polimerization_furnace_temp === '0' ||
+    data.internal_varnish_porosity === '0';
 
   const tresholdsData = summaryData?.tresholds ?? null;
 
   const alertDialogCondition =
     tresholdsData &&
-    (Number(data.varnish_machine_speed) <
-      tresholdsData.varnish_varnish_machine_speed_min ||
-      Number(data.total_air_pressure) <
-        tresholdsData.varnish_total_air_pressure_min ||
-      Number(data.feed_can_air_pressure) <
-        tresholdsData.varnish_feed_can_air_pressure_min ||
+    (Number(data.varnish_machine_speed) < tresholdsData.varnish_varnish_machine_speed_min ||
+      Number(data.total_air_pressure) < tresholdsData.varnish_total_air_pressure_min ||
+      Number(data.feed_can_air_pressure) < tresholdsData.varnish_feed_can_air_pressure_min ||
       Number(data.nozzle_regulator_air_pressure) <
         tresholdsData.varnish_nozzle_regulator_air_pressure_min ||
       Number(data.cells_speed) < tresholdsData.varnish_cells_speed_min ||
@@ -73,14 +61,10 @@ export default function useVarnishAddEntryMenu(summaryData: ISummary | null) {
         tresholdsData.varnish_injection_c_start_position_min ||
       Number(data.injection_d_start_position) <
         tresholdsData.varnish_injection_d_start_position_min ||
-      Number(data.injection_a_end_position) <
-        tresholdsData.varnish_injection_a_end_position_min ||
-      Number(data.injection_b_end_position) <
-        tresholdsData.varnish_injection_b_end_position_min ||
-      Number(data.injection_c_end_position) <
-        tresholdsData.varnish_injection_c_end_position_min ||
-      Number(data.injection_d_end_position) <
-        tresholdsData.varnish_injection_d_end_position_min ||
+      Number(data.injection_a_end_position) < tresholdsData.varnish_injection_a_end_position_min ||
+      Number(data.injection_b_end_position) < tresholdsData.varnish_injection_b_end_position_min ||
+      Number(data.injection_c_end_position) < tresholdsData.varnish_injection_c_end_position_min ||
+      Number(data.injection_d_end_position) < tresholdsData.varnish_injection_d_end_position_min ||
       Number(data.tube_molding_start_position) <
         tresholdsData.varnish_tube_molding_start_position_min ||
       Number(data.tube_molding_end_position) <
@@ -89,12 +73,9 @@ export default function useVarnishAddEntryMenu(summaryData: ISummary | null) {
         tresholdsData.varnish_polimerization_furnace_temp_min ||
       Number(data.internal_varnish_porosity) <
         tresholdsData.varnish_internal_varnish_porosity_min ||
-      Number(data.varnish_machine_speed) >
-        tresholdsData.varnish_varnish_machine_speed_max ||
-      Number(data.total_air_pressure) >
-        tresholdsData.varnish_total_air_pressure_max ||
-      Number(data.feed_can_air_pressure) >
-        tresholdsData.varnish_feed_can_air_pressure_max ||
+      Number(data.varnish_machine_speed) > tresholdsData.varnish_varnish_machine_speed_max ||
+      Number(data.total_air_pressure) > tresholdsData.varnish_total_air_pressure_max ||
+      Number(data.feed_can_air_pressure) > tresholdsData.varnish_feed_can_air_pressure_max ||
       Number(data.nozzle_regulator_air_pressure) >
         tresholdsData.varnish_nozzle_regulator_air_pressure_max ||
       Number(data.cells_speed) > tresholdsData.varnish_cells_speed_max ||
@@ -106,14 +87,10 @@ export default function useVarnishAddEntryMenu(summaryData: ISummary | null) {
         tresholdsData.varnish_injection_c_start_position_max ||
       Number(data.injection_d_start_position) >
         tresholdsData.varnish_injection_d_start_position_max ||
-      Number(data.injection_a_end_position) >
-        tresholdsData.varnish_injection_a_end_position_max ||
-      Number(data.injection_b_end_position) >
-        tresholdsData.varnish_injection_b_end_position_max ||
-      Number(data.injection_c_end_position) >
-        tresholdsData.varnish_injection_c_end_position_max ||
-      Number(data.injection_d_end_position) >
-        tresholdsData.varnish_injection_d_end_position_max ||
+      Number(data.injection_a_end_position) > tresholdsData.varnish_injection_a_end_position_max ||
+      Number(data.injection_b_end_position) > tresholdsData.varnish_injection_b_end_position_max ||
+      Number(data.injection_c_end_position) > tresholdsData.varnish_injection_c_end_position_max ||
+      Number(data.injection_d_end_position) > tresholdsData.varnish_injection_d_end_position_max ||
       Number(data.tube_molding_start_position) >
         tresholdsData.varnish_tube_molding_start_position_max ||
       Number(data.tube_molding_end_position) >
@@ -137,9 +114,7 @@ export default function useVarnishAddEntryMenu(summaryData: ISummary | null) {
         varnish_machine_speed: Number(data.varnish_machine_speed),
         total_air_pressure: Number(data.total_air_pressure),
         feed_can_air_pressure: Number(data.feed_can_air_pressure),
-        nozzle_regulator_air_pressure: Number(
-          data.nozzle_regulator_air_pressure,
-        ),
+        nozzle_regulator_air_pressure: Number(data.nozzle_regulator_air_pressure),
         cells_speed: Number(data.cells_speed),
         injection_a_start_position: Number(data.injection_a_start_position),
         injection_b_start_position: Number(data.injection_b_start_position),

@@ -78,6 +78,7 @@ export async function getStatusesList({
       state: state,
       laboratory_assistant_name:
         laboratory_lock?.laboratory_assistant?.name ?? null,
+      user_name: laboratory_lock?.user?.name ?? null,
       laboratory_lock_reason:
         laboratory_lock?.laboratory_lock_reason?.value ?? null,
       has_laboratory_lock: !!laboratory_lock,

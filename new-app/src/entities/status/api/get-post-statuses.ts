@@ -39,6 +39,7 @@ export async function getPostStatuses({
         laboratory_lock?.laboratory_lock_reason?.value ?? null,
       laboratory_assistant_name:
         laboratory_lock?.laboratory_assistant?.name ?? null,
+      user_name: laboratory_lock?.user?.name ?? null,
       has_laboratory_lock: !!status.laboratory_lock,
     };
   });

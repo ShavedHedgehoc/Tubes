@@ -14,6 +14,7 @@ type Props = {
     postName: string,
     postState: IState,
     conveyorName: string,
+    hasLock: boolean,
   ) => React.ReactNode;
 };
 
@@ -113,6 +114,7 @@ export default function ConveyorCard({
                 post.name,
                 post.data?.postState ?? "no_data",
                 conveyorData.name,
+                post.data?.hasLock ?? false,
               )}
             />
           ))}

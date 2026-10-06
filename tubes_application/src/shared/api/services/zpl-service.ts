@@ -1,5 +1,5 @@
-import { $api } from "../http";
-import { ApiRoutes } from "./api-routes";
+import { $api } from '../http';
+import { ApiRoutes } from './api-routes';
 
 export interface PrintReceiptDto {
   ip: string; //"192.168.250.95";

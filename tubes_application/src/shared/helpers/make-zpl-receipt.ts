@@ -1,10 +1,10 @@
-import { v4 as uuidv4 } from "uuid";
-import { formatDateToString, formatTimeToString } from "./date-time-formatters";
-import { Receiptconstants } from "./receipt-constants";
+import { v4 as uuidv4 } from 'uuid';
+import { formatDateToString, formatTimeToString } from './date-time-formatters';
+import { Receiptconstants } from './receipt-constants';
 
 function parseCyrillicToURLEncoded(val: string) {
   const encodeURI = encodeURIComponent(val);
-  const parsedEncodedURI = encodeURI.replaceAll("%", "_");
+  const parsedEncodedURI = encodeURI.replaceAll('%', '_');
   return parsedEncodedURI;
 }
 
@@ -36,16 +36,10 @@ export function makeBoxReceipt({
   const parsedName = parseCyrillicToURLEncoded(name);
   const parsedBatch = parseCyrillicToURLEncoded(`Партия: ${batch}`);
   const parsedQuantity = parseCyrillicToURLEncoded(`Количество: ${quantity}`);
-  const parsedBoxNumber = parseCyrillicToURLEncoded(
-    `Номер короба: ${boxNumber}`,
-  );
+  const parsedBoxNumber = parseCyrillicToURLEncoded(`Номер короба: ${boxNumber}`);
   const parsedEmployee = parseCyrillicToURLEncoded(`Оператор: ${employee}`);
-  const parsedDate = parseCyrillicToURLEncoded(
-    `Дата: ${formatDateToString(date)}`,
-  );
-  const parsedTime = parseCyrillicToURLEncoded(
-    `Время: ${formatTimeToString(date)}`,
-  );
+  const parsedDate = parseCyrillicToURLEncoded(`Дата: ${formatDateToString(date)}`);
+  const parsedTime = parseCyrillicToURLEncoded(`Время: ${formatTimeToString(date)}`);
   // const qrCode = `${uuid}#${boxNumber}#${summaryId}#${employeeId}#${quantity}#${date.toISOString()}`;
   const qrCode = `${uuid}#${boxNumber}#${batchId}#${summaryId}#${employeeId}#${quantity}#${date.toISOString()}`;
 

@@ -1,5 +1,5 @@
-import { $api } from "../http";
-import { ApiRoutes } from "./api-routes";
+import { $api } from '../http';
+import { ApiRoutes } from './api-routes';
 
 export interface CreateExtrusionEntryDto {
   summary_id: number;
@@ -114,29 +114,21 @@ export interface CreatedSealantParam extends CreateSealantEntryDto {
 }
 
 export default class ParamsService {
-  static async createExtrusionEntry(
-    dto: CreateExtrusionEntryDto,
-  ): Promise<CreatedExtrusionParam> {
+  static async createExtrusionEntry(dto: CreateExtrusionEntryDto): Promise<CreatedExtrusionParam> {
     const res = await $api.post(`${ApiRoutes.CREATE_EXTRUSION_ENTRY}`, dto);
     return res.data;
   }
 
-  static async createVarnishEntry(
-    dto: CreateVarnishEntryDto,
-  ): Promise<CreatedVarnishParam> {
+  static async createVarnishEntry(dto: CreateVarnishEntryDto): Promise<CreatedVarnishParam> {
     const res = await $api.post(`${ApiRoutes.CREATE_VARNISH_ENTRY}`, dto);
     return res.data;
   }
-  static async createOffsetEntry(
-    dto: CreateOffsetEntryDto,
-  ): Promise<CreatedOffsetParam> {
+  static async createOffsetEntry(dto: CreateOffsetEntryDto): Promise<CreatedOffsetParam> {
     const res = await $api.post(`${ApiRoutes.CREATE_OFFSET_ENTRY}`, dto);
     return res.data;
   }
 
-  static async createSealantEntry(
-    dto: CreateSealantEntryDto,
-  ): Promise<CreatedSealantParam> {
+  static async createSealantEntry(dto: CreateSealantEntryDto): Promise<CreatedSealantParam> {
     const res = await $api.post(`${ApiRoutes.CREATE_SEALANT_ENTRY}`, dto);
     return res.data;
   }

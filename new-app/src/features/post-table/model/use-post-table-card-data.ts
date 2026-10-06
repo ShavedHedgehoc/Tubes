@@ -32,6 +32,7 @@ export function usePostTableCardData(statuses: StatusEntity[] = []) {
         date: item.createdAt,
         employee: item.employee_name,
         lab_assistant: item.laboratory_assistant_name,
+        user: item.user_name,
         lab_lock_reason: item.laboratory_lock_reason,
         state: state as StatusTableRowState,
         operation: item.operation_description || item.maintenance_description,

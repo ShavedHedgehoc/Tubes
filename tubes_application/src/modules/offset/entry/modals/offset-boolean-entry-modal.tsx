@@ -1,11 +1,8 @@
-import BooleanEntryModal from "@/shared/components/modals/boolean-entry-modal";
+import BooleanEntryModal from '@/shared/components/modals/boolean-entry-modal';
 
-import { useShallow } from "zustand/shallow";
-import { useOffsetBooleanEntryModalStore } from "../../store/use-offset-boolean-entry-modal-store";
-import {
-  OffsetInputParams,
-  useOffsetInputStore,
-} from "../../store/use-offset-input-store";
+import { useShallow } from 'zustand/shallow';
+import { useOffsetBooleanEntryModalStore } from '../../store/use-offset-boolean-entry-modal-store';
+import { OffsetInputParams, useOffsetInputStore } from '../../store/use-offset-input-store';
 
 export default function OffsetBooleanEntryModal() {
   const { key, title, open, setOpen } = useOffsetBooleanEntryModalStore(
@@ -17,9 +14,7 @@ export default function OffsetBooleanEntryModal() {
     })),
   );
 
-  const changeData = useOffsetInputStore(
-    useShallow((state) => state.changeData),
-  );
+  const changeData = useOffsetInputStore(useShallow((state) => state.changeData));
 
   const data = useOffsetInputStore(
     useShallow((state) => {

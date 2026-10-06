@@ -1,5 +1,5 @@
-import { $api } from "../http";
-import { ApiRoutes } from "./api-routes";
+import { $api } from '../http';
+import { ApiRoutes } from './api-routes';
 
 export interface IRank {
   id: number;
@@ -17,9 +17,7 @@ export interface IEmployee {
 // employee login
 export default class EmployeeService {
   static async getEmployeeByBarcode(barcode: string): Promise<IEmployee> {
-    const res = await $api.get(
-      `${ApiRoutes.GET_EMPLOYEES_BY_BARCODE}${barcode}`,
-    );
+    const res = await $api.get(`${ApiRoutes.GET_EMPLOYEES_BY_BARCODE}${barcode}`);
     return res.data;
   }
 }

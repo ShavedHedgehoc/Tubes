@@ -28,6 +28,11 @@ export function ModalLayout({
   children,
   showClose = false,
 }: ModalLayoutProps) {
+  const handleOutsideClick = (e: Event) => {
+    if (!showClose) {
+      e.preventDefault();
+    }
+  };
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent
@@ -37,6 +42,9 @@ export function ModalLayout({
           className,
         )}
         showCloseButton={showClose}
+        onPointerDownOutside={handleOutsideClick}
+        onInteractOutside={handleOutsideClick}
+        onEscapeKeyDown={handleOutsideClick}
       >
         <DialogHeader className="sr-only">
           <DialogTitle>{title}</DialogTitle>

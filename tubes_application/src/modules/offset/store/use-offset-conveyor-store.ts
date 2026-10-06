@@ -1,7 +1,7 @@
-import type { IConveyor } from "@/shared/api/services/conveyor-service";
+import type { IConveyor } from '@/shared/api/services/conveyor-service';
 
-import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
 
 interface OffsetConveyorStore {
   offsetConveyor: IConveyor | null;

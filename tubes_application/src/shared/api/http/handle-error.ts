@@ -1,11 +1,11 @@
-import axios, { AxiosError } from "axios";
-import { httpErrors } from "./http-errors";
+import axios, { AxiosError } from 'axios';
+import { httpErrors } from './http-errors';
 
 const handleError = (error: Error | AxiosError | unknown): string => {
   if (axios.isAxiosError(error)) {
     if (error.response?.status === 504) return httpErrors.API_ERROR;
     const message =
-      typeof error.response !== "undefined"
+      typeof error.response !== 'undefined'
         ? error.response.data.message
         : httpErrors.UNKNOWN_ERROR;
     return message;

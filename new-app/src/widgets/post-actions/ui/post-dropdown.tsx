@@ -2,6 +2,8 @@
 
 import { useConveyorUiParams } from "@/entities/conveyor";
 import { useStatusUiParams } from "@/entities/status";
+import { useRoles } from "@/entities/user";
+import { useLabLockUIParams } from "@/features/lock-post";
 import { cn } from "@/shared/lib";
 import {
   Button,
@@ -12,7 +14,14 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "@/shared/ui";
-import { List, SquareMenu, StopCircle, TrendingUp } from "lucide-react";
+import {
+  List,
+  Lock,
+  LockOpen,
+  SquareMenu,
+  StopCircle,
+  TrendingUp,
+} from "lucide-react";
 
 type IState = "working" | "idle" | "finished" | "locked" | "no_data";
 type Props = {
@@ -21,6 +30,7 @@ type Props = {
   postName: string;
   postState: IState;
   conveyorName: string;
+  hasLock: boolean;
 };
 
 export function PostDropdown({
@@ -29,9 +39,12 @@ export function PostDropdown({
   postName,
   postState,
   conveyorName,
+  hasLock,
 }: Props) {
   const { setParams } = useConveyorUiParams();
   const { setParams: setStatusParams } = useStatusUiParams();
+  const { setParams: setLabLocksParams } = useLabLockUIParams();
+  const { isLabAssistant } = useRoles();
 
   const handleClosePost = () => {
     setParams({
@@ -59,6 +72,17 @@ export function PostDropdown({
       post_title: postName,
       conveyor_name: conveyorName,
       "open-table": true,
+    });
+  };
+
+  const handleChangeLabLock = () => {
+    setLabLocksParams({
+      summary_id: summaryId,
+      post_val: postId,
+      post_title: postName,
+      state: !hasLock,
+      conveyor_name: conveyorName,
+      "change-lock": true,
     });
   };
 
@@ -94,6 +118,21 @@ export function PostDropdown({
         >
           <TrendingUp />
           <span className="font-semibold"> График</span>
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem
+          variant={"destructive"}
+          onClick={handleChangeLabLock}
+          disabled={
+            !isLabAssistant ||
+            postState === "finished" ||
+            postState === "no_data"
+          }
+        >
+          {hasLock ? <LockOpen /> : <Lock />}
+          <span className="font-semibold">
+            {hasLock ? "Разблокировать" : "Заблокировать"}
+          </span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem

@@ -1,35 +1,23 @@
-import type { CreateStatusDto } from "@/shared/api/services/status-service";
-import { useActiveSummary } from "@/shared/api/use-active-summary";
-import { useShallow } from "zustand/shallow";
+import type { CreateStatusDto } from '@/shared/api/services/status-service';
+import { useActiveSummary } from '@/shared/api/use-active-summary';
+import { useShallow } from 'zustand/shallow';
 import {
   useOffsetCloseSummaryModalStore,
   useOffsetDefectInputModalStore,
-} from "../../store/use-offset-modal-store";
-import { useOffsetDefectStore } from "../../store/use-offset-defect-store";
-import { useOffsetEmployeeStore } from "../../store/use-offset-employee-store";
-import { useOffsetConveyorStore } from "../../store/use-offset-conveyor-store";
-import { useCreateStatus } from "@/shared/api/use-create-status";
+} from '../../store/use-offset-modal-store';
+import { useOffsetDefectStore } from '../../store/use-offset-defect-store';
+import { useOffsetEmployeeStore } from '../../store/use-offset-employee-store';
+import { useOffsetConveyorStore } from '../../store/use-offset-conveyor-store';
+import { useCreateStatus } from '@/shared/api/use-create-status';
 
 export default function useOffsetCloseSummaryModal() {
-  const open = useOffsetCloseSummaryModalStore(
-    useShallow((state) => state.open),
-  );
-  const setOpen = useOffsetCloseSummaryModalStore(
-    useShallow((state) => state.setOpen),
-  );
-  const setOpenEntryModal = useOffsetDefectInputModalStore(
-    useShallow((state) => state.setOpen),
-  );
-  const clearData = useOffsetDefectStore(
-    useShallow((state) => state.clearData),
-  );
+  const open = useOffsetCloseSummaryModalStore(useShallow((state) => state.open));
+  const setOpen = useOffsetCloseSummaryModalStore(useShallow((state) => state.setOpen));
+  const setOpenEntryModal = useOffsetDefectInputModalStore(useShallow((state) => state.setOpen));
+  const clearData = useOffsetDefectStore(useShallow((state) => state.clearData));
   const data = useOffsetDefectStore(useShallow((state) => state.data));
-  const employee = useOffsetEmployeeStore(
-    useShallow((state) => state.offsetEmployee),
-  );
-  const offsetConveyor = useOffsetConveyorStore(
-    useShallow((state) => state.offsetConveyor),
-  );
+  const employee = useOffsetEmployeeStore(useShallow((state) => state.offsetEmployee));
+  const offsetConveyor = useOffsetConveyorStore(useShallow((state) => state.offsetConveyor));
   const { createStatus } = useCreateStatus();
   const { data: summaryData } = useActiveSummary(offsetConveyor?.id ?? null);
 

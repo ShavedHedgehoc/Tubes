@@ -1,12 +1,5 @@
-import {
-  Stat,
-  VStack,
-  Status,
-  HStack,
-  Separator,
-  Text,
-} from "@chakra-ui/react";
-type ParameterCardVariants = "numeric" | "boolean" | "string";
+import { Stat, VStack, Status, HStack, Separator, Text } from '@chakra-ui/react';
+type ParameterCardVariants = 'numeric' | 'boolean' | 'string';
 export interface ParameterCardProps {
   title: string;
   value?: number | null;
@@ -20,58 +13,42 @@ export interface ParameterCardProps {
   variant: ParameterCardVariants;
 }
 export default function ParameterCard(props: ParameterCardProps) {
-  const hasLimits =
-    typeof props.minValue === "number" && typeof props.maxValue === "number";
+  const hasLimits = typeof props.minValue === 'number' && typeof props.maxValue === 'number';
   const hasValue = props.value !== null && props.value !== undefined;
   return (
-    <Stat.Root
-      w="full"
-      h="full"
-      px={4}
-      py={4}
-      backgroundColor="bg.panel"
-      size="md"
-      rounded="lg"
-    >
-      <Stat.Label
-        colorPalette="teal"
-        fontSize="sm"
-        justifyContent="center"
-        textAlign="center"
-      >
+    <Stat.Root w="full" h="full" px={4} py={4} backgroundColor="bg.panel" size="md" rounded="lg">
+      <Stat.Label colorPalette="teal" fontSize="sm" justifyContent="center" textAlign="center">
         {props.title}
       </Stat.Label>
       <Stat.ValueText
-        fontSize={props.variant === "boolean" ? "md" : "2xl"}
+        fontSize={props.variant === 'boolean' ? 'md' : '2xl'}
         justifyContent="center"
         alignItems="flex-end"
         pt={2}
       >
         {/* {props.variant === "numeric" && !props.minValue && !props.maxValue && ( */}
-        {props.variant === "numeric" && !hasLimits && (
+        {props.variant === 'numeric' && !hasLimits && (
           <Text textStyle="md" color="fg.subtle">
             Внесение не требуется
           </Text>
         )}
-        {props.variant === "numeric" && hasLimits && (props.value ?? "-")}
+        {props.variant === 'numeric' && hasLimits && (props.value ?? '-')}
         {/* {props.variant === "numeric" &&
           typeof props.minValue === "number" &&
           typeof props.maxValue === "number" &&
           (props.value ?? "-")} */}
         {/* {props.variant === "numeric" && (props.minValue || props.maxValue) && (props.value ?? "-")} */}
-        {props.variant === "boolean" &&
+        {props.variant === 'boolean' &&
           (props.booleanValue === null
-            ? "-"
+            ? '-'
             : props.booleanValue
-              ? "Соответствует"
-              : "Не соответствует")}
-        {props.variant === "string" && (props.stringValue ?? "-")}
+              ? 'Соответствует'
+              : 'Не соответствует')}
+        {props.variant === 'string' && (props.stringValue ?? '-')}
         <VStack
           alignItems="flex-end"
           h="full"
-          justifyContent={
-            props.variant === "numeric" ? "space-between" : "flex-start"
-          }
+          justifyContent={props.variant === 'numeric' ? 'space-between' : 'flex-start'}
         >
           {/* <Status.Root
             colorPalette={
@@ -103,28 +80,27 @@ export default function ParameterCard(props: ParameterCardProps) {
           > */}
           <Status.Root
             colorPalette={
-              props.variant === "numeric"
+              props.variant === 'numeric'
                 ? hasValue && hasLimits
-                  ? props.value! > props.maxValue! ||
-                    props.value! < props.minValue!
-                    ? "red"
-                    : "green"
+                  ? props.value! > props.maxValue! || props.value! < props.minValue!
+                    ? 'red'
+                    : 'green'
                   : hasValue
-                    ? "gray"
-                    : "yellow"
-                : props.variant === "boolean"
+                    ? 'gray'
+                    : 'yellow'
+                : props.variant === 'boolean'
                   ? props.booleanValue === null
-                    ? "yellow"
+                    ? 'yellow'
                     : props.booleanValue
-                      ? "green"
-                      : "red"
+                      ? 'green'
+                      : 'red'
                   : props.stringValue && props.stringDefaultValue
                     ? props.stringValue !== props.stringDefaultValue
-                      ? "red"
-                      : "green"
+                      ? 'red'
+                      : 'green'
                     : props.stringValue
-                      ? "gray"
-                      : "yellow"
+                      ? 'gray'
+                      : 'yellow'
             }
             alignItems="end"
           >
@@ -133,15 +109,13 @@ export default function ParameterCard(props: ParameterCardProps) {
               !props.maxValue &&
               !props.minValue
             ) && <Status.Indicator />} */}
-            {!(props.variant === "numeric" && !hasLimits) && (
-              <Status.Indicator />
-            )}
+            {!(props.variant === 'numeric' && !hasLimits) && <Status.Indicator />}
           </Status.Root>
           <Stat.ValueUnit pl={2}>
             {/* {props.variant === "numeric" && props.minValue && props.maxValue && (props.unit ?? "-")} */}
-            {props.variant === "numeric" &&
+            {props.variant === 'numeric' &&
               (props.minValue || props.maxValue) &&
-              (props.unit ?? "-")}
+              (props.unit ?? '-')}
           </Stat.ValueUnit>
         </VStack>
       </Stat.ValueText>
@@ -151,25 +125,20 @@ export default function ParameterCard(props: ParameterCardProps) {
       {/* {props.variant === "numeric" &&
         typeof props.minValue === "number" &&
         typeof props.maxValue === "number" && ( */}
-      {props.variant === "numeric" && hasLimits && (
+      {props.variant === 'numeric' && hasLimits && (
         <HStack justifyContent="center" pt={1} gap={6}>
           <VStack gap={0}>
             <Text color="fg.a" textStyle="sm">
-              {props.minValue ?? "-"}
+              {props.minValue ?? '-'}
             </Text>
             <Text color="fg.subtle" textStyle="xs">
               Минимум
             </Text>
           </VStack>
-          <Separator
-            orientation="vertical"
-            height="6"
-            size="sm"
-            colorPalette="white"
-          />
+          <Separator orientation="vertical" height="6" size="sm" colorPalette="white" />
           <VStack gap={0}>
             <Text color="fg.a" textStyle="sm">
-              {props.maxValue ?? "-"}
+              {props.maxValue ?? '-'}
             </Text>
             <Text color="fg.subtle" textStyle="xs">
               Максимум
@@ -177,14 +146,14 @@ export default function ParameterCard(props: ParameterCardProps) {
           </VStack>
         </HStack>
       )}
-      {props.variant === "string" && (
+      {props.variant === 'string' && (
         <HStack justifyContent="center" pt={2} gap={6}>
           <Text color="fg.a" textStyle="sm">
-            {props.stringDefaultValue ?? "-"}
+            {props.stringDefaultValue ?? '-'}
           </Text>
         </HStack>
       )}
-      {props.variant === "boolean" && props.stringDefaultValue && (
+      {props.variant === 'boolean' && props.stringDefaultValue && (
         <HStack justifyContent="center" pt={2} gap={6}>
           <Text color="fg.a" textStyle="sm">
             {props.stringDefaultValue}

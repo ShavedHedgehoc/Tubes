@@ -1,6 +1,6 @@
-import type { IEmployee } from "@/shared/api/services/employee-service";
-import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import type { IEmployee } from '@/shared/api/services/employee-service';
+import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
 
 interface ExtrusionEmployeeStore {
   extrusionEmployee: IEmployee | null;

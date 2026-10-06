@@ -4,6 +4,10 @@ import { ApiMessages } from "src/resources/api-messages";
 import { CreateStatusDto } from "./dto/create-status.dto";
 import { GetStatusesDto } from "./dto/get-statuses.dto";
 import { Prisma } from "db";
+import {
+  StatusesListResponse,
+  StatusListRow,
+} from "./dto/statuses-list.response";
 
 @Injectable()
 export class StatusesService {
@@ -199,7 +203,7 @@ export class StatusesService {
     });
   }
 
-  async getStatuses(query: GetStatusesDto) {
+  async getStatuses(query: GetStatusesDto): Promise<StatusesListResponse> {
     type StatusWhere = Prisma.Args<
       typeof this.prisma.status,
       "findMany"
@@ -229,6 +233,7 @@ export class StatusesService {
             include: {
               laboratory_lock_reason: true,
               laboratory_assistant: true,
+              user: { select: { id: true, name: true } },
             },
           },
         },
@@ -237,7 +242,31 @@ export class StatusesService {
         skip: query.limit * (query.page - 1),
       }),
     ]);
+    const formattedStatuses = statuses.map((status) => {
+      if (!status.maintenance_session) return status;
 
-    return { summary, statuses, total };
+      return {
+        ...status,
+        maintenance_session: {
+          ...status.maintenance_session,
+
+          total_duration:
+            status.maintenance_session.total_duration !== null
+              ? Number(status.maintenance_session.total_duration)
+              : null,
+          work_duration:
+            status.maintenance_session.work_duration !== null
+              ? Number(status.maintenance_session.work_duration)
+              : null,
+          // Приводим end_time к Date (из прошлой ошибки), если ваш интерфейс все еще требует строго Date
+          end_time: status.maintenance_session.end_time as Date,
+        },
+      };
+    });
+    return {
+      summary,
+      statuses: formattedStatuses as unknown as StatusListRow[],
+      total,
+    };
   }
 }

@@ -14,14 +14,31 @@
       "type": "shell",
       "command": "npm run prettier:fix",
       "group": "build",
-      "problemMatcher": []
+      "problemMatcher": [],
+      "detail": "Форматирование"
+    },
+    {
+      "label": "Pre-flight",
+      "type": "shell",
+      "command": "npm run pre-flight",
+      "group": {
+        "kind": "build"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": [],
+      "detail": "Полная проверка проекта перед commit"
     },
     {
       "label": "DEV: Run all",
       "dependsOn": ["DEV: Api", "DEV: Web", "DEV: Stations", "DEV: Api 2"],
       "dependsOrder": "parallel",
       "problemMatcher": [],
-      "group": "build"
+      "group": "build",
+      "detail": "Запускает режим разработки (dev) для всех приложений"
     },
     {
       "label": "DEV: Api",
@@ -53,80 +70,3 @@
     }
   ]
 }
-// {
-//   "version": "2.0.0",
-//   "tasks": [
-//     {
-//       "label": "Prisma: Generate Client",
-//       "type": "shell",
-//       "command": "pnpm db:generate",
-//       "problemMatcher": [],
-//       "group": "build",
-//       "detail": "Генерирует типы Prisma для всех пакетов"
-//     },
-//     {
-//       "label": "Prisma: Pull database",
-//       "type": "shell",
-//       "command": "pnpm db:pull",
-//       "problemMatcher": [],
-//       "group": "build",
-//       "detail": "Генерирует схему Prisma"
-//     },
-//     {
-//       "label": "tRPC: Load schema to API",
-//       "type": "shell",
-//       "command": "pnpm schema",
-//       "problemMatcher": [],
-//       "group": "build",
-//       "detail": "Выгружает типы tRPC в Studio"
-//     },
-//    {
-//       "label": "DEV: Run all",
-//       "type": "shell",
-//       "command": "pnpm dev",
-//       "problemMatcher": [],
-//       "group": "build",
-//       "presentation": {
-//         "reveal": "always",
-//         "panel": "dedicated"
-//       }
-//     },
-//     {
-//       "label": "Lint all",
-//       "type": "shell",
-//       "command": "pnpm lint",
-//       "group": "build",
-//       "problemMatcher": []
-//     },
-//     {
-//       "label": "Lint aplication only",
-//       "type": "shell",
-//       "command": "pnpm --filter \"@repo/application\" lint",
-//       "group": "build",
-//       "problemMatcher": [
-//         "$eslint-stylish"
-//       ]
-//     },
-//     {
-//       "label": "Knip",
-//       "type": "shell",
-//       "command": "pnpm knip",
-//       "group": "build",
-//       "problemMatcher": []
-//     },
-//     {
-//       "label": "Format all",
-//       "type": "shell",
-//       "command": "pnpm format",
-//       "group": "build",
-//       "problemMatcher": []
-//     },
-//     {
-//       "label": "Pre-flight",
-//       "type": "shell",
-//       "command": "pnpm pre-flight ",
-//       "group": "build",
-//       "problemMatcher": []
-//     }
-//   ]
-// }

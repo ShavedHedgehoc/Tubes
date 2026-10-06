@@ -79,7 +79,7 @@
 //     </Theme>
 //   );
 // }
-import { Grid, GridItem, Theme, Box } from "@chakra-ui/react";
+import { Grid, GridItem, Theme, Box } from '@chakra-ui/react';
 
 export interface PageLayoutProps {
   timeComponent: React.ReactNode;

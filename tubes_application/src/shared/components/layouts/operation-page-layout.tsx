@@ -1,5 +1,5 @@
-import { Theme, Grid, GridItem, Center, Heading } from "@chakra-ui/react";
-import React from "react";
+import { Theme, Grid, GridItem, Center, Heading } from '@chakra-ui/react';
+import React from 'react';
 
 export interface OperationPageLayoutProps {
   timeComponent: React.ReactNode;

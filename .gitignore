@@ -9,3 +9,4 @@
 tubes_application/tsconfig.app.tsbuildinfo
 /build
 /dist
+!.env.development
