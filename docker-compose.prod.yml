@@ -19,7 +19,7 @@ services:
 
   pgadmin:
     container_name: pgadmin_container
-    image: dpage/pgadmin4:9.14
+    image: dpage/pgadmin4:9.18
     logging:
       driver: 'json-file'
       options:
@@ -42,7 +42,7 @@ services:
     container_name: api_tubes
     build:
       context: .
-      dockerfile: docker/api_tubes/Dockerfile.fast
+      dockerfile: docker/api_tubes/Dockerfile.new
       args:
         - NODE_ENV=production
     dns:
@@ -84,6 +84,7 @@ services:
       PORT: '7200'
     depends_on:
       - postgres
+      - tubes_api
     restart: always
     networks:
       - postgres
@@ -92,7 +93,7 @@ services:
     container_name: new_app
     build:
       context: .
-      dockerfile: docker/new-app/Dockerfile.fast
+      dockerfile: docker/new-app/Dockerfile.new
       network: host
       args:
         - NODE_ENV=production
@@ -118,7 +119,7 @@ services:
     container_name: tubes_dash
     build:
       context: .
-      dockerfile: docker/tubes/Dockerfile.fast
+      dockerfile: docker/tubes/Dockerfile.new
       args:
         - NODE_ENV=production
     logging:
