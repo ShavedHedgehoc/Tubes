@@ -1,5 +1,5 @@
-import { $api } from "../http";
-import { ApiRoutes } from "./api-routes";
+import { $api } from '../http';
+import { ApiRoutes } from './api-routes';
 
 export interface UpdateMaintenanceLogDto {
   id: number;
@@ -17,9 +17,7 @@ interface IMaintenanceLog {
 }
 
 export default class MaintenanceLogService {
-  static async updateMaintenanceLog(
-    dto: UpdateMaintenanceLogDto,
-  ): Promise<IMaintenanceLog> {
+  static async updateMaintenanceLog(dto: UpdateMaintenanceLogDto): Promise<IMaintenanceLog> {
     const res = await $api.patch(ApiRoutes.UPDATE_MAINTENANCE_LOG, dto);
     return res.data;
   }

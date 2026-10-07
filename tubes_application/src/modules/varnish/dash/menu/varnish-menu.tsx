@@ -1,5 +1,5 @@
-import Menu from "../../../../shared/components/menu/menu";
-import type { MenuButtonProps } from "../../../../shared/components/menu/menu-button";
+import Menu from '../../../../shared/components/menu/menu';
+import type { MenuButtonProps } from '../../../../shared/components/menu/menu-button';
 import {
   TbAdjustments,
   TbAutomation,
@@ -9,13 +9,13 @@ import {
   TbLogin2,
   TbLogout2,
   TbSettingsExclamation,
-} from "react-icons/tb";
-import MenuButton from "../../../../shared/components/menu/menu-button";
-import { TbStopwatch } from "react-icons/tb";
-import { useNavigate } from "react-router-dom";
-import { RouteNames } from "@/shared/router/route-names";
-import useVarnishMenu from "./use-varnish-menu";
-import { useActiveSummary } from "@/shared/api/use-active-summary";
+} from 'react-icons/tb';
+import MenuButton from '../../../../shared/components/menu/menu-button';
+import { TbStopwatch } from 'react-icons/tb';
+import { useNavigate } from 'react-router-dom';
+import { RouteNames } from '@/shared/router/route-names';
+import useVarnishMenu from './use-varnish-menu';
+import { useActiveSummary } from '@/shared/api/use-active-summary';
 
 export default function VarnishMenu() {
   const navigate = useNavigate();
@@ -37,53 +37,45 @@ export default function VarnishMenu() {
   const { data: summaryData } = useActiveSummary(varnishConveyor?.id ?? null);
 
   const inputParametersButtonProps: MenuButtonProps = {
-    title: "Параметры",
+    title: 'Параметры',
     icon: <TbAdjustments />,
     disabled: inputParametersButtonDisabledCondition,
     action: () => handleOpenParametersClick(),
   };
 
   const scanMaterilButtonProps: MenuButtonProps = {
-    title: "Комплектующие",
+    title: 'Комплектующие',
     icon: <TbBarcode />,
     disabled: scanMaterialsButtonDisabledCondition,
     action: () => setOpenMaterialScan(true),
   };
 
   const maintenanceButtonProps: MenuButtonProps = {
-    title: "ТО",
+    title: 'ТО',
     icon: <TbSettingsExclamation />,
     disabled: maintenanceButtonDisabledCondition,
-    action: () =>
-      navigate(
-        `${RouteNames.VARNISH_MAINTENANCE_ROOT}/${varnishConveyor?.name}`,
-      ),
+    action: () => navigate(`${RouteNames.VARNISH_MAINTENANCE_ROOT}/${varnishConveyor?.name}`),
   };
 
   const operationsButtonProps: MenuButtonProps = {
-    title: "Операции",
+    title: 'Операции',
     icon: <TbAutomation />,
     disabled: operationButtonDisabledCondition,
-    action: () =>
-      navigate(
-        `${RouteNames.VARNISH_OPERATIONS_ROOT}/${varnishConveyor?.name}`,
-      ),
+    action: () => navigate(`${RouteNames.VARNISH_OPERATIONS_ROOT}/${varnishConveyor?.name}`),
   };
 
   const sopButtonProps: MenuButtonProps = {
-    title: "Инфо",
+    title: 'Инфо',
     icon: <TbInfoTriangle />,
     disabled: false,
     action: () =>
       summaryData?.varnishStatus.operation_id
-        ? navigate(
-            `${RouteNames.VARNISH_SOP_ROOT}/${summaryData.varnishStatus.operation_id}`,
-          )
+        ? navigate(`${RouteNames.VARNISH_SOP_ROOT}/${summaryData.varnishStatus.operation_id}`)
         : undefined,
   };
 
   const picturesButtonProps: MenuButtonProps = {
-    title: "Изображения",
+    title: 'Изображения',
     icon: <TbLibraryPhoto />,
     disabled: pictureButtonDisabledCondition,
     action: () =>
@@ -93,14 +85,14 @@ export default function VarnishMenu() {
   };
 
   const endButtonProps: MenuButtonProps = {
-    title: "Закончить",
+    title: 'Закончить',
     icon: <TbStopwatch />,
     disabled: endButtonDisabledCondition,
     action: () => setOpenCloseSummary(true),
   };
 
   const loginButtonProps: MenuButtonProps = {
-    title: employee ? "Выйти" : "Авторизоваться",
+    title: employee ? 'Выйти' : 'Авторизоваться',
     icon: employee ? <TbLogout2 /> : <TbLogin2 />,
     disabled: false,
     action: employee ? () => setOpenLogout(true) : () => setOpenAuth(true),
@@ -112,7 +104,7 @@ export default function VarnishMenu() {
       <MenuButton {...scanMaterilButtonProps} />
       <MenuButton {...maintenanceButtonProps} />
       <MenuButton {...operationsButtonProps} />
-      {summaryData && summaryData.varnishStatus.state === "idle" && (
+      {summaryData && summaryData.varnishStatus.state === 'idle' && (
         <MenuButton {...sopButtonProps} />
       )}
       <MenuButton {...picturesButtonProps} />

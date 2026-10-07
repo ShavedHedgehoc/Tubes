@@ -1,5 +1,5 @@
-import { $api } from "../http";
-import { ApiRoutes } from "./api-routes";
+import { $api } from '../http';
+import { ApiRoutes } from './api-routes';
 
 export interface ISOPPicture {
   id: number;
@@ -12,12 +12,8 @@ export interface ISOPPictureData {
 }
 
 export default class SopService {
-  static async getSopPictures(
-    operationId: number | null,
-  ): Promise<ISOPPictureData> {
-    const res = await $api.get(
-      `${ApiRoutes.GET_SOP_PICTURES}?operation_id=${operationId}`,
-    );
+  static async getSopPictures(operationId: number | null): Promise<ISOPPictureData> {
+    const res = await $api.get(`${ApiRoutes.GET_SOP_PICTURES}?operation_id=${operationId}`);
     return res.data;
   }
 }

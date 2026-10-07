@@ -1,9 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
-import SopService from "@/shared/api/services/sop-service";
+import { useQuery } from '@tanstack/react-query';
+import SopService from '@/shared/api/services/sop-service';
 
 export const useVarnishSop = (operationId: number | null) =>
   useQuery({
-    queryKey: ["varnish_sop", operationId],
+    queryKey: ['varnish_sop', operationId],
     queryFn: () => SopService.getSopPictures(operationId),
     enabled: !!operationId,
   });

@@ -1,16 +1,10 @@
-import MenuButton, {
-  type MenuButtonProps,
-} from "@/shared/components/menu/menu-button";
-import { TbSettingsAutomation, TbSettingsCancel, TbX } from "react-icons/tb";
-import Menu from "@/shared/components/menu/menu";
-import type { ISummary } from "@/shared/api/services/summary-service";
-import useOffsetOperationsMenu from "./use-offset-operations-menu";
+import MenuButton, { type MenuButtonProps } from '@/shared/components/menu/menu-button';
+import { TbSettingsAutomation, TbSettingsCancel, TbX } from 'react-icons/tb';
+import Menu from '@/shared/components/menu/menu';
+import type { ISummary } from '@/shared/api/services/summary-service';
+import useOffsetOperationsMenu from './use-offset-operations-menu';
 
-export default function OffsetOperationsMenu({
-  summaryData,
-}: {
-  summaryData: ISummary | null;
-}) {
+export default function OffsetOperationsMenu({ summaryData }: { summaryData: ISummary | null }) {
   const {
     handleSetClick,
     handleExitClick,
@@ -21,21 +15,21 @@ export default function OffsetOperationsMenu({
     setWorkingButtonDisableCondition,
   } = useOffsetOperationsMenu(summaryData);
   const backButtonProps: MenuButtonProps = {
-    title: "Закрыть",
+    title: 'Закрыть',
     icon: <TbX />,
     disabled: false,
     action: () => handleExitClick(),
   };
 
   const setIdleButtonProps: MenuButtonProps = {
-    title: "Начать",
+    title: 'Начать',
     icon: <TbSettingsAutomation />,
     disabled: setIdleButtonDisableCondition,
     action: () => handleSetClick(),
   };
 
   const setWorkingButtonProps: MenuButtonProps = {
-    title: "Закончить",
+    title: 'Закончить',
     icon: <TbSettingsCancel />,
     disabled: setWorkingButtonDisableCondition,
     action: () => handleWorkingClick(),
@@ -44,9 +38,7 @@ export default function OffsetOperationsMenu({
   return (
     <Menu>
       {setIdleButtonVisibleCondition && <MenuButton {...setIdleButtonProps} />}
-      {setWorkingButtonVisibleCondition && (
-        <MenuButton {...setWorkingButtonProps} />
-      )}
+      {setWorkingButtonVisibleCondition && <MenuButton {...setWorkingButtonProps} />}
       <MenuButton {...backButtonProps} />
     </Menu>
   );

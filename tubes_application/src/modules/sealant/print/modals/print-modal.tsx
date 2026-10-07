@@ -1,46 +1,37 @@
-import {
-  Dialog,
-  Grid,
-  GridItem,
-  HStack,
-  Heading,
-  Stack,
-  Text,
-  Button,
-} from "@chakra-ui/react";
-import { type DialogOpenChangeDetails } from "@chakra-ui/react";
+import { Dialog, Grid, GridItem, HStack, Heading, Stack, Text, Button } from '@chakra-ui/react';
+import { type DialogOpenChangeDetails } from '@chakra-ui/react';
 
-import { useQuantityIntegerModalStore } from "../../store/use-quantity-integer-modal-store";
-import { useBoxQuantityStore } from "../../store/use-box-quantity-store";
-import { useShallow } from "zustand/shallow";
-import { usePrintZpl } from "../../use-print-zpl";
-import type { ISummary } from "@/shared/api/services/summary-service";
-import { usePrinter } from "../../use-printer";
-import { useSealantEmployeeStore } from "../../store/use-sealant-employee-store";
-import { useSealantConveyorStore } from "../../store/use-sealant-conveyor-store";
-import { useProductionBoxes } from "../../use-production-boxes";
-import { makeBoxReceipt } from "@/shared/helpers/make-zpl-receipt";
-import type { PrintReceiptDto } from "@/shared/api/services/zpl-service";
-import { TbPrinter } from "react-icons/tb";
+import { useQuantityIntegerModalStore } from '../../store/use-quantity-integer-modal-store';
+import { useBoxQuantityStore } from '../../store/use-box-quantity-store';
+import { useShallow } from 'zustand/shallow';
+import { usePrintZpl } from '../../use-print-zpl';
+import type { ISummary } from '@/shared/api/services/summary-service';
+import { usePrinter } from '../../use-printer';
+import { useSealantEmployeeStore } from '../../store/use-sealant-employee-store';
+import { useSealantConveyorStore } from '../../store/use-sealant-conveyor-store';
+import { useProductionBoxes } from '../../use-production-boxes';
+import { makeBoxReceipt } from '@/shared/helpers/make-zpl-receipt';
+import type { PrintReceiptDto } from '@/shared/api/services/zpl-service';
+import { TbPrinter } from 'react-icons/tb';
 
 const BUTTON_LAYOUT = [
-  { label: "C", action: "clear", col: 4 },
-  { label: "<<", action: "slice", col: 8 },
-  { label: "7" },
-  { label: "8" },
-  { label: "9" },
-  { label: "4" },
-  { label: "5" },
-  { label: "6" },
-  { label: "1" },
-  { label: "2" },
-  { label: "3" },
-  { label: "." },
-  { label: "0", col: 8 },
+  { label: 'C', action: 'clear', col: 4 },
+  { label: '<<', action: 'slice', col: 8 },
+  { label: '7' },
+  { label: '8' },
+  { label: '9' },
+  { label: '4' },
+  { label: '5' },
+  { label: '6' },
+  { label: '1' },
+  { label: '2' },
+  { label: '3' },
+  { label: '.' },
+  { label: '0', col: 8 },
   {
-    label: "Печать",
+    label: 'Печать',
     col: 12,
-    action: "close",
+    action: 'close',
     icon: <TbPrinter />,
     canDisable: true,
   },
@@ -53,12 +44,7 @@ interface AddEntryModalButtonProps {
   onClick: (val: string) => void;
 }
 
-function AddEntryModalButton({
-  value,
-  disabled,
-  icon,
-  onClick,
-}: AddEntryModalButtonProps) {
+function AddEntryModalButton({ value, disabled, icon, onClick }: AddEntryModalButtonProps) {
   return (
     <Button
       size="2xl"
@@ -75,28 +61,16 @@ function AddEntryModalButton({
   );
 }
 
-export default function PrintModal({
-  summaryData,
-}: {
-  summaryData: ISummary | null;
-}) {
+export default function PrintModal({ summaryData }: { summaryData: ISummary | null }) {
   const open = useQuantityIntegerModalStore(useShallow((state) => state.open));
-  const setOpen = useQuantityIntegerModalStore(
-    useShallow((state) => state.setOpen),
-  );
+  const setOpen = useQuantityIntegerModalStore(useShallow((state) => state.setOpen));
   const data = useBoxQuantityStore(useShallow((state) => state.quantity));
   const clearData = useBoxQuantityStore(useShallow((state) => state.clearData));
-  const changeData = useBoxQuantityStore(
-    useShallow((state) => state.changeData),
-  );
+  const changeData = useBoxQuantityStore(useShallow((state) => state.changeData));
   const sliceData = useBoxQuantityStore(useShallow((state) => state.sliceData));
   const roundData = useBoxQuantityStore(useShallow((state) => state.roundData));
-  const employee = useSealantEmployeeStore(
-    useShallow((state) => state.sealantEmployee),
-  );
-  const sealantConveyor = useSealantConveyorStore(
-    useShallow((state) => state.sealantConveyor),
-  );
+  const employee = useSealantEmployeeStore(useShallow((state) => state.sealantEmployee));
+  const sealantConveyor = useSealantConveyorStore(useShallow((state) => state.sealantConveyor));
   const { data: printerData } = usePrinter(sealantConveyor?.id ?? null);
   const { data: boxData } = useProductionBoxes(summaryData?.data.id ?? null);
 
@@ -121,13 +95,13 @@ export default function PrintModal({
         summaryId: number | null;
         employeeId: number | null;
       } = {
-        name: summaryData?.data.product_name ?? "",
-        code: summaryData?.data.product_code ?? "",
-        batch: summaryData?.data.batch_name ?? "",
+        name: summaryData?.data.product_name ?? '',
+        code: summaryData?.data.product_code ?? '',
+        batch: summaryData?.data.batch_name ?? '',
         batchId: summaryData?.data.batch_id ?? null,
         boxNumber: boxData && boxData.length > 0 ? boxData.length + 1 : 1,
         quantity: Number(data),
-        employee: employee?.name ?? "",
+        employee: employee?.name ?? '',
         employeeId: employee?.id ?? null,
         summaryId: summaryData?.data.id ?? null,
       };
@@ -140,14 +114,9 @@ export default function PrintModal({
       printZPL(dto);
     }
   };
-  const disabledCondition = !employee || !printerData || data === "0";
+  const disabledCondition = !employee || !printerData || data === '0';
   return (
-    <Dialog.Root
-      open={open}
-      onOpenChange={(e) => handleOpenchange(e)}
-      placement="center"
-      size="sm"
-    >
+    <Dialog.Root open={open} onOpenChange={(e) => handleOpenchange(e)} placement="center" size="sm">
       <Dialog.Backdrop />
       <Dialog.Positioner>
         <Dialog.Content rounded="lg">
@@ -155,21 +124,13 @@ export default function PrintModal({
             <Dialog.Title w="full">
               <Stack gap={4}>
                 <HStack justify="space-between">
-                  <Heading color="fg.muted">
-                    Введите количество в коробе
-                  </Heading>
+                  <Heading color="fg.muted">Введите количество в коробе</Heading>
                 </HStack>
 
                 <Stack gap={5}>
-                  <HStack
-                    justify="end"
-                    px={4}
-                    py={2}
-                    rounded="md"
-                    borderWidth="1px"
-                  >
+                  <HStack justify="end" px={4} py={2} rounded="md" borderWidth="1px">
                     <Text textStyle="3xl" color="fg.a">
-                      {data ? data : "0"}
+                      {data ? data : '0'}
                     </Text>
                   </HStack>
                 </Stack>
@@ -186,9 +147,9 @@ export default function PrintModal({
                     value={btn.label}
                     disabled={btn.canDisable ? disabledCondition : false}
                     onClick={(val) => {
-                      if (btn.action === "clear") return clearData();
-                      if (btn.action === "slice") return sliceData();
-                      if (btn.action === "close") return handleClose();
+                      if (btn.action === 'clear') return clearData();
+                      if (btn.action === 'slice') return sliceData();
+                      if (btn.action === 'close') return handleClose();
                       changeData(val);
                     }}
                   />

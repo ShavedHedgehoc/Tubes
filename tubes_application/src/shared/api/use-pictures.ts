@@ -1,9 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
-import PicturesService from "./services/pictures-service";
+import { useQuery } from '@tanstack/react-query';
+import PicturesService from './services/pictures-service';
 
 export const usePictures = (productId: number | null) =>
   useQuery({
-    queryKey: ["pictures", productId],
+    queryKey: ['pictures', productId],
     queryFn: () => PicturesService.getPicturesByProductId(productId),
     enabled: !!productId,
   });

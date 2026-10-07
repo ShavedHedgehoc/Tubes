@@ -1,6 +1,6 @@
-import { CloseButton, Dialog, Input } from "@chakra-ui/react";
+import { CloseButton, Dialog, Input } from '@chakra-ui/react';
 
-import { useRef, useState } from "react";
+import { useRef, useState } from 'react';
 
 export interface ScanModalProps {
   title: string;
@@ -10,15 +10,15 @@ export interface ScanModalProps {
 }
 
 export default function ScanModal(props: ScanModalProps) {
-  const [inputField, setInputField] = useState("");
+  const [inputField, setInputField] = useState('');
   const ref = useRef<HTMLInputElement | null>(null);
 
   const clearInput = () => {
-    setInputField("");
+    setInputField('');
   };
 
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       props.setOpen(false);
       props.processInput(inputField);
       clearInput();

@@ -1,10 +1,10 @@
-import { useShallow } from "zustand/shallow";
-import NumericEntryModal from "@/shared/components/modals/numeric-entry-modal";
+import { useShallow } from 'zustand/shallow';
+import NumericEntryModal from '@/shared/components/modals/numeric-entry-modal';
 import {
   useExtrusionInputStore,
   ExtrusionInputParams,
-} from "../../store/use-extrusion-input-store";
-import { useExtrusionNumericEntryModalStore } from "../../store/use-extrusion-numeric-entry-modal-store";
+} from '../../store/use-extrusion-input-store';
+import { useExtrusionNumericEntryModalStore } from '../../store/use-extrusion-numeric-entry-modal-store';
 
 export default function ExtrusionNumericEntryModal() {
   const { key, title, open, setOpen, minValue, maxValue, unit } =
@@ -20,22 +20,14 @@ export default function ExtrusionNumericEntryModal() {
       })),
     );
 
-  const clearData = useExtrusionInputStore(
-    useShallow((state) => state.clearData),
-  );
-  const changeData = useExtrusionInputStore(
-    useShallow((state) => state.changeData),
-  );
-  const sliceData = useExtrusionInputStore(
-    useShallow((state) => state.sliceData),
-  );
-  const roundData = useExtrusionInputStore(
-    useShallow((state) => state.roundData),
-  );
+  const clearData = useExtrusionInputStore(useShallow((state) => state.clearData));
+  const changeData = useExtrusionInputStore(useShallow((state) => state.changeData));
+  const sliceData = useExtrusionInputStore(useShallow((state) => state.sliceData));
+  const roundData = useExtrusionInputStore(useShallow((state) => state.roundData));
 
   const data = useExtrusionInputStore(
     useShallow((state) => {
-      if (!key) return "0";
+      if (!key) return '0';
       return state.data[key as keyof typeof state.data] as string;
     }),
   );

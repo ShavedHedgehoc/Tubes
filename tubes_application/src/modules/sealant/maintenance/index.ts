@@ -1,2 +1,2 @@
-export { SealantMaintenanceMenu } from "./menu";
-export { SealantMaintenanceContent } from "./content";
+export { SealantMaintenanceMenu } from './menu';
+export { SealantMaintenanceContent } from './content';

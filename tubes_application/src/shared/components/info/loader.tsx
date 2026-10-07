@@ -1,4 +1,4 @@
-import { AbsoluteCenter, Spinner } from "@chakra-ui/react";
+import { AbsoluteCenter, Spinner } from '@chakra-ui/react';
 
 export default function Loader() {
   return (

@@ -1,5 +1,5 @@
-import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
 
 interface SimplyModalStore {
   open: boolean;
@@ -17,13 +17,10 @@ const createModalStore = (name: string) =>
     ),
   );
 
-export const useVarnishAuthModalStore = createModalStore("Auth");
-export const useVarnishLogoutModalStore = createModalStore("Logout");
-export const useVarnishCloseConfirmModalStore =
-  createModalStore("CloseConfirm");
-export const useVarnishMaterialScanModalStore =
-  createModalStore("MaterialScan");
-export const useVarnishCloseSummaryModalStore =
-  createModalStore("CloseSummary");
-export const useVarnishDefectInputModalStore = createModalStore("DefectInput");
-export const useVarnishMaintenanceModalStore = createModalStore("Maintenance");
+export const useVarnishAuthModalStore = createModalStore('Auth');
+export const useVarnishLogoutModalStore = createModalStore('Logout');
+export const useVarnishCloseConfirmModalStore = createModalStore('CloseConfirm');
+export const useVarnishMaterialScanModalStore = createModalStore('MaterialScan');
+export const useVarnishCloseSummaryModalStore = createModalStore('CloseSummary');
+export const useVarnishDefectInputModalStore = createModalStore('DefectInput');
+export const useVarnishMaintenanceModalStore = createModalStore('Maintenance');

@@ -1,5 +1,5 @@
-import Menu from "@/shared/components/menu/menu";
-import type { MenuButtonProps } from "@/shared/components/menu/menu-button";
+import Menu from '@/shared/components/menu/menu';
+import type { MenuButtonProps } from '@/shared/components/menu/menu-button';
 import {
   TbAdjustments,
   TbAutomation,
@@ -10,13 +10,13 @@ import {
   TbLogout2,
   TbPrinter,
   TbSettingsExclamation,
-} from "react-icons/tb";
-import MenuButton from "../../../../shared/components/menu/menu-button";
-import { TbStopwatch } from "react-icons/tb";
-import { useNavigate } from "react-router-dom";
-import { RouteNames } from "@/shared/router/route-names";
-import useSealantMenu from "./use-sealant-menu";
-import { useActiveSummary } from "@/shared/api/use-active-summary";
+} from 'react-icons/tb';
+import MenuButton from '../../../../shared/components/menu/menu-button';
+import { TbStopwatch } from 'react-icons/tb';
+import { useNavigate } from 'react-router-dom';
+import { RouteNames } from '@/shared/router/route-names';
+import useSealantMenu from './use-sealant-menu';
+import { useActiveSummary } from '@/shared/api/use-active-summary';
 
 export default function SealantMenu() {
   const navigate = useNavigate();
@@ -39,52 +39,44 @@ export default function SealantMenu() {
   const { data: summaryData } = useActiveSummary(sealantConveyor?.id ?? null);
 
   const inputParametersButtonProps: MenuButtonProps = {
-    title: "Параметры",
+    title: 'Параметры',
     icon: <TbAdjustments />,
     disabled: inputParametersButtonDisabledCondition,
     action: () => handleOpenParametersClick(),
   };
 
   const scanMaterilButtonProps: MenuButtonProps = {
-    title: "Комплектующие",
+    title: 'Комплектующие',
     icon: <TbBarcode />,
     disabled: scanMaterialsButtonDisabledCondition,
     action: () => setOpenMaterialScan(true),
   };
 
   const maintenanceButtonProps: MenuButtonProps = {
-    title: "ТО",
+    title: 'ТО',
     icon: <TbSettingsExclamation />,
     disabled: maintenanceButtonDisabledCondition,
-    action: () =>
-      navigate(
-        `${RouteNames.SEALANT_MAINTENANCE_ROOT}/${sealantConveyor?.name}`,
-      ),
+    action: () => navigate(`${RouteNames.SEALANT_MAINTENANCE_ROOT}/${sealantConveyor?.name}`),
   };
 
   const operationsButtonProps: MenuButtonProps = {
-    title: "Операции",
+    title: 'Операции',
     icon: <TbAutomation />,
     disabled: operationButtonDisabledCondition,
-    action: () =>
-      navigate(
-        `${RouteNames.SEALANT_OPERATIONS_ROOT}/${sealantConveyor?.name}`,
-      ),
+    action: () => navigate(`${RouteNames.SEALANT_OPERATIONS_ROOT}/${sealantConveyor?.name}`),
   };
   const sopButtonProps: MenuButtonProps = {
-    title: "Инфо",
+    title: 'Инфо',
     icon: <TbInfoTriangle />,
     disabled: false,
     action: () =>
       summaryData?.sealantStatus.operation_id
-        ? navigate(
-            `${RouteNames.SEALANT_SOP_ROOT}/${summaryData.sealantStatus.operation_id}`,
-          )
+        ? navigate(`${RouteNames.SEALANT_SOP_ROOT}/${summaryData.sealantStatus.operation_id}`)
         : undefined,
   };
 
   const picturesButtonProps: MenuButtonProps = {
-    title: "Изображения",
+    title: 'Изображения',
     icon: <TbLibraryPhoto />,
     disabled: pictureButtonDisabledCondition,
     action: () =>
@@ -94,21 +86,20 @@ export default function SealantMenu() {
   };
 
   const endButtonProps: MenuButtonProps = {
-    title: "Закончить",
+    title: 'Закончить',
     icon: <TbStopwatch />,
     disabled: endButtonDisabledCondition,
     action: () => setOpenCloseSummary(true),
   };
   const printButtonProps: MenuButtonProps = {
-    title: "Печать",
+    title: 'Печать',
     icon: <TbPrinter />,
     disabled: printButtonDisabledCondition,
-    action: () =>
-      navigate(`${RouteNames.SEALANT_PRINT_ROOT}/${sealantConveyor?.name}`),
+    action: () => navigate(`${RouteNames.SEALANT_PRINT_ROOT}/${sealantConveyor?.name}`),
   };
 
   const loginButtonProps: MenuButtonProps = {
-    title: employee ? "Выйти" : "Авторизоваться",
+    title: employee ? 'Выйти' : 'Авторизоваться',
     icon: employee ? <TbLogout2 /> : <TbLogin2 />,
     disabled: false,
     action: employee ? () => setOpenLogout(true) : () => setOpenAuth(true),
@@ -120,7 +111,7 @@ export default function SealantMenu() {
       <MenuButton {...scanMaterilButtonProps} />
       <MenuButton {...maintenanceButtonProps} />
       <MenuButton {...operationsButtonProps} />
-      {summaryData && summaryData.sealantStatus.state === "idle" && (
+      {summaryData && summaryData.sealantStatus.state === 'idle' && (
         <MenuButton {...sopButtonProps} />
       )}
       <MenuButton {...picturesButtonProps} />

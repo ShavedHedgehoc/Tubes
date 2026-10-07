@@ -1,7 +1,7 @@
-import { $api } from "../http";
-import { ApiRoutes } from "./api-routes";
-import type { IEmployee } from "./employee-service";
-import type { IProduct } from "./product-service";
+import { $api } from '../http';
+import { ApiRoutes } from './api-routes';
+import type { IEmployee } from './employee-service';
+import type { IProduct } from './product-service';
 
 export interface CreateProductionBoxDto {
   uuid: string;
@@ -48,12 +48,8 @@ export default class ProductionBoxService {
     return res.data;
   }
 
-  static async getProductionBoxes(
-    summary_id: number | null,
-  ): Promise<IProductionBox[] | []> {
-    const res = await $api.get(
-      `${ApiRoutes.PRODUCTION_BOX}?summary_id=${summary_id}`,
-    );
+  static async getProductionBoxes(summary_id: number | null): Promise<IProductionBox[] | []> {
+    const res = await $api.get(`${ApiRoutes.PRODUCTION_BOX}?summary_id=${summary_id}`);
     return res.data;
   }
 }

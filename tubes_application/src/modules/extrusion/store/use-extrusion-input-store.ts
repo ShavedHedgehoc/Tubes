@@ -1,7 +1,7 @@
-import type { DataFormField } from "@/shared/helpers/data-form-field";
-import { formatKeyboardInput } from "@/shared/helpers/format-keyboard-input";
-import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import type { DataFormField } from '@/shared/helpers/data-form-field';
+import { formatKeyboardInput } from '@/shared/helpers/format-keyboard-input';
+import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
 
 interface IExtrusionParameterData {
   counter_value: string;
@@ -24,29 +24,23 @@ interface ExtrusionInputStore {
   data: IExtrusionParameterData;
   initData: () => void;
   changeData: (value: DataFormField<keyof IExtrusionParameterData>) => void;
-  clearData: (
-    value: Pick<DataFormField<keyof IExtrusionParameterData>, "key">,
-  ) => void;
-  sliceData: (
-    value: Pick<DataFormField<keyof IExtrusionParameterData>, "key">,
-  ) => void;
-  roundData: (
-    value: Pick<DataFormField<keyof IExtrusionParameterData>, "key">,
-  ) => void;
+  clearData: (value: Pick<DataFormField<keyof IExtrusionParameterData>, 'key'>) => void;
+  sliceData: (value: Pick<DataFormField<keyof IExtrusionParameterData>, 'key'>) => void;
+  roundData: (value: Pick<DataFormField<keyof IExtrusionParameterData>, 'key'>) => void;
   setData: (value: DataFormField<keyof IExtrusionParameterData>) => void;
 }
 
 export const initDataValue: IExtrusionParameterData = {
-  counter_value: "0",
-  press_speed: "0",
-  blow_time: "0",
-  turning_machine_speed: "0",
-  annealing_furnace_temp: "0",
-  tube_cylindrical_section_length: "0",
-  membrane_thickness: "0",
-  tube_diameter: "0",
-  tube_cylindrical_thickness: "0",
-  tube_rigidity: "0",
+  counter_value: '0',
+  press_speed: '0',
+  blow_time: '0',
+  turning_machine_speed: '0',
+  annealing_furnace_temp: '0',
+  tube_cylindrical_section_length: '0',
+  membrane_thickness: '0',
+  tube_diameter: '0',
+  tube_cylindrical_thickness: '0',
+  tube_rigidity: '0',
   tube_cutting_quality: false,
   tightness: false,
   external_thread_quality: false,
@@ -54,20 +48,20 @@ export const initDataValue: IExtrusionParameterData = {
 };
 
 export enum ExtrusionInputParams {
-  COUNTER_VALUE = "counter_value",
-  PRESS_SPEED = "press_speed",
-  BLOW_TIME = "blow_time",
-  TURNING_MACHINE_SPEED = "turning_machine_speed",
-  ANNEALING_FURNACE_TEMP = "annealing_furnace_temp",
-  TUBE_CYLINDRICAL_SECTION_LENGTH = "tube_cylindrical_section_length",
-  MEMBRANE_THICKNESS = "membrane_thickness",
-  TUBE_DIAMETER = "tube_diameter",
-  TUBE_CYLINDRICAL_THICKNESS = "tube_cylindrical_thickness",
-  TUBE_RIGIDITY = "tube_rigidity",
-  TUBE_CUTTING_QUALITY = "tube_cutting_quality",
-  TIGHTNESS = "tightness",
-  EXTERNAL_THREAD_QUALITY = "external_thread_quality",
-  TUBE_MARKING = "tube_marking",
+  COUNTER_VALUE = 'counter_value',
+  PRESS_SPEED = 'press_speed',
+  BLOW_TIME = 'blow_time',
+  TURNING_MACHINE_SPEED = 'turning_machine_speed',
+  ANNEALING_FURNACE_TEMP = 'annealing_furnace_temp',
+  TUBE_CYLINDRICAL_SECTION_LENGTH = 'tube_cylindrical_section_length',
+  MEMBRANE_THICKNESS = 'membrane_thickness',
+  TUBE_DIAMETER = 'tube_diameter',
+  TUBE_CYLINDRICAL_THICKNESS = 'tube_cylindrical_thickness',
+  TUBE_RIGIDITY = 'tube_rigidity',
+  TUBE_CUTTING_QUALITY = 'tube_cutting_quality',
+  TIGHTNESS = 'tightness',
+  EXTERNAL_THREAD_QUALITY = 'external_thread_quality',
+  TUBE_MARKING = 'tube_marking',
 }
 
 export const useExtrusionInputStore = create<ExtrusionInputStore>()(
@@ -80,8 +74,7 @@ export const useExtrusionInputStore = create<ExtrusionInputStore>()(
       set((state) => ({
         data: {
           ...state.data,
-          [fieldKey]:
-            typeof initDataValue[fieldKey] === "boolean" ? false : "0",
+          [fieldKey]: typeof initDataValue[fieldKey] === 'boolean' ? false : '0',
         },
       }));
     },
@@ -90,12 +83,12 @@ export const useExtrusionInputStore = create<ExtrusionInputStore>()(
       const fieldKey = key as keyof IExtrusionParameterData;
       set((state) => {
         const currentVal = state.data[fieldKey];
-        if (typeof currentVal !== "string") return state;
+        if (typeof currentVal !== 'string') return state;
 
         return {
           data: {
             ...state.data,
-            [fieldKey]: currentVal.length < 2 ? "0" : currentVal.slice(0, -1),
+            [fieldKey]: currentVal.length < 2 ? '0' : currentVal.slice(0, -1),
           },
         };
       });
@@ -104,7 +97,7 @@ export const useExtrusionInputStore = create<ExtrusionInputStore>()(
       set((state) => {
         const fieldKey = key as keyof IExtrusionParameterData;
         const currentValue = state.data[fieldKey];
-        if (typeof currentValue === "string") {
+        if (typeof currentValue === 'string') {
           return {
             data: {
               ...state.data,
@@ -115,7 +108,7 @@ export const useExtrusionInputStore = create<ExtrusionInputStore>()(
         return {
           data: {
             ...state.data,
-            [fieldKey]: typeof value === "boolean" ? value : !currentValue,
+            [fieldKey]: typeof value === 'boolean' ? value : !currentValue,
           },
         };
       });
@@ -125,7 +118,7 @@ export const useExtrusionInputStore = create<ExtrusionInputStore>()(
       const fieldKey = key as keyof IExtrusionParameterData;
       set((state) => {
         const currentVal = state.data[fieldKey];
-        if (typeof currentVal !== "string") return state;
+        if (typeof currentVal !== 'string') return state;
 
         return {
           data: {
@@ -139,16 +132,16 @@ export const useExtrusionInputStore = create<ExtrusionInputStore>()(
       const fieldKey = key as keyof IExtrusionParameterData;
       set((state) => {
         const targetValue = state.data[fieldKey];
-        if (typeof targetValue === "string") {
+        if (typeof targetValue === 'string') {
           return {
             data: { ...state.data, [fieldKey]: value },
           };
         }
-        if (typeof targetValue === "boolean") {
+        if (typeof targetValue === 'boolean') {
           return {
             data: {
               ...state.data,
-              [fieldKey]: value === "true" ? true : false,
+              [fieldKey]: value === 'true' ? true : false,
             },
           };
         }

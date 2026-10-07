@@ -1,10 +1,7 @@
-import BooleanEntryModal from "@/shared/components/modals/boolean-entry-modal";
-import { useShallow } from "zustand/shallow";
-import { useSealantBooleanEntryModalStore } from "../../store/use-sealant-boolean-entry-modal-store";
-import {
-  useSealantInputStore,
-  SealantInputParams,
-} from "../../store/use-sealant-input-store";
+import BooleanEntryModal from '@/shared/components/modals/boolean-entry-modal';
+import { useShallow } from 'zustand/shallow';
+import { useSealantBooleanEntryModalStore } from '../../store/use-sealant-boolean-entry-modal-store';
+import { useSealantInputStore, SealantInputParams } from '../../store/use-sealant-input-store';
 
 export default function SealantBooleanEntryModal() {
   const { key, title, open, setOpen } = useSealantBooleanEntryModalStore(
@@ -16,9 +13,7 @@ export default function SealantBooleanEntryModal() {
     })),
   );
 
-  const changeData = useSealantInputStore(
-    useShallow((state) => state.changeData),
-  );
+  const changeData = useSealantInputStore(useShallow((state) => state.changeData));
 
   const data = useSealantInputStore(
     useShallow((state) => {

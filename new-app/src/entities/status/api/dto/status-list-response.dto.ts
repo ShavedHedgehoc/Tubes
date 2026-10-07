@@ -9,6 +9,7 @@ type StatusDto = {
   employee_id: number | null;
   idle_time: number | null;
   finished: boolean;
+  is_locked: boolean;
   createdAt: Date;
   extrusion_param_id: number | null;
   varnish_param_id: number | null;
@@ -89,10 +90,41 @@ type SummaryDto = {
   shift: number;
 };
 
+type LaboratoryLockReason = {
+  id: number;
+  value: string;
+};
+
+type LaboratoryAssistant = {
+  id: number;
+  name: string;
+};
+
+type User = {
+  id: number;
+  name: string;
+};
+
+type LaboratoryLock = {
+  id: number;
+  laboratory_lock_reason_id: number;
+  laboratory_assistant_id: number | null;
+  user_id: number | null;
+  createdAt: Date;
+  summary_id: number;
+  post_id: number;
+  is_active: boolean;
+  closedAt: Date | null;
+  user: User | null;
+  laboratory_assistant: LaboratoryAssistant | null;
+  laboratory_lock_reason: LaboratoryLockReason | null;
+};
+
 export type StatusRow = StatusDto & {
   employee: Employee | null;
   operation: Operation | null;
   maintenance_session: MaintenanceSession | null;
+  laboratory_lock: LaboratoryLock | null;
   post: Post;
 };
 

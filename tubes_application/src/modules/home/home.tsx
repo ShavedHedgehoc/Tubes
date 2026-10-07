@@ -1,19 +1,10 @@
-import { ColorModeProvider } from "@/components/ui/color-mode";
-import { useConveyors } from "@/shared/api/use-conveyors";
-import Loader from "@/shared/components/info/loader";
-import { AppMessages } from "@/shared/resources/app-messages";
-import { RouteNames } from "@/shared/router/route-names";
-import {
-  Theme,
-  Grid,
-  GridItem,
-  Text,
-  Button,
-  VStack,
-  Heading,
-  Center,
-} from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { ColorModeProvider } from '@/components/ui/color-mode';
+import { useConveyors } from '@/shared/api/use-conveyors';
+import Loader from '@/shared/components/info/loader';
+import { AppMessages } from '@/shared/resources/app-messages';
+import { RouteNames } from '@/shared/router/route-names';
+import { Theme, Grid, GridItem, Text, Button, VStack, Heading, Center } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
   const { data, isPending, isSuccess } = useConveyors();
@@ -47,14 +38,9 @@ export default function Home() {
                       w="full"
                       variant="surface"
                       colorPalette="current"
-                      onClick={() =>
-                        navigate(`${RouteNames.POSTS_ROOT}/${item.name}`)
-                      }
+                      onClick={() => navigate(`${RouteNames.POSTS_ROOT}/${item.name}`)}
                     >
-                      <Text
-                        textStyle="2xl"
-                        color="fg.subtle"
-                      >{`Конвейер ${item.name}`}</Text>
+                      <Text textStyle="2xl" color="fg.subtle">{`Конвейер ${item.name}`}</Text>
                     </Button>
                   ))}
                 </VStack>

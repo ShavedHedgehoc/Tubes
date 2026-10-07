@@ -1,38 +1,26 @@
-import { useShallow } from "zustand/react/shallow";
-import { useOffsetConveyorStore } from "../../store/use-offset-conveyor-store";
-import { useOffsetEmployeeStore } from "../../store/use-offset-employee-store";
+import { useShallow } from 'zustand/react/shallow';
+import { useOffsetConveyorStore } from '../../store/use-offset-conveyor-store';
+import { useOffsetEmployeeStore } from '../../store/use-offset-employee-store';
 import {
   useOffsetAuthModalStore,
   useOffsetMaterialScanModalStore,
   useOffsetLogoutModalStore,
   useOffsetCloseSummaryModalStore,
-} from "../../store/use-offset-modal-store";
-import { useActiveSummary } from "@/shared/api/use-active-summary";
-import { useNavigate } from "react-router-dom";
-import { useOffsetInputStore } from "../../store/use-offset-input-store";
-import { RouteNames } from "@/shared/router/route-names";
-import { OffsetInputParams } from "../../store/use-offset-input-store";
+} from '../../store/use-offset-modal-store';
+import { useActiveSummary } from '@/shared/api/use-active-summary';
+import { useNavigate } from 'react-router-dom';
+import { useOffsetInputStore } from '../../store/use-offset-input-store';
+import { RouteNames } from '@/shared/router/route-names';
+import { OffsetInputParams } from '../../store/use-offset-input-store';
 
 export default function useOffsetMenu() {
-  const employee = useOffsetEmployeeStore(
-    useShallow((state) => state.offsetEmployee),
-  );
-  const offsetConveyor = useOffsetConveyorStore(
-    useShallow((state) => state.offsetConveyor),
-  );
+  const employee = useOffsetEmployeeStore(useShallow((state) => state.offsetEmployee));
+  const offsetConveyor = useOffsetConveyorStore(useShallow((state) => state.offsetConveyor));
   const { data: summaryData } = useActiveSummary(offsetConveyor?.id ?? null);
-  const setOpenAuth = useOffsetAuthModalStore(
-    useShallow((state) => state.setOpen),
-  );
-  const setOpenMaterialScan = useOffsetMaterialScanModalStore(
-    useShallow((state) => state.setOpen),
-  );
-  const setOpenLogout = useOffsetLogoutModalStore(
-    useShallow((state) => state.setOpen),
-  );
-  const setOpenCloseSummary = useOffsetCloseSummaryModalStore(
-    useShallow((state) => state.setOpen),
-  );
+  const setOpenAuth = useOffsetAuthModalStore(useShallow((state) => state.setOpen));
+  const setOpenMaterialScan = useOffsetMaterialScanModalStore(useShallow((state) => state.setOpen));
+  const setOpenLogout = useOffsetLogoutModalStore(useShallow((state) => state.setOpen));
+  const setOpenCloseSummary = useOffsetCloseSummaryModalStore(useShallow((state) => state.setOpen));
 
   const navigate = useNavigate();
   const setData = useOffsetInputStore(useShallow((state) => state.setData));
@@ -71,33 +59,17 @@ export default function useOffsetMenu() {
   const handleOpenParametersClick = () => {
     const params = summaryData?.offsetParams ?? null;
 
-    const printingMachineSpeed = String(params?.printing_machine_speed ?? "0");
-    const totalAirPressure = String(params?.total_air_pressure ?? "0");
-    const printerMotor = String(params?.printer_motor ?? "0");
-    const baseCoversHoldersMotor = String(
-      params?.base_covers_holders_motor ?? "0",
-    );
-    const baseCoversStationMotor = String(
-      params?.base_covers_station_motor ?? "0",
-    );
-    const imprintQuantityPrintedBox1 = String(
-      params?.imprint_quantity_printed_box_1 ?? "0",
-    );
-    const imprintQuantityPrintedBox2 = String(
-      params?.imprint_quantity_printed_box_2 ?? "0",
-    );
-    const imprintQuantityPrintedBox3 = String(
-      params?.imprint_quantity_printed_box_3 ?? "0",
-    );
-    const imprintQuantityPrintedBox4 = String(
-      params?.imprint_quantity_printed_box_4 ?? "0",
-    );
-    const imprintQuantityPrintedBox5 = String(
-      params?.imprint_quantity_printed_box_5 ?? "0",
-    );
-    const imprintQuantityPrintedBox6 = String(
-      params?.imprint_quantity_printed_box_6 ?? "0",
-    );
+    const printingMachineSpeed = String(params?.printing_machine_speed ?? '0');
+    const totalAirPressure = String(params?.total_air_pressure ?? '0');
+    const printerMotor = String(params?.printer_motor ?? '0');
+    const baseCoversHoldersMotor = String(params?.base_covers_holders_motor ?? '0');
+    const baseCoversStationMotor = String(params?.base_covers_station_motor ?? '0');
+    const imprintQuantityPrintedBox1 = String(params?.imprint_quantity_printed_box_1 ?? '0');
+    const imprintQuantityPrintedBox2 = String(params?.imprint_quantity_printed_box_2 ?? '0');
+    const imprintQuantityPrintedBox3 = String(params?.imprint_quantity_printed_box_3 ?? '0');
+    const imprintQuantityPrintedBox4 = String(params?.imprint_quantity_printed_box_4 ?? '0');
+    const imprintQuantityPrintedBox5 = String(params?.imprint_quantity_printed_box_5 ?? '0');
+    const imprintQuantityPrintedBox6 = String(params?.imprint_quantity_printed_box_6 ?? '0');
 
     setData({
       key: OffsetInputParams.PRINTING_MACHINE_SPEED,

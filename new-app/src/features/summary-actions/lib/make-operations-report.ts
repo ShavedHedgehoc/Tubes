@@ -128,7 +128,13 @@ export default function makeOperationReportPage({
   sheet.getRow(9).height = 40;
 
   const operationRows = data.statuses
-    .filter((x) => x.idle_time && x.post_val === postVal)
+    //  add not lab_lock to filter
+    .filter(
+      (x) =>
+        x.idle_time &&
+        x.post_val === postVal &&
+        x.has_laboratory_lock === false,
+    )
     .map((row) => {
       const startDate = new Date(row.createdAt);
       const endDate = addMilliseconds(startDate, row.idle_time!);

@@ -1,18 +1,15 @@
-import type { ISummary } from "@/shared/api/services/summary-service";
-import { useShallow } from "zustand/shallow";
-import { useExtrusionEmployeeStore } from "../../store/use-extrusion-employee-store";
-import { useExtrusionMaintenanceStore } from "../../store/use-extrusion-maintenance-store";
-import type { CreateStatusDto } from "@/shared/api/services/status-service";
-import { useCreateStatus } from "@/shared/api/use-create-status";
-import { useNavigate } from "react-router-dom";
-import { RouteNames } from "@/shared/router/route-names";
-import { useExtrusionConveyorStore } from "../../store/use-extrusion-conveyor-store";
-import {
-  useUpdateMaintenanceLog,
-  type UpdateMaintenanceLogDto,
-} from "@/shared/api";
-import { useState } from "react";
-import type { MaintenanceHookReturn } from "@/shared/components/layouts/maintenance-post-content-layout";
+import type { ISummary } from '@/shared/api/services/summary-service';
+import { useShallow } from 'zustand/shallow';
+import { useExtrusionEmployeeStore } from '../../store/use-extrusion-employee-store';
+import { useExtrusionMaintenanceStore } from '../../store/use-extrusion-maintenance-store';
+import type { CreateStatusDto } from '@/shared/api/services/status-service';
+import { useCreateStatus } from '@/shared/api/use-create-status';
+import { useNavigate } from 'react-router-dom';
+import { RouteNames } from '@/shared/router/route-names';
+import { useExtrusionConveyorStore } from '../../store/use-extrusion-conveyor-store';
+import { useUpdateMaintenanceLog, type UpdateMaintenanceLogDto } from '@/shared/api';
+import { useState } from 'react';
+import type { MaintenanceHookReturn } from '@/shared/components/layouts/maintenance-post-content-layout';
 
 export default function useExtrusionMaintenanceContent({
   summaryData,
@@ -31,9 +28,7 @@ export default function useExtrusionMaintenanceContent({
   const setSelectedMaintenance = useExtrusionMaintenanceStore(
     useShallow((state) => state.setSelectedMaintenance),
   );
-  const employee = useExtrusionEmployeeStore(
-    useShallow((state) => state.extrusionEmployee),
-  );
+  const employee = useExtrusionEmployeeStore(useShallow((state) => state.extrusionEmployee));
 
   const extrusionConveyor = useExtrusionConveyorStore(
     useShallow((state) => state.extrusionConveyor),

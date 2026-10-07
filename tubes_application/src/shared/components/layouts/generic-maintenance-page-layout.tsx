@@ -1,22 +1,22 @@
-import { useActiveSummary } from "@/shared/api/use-active-summary";
-import { useConveyor } from "@/shared/api/use-conveyor";
-import { useParams } from "react-router-dom";
-import { useShallow } from "zustand/shallow";
-import Loader from "../info/loader";
-import NotFound from "../info/not-found-full-screen";
-import { AppMessages } from "@/shared/resources/app-messages";
-import type { MaintenancePageLayoutProps } from "./maintenance-page-layout";
-import type { Params } from "@/shared/router/params";
-import TimeComponent from "../lines/time-component";
-import HeaderComponent from "../headers/header-component";
-import UserComponent from "../lines/user-component";
-import Info from "../info/info";
-import { ColorModeProvider } from "@/components/ui/color-mode";
-import { Theme } from "@chakra-ui/react";
-import MaintenancePageLayout from "./maintenance-page-layout";
-import type { ISummary } from "@/shared/api/services/summary-service";
-import type { IEmployee } from "@/shared/api/services/employee-service";
-import type { IConveyor } from "@/shared/api/services/conveyor-service";
+import { useActiveSummary } from '@/shared/api/use-active-summary';
+import { useConveyor } from '@/shared/api/use-conveyor';
+import { useParams } from 'react-router-dom';
+import { useShallow } from 'zustand/shallow';
+import Loader from '../info/loader';
+import NotFound from '../info/not-found-full-screen';
+import { AppMessages } from '@/shared/resources/app-messages';
+import type { MaintenancePageLayoutProps } from './maintenance-page-layout';
+import type { Params } from '@/shared/router/params';
+import TimeComponent from '../lines/time-component';
+import HeaderComponent from '../headers/header-component';
+import UserComponent from '../lines/user-component';
+import Info from '../info/info';
+import { ColorModeProvider } from '@/components/ui/color-mode';
+import { Theme } from '@chakra-ui/react';
+import MaintenancePageLayout from './maintenance-page-layout';
+import type { ISummary } from '@/shared/api/services/summary-service';
+import type { IEmployee } from '@/shared/api/services/employee-service';
+import type { IConveyor } from '@/shared/api/services/conveyor-service';
 
 interface PostConfig<T extends string> {
   postName: T;
@@ -46,18 +46,12 @@ export default function GenericMaintenancePageLayout<T extends string>({
   // Динамические сторы
   const conveyor = config.useConveyorStore(
     useShallow(
-      (state) =>
-        state[
-          `${postPrefix}Conveyor` as keyof ConveyorStore<T>
-        ] as IConveyor | null,
+      (state) => state[`${postPrefix}Conveyor` as keyof ConveyorStore<T>] as IConveyor | null,
     ),
   );
   const employee = config.useEmployeeStore(
     useShallow(
-      (state) =>
-        state[
-          `${postPrefix}Employee` as keyof EmployeeStore<T>
-        ] as IEmployee | null,
+      (state) => state[`${postPrefix}Employee` as keyof EmployeeStore<T>] as IEmployee | null,
     ),
   );
 
@@ -75,14 +69,9 @@ export default function GenericMaintenancePageLayout<T extends string>({
   const pageLayoutProps: MaintenancePageLayoutProps = {
     timeComponent: <TimeComponent />,
     headerComponent: (
-      <HeaderComponent
-        conveyorName={conveyor.name}
-        postName={config.postNameTitle}
-      />
+      <HeaderComponent conveyorName={conveyor.name} postName={config.postNameTitle} />
     ),
-    maintenanceComponent: (
-      <ContentComponent summaryData={summaryData ?? null} />
-    ),
+    maintenanceComponent: <ContentComponent summaryData={summaryData ?? null} />,
     menuComponent: <MenuComponent summaryData={summaryData ?? null} />,
     userComponent: <UserComponent employee={employee} />,
     loaderComponent: <Loader />,

@@ -1,4 +1,4 @@
-import { Button, VStack, Icon, Text } from "@chakra-ui/react";
+import { Button, VStack, Icon, Text } from '@chakra-ui/react';
 
 export interface MenuButtonProps {
   title: string;

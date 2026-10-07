@@ -1,18 +1,15 @@
-import type { ISummary } from "@/shared/api/services/summary-service";
-import { useShallow } from "zustand/shallow";
-import { useSealantEmployeeStore } from "../../store/use-sealant-employee-store";
-import { useSealantMaintenanceStore } from "../../store/use-sealant-maintenance-store";
-import type { CreateStatusDto } from "@/shared/api/services/status-service";
-import { useCreateStatus } from "@/shared/api/use-create-status";
-import { useNavigate } from "react-router-dom";
-import { RouteNames } from "@/shared/router/route-names";
-import { useSealantConveyorStore } from "../../store/use-sealant-conveyor-store";
-import {
-  useUpdateMaintenanceLog,
-  type UpdateMaintenanceLogDto,
-} from "@/shared/api";
-import { useState } from "react";
-import type { MaintenanceHookReturn } from "@/shared/components/layouts/maintenance-post-content-layout";
+import type { ISummary } from '@/shared/api/services/summary-service';
+import { useShallow } from 'zustand/shallow';
+import { useSealantEmployeeStore } from '../../store/use-sealant-employee-store';
+import { useSealantMaintenanceStore } from '../../store/use-sealant-maintenance-store';
+import type { CreateStatusDto } from '@/shared/api/services/status-service';
+import { useCreateStatus } from '@/shared/api/use-create-status';
+import { useNavigate } from 'react-router-dom';
+import { RouteNames } from '@/shared/router/route-names';
+import { useSealantConveyorStore } from '../../store/use-sealant-conveyor-store';
+import { useUpdateMaintenanceLog, type UpdateMaintenanceLogDto } from '@/shared/api';
+import { useState } from 'react';
+import type { MaintenanceHookReturn } from '@/shared/components/layouts/maintenance-post-content-layout';
 
 export default function useSealantMaintenanceContent({
   summaryData,
@@ -31,13 +28,9 @@ export default function useSealantMaintenanceContent({
   const setSelectedMaintenance = useSealantMaintenanceStore(
     useShallow((state) => state.setSelectedMaintenance),
   );
-  const employee = useSealantEmployeeStore(
-    useShallow((state) => state.sealantEmployee),
-  );
+  const employee = useSealantEmployeeStore(useShallow((state) => state.sealantEmployee));
 
-  const sealantConveyor = useSealantConveyorStore(
-    useShallow((state) => state.sealantConveyor),
-  );
+  const sealantConveyor = useSealantConveyorStore(useShallow((state) => state.sealantConveyor));
 
   const { createStatus, isPending } = useCreateStatus();
   const { updateMaintenanceLog } = useUpdateMaintenanceLog();

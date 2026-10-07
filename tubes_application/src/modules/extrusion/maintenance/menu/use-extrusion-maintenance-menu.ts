@@ -1,14 +1,14 @@
-import { RouteNames } from "@/shared/router/route-names";
-import { useNavigate } from "react-router-dom";
-import { useShallow } from "zustand/shallow";
-import { useExtrusionConveyorStore } from "../../store/use-extrusion-conveyor-store";
-import type { ISummary } from "@/shared/api/services/summary-service";
-import type { CreateStatusDto } from "@/shared/api/services/status-service";
-import { useExtrusionEmployeeStore } from "../../store/use-extrusion-employee-store";
+import { RouteNames } from '@/shared/router/route-names';
+import { useNavigate } from 'react-router-dom';
+import { useShallow } from 'zustand/shallow';
+import { useExtrusionConveyorStore } from '../../store/use-extrusion-conveyor-store';
+import type { ISummary } from '@/shared/api/services/summary-service';
+import type { CreateStatusDto } from '@/shared/api/services/status-service';
+import { useExtrusionEmployeeStore } from '../../store/use-extrusion-employee-store';
 
-import { useCreateStatus } from "@/shared/api/use-create-status";
-import { useExtrusionMaintenanceStore } from "../../store/use-extrusion-maintenance-store";
-import type { MaintenanceMenuHookReturn } from "@/shared/components/layouts/maintenance-menu-layout";
+import { useCreateStatus } from '@/shared/api/use-create-status';
+import { useExtrusionMaintenanceStore } from '../../store/use-extrusion-maintenance-store';
+import type { MaintenanceMenuHookReturn } from '@/shared/components/layouts/maintenance-menu-layout';
 
 export default function useExtrusionMaintenanceMenu({
   summaryData,
@@ -18,9 +18,7 @@ export default function useExtrusionMaintenanceMenu({
   const extrusionConveyor = useExtrusionConveyorStore(
     useShallow((state) => state.extrusionConveyor),
   );
-  const employee = useExtrusionEmployeeStore(
-    useShallow((state) => state.extrusionEmployee),
-  );
+  const employee = useExtrusionEmployeeStore(useShallow((state) => state.extrusionEmployee));
   const selectedMaintenance = useExtrusionMaintenanceStore(
     useShallow((state) => state.selectedMaintenance),
   );
@@ -37,11 +35,7 @@ export default function useExtrusionMaintenanceMenu({
         : false
       : false;
 
-  const setIdleButtonDisableCondition = !(
-    summaryData &&
-    employee &&
-    selectedMaintenance
-  );
+  const setIdleButtonDisableCondition = !(summaryData && employee && selectedMaintenance);
   const handleExitClick = () => {
     navigate(`${RouteNames.EXTRUSION_ROOT}/${extrusionConveyor?.name}`);
     setSelectedMaintenance(null);

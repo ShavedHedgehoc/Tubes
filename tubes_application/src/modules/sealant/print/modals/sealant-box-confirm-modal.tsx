@@ -1,34 +1,23 @@
-import { useShallow } from "zustand/react/shallow";
-import type { ScanModalProps } from "@/shared/components/modals/scan-modal";
-import ScanModal from "@/shared/components/modals/scan-modal";
-import { enqueueSnackbar } from "notistack";
-import { useSealantBoxConfirmModalStore } from "../../store/use-sealant-modal-store";
-import { AppMessages } from "@/shared/resources/app-messages";
-import { parseBoxBarcode } from "@/shared/helpers/parsers";
-import { useCreateProductionBox } from "../../use-create-production-box";
-import type { CreateProductionBoxDto } from "@/shared/api/services/production-box-service";
+import { useShallow } from 'zustand/react/shallow';
+import type { ScanModalProps } from '@/shared/components/modals/scan-modal';
+import ScanModal from '@/shared/components/modals/scan-modal';
+import { enqueueSnackbar } from 'notistack';
+import { useSealantBoxConfirmModalStore } from '../../store/use-sealant-modal-store';
+import { AppMessages } from '@/shared/resources/app-messages';
+import { parseBoxBarcode } from '@/shared/helpers/parsers';
+import { useCreateProductionBox } from '../../use-create-production-box';
+import type { CreateProductionBoxDto } from '@/shared/api/services/production-box-service';
 
 export default function SealantBoxConfirmModal() {
-  const open = useSealantBoxConfirmModalStore(
-    useShallow((state) => state.open),
-  );
-  const setOpen = useSealantBoxConfirmModalStore(
-    useShallow((state) => state.setOpen),
-  );
+  const open = useSealantBoxConfirmModalStore(useShallow((state) => state.open));
+  const setOpen = useSealantBoxConfirmModalStore(useShallow((state) => state.setOpen));
   const { createProductionBox } = useCreateProductionBox();
 
   const processBarcode = (val: string) => {
     setOpen(false);
 
-    const {
-      uuid,
-      box_number,
-      batch_id,
-      summary_id,
-      employee_id,
-      quantity,
-      createdAt,
-    } = parseBoxBarcode(val);
+    const { uuid, box_number, batch_id, summary_id, employee_id, quantity, createdAt } =
+      parseBoxBarcode(val);
     if (uuid && summary_id && employee_id && quantity && createdAt) {
       const dto: CreateProductionBoxDto = {
         uuid: uuid,
@@ -42,15 +31,15 @@ export default function SealantBoxConfirmModal() {
       createProductionBox(dto);
     } else {
       enqueueSnackbar(AppMessages.PRODUCTION_BOX_SCAN_ERROR, {
-        variant: "error",
-        anchorOrigin: { vertical: "top", horizontal: "right" },
+        variant: 'error',
+        anchorOrigin: { vertical: 'top', horizontal: 'right' },
       });
       return;
     }
   };
 
   const modalProps: ScanModalProps = {
-    title: "Отсканируйте штрихкод короба",
+    title: 'Отсканируйте штрихкод короба',
     open: open,
     setOpen: (val) => setOpen(val),
     processInput: (val) => processBarcode(val),

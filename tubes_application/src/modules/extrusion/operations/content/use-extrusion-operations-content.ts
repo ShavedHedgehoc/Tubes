@@ -1,7 +1,7 @@
-import type { ISummary } from "@/shared/api/services/summary-service";
-import { useShallow } from "zustand/shallow";
-import { useExtrusionEmployeeStore } from "../../store/use-extrusion-employee-store";
-import { useExtrusionOperationStore } from "../../store/use-extrusion-operation-store";
+import type { ISummary } from '@/shared/api/services/summary-service';
+import { useShallow } from 'zustand/shallow';
+import { useExtrusionEmployeeStore } from '../../store/use-extrusion-employee-store';
+import { useExtrusionOperationStore } from '../../store/use-extrusion-operation-store';
 
 export default function useExtrusionOperationsContent({
   summaryData,
@@ -18,9 +18,7 @@ export default function useExtrusionOperationsContent({
   const setSelectedOperation = useExtrusionOperationStore(
     useShallow((state) => state.setSelectedOperation),
   );
-  const employee = useExtrusionEmployeeStore(
-    useShallow((state) => state.extrusionEmployee),
-  );
+  const employee = useExtrusionEmployeeStore(useShallow((state) => state.extrusionEmployee));
 
   return { items, selectedOperation, setSelectedOperation, employee };
 }

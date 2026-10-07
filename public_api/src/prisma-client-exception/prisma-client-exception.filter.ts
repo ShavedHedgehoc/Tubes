@@ -1,17 +1,17 @@
-import { ArgumentsHost, Catch, HttpStatus } from "@nestjs/common";
-import { BaseExceptionFilter } from "@nestjs/core";
-import { Response } from "express";
-import { Prisma } from "db";
+import { ArgumentsHost, Catch, HttpStatus } from '@nestjs/common';
+import { BaseExceptionFilter } from '@nestjs/core';
+import { Response } from 'express';
+import { Prisma } from 'db';
 
 @Catch(Prisma.PrismaClientKnownRequestError)
 export class PrismaClientExceptionFilter extends BaseExceptionFilter {
   catch(exception: Prisma.PrismaClientKnownRequestError, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
-    const message = exception.message.replace(/\n/g, "");
+    const message = exception.message.replace(/\n/g, '');
 
     switch (exception.code) {
-      case "P2002": {
+      case 'P2002': {
         const status = HttpStatus.CONFLICT;
         response.status(status).json({
           statusCode: status,
@@ -19,12 +19,11 @@ export class PrismaClientExceptionFilter extends BaseExceptionFilter {
         });
         break;
       }
-      case "P2003": {
+      case 'P2003': {
         const status = HttpStatus.BAD_REQUEST;
         response.status(status).json({
           statusCode: status,
-          message:
-            "Запись не может быть удалена, так как связана с другими записями",
+          message: 'Запись не может быть удалена, так как связана с другими записями',
         });
         break;
       }

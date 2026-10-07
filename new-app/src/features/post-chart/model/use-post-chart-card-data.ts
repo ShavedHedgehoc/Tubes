@@ -29,6 +29,24 @@ export function usePostChartCardData(statuses: StatusEntity[] = []) {
       0,
     );
 
+    const lockIntervals: { start: number; end: number }[] = [];
+    let currentLockStart: number | null = null;
+    processedData.forEach((item, index) => {
+      if (item.is_locked) {
+        if (currentLockStart === null) {
+          currentLockStart = item.time;
+        }
+      } else {
+        if (currentLockStart !== null) {
+          lockIntervals.push({ start: currentLockStart, end: item.time });
+          currentLockStart = null;
+        }
+      }
+      if (index === processedData.length - 1 && currentLockStart !== null) {
+        lockIntervals.push({ start: currentLockStart, end: item.time });
+      }
+    });
+
     const firstDate = statuses[0]?.createdAt;
     const lastDate = statuses[statuses.length - 1]?.createdAt;
     const startDate = statuses[0]?.createdAt
@@ -49,16 +67,22 @@ export function usePostChartCardData(statuses: StatusEntity[] = []) {
       totalTime > 0
         ? Number(((totalIdleTimes / totalTime) * 100).toFixed(2))
         : 0;
+
     const chartData = processedData.map((item) => {
       return {
         time: item.time,
         val: item.counter_value,
-        description: item.operation_description || item.maintenance_description,
-        employee: item.employee_name,
+        description: item.is_locked
+          ? `Блокировка: ${item.laboratory_lock_reason}`
+          : item.laboratory_lock_reason
+            ? "Снятие блокировки"
+            : item.operation_description || item.maintenance_description,
+        employee: item.laboratory_lock_reason
+          ? item.laboratory_assistant_name || item.user_name
+          : item.employee_name,
         isIdle: item.idle,
       };
     });
-
     return {
       chartData,
       idleIntervals,
@@ -68,6 +92,7 @@ export function usePostChartCardData(statuses: StatusEntity[] = []) {
       totalIdleTimes,
       totalTime,
       idlePercent,
+      lockIntervals,
     };
   }, [statuses]);
 }

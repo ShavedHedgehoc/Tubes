@@ -1,7 +1,7 @@
-import { useShallow } from "zustand/shallow";
-import { useVarnishNumericEntryModalStore } from "../store/use-varnish-numeric-entry-modal-store";
-import { useVarnishBooleanEntryModalStore } from "../store/use-varnish-boolean-entry-modal-store";
-import { useVarnishIntegerEntryModalStore } from "../store/use-varnish-integer-entry-modal-store";
+import { useShallow } from 'zustand/shallow';
+import { useVarnishNumericEntryModalStore } from '../store/use-varnish-numeric-entry-modal-store';
+import { useVarnishBooleanEntryModalStore } from '../store/use-varnish-boolean-entry-modal-store';
+import { useVarnishIntegerEntryModalStore } from '../store/use-varnish-integer-entry-modal-store';
 
 export default function useVarnishEntriesHandleCardsClick() {
   const { setKey, setTitle, setMinValue, setMaxValue, setUnit, setOpen } =
@@ -88,13 +88,7 @@ export default function useVarnishEntriesHandleCardsClick() {
     setOpenInteger(true);
   };
 
-  const handleBooleanCardClick = ({
-    id,
-    title,
-  }: {
-    id: string;
-    title: string;
-  }) => {
+  const handleBooleanCardClick = ({ id, title }: { id: string; title: string }) => {
     setBooleanKey(id);
     setBooleanTitle(title);
     setBooleanOpen(true);

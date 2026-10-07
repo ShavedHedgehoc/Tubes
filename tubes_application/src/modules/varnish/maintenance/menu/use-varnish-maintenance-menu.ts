@@ -1,25 +1,21 @@
-import { RouteNames } from "@/shared/router/route-names";
-import { useNavigate } from "react-router-dom";
-import { useShallow } from "zustand/shallow";
-import { useVarnishConveyorStore } from "../../store/use-varnish-conveyor-store";
-import type { ISummary } from "@/shared/api/services/summary-service";
-import type { CreateStatusDto } from "@/shared/api/services/status-service";
-import { useVarnishEmployeeStore } from "../../store/use-varnish-employee-store";
-import { useCreateStatus } from "@/shared/api/use-create-status";
-import type { MaintenanceMenuHookReturn } from "@/shared/components/layouts/maintenance-menu-layout";
-import { useVarnishMaintenanceStore } from "../../store/use-varnish-maintenance-store";
+import { RouteNames } from '@/shared/router/route-names';
+import { useNavigate } from 'react-router-dom';
+import { useShallow } from 'zustand/shallow';
+import { useVarnishConveyorStore } from '../../store/use-varnish-conveyor-store';
+import type { ISummary } from '@/shared/api/services/summary-service';
+import type { CreateStatusDto } from '@/shared/api/services/status-service';
+import { useVarnishEmployeeStore } from '../../store/use-varnish-employee-store';
+import { useCreateStatus } from '@/shared/api/use-create-status';
+import type { MaintenanceMenuHookReturn } from '@/shared/components/layouts/maintenance-menu-layout';
+import { useVarnishMaintenanceStore } from '../../store/use-varnish-maintenance-store';
 
 export default function useVarnishMaintenanceMenu({
   summaryData,
 }: {
   summaryData: ISummary | null;
 }): MaintenanceMenuHookReturn {
-  const varnishConveyor = useVarnishConveyorStore(
-    useShallow((state) => state.varnishConveyor),
-  );
-  const employee = useVarnishEmployeeStore(
-    useShallow((state) => state.varnishEmployee),
-  );
+  const varnishConveyor = useVarnishConveyorStore(useShallow((state) => state.varnishConveyor));
+  const employee = useVarnishEmployeeStore(useShallow((state) => state.varnishEmployee));
   const selectedMaintenance = useVarnishMaintenanceStore(
     useShallow((state) => state.selectedMaintenance),
   );
@@ -36,11 +32,7 @@ export default function useVarnishMaintenanceMenu({
         : false
       : false;
 
-  const setIdleButtonDisableCondition = !(
-    summaryData &&
-    employee &&
-    selectedMaintenance
-  );
+  const setIdleButtonDisableCondition = !(summaryData && employee && selectedMaintenance);
   const handleExitClick = () => {
     navigate(`${RouteNames.VARNISH_ROOT}/${varnishConveyor?.name}`);
     setSelectedMaintenance(null);

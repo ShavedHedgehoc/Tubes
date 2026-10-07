@@ -1,5 +1,5 @@
-import { $api } from "../http";
-import { ApiRoutes } from "./api-routes";
+import { $api } from '../http';
+import { ApiRoutes } from './api-routes';
 
 interface ISummaryData {
   id: number;
@@ -246,6 +246,7 @@ interface ISealantParams {
 export interface IStatusCounter {
   counter_value: number;
   idle: boolean;
+  is_locked: boolean;
   createdAt: Date;
 }
 
@@ -255,7 +256,7 @@ export interface IMaterial {
   scanned: boolean;
 }
 
-type state = "idle" | "working" | "finished";
+type state = 'idle' | 'working' | 'finished';
 
 export interface IStatus {
   idle: boolean;
@@ -265,6 +266,10 @@ export interface IStatus {
   state: state;
   operation_id: number | null;
   maintenance_session_id: number | null;
+  is_locked: boolean;
+  lock_date: Date | null;
+  lock_reason: string | null;
+  lab_assistant: string | null;
 }
 
 export interface IOperation {
@@ -342,9 +347,7 @@ export interface ISummary {
 }
 
 export default class SummaryService {
-  static async getActiveSummaryRecordByConveyorId(
-    conveyor_id: number | null,
-  ): Promise<ISummary> {
+  static async getActiveSummaryRecordByConveyorId(conveyor_id: number | null): Promise<ISummary> {
     const res = await $api.get(`${ApiRoutes.GET_ACTIVE_SUMMARY}${conveyor_id}`);
     return res.data;
   }

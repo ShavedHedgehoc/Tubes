@@ -399,6 +399,17 @@ type TresholdDto = {
   conveyor_name: string;
 };
 
+type BoxDto = {
+  id: number;
+  uuid: string;
+  summary_id: number;
+  createdAt: Date;
+  quantity: number;
+  box_number: number;
+  batch_id: number;
+  employee: Employee;
+};
+
 export type SummaryReportDto = {
   summary: Omit<SummaryDto, "_count">;
   statuses: StatusRow[];
@@ -409,4 +420,5 @@ export type SummaryReportDto = {
   varnishParams: VarnishParamsDto[];
   offsetParams: OffsetParamsDto[];
   sealantParams: SealantParamsDto[];
+  boxes: BoxDto[];
 };

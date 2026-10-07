@@ -1,16 +1,16 @@
 export const UNITS = {
-  PCS: "шт",
-  PCS_MIN: "шт/мин",
-  MS: "мс",
-  TEMP: "°С",
-  MM: "мм",
-  BAR: "Бар",
-  RPM: "RPM",
-  ED: "ед.",
-  MA: "mA",
-  SEC: "c",
-  NCM: "Н.см",
-  IMPRINTS: "отпечатков",
+  PCS: 'шт',
+  PCS_MIN: 'шт/мин',
+  MS: 'мс',
+  TEMP: '°С',
+  MM: 'мм',
+  BAR: 'Бар',
+  RPM: 'RPM',
+  ED: 'ед.',
+  MA: 'mA',
+  SEC: 'c',
+  NCM: 'Н.см',
+  IMPRINTS: 'отпечатков',
 } as const;
 
 export const PARAMETER_UNITS = {

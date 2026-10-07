@@ -1,21 +1,17 @@
-import { RouteNames } from "@/shared/router/route-names";
-import { useNavigate } from "react-router-dom";
-import { useShallow } from "zustand/shallow";
+import { RouteNames } from '@/shared/router/route-names';
+import { useNavigate } from 'react-router-dom';
+import { useShallow } from 'zustand/shallow';
 
-import { useVarnishConveyorStore } from "../../store/use-varnish-conveyor-store";
-import type { ISummary } from "@/shared/api/services/summary-service";
-import type { CreateStatusDto } from "@/shared/api/services/status-service";
-import { useVarnishEmployeeStore } from "../../store/use-varnish-employee-store";
-import { useVarnishOperationStore } from "../../store/use-varnish-operation-store";
-import { useCreateStatus } from "@/shared/api/use-create-status";
+import { useVarnishConveyorStore } from '../../store/use-varnish-conveyor-store';
+import type { ISummary } from '@/shared/api/services/summary-service';
+import type { CreateStatusDto } from '@/shared/api/services/status-service';
+import { useVarnishEmployeeStore } from '../../store/use-varnish-employee-store';
+import { useVarnishOperationStore } from '../../store/use-varnish-operation-store';
+import { useCreateStatus } from '@/shared/api/use-create-status';
 
 export default function useVarnishOperationsMenu(summaryData: ISummary | null) {
-  const varnishConveyor = useVarnishConveyorStore(
-    useShallow((state) => state.varnishConveyor),
-  );
-  const employee = useVarnishEmployeeStore(
-    useShallow((state) => state.varnishEmployee),
-  );
+  const varnishConveyor = useVarnishConveyorStore(useShallow((state) => state.varnishConveyor));
+  const employee = useVarnishEmployeeStore(useShallow((state) => state.varnishEmployee));
   const selectedOperation = useVarnishOperationStore(
     useShallow((state) => state.selectedOperation),
   );
@@ -39,11 +35,7 @@ export default function useVarnishOperationsMenu(summaryData: ISummary | null) {
         : false
       : false;
 
-  const setIdleButtonDisableCondition = !(
-    summaryData &&
-    employee &&
-    selectedOperation
-  );
+  const setIdleButtonDisableCondition = !(summaryData && employee && selectedOperation);
 
   const setWorkingButtonDisableCondition = !(summaryData && employee);
 

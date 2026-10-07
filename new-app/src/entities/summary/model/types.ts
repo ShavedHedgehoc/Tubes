@@ -139,7 +139,8 @@ export type StatusRow = {
   maintenance_session_id: number | null;
   maintenance_value: string | null;
   maintenance_description: string | null;
-  idle: false;
+  idle: boolean;
+  is_locked: boolean;
   employee_id: number | null;
   employee_name: string | null;
   idle_time: number | null;
@@ -149,6 +150,10 @@ export type StatusRow = {
   varnish_param_id: number | null;
   offset_param_id: number | null;
   sealant_param_id: number | null;
+  laboratory_assistant_name: string | null;
+  user_name: string | null;
+  laboratory_lock_reason: string | null;
+  has_laboratory_lock: boolean;
 };
 
 export type SummaryStatusesResponse = SummaryWithStatusesBase & {
@@ -408,6 +413,14 @@ type VarnishParamsRow = VarnishParams & ParamsAddition;
 type OffsetParamsRow = OffsetParams & ParamsAddition;
 type SealantParamsRow = SealantParams & ParamsAddition;
 
+type BoxRow = {
+  id: number;
+  number: number;
+  uuid: string;
+  quantity: number;
+  employee: string;
+  createdAt: Date;
+};
 export type SummaryReportEntity = {
   summary: SummaryReportBase;
   statuses: StatusRow[];
@@ -418,6 +431,7 @@ export type SummaryReportEntity = {
   varnishParams: VarnishParamsRow[];
   offsetParams: OffsetParamsRow[];
   sealantParams: SealantParamsRow[];
+  boxes: BoxRow[];
 };
 
 export type PostIdle = Record<string, number>;

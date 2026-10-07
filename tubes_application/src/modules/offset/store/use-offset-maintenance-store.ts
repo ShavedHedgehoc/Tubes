@@ -1,6 +1,6 @@
-import type { IMaintenance } from "@/shared/api/services/summary-service";
-import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import type { IMaintenance } from '@/shared/api/services/summary-service';
+import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
 
 interface OffsetMaintenanceStore {
   selectedMaintenance: IMaintenance | null;
@@ -9,7 +9,6 @@ interface OffsetMaintenanceStore {
 export const useOffsetMaintenanceStore = create<OffsetMaintenanceStore>()(
   devtools((set) => ({
     selectedMaintenance: null,
-    setSelectedMaintenance: (value) =>
-      set(() => ({ selectedMaintenance: value })),
+    setSelectedMaintenance: (value) => set(() => ({ selectedMaintenance: value })),
   })),
 );

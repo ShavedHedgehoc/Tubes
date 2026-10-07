@@ -1,23 +1,16 @@
-import type { ISummary } from "@/shared/api/services/summary-service";
-import { CountersTresholds } from "@/shared/helpers/counters-tresholds";
-import { SEALANT_PARAMETER_NAMES } from "@/shared/helpers/parameter-names";
-import { useShallow } from "zustand/shallow";
-import type { AddParameterCardProps } from "../../../shared/components/cards/add-parameter-card";
-import { VStack, HStack } from "@chakra-ui/react";
-import AddParameterCard from "../../../shared/components/cards/add-parameter-card";
-import { PARAMETER_UNITS } from "@/shared/helpers/parameter-units";
-import {
-  useSealantInputStore,
-  SealantInputParams,
-} from "../store/use-sealant-input-store";
-import useSealantEntriesHandleCardsClick from "./use-sealant-entries-handle-cards-click";
-import { parseValue } from "@/shared/helpers/parse-value";
+import type { ISummary } from '@/shared/api/services/summary-service';
+import { CountersTresholds } from '@/shared/helpers/counters-tresholds';
+import { SEALANT_PARAMETER_NAMES } from '@/shared/helpers/parameter-names';
+import { useShallow } from 'zustand/shallow';
+import type { AddParameterCardProps } from '../../../shared/components/cards/add-parameter-card';
+import { VStack, HStack } from '@chakra-ui/react';
+import AddParameterCard from '../../../shared/components/cards/add-parameter-card';
+import { PARAMETER_UNITS } from '@/shared/helpers/parameter-units';
+import { useSealantInputStore, SealantInputParams } from '../store/use-sealant-input-store';
+import useSealantEntriesHandleCardsClick from './use-sealant-entries-handle-cards-click';
+import { parseValue } from '@/shared/helpers/parse-value';
 
-export default function SealantEntries({
-  summaryData,
-}: {
-  summaryData: ISummary | null;
-}) {
+export default function SealantEntries({ summaryData }: { summaryData: ISummary | null }) {
   const data = useSealantInputStore(useShallow((state) => state.data));
   const { handleCardClick, handleIntegerCardClick, handleBooleanCardClick } =
     useSealantEntriesHandleCardsClick();
@@ -35,7 +28,7 @@ export default function SealantEntries({
     maxValue: CountersTresholds.COUNTERS_MAX_TRESHOLD,
     unit: PARAMETER_UNITS[SealantInputParams.COUNTER_VALUE],
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const capMachineSpeedCardProps: AddParameterCardProps = {
@@ -46,7 +39,7 @@ export default function SealantEntries({
     maxValue: tresholdsData?.sealant_cap_machine_speed_max ?? null,
     unit: PARAMETER_UNITS[SealantInputParams.CAP_MACHINE_SPEED],
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const totalAirPressureCardProps: AddParameterCardProps = {
@@ -57,7 +50,7 @@ export default function SealantEntries({
     maxValue: tresholdsData?.sealant_total_air_pressure_max ?? null,
     unit: PARAMETER_UNITS[SealantInputParams.TOTAL_AIR_PRESSURE],
     onClick: (val) => handleCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const holdersForwardCardProps: AddParameterCardProps = {
@@ -68,7 +61,7 @@ export default function SealantEntries({
     maxValue: tresholdsData?.sealant_holders_forward_max ?? null,
     unit: PARAMETER_UNITS[SealantInputParams.HOLDERS_FORWARD],
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const holdersOpeningLeftCardProps: AddParameterCardProps = {
@@ -79,7 +72,7 @@ export default function SealantEntries({
     maxValue: tresholdsData?.sealant_holders_opening_left_max ?? null,
     unit: PARAMETER_UNITS[SealantInputParams.HOLDERS_OPENING_LEFT],
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const holdersOpeningRightCardProps: AddParameterCardProps = {
@@ -90,7 +83,7 @@ export default function SealantEntries({
     maxValue: tresholdsData?.sealant_holders_opening_right_max ?? null,
     unit: PARAMETER_UNITS[SealantInputParams.HOLDERS_OPENING_RIGHT],
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const holdersClosingCardProps: AddParameterCardProps = {
@@ -101,7 +94,7 @@ export default function SealantEntries({
     maxValue: tresholdsData?.sealant_holders_closing_max ?? null,
     unit: PARAMETER_UNITS[SealantInputParams.HOLDERS_CLOSING],
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const injectionAStartCardProps: AddParameterCardProps = {
@@ -111,7 +104,7 @@ export default function SealantEntries({
     minValue: tresholdsData?.sealant_injection_a_start_min ?? null,
     maxValue: tresholdsData?.sealant_injection_a_start_max ?? null,
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const injectionBStartCardProps: AddParameterCardProps = {
@@ -121,7 +114,7 @@ export default function SealantEntries({
     minValue: tresholdsData?.sealant_injection_b_start_min ?? null,
     maxValue: tresholdsData?.sealant_injection_b_start_max ?? null,
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const injectionAEndCardProps: AddParameterCardProps = {
@@ -131,7 +124,7 @@ export default function SealantEntries({
     minValue: tresholdsData?.sealant_injection_a_end_min ?? null,
     maxValue: tresholdsData?.sealant_injection_a_end_max ?? null,
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const injectionBEndCardProps: AddParameterCardProps = {
@@ -141,35 +134,27 @@ export default function SealantEntries({
     minValue: tresholdsData?.sealant_injection_b_end_min ?? null,
     maxValue: tresholdsData?.sealant_injection_b_end_max ?? null,
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const injectionTubeOrientationStartCardProps: AddParameterCardProps = {
     id: SealantInputParams.INJECTION_TUBE_ORIENTATION_START,
-    title:
-      SEALANT_PARAMETER_NAMES[
-        SealantInputParams.INJECTION_TUBE_ORIENTATION_START
-      ],
+    title: SEALANT_PARAMETER_NAMES[SealantInputParams.INJECTION_TUBE_ORIENTATION_START],
     value: parseValue(data.injection_tube_orientation_start),
-    minValue:
-      tresholdsData?.sealant_injection_tube_orientation_start_min ?? null,
-    maxValue:
-      tresholdsData?.sealant_injection_tube_orientation_start_max ?? null,
+    minValue: tresholdsData?.sealant_injection_tube_orientation_start_min ?? null,
+    maxValue: tresholdsData?.sealant_injection_tube_orientation_start_max ?? null,
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const injectionTubeOrientationEndCardProps: AddParameterCardProps = {
     id: SealantInputParams.INJECTION_TUBE_ORIENTATION_END,
-    title:
-      SEALANT_PARAMETER_NAMES[
-        SealantInputParams.INJECTION_TUBE_ORIENTATION_END
-      ],
+    title: SEALANT_PARAMETER_NAMES[SealantInputParams.INJECTION_TUBE_ORIENTATION_END],
     value: parseValue(data.injection_tube_orientation_end),
     minValue: tresholdsData?.sealant_injection_tube_orientation_end_min ?? null,
     maxValue: tresholdsData?.sealant_injection_tube_orientation_end_max ?? null,
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const isCapSurfaceSmoothCardProps: AddParameterCardProps = {
@@ -177,7 +162,7 @@ export default function SealantEntries({
     title: SEALANT_PARAMETER_NAMES[SealantInputParams.IS_CAP_SURFACE_SMOOTH],
     booleanValue: data.is_cap_surface_smooth ?? null,
     onClick: (val) => handleBooleanCardClick(val),
-    variant: "boolean",
+    variant: 'boolean',
   };
 
   const latexRingPaddingCardProps: AddParameterCardProps = {
@@ -188,7 +173,7 @@ export default function SealantEntries({
     maxValue: tresholdsData?.sealant_latex_ring_padding_max ?? null,
     unit: PARAMETER_UNITS[SealantInputParams.LATEX_RING_PADDING],
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const latexRingWidthCardProps: AddParameterCardProps = {
@@ -199,7 +184,7 @@ export default function SealantEntries({
     maxValue: tresholdsData?.sealant_latex_ring_width_max ?? null,
     unit: PARAMETER_UNITS[SealantInputParams.LATEX_RING_WIDTH],
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const tubeRigidityCardProps: AddParameterCardProps = {
@@ -210,7 +195,7 @@ export default function SealantEntries({
     maxValue: tresholdsData?.sealant_tube_rigidity_max ?? null,
     unit: PARAMETER_UNITS[SealantInputParams.TUBE_RIGIDITY],
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const capUnscrewingTorqueCardProps: AddParameterCardProps = {
@@ -221,7 +206,7 @@ export default function SealantEntries({
     maxValue: tresholdsData?.sealant_cap_unscrewing_torque_max ?? null,
     unit: PARAMETER_UNITS[SealantInputParams.CAP_UNSCREWING_TORQUE],
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   return (

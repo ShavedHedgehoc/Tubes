@@ -46,57 +46,32 @@ export class ConveyorsService {
               include: { employee: true },
               orderBy: { id: "desc" },
             },
-            // extrusion_statuses: {
-            //   include: { employee: true },
-            //   orderBy: { id: "desc" },
-            //   take: 1,
-            // },
-            // varnish_statuses: {
-            //   include: { employee: true },
-            //   orderBy: { id: "desc" },
-            //   take: 1,
-            // },
-            // offset_statuses: {
-            //   include: { employee: true },
-            //   orderBy: { id: "desc" },
-            //   take: 1,
-            // },
-            // sealant_statuses: {
-            //   include: { employee: true },
-            //   orderBy: { id: "desc" },
-            //   take: 1,
-            // },
+            laboratory_locks: {
+              where: { is_active: true },
+              include: { laboratory_lock_reason: true },
+              orderBy: { id: "desc" },
+            },
           },
         },
       },
     });
     return {
       conveyors: conveyors.map((conveyor) => {
-        const summary = conveyor.summaries[0] || null;
+        const summary = conveyor.summaries?.[0] || null;
         const allStatuses = summary?.statuses || [];
-        // Вспомогательная функция для извлечения статуса и сотрудника
-        // const getStatusData = <T extends { employee: Employee | null }>(
-        //   statusArray?: T[] | null,
-        // ) => {
-        //   const lastStatus = statusArray?.[0] ?? null;
-        //   return {
-        //     status: lastStatus,
-        //     employee: lastStatus?.employee ?? null,
-        //   };
-        // };
+        const allLocks = summary?.laboratory_locks || [];
 
         const getLastStatusByPost = (postId: number) => {
           const status = allStatuses.find((s) => s.post_id === postId) || null;
+          const lock = allLocks.find((l) => l.post_id === postId) || null;
           return {
             status: status,
             employee: status?.employee || null,
+            hasLock: !!lock,
+            lockReason: lock?.laboratory_lock_reason.value ?? null,
           };
         };
 
-        // const extrusion = getStatusData(summary?.extrusion_statuses);
-        // const varnish = getStatusData(summary?.varnish_statuses);
-        // const offset = getStatusData(summary?.offset_statuses);
-        // const sealant = getStatusData(summary?.sealant_statuses);
         const extrusion = getLastStatusByPost(1);
         const varnish = getLastStatusByPost(2);
         const offset = getLastStatusByPost(3);
@@ -109,69 +84,22 @@ export class ConveyorsService {
           batch: summary?.batch || null,
           extrusion_status: extrusion.status,
           extrusion_employee: extrusion.employee,
+          extrusion_has_lock: extrusion.hasLock,
           varnish_status: varnish.status,
           varnish_employee: varnish.employee,
+          varnish_has_lock: varnish.hasLock,
           offset_status: offset.status,
           offset_employee: offset.employee,
+          offset_has_lock: offset.hasLock,
           sealant_status: sealant.status,
           sealant_employee: sealant.employee,
+          sealant_has_lock: sealant.hasLock,
+          extrusion_lock_reason: extrusion.lockReason,
+          varnish_lock_reason: varnish.lockReason,
+          sealant_lock_reason: sealant.lockReason,
+          offset_lock_reason: offset.lockReason,
         });
       }),
     };
-    //   conveyors: conveyors.map((item) =>
-    //     mappedConveyors({
-    //       conveyor: item,
-    //       summary: item.summaries.length ? item.summaries[0] : null,
-    //       product:
-    //         item.summaries.length && item.summaries[0].product
-    //           ? item.summaries[0].product
-    //           : null,
-    //       batch:
-    //         item.summaries.length && item.summaries[0].batch
-    //           ? item.summaries[0].batch
-    //           : null,
-    //       extrusion_status:
-    //         item.summaries.length && item.summaries[0].extrusion_statuses.length
-    //           ? item.summaries[0].extrusion_statuses[0]
-    //           : null,
-    //       extrusion_employee:
-    //         item.summaries.length &&
-    //           item.summaries[0].extrusion_statuses.length &&
-    //           item.summaries[0].extrusion_statuses[0].employee
-    //           ? item.summaries[0].extrusion_statuses[0].employee
-    //           : null,
-    //       varnish_status:
-    //         item.summaries.length && item.summaries[0].varnish_statuses.length
-    //           ? item.summaries[0].varnish_statuses[0]
-    //           : null,
-    //       varnish_employee:
-    //         item.summaries.length &&
-    //           item.summaries[0].varnish_statuses.length &&
-    //           item.summaries[0].varnish_statuses[0].employee
-    //           ? item.summaries[0].varnish_statuses[0].employee
-    //           : null,
-    //       offset_status:
-    //         item.summaries.length && item.summaries[0].offset_statuses.length
-    //           ? item.summaries[0].offset_statuses[0]
-    //           : null,
-    //       offset_employee:
-    //         item.summaries.length &&
-    //           item.summaries[0].offset_statuses.length &&
-    //           item.summaries[0].offset_statuses[0].employee
-    //           ? item.summaries[0].offset_statuses[0].employee
-    //           : null,
-    //       sealant_status:
-    //         item.summaries.length && item.summaries[0].sealant_statuses.length
-    //           ? item.summaries[0].sealant_statuses[0]
-    //           : null,
-    //       sealant_employee:
-    //         item.summaries.length &&
-    //           item.summaries[0].sealant_statuses.length &&
-    //           item.summaries[0].sealant_statuses[0].employee
-    //           ? item.summaries[0].sealant_statuses[0].employee
-    //           : null,
-    //     }),
-    //   ),
-    // };
   }
 }

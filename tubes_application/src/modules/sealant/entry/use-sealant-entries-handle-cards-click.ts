@@ -1,56 +1,30 @@
-import { useShallow } from "zustand/shallow";
-import { useSealantNumericEntryModalStore } from "../store/use-sealant-numeric-entry-modal-store";
-import { useSealantBooleanEntryModalStore } from "../store/use-sealant-boolean-entry-modal-store";
-import { useSealantIntegerEntryModalStore } from "@/modules/sealant/store/use-sealant-integer-entry-modal-store";
+import { useShallow } from 'zustand/shallow';
+import { useSealantNumericEntryModalStore } from '../store/use-sealant-numeric-entry-modal-store';
+import { useSealantBooleanEntryModalStore } from '../store/use-sealant-boolean-entry-modal-store';
+import { useSealantIntegerEntryModalStore } from '@/modules/sealant/store/use-sealant-integer-entry-modal-store';
 
 export default function useSealantEntriesHandleCardsClick() {
-  const setKey = useSealantNumericEntryModalStore(
-    useShallow((state) => state.setKey),
-  );
-  const setTitle = useSealantNumericEntryModalStore(
-    useShallow((state) => state.setTitle),
-  );
-  const setMinValue = useSealantNumericEntryModalStore(
-    useShallow((state) => state.setMinValue),
-  );
-  const setMaxValue = useSealantNumericEntryModalStore(
-    useShallow((state) => state.setMaxValue),
-  );
-  const setUnit = useSealantNumericEntryModalStore(
-    useShallow((state) => state.setUnit),
-  );
-  const setOpen = useSealantNumericEntryModalStore(
-    useShallow((state) => state.setOpen),
-  );
+  const setKey = useSealantNumericEntryModalStore(useShallow((state) => state.setKey));
+  const setTitle = useSealantNumericEntryModalStore(useShallow((state) => state.setTitle));
+  const setMinValue = useSealantNumericEntryModalStore(useShallow((state) => state.setMinValue));
+  const setMaxValue = useSealantNumericEntryModalStore(useShallow((state) => state.setMaxValue));
+  const setUnit = useSealantNumericEntryModalStore(useShallow((state) => state.setUnit));
+  const setOpen = useSealantNumericEntryModalStore(useShallow((state) => state.setOpen));
 
-  const setKeyInteger = useSealantIntegerEntryModalStore(
-    useShallow((state) => state.setKey),
-  );
-  const setTitleInteger = useSealantIntegerEntryModalStore(
-    useShallow((state) => state.setTitle),
-  );
+  const setKeyInteger = useSealantIntegerEntryModalStore(useShallow((state) => state.setKey));
+  const setTitleInteger = useSealantIntegerEntryModalStore(useShallow((state) => state.setTitle));
   const setMinValueInteger = useSealantIntegerEntryModalStore(
     useShallow((state) => state.setMinValue),
   );
   const setMaxValueInteger = useSealantIntegerEntryModalStore(
     useShallow((state) => state.setMaxValue),
   );
-  const setUnitInteger = useSealantIntegerEntryModalStore(
-    useShallow((state) => state.setUnit),
-  );
-  const setOpenInteger = useSealantIntegerEntryModalStore(
-    useShallow((state) => state.setOpen),
-  );
+  const setUnitInteger = useSealantIntegerEntryModalStore(useShallow((state) => state.setUnit));
+  const setOpenInteger = useSealantIntegerEntryModalStore(useShallow((state) => state.setOpen));
 
-  const setBooleanKey = useSealantBooleanEntryModalStore(
-    useShallow((state) => state.setKey),
-  );
-  const setBooleanTitle = useSealantBooleanEntryModalStore(
-    useShallow((state) => state.setTitle),
-  );
-  const setBooleanOpen = useSealantBooleanEntryModalStore(
-    useShallow((state) => state.setOpen),
-  );
+  const setBooleanKey = useSealantBooleanEntryModalStore(useShallow((state) => state.setKey));
+  const setBooleanTitle = useSealantBooleanEntryModalStore(useShallow((state) => state.setTitle));
+  const setBooleanOpen = useSealantBooleanEntryModalStore(useShallow((state) => state.setOpen));
 
   const handleCardClick = ({
     id,
@@ -94,13 +68,7 @@ export default function useSealantEntriesHandleCardsClick() {
     setOpenInteger(true);
   };
 
-  const handleBooleanCardClick = ({
-    id,
-    title,
-  }: {
-    id: string;
-    title: string;
-  }) => {
+  const handleBooleanCardClick = ({ id, title }: { id: string; title: string }) => {
     setBooleanKey(id);
     setBooleanTitle(title);
     setBooleanOpen(true);

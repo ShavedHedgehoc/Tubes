@@ -1,1 +1,1 @@
-export { SealantMaintenanceMenu } from "./sealant-maintenance-menu";
+export { SealantMaintenanceMenu } from './sealant-maintenance-menu';

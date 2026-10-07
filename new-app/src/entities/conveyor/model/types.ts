@@ -4,11 +4,13 @@ export type ConveyorEntity = {
   id: number;
   name: string;
 };
-type PostState = "idle" | "working" | "finished";
+type PostState = "idle" | "working" | "finished" | "locked";
 
 type PostData = {
   productionValue: number | null;
   postState: PostState;
+  hasLock: boolean;
+  lockReason: string | null;
   employeeName: string | null;
 };
 

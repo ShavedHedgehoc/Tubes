@@ -1,5 +1,5 @@
-import { Theme, Grid, GridItem, Center, Heading } from "@chakra-ui/react";
-import React from "react";
+import { Theme, Grid, GridItem, Center, Heading } from '@chakra-ui/react';
+import React from 'react';
 
 export interface MaintenancePageLayoutProps {
   timeComponent: React.ReactNode;
@@ -12,9 +12,7 @@ export interface MaintenancePageLayoutProps {
   isLoading: boolean;
   isNotFound: boolean;
 }
-export default function MaintenancePageLayout(
-  props: MaintenancePageLayoutProps,
-) {
+export default function MaintenancePageLayout(props: MaintenancePageLayoutProps) {
   return (
     <Theme appearance="dark">
       <Grid

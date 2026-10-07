@@ -1,32 +1,23 @@
-import type { ISummary } from "@/shared/api/services/summary-service";
-import Info from "@/shared/components/info/info";
-import NotFound from "@/shared/components/info/not-found-full-screen";
-import { formatTimeToString } from "@/shared/helpers/date-time-formatters";
-import { AppMessages } from "@/shared/resources/app-messages";
-import {
-  Box,
-  Heading,
-  ScrollArea,
-  SimpleGrid,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
-import useVarnishOperationsContent from "./use-varnish-operations-content";
-import OperationCard from "@/shared/components/cards/operation-card";
+import type { ISummary } from '@/shared/api/services/summary-service';
+import Info from '@/shared/components/info/info';
+import NotFound from '@/shared/components/info/not-found-full-screen';
+import { formatTimeToString } from '@/shared/helpers/date-time-formatters';
+import { AppMessages } from '@/shared/resources/app-messages';
+import { Box, Heading, ScrollArea, SimpleGrid, Text, VStack } from '@chakra-ui/react';
+import useVarnishOperationsContent from './use-varnish-operations-content';
+import OperationCard from '@/shared/components/cards/operation-card';
 
 export default function VarnishOperationsContent({
   summaryData,
 }: {
   summaryData: ISummary | null;
 }) {
-  const { items, setSelectedOperation, employee, selectedOperation } =
-    useVarnishOperationsContent({
-      summaryData: summaryData,
-    });
+  const { items, setSelectedOperation, employee, selectedOperation } = useVarnishOperationsContent({
+    summaryData: summaryData,
+  });
 
   if (!employee) return <NotFound message={AppMessages.NOT_AUTHORIZED} />;
-  if (!summaryData)
-    return <NotFound message={AppMessages.ACTIVE_SUMMARY_NOT_FOUND} />;
+  if (!summaryData) return <NotFound message={AppMessages.ACTIVE_SUMMARY_NOT_FOUND} />;
   if (!summaryData.varnishOperations.length)
     return <Info message={AppMessages.OPERATIONS_LIST_NOT_FOUND} />;
 
@@ -37,12 +28,10 @@ export default function VarnishOperationsContent({
           Статус поста - простой
         </Heading>
         <Heading fontSize="3xl" color="fg.subtle">
-          Выполняемая операция:{" "}
-          {summaryData.varnishStatus.operation_description}
+          Выполняемая операция: {summaryData.varnishStatus.operation_description}
         </Heading>
         <Heading fontSize="3xl" color="fg.subtle">
-          Время начала:{" "}
-          {formatTimeToString(summaryData.varnishStatus.createdAt)}
+          Время начала: {formatTimeToString(summaryData.varnishStatus.createdAt)}
         </Heading>
       </VStack>
     ),
@@ -54,9 +43,9 @@ export default function VarnishOperationsContent({
         <Text color="fg.subtle" textStyle="xl">
           {selectedOperation
             ? `Выбранная операция: ${selectedOperation.description}`
-            : "Выберите операцию"}
+            : 'Выберите операцию'}
         </Text>
-        <ScrollArea.Root height="full" variant={"always"}>
+        <ScrollArea.Root height="full" variant={'always'}>
           <ScrollArea.Viewport>
             <ScrollArea.Content paddingEnd="3" textStyle="sm">
               <SimpleGrid columns={4} gap={2}>
@@ -64,15 +53,8 @@ export default function VarnishOperationsContent({
                   <OperationCard
                     operation={item}
                     onClick={() => setSelectedOperation(item)}
-                    selected={
-                      selectedOperation !== null &&
-                      selectedOperation.id === item.id
-                    }
-                    disabled={
-                      !employee ||
-                      !employee.rank ||
-                      employee.rank.val < item.min_rank
-                    }
+                    selected={selectedOperation !== null && selectedOperation.id === item.id}
+                    disabled={!employee || !employee.rank || employee.rank.val < item.min_rank}
                   />
                 ))}
               </SimpleGrid>

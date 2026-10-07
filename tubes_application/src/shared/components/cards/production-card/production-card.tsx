@@ -1,9 +1,9 @@
-import type { ISummary } from "@/shared/api/services/summary-service";
-import { Box, DataList, HStack, Stack, Text } from "@chakra-ui/react";
-import InputTimer from "./input-timer";
-import { CHECK_INTERVALS } from "@/shared/helpers/check-intervals";
-import useProductionCardData from "./use-production-card-data";
-import { formatTimeToString } from "@/shared/helpers/date-time-formatters";
+import type { ISummary } from '@/shared/api/services/summary-service';
+import { Box, DataList, HStack, Stack, Text } from '@chakra-ui/react';
+import InputTimer from './input-timer';
+import { CHECK_INTERVALS } from '@/shared/helpers/check-intervals';
+import useProductionCardData from './use-production-card-data';
+import { formatTimeToString } from '@/shared/helpers/date-time-formatters';
 
 export default function ProductionCard({
   summaryData,
@@ -14,7 +14,7 @@ export default function ProductionCard({
 }) {
   const { note, production, lastCheckDate, operationStatus, idleTime, today } =
     useProductionCardData(postId, summaryData);
-  const locale = "ru";
+  const locale = 'ru';
 
   const inputTimer =
     operationStatus &&
@@ -33,10 +33,10 @@ export default function ProductionCard({
                 new Date(operationStatus.createdAt).getTime() -
                 3 * 3600 * 1000,
             ).toLocaleTimeString(locale, {
-              hour: "numeric",
+              hour: 'numeric',
               hour12: false,
-              minute: "numeric",
-              second: "numeric",
+              minute: 'numeric',
+              second: 'numeric',
             })}`}
           </Text>
         </Stack>
@@ -82,19 +82,19 @@ export default function ProductionCard({
           </DataList.Root>
           <HStack gap={6}>
             <DataList.Root size="lg">
-              <DataList.Item alignItems={"center"}>
+              <DataList.Item alignItems={'center'}>
                 <DataList.ItemLabel>Смена</DataList.ItemLabel>
                 <DataList.ItemValue>{`${summaryData?.data.shift}`}</DataList.ItemValue>
               </DataList.Item>
             </DataList.Root>
             <DataList.Root size="lg">
-              <DataList.Item alignItems={"center"}>
+              <DataList.Item alignItems={'center'}>
                 <DataList.ItemLabel>Партия</DataList.ItemLabel>
                 <DataList.ItemValue>{`${summaryData?.data.batch_name}`}</DataList.ItemValue>
               </DataList.Item>
             </DataList.Root>
             <DataList.Root size="lg">
-              <DataList.Item alignItems={"center"}>
+              <DataList.Item alignItems={'center'}>
                 <DataList.ItemLabel>План</DataList.ItemLabel>
                 <DataList.ItemValue>{`${summaryData?.data.plan}`}</DataList.ItemValue>
               </DataList.Item>
@@ -108,7 +108,7 @@ export default function ProductionCard({
           </DataList.Root>
         </Stack>
 
-        <HStack justify={"space-between"}>
+        <HStack justify={'space-between'}>
           {inputTimer}
           <HStack justify="end" alignItems="end" h="full">
             <Text color="fg.subtle" textStyle="md">
