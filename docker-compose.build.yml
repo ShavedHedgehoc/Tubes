@@ -2,38 +2,44 @@ version: '3.8'
 
 services:
   tubes_api:
-    context: .
-    dockerfile: docker/api_tubes/Dockerfile.new
-    args:
-      - NODE_ENV=production
+    build:
+      context: .
+      dockerfile: docker/api_tubes/Dockerfile.new
+      args:
+        - NODE_ENV=production
 
   public_api:
-    context: .
-    dockerfile: docker/public_api/Dockerfile.fast
-    args:
-      - NODE_ENV=production
+    build:
+      context: .
+      dockerfile: docker/public_api/Dockerfile.fast
+      args:
+        - NODE_ENV=production
 
   new_app:
-    context: .
-    dockerfile: docker/new-app/Dockerfile.new
-    args:
-      - NODE_ENV=production
-      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
-      - INTERNAL_API_URL=${INTERNAL_API_URL}
+    build:
+      context: .
+      dockerfile: docker/new-app/Dockerfile.new
+      args:
+        - NODE_ENV=production
+        - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+        - INTERNAL_API_URL=${INTERNAL_API_URL}
 
   tubes_dash:
-    context: .
-    dockerfile: docker/tubes/Dockerfile.new
-    args:
-      - NODE_ENV=production
+    build:
+      context: .
+      dockerfile: docker/tubes/Dockerfile.new
+      args:
+        - NODE_ENV=production
 
   nginx:
-    context: ./docker/nginx
-    args:
-      - NODE_ENV=production
+    build:
+      context: ./docker/nginx
+      args:
+        - NODE_ENV=production
 
   nginx-file-server:
-    context: ./docker/nginx
-    dockerfile: Dockerfile.file-server
-    args:
-      - NODE_ENV=production
+    build:
+      context: ./docker/nginx
+      dockerfile: Dockerfile.file-server
+      args:
+        - NODE_ENV=production
