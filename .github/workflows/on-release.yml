@@ -1,32 +1,3 @@
-# name: Release & Sync Version
-
-# on:
-#   push:
-#     branches: [release]
-
-# jobs:
-#   bump-and-sync:
-#     if: "!contains(github.event.head_commit.message, '[skip ci]')"
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v4
-#         with:
-#           fetch-depth: 0
-#           token: ${{ secrets.MY_GITHUB_PAT }}
-
-#       - name: Git Config
-#         run: |
-#           git config --global user.name "github-actions[bot]"
-#           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-#       - name: Bump & Push to Release
-#         run: |
-#           npm version patch --include-workspace-root --workspaces -m "chore: release %s [skip ci]"
-#           git push origin release --follow-tags
-#       - name: Sync version to Main
-#         run: |
-#           # Прямой пуш из release в main, чтобы они стали идентичны
-#           git push origin release:main
 name: Release, Sync & Build Docker
 
 on:
@@ -87,13 +58,13 @@ jobs:
           export INTERNAL_API_URL="http://tubes_api:7100/api_tubes"
 
           # Запускаем сборку всех 6 образов
-          docker compose -f docker-compose.build.yml build
+          docker compose -p monorepo -f docker-compose.build.yml build
 
           # Список сервисов в точности как в файле docker-compose.build.yml
           SERVICES="tubes_api public_api new_app tubes_dash nginx nginx-file-server"
 
           for svc in $SERVICES; do
-            docker tag ${svc} ghcr.io/$IMAGE_OWNER/$IMAGE_REPO/${svc}:latest
+            docker tag monorepo-${svc} ghcr.io/$IMAGE_OWNER/$IMAGE_REPO/${svc}:latest
             docker push ghcr.io/$IMAGE_OWNER/$IMAGE_REPO/${svc}:latest
           done
 
