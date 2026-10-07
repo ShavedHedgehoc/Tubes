@@ -20,4 +20,5 @@ export type DataViewLayoutProps<TData, T extends PaginationParams> = {
   ) => Promise<URLSearchParams>;
   className?: string;
   isFetching?: boolean;
+  getRowClassName?: (row: TData) => string;
 };

@@ -20,7 +20,7 @@ export default function NameInput() {
   };
 
   const handleReset = () => {
-    setParams({ name: null, page: 1 }, { shallow: false });
+    setParams({ name: null, page: 1 });
   };
 
   const handleChangeSort = () => {
@@ -40,6 +40,7 @@ export default function NameInput() {
         )}
       </Button>
       <Input
+        id="employee-filter-name-input"
         placeholder="Поиск по фамилии...  "
         value={value}
         onChange={handleChangeName}

@@ -20,7 +20,7 @@ jobs:
       # - name: Check Formatting (Prettier)
       #   run: npx prettier --check .
       - name: Generate Prisma
-        run: npm run generate -w api_tubes
+        run: npx prisma@6.19.0 generate --schema=./db/prisma/schema.prisma
       - name: Lint & Type Check All
         run: |
           npm run lint:all
@@ -35,7 +35,7 @@ jobs:
     strategy:
       matrix:
         # Используем матрицу, чтобы не дублировать код джоб
-        package: [api_tubes, tubes_application, new-app]
+        package: [api_tubes, public_api, tubes_application, new-app]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -45,7 +45,7 @@ jobs:
       - name: Install
         run: npm ci --no-fund
       - name: Generate Prisma (only for API)
-        if: matrix.package == 'api_tubes'
-        run: npm run generate -w api_tubes
+        if: matrix.package != 'tubes_application'
+        run: npx prisma@6.19.0 generate --schema=./db/prisma/schema.prisma
       - name: Build ${{ matrix.package }}
         run: npm run build -w ${{ matrix.package }}

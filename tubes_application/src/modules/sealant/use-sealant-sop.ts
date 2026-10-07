@@ -4,6 +4,6 @@ import SopService from "@/shared/api/services/sop-service";
 export const useSealantSop = (operationId: number | null) =>
   useQuery({
     queryKey: ["sealant_sop", operationId],
-    queryFn: () => SopService.getSealantSopPictures(operationId),
+    queryFn: () => SopService.getSopPictures(operationId),
     enabled: !!operationId,
   });

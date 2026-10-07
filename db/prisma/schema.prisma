@@ -1,0 +1,706 @@
+generator client {
+  provider = "prisma-client-js"
+  // output   = "../generated/prisma"
+  output   = "../dist"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Конвейеры
+model Conveyor {
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
+  summaries Summary[]
+  printers  Printer[]
+  tresholds Treshold[]
+
+  @@map("conveyors")
+}
+
+model Post {
+  id                   Int                  @id @default(autoincrement())
+  value                Int                  @unique
+  name                 String               @unique
+  operations           Operation[]
+  statuses             Status[]
+  defects              Defect[]
+  notes                Note[]
+  maintenances         Maintenance[]
+  maintenance_sessions MaintenanceSession[]
+
+  @@map("posts")
+}
+
+model Rank {
+  id           Int           @id @default(autoincrement())
+  val          Int           @unique
+  description  String
+  employees    Employee[]
+  operations   Operation[]
+  maintenances Maintenance[]
+
+  @@map("ranks")
+}
+
+model Operation {
+  id                 Int                @id @default(autoincrement())
+  value              String             @unique
+  min_rank           Rank               @relation(fields: [min_rank_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  min_rank_id        Int
+  description        String
+  statuses           Status[]
+  operation_pictures OperationPicture[]
+  post               Post               @relation(fields: [post_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  post_id            Int
+  isInactive         Boolean            @default(false)
+
+  @@map("operations")
+}
+
+model OperationPicture {
+  id           Int       @id @default(autoincrement())
+  operation    Operation @relation(fields: [operation_id], references: [id], onDelete: Cascade)
+  operation_id Int
+  file_path    FilePath  @relation(fields: [file_path_id], references: [id], onDelete: Cascade)
+  file_path_id Int
+  order        Int       @default(0) // Поле для сортировки
+
+  @@unique([operation_id, file_path_id])
+  @@map("operation_pictures")
+}
+
+model Status {
+  id                     Int                 @id @default(autoincrement())
+  summary                Summary             @relation(fields: [summary_id], references: [id], onUpdate: Cascade, onDelete: Restrict)
+  summary_id             Int
+  post                   Post                @relation(fields: [post_id], references: [id], onUpdate: Cascade, onDelete: Restrict)
+  post_id                Int
+  counter_value          Int
+  operation              Operation?          @relation(fields: [operation_id], references: [id], onUpdate: Cascade, onDelete: Restrict)
+  operation_id           Int?
+  idle                   Boolean             @default(false)
+  employee               Employee?           @relation(fields: [employee_id], references: [id], onUpdate: Cascade, onDelete: Restrict)
+  employee_id            Int?
+  idle_time              BigInt?
+  finished               Boolean             @default(false)
+  createdAt              DateTime            @default(now())
+  maintenance_session    MaintenanceSession? @relation(fields: [maintenance_session_id], references: [id])
+  maintenance_session_id Int?
+  extrusion_param        ExtrusionParam?     @relation(fields: [extrusion_param_id], references: [id])
+  extrusion_param_id     Int?
+  varnish_param          VarnishParam?       @relation(fields: [varnish_param_id], references: [id])
+  varnish_param_id       Int?
+  offset_param           OffsetParam?        @relation(fields: [offset_param_id], references: [id])
+  offset_param_id        Int?
+  sealant_param          SealantParam?       @relation(fields: [sealant_param_id], references: [id])
+  sealant_param_id       Int?
+
+  @@index([summary_id])
+  @@index([post_id, createdAt])
+  @@index([createdAt])
+  @@index([maintenance_session_id])
+  @@map("statuses")
+}
+
+model Goal {
+  id             Int      @id @default(autoincrement())
+  metric_name    String
+  target_value   Float
+  effective_from DateTime
+  createdAt      DateTime @default(now())
+
+  @@map("goals")
+}
+
+// Шаблон обслуживания (например: "Ежедневное ТО", "ТО-10000")
+model Maintenance {
+  id                   Int                  @id @default(autoincrement())
+  value                String               @unique
+  description          String
+  post                 Post                 @relation(fields: [post_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  post_id              Int
+  min_rank             Rank                 @relation(fields: [min_rank_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  min_rank_id          Int
+  tasks                MaintenanceTask[]
+  maintenance_sessions MaintenanceSession[]
+
+  @@map("maintenances")
+}
+
+// Список задач для конкретного шаблона (Layout)
+model MaintenanceTask {
+  id              Int              @id @default(autoincrement())
+  maintenance     Maintenance      @relation(fields: [maintenance_id], references: [id])
+  maintenance_id  Int
+  title           String
+  order           Int              @default(0)
+  maintenanceLogs MaintenanceLog[]
+
+  @@unique(name: "maintenance_title", [maintenance_id, title])
+  @@index([maintenance_id])
+  @@map("maintenance_tasks")
+}
+
+// Сеанс обслуживания
+model MaintenanceSession {
+  id               Int              @id @default(autoincrement())
+  maintenance      Maintenance      @relation(fields: [maintenance_id], references: [id])
+  maintenance_id   Int
+  post             Post             @relation(fields: [post_id], references: [id])
+  post_id          Int
+  maintenance_logs MaintenanceLog[]
+  statuses         Status[]
+  start_time       DateTime         @default(now())
+  end_time         DateTime?
+  total_duration   BigInt?
+  work_duration    BigInt?
+
+  @@index([post_id])
+  @@index([maintenance_id])
+  @@index([start_time])
+  @@map("maintenance_sessions")
+}
+
+// 4. Лог выполнения задачи
+model MaintenanceLog {
+  id         Int                @id @default(autoincrement())
+  session    MaintenanceSession @relation(fields: [session_id], references: [id])
+  session_id Int
+  title      String
+  task_id    Int
+  task       MaintenanceTask    @relation(fields: [task_id], references: [id], onDelete: Restrict)
+  start_time DateTime?
+  end_time   DateTime?
+  duration   BigInt?
+  is_done    Boolean            @default(false)
+
+  @@index([session_id])
+  @@index([task_id])
+  @@index([task_id, start_time])
+  @@map("maintenance_logs")
+}
+
+// Пользователи
+model User {
+  id         Int        @id @default(autoincrement())
+  name       String
+  email      String     @unique
+  password   String
+  avatar_url String?
+  banned     Boolean    @default(false)
+  user_roles UserRole[]
+  token      Token?
+
+  @@map("users")
+}
+
+model Role {
+  id          Int        @id @default(autoincrement())
+  value       String     @unique
+  description String     @unique
+  user_roles  UserRole[]
+
+  @@map("roles")
+}
+
+model UserRole {
+  id      Int  @id @default(autoincrement())
+  user    User @relation(fields: [user_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  user_id Int
+  role    Role @relation(fields: [role_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  role_id Int
+
+  @@map("user_roles")
+}
+
+model Token {
+  id      Int    @id @default(autoincrement())
+  user    User   @relation(fields: [user_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  user_id Int    @unique
+  token   String
+
+  @@map("tokens")
+}
+
+// Сотрудники
+model Employee {
+  id                 Int                @id @default(autoincrement())
+  name               String
+  barcode            String             @unique @db.VarChar(13)
+  rank               Rank?              @relation(fields: [rank_id], references: [id], onUpdate: Cascade, onDelete: Restrict)
+  rank_id            Int
+  banned             Boolean            @default(false)
+  consumed_materials ConsumedMaterial[]
+  extrusion_params   ExtrusionParam[]
+  varnish_params     VarnishParam[]
+  offset_params      OffsetParam[]
+  sealant_params     SealantParam[]
+  production_boxes   ProductionBox[]
+  statuses           Status[]
+
+  @@map("employees")
+}
+
+//  Продукция
+model Product {
+  id               Int                 @id @default(autoincrement())
+  code             String              @unique
+  marking          String
+  name             String
+  summaries        Summary[]
+  product_pictures ProductPicture[]
+  tresholds        Treshold[]
+  unit_weight      ProductUnitWeight[]
+
+  @@map("products")
+}
+
+model ProductUnitWeight {
+  id         Int     @id @default(autoincrement())
+  product    Product @relation(fields: [product_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  product_id Int
+  weight     Float
+
+  @@map("product_unit_weights")
+}
+
+model Crew {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  summaries Summary[]
+
+  @@map("crews")
+}
+
+// Пути файлов
+model FilePath {
+  id                 Int                @id @default(autoincrement())
+  name               String
+  path               String
+  description        String             @default("") @db.VarChar(300)
+  product_pictures   ProductPicture[]
+  operation_pictures OperationPicture[]
+
+  @@map("file_paths")
+}
+
+// Картинки продуктов
+model ProductPicture {
+  id           Int      @id @default(autoincrement())
+  product      Product  @relation(fields: [product_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  product_id   Int
+  file_path    FilePath @relation(fields: [file_path_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  file_path_id Int
+  order        Int      @default(0)
+
+  @@unique([product_id, file_path_id])
+  @@index([product_id, order])
+  @@map("product_pictures")
+}
+
+// Партии
+model Batch {
+  id               Int             @id @default(autoincrement())
+  name             String          @unique
+  summaries        Summary[]
+  production_boxes ProductionBox[]
+
+  @@map("batches")
+}
+
+//Короба продукции
+model ProductionBox {
+  id          Int      @id @default(autoincrement())
+  uuid        String   @unique
+  box_number  Int
+  summary     Summary  @relation(fields: [summary_id], references: [id], onUpdate: Cascade, onDelete: Restrict)
+  summary_id  Int
+  batch       Batch    @relation(fields: [batch_id], references: [id], onUpdate: Cascade)
+  batch_id    Int
+  employee    Employee @relation(fields: [employee_id], references: [id], onUpdate: Cascade, onDelete: Restrict)
+  employee_id Int
+  quantity    Int
+  createdAt   DateTime @default(now())
+
+  @@index([summary_id])
+  @@index([createdAt])
+  @@map("production_boxes")
+}
+
+// Принтеры
+model Printer {
+  id          Int      @id @default(autoincrement())
+  conveyor    Conveyor @relation(fields: [conveyor_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  conveyor_id Int      @unique
+  ip          String
+  port        Int
+
+  @@map("printers")
+}
+
+// Партии материалов
+model Lot {
+  id                 Int                @id @default(autoincrement())
+  material           Material           @relation(fields: [material_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  material_id        Int
+  value              String
+  consumed_materials ConsumedMaterial[]
+
+  @@unique(name: "material_lot", [value, material_id])
+  @@map("lots")
+}
+
+// Запись сводки
+model Summary {
+  id                 Int                @id @default(autoincrement())
+  product            Product            @relation(fields: [product_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  product_id         Int
+  batch              Batch              @relation(fields: [batch_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  batch_id           Int
+  conveyor           Conveyor           @relation(fields: [conveyor_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  conveyor_id        Int
+  plan               Int
+  isActive           Boolean            @default(false)
+  isFinished         Boolean            @default(false)
+  date               DateTime
+  shift              Int                @default(1)
+  specifications     Specification[]
+  consumed_materials ConsumedMaterial[]
+  notes              Note[]
+  extrusion_params   ExtrusionParam[]
+  varnish_params     VarnishParam[]
+  offset_params      OffsetParam[]
+  sealant_params     SealantParam[]
+  production_boxes   ProductionBox[]
+  statuses           Status[]
+  defects            Defect[]
+  crew               Crew?              @relation(fields: [crew_id], references: [id])
+  crew_id            Int?
+
+  @@index([conveyor_id, isActive])
+  @@index([date])
+  @@map("summaries")
+}
+
+// Брак
+model Defect {
+  id         Int     @id @default(autoincrement())
+  summary    Summary @relation(fields: [summary_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  summary_id Int
+  post       Post    @relation(fields: [post_id], references: [id], onUpdate: Cascade)
+  post_id    Int
+  value      Float
+
+  @@unique([summary_id, post_id])
+  @@map("defects")
+}
+
+// Комплектующие
+model Material {
+  id                 Int                @id @default(autoincrement())
+  code               String             @unique
+  name               String
+  post_number        Int
+  specifications     Specification[]
+  consumed_materials ConsumedMaterial[]
+  lots               Lot[]
+
+  @@map("materials")
+}
+
+//Спецификации
+model Specification {
+  id          Int      @id @default(autoincrement())
+  summary     Summary  @relation(fields: [summary_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  summary_id  Int
+  material    Material @relation(fields: [material_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  material_id Int
+
+  @@map("specifications")
+}
+
+// Потребленные материалы
+model ConsumedMaterial {
+  id          Int      @id @default(autoincrement())
+  summary     Summary  @relation(fields: [summary_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  summary_id  Int
+  material    Material @relation(fields: [material_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  material_id Int
+  lot         Lot      @relation(fields: [lot_id], references: [id], onDelete: NoAction, onUpdate: Cascade)
+  lot_id      Int
+  employee    Employee @relation(fields: [employee_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  employee_id Int
+  createdAt   DateTime @default(now())
+
+  @@map("consumed_materials")
+}
+
+// Примечания
+model Note {
+  id         Int     @id @default(autoincrement())
+  summary    Summary @relation(fields: [summary_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  summary_id Int
+  post       Post    @relation(fields: [post_id], references: [id])
+  post_id    Int
+  note       String
+
+  @@map("notes")
+}
+
+// Параметры экструзии
+model ExtrusionParam {
+  id                                 Int      @id @default(autoincrement())
+  summary                            Summary  @relation(fields: [summary_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  summary_id                         Int
+  counter_value                      Int
+  press_speed                        Int
+  blow_time                          Int
+  turning_machine_speed              Int
+  annealing_furnace_temp             Int
+  tube_cylindrical_section_length    Float
+  membrane_thickness                 Float
+  tube_diameter                      Float
+  tube_cylindrical_section_thickness Float
+  tube_rigidity                      Int
+  tube_cutting_quality               Boolean  @default(false)
+  tightness                          Boolean  @default(false)
+  external_thread_quality            Boolean  @default(false)
+  tube_marking                       Boolean  @default(false)
+  employee                           Employee @relation(fields: [employee_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  employee_id                        Int
+  createdAt                          DateTime @default(now())
+  statuses                           Status[]
+
+  @@index([summary_id])
+  @@map("extrusion_params")
+}
+
+//varnish
+model VarnishParam {
+  id                            Int      @id @default(autoincrement())
+  summary                       Summary  @relation(fields: [summary_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  summary_id                    Int
+  counter_value                 Int
+  varnish_machine_speed         Int
+  total_air_pressure            Float
+  feed_can_air_pressure         Float
+  nozzle_regulator_air_pressure Float
+  cells_speed                   Int
+  injection_a_start_position    Int
+  injection_b_start_position    Int
+  injection_c_start_position    Int
+  injection_d_start_position    Int
+  injection_a_end_position      Int
+  injection_b_end_position      Int
+  injection_c_end_position      Int
+  injection_d_end_position      Int
+  tube_molding_start_position   Int
+  tube_molding_end_position     Int
+  polimerization_furnace_temp   Int
+  internal_varnish_porosity     Float
+  internal_sectional_view       Boolean
+  aluminium_clearance_lack      Boolean
+  unpainting_lack               Boolean
+  employee                      Employee @relation(fields: [employee_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  employee_id                   Int
+  createdAt                     DateTime @default(now())
+  statuses                      Status[]
+
+  @@index([summary_id])
+  @@map("varnish_params")
+}
+
+//offset
+model OffsetParam {
+  id                             Int      @id @default(autoincrement())
+  summary                        Summary  @relation(fields: [summary_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  summary_id                     Int
+  counter_value                  Int
+  printing_machine_speed         Int
+  total_air_pressure             Int
+  padding_furnace_temp           Int
+  offset_furnace_temp            Int
+  printer_motor                  Int
+  base_covers_holders_motor      Int
+  base_covers_station_motor      Int
+  imprint_quantity_printed_box_1 Int?
+  imprint_quantity_printed_box_2 Int?
+  imprint_quantity_printed_box_3 Int?
+  imprint_quantity_printed_box_4 Int?
+  imprint_quantity_printed_box_5 Int?
+  imprint_quantity_printed_box_6 Int?
+  ink_supply_time                Float
+  design_match                   Boolean  @default(false)
+  tube_appearance                Boolean  @default(false)
+  tube_edge_deformation_lack     Boolean  @default(false)
+  aluminium_clearance_lack       Boolean  @default(false)
+  drips_lack                     Boolean  @default(false)
+  employee                       Employee @relation(fields: [employee_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  employee_id                    Int
+  createdAt                      DateTime @default(now())
+  statuses                       Status[]
+
+  @@index([summary_id])
+  @@map("offset_params")
+}
+
+//sealant
+
+model SealantParam {
+  id                               Int      @id @default(autoincrement())
+  summary                          Summary  @relation(fields: [summary_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  summary_id                       Int
+  counter_value                    Int
+  cap_machine_speed                Int
+  total_air_pressure               Float
+  holders_forward                  Int
+  holders_opening_left             Int
+  holders_opening_right            Int
+  holders_closing                  Int
+  injection_a_start                Int
+  injection_b_start                Int
+  injection_a_end                  Int
+  injection_b_end                  Int
+  injection_tube_orientation_start Int
+  injection_tube_orientation_end   Int
+  is_cap_surface_smooth            Boolean
+  latex_ring_padding               Int
+  latex_ring_width                 Int
+  tube_rigidity                    Int
+  cap_unscrewing_torque            Int
+  employee                         Employee @relation(fields: [employee_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  employee_id                      Int
+  createdAt                        DateTime @default(now())
+  statuses                         Status[]
+
+  @@index([summary_id])
+  @@map("sealant_params")
+}
+
+model Treshold {
+  id                                               Int      @id @default(autoincrement())
+  product                                          Product  @relation(fields: [product_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  product_id                                       Int
+  conveyor                                         Conveyor @relation(fields: [conveyor_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  conveyor_id                                      Int
+  extrusion_press_speed_min                        Int
+  extrusion_press_speed_max                        Int
+  extrusion_blow_time_min                          Int
+  extrusion_blow_time_max                          Int
+  extrusion_turning_machine_speed_min              Int
+  extrusion_turning_machine_speed_max              Int
+  extrusion_annealing_furnace_temp_min             Int
+  extrusion_annealing_furnace_temp_max             Int
+  extrusion_tube_cylindrical_section_length_min    Float
+  extrusion_tube_cylindrical_section_length_max    Float
+  extrusion_membrane_thickness_min                 Float
+  extrusion_membrane_thickness_max                 Float
+  extrusion_tube_diameter_min                      Float
+  extrusion_tube_diameter_max                      Float
+  extrusion_tube_cylindrical_section_thickness_min Float
+  extrusion_tube_cylindrical_section_thickness_max Float
+  extrusion_tube_rigidity_min                      Int
+  extrusion_tube_rigidity_max                      Int
+  extrusion_external_thread_value                  String
+  varnish_varnish_machine_speed_min                Int
+  varnish_varnish_machine_speed_max                Int
+  varnish_total_air_pressure_min                   Float
+  varnish_total_air_pressure_max                   Float
+  varnish_feed_can_air_pressure_min                Float
+  varnish_feed_can_air_pressure_max                Float
+  varnish_nozzle_regulator_air_pressure_min        Float
+  varnish_nozzle_regulator_air_pressure_max        Float
+  varnish_cells_speed_min                          Int
+  varnish_cells_speed_max                          Int
+  varnish_injection_a_start_position_min           Int
+  varnish_injection_a_start_position_max           Int
+  varnish_injection_b_start_position_min           Int
+  varnish_injection_b_start_position_max           Int
+  varnish_injection_c_start_position_min           Int
+  varnish_injection_c_start_position_max           Int
+  varnish_injection_d_start_position_min           Int
+  varnish_injection_d_start_position_max           Int
+  varnish_injection_a_end_position_min             Int
+  varnish_injection_a_end_position_max             Int
+  varnish_injection_b_end_position_min             Int
+  varnish_injection_b_end_position_max             Int
+  varnish_injection_c_end_position_min             Int
+  varnish_injection_c_end_position_max             Int
+  varnish_injection_d_end_position_min             Int
+  varnish_injection_d_end_position_max             Int
+  varnish_tube_molding_start_position_min          Int
+  varnish_tube_molding_start_position_max          Int
+  varnish_tube_molding_end_position_min            Int
+  varnish_tube_molding_end_position_max            Int
+  varnish_polimerization_furnace_temp_min          Int
+  varnish_polimerization_furnace_temp_max          Int
+  varnish_internal_varnish_porosity_min            Float
+  varnish_internal_varnish_porosity_max            Float
+  offset_printing_machine_speed_min                Int
+  offset_printing_machine_speed_max                Int
+  offset_total_air_pressure_min                    Int
+  offset_total_air_pressure_max                    Int
+  offset_padding_furnace_temp_min                  Int
+  offset_padding_furnace_temp_max                  Int
+  offset_offset_furnace_temp_min                   Int
+  offset_offset_furnace_temp_max                   Int
+  offset_printer_motor_min                         Int
+  offset_printer_motor_max                         Int
+  offset_base_covers_holders_motor_min             Int
+  offset_base_covers_holders_motor_max             Int
+  offset_base_covers_station_motor_min             Int
+  offset_base_covers_station_motor_max             Int
+  offset_imprint_quantity_printed_box_1_min        Int?
+  offset_imprint_quantity_printed_box_1_max        Int?
+  offset_imprint_quantity_printed_box_2_min        Int?
+  offset_imprint_quantity_printed_box_2_max        Int?
+  offset_imprint_quantity_printed_box_3_min        Int?
+  offset_imprint_quantity_printed_box_3_max        Int?
+  offset_imprint_quantity_printed_box_4_min        Int?
+  offset_imprint_quantity_printed_box_4_max        Int?
+  offset_imprint_quantity_printed_box_5_min        Int?
+  offset_imprint_quantity_printed_box_5_max        Int?
+  offset_imprint_quantity_printed_box_6_min        Int?
+  offset_imprint_quantity_printed_box_6_max        Int?
+  offset_ink_supply_time_min                       Float
+  offset_ink_supply_time_max                       Float
+  sealant_cap_machine_speed_min                    Int
+  sealant_cap_machine_speed_max                    Int
+  sealant_total_air_pressure_min                   Float
+  sealant_total_air_pressure_max                   Float
+  sealant_holders_forward_min                      Int
+  sealant_holders_forward_max                      Int
+  sealant_holders_opening_left_min                 Int
+  sealant_holders_opening_left_max                 Int
+  sealant_holders_opening_right_min                Int
+  sealant_holders_opening_right_max                Int
+  sealant_holders_closing_min                      Int
+  sealant_holders_closing_max                      Int
+  sealant_injection_a_start_min                    Int
+  sealant_injection_a_start_max                    Int
+  sealant_injection_b_start_min                    Int
+  sealant_injection_b_start_max                    Int
+  sealant_injection_a_end_min                      Int
+  sealant_injection_a_end_max                      Int
+  sealant_injection_b_end_min                      Int
+  sealant_injection_b_end_max                      Int
+  sealant_injection_tube_orientation_start_min     Int
+  sealant_injection_tube_orientation_start_max     Int
+  sealant_injection_tube_orientation_end_min       Int
+  sealant_injection_tube_orientation_end_max       Int
+  sealant_latex_ring_padding_min                   Int
+  sealant_latex_ring_padding_max                   Int
+  sealant_latex_ring_width_min                     Int
+  sealant_latex_ring_width_max                     Int
+  sealant_tube_rigidity_min                        Int
+  sealant_tube_rigidity_max                        Int
+  sealant_cap_unscrewing_torque_min                Int
+  sealant_cap_unscrewing_torque_max                Int
+  createdAt                                        DateTime @default(now())
+
+  @@index([product_id, createdAt(sort: Desc)])
+  @@map("tresholds")
+}

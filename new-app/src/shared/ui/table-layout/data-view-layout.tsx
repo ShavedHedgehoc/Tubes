@@ -25,7 +25,7 @@ export function DataViewLayout<TData, T extends PaginationParams>(
   return (
     <div
       className={cn(
-        "container mx-auto py-10 transition-all duration-500 relative",
+        "container mx-auto py-6 transition-all duration-500 relative",
         props.className,
         isPending && "opacity-60 grayscale-50 pointer-events-none",
       )}
@@ -76,7 +76,11 @@ export function DataViewLayout<TData, T extends PaginationParams>(
                 transition={{ duration: 0.2 }}
               >
                 <div className={cn(isPending && "pointer-events-none")}>
-                  <DataTable columns={props.columns} data={props.data!} />
+                  <DataTable
+                    columns={props.columns}
+                    data={props.data!}
+                    getRowClassName={props.getRowClassName}
+                  />
                 </div>
               </motion.div>
             )}

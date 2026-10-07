@@ -16,6 +16,7 @@ interface ModalLayoutProps {
   onOpenChange: (val: boolean) => void;
   className?: string;
   children: React.ReactNode;
+  showClose?: boolean;
 }
 
 export function ModalLayout({
@@ -24,7 +25,8 @@ export function ModalLayout({
   isOpen,
   onOpenChange,
   className,
-  children, // Извлекаем children
+  children,
+  showClose = false,
 }: ModalLayoutProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
@@ -34,7 +36,7 @@ export function ModalLayout({
           "p-0 border-none bg-transparent shadow-none overflow-hidden",
           className,
         )}
-        showCloseButton={false}
+        showCloseButton={showClose}
       >
         <DialogHeader className="sr-only">
           <DialogTitle>{title}</DialogTitle>

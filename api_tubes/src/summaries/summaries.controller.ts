@@ -17,16 +17,16 @@ import { ChangeSummaryStateDto } from "./dto/change-summary-state.dto";
 import { GetSummariesListDto } from "./dto/get-summaries-list.dto";
 import { DeleteSummaryDto } from "./dto/delete-summary.dto";
 import { AvailableSummariesResponse } from "./dto/available-summaries.response";
+import { GetDetailDto } from "./dto/get-detail.dto";
+import { GetPostStatusesDto } from "./dto/get-post-statuses.dto";
+import { GetStatusesDto } from "./dto/get-statuses.dto";
+import { StartSummaryDto } from "./dto/start-summary.dto";
+import { UpdateSummaryDto } from "./dto/update-summary.dto";
+import { CrewStatExtended } from "./chart-data.service";
+import { GetCrewsStatsDto } from "./dto/get-crews-stats.dto";
 // import { GetDetailDto } from "./dto/get-detail.dto";
 
 //move to dto
-// export class GetDetailDto {
-//   @ApiProperty({ example: 1, description: "id записи" })
-//   @IsNotEmpty()
-//   @Type(() => Number)
-//   @IsNumber()
-//   readonly id: number;
-// }
 
 @ApiTags("Сводки")
 @Controller("summaries")
@@ -41,17 +41,64 @@ export class SummariesController {
     return this.summaryService.getSummariesList(query);
   }
 
-  // !!!!!!!!!!!!
-  // Надо добавить ручку для формы редактирования
+  @ApiOperation({ summary: "Получить список сводок со значением брака" })
+  @Get("/defects")
+  getSummaryDefectList(
+    @Query(new ValidationPipe({ transform: true })) query: GetSummariesListDto,
+  ) {
+    return this.summaryService.getSummaryDefectsList(query);
+  }
 
-  // @ApiOperation({
-  //   summary: "Получить детали cводку по id (для подробного отчета)",
-  // })
-  // @Get("detail/:id")
-  // @UsePipes(new ValidationPipe({ transform: true }))
-  // getSummaryById(@Param() params: GetDetailDto) {
-  //   return this.summaryService.getSummaryById(params.id);
-  // }
+  @ApiOperation({ summary: "Графики" })
+  @Get("/charts_data")
+  getSummaryChartsData(
+    @Query(new ValidationPipe({ transform: true })) query: GetCrewsStatsDto,
+  ): Promise<Record<string, CrewStatExtended[]>> {
+    return this.summaryService.getSummaryChartData(query);
+  }
+
+  @ApiOperation({ summary: "Получить статусы поста" })
+  @Get("/post_statuses")
+  getPostStatuses(
+    @Query(new ValidationPipe({ transform: true })) query: GetPostStatusesDto,
+  ) {
+    return this.summaryService.getPostStatuses(query);
+  }
+
+  @ApiOperation({ summary: "Получить статусы сводки" })
+  @Get("/summary_statuses")
+  getSummaryStatuses(
+    @Query(new ValidationPipe({ transform: true })) query: GetStatusesDto,
+  ) {
+    return this.summaryService.getPostStatusesWithData(query);
+  }
+
+  @ApiOperation({ summary: "Обновить данные сводки" })
+  @Patch()
+  @UsePipes(new ValidationPipe({ transform: true }))
+  updateSummary(
+    @Body(new ValidationPipe({ transform: true })) dto: UpdateSummaryDto,
+  ) {
+    return this.summaryService.updateSummary(dto);
+  }
+
+  @ApiOperation({
+    summary: "Получить детали cводку по id (для редактирования)",
+  })
+  @Get("detail/:id")
+  @UsePipes(new ValidationPipe({ transform: true }))
+  getSummaryById(@Param() params: GetDetailDto) {
+    return this.summaryService.getSummaryById(params.id);
+  }
+
+  @ApiOperation({
+    summary: "Получить детали cводку по id (подробного отчета)",
+  })
+  @Get("full_detail/:id")
+  @UsePipes(new ValidationPipe({ transform: true }))
+  getSummaryReportById(@Param() params: GetDetailDto) {
+    return this.summaryService.getSummaryDetail(params.id);
+  }
 
   @ApiOperation({ summary: "Получить активную сводку по id конвейера" })
   @Get("/active")
@@ -81,7 +128,7 @@ export class SummariesController {
 
   @ApiOperation({ summary: "Активировать запись сводки" })
   @Patch("/set_active")
-  startSummary(@Body() dto: ChangeSummaryStateDto) {
+  startSummary(@Body() dto: StartSummaryDto) {
     return this.summaryService.startSummary(dto);
   }
 

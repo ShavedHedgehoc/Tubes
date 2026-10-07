@@ -18,8 +18,8 @@ import { ColorModeProvider } from "@/components/ui/color-mode";
 import OperationPageLayout, {
   type OperationPageLayoutProps,
 } from "@/shared/components/layouts/operation-page-layout";
-import ExtrusionOperationsMenu from "./operatrions/menu/extrusion-operations-menu";
-import ExtrusionOperationsContent from "./operatrions/content/extrusion-operations-content";
+import ExtrusionOperationsMenu from "./operations/menu/extrusion-operations-menu";
+import ExtrusionOperationsContent from "./operations/content/extrusion-operations-content";
 
 export default function ExtrusionOperations() {
   const params = useParams<Params.CONVEYOR_NAME>();

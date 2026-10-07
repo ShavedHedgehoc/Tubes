@@ -48,8 +48,6 @@ export default function useExtrusionAddEntryMenu(summaryData: ISummary | null) {
     data.tube_diameter === "0" ||
     data.tube_cylindrical_thickness === "0" ||
     data.tube_rigidity === "0";
-  // ||
-  // data.rondel_type_id === null;
 
   const tresholdsData = summaryData?.tresholds ?? null;
 
@@ -83,7 +81,6 @@ export default function useExtrusionAddEntryMenu(summaryData: ISummary | null) {
         tresholdsData.extrusion_tube_cylindrical_section_thickness_min ||
       Number(data.tube_rigidity) > tresholdsData.extrusion_tube_rigidity_max ||
       Number(data.tube_rigidity) < tresholdsData.extrusion_tube_rigidity_min ||
-      // Number(data.rondel_type_id) !== tresholdsData.extrusion_rondel_id ||
       data.external_thread_quality === false ||
       data.tightness === false ||
       data.tube_cutting_quality === false ||
@@ -101,7 +98,6 @@ export default function useExtrusionAddEntryMenu(summaryData: ISummary | null) {
         turning_machine_speed: Number(data.turning_machine_speed),
         annealing_furnace_temp: Number(data.annealing_furnace_temp),
         employee_id: employee.id,
-        // rondel_id: Number(data.rondel_type_id ?? 1),
         tube_cylindrical_section_length: Number(
           data.tube_cylindrical_section_length,
         ),
@@ -137,7 +133,6 @@ export default function useExtrusionAddEntryMenu(summaryData: ISummary | null) {
         `${RouteNames.EXTRUSION_ROOT}/${extrusionConveyor?.name}`,
       );
     }
-    //  ? setOpenConfirm(true) : navigate(`${RouteNames.EXTRUSION_ROOT}/${extrusionConveyor?.name}`);
   };
 
   return { saveButtonDisabledCondition, handleSaveClick, handleExitClick };

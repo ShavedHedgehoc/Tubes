@@ -6,12 +6,22 @@ import CodeInput from "./code-input";
 import ResetButton from "./reset-button";
 import TodayButton from "./today-button";
 import { DatePicker } from "@/shared/ui";
+import ConveyorCombobox from "./conveyor-combobox";
+import { ConveyorEntity } from "@/entities/conveyor";
+import CrewCombobox from "./crew-combobox";
+import { CrewEntity } from "@/entities/crew";
 
 interface Props {
+  conveyorListItems: ConveyorEntity[];
+  crewListItems: CrewEntity[];
   actions?: React.ReactNode;
 }
 
-export function SummaryFilter({ actions }: Props) {
+export function SummaryFilter({
+  conveyorListItems,
+  crewListItems,
+  actions,
+}: Props) {
   const { params, setParams } = useSummarySearchParams();
 
   return (
@@ -24,9 +34,9 @@ export function SummaryFilter({ actions }: Props) {
             onChange={(val) => {
               const str = val ? format(val, "yyyy-MM-dd") : null;
               if (str && params.end_date && str > params.end_date) {
-                setParams({ start_date: str, end_date: str });
+                setParams({ start_date: str, end_date: str, page: 1 });
               } else {
-                setParams({ start_date: str });
+                setParams({ start_date: str, page: 1 });
               }
             }}
           />
@@ -36,12 +46,14 @@ export function SummaryFilter({ actions }: Props) {
             onChange={(val) => {
               const str = val ? format(val, "yyyy-MM-dd") : null;
               if (str && params.start_date && str < params.start_date) {
-                setParams({ end_date: str, start_date: str });
+                setParams({ end_date: str, start_date: str, page: 1 });
               } else {
-                setParams({ end_date: str });
+                setParams({ end_date: str, page: 1 });
               }
             }}
           />
+          <ConveyorCombobox items={conveyorListItems} />
+          <CrewCombobox items={crewListItems} />
           <CodeInput />
           <StateSelector />
         </div>

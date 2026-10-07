@@ -8,7 +8,6 @@ import { useShallow } from "zustand/react/shallow";
 import type { PageLayoutProps } from "../../shared/components/layouts/page-layout";
 import PageLayout from "../../shared/components/layouts/page-layout";
 import TimeComponent from "../../shared/components/lines/time-component";
-import HeaderComponent from "../../shared/components/headers/header-component";
 import UserComponent from "../../shared/components/lines/user-component";
 import ProductionCard from "../../shared/components/cards/production-card/production-card";
 import MaterialPieChartComponent from "../../shared/components/charts/material-pie-chart-component";
@@ -27,6 +26,8 @@ import { useVarnishConveyorStore } from "./store/use-varnish-conveyor-store";
 import { useVarnishEmployeeStore } from "./store/use-varnish-employee-store";
 import VarnishDefectEntryModal from "./dash/modals/varnish-defect-entry-modal";
 import VarnishCloseSummaryModal from "./dash/modals/varnish-close-summary-modal";
+import PostIndicator from "@/shared/components/cards/post-indicator";
+import HeaderWithIndicatorComponent from "@/shared/components/headers/header-with-indicator";
 
 export default function Varnish() {
   const params = useParams<Params.CONVEYOR_NAME>();
@@ -50,9 +51,10 @@ export default function Varnish() {
   const pageLayoutProps: PageLayoutProps = {
     timeComponent: <TimeComponent />,
     headerComponent: (
-      <HeaderComponent
+      <HeaderWithIndicatorComponent
         conveyorName={varnishConveyor.name}
         postName={PostNames.VARNISH}
+        postIndicator={<PostIndicator postId={2} data={summaryData ?? null} />}
       />
     ),
     parameterComponent: <VarnishParameters summaryData={summaryData ?? null} />,

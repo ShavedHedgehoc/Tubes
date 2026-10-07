@@ -1,30 +1,80 @@
+# FROM node:20-slim AS builder
+
+# RUN apt-get update && apt-get install -y openssl python3 make g++ && rm -rf /var/lib/apt/lists/*
+
+# WORKDIR /app
+
+# COPY package.json package-lock.json ./
+# COPY api_tubes/package.json ./api_tubes/
+
+
+# RUN npm ci -w api_tubes
+
+# COPY api_tubes/ ./api_tubes/
+
+# WORKDIR /app/api_tubes
+# RUN npx prisma generate
+# RUN npm run build
+
+# FROM node:20-slim AS runtime
+# RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
+
+
+# WORKDIR /app
+
+# ENV PATH="/app/node_modules/.bin:${PATH}"
+
+# COPY --from=builder /app/node_modules ./node_modules
+# COPY --from=builder /app/api_tubes ./api_tubes
+
+# WORKDIR /app/api_tubes
+
+# EXPOSE 7100
+
+# CMD ["npm", "run", "start:migrate:prod"]
+
+# --- Этап сборки (Builder) ---
 FROM node:20-slim AS builder
 
 RUN apt-get update && apt-get install -y openssl python3 make g++ && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
+# Копируем файлы конфигурации монорепозитория
 COPY package.json package-lock.json ./
+
+# Копируем package.json ВСЕХ пакетов монорепозитория (включая api_tubes и пакет с prisma)
+# Замените 'db_package', если папка с призмой называется иначе!
 COPY api_tubes/package.json ./api_tubes/
+COPY db/package.json ./db/
 
-RUN npm ci -w api_tubes
+# Устанавливаем зависимости для обоих пакетов сразу
+RUN npm ci -w api_tubes -w db
 
+# Копируем исходный код обоих пакетов 
+COPY db/ ./db/
 COPY api_tubes/ ./api_tubes/
 
+# Генерируем клиент Prisma, указав явный путь к схеме в другом пакете
+RUN npx prisma generate --schema=./db_package/prisma/schema.prisma
+
+# Собираем приложение api_tubes
 WORKDIR /app/api_tubes
-RUN npx prisma generate
 RUN npm run build
 
+
+# --- Этап выполнения (Runtime) ---
 FROM node:20-slim AS runtime
 RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
-
 
 WORKDIR /app
 
 ENV PATH="/app/node_modules/.bin:${PATH}"
 
+# Переносим скомпилированные модули и код
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/api_tubes ./api_tubes
+COPY --from=builder /app/db ./db
 
 WORKDIR /app/api_tubes
 

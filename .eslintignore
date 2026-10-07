@@ -3,3 +3,4 @@ node_modules/
 **/dist/
 **/build/
 .next/
+new-app/src/shared/ui/chart.tsx",

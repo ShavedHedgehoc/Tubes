@@ -1,14 +1,4 @@
-import {
-  Batch,
-  Conveyor,
-  Employee,
-  ExtrusionStatus,
-  OffsetStatus,
-  Product,
-  SealantStatus,
-  Summary,
-  VarnishStatus,
-} from "./../../generated/prisma/index.d";
+import { Batch, Conveyor, Employee, Product, Status, Summary } from "db";
 
 type IState = "idle" | "working" | "finished";
 export interface IPostData {
@@ -60,13 +50,13 @@ export const mappedConveyors = ({
   summary: Summary | null;
   product: Product | null;
   batch: Batch | null;
-  extrusion_status: ExtrusionStatus | null;
+  extrusion_status: Status | null;
   extrusion_employee: Employee | null;
-  varnish_status: VarnishStatus | null;
+  varnish_status: Status | null;
   varnish_employee: Employee | null;
-  offset_status: OffsetStatus | null;
+  offset_status: Status | null;
   offset_employee: Employee | null;
-  sealant_status: SealantStatus | null;
+  sealant_status: Status | null;
   sealant_employee: Employee | null;
 }): IMappedConveyor => {
   const mappedExtrusionStatus: IPostData | null = extrusion_status

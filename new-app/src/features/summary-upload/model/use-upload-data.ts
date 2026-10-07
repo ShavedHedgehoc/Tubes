@@ -9,12 +9,17 @@ export function useUploadSummaryData() {
   const { mutate: upload, isPending: uploadPending } = useMutation({
     mutationFn: summaryApi.uploadData,
     onSuccess: async () => {
-      await client.invalidateQueries({
-        queryKey: summaryApi.summaryQueries.lists(),
-      });
-      await client.invalidateQueries({
-        queryKey: conveyorApi.conveyorQueries.views(),
-      });
+      await Promise.all([
+        client.invalidateQueries({
+          queryKey: summaryApi.summaryQueries.lists(),
+        }),
+        client.invalidateQueries({
+          queryKey: summaryApi.summaryQueries.availables(),
+        }),
+        client.invalidateQueries({
+          queryKey: conveyorApi.conveyorQueries.views(),
+        }),
+      ]);
       toast.success("Данные загружены");
     },
     onError: (err) => {

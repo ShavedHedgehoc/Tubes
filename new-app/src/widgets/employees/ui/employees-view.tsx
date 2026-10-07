@@ -24,7 +24,6 @@ export default function EmployeesView({
   const { params, setParams } = useEmployeeSearchParams();
   const { data, isPlaceholderData, isFetching } = useQuery({
     ...employeeApi.employeeQueries.list(params, { isServer: false }),
-
     placeholderData: keepPreviousData,
   });
 

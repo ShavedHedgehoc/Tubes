@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
-import { Prisma } from "@prisma/client";
+import { Prisma } from "db";
 import { CreateTresholdsBulkDto } from "./dto/create-tresholds-bulk.dto";
 import { GetTresholdsDto } from "./dto/get-tresholds.dto";
 import {
@@ -113,7 +113,7 @@ export class TresholdsService {
           product: { select: { code: true, name: true, marking: true } },
           conveyor: { select: { name: true } },
         },
-        orderBy: [{ id: "asc" }],
+        orderBy: [{ id: "desc" }],
       }),
     ]);
 

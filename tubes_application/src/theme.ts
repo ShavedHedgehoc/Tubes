@@ -7,6 +7,16 @@ const config = defineConfig({
         "0%, 100%": { color: "var(--chakra-colors-fg)" },
         "50%": { color: "var(--chakra-colors-fg-error)" },
       },
+      breath: {
+        "0%, 100%": {
+          transform: "scale(0.9)",
+          opacity: "0.7",
+        },
+        "50%": {
+          transform: "scale(1.1)",
+          opacity: "1",
+        },
+      },
       colorChangeWhiteSubtle: {
         "0%, 100%": { color: "var(--chakra-colors-fg)" },
         "50%": { color: "var(--chakra-colors-fg-subtle)" },

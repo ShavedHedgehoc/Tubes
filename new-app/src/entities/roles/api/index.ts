@@ -1,0 +1,1 @@
+export { rolesQueries } from "./role.queries";

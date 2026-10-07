@@ -19,6 +19,14 @@ describe("Summary Columns", () => {
     plan: 10000,
     isActive: false,
     isFinished: false,
+    production: null,
+    execution: null,
+    defectPercent: null,
+    unitWeight: null,
+    crewName: null,
+    defectRateGoal: null,
+    executionGoal: null,
+
     product: {
       id: 1,
       code: "057814",
@@ -36,10 +44,7 @@ describe("Summary Columns", () => {
     date: new Date("2026-01-01"),
     shift: 2,
     _count: {
-      extrusion_statuses: 1,
-      varnish_statuses: 2,
-      offset_statuses: 3,
-      sealant_statuses: 4,
+      statuses: 1,
     },
   };
 

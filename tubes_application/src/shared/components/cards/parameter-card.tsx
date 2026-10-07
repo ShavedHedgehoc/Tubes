@@ -20,8 +20,10 @@ export interface ParameterCardProps {
   variant: ParameterCardVariants;
 }
 export default function ParameterCard(props: ParameterCardProps) {
+  const hasLimits =
+    typeof props.minValue === "number" && typeof props.maxValue === "number";
+  const hasValue = props.value !== null && props.value !== undefined;
   return (
-    // <Stat.Root w="full" h="full" px={6} py={8} backgroundColor="bg.panel" size="lg" rounded="lg">
     <Stat.Root
       w="full"
       h="full"
@@ -45,15 +47,17 @@ export default function ParameterCard(props: ParameterCardProps) {
         alignItems="flex-end"
         pt={2}
       >
-        {props.variant === "numeric" && !props.minValue && !props.maxValue && (
+        {/* {props.variant === "numeric" && !props.minValue && !props.maxValue && ( */}
+        {props.variant === "numeric" && !hasLimits && (
           <Text textStyle="md" color="fg.subtle">
             Внесение не требуется
           </Text>
         )}
-        {props.variant === "numeric" &&
+        {props.variant === "numeric" && hasLimits && (props.value ?? "-")}
+        {/* {props.variant === "numeric" &&
           typeof props.minValue === "number" &&
           typeof props.maxValue === "number" &&
-          (props.value ?? "-")}
+          (props.value ?? "-")} */}
         {/* {props.variant === "numeric" && (props.minValue || props.maxValue) && (props.value ?? "-")} */}
         {props.variant === "boolean" &&
           (props.booleanValue === null
@@ -69,7 +73,7 @@ export default function ParameterCard(props: ParameterCardProps) {
             props.variant === "numeric" ? "space-between" : "flex-start"
           }
         >
-          <Status.Root
+          {/* <Status.Root
             colorPalette={
               props.variant === "numeric"
                 ? props.value &&
@@ -96,12 +100,42 @@ export default function ParameterCard(props: ParameterCardProps) {
                       : "yellow"
             }
             alignItems="end"
+          > */}
+          <Status.Root
+            colorPalette={
+              props.variant === "numeric"
+                ? hasValue && hasLimits
+                  ? props.value! > props.maxValue! ||
+                    props.value! < props.minValue!
+                    ? "red"
+                    : "green"
+                  : hasValue
+                    ? "gray"
+                    : "yellow"
+                : props.variant === "boolean"
+                  ? props.booleanValue === null
+                    ? "yellow"
+                    : props.booleanValue
+                      ? "green"
+                      : "red"
+                  : props.stringValue && props.stringDefaultValue
+                    ? props.stringValue !== props.stringDefaultValue
+                      ? "red"
+                      : "green"
+                    : props.stringValue
+                      ? "gray"
+                      : "yellow"
+            }
+            alignItems="end"
           >
-            {!(
+            {/* {!(
               props.variant === "numeric" &&
               !props.maxValue &&
               !props.minValue
-            ) && <Status.Indicator />}
+            ) && <Status.Indicator />} */}
+            {!(props.variant === "numeric" && !hasLimits) && (
+              <Status.Indicator />
+            )}
           </Status.Root>
           <Stat.ValueUnit pl={2}>
             {/* {props.variant === "numeric" && props.minValue && props.maxValue && (props.unit ?? "-")} */}
@@ -114,34 +148,35 @@ export default function ParameterCard(props: ParameterCardProps) {
       {/* Тут какой-то баг при minValue=0 */}
 
       {/* {props.variant === "numeric" && (props.minValue || props.maxValue) && ( */}
-      {props.variant === "numeric" &&
+      {/* {props.variant === "numeric" &&
         typeof props.minValue === "number" &&
-        typeof props.maxValue === "number" && (
-          <HStack justifyContent="center" pt={1} gap={6}>
-            <VStack gap={0}>
-              <Text color="fg.a" textStyle="sm">
-                {props.minValue ?? "-"}
-              </Text>
-              <Text color="fg.subtle" textStyle="xs">
-                Минимум
-              </Text>
-            </VStack>
-            <Separator
-              orientation="vertical"
-              height="6"
-              size="sm"
-              colorPalette="white"
-            />
-            <VStack gap={0}>
-              <Text color="fg.a" textStyle="sm">
-                {props.maxValue ?? "-"}
-              </Text>
-              <Text color="fg.subtle" textStyle="xs">
-                Максимум
-              </Text>
-            </VStack>
-          </HStack>
-        )}
+        typeof props.maxValue === "number" && ( */}
+      {props.variant === "numeric" && hasLimits && (
+        <HStack justifyContent="center" pt={1} gap={6}>
+          <VStack gap={0}>
+            <Text color="fg.a" textStyle="sm">
+              {props.minValue ?? "-"}
+            </Text>
+            <Text color="fg.subtle" textStyle="xs">
+              Минимум
+            </Text>
+          </VStack>
+          <Separator
+            orientation="vertical"
+            height="6"
+            size="sm"
+            colorPalette="white"
+          />
+          <VStack gap={0}>
+            <Text color="fg.a" textStyle="sm">
+              {props.maxValue ?? "-"}
+            </Text>
+            <Text color="fg.subtle" textStyle="xs">
+              Максимум
+            </Text>
+          </VStack>
+        </HStack>
+      )}
       {props.variant === "string" && (
         <HStack justifyContent="center" pt={2} gap={6}>
           <Text color="fg.a" textStyle="sm">

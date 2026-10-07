@@ -8,7 +8,6 @@ import { useShallow } from "zustand/react/shallow";
 import type { PageLayoutProps } from "../../shared/components/layouts/page-layout";
 import PageLayout from "../../shared/components/layouts/page-layout";
 import TimeComponent from "../../shared/components/lines/time-component";
-import HeaderComponent from "../../shared/components/headers/header-component";
 import UserComponent from "../../shared/components/lines/user-component";
 import ProductionCard from "../../shared/components/cards/production-card/production-card";
 import MaterialPieChartComponent from "../../shared/components/charts/material-pie-chart-component";
@@ -27,6 +26,8 @@ import { useSealantConveyorStore } from "./store/use-sealant-conveyor-store";
 import { useSealantEmployeeStore } from "./store/use-sealant-employee-store";
 import SealantCloseSummaryModal from "./dash/modals/sealant-close-summary-modal";
 import SealantDefectEntryModal from "./dash/modals/sealant-defect-entry-modal";
+import PostIndicator from "@/shared/components/cards/post-indicator";
+import HeaderWithIndicatorComponent from "@/shared/components/headers/header-with-indicator";
 
 export default function Sealant() {
   const params = useParams<Params.CONVEYOR_NAME>();
@@ -50,9 +51,10 @@ export default function Sealant() {
   const pageLayoutProps: PageLayoutProps = {
     timeComponent: <TimeComponent />,
     headerComponent: (
-      <HeaderComponent
+      <HeaderWithIndicatorComponent
         conveyorName={sealantConveyor.name}
         postName={PostNames.SEALANT}
+        postIndicator={<PostIndicator postId={4} data={summaryData ?? null} />}
       />
     ),
     parameterComponent: <SealantParameters summaryData={summaryData ?? null} />,

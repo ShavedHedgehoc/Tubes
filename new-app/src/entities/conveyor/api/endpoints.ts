@@ -1,7 +1,5 @@
 export const CONVEYORS_ENDPOINTS = {
+  LIST: "/conveyors/all_conveyors",
   VIEW: "/conveyors/all_data",
-  CREATE_EXTRUSION: "/statuses/extrusion",
-  CREATE_VARNISH: "/statuses/varnish",
-  CREATE_OFFSET: "/statuses/offset",
-  CREATE_SEALANT: "/statuses/sealant",
+  CREATE_STATUS: "/statuses",
 } as const;

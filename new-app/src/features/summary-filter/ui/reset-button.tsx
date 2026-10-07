@@ -13,6 +13,8 @@ export default function ResetButton() {
     params.start_date !== format(getMonthBounds().firstDay, "yyyy-MM-dd") ||
     params.end_date !== format(getMonthBounds().lastDay, "yyyy-MM-dd") ||
     params.code !== null ||
+    (params.conveyors && params.conveyors.length > 0) ||
+    (params.crews && params.crews.length > 0) ||
     params.states !== null;
 
   const handleReset = () => {

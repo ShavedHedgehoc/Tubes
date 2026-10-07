@@ -11,28 +11,30 @@ import {
 import { LogOut, User } from "lucide-react";
 import { Button } from "@/shared/ui/button";
 import Link from "next/link";
-// import { useAppSession } from "@/entities/session/use-app-session";
 // import { Skeleton } from "@/shared/ui/skeleton";
-// import { useSignOut } from "@/features/auth/use-sign-out";
-// import { SignInButton } from "@/features/auth/sign-in-button";
-import { Avatar, AvatarFallback } from "@/shared/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage, Skeleton } from "@/shared/ui";
+import { useAppSession } from "@/entities/user";
+import { useLogout } from "@/features/auth";
 
 // import { ProfileAvatar, getProfileDisplayName } from "@/entities/user/profile";
 
 export function Profile() {
-  // const session = useAppSession();
+  const session = useAppSession();
+  const { logout, logoutPending } = useLogout();
 
-  // const { signOut, isPending: isLoadingSignOut } = useSignOut();
+  if (session.status === "loading") {
+    return <Skeleton className="w-8 h-8 rounded-full" />;
+  }
 
-  // if (session.status === "loading") {
-  //     return <Skeleton className="w-8 h-8 rounded-full" />;
-  // }
+  const user = session?.data?.user;
 
-  // if (session.status === "unauthenticated") {
-  //     return <SignInButton />;
-  // }
-
-  // const user = session?.data?.user;
+  const initials = user?.name
+    ?.split(" ")
+    .filter(Boolean)
+    .map((n) => n[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
 
   return (
     <DropdownMenu>
@@ -42,8 +44,10 @@ export function Profile() {
           className="p-px rounded-full self-center h-8 w-8"
         >
           <Avatar>
-            {/* <AvatarImage src={session.data?.user.image} /> */}
-            <AvatarFallback>U</AvatarFallback>
+            <AvatarImage src={user?.avatar_url} />
+            <AvatarFallback className="text-xs">
+              {initials || "XX"}
+            </AvatarFallback>
           </Avatar>
 
           {/* <ProfileAvatar profile={user} className="w-8 h-8" /> */}
@@ -53,7 +57,7 @@ export function Profile() {
         <DropdownMenuLabel>
           <p>Мой аккаунт</p>
           <p className="text-xs text-muted-foreground overflow-hidden text-ellipsis">
-            {/* {session.data?.user.name} */}
+            {session.data?.user.name}
           </p>
         </DropdownMenuLabel>
         <DropdownMenuGroup></DropdownMenuGroup>
@@ -66,10 +70,7 @@ export function Profile() {
               <span>Профиль</span>
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem
-          // disabled={isLoadingSignOut}
-          // onClick={() => signOut()}
-          >
+          <DropdownMenuItem disabled={logoutPending} onClick={() => logout()}>
             <LogOut className="mr-2 h-4 w-4" />
             <span>Выход</span>
           </DropdownMenuItem>

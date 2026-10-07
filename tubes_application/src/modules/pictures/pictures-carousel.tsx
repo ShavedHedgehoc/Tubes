@@ -7,7 +7,6 @@ import {
   IconButton,
   Image,
   type IconButtonProps,
-  AspectRatio,
 } from "@chakra-ui/react";
 import { forwardRef } from "react";
 import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
@@ -27,7 +26,7 @@ export default function PicturesCarousel({
           {...props}
           ref={ref}
           size="xl"
-          variant="outline"
+          variant="ghost"
           rounded="full"
           position="absolute"
           zIndex="1"
@@ -46,7 +45,8 @@ export default function PicturesCarousel({
       {items.length ? (
         <Carousel.Root
           slideCount={items.length}
-          maxW="5xl"
+          maxW={{ base: "full", xl: "5xl" }}
+          px={{ base: "12", xl: "0" }}
           mx="auto"
           gap="4"
           position="relative"
@@ -54,7 +54,7 @@ export default function PicturesCarousel({
         >
           <Carousel.Control gap="4" width="full" position="relative">
             <Carousel.PrevTrigger asChild>
-              <ActionButton insetStart="4">
+              <ActionButton insetStart={{ base: "2", xl: "-20" }}>
                 <LuArrowLeft />
               </ActionButton>
             </Carousel.PrevTrigger>
@@ -62,39 +62,35 @@ export default function PicturesCarousel({
             <Carousel.ItemGroup width="full">
               {items.map((name, index) => (
                 <Carousel.Item key={index} index={index}>
-                  <AspectRatio ratio={1.5 / 1} maxH="80vh" w="full">
+                  <Box
+                    height={{ base: "400px", md: "70vh" }}
+                    maxHeight="700px"
+                    width="full"
+                    bg="gray.100"
+                    _dark={{ bg: "whiteAlpha.50" }}
+                    rounded="xl"
+                    overflow="hidden"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
                     <Image
-                      src={
-                        new URL(`${AssestsFolderUrl}/${name}`, import.meta.url)
-                          .href
-                      }
-                      alt={`... ${AssestsFolderUrl}/${name}`}
+                      src={`${AssestsFolderUrl}/${name}`}
+                      alt={name}
+                      width="full"
+                      height="full"
                       objectFit="contain"
+                      draggable={false}
                     />
-                  </AspectRatio>
+                  </Box>
                 </Carousel.Item>
               ))}
             </Carousel.ItemGroup>
-
             <Carousel.NextTrigger asChild>
-              <ActionButton insetEnd="4">
+              <ActionButton insetEnd={{ base: "2", xl: "-20" }}>
                 <LuArrowRight />
               </ActionButton>
             </Carousel.NextTrigger>
-
-            <Box position="absolute" bottom="6" width="full">
-              <Carousel.Indicators
-                transition="width 0.2s ease-in-out"
-                transformOrigin="center"
-                opacity="0.5"
-                boxSize="2"
-                _current={{
-                  width: "10",
-                  bg: "colorPalette.subtle",
-                  opacity: 1,
-                }}
-              />
-            </Box>
           </Carousel.Control>
         </Carousel.Root>
       ) : (

@@ -17,7 +17,7 @@ export const uploadSummariesFormSchema = z.object({
     }, `Max file size is 3MB.`)
     .refine((file) => {
       return ACCEPTED_FILE_TYPES.includes(file.type);
-    }, "Only .png and .jpeg formats are accepted."),
+    }, "Only .xls and .xlsx formats are accepted."),
 });
 
 export type UploadSummariesFormValues = z.infer<
@@ -54,7 +54,8 @@ export const summaryValidationSchema: JSONSchemaType<SummaryUploadDataRow> = {
     },
     batch: {
       type: "string",
-      pattern: "^[1-9]{1}[0-9]{1,3}[A-L]{1}\\d{1}[R,S,Z,X]{0,1}$",
+      // pattern: "^[1-9]{1}[0-9]{1,3}[A-L]{1}\\d{1}[R,S,Z,X]{0,1}$", //old pattern
+      pattern: "^[1-9]{1}[0-9]{1,3}[A-L]{1}\\d{1,2}[R,S,Z,X]{0,1}$", //new pattern
       errorMessage: { pattern: "Шаблон партии не совпадает" },
     },
     plan: {
@@ -99,3 +100,14 @@ export const summaryValidationSchema: JSONSchemaType<SummaryUploadDataRow> = {
     "shift",
   ],
 };
+
+export const updateSummaryFormSchema = z.object({
+  plan: z
+    .number("Введите число")
+    .min(0, "Должно быть больше нуля.")
+    .max(99999, "Должно быть меньше 99 999."),
+
+  crew_id: z.number().int().nullable().optional(),
+});
+
+export type UpdateSummaryFormValues = z.infer<typeof updateSummaryFormSchema>;

@@ -1,24 +1,5 @@
 import { ITreshold } from "src/tresholds/dto/get-tresholds.response";
 
-export class BaseStatus {
-  id: number;
-  createdAt: Date;
-  summary_id: number;
-  counter_value: number;
-  employee_id: number | null;
-  operation_id: number | null;
-  idle: boolean;
-  idle_time: number | null;
-  finished: boolean;
-  operation?: {
-    value: string;
-    id: number;
-    min_rank: number;
-    description: string;
-  } | null;
-}
-
-// move to dto
 type state = "idle" | "working" | "finished";
 
 class IMaterial {
@@ -27,7 +8,7 @@ class IMaterial {
   scanned: boolean;
 }
 
-class IStatusCounter {
+export class IStatusCounter {
   counter_value: number;
   idle: boolean;
   createdAt: Date;
@@ -39,13 +20,14 @@ class IOperation {
   description: string;
   min_rank: number;
 }
-class IStatus {
+export class IStatus {
   idle: boolean;
   finished: boolean;
   state: state;
   operation_description: string;
   createdAt: Date | null;
   operation_id: number | null;
+  maintenance_session_id: number | null;
 }
 class ISummaryData {
   id: number;
@@ -70,8 +52,6 @@ class IExtrusionParams {
   blow_time: number;
   turning_machine_speed: number;
   annealing_furnace_temp: number;
-
-  // rondel_id: number;
   tube_cylindrical_section_length: number;
   membrane_thickness: number;
   tube_diameter: number;
@@ -83,7 +63,6 @@ class IExtrusionParams {
   external_thread_quality: boolean;
   employee_id: number;
   createdAt: Date;
-  // rondel: string;
 }
 
 class IVarnishParams {
@@ -165,6 +144,32 @@ class ISealantParams {
   createdAt: Date;
 }
 
+class IMaintenance {
+  id: number;
+  value: string;
+  description: string;
+  min_rank: number;
+  task_count: number;
+}
+
+class IMaintenanceLog {
+  id: number;
+  title: string;
+  start_time: Date | null;
+  end_time: Date | null;
+  is_done: boolean;
+  order: number;
+}
+
+class IMaintenanceSession {
+  id: number;
+  maintenance_value: string;
+  maintenance_description: string;
+  maintenance_logs: IMaintenanceLog[];
+  start_time: Date | null;
+  end_time: Date | null;
+}
+
 export class ActiveSummaryResponse {
   data: ISummaryData;
   extrusionParams: IExtrusionParams | null;
@@ -180,6 +185,14 @@ export class ActiveSummaryResponse {
   varnish_materials: IMaterial[] | [];
   offset_materials: IMaterial[] | [];
   sealant_materials: IMaterial[] | [];
+  extrusionMaintenances: IMaintenance[] | [];
+  varnishMaintenances: IMaintenance[] | [];
+  offsetMaintenances: IMaintenance[] | [];
+  sealantMaintenances: IMaintenance[] | [];
+  extrusionMaintenanceSession: IMaintenanceSession | null;
+  varnishMaintenanceSession: IMaintenanceSession | null;
+  offsetMaintenanceSession: IMaintenanceSession | null;
+  sealantMaintenanceSession: IMaintenanceSession | null;
   extrusionStatus: IStatus;
   extrusionOperations: IOperation[] | [];
   varnishStatus: IStatus;

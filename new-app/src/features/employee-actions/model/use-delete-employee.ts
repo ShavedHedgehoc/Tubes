@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { employeeApi } from "@/entities/employee";
 import { toast } from "sonner";
+import { handleError } from "@/shared/api";
 
 export function useDeleteEmployee() {
   const client = useQueryClient();
@@ -13,7 +14,8 @@ export function useDeleteEmployee() {
       toast.success("Сотрудник успешно удален");
     },
     onError: (err) => {
-      toast.error(err.message);
+      const errMessage = handleError(err);
+      toast.error(errMessage);
     },
   });
   return { deleteEmployee, deletePending };

@@ -14,7 +14,7 @@ export const useVarnishOperation = (operationId: string | null) => {
   return useQuery({
     queryKey: ["varnish_sop_operation", operationId],
     queryFn: async () => {
-      const data = await OperationService.getVarnishOperationById(operationId);
+      const data = await OperationService.getOperationById(operationId);
       if (data.length > 0) {
         setSelectedOperation(data[0]);
       } else {

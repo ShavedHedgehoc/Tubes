@@ -26,3 +26,4 @@ export const useVarnishMaterialScanModalStore =
 export const useVarnishCloseSummaryModalStore =
   createModalStore("CloseSummary");
 export const useVarnishDefectInputModalStore = createModalStore("DefectInput");
+export const useVarnishMaintenanceModalStore = createModalStore("Maintenance");

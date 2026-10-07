@@ -89,8 +89,8 @@ export function TablePagination<T extends PaginationParams>({
               className={cn(isFirstPage && "pointer-events-none opacity-50")}
             />
           </PaginationItem>
-          <p className="text-muted-foreground text-sm italic select-none">
-            {`Страница ${params.page} из ${totalPages}`}
+          <p className="text-muted-foreground text-sm italic select-none min-w-[100px]">
+            {totalPages === 0 ? `` : `Страница ${params.page} из ${totalPages}`}
           </p>
           <PaginationItem>
             <PaginationNext

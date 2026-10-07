@@ -17,10 +17,7 @@ type ConveyorEntity = {
 };
 
 type TubePostStatusRecordCount = {
-  extrusion_statuses: number;
-  varnish_statuses: number;
-  offset_statuses: number;
-  sealant_statuses: number;
+  statuses: number;
 };
 
 export type SummaryDto = {
@@ -35,6 +32,13 @@ export type SummaryDto = {
   product: ProductEntity;
   batch: BatchEntity;
   conveyor: ConveyorEntity;
+  production: number | null;
+  execution: number | null;
+  defectPercent: number | null;
+  unitWeight: number | null;
+  crewName: string | null;
+  defectRateGoal: number | null;
+  executionGoal: number | null;
 
   shift: number;
   _count: TubePostStatusRecordCount;

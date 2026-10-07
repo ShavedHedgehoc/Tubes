@@ -1,378 +1,187 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
-import { CreateStatusDto } from "./dto/create-status.dto";
 import { ApiMessages } from "src/resources/api-messages";
+import { CreateStatusDto } from "./dto/create-status.dto";
+import { GetStatusesDto } from "./dto/get-statuses.dto";
+import { Prisma } from "db";
 
 @Injectable()
 export class StatusesService {
   constructor(private prisma: PrismaService) {}
 
-  async createExtrusionStatus(dto: CreateStatusDto) {
+  async createStatus(dto: CreateStatusDto) {
     return await this.prisma.$transaction(async (tx) => {
-      const lastStatusEntry = await tx.extrusionStatus.findFirst({
-        orderBy: {
-          id: "desc",
-        },
-      });
+      const now = new Date();
+      const [post, lastStatusEntry] = await Promise.all([
+        tx.post.findUnique({ where: { value: dto.post_val } }),
+        tx.status.findFirst({
+          where: { summary_id: dto.summary_id, post: { value: dto.post_val } },
+          orderBy: { id: "desc" },
+        }),
+      ]);
 
-      if (!lastStatusEntry)
+      if (!post) {
         throw new HttpException(
-          ApiMessages.PREVISIOUS_STATUS_NOT_FOUND,
+          ApiMessages.POST_NOT_FOUND,
           HttpStatus.BAD_REQUEST,
         );
+      }
+
+      let maintenanceSessionId: number | null = null;
+      if (dto.maintenance_id) {
+        const commonTasks = await tx.maintenanceTask.findMany({
+          where: { maintenance_id: dto.maintenance_id },
+        });
+        const maintenanceSession = await tx.maintenanceSession.create({
+          data: {
+            maintenance_id: dto.maintenance_id,
+            post_id: post.id,
+            start_time: now,
+            maintenance_logs: {
+              create: commonTasks.map((task) => ({
+                title: task.title,
+                task_id: task.id,
+                is_done: false,
+              })),
+            },
+          },
+        });
+        maintenanceSessionId = maintenanceSession.id;
+      }
+
+      if (!lastStatusEntry) {
+        if (!dto.idle) {
+          throw new HttpException(
+            ApiMessages.PREVISIOUS_STATUS_NOT_FOUND,
+            HttpStatus.BAD_REQUEST,
+          );
+        }
+        return tx.status.create({
+          data: {
+            summary_id: dto.summary_id,
+            operation_id: dto.operation_id,
+            maintenance_session_id: maintenanceSessionId,
+            idle: dto.idle,
+            finished: dto.finished,
+            employee_id: dto.employee_id,
+            counter_value: 0,
+            post_id: post.id,
+          },
+        });
+      }
 
       if (lastStatusEntry.idle) {
-        const timeDelta = Date.now() - lastStatusEntry.createdAt.getTime();
-        await tx.extrusionStatus.update({
+        const timeDelta = now.getTime() - lastStatusEntry.createdAt.getTime();
+
+        if (lastStatusEntry.maintenance_session_id) {
+          const session = await tx.maintenanceSession.findUnique({
+            where: { id: lastStatusEntry.maintenance_session_id },
+          });
+
+          if (session) {
+            const sessionDuration =
+              now.getTime() - session.start_time.getTime();
+            const aggregate = await tx.maintenanceLog.aggregate({
+              _sum: { duration: true },
+              where: { session_id: session.id },
+            });
+
+            await tx.maintenanceSession.update({
+              where: { id: session.id },
+              data: {
+                end_time: now,
+                total_duration: sessionDuration,
+                work_duration: aggregate._sum.duration ?? 0,
+              },
+            });
+          }
+        }
+
+        await tx.status.update({
           where: { id: lastStatusEntry.id },
           data: { idle_time: timeDelta },
         });
+
+        if (dto.defect_value) {
+          await tx.status.create({
+            data: {
+              summary_id: dto.summary_id,
+              post_id: post.id,
+              operation_id: dto.operation_id,
+              idle: false,
+              finished: false,
+              employee_id: dto.employee_id,
+              counter_value: lastStatusEntry.counter_value,
+            },
+          });
+        }
       }
+
       if (dto.defect_value) {
-        await tx.extrusionDefect.upsert({
-          where: { summary_id: dto.summary_id },
+        await tx.defect.upsert({
+          where: {
+            summary_id_post_id: {
+              summary_id: dto.summary_id,
+              post_id: post.id,
+            },
+          },
           update: { value: Number(dto.defect_value) },
           create: {
             summary_id: dto.summary_id,
+            post_id: post.id,
             value: Number(dto.defect_value),
           },
         });
       }
-      return await tx.extrusionStatus.create({
+      const isIdle = !!(maintenanceSessionId || dto.operation_id || dto.idle);
+      return tx.status.create({
         data: {
           summary_id: dto.summary_id,
+          post_id: post.id,
           operation_id: dto.operation_id,
-          idle: dto.idle,
+          idle: isIdle,
           finished: dto.finished,
           employee_id: dto.employee_id,
           counter_value: lastStatusEntry.counter_value,
+          maintenance_session_id: maintenanceSessionId,
         },
       });
     });
   }
 
-  async createVarnishStatus(dto: CreateStatusDto) {
-    return await this.prisma.$transaction(async (tx) => {
-      const lastStatusEntry = await tx.varnishStatus.findFirst({
-        orderBy: {
-          id: "desc",
-        },
-      });
-
-      if (!lastStatusEntry)
-        throw new HttpException(
-          ApiMessages.PREVISIOUS_STATUS_NOT_FOUND,
-          HttpStatus.BAD_REQUEST,
-        );
-
-      if (lastStatusEntry.idle) {
-        const timeDelta = Date.now() - lastStatusEntry.createdAt.getTime();
-        await tx.varnishStatus.update({
-          where: { id: lastStatusEntry.id },
-          data: { idle_time: timeDelta },
-        });
-      }
-      if (dto.defect_value) {
-        await tx.varnishDefect.upsert({
-          where: { summary_id: dto.summary_id },
-          update: { value: Number(dto.defect_value) },
-          create: {
-            summary_id: dto.summary_id,
-            value: Number(dto.defect_value),
-          },
-        });
-      }
-      return await tx.varnishStatus.create({
-        data: {
-          summary_id: dto.summary_id,
-          operation_id: dto.operation_id,
-          idle: dto.idle,
-          finished: dto.finished,
-          employee_id: dto.employee_id,
-          counter_value: lastStatusEntry.counter_value,
-        },
-      });
+  async getStatuses(query: GetStatusesDto) {
+    type StatusWhere = Prisma.Args<
+      typeof this.prisma.status,
+      "findMany"
+    >["where"];
+    const summary = await this.prisma.summary.findUnique({
+      where: { id: query.summary_id },
+      include: { conveyor: true, batch: true, product: true },
     });
+    if (!summary) throw new HttpException("", HttpStatus.NOT_FOUND);
+    const where: StatusWhere = {
+      summary_id: query.summary_id,
+      ...(query.posts?.length && {
+        post_id: { in: query.posts },
+      }),
+    };
+
+    const [total, statuses] = await Promise.all([
+      this.prisma.status.count({ where }),
+      this.prisma.status.findMany({
+        where,
+        include: {
+          operation: true,
+          employee: true,
+          post: true,
+          maintenance_session: { include: { maintenance: true } },
+        },
+        orderBy: [{ createdAt: "asc" }],
+        take: query.limit,
+        skip: query.limit * (query.page - 1),
+      }),
+    ]);
+
+    return { summary, statuses, total };
   }
-
-  async createOffsetStatus(dto: CreateStatusDto) {
-    return await this.prisma.$transaction(async (tx) => {
-      const lastStatusEntry = await tx.offsetStatus.findFirst({
-        orderBy: {
-          id: "desc",
-        },
-      });
-
-      if (!lastStatusEntry)
-        throw new HttpException(
-          ApiMessages.PREVISIOUS_STATUS_NOT_FOUND,
-          HttpStatus.BAD_REQUEST,
-        );
-
-      if (lastStatusEntry.idle) {
-        const timeDelta = Date.now() - lastStatusEntry.createdAt.getTime();
-        await tx.offsetStatus.update({
-          where: { id: lastStatusEntry.id },
-          data: { idle_time: timeDelta },
-        });
-      }
-      if (dto.defect_value) {
-        await tx.offsetDefect.upsert({
-          where: { summary_id: dto.summary_id },
-          update: { value: Number(dto.defect_value) },
-          create: {
-            summary_id: dto.summary_id,
-            value: Number(dto.defect_value),
-          },
-        });
-      }
-      return await tx.offsetStatus.create({
-        data: {
-          summary_id: dto.summary_id,
-          operation_id: dto.operation_id,
-          idle: dto.idle,
-          finished: dto.finished,
-          employee_id: dto.employee_id,
-          counter_value: lastStatusEntry.counter_value,
-        },
-      });
-    });
-  }
-
-  async createSealantStatus(dto: CreateStatusDto) {
-    return await this.prisma.$transaction(async (tx) => {
-      const lastStatusEntry = await tx.sealantStatus.findFirst({
-        orderBy: {
-          id: "desc",
-        },
-      });
-
-      if (!lastStatusEntry)
-        throw new HttpException(
-          ApiMessages.PREVISIOUS_STATUS_NOT_FOUND,
-          HttpStatus.BAD_REQUEST,
-        );
-
-      if (lastStatusEntry.idle) {
-        const timeDelta = Date.now() - lastStatusEntry.createdAt.getTime();
-        await tx.sealantStatus.update({
-          where: { id: lastStatusEntry.id },
-          data: { idle_time: timeDelta },
-        });
-      }
-      if (dto.defect_value) {
-        await tx.sealantDefect.upsert({
-          where: { summary_id: dto.summary_id },
-          update: { value: Number(dto.defect_value) },
-          create: {
-            summary_id: dto.summary_id,
-            value: Number(dto.defect_value),
-          },
-        });
-      }
-      return await tx.sealantStatus.create({
-        data: {
-          summary_id: dto.summary_id,
-          operation_id: dto.operation_id,
-          idle: dto.idle,
-          finished: dto.finished,
-          employee_id: dto.employee_id,
-          counter_value: lastStatusEntry.counter_value,
-        },
-      });
-    });
-  }
-
-  // async createExtrusionStatus(dto: CreateStatusDto) {
-  //   const lastStatusEntry = await this.prisma.extrusionStatus.findFirst({
-  //     orderBy: {
-  //       id: "desc",
-  //     },
-  //   });
-
-  //   if (!lastStatusEntry)
-  //     throw new HttpException(
-  //       ApiMessages.PREVISIOUS_STATUS_NOT_FOUND,
-  //       HttpStatus.BAD_REQUEST,
-  //     );
-
-  //   if (lastStatusEntry.idle) {
-  //     const timeDelta = await (new Date().getTime() -
-  //       new Date(lastStatusEntry.createdAt).getTime());
-  //     await this.prisma.extrusionStatus.update({
-  //       where: {
-  //         id: lastStatusEntry.id,
-  //       },
-  //       data: {
-  //         idle_time: timeDelta,
-  //       },
-  //     });
-  //   }
-
-  //   if (dto.defect_value) {
-  //     await this.prisma.extrusionDefect.upsert({
-  //       where: { summary_id: dto.summary_id },
-  //       update: { value: Number(dto.defect_value) },
-  //       create: { summary_id: dto.summary_id, value: Number(dto.defect_value) },
-  //     });
-  //   }
-
-  //   const extrusionEntry = await this.prisma.extrusionStatus.create({
-  //     data: {
-  //       summary_id: dto.summary_id,
-  //       operation_id: dto.operation_id,
-  //       idle: dto.idle,
-  //       finished: dto.finished,
-  //       employee_id: dto.employee_id,
-  //       counter_value: lastStatusEntry.counter_value,
-  //     },
-  //   });
-
-  //   return extrusionEntry;
-  // }
-
-  // async createVarnishStatus(dto: CreateStatusDto) {
-  //   const lastStatusEntry = await this.prisma.varnishStatus.findFirst({
-  //     orderBy: {
-  //       id: "desc",
-  //     },
-  //   });
-
-  //   if (!lastStatusEntry)
-  //     throw new HttpException(
-  //       ApiMessages.PREVISIOUS_STATUS_NOT_FOUND,
-  //       HttpStatus.BAD_REQUEST,
-  //     );
-
-  //   if (lastStatusEntry.idle) {
-  //     const timeDelta = await (new Date().getTime() -
-  //       new Date(lastStatusEntry.createdAt).getTime());
-
-  //     await this.prisma.varnishStatus.update({
-  //       where: {
-  //         id: lastStatusEntry.id,
-  //       },
-  //       data: {
-  //         idle_time: timeDelta,
-  //       },
-  //     });
-  //   }
-
-  //   if (dto.defect_value) {
-  //     await this.prisma.varnishDefect.upsert({
-  //       where: { summary_id: dto.summary_id },
-  //       update: { value: Number(dto.defect_value) },
-  //       create: { summary_id: dto.summary_id, value: Number(dto.defect_value) },
-  //     });
-  //   }
-
-  //   const varnishEntry = await this.prisma.varnishStatus.create({
-  //     data: {
-  //       summary_id: dto.summary_id,
-  //       operation_id: dto.operation_id,
-  //       idle: dto.idle,
-  //       finished: dto.finished,
-  //       employee_id: dto.employee_id,
-  //       counter_value: lastStatusEntry.counter_value,
-  //     },
-  //   });
-
-  //   return varnishEntry;
-  // }
-
-  // async createOffsetStatus(dto: CreateStatusDto) {
-  //   const lastStatusEntry = await this.prisma.offsetStatus.findFirst({
-  //     orderBy: {
-  //       id: "desc",
-  //     },
-  //   });
-
-  //   if (!lastStatusEntry)
-  //     throw new HttpException(
-  //       ApiMessages.PREVISIOUS_STATUS_NOT_FOUND,
-  //       HttpStatus.BAD_REQUEST,
-  //     );
-
-  //   if (lastStatusEntry.idle) {
-  //     const timeDelta = await (new Date().getTime() -
-  //       new Date(lastStatusEntry.createdAt).getTime());
-  //     await this.prisma.offsetStatus.update({
-  //       where: {
-  //         id: lastStatusEntry.id,
-  //       },
-  //       data: {
-  //         idle_time: timeDelta,
-  //       },
-  //     });
-  //   }
-
-  //   if (dto.defect_value) {
-  //     await this.prisma.offsetDefect.upsert({
-  //       where: { summary_id: dto.summary_id },
-  //       update: { value: Number(dto.defect_value) },
-  //       create: { summary_id: dto.summary_id, value: Number(dto.defect_value) },
-  //     });
-  //   }
-
-  //   const offsetEntry = await this.prisma.offsetStatus.create({
-  //     data: {
-  //       summary_id: dto.summary_id,
-  //       operation_id: dto.operation_id,
-  //       idle: dto.idle,
-  //       finished: dto.finished,
-  //       employee_id: dto.employee_id,
-  //       counter_value: lastStatusEntry.counter_value,
-  //     },
-  //   });
-
-  //   return offsetEntry;
-  // }
-
-  // async createSealantStatus(dto: CreateStatusDto) {
-  //   const lastStatusEntry = await this.prisma.sealantStatus.findFirst({
-  //     orderBy: {
-  //       id: "desc",
-  //     },
-  //   });
-
-  //   if (!lastStatusEntry)
-  //     throw new HttpException(
-  //       ApiMessages.PREVISIOUS_STATUS_NOT_FOUND,
-  //       HttpStatus.BAD_REQUEST,
-  //     );
-
-  //   if (lastStatusEntry.idle) {
-  //     const timeDelta = await (new Date().getTime() -
-  //       new Date(lastStatusEntry.createdAt).getTime());
-  //     await this.prisma.sealantStatus.update({
-  //       where: {
-  //         id: lastStatusEntry.id,
-  //       },
-  //       data: {
-  //         idle_time: timeDelta,
-  //       },
-  //     });
-  //   }
-
-  //   if (dto.defect_value) {
-  //     await this.prisma.sealantDefect.upsert({
-  //       where: { summary_id: dto.summary_id },
-  //       update: { value: Number(dto.defect_value) },
-  //       create: { summary_id: dto.summary_id, value: Number(dto.defect_value) },
-  //     });
-  //   }
-
-  //   const sealantEntry = await this.prisma.sealantStatus.create({
-  //     data: {
-  //       summary_id: dto.summary_id,
-  //       operation_id: dto.operation_id,
-  //       idle: dto.idle,
-  //       finished: dto.finished,
-  //       employee_id: dto.employee_id,
-  //       counter_value: lastStatusEntry.counter_value,
-  //     },
-  //   });
-
-  //   return sealantEntry;
-  // }
 }

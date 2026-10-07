@@ -11,7 +11,7 @@ import {
 interface FormLayoutProps {
   title: string;
   description: string;
-  onClose: () => void;
+  onClose?: () => void;
   children: React.ReactNode;
   footer: React.ReactNode;
 }
@@ -27,7 +27,7 @@ export function FormLayout({
     <div className="container mx-auto flex items-center justify-center flex-col p-8 flex-1">
       <Card className="w-full px-3 sm:max-w-md border-0 shadow-none sm:border relative">
         <div className="absolute right-3 top-3">
-          <FormCloseButton handleClose={onClose} />
+          {onClose && <FormCloseButton handleClose={onClose} />}
         </div>
         <div className="flex flex-col gap-4">
           <CardHeader>

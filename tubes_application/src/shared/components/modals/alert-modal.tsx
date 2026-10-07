@@ -33,7 +33,6 @@ export default function AlertModal(props: AlertModalProps) {
       }}
     >
       <Dialog.Trigger asChild></Dialog.Trigger>
-      {/* <Portal> */}
       <Dialog.Backdrop />
       <Dialog.Positioner>
         <Dialog.Content>
@@ -58,7 +57,6 @@ export default function AlertModal(props: AlertModalProps) {
           </Dialog.CloseTrigger>
         </Dialog.Content>
       </Dialog.Positioner>
-      {/* </Portal> */}
     </Dialog.Root>
   );
 }

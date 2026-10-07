@@ -4,6 +4,8 @@ import {
   SheetTrigger,
   SheetContent,
   SheetHeader,
+  SheetTitle,
+  SheetDescription,
 } from "@/shared/ui/sheet";
 import { Menu } from "lucide-react";
 
@@ -20,7 +22,7 @@ export function Layout({
 }) {
   return (
     <header className="sticky top-0 z-50 w-full  bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
-      <div className=" flex h-14 items-center px-5 w-full">
+      <div className="container mx-auto flex h-14 items-center px-5 w-full">
         <div className="md:hidden mr-2">
           <Sheet>
             <SheetTrigger asChild>
@@ -29,7 +31,12 @@ export function Layout({
               </Button>
             </SheetTrigger>
             <SheetContent side="left">
-              <SheetHeader className=" border-b pb-5 mb-5">{logo}</SheetHeader>
+              <SheetHeader className=" border-b pb-5 mb-5">
+                <SheetTitle>{logo}</SheetTitle>
+                <SheetDescription className="sr-only">
+                  Mobile menu
+                </SheetDescription>
+              </SheetHeader>
               {nav}
             </SheetContent>
           </Sheet>

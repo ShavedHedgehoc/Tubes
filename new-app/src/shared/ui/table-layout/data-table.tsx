@@ -19,11 +19,13 @@ import {
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  getRowClassName?: (row: TData) => string;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  getRowClassName,
 }: DataTableProps<TData, TValue>) {
   // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable({
@@ -73,6 +75,7 @@ export function DataTable<TData, TValue>({
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
+                className={cn(getRowClassName?.(row.original))}
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>

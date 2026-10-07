@@ -14,7 +14,7 @@ export const useSealantOperation = (operationId: string | null) => {
   return useQuery({
     queryKey: ["sealant_sop_operation", operationId],
     queryFn: async () => {
-      const data = await OperationService.getSealantOperationById(operationId);
+      const data = await OperationService.getOperationById(operationId);
       if (data.length > 0) {
         setSelectedOperation(data[0]);
       } else {

@@ -172,6 +172,14 @@ export const useOffsetInputStore = create<OffsetInputStore>()(
       const fieldKey = key as keyof IOffsetParameterData;
       set((state) => {
         const targetValue = state.data[fieldKey];
+        if (targetValue === null) {
+          return {
+            data: {
+              ...state.data,
+              [fieldKey]: value,
+            },
+          };
+        }
         if (typeof targetValue === "string") {
           return {
             data: { ...state.data, [fieldKey]: value },

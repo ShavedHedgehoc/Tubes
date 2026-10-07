@@ -1,6 +1,6 @@
 export const EMPLOYEE_ENDPOINTS = {
   LIST: "/employees/list",
-  CHANGE_BANNED: "",
+  CHANGE_BANNED: "/employees/change_banned",
   CREATE: "",
   DELETE: "",
   UPDATE: "",

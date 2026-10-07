@@ -20,12 +20,13 @@ export default function CodeInput() {
   };
 
   const handleReset = () => {
-    setParams({ code: null, page: 1 }, { shallow: false });
+    setParams({ code: null, page: 1 });
   };
 
   return (
     <ButtonGroup className="h-8 ">
       <Input
+        id={"summary-filter-name-input"}
         placeholder="Поиск по коду...  "
         value={value}
         onChange={handleChangeCode}

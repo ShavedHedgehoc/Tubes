@@ -58,7 +58,13 @@ export default function useVarnishMenu() {
   const operationButtonDisabledCondition =
     !employee ||
     !summaryData ||
-    !summaryData.varnishStatus.createdAt ||
+    summaryData.varnishStatus.maintenance_session_id !== null ||
+    summaryData.varnishStatus.finished;
+
+  const maintenanceButtonDisabledCondition =
+    !employee ||
+    !summaryData ||
+    summaryData.varnishStatus.operation_id !== null ||
     summaryData.varnishStatus.finished;
 
   const pictureButtonDisabledCondition = summaryData === null;
@@ -157,5 +163,6 @@ export default function useVarnishMenu() {
     operationButtonDisabledCondition,
     pictureButtonDisabledCondition,
     endButtonDisabledCondition,
+    maintenanceButtonDisabledCondition,
   };
 }

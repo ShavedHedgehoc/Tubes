@@ -7,6 +7,19 @@ import { ConveyorsDataResponse } from "./dto/conveyors-data.response";
 @Controller("conveyors")
 export class ConveyorsController {
   constructor(private readonly conveyorService: ConveyorsService) {}
+  // used in dashboard conveyor service
+  @ApiOperation({ summary: "Получить конвейер по имени" })
+  @Get()
+  getConveyorByName(@Query("name") name: string) {
+    return this.conveyorService.getConveyorByName(name);
+  }
+  // endpoint for app
+  @ApiOperation({ summary: "Получить все конвейеры" })
+  @Get("/all_conveyors")
+  getConveyors() {
+    return this.conveyorService.getConveyors();
+  }
+  // endpoint for dash
   @ApiOperation({ summary: "Получить все конвейеры" })
   @Get("/all")
   getAllconveyors() {
@@ -21,12 +34,5 @@ export class ConveyorsController {
   @Get("/:id")
   getConveyorById(@Param("id") id: string) {
     return this.conveyorService.getConveyorById(Number(id));
-  }
-
-  // used in dashboard conveyor service
-  @ApiOperation({ summary: "Получить конвейер по имени" })
-  @Get()
-  getConveyorByName(@Query("name") name: string) {
-    return this.conveyorService.getConveyorByName(name);
   }
 }

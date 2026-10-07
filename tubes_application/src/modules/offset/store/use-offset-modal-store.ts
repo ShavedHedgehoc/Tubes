@@ -23,3 +23,4 @@ export const useOffsetCloseConfirmModalStore = createModalStore("CloseConfirm");
 export const useOffsetMaterialScanModalStore = createModalStore("MaterialScan");
 export const useOffsetCloseSummaryModalStore = createModalStore("CloseSummary");
 export const useOffsetDefectInputModalStore = createModalStore("DefectInput");
+export const useOffsetMaintenanceModalStore = createModalStore("Maintenance");

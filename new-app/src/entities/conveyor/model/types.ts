@@ -1,6 +1,6 @@
 import { CreateStatusDto } from "../api/dto/create-status.dto";
 
-type ConveyorEntity = {
+export type ConveyorEntity = {
   id: number;
   name: string;
 };
@@ -35,4 +35,5 @@ export type ConveyorsViewResponse = {
   conveyors: ConveyorData[];
 };
 
-export type CreatePostStatusData = { postId: number } & CreateStatusDto;
+export type CreatePostStatusData = { post_val: number } & CreateStatusDto;
+export type ConveyorsResponse = { conveyors: ConveyorEntity[] };

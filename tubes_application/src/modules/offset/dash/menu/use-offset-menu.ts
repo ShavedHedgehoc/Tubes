@@ -56,7 +56,7 @@ export default function useOffsetMenu() {
   const operationButtonDisabledCondition =
     !employee ||
     !summaryData ||
-    !summaryData.offsetStatus.createdAt ||
+    summaryData.offsetStatus.maintenance_session_id !== null ||
     summaryData.offsetStatus.finished;
 
   const pictureButtonDisabledCondition = summaryData === null;
@@ -144,6 +144,13 @@ export default function useOffsetMenu() {
     navigate(`${RouteNames.OFFSET_ADD_ENTRY_ROOT}/${offsetConveyor?.name}`);
   };
 
+  const maintenanceButtonDisabledCondition =
+    !employee ||
+    !summaryData ||
+    summaryData.offsetStatus.operation_id !== null ||
+    // !summaryData.extrusionStatus.createdAt ||
+    summaryData.extrusionStatus.finished;
+
   return {
     employee,
     offsetConveyor,
@@ -154,6 +161,7 @@ export default function useOffsetMenu() {
     handleOpenParametersClick,
     inputParametersButtonDisabledCondition,
     scanMaterialsButtonDisabledCondition,
+    maintenanceButtonDisabledCondition,
     operationButtonDisabledCondition,
     pictureButtonDisabledCondition,
     endButtonDisabledCondition,

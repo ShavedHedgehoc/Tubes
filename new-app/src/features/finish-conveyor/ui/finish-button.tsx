@@ -23,7 +23,7 @@ export function FinishButton({ conveyorData }: { conveyorData: ConveyorData }) {
     if (conveyorData.summary) finishConveyor(conveyorData.summary?.id);
   };
 
-  const diasbleCondition =
+  const disableCondition =
     !conveyorData.summary ||
     conveyorData.summary.extrusion?.postState !== "finished" ||
     conveyorData.summary.varnish?.postState !== "finished" ||
@@ -34,15 +34,24 @@ export function FinishButton({ conveyorData }: { conveyorData: ConveyorData }) {
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <button
-          disabled={diasbleCondition || finishPending}
+          disabled={disableCondition || finishPending}
           onClick={(e) => e.stopPropagation()}
           className={cn(
-            "p-2 rounded-xl transition-all duration-200",
-            "text-muted-foreground hover:text-foreground",
-            "bg-background/80 backdrop-blur-sm hover:bg-background",
-            "border shadow-sm active:scale-95",
-            "group-hover:border-primary/30",
-            "absolute top-4 right-3 z-10",
+            // "p-2 rounded-xl transition-all duration-200",
+            // "text-muted-foreground hover:text-foreground",
+            // "bg-background/80 backdrop-blur-sm",
+            // !disableCondition && "hover:bg-background",
+            // "border shadow-sm active:scale-95",
+            // "group-hover:border-primary/30",
+            // "absolute top-4 right-3 z-10",
+            "p-2 rounded-xl transition-all duration-200 border absolute top-4 right-3 z-10",
+            "bg-background/80 backdrop-blur-sm",
+            !disableCondition
+              ? [
+                  "text-muted-foreground hover:text-foreground hover:bg-background",
+                  "shadow-sm active:scale-95 group-hover:border-primary/30 cursor-pointer",
+                ]
+              : ["opacity-50 cursor-not-allowed text-muted-foreground/50"],
           )}
           title="Закончить"
         >

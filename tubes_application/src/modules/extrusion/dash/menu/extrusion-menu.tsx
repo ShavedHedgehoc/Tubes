@@ -8,6 +8,7 @@ import {
   TbLibraryPhoto,
   TbLogin2,
   TbLogout2,
+  TbSettingsExclamation,
 } from "react-icons/tb";
 import MenuButton from "../../../../shared/components/menu/menu-button";
 import { TbStopwatch } from "react-icons/tb";
@@ -27,6 +28,7 @@ export default function ExtrusionMenu() {
     setOpenCloseSummary,
     inputParametersButtonDisabledCondition,
     scanMaterialsButtonDisabledCondition,
+    maintenanceButtonDisabledCondition,
     operationButtonDisabledCondition,
     pictureButtonDisabledCondition,
     endButtonDisabledCondition,
@@ -46,6 +48,16 @@ export default function ExtrusionMenu() {
     icon: <TbBarcode />,
     disabled: scanMaterialsButtonDisabledCondition,
     action: () => setOpenMaterialScan(true),
+  };
+
+  const maintenanceButtonProps: MenuButtonProps = {
+    title: "ТО",
+    icon: <TbSettingsExclamation />,
+    disabled: maintenanceButtonDisabledCondition,
+    action: () =>
+      navigate(
+        `${RouteNames.EXTRUSION_MAINTENANCE_ROOT}/${extrusionConveyor?.name}`,
+      ),
   };
 
   const operationsButtonProps: MenuButtonProps = {
@@ -98,6 +110,7 @@ export default function ExtrusionMenu() {
     <Menu>
       <MenuButton {...inputParametersButtonProps} />
       <MenuButton {...scanMaterilButtonProps} />
+      <MenuButton {...maintenanceButtonProps} />
       <MenuButton {...operationsButtonProps} />
       {summaryData && summaryData.extrusionStatus.state === "idle" && (
         <MenuButton {...sopButtonProps} />

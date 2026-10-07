@@ -14,9 +14,21 @@ import {
 import { UploadButton } from "@/features/summary-upload";
 import { EditSummaryModal } from "@/features/summary-actions";
 import { useMemo } from "react";
+import { CrewEntity } from "@/entities/crew";
+import { useRoles } from "@/entities/user";
+import { ConveyorEntity } from "@/entities/conveyor";
 
-export default function SummariesView() {
+interface Props {
+  conveyorListItems: ConveyorEntity[] | [];
+  crewListItems: CrewEntity[] | [];
+}
+
+export default function SummariesView({
+  crewListItems,
+  conveyorListItems,
+}: Props) {
   const { params, setParams } = useSummarySearchParams();
+  const { isAllowSummaryEdit } = useRoles();
 
   const { data, isPlaceholderData, isFetching } = useQuery({
     ...summaryApi.summaryQueries.list(params, { isServer: false }),
@@ -33,7 +45,13 @@ export default function SummariesView() {
     total: data?.total ?? 0,
     totalPages: data?.totalPages ?? 0,
     picture: <PlantIcon />,
-    filter: <SummaryFilter actions={<UploadButton />} />,
+    filter: (
+      <SummaryFilter
+        actions={<UploadButton />}
+        conveyorListItems={conveyorListItems}
+        crewListItems={crewListItems}
+      />
+    ),
     params: params,
     setParams: setParams,
     isFetching: isFetching || isPlaceholderData,
@@ -42,7 +60,7 @@ export default function SummariesView() {
   return (
     <div>
       <DataViewLayout {...dataViewProps} />
-      <EditSummaryModal />
+      {isAllowSummaryEdit && <EditSummaryModal crews={crewListItems} />}
     </div>
   );
 }

@@ -56,7 +56,7 @@ export const OFFSET_PARAMETER_NAMES = {
   imprint_quantity_printed_box_5: "5 печатный ящик (отпечатков)", //-количество отпечатков ", //not required
   imprint_quantity_printed_box_6: "6 печатный ящик (отпечатков)", //-количество отпечатков ", //not required
   ink_supply_time: "Время подачи чернил", // decimal
-  design_match: "Соответсвие дизайну и контрольному образцу", //boolean
+  design_match: "Соответствие дизайну и контрольному образцу", //boolean
   tube_appearance:
     "Внешний вид тубы (разнотон, нечеткий текст, двоение печати)", //boolean
   tube_edge_deformation_lack: "Отсутствие деформации края тубы", //boolean
@@ -67,7 +67,7 @@ export const OFFSET_PARAMETER_NAMES = {
 export const SEALANT_PARAMETER_NAMES = {
   counter_value: "Показания счетчика",
   cap_machine_speed: "Скорость колпачковой машины", //шт./мин.
-  total_air_pressure: "Давление воздуха общее", //Бар.	//float
+  total_air_pressure: "Давление воздуха управления форсунок", //Бар.	//float
   holders_forward: "Захваты вперед", //ед.
   holders_opening_left: "Открытие захваты (лев)", //ед.
   holders_opening_right: "Открытие захваты (прав)", //ед.
