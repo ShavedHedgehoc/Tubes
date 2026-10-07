@@ -1,5 +1,5 @@
-import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
 
 interface SimplyModalStore {
   open: boolean;
@@ -17,14 +17,11 @@ const createModalStore = (name: string) =>
     ),
   );
 
-export const useSealantAuthModalStore = createModalStore("Auth");
-export const useSealantLogoutModalStore = createModalStore("Logout");
-export const useSealantCloseConfirmModalStore =
-  createModalStore("CloseConfirm");
-export const useSealantMaterialScanModalStore =
-  createModalStore("MaterialScan");
-export const useSealantCloseSummaryModalStore =
-  createModalStore("CloseSummary");
-export const useSealantDefectInputModalStore = createModalStore("DefectInput");
-export const useSealantBoxConfirmModalStore = createModalStore("BoxConfirm");
-export const useSealantMaintenanceModalStore = createModalStore("Maintenance");
+export const useSealantAuthModalStore = createModalStore('Auth');
+export const useSealantLogoutModalStore = createModalStore('Logout');
+export const useSealantCloseConfirmModalStore = createModalStore('CloseConfirm');
+export const useSealantMaterialScanModalStore = createModalStore('MaterialScan');
+export const useSealantCloseSummaryModalStore = createModalStore('CloseSummary');
+export const useSealantDefectInputModalStore = createModalStore('DefectInput');
+export const useSealantBoxConfirmModalStore = createModalStore('BoxConfirm');
+export const useSealantMaintenanceModalStore = createModalStore('Maintenance');

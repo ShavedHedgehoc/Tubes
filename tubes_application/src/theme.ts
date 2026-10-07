@@ -1,25 +1,25 @@
-import { createSystem, defaultConfig, defineConfig } from "@chakra-ui/react";
+import { createSystem, defaultConfig, defineConfig } from '@chakra-ui/react';
 
 const config = defineConfig({
   theme: {
     keyframes: {
       colorChange: {
-        "0%, 100%": { color: "var(--chakra-colors-fg)" },
-        "50%": { color: "var(--chakra-colors-fg-error)" },
+        '0%, 100%': { color: 'var(--chakra-colors-fg)' },
+        '50%': { color: 'var(--chakra-colors-fg-error)' },
       },
       breath: {
-        "0%, 100%": {
-          transform: "scale(0.9)",
-          opacity: "0.7",
+        '0%, 100%': {
+          transform: 'scale(0.9)',
+          opacity: '0.7',
         },
-        "50%": {
-          transform: "scale(1.1)",
-          opacity: "1",
+        '50%': {
+          transform: 'scale(1.1)',
+          opacity: '1',
         },
       },
       colorChangeWhiteSubtle: {
-        "0%, 100%": { color: "var(--chakra-colors-fg)" },
-        "50%": { color: "var(--chakra-colors-fg-subtle)" },
+        '0%, 100%': { color: 'var(--chakra-colors-fg)' },
+        '50%': { color: 'var(--chakra-colors-fg-subtle)' },
       },
     },
     tokens: {
@@ -28,8 +28,8 @@ const config = defineConfig({
         colorCycleWhiteSubtle: { value: `colorChangeWhiteSubtle 1s  infinite` },
       },
       fonts: {
-        body: { value: "Segoe UI, sans-serif" },
-        heading: { value: "Segoe UI, sans-serif" },
+        body: { value: 'Segoe UI, sans-serif' },
+        heading: { value: 'Segoe UI, sans-serif' },
       },
     },
     semanticTokens: {

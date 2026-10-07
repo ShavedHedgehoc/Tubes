@@ -1,12 +1,12 @@
 // @ts-check
-import eslint from "@eslint/js";
-import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
-import globals from "globals";
-import tseslint from "typescript-eslint";
+import eslint from '@eslint/js';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
   {
-    ignores: ["eslint.config.mjs"],
+    ignores: ['eslint.config.mjs'],
   },
   eslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
@@ -17,8 +17,8 @@ export default tseslint.config(
         ...globals.node,
         ...globals.jest,
       },
-      ecmaVersion: "latest", // 5,
-      sourceType: "module",
+      ecmaVersion: 'latest', // 5,
+      sourceType: 'module',
       parserOptions: {
         projectService: true,
         tsconfigRootDir: import.meta.dirname,
@@ -27,19 +27,19 @@ export default tseslint.config(
   },
   {
     rules: {
-      "@typescript-eslint/no-deprecated": "off",
-      "@typescript-eslint/interface-name-prefix": "off", //
-      "@typescript-eslint/no-explicit-any": "off", //
-      "@typescript-eslint/explicit-function-return-type": "off", // Можно включить для строгой типизации API
-      "@typescript-eslint/no-floating-promises": "warn",
-      "@typescript-eslint/no-unsafe-argument": "warn",
-      "no-console": "warn", // Чтобы не забывать console.log в коде
-      "@typescript-eslint/no-unused-vars": [
-        "error",
+      '@typescript-eslint/no-deprecated': 'off',
+      '@typescript-eslint/interface-name-prefix': 'off', //
+      '@typescript-eslint/no-explicit-any': 'off', //
+      '@typescript-eslint/explicit-function-return-type': 'off', // Можно включить для строгой типизации API
+      '@typescript-eslint/no-floating-promises': 'warn',
+      '@typescript-eslint/no-unsafe-argument': 'warn',
+      'no-console': 'warn', // Чтобы не забывать console.log в коде
+      '@typescript-eslint/no-unused-vars': [
+        'error',
         {
-          argsIgnorePattern: "^_",
-          varsIgnorePattern: "^_",
-          caughtErrorsIgnorePattern: "^_",
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
         },
       ], // Игнорировать переменные с подчеркиванием
     },

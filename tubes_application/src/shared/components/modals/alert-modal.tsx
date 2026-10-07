@@ -1,4 +1,4 @@
-import { Button, CloseButton, Dialog } from "@chakra-ui/react";
+import { Button, CloseButton, Dialog } from '@chakra-ui/react';
 
 export interface AlertModalProps {
   title?: string;
@@ -17,7 +17,7 @@ export default function AlertModal(props: AlertModalProps) {
     props.okAction();
   };
   const handleCancelClick = () => {
-    if ("cancelAction" in props && typeof props.cancelAction === "function") {
+    if ('cancelAction' in props && typeof props.cancelAction === 'function') {
       props.cancelAction();
     }
   };
@@ -45,11 +45,11 @@ export default function AlertModal(props: AlertModalProps) {
           <Dialog.Footer>
             <Dialog.ActionTrigger asChild>
               <Button variant="outline" size="sm">
-                {props.cancelButtonValue ?? "Cancel"}
+                {props.cancelButtonValue ?? 'Cancel'}
               </Button>
             </Dialog.ActionTrigger>
             <Button colorPalette="red" onClick={() => handleOkClick()}>
-              {props.actionButtonValue ?? "Ok"}
+              {props.actionButtonValue ?? 'Ok'}
             </Button>
           </Dialog.Footer>
           <Dialog.CloseTrigger asChild>

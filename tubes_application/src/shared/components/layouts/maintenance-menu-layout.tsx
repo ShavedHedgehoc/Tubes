@@ -1,8 +1,8 @@
-import type { ISummary } from "@/shared/api/services/summary-service";
-import type { MenuButtonProps } from "../menu/menu-button";
-import { TbSettingsAutomation, TbX } from "react-icons/tb";
-import Menu from "../menu/menu";
-import MenuButton from "../menu/menu-button";
+import type { ISummary } from '@/shared/api/services/summary-service';
+import type { MenuButtonProps } from '../menu/menu-button';
+import { TbSettingsAutomation, TbX } from 'react-icons/tb';
+import Menu from '../menu/menu';
+import MenuButton from '../menu/menu-button';
 
 export interface MaintenanceMenuHookReturn {
   handleSetClick: () => Promise<void> | void;
@@ -31,14 +31,14 @@ export default function MaintenancePostMenuLayout({
   } = useMenuHook({ summaryData });
 
   const backButtonProps: MenuButtonProps = {
-    title: "Закрыть",
+    title: 'Закрыть',
     icon: <TbX />,
     disabled: false,
     action: () => handleExitClick(),
   };
 
   const setIdleButtonProps: MenuButtonProps = {
-    title: "Начать",
+    title: 'Начать',
     icon: <TbSettingsAutomation />,
     disabled: setIdleButtonDisableCondition,
     action: () => handleSetClick(),

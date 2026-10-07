@@ -1,5 +1,5 @@
-import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
 
 interface BooleanEntryModalStore {
   key: string;
@@ -11,8 +11,8 @@ interface BooleanEntryModalStore {
 }
 export const useOffsetBooleanEntryModalStore = create<BooleanEntryModalStore>()(
   devtools((set) => ({
-    key: "",
-    title: "",
+    key: '',
+    title: '',
     open: false,
     setKey: (value) => set(() => ({ key: value })),
     setTitle: (value) => set(() => ({ title: value })),

@@ -1,35 +1,24 @@
-import type { CreateExtrusionEntryDto } from "@/shared/api/services/params-service";
-import { CountersTresholds } from "@/shared/helpers/counters-tresholds";
-import { RouteNames } from "@/shared/router/route-names";
-import { useNavigate } from "react-router-dom";
-import { useShallow } from "zustand/shallow";
+import type { CreateExtrusionEntryDto } from '@/shared/api/services/params-service';
+import { CountersTresholds } from '@/shared/helpers/counters-tresholds';
+import { RouteNames } from '@/shared/router/route-names';
+import { useNavigate } from 'react-router-dom';
+import { useShallow } from 'zustand/shallow';
 
-import { useExtrusionConveyorStore } from "../../store/use-extrusion-conveyor-store";
-import { useExtrusionEmployeeStore } from "../../store/use-extrusion-employee-store";
-import { useExtrusionEntryAlertModalStore } from "../../store/use-extrusion-entry-alert-modal-store";
-import {
-  initDataValue,
-  useExtrusionInputStore,
-} from "../../store/use-extrusion-input-store";
-import { useExtrusionCloseConfirmModalStore } from "../../store/use-extrusion-modal-store";
-import { useCreateExtrusionEntry } from "../../use-create-extrusion-entry";
-import type { ISummary } from "@/shared/api/services/summary-service";
+import { useExtrusionConveyorStore } from '../../store/use-extrusion-conveyor-store';
+import { useExtrusionEmployeeStore } from '../../store/use-extrusion-employee-store';
+import { useExtrusionEntryAlertModalStore } from '../../store/use-extrusion-entry-alert-modal-store';
+import { initDataValue, useExtrusionInputStore } from '../../store/use-extrusion-input-store';
+import { useExtrusionCloseConfirmModalStore } from '../../store/use-extrusion-modal-store';
+import { useCreateExtrusionEntry } from '../../use-create-extrusion-entry';
+import type { ISummary } from '@/shared/api/services/summary-service';
 
 export default function useExtrusionAddEntryMenu(summaryData: ISummary | null) {
-  const employee = useExtrusionEmployeeStore(
-    useShallow((state) => state.extrusionEmployee),
-  );
-  const setOpenConfirm = useExtrusionCloseConfirmModalStore(
-    useShallow((state) => state.setOpen),
-  );
+  const employee = useExtrusionEmployeeStore(useShallow((state) => state.extrusionEmployee));
+  const setOpenConfirm = useExtrusionCloseConfirmModalStore(useShallow((state) => state.setOpen));
   const data = useExtrusionInputStore(useShallow((state) => state.data));
-  const setOpenAlert = useExtrusionEntryAlertModalStore(
-    (state) => state.setOpen,
-  );
+  const setOpenAlert = useExtrusionEntryAlertModalStore((state) => state.setOpen);
   const setDto = useExtrusionEntryAlertModalStore((state) => state.setDto);
-  const initData = useExtrusionInputStore(
-    useShallow((state) => state.initData),
-  );
+  const initData = useExtrusionInputStore(useShallow((state) => state.initData));
   const extrusionConveyor = useExtrusionConveyorStore(
     useShallow((state) => state.extrusionConveyor),
   );
@@ -38,37 +27,31 @@ export default function useExtrusionAddEntryMenu(summaryData: ISummary | null) {
 
   const saveButtonDisabledCondition =
     !employee ||
-    data.counter_value === "0" ||
-    data.press_speed === "0" ||
-    data.blow_time === "0" ||
-    data.turning_machine_speed === "0" ||
-    data.annealing_furnace_temp === "0" ||
-    data.tube_cylindrical_section_length === "0" ||
-    data.membrane_thickness === "0" ||
-    data.tube_diameter === "0" ||
-    data.tube_cylindrical_thickness === "0" ||
-    data.tube_rigidity === "0";
+    data.counter_value === '0' ||
+    data.press_speed === '0' ||
+    data.blow_time === '0' ||
+    data.turning_machine_speed === '0' ||
+    data.annealing_furnace_temp === '0' ||
+    data.tube_cylindrical_section_length === '0' ||
+    data.membrane_thickness === '0' ||
+    data.tube_diameter === '0' ||
+    data.tube_cylindrical_thickness === '0' ||
+    data.tube_rigidity === '0';
 
   const tresholdsData = summaryData?.tresholds ?? null;
 
   const alertDialogCondition =
     tresholdsData &&
-    (Number(data.annealing_furnace_temp) <
-      tresholdsData.extrusion_annealing_furnace_temp_min ||
-      Number(data.annealing_furnace_temp) >
-        tresholdsData.extrusion_annealing_furnace_temp_max ||
+    (Number(data.annealing_furnace_temp) < tresholdsData.extrusion_annealing_furnace_temp_min ||
+      Number(data.annealing_furnace_temp) > tresholdsData.extrusion_annealing_furnace_temp_max ||
       Number(data.blow_time) < tresholdsData.extrusion_blow_time_min ||
       Number(data.blow_time) > tresholdsData.extrusion_blow_time_max ||
       Number(data.press_speed) < tresholdsData.extrusion_press_speed_min ||
       Number(data.press_speed) > tresholdsData.extrusion_press_speed_max ||
-      Number(data.turning_machine_speed) <
-        tresholdsData.extrusion_turning_machine_speed_min ||
-      Number(data.turning_machine_speed) >
-        tresholdsData.extrusion_turning_machine_speed_max ||
-      Number(data.membrane_thickness) >
-        tresholdsData.extrusion_membrane_thickness_max ||
-      Number(data.membrane_thickness) <
-        tresholdsData.extrusion_membrane_thickness_min ||
+      Number(data.turning_machine_speed) < tresholdsData.extrusion_turning_machine_speed_min ||
+      Number(data.turning_machine_speed) > tresholdsData.extrusion_turning_machine_speed_max ||
+      Number(data.membrane_thickness) > tresholdsData.extrusion_membrane_thickness_max ||
+      Number(data.membrane_thickness) < tresholdsData.extrusion_membrane_thickness_min ||
       Number(data.tube_cylindrical_section_length) <
         tresholdsData.extrusion_tube_cylindrical_section_length_min ||
       Number(data.tube_cylindrical_section_length) >
@@ -98,14 +81,10 @@ export default function useExtrusionAddEntryMenu(summaryData: ISummary | null) {
         turning_machine_speed: Number(data.turning_machine_speed),
         annealing_furnace_temp: Number(data.annealing_furnace_temp),
         employee_id: employee.id,
-        tube_cylindrical_section_length: Number(
-          data.tube_cylindrical_section_length,
-        ),
+        tube_cylindrical_section_length: Number(data.tube_cylindrical_section_length),
         membrane_thickness: Number(data.membrane_thickness),
         tube_diameter: Number(data.tube_diameter),
-        tube_cylindrical_section_thickness: Number(
-          data.tube_cylindrical_thickness,
-        ),
+        tube_cylindrical_section_thickness: Number(data.tube_cylindrical_thickness),
         tube_rigidity: Number(data.tube_rigidity),
         tube_cutting_quality: data.tube_cutting_quality,
         tightness: data.tightness,
@@ -129,9 +108,7 @@ export default function useExtrusionAddEntryMenu(summaryData: ISummary | null) {
     if (isInputsChanged) {
       return setOpenConfirm(true);
     } else {
-      return navigate(
-        `${RouteNames.EXTRUSION_ROOT}/${extrusionConveyor?.name}`,
-      );
+      return navigate(`${RouteNames.EXTRUSION_ROOT}/${extrusionConveyor?.name}`);
     }
   };
 

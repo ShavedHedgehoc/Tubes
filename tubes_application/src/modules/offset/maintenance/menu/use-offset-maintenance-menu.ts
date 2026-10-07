@@ -1,27 +1,23 @@
-import { RouteNames } from "@/shared/router/route-names";
-import { useNavigate } from "react-router-dom";
-import { useShallow } from "zustand/shallow";
-import { useOffsetConveyorStore } from "../../store/use-offset-conveyor-store";
-import type { ISummary } from "@/shared/api/services/summary-service";
-import type { CreateStatusDto } from "@/shared/api/services/status-service";
-import { useOffsetEmployeeStore } from "../../store/use-offset-employee-store";
+import { RouteNames } from '@/shared/router/route-names';
+import { useNavigate } from 'react-router-dom';
+import { useShallow } from 'zustand/shallow';
+import { useOffsetConveyorStore } from '../../store/use-offset-conveyor-store';
+import type { ISummary } from '@/shared/api/services/summary-service';
+import type { CreateStatusDto } from '@/shared/api/services/status-service';
+import { useOffsetEmployeeStore } from '../../store/use-offset-employee-store';
 
-import { useCreateStatus } from "@/shared/api/use-create-status";
+import { useCreateStatus } from '@/shared/api/use-create-status';
 
-import type { MaintenanceMenuHookReturn } from "@/shared/components/layouts/maintenance-menu-layout";
-import { useOffsetMaintenanceStore } from "../../store/use-offset-maintenance-store";
+import type { MaintenanceMenuHookReturn } from '@/shared/components/layouts/maintenance-menu-layout';
+import { useOffsetMaintenanceStore } from '../../store/use-offset-maintenance-store';
 
 export default function useOffsetMaintenanceMenu({
   summaryData,
 }: {
   summaryData: ISummary | null;
 }): MaintenanceMenuHookReturn {
-  const offsetConveyor = useOffsetConveyorStore(
-    useShallow((state) => state.offsetConveyor),
-  );
-  const employee = useOffsetEmployeeStore(
-    useShallow((state) => state.offsetEmployee),
-  );
+  const offsetConveyor = useOffsetConveyorStore(useShallow((state) => state.offsetConveyor));
+  const employee = useOffsetEmployeeStore(useShallow((state) => state.offsetEmployee));
   const selectedMaintenance = useOffsetMaintenanceStore(
     useShallow((state) => state.selectedMaintenance),
   );
@@ -38,11 +34,7 @@ export default function useOffsetMaintenanceMenu({
         : false
       : false;
 
-  const setIdleButtonDisableCondition = !(
-    summaryData &&
-    employee &&
-    selectedMaintenance
-  );
+  const setIdleButtonDisableCondition = !(summaryData && employee && selectedMaintenance);
   const handleExitClick = () => {
     navigate(`${RouteNames.OFFSET_ROOT}/${offsetConveyor?.name}`);
     setSelectedMaintenance(null);

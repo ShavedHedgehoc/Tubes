@@ -8,6 +8,7 @@ import makeSealantPage from "./make-sealant-page";
 
 import makeOperationReportPage from "./make-operations-report";
 import { POST_NAMES } from "@/shared/config";
+import makeBoxPage from "./make-box-page";
 
 export async function makeXLSX(data: SummaryReportEntity) {
   const workbook = new ExcelJS.Workbook();
@@ -44,6 +45,7 @@ export async function makeXLSX(data: SummaryReportEntity) {
     postVal: 4,
     postName: POST_NAMES["sealant"],
   });
+  makeBoxPage({ workbook, data });
 
   const buffer = await workbook.xlsx.writeBuffer();
   const blob = new Blob([buffer], {

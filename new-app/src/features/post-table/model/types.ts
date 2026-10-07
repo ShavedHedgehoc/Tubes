@@ -1,5 +1,7 @@
 export type StatusTableRowState =
   | "Внесение параметров"
+  | "Блокировка лабораторией"
+  | "Конец блокировки"
   | "Начало операции"
   | "Конец операции"
   | "Окончание работы";
@@ -16,6 +18,9 @@ export type StatusTableRow = {
   id: number;
   date: Date;
   employee: string | null;
+  lab_assistant: string | null;
+  user: string | null;
+  lab_lock_reason: string | null;
   state: StatusTableRowState;
   operation: string | null;
   ids: Ids;

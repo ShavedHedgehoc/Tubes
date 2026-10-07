@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main, release]
+    branches: [main]
 
 jobs:
   pre-flight:
@@ -13,12 +13,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: "npm"
+          node-version: '20'
+          cache: 'npm'
       - name: Install
         run: npm ci --no-fund
-      # - name: Check Formatting (Prettier)
-      #   run: npx prettier --check .
       - name: Generate Prisma
         run: npx prisma@6.19.0 generate --schema=./db/prisma/schema.prisma
       - name: Lint & Type Check All
@@ -27,25 +25,22 @@ jobs:
           npm run types:all
       - name: Knip Cleanliness Check
         run: npx knip --reporter github-actions
-
-  # --- Сборка всех пакетов параллельно ---
-  build:
+  build-check:
     needs: pre-flight
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        # Используем матрицу, чтобы не дублировать код джоб
         package: [api_tubes, public_api, tubes_application, new-app]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: "npm"
+          node-version: '20'
+          cache: 'npm'
       - name: Install
         run: npm ci --no-fund
       - name: Generate Prisma (only for API)
-        if: matrix.package != 'tubes_application'
+        if: matrix.package != 'tubes_application' && matrix.package != 'new-app'
         run: npx prisma@6.19.0 generate --schema=./db/prisma/schema.prisma
       - name: Build ${{ matrix.package }}
         run: npm run build -w ${{ matrix.package }}

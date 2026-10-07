@@ -1,6 +1,6 @@
 import { ITreshold } from "src/tresholds/dto/get-tresholds.response";
 
-type state = "idle" | "working" | "finished";
+type state = "idle" | "working" | "finished" | "locked";
 
 class IMaterial {
   code: string;
@@ -11,6 +11,7 @@ class IMaterial {
 export class IStatusCounter {
   counter_value: number;
   idle: boolean;
+  is_locked: boolean;
   createdAt: Date;
 }
 
@@ -22,12 +23,16 @@ class IOperation {
 }
 export class IStatus {
   idle: boolean;
+  is_locked: boolean;
   finished: boolean;
   state: state;
   operation_description: string;
   createdAt: Date | null;
   operation_id: number | null;
   maintenance_session_id: number | null;
+  lock_date: Date | null;
+  lock_reason: string | null;
+  lab_assistant: string | null;
 }
 class ISummaryData {
   id: number;

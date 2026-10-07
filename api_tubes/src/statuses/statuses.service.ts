@@ -4,6 +4,10 @@ import { ApiMessages } from "src/resources/api-messages";
 import { CreateStatusDto } from "./dto/create-status.dto";
 import { GetStatusesDto } from "./dto/get-statuses.dto";
 import { Prisma } from "db";
+import {
+  StatusesListResponse,
+  StatusListRow,
+} from "./dto/statuses-list.response";
 
 @Injectable()
 export class StatusesService {
@@ -69,10 +73,10 @@ export class StatusesService {
           },
         });
       }
-
+      // start idle processing
       if (lastStatusEntry.idle) {
         const timeDelta = now.getTime() - lastStatusEntry.createdAt.getTime();
-
+        // process maintence
         if (lastStatusEntry.maintenance_session_id) {
           const session = await tx.maintenanceSession.findUnique({
             where: { id: lastStatusEntry.maintenance_session_id },
@@ -96,6 +100,17 @@ export class StatusesService {
             });
           }
         }
+        // process close labLock
+        if (lastStatusEntry.laboratory_lock_id) {
+          // close lock record
+          await tx.laboratoryLock.update({
+            where: { id: lastStatusEntry.laboratory_lock_id },
+            data: {
+              is_active: false,
+              closedAt: new Date(),
+            },
+          });
+        }
 
         await tx.status.update({
           where: { id: lastStatusEntry.id },
@@ -112,11 +127,50 @@ export class StatusesService {
               finished: false,
               employee_id: dto.employee_id,
               counter_value: lastStatusEntry.counter_value,
+              laboratory_lock_id: lastStatusEntry.laboratory_lock_id,
             },
           });
+        } else {
+          // lock if has active lock
+          const labLockActive = await tx.laboratoryLock.findFirst({
+            where: {
+              summary_id: dto.summary_id,
+              post_id: post.id,
+              is_active: true,
+            },
+            orderBy: { createdAt: "desc" },
+          });
+          if (labLockActive) {
+            await tx.status.create({
+              data: {
+                summary_id: dto.summary_id,
+                post_id: post.id,
+                operation_id: dto.operation_id,
+                idle: false,
+                finished: false,
+                employee_id: dto.employee_id,
+                counter_value: lastStatusEntry.counter_value,
+                maintenance_session_id: maintenanceSessionId,
+              },
+            });
+            return tx.status.create({
+              data: {
+                summary_id: dto.summary_id,
+                post_id: post.id,
+                operation_id: null,
+                idle: true,
+                finished: false,
+                employee_id: dto.employee_id,
+                counter_value: lastStatusEntry.counter_value,
+                maintenance_session_id: null,
+                laboratory_lock_id: labLockActive.id,
+                is_locked: true,
+              },
+            });
+          }
         }
       }
-
+      // end idle processing
       if (dto.defect_value) {
         await tx.defect.upsert({
           where: {
@@ -149,7 +203,7 @@ export class StatusesService {
     });
   }
 
-  async getStatuses(query: GetStatusesDto) {
+  async getStatuses(query: GetStatusesDto): Promise<StatusesListResponse> {
     type StatusWhere = Prisma.Args<
       typeof this.prisma.status,
       "findMany"
@@ -175,13 +229,44 @@ export class StatusesService {
           employee: true,
           post: true,
           maintenance_session: { include: { maintenance: true } },
+          laboratory_lock: {
+            include: {
+              laboratory_lock_reason: true,
+              laboratory_assistant: true,
+              user: { select: { id: true, name: true } },
+            },
+          },
         },
         orderBy: [{ createdAt: "asc" }],
         take: query.limit,
         skip: query.limit * (query.page - 1),
       }),
     ]);
+    const formattedStatuses = statuses.map((status) => {
+      if (!status.maintenance_session) return status;
 
-    return { summary, statuses, total };
+      return {
+        ...status,
+        maintenance_session: {
+          ...status.maintenance_session,
+
+          total_duration:
+            status.maintenance_session.total_duration !== null
+              ? Number(status.maintenance_session.total_duration)
+              : null,
+          work_duration:
+            status.maintenance_session.work_duration !== null
+              ? Number(status.maintenance_session.work_duration)
+              : null,
+          // Приводим end_time к Date (из прошлой ошибки), если ваш интерфейс все еще требует строго Date
+          end_time: status.maintenance_session.end_time as Date,
+        },
+      };
+    });
+    return {
+      summary,
+      statuses: formattedStatuses as unknown as StatusListRow[],
+      total,
+    };
   }
 }

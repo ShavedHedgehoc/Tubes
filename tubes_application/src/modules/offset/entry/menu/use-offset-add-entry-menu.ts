@@ -1,98 +1,77 @@
-import type { CreateOffsetEntryDto } from "@/shared/api/services/params-service";
-import { CountersTresholds } from "@/shared/helpers/counters-tresholds";
-import { RouteNames } from "@/shared/router/route-names";
-import { useNavigate } from "react-router-dom";
-import { useShallow } from "zustand/shallow";
+import type { CreateOffsetEntryDto } from '@/shared/api/services/params-service';
+import { CountersTresholds } from '@/shared/helpers/counters-tresholds';
+import { RouteNames } from '@/shared/router/route-names';
+import { useNavigate } from 'react-router-dom';
+import { useShallow } from 'zustand/shallow';
 
-import { useOffsetConveyorStore } from "../../store/use-offset-conveyor-store";
-import { useOffsetEmployeeStore } from "../../store/use-offset-employee-store";
+import { useOffsetConveyorStore } from '../../store/use-offset-conveyor-store';
+import { useOffsetEmployeeStore } from '../../store/use-offset-employee-store';
 
-import {
-  initDataValue,
-  useOffsetInputStore,
-} from "../../store/use-offset-input-store";
-import { useOffsetCloseConfirmModalStore } from "../../store/use-offset-modal-store";
-import { useCreateOffsetEntry } from "../../use-create-offset-entry";
-import type { ISummary } from "@/shared/api/services/summary-service";
-import { useEOffsetEntryAlertModalStore } from "../../store/use-offset-entry-alert-modal-store";
+import { initDataValue, useOffsetInputStore } from '../../store/use-offset-input-store';
+import { useOffsetCloseConfirmModalStore } from '../../store/use-offset-modal-store';
+import { useCreateOffsetEntry } from '../../use-create-offset-entry';
+import type { ISummary } from '@/shared/api/services/summary-service';
+import { useEOffsetEntryAlertModalStore } from '../../store/use-offset-entry-alert-modal-store';
 
 export default function useOffsetAddEntryMenu(summaryData: ISummary | null) {
-  const employee = useOffsetEmployeeStore(
-    useShallow((state) => state.offsetEmployee),
-  );
-  const setOpenConfirm = useOffsetCloseConfirmModalStore(
-    useShallow((state) => state.setOpen),
-  );
+  const employee = useOffsetEmployeeStore(useShallow((state) => state.offsetEmployee));
+  const setOpenConfirm = useOffsetCloseConfirmModalStore(useShallow((state) => state.setOpen));
   const data = useOffsetInputStore(useShallow((state) => state.data));
   const setOpenAlert = useEOffsetEntryAlertModalStore((state) => state.setOpen);
   const setDto = useEOffsetEntryAlertModalStore((state) => state.setDto);
   const initData = useOffsetInputStore(useShallow((state) => state.initData));
-  const offsetConveyor = useOffsetConveyorStore(
-    useShallow((state) => state.offsetConveyor),
-  );
+  const offsetConveyor = useOffsetConveyorStore(useShallow((state) => state.offsetConveyor));
   const { createOffsetEntry } = useCreateOffsetEntry();
   const navigate = useNavigate();
 
   const saveButtonDisabledCondition =
     !employee ||
-    data.counter_value === "0" ||
-    data.printing_machine_speed === "0" ||
-    data.total_air_pressure === "0" ||
-    data.padding_furnace_temp === "0" ||
-    data.offset_furnace_temp === "0" ||
-    data.printer_motor === "0" ||
-    data.base_covers_holders_motor === "0" ||
-    data.base_covers_station_motor === "0" ||
+    data.counter_value === '0' ||
+    data.printing_machine_speed === '0' ||
+    data.total_air_pressure === '0' ||
+    data.padding_furnace_temp === '0' ||
+    data.offset_furnace_temp === '0' ||
+    data.printer_motor === '0' ||
+    data.base_covers_holders_motor === '0' ||
+    data.base_covers_station_motor === '0' ||
     (summaryData?.tresholds?.offset_imprint_quantity_printed_box_1_max &&
       summaryData?.tresholds?.offset_imprint_quantity_printed_box_1_min &&
-      data.imprint_quantity_printed_box_1 === "0") ||
+      data.imprint_quantity_printed_box_1 === '0') ||
     (summaryData?.tresholds?.offset_imprint_quantity_printed_box_2_max &&
       summaryData?.tresholds?.offset_imprint_quantity_printed_box_2_min &&
-      data.imprint_quantity_printed_box_2 === "0") ||
+      data.imprint_quantity_printed_box_2 === '0') ||
     (summaryData?.tresholds?.offset_imprint_quantity_printed_box_3_max &&
       summaryData?.tresholds?.offset_imprint_quantity_printed_box_3_min &&
-      data.imprint_quantity_printed_box_3 === "0") ||
+      data.imprint_quantity_printed_box_3 === '0') ||
     (summaryData?.tresholds?.offset_imprint_quantity_printed_box_4_max &&
       summaryData?.tresholds?.offset_imprint_quantity_printed_box_4_min &&
-      data.imprint_quantity_printed_box_4 === "0") ||
+      data.imprint_quantity_printed_box_4 === '0') ||
     (summaryData?.tresholds?.offset_imprint_quantity_printed_box_5_max &&
       summaryData?.tresholds?.offset_imprint_quantity_printed_box_5_min &&
-      data.imprint_quantity_printed_box_5 === "0") ||
+      data.imprint_quantity_printed_box_5 === '0') ||
     (summaryData?.tresholds?.offset_imprint_quantity_printed_box_6_max &&
       summaryData?.tresholds?.offset_imprint_quantity_printed_box_6_min &&
-      data.imprint_quantity_printed_box_6 === "0") ||
-    data.ink_supply_time === "0";
+      data.imprint_quantity_printed_box_6 === '0') ||
+    data.ink_supply_time === '0';
 
   const tresholdsData = summaryData?.tresholds ?? null;
 
   const alertDialogCondition =
     tresholdsData &&
-    (Number(data.printing_machine_speed) <
-      tresholdsData.offset_printing_machine_speed_min ||
-      Number(data.printing_machine_speed) >
-        tresholdsData.offset_printing_machine_speed_max ||
-      Number(data.total_air_pressure) <
-        tresholdsData.offset_total_air_pressure_min ||
-      Number(data.total_air_pressure) >
-        tresholdsData.offset_total_air_pressure_max ||
-      Number(data.padding_furnace_temp) <
-        tresholdsData.offset_padding_furnace_temp_min ||
-      Number(data.padding_furnace_temp) >
-        tresholdsData.offset_padding_furnace_temp_max ||
-      Number(data.offset_furnace_temp) <
-        tresholdsData.offset_offset_furnace_temp_min ||
-      Number(data.offset_furnace_temp) >
-        tresholdsData.offset_offset_furnace_temp_max ||
+    (Number(data.printing_machine_speed) < tresholdsData.offset_printing_machine_speed_min ||
+      Number(data.printing_machine_speed) > tresholdsData.offset_printing_machine_speed_max ||
+      Number(data.total_air_pressure) < tresholdsData.offset_total_air_pressure_min ||
+      Number(data.total_air_pressure) > tresholdsData.offset_total_air_pressure_max ||
+      Number(data.padding_furnace_temp) < tresholdsData.offset_padding_furnace_temp_min ||
+      Number(data.padding_furnace_temp) > tresholdsData.offset_padding_furnace_temp_max ||
+      Number(data.offset_furnace_temp) < tresholdsData.offset_offset_furnace_temp_min ||
+      Number(data.offset_furnace_temp) > tresholdsData.offset_offset_furnace_temp_max ||
       Number(data.printer_motor) < tresholdsData.offset_printer_motor_min ||
       Number(data.printer_motor) > tresholdsData.offset_printer_motor_max ||
-      Number(data.base_covers_holders_motor) <
-        tresholdsData.offset_base_covers_holders_motor_min ||
-      Number(data.base_covers_holders_motor) >
-        tresholdsData.offset_base_covers_holders_motor_max ||
-      Number(data.base_covers_station_motor) <
-        tresholdsData.offset_base_covers_station_motor_min ||
-      Number(data.base_covers_station_motor) >
-        tresholdsData.offset_base_covers_station_motor_max ||
+      Number(data.base_covers_holders_motor) < tresholdsData.offset_base_covers_holders_motor_min ||
+      Number(data.base_covers_holders_motor) > tresholdsData.offset_base_covers_holders_motor_max ||
+      Number(data.base_covers_station_motor) < tresholdsData.offset_base_covers_station_motor_min ||
+      Number(data.base_covers_station_motor) > tresholdsData.offset_base_covers_station_motor_max ||
       //
       (tresholdsData.offset_imprint_quantity_printed_box_1_min &&
         tresholdsData.offset_imprint_quantity_printed_box_1_max &&
@@ -171,24 +150,12 @@ export default function useOffsetAddEntryMenu(summaryData: ISummary | null) {
         printer_motor: Number(data.printer_motor),
         base_covers_holders_motor: Number(data.base_covers_holders_motor),
         base_covers_station_motor: Number(data.base_covers_station_motor),
-        imprint_quantity_printed_box_1: Number(
-          data.imprint_quantity_printed_box_1,
-        ),
-        imprint_quantity_printed_box_2: Number(
-          data.imprint_quantity_printed_box_2,
-        ),
-        imprint_quantity_printed_box_3: Number(
-          data.imprint_quantity_printed_box_3,
-        ),
-        imprint_quantity_printed_box_4: Number(
-          data.imprint_quantity_printed_box_4,
-        ),
-        imprint_quantity_printed_box_5: Number(
-          data.imprint_quantity_printed_box_5,
-        ),
-        imprint_quantity_printed_box_6: Number(
-          data.imprint_quantity_printed_box_6,
-        ),
+        imprint_quantity_printed_box_1: Number(data.imprint_quantity_printed_box_1),
+        imprint_quantity_printed_box_2: Number(data.imprint_quantity_printed_box_2),
+        imprint_quantity_printed_box_3: Number(data.imprint_quantity_printed_box_3),
+        imprint_quantity_printed_box_4: Number(data.imprint_quantity_printed_box_4),
+        imprint_quantity_printed_box_5: Number(data.imprint_quantity_printed_box_5),
+        imprint_quantity_printed_box_6: Number(data.imprint_quantity_printed_box_6),
         ink_supply_time: Number(data.ink_supply_time),
         design_match: data.design_match,
         tube_appearance: data.tube_appearance,

@@ -1,5 +1,5 @@
-import { $api } from "../http";
-import { ApiRoutes } from "./api-routes";
+import { $api } from '../http';
+import { ApiRoutes } from './api-routes';
 
 export default class HealthService {
   static async checkApiHealth(): Promise<number> {

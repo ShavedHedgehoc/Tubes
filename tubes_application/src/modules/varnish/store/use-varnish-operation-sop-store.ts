@@ -1,6 +1,6 @@
-import type { IOperation } from "@/shared/api/services/summary-service";
-import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import type { IOperation } from '@/shared/api/services/summary-service';
+import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
 
 interface VarnishOperationStore {
   selectedOperation: IOperation | null;

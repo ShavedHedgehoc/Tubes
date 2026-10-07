@@ -1,9 +1,11 @@
-type State = "idle" | "working" | "finished";
+type State = "idle" | "working" | "finished" | "locked";
 
 class PostData {
   production: number | null;
   state: State;
   employee: string | null;
+  hasLock: boolean;
+  lockReason: string | null;
 }
 
 class ConveyorSummary {

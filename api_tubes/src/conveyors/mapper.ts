@@ -1,9 +1,11 @@
 import { Batch, Conveyor, Employee, Product, Status, Summary } from "db";
 
-type IState = "idle" | "working" | "finished";
+type IState = "idle" | "working" | "finished" | "locked";
 export interface IPostData {
   production: number | null;
   state: IState;
+  hasLock: boolean;
+  lockReason: string | null;
   employee: string | null;
 }
 
@@ -39,12 +41,20 @@ export const mappedConveyors = ({
   batch,
   extrusion_status,
   extrusion_employee,
+  extrusion_has_lock,
   varnish_status,
   varnish_employee,
+  varnish_has_lock,
   offset_status,
   offset_employee,
+  offset_has_lock,
   sealant_status,
   sealant_employee,
+  sealant_has_lock,
+  extrusion_lock_reason,
+  varnish_lock_reason,
+  sealant_lock_reason,
+  offset_lock_reason,
 }: {
   conveyor: Conveyor;
   summary: Summary | null;
@@ -52,22 +62,35 @@ export const mappedConveyors = ({
   batch: Batch | null;
   extrusion_status: Status | null;
   extrusion_employee: Employee | null;
+  extrusion_has_lock: boolean;
+
   varnish_status: Status | null;
   varnish_employee: Employee | null;
+  varnish_has_lock: boolean;
   offset_status: Status | null;
   offset_employee: Employee | null;
+  offset_has_lock: boolean;
   sealant_status: Status | null;
   sealant_employee: Employee | null;
+  sealant_has_lock: boolean;
+  extrusion_lock_reason: string | null;
+  varnish_lock_reason: string | null;
+  sealant_lock_reason: string | null;
+  offset_lock_reason: string | null;
 }): IMappedConveyor => {
   const mappedExtrusionStatus: IPostData | null = extrusion_status
     ? {
         employee: extrusion_employee ? extrusion_employee.name : null,
         production: extrusion_status.counter_value,
+        hasLock: extrusion_has_lock,
+        lockReason: extrusion_lock_reason,
         state:
           extrusion_status.finished === true
             ? "finished"
             : extrusion_status.idle === true
-              ? "idle"
+              ? extrusion_status.is_locked === true
+                ? "locked"
+                : "idle"
               : "working",
       }
     : null;
@@ -75,11 +98,15 @@ export const mappedConveyors = ({
     ? {
         employee: varnish_employee ? varnish_employee.name : null,
         production: varnish_status.counter_value,
+        hasLock: varnish_has_lock,
+        lockReason: varnish_lock_reason,
         state:
           varnish_status.finished === true
             ? "finished"
             : varnish_status.idle === true
-              ? "idle"
+              ? varnish_status.is_locked === true
+                ? "locked"
+                : "idle"
               : "working",
       }
     : null;
@@ -87,11 +114,15 @@ export const mappedConveyors = ({
     ? {
         employee: offset_employee ? offset_employee.name : null,
         production: offset_status.counter_value,
+        hasLock: offset_has_lock,
+        lockReason: offset_lock_reason,
         state:
           offset_status.finished === true
             ? "finished"
             : offset_status.idle === true
-              ? "idle"
+              ? offset_status.is_locked === true
+                ? "locked"
+                : "idle"
               : "working",
       }
     : null;
@@ -99,11 +130,15 @@ export const mappedConveyors = ({
     ? {
         employee: sealant_employee ? sealant_employee.name : null,
         production: sealant_status.counter_value,
+        hasLock: sealant_has_lock,
+        lockReason: sealant_lock_reason,
         state:
           sealant_status.finished === true
             ? "finished"
             : sealant_status.idle === true
-              ? "idle"
+              ? sealant_status.is_locked === true
+                ? "locked"
+                : "idle"
               : "working",
       }
     : null;

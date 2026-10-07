@@ -1,4 +1,4 @@
-import { Center, Heading } from "@chakra-ui/react";
+import { Center, Heading } from '@chakra-ui/react';
 
 export default function HeaderComponent({
   conveyorName,
@@ -9,10 +9,7 @@ export default function HeaderComponent({
 }) {
   return (
     <Center h="full">
-      <Heading
-        size="2xl"
-        color="fg.subtle"
-      >{`Конвейер ${conveyorName}. ${postName}`}</Heading>
+      <Heading size="2xl" color="fg.subtle">{`Конвейер ${conveyorName}. ${postName}`}</Heading>
     </Center>
   );
 }

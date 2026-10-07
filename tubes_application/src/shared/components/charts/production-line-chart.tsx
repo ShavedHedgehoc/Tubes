@@ -1,9 +1,9 @@
-import type { ISummary } from "@/shared/api/services/summary-service";
-import { formatTimeOnly } from "@/shared/helpers/date-time-formatters";
-import { getStatusCountersData } from "@/shared/helpers/summary-data-parsers";
-import { Chart, useChart } from "@chakra-ui/charts";
-import { Box, VStack, Text } from "@chakra-ui/react";
-import React from "react";
+import type { ISummary } from '@/shared/api/services/summary-service';
+import { formatTimeOnly } from '@/shared/helpers/date-time-formatters';
+import { getStatusCountersData } from '@/shared/helpers/summary-data-parsers';
+import { Chart, useChart } from '@chakra-ui/charts';
+import { Box, VStack, Text } from '@chakra-ui/react';
+import React from 'react';
 import {
   CartesianGrid,
   XAxis,
@@ -14,7 +14,7 @@ import {
   ReferenceLine,
   ReferenceArea,
   ResponsiveContainer,
-} from "recharts";
+} from 'recharts';
 
 export default function ProductionLineChart({
   summaryData,
@@ -45,6 +45,24 @@ export default function ProductionLineChart({
     }
   });
 
+  const lockIntervals: { start: number; end: number }[] = [];
+  let currentLockStart: number | null = null;
+  processedData.forEach((item, index) => {
+    if (item.is_locked) {
+      if (currentLockStart === null) {
+        currentLockStart = item.time;
+      }
+    } else {
+      if (currentLockStart !== null) {
+        lockIntervals.push({ start: currentLockStart, end: item.time });
+        currentLockStart = null;
+      }
+    }
+    if (index === processedData.length - 1 && currentLockStart !== null) {
+      lockIntervals.push({ start: currentLockStart, end: item.time });
+    }
+  });
+
   const chartData = processedData.reduce(
     (acc, item, index, array) => {
       const prevItem = array[index - 1];
@@ -65,10 +83,11 @@ export default function ProductionLineChart({
 
   const lineChart = useChart({
     data: chartData,
-    series: [{ name: "val", color: "teal.solid", label: "Выработка" }],
+    series: [{ name: 'val', color: 'teal.solid', label: 'Выработка' }],
   });
 
-  const orangeColor = lineChart.color("orange.solid");
+  const orangeColor = lineChart.color('orange.solid');
+  const redColor = lineChart.color('red.solid');
 
   if (!summaryData?.tresholds) return null;
 
@@ -83,23 +102,20 @@ export default function ProductionLineChart({
                   data={lineChart.data}
                   margin={{ top: 25, right: 20, left: 0, bottom: 0 }}
                 >
-                  <CartesianGrid
-                    stroke={lineChart.color("border")}
-                    vertical={true}
-                  />
+                  <CartesianGrid stroke={lineChart.color('border')} vertical={true} />
 
                   <XAxis
                     type="number"
-                    domain={["dataMin", "dataMax"]}
-                    dataKey={lineChart.key("time")}
+                    domain={['dataMin', 'dataMax']}
+                    dataKey={lineChart.key('time')}
                     tickFormatter={(val) => formatTimeOnly(new Date(val))}
-                    stroke={lineChart.color("border")}
+                    stroke={lineChart.color('border')}
                   />
 
                   <YAxis
                     yAxisId="left"
-                    dataKey={lineChart.key("val")}
-                    stroke={lineChart.color("border")}
+                    dataKey={lineChart.key('val')}
+                    stroke={lineChart.color('border')}
                   />
 
                   {idleIntervals.map((interval, idx) => {
@@ -135,14 +151,49 @@ export default function ProductionLineChart({
                     );
                   })}
 
+                  {lockIntervals &&
+                    lockIntervals.map((interval, idx) => {
+                      const isLastAndLocked =
+                        idx === lockIntervals.length - 1 &&
+                        processedData[processedData.length - 1].is_locked;
+
+                      return (
+                        <React.Fragment key={`lock-${idx}`}>
+                          <ReferenceLine
+                            x={interval.start}
+                            stroke={redColor}
+                            strokeWidth={2}
+                            // strokeDasharray="3 3"
+                            yAxisId="left"
+                          />
+                          {!isLastAndLocked && (
+                            <ReferenceLine
+                              x={interval.end}
+                              stroke={redColor}
+                              strokeWidth={2}
+                              yAxisId="left"
+                            />
+                          )}
+                          <ReferenceArea
+                            x1={interval.start}
+                            x2={interval.end}
+                            yAxisId="left"
+                            fill={redColor}
+                            fillOpacity={0.28}
+                            strokeOpacity={0}
+                          />
+                        </React.Fragment>
+                      );
+                    })}
+
                   <Legend content={<Chart.Legend />} />
 
                   <Line
                     yAxisId="left"
                     dot={false}
                     type="stepAfter"
-                    dataKey={lineChart.key("val")}
-                    stroke={lineChart.color("teal.solid")}
+                    dataKey={lineChart.key('val')}
+                    stroke={lineChart.color('teal.solid')}
                     strokeWidth={2}
                     isAnimationActive={false}
                     connectNulls={false}

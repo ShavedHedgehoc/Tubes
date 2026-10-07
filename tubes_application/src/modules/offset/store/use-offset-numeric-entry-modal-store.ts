@@ -1,5 +1,5 @@
-import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
 
 interface EntryModalStore {
   key: string;
@@ -17,8 +17,8 @@ interface EntryModalStore {
 }
 export const useOffsetNumericEntryModalStore = create<EntryModalStore>()(
   devtools((set) => ({
-    key: "",
-    title: "",
+    key: '',
+    title: '',
     open: false,
     minValue: null,
     maxValue: null,

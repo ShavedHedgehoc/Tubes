@@ -1,10 +1,10 @@
-import BooleanEntryModal from "@/shared/components/modals/boolean-entry-modal";
-import { useShallow } from "zustand/shallow";
+import BooleanEntryModal from '@/shared/components/modals/boolean-entry-modal';
+import { useShallow } from 'zustand/shallow';
 import {
   useExtrusionInputStore,
   ExtrusionInputParams,
-} from "../../store/use-extrusion-input-store";
-import { useExtrusionBooleanEntryModalStore } from "../../store/use-extrusion-boolean-entry-modal-store";
+} from '../../store/use-extrusion-input-store';
+import { useExtrusionBooleanEntryModalStore } from '../../store/use-extrusion-boolean-entry-modal-store';
 
 export default function ExtrusionBooleanEntryModal() {
   const { key, title, open, setOpen } = useExtrusionBooleanEntryModalStore(
@@ -16,9 +16,7 @@ export default function ExtrusionBooleanEntryModal() {
     })),
   );
 
-  const changeData = useExtrusionInputStore(
-    useShallow((state) => state.changeData),
-  );
+  const changeData = useExtrusionInputStore(useShallow((state) => state.changeData));
 
   const data = useExtrusionInputStore(
     useShallow((state) => {

@@ -1,4 +1,4 @@
-import { Heading, Grid, Box } from "@chakra-ui/react";
+import { Heading, Grid, Box } from '@chakra-ui/react';
 
 export default function HeaderWithIndicatorComponent({
   conveyorName,

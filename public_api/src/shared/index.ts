@@ -1,1 +1,1 @@
-export { ToStringArray } from "./to-string-array.decorator";
+export { ToStringArray } from './to-string-array.decorator';

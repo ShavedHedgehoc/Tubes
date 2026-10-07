@@ -10,6 +10,7 @@ export async function Dash() {
   await queryClient.prefetchQuery(
     conveyorApi.conveyorQueries.view({ isServer: true }),
   );
+
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <DashView />

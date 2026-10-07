@@ -1,5 +1,5 @@
-import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
 
 interface VarnishDefectStore {
   data: string;
@@ -12,25 +12,23 @@ interface VarnishDefectStore {
 
 export const useVarnishDefectStore = create<VarnishDefectStore>()(
   devtools((set) => ({
-    data: "0",
+    data: '0',
 
-    clearData: () => set(() => ({ data: "0" })),
+    clearData: () => set(() => ({ data: '0' })),
     sliceData: () =>
       set((state) => ({
-        data: state.data.length < 2 ? "0" : state.data.slice(0, -1),
+        data: state.data.length < 2 ? '0' : state.data.slice(0, -1),
       })),
     changeData: (value) =>
       set((state) => ({
         data:
-          (state.data.includes(".") && value == ".") || state.data.length >= 8
+          (state.data.includes('.') && value == '.') || state.data.length >= 8
             ? state.data
-            : value == "."
+            : value == '.'
               ? state.data + value
-              : value === "0" &&
-                  Number(state.data + value) === 0 &&
-                  state.data.includes(".")
+              : value === '0' && Number(state.data + value) === 0 && state.data.includes('.')
                 ? state.data + value
-                : value === "0" && Number(state.data + value) !== 0
+                : value === '0' && Number(state.data + value) !== 0
                   ? state.data + value
                   : Number(state.data + value).toString(),
       })),

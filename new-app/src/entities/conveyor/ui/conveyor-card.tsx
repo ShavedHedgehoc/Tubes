@@ -3,7 +3,7 @@ import { ConveyorData } from "../model";
 import PostCard from "./post-card";
 import { formatNumber } from "@/shared/lib";
 import { POST_NAMES } from "@/shared/config";
-type IState = "working" | "idle" | "finished" | "no_data";
+type IState = "working" | "idle" | "finished" | "locked" | "no_data";
 type Props = {
   conveyorData: ConveyorData;
   menuActionButton: React.ReactNode;
@@ -14,6 +14,7 @@ type Props = {
     postName: string,
     postState: IState,
     conveyorName: string,
+    hasLock: boolean,
   ) => React.ReactNode;
 };
 
@@ -101,6 +102,8 @@ export default function ConveyorCard({
               productionValue={post.data?.productionValue ?? 0}
               employee={post.data?.employeeName ?? ""}
               state={post.data?.postState ?? "no_data"}
+              hasLock={post.data?.hasLock ?? false}
+              lockReason={post.data?.lockReason ?? null}
               summary_id={conveyorData.summary!.id}
               post_id={post.id}
               post_name={post.name}
@@ -111,6 +114,7 @@ export default function ConveyorCard({
                 post.name,
                 post.data?.postState ?? "no_data",
                 conveyorData.name,
+                post.data?.hasLock ?? false,
               )}
             />
           ))}

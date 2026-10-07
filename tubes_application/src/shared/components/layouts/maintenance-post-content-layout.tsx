@@ -1,25 +1,18 @@
-import type { IEmployee } from "@/shared/api/services/employee-service";
+import type { IEmployee } from '@/shared/api/services/employee-service';
 import type {
   IMaintenance,
   IMaintenanceSession,
   ISummary,
-} from "@/shared/api/services/summary-service";
-import {
-  Box,
-  Heading,
-  ScrollArea,
-  SimpleGrid,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
-import { useEffect } from "react";
-import { useShallow } from "zustand/shallow";
-import NotFound from "../info/not-found-full-screen";
-import Info from "../info/info";
-import { AppMessages } from "@/shared/resources/app-messages";
-import MaintenanceCard from "../cards/maintenance-card";
-import Loader from "../info/loader";
-import MaintenanceModal from "../modals/maintenance-modal/maintenance-modal";
+} from '@/shared/api/services/summary-service';
+import { Box, Heading, ScrollArea, SimpleGrid, Text, VStack } from '@chakra-ui/react';
+import { useEffect } from 'react';
+import { useShallow } from 'zustand/shallow';
+import NotFound from '../info/not-found-full-screen';
+import Info from '../info/info';
+import { AppMessages } from '@/shared/resources/app-messages';
+import MaintenanceCard from '../cards/maintenance-card';
+import Loader from '../info/loader';
+import MaintenanceModal from '../modals/maintenance-modal/maintenance-modal';
 
 export interface MaintenanceHookReturn {
   items: IMaintenance[];
@@ -33,9 +26,7 @@ export interface MaintenanceHookReturn {
   endTask: ({ id, time }: { id: number; time: Date }) => Promise<void> | void;
 }
 
-export type MaintenanceHookFn = (args: {
-  summaryData: ISummary | null;
-}) => MaintenanceHookReturn;
+export type MaintenanceHookFn = (args: { summaryData: ISummary | null }) => MaintenanceHookReturn;
 
 export interface MaintenanceStore {
   open: boolean;
@@ -44,7 +35,7 @@ export interface MaintenanceStore {
 
 interface GenericMaintenanceProps {
   summaryData: ISummary | null;
-  type: "extrusion" | "varnish" | "offset" | "sealant";
+  type: 'extrusion' | 'varnish' | 'offset' | 'sealant';
   useContentHook: MaintenanceHookFn;
   useModalStore: <T>(selector: (state: MaintenanceStore) => T) => T;
 }
@@ -86,20 +77,13 @@ export default function MaintenancePostContentLayout({
 
   useEffect(() => {
     const isIdleWithSession =
-      currentStatus?.state === "idle" &&
-      !!currentStatus?.maintenance_session_id;
+      currentStatus?.state === 'idle' && !!currentStatus?.maintenance_session_id;
     setOpenModal(isIdleWithSession);
-  }, [
-    currentStatus?.state,
-    currentStatus?.maintenance_session_id,
-    setOpenModal,
-  ]);
+  }, [currentStatus?.state, currentStatus?.maintenance_session_id, setOpenModal]);
 
   if (!employee) return <NotFound message={AppMessages.NOT_AUTHORIZED} />;
-  if (!summaryData)
-    return <NotFound message={AppMessages.ACTIVE_SUMMARY_NOT_FOUND} />;
-  if (!currentMaintenances.length)
-    return <Info message={AppMessages.OPERATIONS_LIST_NOT_FOUND} />;
+  if (!summaryData) return <NotFound message={AppMessages.ACTIVE_SUMMARY_NOT_FOUND} />;
+  if (!currentMaintenances.length) return <Info message={AppMessages.OPERATIONS_LIST_NOT_FOUND} />;
 
   const content = {
     idle: <></>,
@@ -111,7 +95,7 @@ export default function MaintenancePostContentLayout({
         <Text color="fg.subtle" textStyle="xl">
           {selectedMaintenance
             ? `Выбран вид ТО: ${selectedMaintenance.description}`
-            : "Выберите вид ТО"}
+            : 'Выберите вид ТО'}
         </Text>
         <ScrollArea.Root height="full" variant="always">
           <ScrollArea.Viewport>
@@ -124,9 +108,7 @@ export default function MaintenancePostContentLayout({
                     onClick={() => setSelectedMaintenance(item)}
                     selected={selectedMaintenance?.id === item.id}
                     disabled={
-                      !employee?.rank ||
-                      employee.rank.val < item.min_rank ||
-                      item.task_count === 0
+                      !employee?.rank || employee.rank.val < item.min_rank || item.task_count === 0
                     }
                   />
                 ))}
@@ -138,7 +120,7 @@ export default function MaintenancePostContentLayout({
       </VStack>
     ),
     finished: <></>,
-  }[currentStatus?.state || "idle"];
+  }[currentStatus?.state || 'idle'];
 
   return (
     <Box h="full" w="full" px={16}>

@@ -29,6 +29,8 @@ import { RolesModule } from "./roles/roles.module";
 import { MaintenanceLogModule } from "./maintenance-log/maintenance-log.module";
 import { PostsModule } from "./posts/post.module";
 import { CrewsModule } from "./crews/crews.module";
+import { LaboratoryLocksModule } from "./laboratory-locks/laboratory-locks.module";
+import { LaboratoryLockReasonsModule } from "./laboratory-lock-reason/laboratory-lock-reason.module";
 
 const imports: Array<Type<unknown> | DynamicModule | Promise<DynamicModule>> = [
   ConfigModule.forRoot(),
@@ -58,6 +60,8 @@ const imports: Array<Type<unknown> | DynamicModule | Promise<DynamicModule>> = [
   MaintenanceLogModule,
   PostsModule,
   CrewsModule,
+  LaboratoryLocksModule,
+  LaboratoryLockReasonsModule,
 ];
 
 if (process.env.NODE_ENV !== "production") {

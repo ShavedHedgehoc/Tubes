@@ -1,7 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
-import OperationService from "@/shared/api/services/operation-service";
-import { useExtrusionOperationSopStore } from "./store/use-extrusion-operation-sop-store";
-import { useShallow } from "zustand/shallow";
+import { useQuery } from '@tanstack/react-query';
+import OperationService from '@/shared/api/services/operation-service';
+import { useExtrusionOperationSopStore } from './store/use-extrusion-operation-sop-store';
+import { useShallow } from 'zustand/shallow';
 
 export const useExtrusionOperation = (operationId: string | null) => {
   const setSelectedOperation = useExtrusionOperationSopStore(
@@ -11,7 +11,7 @@ export const useExtrusionOperation = (operationId: string | null) => {
     useShallow((state) => state.clearSelectedOperation),
   );
   return useQuery({
-    queryKey: ["extrusion_sop_operation", operationId],
+    queryKey: ['extrusion_sop_operation', operationId],
     queryFn: async () => {
       const data = await OperationService.getOperationById(operationId);
       if (data.length > 0) {

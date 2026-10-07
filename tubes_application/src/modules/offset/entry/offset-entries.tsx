@@ -1,23 +1,16 @@
-import type { ISummary } from "@/shared/api/services/summary-service";
-import { CountersTresholds } from "@/shared/helpers/counters-tresholds";
-import { OFFSET_PARAMETER_NAMES } from "@/shared/helpers/parameter-names";
-import { useShallow } from "zustand/shallow";
-import type { AddParameterCardProps } from "../../../shared/components/cards/add-parameter-card";
-import { VStack, HStack } from "@chakra-ui/react";
-import AddParameterCard from "../../../shared/components/cards/add-parameter-card";
-import {
-  OffsetInputParams,
-  useOffsetInputStore,
-} from "../store/use-offset-input-store";
-import useOffsetEntriesHandleCardsClick from "./use-offset-entries-handle-cards-click";
-import { PARAMETER_UNITS } from "@/shared/helpers/parameter-units";
-import { parseValue } from "@/shared/helpers/parse-value";
+import type { ISummary } from '@/shared/api/services/summary-service';
+import { CountersTresholds } from '@/shared/helpers/counters-tresholds';
+import { OFFSET_PARAMETER_NAMES } from '@/shared/helpers/parameter-names';
+import { useShallow } from 'zustand/shallow';
+import type { AddParameterCardProps } from '../../../shared/components/cards/add-parameter-card';
+import { VStack, HStack } from '@chakra-ui/react';
+import AddParameterCard from '../../../shared/components/cards/add-parameter-card';
+import { OffsetInputParams, useOffsetInputStore } from '../store/use-offset-input-store';
+import useOffsetEntriesHandleCardsClick from './use-offset-entries-handle-cards-click';
+import { PARAMETER_UNITS } from '@/shared/helpers/parameter-units';
+import { parseValue } from '@/shared/helpers/parse-value';
 
-export default function OffsetEntries({
-  summaryData,
-}: {
-  summaryData: ISummary | null;
-}) {
+export default function OffsetEntries({ summaryData }: { summaryData: ISummary | null }) {
   const data = useOffsetInputStore(useShallow((state) => state.data));
   const { handleCardClick, handleIntegerCardClick, handleBooleanCardClick } =
     useOffsetEntriesHandleCardsClick();
@@ -35,7 +28,7 @@ export default function OffsetEntries({
     maxValue: CountersTresholds.COUNTERS_MAX_TRESHOLD,
     unit: PARAMETER_UNITS[OffsetInputParams.COUNTER_VALUE],
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const printingMachineSpeedCardProps: AddParameterCardProps = {
@@ -46,7 +39,7 @@ export default function OffsetEntries({
     maxValue: tresholdsData?.offset_printing_machine_speed_max ?? null,
     unit: PARAMETER_UNITS[OffsetInputParams.PRINTING_MACHINE_SPEED],
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const totalAirpressureCardProps: AddParameterCardProps = {
@@ -57,7 +50,7 @@ export default function OffsetEntries({
     maxValue: tresholdsData?.offset_total_air_pressure_max ?? null,
     unit: PARAMETER_UNITS[OffsetInputParams.TOTAL_AIR_PRESSURE],
     onClick: (val) => handleCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const paddingFurnaceTempCardProps: AddParameterCardProps = {
@@ -68,7 +61,7 @@ export default function OffsetEntries({
     maxValue: tresholdsData?.offset_padding_furnace_temp_max ?? null,
     unit: PARAMETER_UNITS[OffsetInputParams.PADDING_FURNACE_TEMP],
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const offsetFurnaceTempCardProps: AddParameterCardProps = {
@@ -79,7 +72,7 @@ export default function OffsetEntries({
     maxValue: tresholdsData?.offset_offset_furnace_temp_max ?? null,
     unit: PARAMETER_UNITS[OffsetInputParams.OFFSET_FURNACE_TEMP],
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const printerMotorCardProps: AddParameterCardProps = {
@@ -90,7 +83,7 @@ export default function OffsetEntries({
     maxValue: tresholdsData?.offset_printer_motor_max ?? null,
     unit: PARAMETER_UNITS[OffsetInputParams.PRINTER_MOTOR],
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const baseCoverHoldersMotorCardProps: AddParameterCardProps = {
@@ -101,7 +94,7 @@ export default function OffsetEntries({
     maxValue: tresholdsData?.offset_base_covers_holders_motor_max ?? null,
     unit: PARAMETER_UNITS[OffsetInputParams.BASE_COVERS_HOLDERS_MOTOR],
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const baseCoversStationMotorCardProps: AddParameterCardProps = {
@@ -112,73 +105,67 @@ export default function OffsetEntries({
     maxValue: tresholdsData?.offset_base_covers_station_motor_max ?? null,
     unit: PARAMETER_UNITS[OffsetInputParams.BASE_COVERS_STATION_MOTOR],
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const printedBox1CardProps: AddParameterCardProps = {
     id: OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_1,
-    title:
-      OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_1],
+    title: OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_1],
     value: parseValue(data.imprint_quantity_printed_box_1),
     minValue: tresholdsData?.offset_imprint_quantity_printed_box_1_min ?? null,
     maxValue: tresholdsData?.offset_imprint_quantity_printed_box_1_max ?? null,
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const printedBox2CardProps: AddParameterCardProps = {
     id: OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_2,
-    title:
-      OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_2],
+    title: OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_2],
     value: parseValue(data.imprint_quantity_printed_box_2),
     minValue: tresholdsData?.offset_imprint_quantity_printed_box_2_min ?? null,
     maxValue: tresholdsData?.offset_imprint_quantity_printed_box_2_max ?? null,
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const printedBox3CardProps: AddParameterCardProps = {
     id: OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_3,
-    title:
-      OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_3],
+    title: OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_3],
     value: parseValue(data.imprint_quantity_printed_box_3),
     minValue: tresholdsData?.offset_imprint_quantity_printed_box_3_min ?? null,
     maxValue: tresholdsData?.offset_imprint_quantity_printed_box_3_max ?? null,
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const printedBox4CardProps: AddParameterCardProps = {
     id: OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_4,
-    title:
-      OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_4],
+    title: OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_4],
     value: parseValue(data.imprint_quantity_printed_box_4),
     minValue: tresholdsData?.offset_imprint_quantity_printed_box_4_min ?? null,
     maxValue: tresholdsData?.offset_imprint_quantity_printed_box_4_max ?? null,
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const printedBox5CardProps: AddParameterCardProps = {
     id: OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_5,
-    title:
-      OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_5],
+    title: OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_5],
     value: parseValue(data.imprint_quantity_printed_box_5),
     minValue: tresholdsData?.offset_imprint_quantity_printed_box_5_min ?? null,
     maxValue: tresholdsData?.offset_imprint_quantity_printed_box_5_max ?? null,
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const printedBox6CardProps: AddParameterCardProps = {
     id: OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_6,
-    title:
-      OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_6],
+    title: OFFSET_PARAMETER_NAMES[OffsetInputParams.IMPRINT_QUANTITY_PRINTED_BOX_6],
     value: parseValue(data.imprint_quantity_printed_box_6),
     minValue: tresholdsData?.offset_imprint_quantity_printed_box_6_min ?? null,
     maxValue: tresholdsData?.offset_imprint_quantity_printed_box_6_max ?? null,
     onClick: (val) => handleIntegerCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const inkSupplyTimeCardProps: AddParameterCardProps = {
@@ -189,7 +176,7 @@ export default function OffsetEntries({
     maxValue: tresholdsData?.offset_ink_supply_time_max ?? null,
     unit: PARAMETER_UNITS[OffsetInputParams.INK_SUPPLY_TIME],
     onClick: (val) => handleCardClick(val),
-    variant: "numeric",
+    variant: 'numeric',
   };
 
   const designMatchCardProps: AddParameterCardProps = {
@@ -197,7 +184,7 @@ export default function OffsetEntries({
     title: OFFSET_PARAMETER_NAMES[OffsetInputParams.DESIGN_MATCH],
     booleanValue: data.design_match ?? null,
     onClick: (val) => handleBooleanCardClick(val),
-    variant: "boolean",
+    variant: 'boolean',
   };
 
   const tubeAppearanceCardProps: AddParameterCardProps = {
@@ -205,7 +192,7 @@ export default function OffsetEntries({
     title: OFFSET_PARAMETER_NAMES[OffsetInputParams.TUBE_APPEARANCE],
     booleanValue: data.tube_appearance ?? null,
     onClick: (val) => handleBooleanCardClick(val),
-    variant: "boolean",
+    variant: 'boolean',
   };
 
   const tubeEdgeDeformationLackCardProps: AddParameterCardProps = {
@@ -213,7 +200,7 @@ export default function OffsetEntries({
     title: OFFSET_PARAMETER_NAMES[OffsetInputParams.TUBE_EDGE_DEFORMATION_LACK],
     booleanValue: data.tube_edge_deformation_lack ?? null,
     onClick: (val) => handleBooleanCardClick(val),
-    variant: "boolean",
+    variant: 'boolean',
   };
 
   const aluminiumClearanceCardProps: AddParameterCardProps = {
@@ -221,7 +208,7 @@ export default function OffsetEntries({
     title: OFFSET_PARAMETER_NAMES[OffsetInputParams.ALUMINIUM_CLEARANCE_LACK],
     booleanValue: data.aluminium_clearance_lack ?? null,
     onClick: (val) => handleBooleanCardClick(val),
-    variant: "boolean",
+    variant: 'boolean',
   };
 
   const dripsLackCardProps: AddParameterCardProps = {
@@ -229,7 +216,7 @@ export default function OffsetEntries({
     title: OFFSET_PARAMETER_NAMES[OffsetInputParams.DRIPS_LACK],
     booleanValue: data.drips_lack ?? null,
     onClick: (val) => handleBooleanCardClick(val),
-    variant: "boolean",
+    variant: 'boolean',
   };
 
   return (

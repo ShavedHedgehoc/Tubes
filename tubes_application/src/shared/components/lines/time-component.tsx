@@ -1,5 +1,5 @@
-import { useDate } from "@/shared/helpers/use-date";
-import { HStack, Text } from "@chakra-ui/react";
+import { useDate } from '@/shared/helpers/use-date';
+import { HStack, Text } from '@chakra-ui/react';
 
 export default function TimeComponent() {
   const { time, date } = useDate();

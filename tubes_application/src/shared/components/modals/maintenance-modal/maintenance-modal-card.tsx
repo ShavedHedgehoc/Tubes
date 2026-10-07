@@ -1,14 +1,6 @@
-import type { IMaintenanceLog } from "@/shared/api/services/summary-service";
-import {
-  Badge,
-  Button,
-  Card,
-  Circle,
-  HStack,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
-import { CheckIcon, PlayIcon, Square } from "lucide-react";
+import type { IMaintenanceLog } from '@/shared/api/services/summary-service';
+import { Badge, Button, Card, Circle, HStack, Text, VStack } from '@chakra-ui/react';
+import { CheckIcon, PlayIcon, Square } from 'lucide-react';
 
 export function MaintenanceModalCard({
   item,
@@ -37,9 +29,9 @@ export function MaintenanceModalCard({
 
   return (
     <Card.Root
-      variant={isActive ? "outline" : "subtle"}
-      borderColor={isActive ? "gray.600" : "transparent"}
-      bg={isCompleted ? "bg.subtle" : "bg.panel"}
+      variant={isActive ? 'outline' : 'subtle'}
+      borderColor={isActive ? 'gray.600' : 'transparent'}
+      bg={isCompleted ? 'bg.subtle' : 'bg.panel'}
       mb={3}
       transition="all 0.2s"
     >
@@ -50,11 +42,11 @@ export function MaintenanceModalCard({
               size="8"
               bg={
                 // isCompleted ? "green.100" : isActive ? "green.100" : "gray.100"
-                isCompleted ? "green.100" : "gray.100"
+                isCompleted ? 'green.100' : 'gray.100'
               }
               color={
                 // isCompleted ? "green.600" : isActive ? "green.600" : "gray.400"
-                isCompleted ? "green.600" : "gray.400"
+                isCompleted ? 'green.600' : 'gray.400'
               }
             >
               {
@@ -62,7 +54,7 @@ export function MaintenanceModalCard({
                   <CheckIcon size={16} />
                 ) : (
                   <Text fontSize="md" fontWeight="bold" color="bg">
-                    {item.order ?? "-"}
+                    {item.order ?? '-'}
                   </Text>
                 )
                 //   isActive ? (
@@ -77,10 +69,7 @@ export function MaintenanceModalCard({
               }
             </Circle>
             <VStack align="start" gap={0}>
-              <Text
-                fontWeight="semibold"
-                color={isCompleted ? "fg.subtle" : "fg"}
-              >
+              <Text fontWeight="semibold" color={isCompleted ? 'fg.subtle' : 'fg'}>
                 {item.title}
               </Text>
               {isStartDisabled && (
@@ -102,7 +91,7 @@ export function MaintenanceModalCard({
                 <Button
                   size="sm"
                   colorPalette="green"
-                  variant={isActive ? "ghost" : "solid"}
+                  variant={isActive ? 'ghost' : 'solid'}
                   disabled={isStartDisabled || isActive}
                   onClick={handleStart}
                 >
@@ -112,7 +101,7 @@ export function MaintenanceModalCard({
                 <Button
                   size="sm"
                   colorPalette="red"
-                  variant={!isActive ? "ghost" : "solid"}
+                  variant={!isActive ? 'ghost' : 'solid'}
                   disabled={!isActive}
                   onClick={handleStop}
                 >

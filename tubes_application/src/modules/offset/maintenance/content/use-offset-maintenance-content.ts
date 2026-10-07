@@ -1,18 +1,15 @@
-import type { ISummary } from "@/shared/api/services/summary-service";
-import { useShallow } from "zustand/shallow";
-import { useOffsetEmployeeStore } from "../../store/use-offset-employee-store";
-import { useOffsetMaintenanceStore } from "../../store/use-offset-maintenance-store";
-import type { CreateStatusDto } from "@/shared/api/services/status-service";
-import { useCreateStatus } from "@/shared/api/use-create-status";
-import { useNavigate } from "react-router-dom";
-import { RouteNames } from "@/shared/router/route-names";
-import { useOffsetConveyorStore } from "../../store/use-offset-conveyor-store";
-import {
-  useUpdateMaintenanceLog,
-  type UpdateMaintenanceLogDto,
-} from "@/shared/api";
-import { useState } from "react";
-import type { MaintenanceHookReturn } from "@/shared/components/layouts/maintenance-post-content-layout";
+import type { ISummary } from '@/shared/api/services/summary-service';
+import { useShallow } from 'zustand/shallow';
+import { useOffsetEmployeeStore } from '../../store/use-offset-employee-store';
+import { useOffsetMaintenanceStore } from '../../store/use-offset-maintenance-store';
+import type { CreateStatusDto } from '@/shared/api/services/status-service';
+import { useCreateStatus } from '@/shared/api/use-create-status';
+import { useNavigate } from 'react-router-dom';
+import { RouteNames } from '@/shared/router/route-names';
+import { useOffsetConveyorStore } from '../../store/use-offset-conveyor-store';
+import { useUpdateMaintenanceLog, type UpdateMaintenanceLogDto } from '@/shared/api';
+import { useState } from 'react';
+import type { MaintenanceHookReturn } from '@/shared/components/layouts/maintenance-post-content-layout';
 
 export default function useOffsetMaintenanceContent({
   summaryData,
@@ -20,9 +17,7 @@ export default function useOffsetMaintenanceContent({
   summaryData: ISummary | null;
 }): MaintenanceHookReturn {
   const items =
-    summaryData && summaryData.offsetMaintenances.length > 0
-      ? summaryData.offsetMaintenances
-      : [];
+    summaryData && summaryData.offsetMaintenances.length > 0 ? summaryData.offsetMaintenances : [];
 
   const navigate = useNavigate();
   const selectedMaintenance = useOffsetMaintenanceStore(
@@ -31,13 +26,9 @@ export default function useOffsetMaintenanceContent({
   const setSelectedMaintenance = useOffsetMaintenanceStore(
     useShallow((state) => state.setSelectedMaintenance),
   );
-  const employee = useOffsetEmployeeStore(
-    useShallow((state) => state.offsetEmployee),
-  );
+  const employee = useOffsetEmployeeStore(useShallow((state) => state.offsetEmployee));
 
-  const offsetConveyor = useOffsetConveyorStore(
-    useShallow((state) => state.offsetConveyor),
-  );
+  const offsetConveyor = useOffsetConveyorStore(useShallow((state) => state.offsetConveyor));
 
   const { createStatus, isPending } = useCreateStatus();
   const { updateMaintenanceLog } = useUpdateMaintenanceLog();

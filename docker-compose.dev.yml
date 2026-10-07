@@ -3,28 +3,28 @@ services:
     container_name: postgres_container
     image: postgres:16.2-alpine
     environment:
-      POSTGRES_DB: "summary"
+      POSTGRES_DB: 'summary'
       POSTGRES_USER: ${POSTGRES_USERNAME}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - summary-data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - '5432:5432'
     restart: always
     networks:
       - postgres
 
   pgadmin:
     container_name: pgadmin_container
-    image: dpage/pgadmin4:9.10
+    image: dpage/pgadmin4:9.18
     environment:
-      PGADMIN_DEFAULT_EMAIL: "eagle221174@gmail.com"
-      PGADMIN_DEFAULT_PASSWORD: "1"
-      PGADMIN_CONFIG_SERVER_MODE: "False"
+      PGADMIN_DEFAULT_EMAIL: 'eagle221174@gmail.com'
+      PGADMIN_DEFAULT_PASSWORD: '1'
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
     volumes:
       - pgadmin-data:/var/lib/pgadmin
     ports:
-      - "5050:80"
+      - '5050:80'
     restart: unless-stopped
     networks:
       - postgres
@@ -61,14 +61,14 @@ services:
       context: ./docker/nginx
       dockerfile: Dockerfile.file-server
     logging:
-      driver: "json-file"
+      driver: 'json-file'
       options:
-        max-size: "10m"
-        max-file: "3"
+        max-size: '10m'
+        max-file: '3'
     volumes:
       - files-data:/usr/share/nginx/files/uploads
     ports:
-      - "8080:80"
+      - '8080:80'
     restart: always
     networks:
       - postgres

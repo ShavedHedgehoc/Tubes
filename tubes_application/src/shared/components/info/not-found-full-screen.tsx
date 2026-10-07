@@ -1,5 +1,5 @@
-import { AbsoluteCenter, Box, Icon, Text, VStack } from "@chakra-ui/react";
-import { IoWarningOutline } from "react-icons/io5";
+import { AbsoluteCenter, Box, Icon, Text, VStack } from '@chakra-ui/react';
+import { IoWarningOutline } from 'react-icons/io5';
 
 export default function NotFound({ message }: { message: string }) {
   return (
