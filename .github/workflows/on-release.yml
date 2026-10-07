@@ -55,7 +55,7 @@ jobs:
       - name: Git Config
         run: |
           git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@://github.com"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
       # 1. Обновляем версию в package.json монорепозитория
       - name: Bump & Push to Release
