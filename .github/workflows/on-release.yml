@@ -71,7 +71,18 @@ jobs:
       # 3. Синхронизируем обновленные package.json назад в main
       - name: Sync version to Main
         run: |
+          # 👇 Принудительно уничтожаем любые изменения файлов на диске раннера
+          git reset --hard HEAD
+          git clean -fd
+
+          # Скачиваем актуальное состояние удаленного репозитория
           git fetch origin main
+
+          # Теперь переключение гарантированно пройдет без ошибок
           git checkout main
+
+          # Сливаем изменения версий из релизной ветки
           git merge release --no-edit
+
+          # Отправляем обновленный main в GitHub
           git push origin main
