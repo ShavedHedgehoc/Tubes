@@ -1,0 +1,217 @@
+services:
+  postgres:
+    container_name: postgres_container
+    image: postgres:16.2-alpine
+    logging: &default-logging
+      driver: 'json-file'
+      options:
+        max-size: '10m'
+        max-file: '3'
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - summary-data:/var/lib/postgresql/data
+    restart: always
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - postgres
+
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4:9.18
+    logging: *default-logging
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    ports:
+      - '5050:80'
+    restart: unless-stopped
+    networks:
+      - postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  tubes_api:
+    container_name: api_tubes
+    build:
+      context: .
+      dockerfile: docker/api_tubes/Dockerfile.new
+      args:
+        - NODE_ENV=production
+    logging: *default-logging
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/${POSTGRES_DB}?schema=public
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: '5432'
+      POSTGRES_USERNAME: ${POSTGRES_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      PORT: '7100'
+    volumes:
+      - files-data:/app/api_tubes/uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: always
+    healthcheck:
+      test: ['CMD-SHELL', 'nc -z localhost 7100 || exit 1']
+      interval: 3s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+    networks:
+      - postgres
+      - general
+
+  public_api:
+    container_name: public
+    build:
+      context: .
+      dockerfile: docker/public_api/Dockerfile.fast
+      args:
+        - NODE_ENV=production
+    logging: *default-logging
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/${POSTGRES_DB}?schema=public
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: '5432'
+      POSTGRES_USERNAME: ${POSTGRES_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      PORT: '7200'
+    depends_on:
+      postgres:
+        condition: service_healthy
+      tubes_api:
+        condition: service_healthy
+    restart: always
+    healthcheck:
+      test: ['CMD-SHELL', 'nc -z localhost 7200 || exit 1']
+      interval: 3s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+    networks:
+      - postgres
+      - general
+
+  new_app:
+    container_name: new_app
+    build:
+      context: .
+      dockerfile: docker/new-app/Dockerfile.new
+      args:
+        - NODE_ENV=production
+        - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+        - INTERNAL_API_URL=${INTERNAL_API_URL}
+    logging: *default-logging
+    environment:
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+      - INTERNAL_API_URL=${INTERNAL_API_URL}
+      - NEXTAUTH_URL=${NEXTAUTH_URL}
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+    depends_on:
+      tubes_api:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD-SHELL', 'curl -L --fail http://localhost:80/login || exit 1']
+      interval: 3s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    restart: always
+    networks:
+      - general
+
+  tubes_dash:
+    container_name: tubes_dash
+    build:
+      context: .
+      dockerfile: docker/tubes/Dockerfile.new
+      args:
+        - NODE_ENV=production
+    logging: *default-logging
+    depends_on:
+      tubes_api:
+        condition: service_healthy
+    restart: always
+    healthcheck:
+      test: ['CMD-SHELL', 'curl --fail http://localhost:3100/ || exit 1']
+      interval: 3s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    networks:
+      - general
+
+  nginx:
+    container_name: nginx_container
+    build:
+      context: ./docker/nginx
+      args:
+        - NODE_ENV=production
+    logging: *default-logging
+    restart: always
+    ports:
+      - '80:80'
+      - '3100:3100'
+      - '7200:7200'
+    networks:
+      - general
+    depends_on:
+      tubes_api:
+        condition: service_healthy
+      public_api:
+        condition: service_healthy
+      new_app:
+        condition: service_healthy
+  nginx-file-server:
+    container_name: nginx_file_server_container
+    build:
+      context: ./docker/nginx
+      dockerfile: Dockerfile.file-server
+      args:
+        - NODE_ENV=production
+    logging: *default-logging
+    volumes:
+      - files-data:/usr/share/nginx/files/uploads
+    ports:
+      - '8080:80'
+    restart: always
+    networks:
+      - general
+
+volumes:
+  summary-data:
+  pgadmin-data:
+  files-data:
+
+networks:
+  general:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16
+          gateway: 172.18.0.1
+  postgres:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.19.0.0/16
+          gateway: 172.19.0.1

@@ -33,7 +33,7 @@ jobs:
           npm version patch -m "chore: release %s [skip ci]"
           NEW_VERSION=$(node -p "require('./package.json').version")
           npm version $NEW_VERSION --workspaces --no-git-tag-version
-          git add apps/*/package.json packages/*/package.json package-lock.json
+          git add package.json package-lock.json api_tubes/package.json db/package.json new-app/package.json public_api/package.json tubes_application/package.json
           git commit --amend --no-edit
           git push origin release --follow-tags --force
 
