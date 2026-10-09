@@ -14,6 +14,11 @@ services:
     volumes:
       - summary-data:/var/lib/postgresql/data
     restart: always
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB']
+      interval: 5s
+      timeout: 5s
+      retries: 5
     networks:
       - postgres
 
@@ -33,7 +38,8 @@ services:
     networks:
       - postgres
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
 
   tubes_api:
     container_name: api_tubes
@@ -53,8 +59,15 @@ services:
     volumes:
       - files-data:/app/api_tubes/uploads
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     restart: always
+    healthcheck:
+      test: ['CMD-SHELL', 'nc -z localhost 7100 || exit 1']
+      interval: 3s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
     networks:
       - postgres
       - general
@@ -75,9 +88,17 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       PORT: '7200'
     depends_on:
-      - postgres
-      - tubes_api
+      postgres:
+        condition: service_healthy
+      tubes_api:
+        condition: service_healthy
     restart: always
+    healthcheck:
+      test: ['CMD-SHELL', 'nc -z localhost 7200 || exit 1']
+      interval: 3s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
     networks:
       - postgres
       - general
@@ -92,7 +113,14 @@ services:
       - NEXTAUTH_URL=${NEXTAUTH_URL}
       - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
     depends_on:
-      - tubes_api
+      tubes_api:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD-SHELL', 'curl -L --fail http://localhost:80/login || exit 1']
+      interval: 3s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
     restart: always
     networks:
       - general
@@ -102,8 +130,15 @@ services:
     image: ghcr.io/shavedhedgehoc/tubes/tubes_dash:latest
     logging: *default-logging
     depends_on:
-      - tubes_api
+      tubes_api:
+        condition: service_healthy
     restart: always
+    healthcheck:
+      test: ['CMD-SHELL', 'curl --fail http://localhost:3100/ || exit 1']
+      interval: 3s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
     networks:
       - general
 
@@ -119,10 +154,12 @@ services:
     networks:
       - general
     depends_on:
-      - tubes_dash
-      - new_app
-      - public_api
-
+      tubes_api:
+        condition: service_healthy
+      public_api:
+        condition: service_healthy
+      new_app:
+        condition: service_healthy
   nginx-file-server:
     container_name: nginx_file_server_container
     image: ghcr.io/shavedhedgehoc/tubes/nginx-file-server:latest

@@ -50,7 +50,7 @@ export function AddReasonDialog({
         </DialogHeader>
         <div className="space-y-4 pt-4">
           <Input
-            placeholder="Например: Авария на конвейере"
+            placeholder="Например: Бушон не докручен"
             value={newReasonText}
             onChange={(e) => setNewReasonText(e.target.value)}
             disabled={createReasonPending}
