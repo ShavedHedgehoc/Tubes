@@ -28,13 +28,16 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      # 1. Обновляем версию в package.json монорепозитория
       - name: Bump & Push to Release
         run: |
-          npm version patch --include-workspace-root --workspaces -m "chore: release %s [skip ci]"
-          git push origin release --follow-tags
+          npm install -g pnpm@10
+          pnpm version patch --no-git-checks -m "chore: release %s [skip ci]"
+          NEW_VERSION=$(node -p "require('./package.json').version")
+          pnpm --filter "./apps/**" --filter "./packages/**" exec npm version $NEW_VERSION --no-git-tag-version
+          git add apps/*/package.json packages/*/package.json pnpm-lock.yaml
+          git commit --amend --no-edit
+          git push origin release --follow-tags --force
 
-      # 2. Собираем универсальные Docker-образы
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -53,7 +56,6 @@ jobs:
           export DOCKER_BUILDKIT=1
           export COMPOSE_DOCKER_CLI_BUILD=1
 
-          # Подставляем переменные из вашего примера .env для сборки new_app
           export NEXT_PUBLIC_API_URL="/api/tubes"
           export INTERNAL_API_URL="http://tubes_api:7100/api_tubes"
 
@@ -67,22 +69,11 @@ jobs:
             docker tag monorepo-${svc} ghcr.io/$IMAGE_OWNER/$IMAGE_REPO/${svc}:latest
             docker push ghcr.io/$IMAGE_OWNER/$IMAGE_REPO/${svc}:latest
           done
-
-      # 3. Синхронизируем обновленные package.json назад в main
       - name: Sync version to Main
         run: |
-          # 👇 Принудительно уничтожаем любые изменения файлов на диске раннера
           git reset --hard HEAD
-          git clean -fd
-
-          # Скачиваем актуальное состояние удаленного репозитория
-          git fetch origin main
-
-          # Теперь переключение гарантированно пройдет без ошибок
-          git checkout main
-
-          # Сливаем изменения версий из релизной ветки
-          git merge release --no-edit
-
-          # Отправляем обновленный main в GitHub
+          git clean -fd         
+          git fetch origin main          
+          git checkout main          
+          git merge release --no-edit          
           git push origin main

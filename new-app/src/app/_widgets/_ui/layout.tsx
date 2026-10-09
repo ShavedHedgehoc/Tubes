@@ -13,10 +13,12 @@ export function Layout({
   logo,
   nav,
   profile,
+  ver,
   actions,
 }: {
   logo?: React.ReactNode;
   nav?: React.ReactNode;
+  ver?: React.ReactNode;
   profile?: React.ReactNode;
   actions?: React.ReactNode;
 }) {
@@ -43,9 +45,10 @@ export function Layout({
         </div>
 
         <div className="mr-4 hidden md:flex ">{logo}</div>
-        <div className="items-center flex-1 flex gap-3 justify-between">
+        <div className="items-center flex-1 flex gap-3 justify-between ">
           <div className="hidden md:flex">{nav}</div>
           <div className="flex flex-1 items-center justify-end space-x-3 ">
+            {ver}
             {actions}
             {profile}
           </div>
