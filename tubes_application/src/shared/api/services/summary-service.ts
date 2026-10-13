@@ -14,6 +14,7 @@ interface ISummaryData {
   isActive: boolean;
   isFinished: boolean;
   shift: number;
+  responsible: string;
 }
 
 interface ITreshold {

@@ -4,3 +4,4 @@ export { deleteSummary } from "./delete-summary";
 export { setActiveSummary } from "./set-active-summary";
 export { setFinishSummary } from "./set-finish-summary";
 export { updateSummary } from "./update-summary";
+export { getProductionReport } from "./get-production-report";

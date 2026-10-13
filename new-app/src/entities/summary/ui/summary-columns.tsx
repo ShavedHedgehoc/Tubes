@@ -91,6 +91,16 @@ export const baseSummaryColumns: ColumnDef<SummaryEntity>[] = [
     },
   },
   {
+    accessorKey: "productionPerBoxes",
+    header: () => <div className="text-center">В коробах</div>,
+    cell: ({ row }) => {
+      const summary = row.original;
+      return (
+        <div className="text-center">{summary.productionPerBoxes ?? 0}</div>
+      );
+    },
+  },
+  {
     accessorKey: "execution",
     header: () => (
       <div className="text-center" style={{ width: "60px" }}>

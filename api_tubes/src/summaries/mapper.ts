@@ -1,4 +1,4 @@
-import { Product, Summary, Batch } from "db";
+import { Product, Summary, Batch, User } from "db";
 
 export interface IMappedSummary {
   id: number;
@@ -14,6 +14,7 @@ export interface IMappedSummary {
   marking: string;
   date: Date;
   shift: number;
+  responsible: string | null;
 }
 
 export interface IMappedExtrusionParams {
@@ -121,10 +122,12 @@ export const mappedSummary = ({
   summary,
   batch,
   product,
+  responsible,
 }: {
   summary: Summary;
   batch: Batch;
   product: Product;
+  responsible: User | null;
 }): IMappedSummary => {
   return {
     id: summary.id,
@@ -140,6 +143,7 @@ export const mappedSummary = ({
     isActive: summary.isActive,
     isFinished: summary.isFinished,
     shift: summary.shift,
+    responsible: responsible?.name ?? null,
   };
 };
 

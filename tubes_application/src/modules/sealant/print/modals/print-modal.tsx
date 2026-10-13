@@ -94,6 +94,8 @@ export default function PrintModal({ summaryData }: { summaryData: ISummary | nu
         employee: string;
         summaryId: number | null;
         employeeId: number | null;
+        shift: number | null;
+        responsible: string | null;
       } = {
         name: summaryData?.data.product_name ?? '',
         code: summaryData?.data.product_code ?? '',
@@ -104,6 +106,8 @@ export default function PrintModal({ summaryData }: { summaryData: ISummary | nu
         employee: employee?.name ?? '',
         employeeId: employee?.id ?? null,
         summaryId: summaryData?.data.id ?? null,
+        shift: summaryData?.data?.shift ?? null,
+        responsible: summaryData?.data?.responsible ?? null,
       };
       const zpl = makeBoxReceipt(zplData);
       const dto: PrintReceiptDto = {

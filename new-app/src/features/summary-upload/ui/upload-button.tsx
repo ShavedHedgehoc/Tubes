@@ -7,7 +7,7 @@ import { useRoles } from "@/entities/user";
 
 export function UploadButton() {
   const { setParams } = useSummaryUiParams();
-  const { isUser } = useRoles();
+  const { isPlanner } = useRoles();
 
   const handleAddClick = () => {
     setParams({ "upload-summary": true });
@@ -20,7 +20,7 @@ export function UploadButton() {
         variant="default"
         className=" px-3 h-8 min-h-0 "
         onClick={handleAddClick}
-        disabled={!isUser}
+        disabled={!isPlanner}
       >
         Загрузить
       </Button>

@@ -17,6 +17,7 @@ import { useMemo } from "react";
 import { CrewEntity } from "@/entities/crew";
 import { useRoles } from "@/entities/user";
 import { ConveyorEntity } from "@/entities/conveyor";
+import { PendingReportModal, ReportButton } from "@/features/production-report";
 
 interface Props {
   conveyorListItems: ConveyorEntity[] | [];
@@ -28,7 +29,7 @@ export default function SummariesView({
   conveyorListItems,
 }: Props) {
   const { params, setParams } = useSummarySearchParams();
-  const { isAllowSummaryEdit } = useRoles();
+  const { isAllowSummaryEdit, isPlanner } = useRoles();
 
   const { data, isPlaceholderData, isFetching } = useQuery({
     ...summaryApi.summaryQueries.list(params, { isServer: false }),
@@ -47,7 +48,12 @@ export default function SummariesView({
     picture: <PlantIcon />,
     filter: (
       <SummaryFilter
-        actions={<UploadButton />}
+        actions={
+          <div className="flex gap-2">
+            <ReportButton />
+            <UploadButton />
+          </div>
+        }
         conveyorListItems={conveyorListItems}
         crewListItems={crewListItems}
       />
@@ -56,11 +62,11 @@ export default function SummariesView({
     setParams: setParams,
     isFetching: isFetching || isPlaceholderData,
   };
-
   return (
     <div>
       <DataViewLayout {...dataViewProps} />
       {isAllowSummaryEdit && <EditSummaryModal crews={crewListItems} />}
+      {isPlanner && <PendingReportModal />}
     </div>
   );
 }
