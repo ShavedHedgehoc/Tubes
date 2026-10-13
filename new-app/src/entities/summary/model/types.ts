@@ -63,13 +63,14 @@ export type SummaryAvailable = SummaryBase & {
 export type SummaryEntity = SummaryAvailable & {
   conveyor: Conveyor;
   production: number | null;
+  // add box field
+  productionPerBoxes: number | null;
   execution: number | null;
   defectPercent: number | null;
   unitWeight: number | null;
   crewName: string | null;
   defectRateGoal: number | null;
   executionGoal: number | null;
-
   _count: PostStatusCount;
 };
 
@@ -96,6 +97,22 @@ export type SummaryResponse = {
   summaries: SummaryEntity[];
   total: number;
   totalPages: number;
+};
+
+export type SummaryProductionReportRow = Omit<
+  SummaryEntity,
+  | "execution"
+  | "defectPercent"
+  | "unitWeight"
+  | "defectRateGoal"
+  | "executionGoal"
+  | "_count"
+>;
+export type SummaryProductionReportResponse = {
+  startDate: Date;
+  endDate: Date;
+
+  summaries: SummaryProductionReportRow[];
 };
 
 export type SummuryAvailableResponse = {

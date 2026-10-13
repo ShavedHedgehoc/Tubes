@@ -20,6 +20,7 @@ describe("Summary Columns", () => {
     isActive: false,
     isFinished: false,
     production: null,
+    productionPerBoxes: null,
     execution: null,
     defectPercent: null,
     unitWeight: null,

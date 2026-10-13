@@ -19,24 +19,15 @@ import { useConveyorUiParams } from "@/entities/conveyor";
 import { CrewSelector } from "./crew-selector";
 import { useQuery } from "@tanstack/react-query";
 import { crewApi } from "@/entities/crew";
+import { useAppSession } from "@/entities/user";
 
 interface Props {
   row: SummaryAvailable;
 }
 
-// const LIST_ITEMS = [
-//   { id: 1, name: "Бригада 1" },
-//   { id: 2, name: "Бригада 2" },
-//   { id: 3, name: "Бригада 3" },
-//   { id: 4, name: "Бригада 4" },
-//   { id: 5, name: "Бригада 5" },
-//   { id: 6, name: "Бригада 6" },
-//   { id: 7, name: "Бригада 7" },
-//   { id: 8, name: "Бригада 8" },
-
-// ];
-
 export default function StartButton({ row }: Props) {
+  const session = useAppSession();
+  const user = session?.data?.user;
   const { params, setParams } = useConveyorUiParams();
   const { startConveyor, startPending } = useStartConveyor();
 
@@ -46,10 +37,10 @@ export default function StartButton({ row }: Props) {
 
   const handleStart = () => {
     const crewIdRaw = params["crew-id"]?.[0];
-    if (crewIdRaw) {
+    if (crewIdRaw && user) {
       const crew_id = Number(crewIdRaw);
       startConveyor(
-        { id: row.id, crew_id: crew_id },
+        { id: row.id, crew_id: crew_id, user_id: user.id },
         {
           onSuccess: () => {
             setParams({

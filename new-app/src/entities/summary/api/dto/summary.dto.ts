@@ -33,6 +33,7 @@ export type SummaryDto = {
   batch: BatchEntity;
   conveyor: ConveyorEntity;
   production: number | null;
+  productionPerBoxes: number | null;
   execution: number | null;
   defectPercent: number | null;
   unitWeight: number | null;

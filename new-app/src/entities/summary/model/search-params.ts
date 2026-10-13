@@ -12,6 +12,7 @@ import {
 
 export const summaryUiSchema = {
   "upload-summary": parseAsBoolean.withDefault(false),
+  "pending-report": parseAsBoolean.withDefault(false),
   "edit-summary": parseAsString,
   "view-errors": parseAsBoolean.withDefault(false),
 };

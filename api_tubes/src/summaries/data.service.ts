@@ -64,6 +64,7 @@ export class DataService {
           },
           batch: true,
           conveyor: true,
+          production_boxes: true,
           statuses: {
             select: { counter_value: true },
             where: { finished: true, post: { value: 4 } },
@@ -123,6 +124,9 @@ export class DataService {
       const crewName = crew ? crew.name : null;
       const defectRateGoal = getGoalValue("defect_rate", summary.date);
       const executionGoal = getGoalValue("execution_rate", summary.date);
+      const productionPerBoxes = summary.production_boxes.reduce((sum, box) => {
+        return sum + (box.quantity || 0);
+      }, 0);
       return {
         ...rest,
         product: productRest,
@@ -133,10 +137,94 @@ export class DataService {
         crewName,
         defectRateGoal,
         executionGoal,
+        productionPerBoxes,
       };
     });
 
     return { total: count, rows: rows };
+  }
+
+  async getSummaryProductionReport(query: GetSummariesListDto) {
+    const startDate = new Date(new Date(query.start_date).setHours(0));
+    const endDate = new Date(new Date(query.end_date).setHours(23));
+
+    type SummaryWhere = Prisma.Args<
+      typeof this.prisma.summary,
+      "findMany"
+    >["where"];
+
+    const where: SummaryWhere = {
+      isFinished: true,
+      date: {
+        gte: startDate,
+        lte: endDate,
+      },
+      ...(query.conveyors?.length && {
+        conveyor_id: { in: query.conveyors },
+      }),
+      ...(query.crews?.length && {
+        OR: [
+          { crew_id: { in: query.crews.filter((id) => id !== 0) } },
+          ...(query.crews.includes(0) ? [{ crew_id: null }] : []),
+        ],
+      }),
+      product: query.code
+        ? {
+            code: { contains: query.code, mode: "insensitive" },
+          }
+        : undefined,
+      ...(query.states?.includes(2) && { isFinished: true }),
+      ...(query.states?.includes(1) && { isActive: true }),
+    };
+
+    const summaries = await this.prisma.summary.findMany({
+      where,
+      include: {
+        crew: true,
+        product: {
+          include: { unit_weight: { take: 1, orderBy: [{ id: "desc" }] } },
+        },
+        batch: true,
+        conveyor: true,
+        production_boxes: true,
+        statuses: {
+          select: { counter_value: true },
+          where: { finished: true, post: { value: 4 } },
+          take: 1,
+          orderBy: [{ id: "desc" }],
+        },
+      },
+      orderBy: [
+        { date: "asc" },
+        { conveyor: { name: "asc" } },
+        { shift: "asc" },
+      ],
+    });
+
+    const rows = summaries.map((summary) => {
+      const production = summary.statuses?.[0]?.counter_value ?? null;
+      const {
+        statuses: _statuses,
+        product,
+        crew,
+        production_boxes,
+        ...rest
+      } = summary;
+      const crewName = crew ? crew.name : null;
+
+      const productionPerBoxes = production_boxes.reduce((sum, box) => {
+        return sum + (box.quantity ?? 0);
+      }, 0);
+      return {
+        ...rest,
+        product,
+        production,
+        crewName,
+        productionPerBoxes,
+      };
+    });
+
+    return { startDate, endDate, rows: rows };
   }
 
   async getSummaryById(id: number): Promise<SummaryDetailResponse> {

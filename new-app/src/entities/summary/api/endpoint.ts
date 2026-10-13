@@ -1,5 +1,6 @@
 export const SUMMARY_ENDPOINTS = {
   LIST: "/summaries",
+  PRODUCTION_REPORT: "/summaries/production_report",
   UPLOAD: "/summaries",
   UPDATE: "/summaries",
   DELETE: "/summaries",
