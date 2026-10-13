@@ -20,11 +20,17 @@ export class MutationService {
   }
 
   async startSummary(dto: StartSummaryDto) {
+    const existsUser = await this.prisma.user.findUnique({
+      where: { id: dto.user_id },
+    });
+    if (!existsUser)
+      throw new HttpException("Пользователь не найден", HttpStatus.NOT_FOUND);
     const summary = await this.prisma.summary.update({
       where: { id: dto.id },
       data: {
         isActive: true,
         isFinished: false,
+        responsible: { connect: { id: dto.user_id } },
         crew: { connect: { id: dto.crew_id } },
       },
     });

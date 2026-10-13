@@ -74,6 +74,7 @@ const summaryInclude = {
       },
     },
   },
+  responsible: true,
 } satisfies Prisma.SummaryInclude;
 type SummaryWithIncludes = Prisma.SummaryGetPayload<{
   include: typeof summaryInclude;
@@ -219,6 +220,10 @@ export class SummariesService {
 
   async getSummariesList(query: GetSummariesListDto) {
     return this.dataService.getSummariesList(query);
+  }
+
+  async getSummaryProductionReport(query: GetSummariesListDto) {
+    return this.dataService.getSummaryProductionReport(query);
   }
 
   private async getIdleTimeSum(
@@ -436,6 +441,7 @@ export class SummariesService {
         summary: activeRecord,
         batch: activeRecord.batch,
         product: activeRecord.product,
+        responsible: activeRecord.responsible,
       }),
       // tresholds: activeRecord.product.tresholds[0] ?? null,
       tresholds: tresholds,

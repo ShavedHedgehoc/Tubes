@@ -41,6 +41,14 @@ export class SummariesController {
     return this.summaryService.getSummariesList(query);
   }
 
+  @ApiOperation({ summary: "Получить отчет по выпуску с параметрами" })
+  @Get("/production_report")
+  getSummaryProductionReport(
+    @Query(new ValidationPipe({ transform: true })) query: GetSummariesListDto,
+  ) {
+    return this.summaryService.getSummaryProductionReport(query);
+  }
+
   @ApiOperation({ summary: "Получить список сводок со значением брака" })
   @Get("/defects")
   getSummaryDefectList(

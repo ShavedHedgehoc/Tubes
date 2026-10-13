@@ -10,6 +10,7 @@ import { getAvailableSummaries } from "./get-available-summaries";
 import { getSummaryStatuses } from "./get-summary-statuses";
 import { getSummaryReport } from "./get-summary-report";
 import { getCrewsStats } from "./get-crews-stats";
+import { getProductionReport } from "./get-production-report";
 
 export const summaryQueries = {
   all: () => ["summaries"],
@@ -76,6 +77,29 @@ export const summaryQueries = {
       queryKey: [...summaryQueries.crewsStats(), { ...params }],
       queryFn: () =>
         getCrewsStats({
+          ...params,
+          options,
+        }),
+      staleTime: 60 * 1000,
+    }),
+  productionReports: () => [...summaryQueries.all(), "productionReport"],
+  productionReport: (params: SummaryParams, options?: { isServer: boolean }) =>
+    queryOptions({
+      queryKey: [
+        ...summaryQueries.productionReports(),
+        {
+          ...params,
+          conveyors: Array.isArray(params.conveyors)
+            ? [...params.conveyors].sort()
+            : (params.conveyors ?? null),
+          states: Array.isArray(params.states)
+            ? [...params.states].sort()
+            : (params.states ?? null),
+          code: params.code ?? null,
+        },
+      ],
+      queryFn: () =>
+        getProductionReport({
           ...params,
           options,
         }),

@@ -47,6 +47,7 @@ class ISummaryData {
   isActive: boolean;
   isFinished: boolean;
   shift: number;
+  responsible: string | null;
 }
 
 class IExtrusionParams {

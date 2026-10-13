@@ -198,6 +198,7 @@ model User {
   user_roles      UserRole[]
   laboratoryLocks LaboratoryLock[]
   token           Token?
+  summaries       Summary[]
 
   @@map("users")
 }
@@ -386,6 +387,8 @@ model Summary {
   crew               Crew?              @relation(fields: [crew_id], references: [id])
   crew_id            Int?
   laboratory_locks   LaboratoryLock[]
+  responsible        User?              @relation(fields: [responsible_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  responsible_id     Int?
 
   @@index([conveyor_id, isActive])
   @@index([date])
