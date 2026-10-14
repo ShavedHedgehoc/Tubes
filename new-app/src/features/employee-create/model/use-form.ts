@@ -19,6 +19,7 @@ export const useCreateEmployeeForm = ({ ranks }: { ranks: RankEntity[] }) => {
       name: "",
       barcode: "",
       rank_id: expectedValues[0],
+      allowed_post_ids: [],
     },
   });
 

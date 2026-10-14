@@ -20,6 +20,9 @@ export const employeeParamsSchema = {
   ranks: parseAsArrayOf(parseAsString).withDefault(
     undefined as unknown as string[],
   ),
+  posts: parseAsArrayOf(parseAsString).withDefault(
+    undefined as unknown as string[],
+  ),
   name_asc: parseAsStringLiteral(["true", "false"] as const).withDefault(
     "true",
   ),

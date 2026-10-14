@@ -68,6 +68,7 @@ describe("Server Component: Employees", () => {
       limit: 10,
       name: null,
       ranks: [],
+      posts: [],
       banned: null,
       name_asc: "true",
     };
@@ -93,6 +94,7 @@ describe("Server Component: Employees", () => {
       limit: 10,
       name: null,
       ranks: [],
+      posts: [],
       banned: null,
       name_asc: "true",
     };

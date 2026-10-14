@@ -10,6 +10,7 @@ export const createEmployeeFormSchema = z.object({
     .regex(/^\d+$/, "Штрихкод может содержать только цифры")
     .length(13, "Штрихкод должен быть длиной 13 символов"),
   rank_id: z.number("Выберите разряд").int(),
+  allowed_post_ids: z.array(z.number()),
 });
 
 export type CreateEmployeeFormValues = z.infer<typeof createEmployeeFormSchema>;

@@ -1,5 +1,5 @@
 export type PostDto = {
   id: number;
-  val: number;
+  value: number;
   name: string;
 };

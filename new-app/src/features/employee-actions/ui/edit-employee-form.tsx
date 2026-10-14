@@ -6,14 +6,21 @@ import { EmployeeEntity } from "@/entities/employee/model/types";
 import { RankEntity } from "@/entities/rank";
 import { useEditEmployeeForm } from "../model/use-form";
 import { FormFooter } from "./form-footer";
-import { BarcodeField, NameField, RankSelector } from "./form-fields";
+import {
+  AllowedPostsSelector,
+  BarcodeField,
+  NameField,
+  RankSelector,
+} from "./form-fields";
+import { PostEntity } from "@/entities/post";
 
 interface Props {
   ranks: RankEntity[];
+  posts: PostEntity[];
   data: EmployeeEntity;
 }
 
-export function EditEmployeeForm({ ranks, data }: Props) {
+export function EditEmployeeForm({ ranks, posts, data }: Props) {
   const { form, onSubmit, handleClose, expectedValues, ...state } =
     useEditEmployeeForm({ data, ranks });
 
@@ -31,6 +38,7 @@ export function EditEmployeeForm({ ranks, data }: Props) {
               <NameField />
               <BarcodeField />
               <RankSelector ranks={ranks} expectedValues={expectedValues} />
+              <AllowedPostsSelector posts={posts} />
             </FieldGroup>
           </div>
         </form>

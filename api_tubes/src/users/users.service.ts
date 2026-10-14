@@ -24,14 +24,23 @@ export class UsersService {
       where.banned = query.banned[0] !== 1;
     }
 
-    if (query.roles && query.roles.length > 0) {
-      where.user_roles = {
-        some: {
-          role_id: {
-            in: query.roles,
+    if (query.roles && Array.isArray(query.roles) && query.roles.length > 0) {
+      const andConditions: Prisma.UserWhereInput[] = query.roles.map(
+        (roleId) => ({
+          user_roles: {
+            some: {
+              role_id: roleId,
+            },
           },
-        },
-      };
+        }),
+      );
+      if (where.AND) {
+        where.AND = Array.isArray(where.AND)
+          ? [...where.AND, ...andConditions]
+          : [where.AND, ...andConditions];
+      } else {
+        where.AND = andConditions;
+      }
     }
 
     const { limit = 10, page = 1, name_asc } = query;
@@ -89,9 +98,12 @@ export class UsersService {
       where: { id: dto.id },
       data: {
         user_roles: {
-          deleteMany: idsToRemove.map((id) => ({
-            role_id: id,
-          })),
+          // deleteMany: idsToRemove.map((id) => ({
+          //   role_id: id,
+          // })),
+          deleteMany: {
+            role_id: { in: idsToRemove },
+          },
 
           create: idsToAdd.map((id) => ({
             role: { connect: { id } },

@@ -7,8 +7,15 @@ import { CreateEmployeeForm } from "./create-employee-form";
 import { useModalState } from "@/shared/lib";
 import { useEffect } from "react";
 import { toast } from "sonner";
+import { PostEntity } from "@/entities/post";
 
-export function CreateEmployeeModal({ ranks }: { ranks: RankEntity[] }) {
+export function CreateEmployeeModal({
+  ranks,
+  posts,
+}: {
+  ranks: RankEntity[];
+  posts: PostEntity[];
+}) {
   const { params, setParams } = useEmployeeUiParams();
   const { isOpen, onOpenChange } = useModalState(
     params,
@@ -31,7 +38,7 @@ export function CreateEmployeeModal({ ranks }: { ranks: RankEntity[] }) {
       isOpen={isOpen}
       onOpenChange={onOpenChange}
     >
-      <CreateEmployeeForm ranks={ranks} />
+      <CreateEmployeeForm ranks={ranks} posts={posts} />
     </ModalLayout>
   );
 }

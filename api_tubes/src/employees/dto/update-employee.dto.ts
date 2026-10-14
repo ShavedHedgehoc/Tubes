@@ -1,6 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
 import {
+  IsArray,
+  IsInt,
   IsNotEmpty,
   IsNumber,
   IsString,
@@ -31,4 +33,12 @@ export class UpdateEmployeeDto {
   @Type(() => Number)
   @IsNumber()
   readonly rank_id: number;
+
+  @ApiProperty({
+    example: [1, 2, 3],
+    description: "Идентификаторы доступных постов",
+  })
+  @IsArray()
+  @IsInt({ each: true })
+  readonly allowed_post_ids: number[];
 }

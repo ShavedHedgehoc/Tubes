@@ -1,3 +1,4 @@
+import { PostEntity } from "@/entities/post";
 import { RankEntity } from "@/entities/rank/model/types";
 
 export type EmployeeEntity = {
@@ -7,6 +8,7 @@ export type EmployeeEntity = {
   rank_id: number;
   banned: boolean;
   rank: RankEntity;
+  allowed_posts: PostEntity[];
 };
 
 export type EmployeesResponse = {

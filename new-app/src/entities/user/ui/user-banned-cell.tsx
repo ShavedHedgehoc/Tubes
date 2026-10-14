@@ -11,7 +11,7 @@ export function UserBannedCell({ user }: { user: UserEntity }) {
         </span>
       ) : (
         <span className="inline-flex items-center gap-2 ">
-          <UserCheck className="h-4 w-4 " />
+          <UserCheck className="h-4 w-4" />
           <span className="leading-none">Разрешен</span>
         </span>
       )}

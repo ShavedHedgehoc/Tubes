@@ -22,4 +22,5 @@ export enum AppMessages {
   // BOX_SCAN_ERROR = "Ошибка сканирования короба",
   RECORDS_NOT_FOUND = 'Записей не найдено',
   PARAMS_NOT_FOUND = 'Параметры для этого продукта не найдены',
+  NOT_ALLOWED_TO_POST = 'У вас нет допуска к работе на посту №',
 }

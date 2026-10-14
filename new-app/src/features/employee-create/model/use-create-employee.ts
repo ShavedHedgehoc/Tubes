@@ -9,7 +9,7 @@ export function useCreateEmployee() {
     mutationFn: employeeApi.createEmployee,
     onSuccess: async () => {
       await client.invalidateQueries({
-        queryKey: employeeApi.employeeQueries.lists(),
+        queryKey: employeeApi.employeeQueries.all(),
       });
       toast.success("Сотрудник успешно coздан");
     },
