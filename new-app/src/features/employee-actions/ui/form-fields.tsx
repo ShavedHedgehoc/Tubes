@@ -150,6 +150,7 @@ export function AllowedPostsSelector({ posts }: { posts: PostEntity[] }) {
             ? currentSelectedIds
                 .map((id) => idToNameMap[id])
                 .filter(Boolean)
+                .sort((a, b) => a.localeCompare(b))
                 .join(", ")
             : "Выберите доступные посты...";
 
