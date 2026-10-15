@@ -15,12 +15,17 @@ import { EditEmployeeModal } from "@/features/employee-actions";
 import { AddButton, CreateEmployeeModal } from "@/features/employee-create";
 import { EmployeesFilter } from "@/features/employee-filter";
 import { useMemo } from "react";
+import { PostEntity } from "@/entities/post";
+import { useRoles } from "@/entities/user";
 
 export default function EmployeesView({
   rankListItems,
+  postListItems,
 }: {
   rankListItems: RankEntity[] | [];
+  postListItems: PostEntity[] | [];
 }) {
+  const { isAllowToEmployees } = useRoles();
   const { params, setParams } = useEmployeeSearchParams();
   const { data, isPlaceholderData, isFetching } = useQuery({
     ...employeeApi.employeeQueries.list(params, { isServer: false }),
@@ -38,7 +43,11 @@ export default function EmployeesView({
     totalPages: data?.totalPages ?? 0,
     picture: <EmployeeIcon />,
     filter: (
-      <EmployeesFilter rankListItems={rankListItems} actions={<AddButton />} />
+      <EmployeesFilter
+        rankListItems={rankListItems}
+        postListItems={postListItems}
+        actions={<AddButton />}
+      />
     ),
     params: params,
     setParams: setParams,
@@ -48,8 +57,12 @@ export default function EmployeesView({
   return (
     <div>
       <DataViewLayout {...dataViewProps} />
-      <EditEmployeeModal ranks={rankListItems} />
-      <CreateEmployeeModal ranks={rankListItems} />
+      {isAllowToEmployees && (
+        <EditEmployeeModal ranks={rankListItems} posts={postListItems} />
+      )}
+      {isAllowToEmployees && (
+        <CreateEmployeeModal ranks={rankListItems} posts={postListItems} />
+      )}
     </div>
   );
 }

@@ -43,7 +43,7 @@ export function UserRolesCombobox({
           <ChevronDown className="mr-2 h-4 w-4" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0" align="start">
+      <PopoverContent className="w-50 p-0" align="start">
         <Command className="bg-background shadow-none">
           <CommandList>
             <CommandEmpty>Ничего не найдено.</CommandEmpty>

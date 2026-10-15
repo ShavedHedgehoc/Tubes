@@ -13,11 +13,31 @@ export class EmployeesService {
   async getEmployeeByBarcode(barcode: string) {
     const employee = await this.prisma.employee.findUnique({
       where: { barcode: barcode },
-      include: { rank: true },
+      include: {
+        rank: true,
+        employee_allowed_posts: {
+          include: { post: true },
+        },
+      },
     });
-    if (employee && employee.banned)
+    if (!employee) {
+      throw new HttpException(
+        "Сотрудник с таким штрихкодом не найден",
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
+    if (employee.banned) {
       throw new HttpException("Доступ запрещен!", HttpStatus.FORBIDDEN);
-    return employee;
+    }
+    const { employee_allowed_posts, ...cleanEmployee } = employee;
+    const mappedAllowedPosts = (employee_allowed_posts || []).map(
+      (eap) => eap.post,
+    );
+    return {
+      ...cleanEmployee,
+      allowed_posts: mappedAllowedPosts,
+    };
   }
 
   async getEmployeeList(query: GetEmployeesListDto) {
@@ -31,33 +51,70 @@ export class EmployeesService {
       where.banned = query.banned[0] !== 1;
     }
 
-    if (query.ranks && query.ranks.length > 0) {
+    if (query.ranks && Array.isArray(query.ranks) && query.ranks.length > 0) {
       where.rank_id = { in: query.ranks };
     }
 
+    if (query.posts && Array.isArray(query.posts) && query.posts.length > 0) {
+      const andConditions: Prisma.EmployeeWhereInput[] = query.posts.map(
+        (postId) => ({
+          employee_allowed_posts: {
+            some: {
+              post_id: postId,
+            },
+          },
+        }),
+      );
+      if (where.AND) {
+        where.AND = Array.isArray(where.AND)
+          ? [...where.AND, ...andConditions]
+          : [where.AND, ...andConditions];
+      } else {
+        where.AND = andConditions;
+      }
+    }
     const { limit = 10, page = 1, name_asc } = query;
 
     const [total, employees] = await Promise.all([
       this.prisma.employee.count({ where }),
       this.prisma.employee.findMany({
         where,
-        include: { rank: true },
+        include: {
+          rank: true,
+          employee_allowed_posts: {
+            include: { post: true },
+          },
+        },
         orderBy: { name: name_asc ? "asc" : "desc" },
         take: limit,
         skip: limit * (page - 1),
       }),
     ]);
-    return { employees, total: total };
+    const mappedEmployees = employees.map((e) => {
+      const mappedAllowedPosts = e.employee_allowed_posts?.map(
+        (eap) => eap.post,
+      );
+      return { ...e, allowed_posts: mappedAllowedPosts };
+    });
+    return { employees: mappedEmployees, total: total };
   }
 
   async getEmployeeById(employee_id: number) {
     const employee = await this.prisma.employee.findUnique({
       where: { id: employee_id },
+      include: {
+        employee_allowed_posts: {
+          include: { post: true },
+        },
+      },
     });
     if (!employee)
       throw new HttpException("Сотрудник не найден", HttpStatus.NOT_FOUND);
 
-    return employee;
+    const mappedAllowedPosts = employee.employee_allowed_posts?.map(
+      (eap) => eap.post,
+    );
+    return { ...employee, allowed_posts: mappedAllowedPosts };
   }
 
   async changeBanned(employee_id: number) {
@@ -89,8 +146,19 @@ export class EmployeesService {
         "Уже существует сотрудник с таким штрихкодом",
         HttpStatus.BAD_REQUEST,
       );
+    const { rank_id, allowed_post_ids, ...clearDto } = dto;
     const createdEmployee = await this.prisma.employee.create({
-      data: { ...dto },
+      data: {
+        ...clearDto,
+        rank: { connect: { id: rank_id } },
+        employee_allowed_posts: {
+          create: (allowed_post_ids || []).map((postId) => ({
+            post: {
+              connect: { id: Number(postId) },
+            },
+          })),
+        },
+      },
     });
     return createdEmployee;
   }
@@ -107,6 +175,13 @@ export class EmployeesService {
   async updateEmployee(dto: UpdateEmployeeDto) {
     const employee = await this.prisma.employee.findUnique({
       where: { id: dto.id },
+      include: {
+        employee_allowed_posts: {
+          include: {
+            post: true,
+          },
+        },
+      },
     });
     if (!employee)
       throw new HttpException("Сотрудник не найден", HttpStatus.NOT_FOUND);
@@ -129,6 +204,16 @@ export class EmployeesService {
     if (!rank)
       throw new HttpException("Разряд не найден", HttpStatus.NOT_FOUND);
 
+    const currentAllowedPostIds = employee.employee_allowed_posts.map(
+      (ap) => ap.post.id,
+    );
+    const idsToAdd = dto.allowed_post_ids.filter(
+      (id) => !currentAllowedPostIds.includes(id),
+    );
+    const idsToRemove = currentAllowedPostIds.filter(
+      (id) => !dto.allowed_post_ids.includes(id),
+    );
+
     const updateEmployee = await this.prisma.employee.update({
       where: { id: dto.id },
       data: {
@@ -136,6 +221,14 @@ export class EmployeesService {
         barcode: dto.barcode,
         rank_id: dto.rank_id,
         banned: employee.banned,
+        employee_allowed_posts: {
+          deleteMany: {
+            post_id: { in: idsToRemove },
+          },
+          create: idsToAdd.map((id) => ({
+            post: { connect: { id } },
+          })),
+        },
       },
     });
     return updateEmployee;

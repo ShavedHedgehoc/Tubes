@@ -60,7 +60,7 @@ export default function StartButton({ row }: Props) {
         <Button
           size="sm"
           variant="outline"
-          className="h-8 gap-1.5 hover:bg-emerald-500 hover:text-white transition-all min-w-[100px]"
+          className="h-8 gap-1.5 hover:bg-emerald-500 hover:text-white transition-all min-w-25"
           disabled={startPending}
           onClick={(e) => e.stopPropagation()}
         >

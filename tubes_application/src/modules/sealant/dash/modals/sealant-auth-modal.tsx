@@ -9,7 +9,7 @@ export default function SealantAuthModal() {
   const open = useSealantAuthModalStore(useShallow((state) => state.open));
   const setOpen = useSealantAuthModalStore(useShallow((state) => state.setOpen));
   const setEmployee = useSealantEmployeeStore(useShallow((state) => state.setSealantEmployee));
-  const { login } = useEmployeeLogin(setEmployee);
+  const { login } = useEmployeeLogin({ setEmployee, postVal: 4 });
 
   const modalProps: ScanModalProps = {
     title: 'Отсканируйте бейдж',

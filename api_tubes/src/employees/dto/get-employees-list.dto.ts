@@ -33,6 +33,13 @@ export class GetEmployeesListDto {
   @IsInt({ each: true })
   readonly ranks?: number[];
 
+  @ApiPropertyOptional({ description: "Посты" })
+  @IsOptional()
+  @ToNumbersArray()
+  @IsArray()
+  @IsInt({ each: true })
+  readonly posts?: number[];
+
   @ApiProperty({
     description: "Сортировать ФИО по возрастанию",
   })

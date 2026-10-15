@@ -17,6 +17,7 @@ describe("employeeQueries factory", () => {
     name: null,
     name_asc: "true",
     ranks: [],
+    posts: [],
     banned: [],
     ...overrides,
   });

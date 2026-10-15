@@ -12,12 +12,15 @@ import {
 } from "@/shared/ui";
 import { Ban, MoreHorizontal, Pencil, Trash, UserCheck } from "lucide-react";
 import { useChangeAccessEmployee, useDeleteEmployee } from "../model";
+import { useRoles } from "@/entities/user";
 
 export function RowDropdown({ id, banned }: { id: number; banned: boolean }) {
+  const { isAdmin } = useRoles();
   const { setParams } = useEmployeeUiParams();
   const { changeAccessEmployee, changeAccessPending } =
     useChangeAccessEmployee();
   const { deleteEmployee, deletePending } = useDeleteEmployee();
+
   const handleChangeBannedClick = () => changeAccessEmployee(id);
   const handleDeleteClick = () => deleteEmployee(id);
   const handleEditClick = () => {
@@ -51,7 +54,7 @@ export function RowDropdown({ id, banned }: { id: number; banned: boolean }) {
           <DropdownMenuItem
             variant={"destructive"}
             onClick={handleDeleteClick}
-            disabled={deletePending}
+            disabled={deletePending || !isAdmin}
           >
             <Trash />
             Удалить

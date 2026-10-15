@@ -42,7 +42,7 @@ export default function BannedSelector({
       <SelectTrigger
         size="sm"
         className={cn(
-          "w-[120px]  text-xs rounded-l-none",
+          "w-30 text-xs rounded-l-none",
           rankListItems.length !== 0 && "rounded-r-none border-r-0",
           "focus:ring-0 focus:ring-offset-0",
         )}

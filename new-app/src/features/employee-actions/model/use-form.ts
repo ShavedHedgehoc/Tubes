@@ -22,12 +22,16 @@ export const useEditEmployeeForm = ({
 
   const form = useForm<CreateEmployeeFormValues>({
     resolver: zodResolver(createEmployeeFormSchema),
-    values: data,
+    values: {
+      ...data,
+      allowed_post_ids: data?.allowed_posts?.map((ap) => ap.id),
+    },
   });
 
   const updateId = params["edit-employee"];
   async function onSubmit(data: CreateEmployeeFormValues) {
     if (updateId) {
+      console.log(data);
       updateEmployee(
         { id: updateId, ...data },
         {
