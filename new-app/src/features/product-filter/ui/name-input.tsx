@@ -46,6 +46,7 @@ export default function NameInput() {
         className={cn(
           " border-l-0  h-8",
           "focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none",
+          "shadow-none",
         )}
       >
         <X />

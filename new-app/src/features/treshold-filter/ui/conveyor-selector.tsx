@@ -48,7 +48,7 @@ export default function ConveyorSelector({
     <Select value={currentValue} onValueChange={onValueChange}>
       <SelectTrigger
         size="sm"
-        className=" w-[150px]  text-xs rounded-l-none  focus:ring-0 focus:ring-offset-0"
+        className=" w-37.5 text-xs rounded-l-none  focus:ring-0 focus:ring-offset-0 shadow-none"
       >
         <SelectValue>{currentDescription}</SelectValue>
       </SelectTrigger>

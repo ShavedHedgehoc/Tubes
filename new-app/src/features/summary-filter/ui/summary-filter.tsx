@@ -29,7 +29,7 @@ export function SummaryFilter({
       <div className="flex justify-start gap-2">
         <div className="flex flex-row">
           <DatePicker
-            className="rounded-r-none border-r-0"
+            className="rounded-r-none border-r-0 shadow-none"
             value={parseDate(params.start_date)}
             onChange={(val) => {
               const str = val ? format(val, "yyyy-MM-dd") : null;
@@ -41,7 +41,7 @@ export function SummaryFilter({
             }}
           />
           <DatePicker
-            className="rounded-none border-r-0"
+            className="rounded-none border-r-0 shadow-none"
             value={parseDate(params.end_date)}
             onChange={(val) => {
               const str = val ? format(val, "yyyy-MM-dd") : null;

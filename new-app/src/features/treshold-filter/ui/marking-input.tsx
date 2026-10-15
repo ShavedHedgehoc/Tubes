@@ -35,6 +35,7 @@ export default function MarkingInput() {
           "outline-none! focus-visible:outline-none!",
           "focus:border-input focus-visible:border-input",
           "relative focus:z-10",
+          "shadow-none",
         )}
       />
       <Button
@@ -44,6 +45,7 @@ export default function MarkingInput() {
         className={cn(
           "rounded-r-none border-l-0 border-r-0 h-8",
           "focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none",
+          "shadow-none",
         )}
       >
         <X />

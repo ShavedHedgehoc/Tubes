@@ -46,6 +46,7 @@ export default function CodeInput() {
         className={cn(
           "rounded-r-none border-l-0 border-r-0 h-8",
           "focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none",
+          "shadow-none",
         )}
       >
         <X />
