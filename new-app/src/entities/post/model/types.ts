@@ -1,6 +1,6 @@
 export type PostEntity = {
   id: number;
-  val: number;
+  value: number;
   name: string;
 };
 export type PostsResponce = {

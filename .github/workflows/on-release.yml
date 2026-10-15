@@ -30,7 +30,14 @@ jobs:
 
       - name: Bump & Push to Release
         run: |
-          npm version patch -m "chore: release %s [skip ci]"
+          COMMIT_MSG=$(git log -1 --pretty=%B)          
+          if echo "$COMMIT_MSG" | grep -iqE "^feat"; then
+            echo "Обнаружена новая фича! Поднимаем минорную версию (minor)..."
+            npm version minor -m "chore: release %s [skip ci]"
+          else
+            echo "Фич не обнаружено. Поднимаем патч (patch)..."
+            npm version patch -m "chore: release %s [skip ci]"
+          fi          
           NEW_VERSION=$(node -p "require('./package.json').version")
           npm version $NEW_VERSION --workspaces --no-git-tag-version
           git add package.json package-lock.json api_tubes/package.json db/package.json new-app/package.json public_api/package.json tubes_application/package.json

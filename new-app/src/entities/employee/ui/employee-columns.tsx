@@ -1,6 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Ban, UserCheck } from "lucide-react";
 import { EmployeeEntity } from "../model";
+import { PostAllowCell } from "./post-allow-cell";
 
 export const baseEmployeeColumns: ColumnDef<EmployeeEntity>[] = [
   {
@@ -16,6 +17,26 @@ export const baseEmployeeColumns: ColumnDef<EmployeeEntity>[] = [
     cell: ({ row }) => {
       return <div className="text-center">{row.getValue("barcode")}</div>;
     },
+  },
+  {
+    accessorKey: "post1",
+    header: () => <div className="text-center">Пост 1</div>,
+    cell: ({ row }) => <PostAllowCell employee={row.original} postVal={1} />,
+  },
+  {
+    accessorKey: "post2",
+    header: () => <div className="text-center">Пост 2</div>,
+    cell: ({ row }) => <PostAllowCell employee={row.original} postVal={2} />,
+  },
+  {
+    accessorKey: "post3",
+    header: () => <div className="text-center">Пост 3</div>,
+    cell: ({ row }) => <PostAllowCell employee={row.original} postVal={3} />,
+  },
+  {
+    accessorKey: "post4",
+    header: () => <div className="text-center">Пост 4</div>,
+    cell: ({ row }) => <PostAllowCell employee={row.original} postVal={4} />,
   },
   {
     accessorKey: "rank_id",

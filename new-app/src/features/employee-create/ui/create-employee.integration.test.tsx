@@ -35,6 +35,7 @@ describe("Интеграция: Создание сотрудника (Form -> H
         <NuqsAdapter>
           <CreateEmployeeForm
             ranks={[{ id: 1, val: 1, description: "Разряд 1" }]}
+            posts={[{ id: 1, value: 1, name: "Пост 1" }]}
           />
         </NuqsAdapter>
       </QueryClientProvider>,

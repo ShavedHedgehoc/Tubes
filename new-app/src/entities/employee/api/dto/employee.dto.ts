@@ -1,3 +1,4 @@
+import { PostDto } from "@/entities/post/api/dto";
 import { RankDto } from "@/entities/rank/api/dto/rank.dto";
 
 export type EmployeeDto = {
@@ -7,4 +8,5 @@ export type EmployeeDto = {
   rank_id: number;
   banned: boolean;
   rank: RankDto;
+  allowed_posts: PostDto[];
 };

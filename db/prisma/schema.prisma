@@ -20,9 +20,9 @@ model Conveyor {
 }
 
 model Post {
-  id                   Int                  @id @default(autoincrement())
-  value                Int                  @unique
-  name                 String               @unique
+  id                   Int                    @id @default(autoincrement())
+  value                Int                    @unique
+  name                 String                 @unique
   operations           Operation[]
   statuses             Status[]
   defects              Defect[]
@@ -30,6 +30,7 @@ model Post {
   maintenances         Maintenance[]
   maintenance_sessions MaintenanceSession[]
   laboratoryLocks      LaboratoryLock[]
+  employeeAllowedPosts EmployeeAllowedPosts[]
 
   @@map("posts")
 }
@@ -203,6 +204,16 @@ model User {
   @@map("users")
 }
 
+model EmployeeAllowedPosts {
+  id          Int      @id @default(autoincrement())
+  employee    Employee @relation(fields: [employee_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  employee_id Int
+  post        Post     @relation(fields: [post_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  post_id     Int
+
+  @@map("employee_allowed_posts")
+}
+
 model Role {
   id          Int        @id @default(autoincrement())
   value       String     @unique
@@ -233,19 +244,20 @@ model Token {
 
 // Сотрудники
 model Employee {
-  id                 Int                @id @default(autoincrement())
-  name               String
-  barcode            String             @unique @db.VarChar(13)
-  rank               Rank?              @relation(fields: [rank_id], references: [id], onUpdate: Cascade, onDelete: Restrict)
-  rank_id            Int
-  banned             Boolean            @default(false)
-  consumed_materials ConsumedMaterial[]
-  extrusion_params   ExtrusionParam[]
-  varnish_params     VarnishParam[]
-  offset_params      OffsetParam[]
-  sealant_params     SealantParam[]
-  production_boxes   ProductionBox[]
-  statuses           Status[]
+  id                     Int                    @id @default(autoincrement())
+  name                   String
+  barcode                String                 @unique @db.VarChar(13)
+  rank                   Rank?                  @relation(fields: [rank_id], references: [id], onUpdate: Cascade, onDelete: Restrict)
+  rank_id                Int
+  banned                 Boolean                @default(false)
+  consumed_materials     ConsumedMaterial[]
+  extrusion_params       ExtrusionParam[]
+  varnish_params         VarnishParam[]
+  offset_params          OffsetParam[]
+  sealant_params         SealantParam[]
+  production_boxes       ProductionBox[]
+  statuses               Status[]
+  employee_allowed_posts EmployeeAllowedPosts[]
 
   @@map("employees")
 }

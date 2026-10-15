@@ -10,10 +10,18 @@ import { vi, describe, it, expect, beforeEach } from "vitest";
 
 import { RankEntity } from "@/entities/rank/model/types";
 import { CreateEmployeeForm } from "./create-employee-form";
+import { PostEntity } from "@/entities/post";
 
 const mockRanks: RankEntity[] = [
   { id: 1, val: 1, description: "Разряд 1" },
   { id: 2, val: 1, description: "Разряд 2" },
+];
+
+const mockPosts: PostEntity[] = [
+  { id: 1, value: 1, name: "Пост 1" },
+  { id: 2, value: 2, name: "Пост 2" },
+  { id: 3, value: 3, name: "Пост 3" },
+  { id: 4, value: 4, name: "Пост 4" },
 ];
 const mockMutationState = {
   createEmployee: vi.fn(),
@@ -48,7 +56,7 @@ describe("CreateEmployeeForm", () => {
   const renderForm = (searchParams = {}) => {
     return render(
       <NuqsAdapter {...searchParams}>
-        <CreateEmployeeForm ranks={mockRanks} />
+        <CreateEmployeeForm ranks={mockRanks} posts={mockPosts} />
       </NuqsAdapter>,
     );
   };

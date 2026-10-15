@@ -5,7 +5,13 @@ import handleError from '@/shared/api/http/handle-error';
 
 import { AppMessages } from '../resources/app-messages';
 
-export function useEmployeeLogin(setEmployee: (val: IEmployee) => void) {
+export function useEmployeeLogin({
+  setEmployee,
+  postVal,
+}: {
+  setEmployee: (val: IEmployee) => void;
+  postVal: number;
+}) {
   const {
     mutateAsync: login,
     isPending: isLoginPending,
@@ -15,11 +21,20 @@ export function useEmployeeLogin(setEmployee: (val: IEmployee) => void) {
     mutationFn: EmployeeService.getEmployeeByBarcode,
     onSuccess: (data) => {
       if (data) {
-        setEmployee(data);
-        enqueueSnackbar(AppMessages.AUTH_SUCCESSFUL, {
-          variant: 'success',
-          anchorOrigin: { vertical: 'top', horizontal: 'right' },
-        });
+        const mappedAllowedPostVals = (data.allowed_posts || []).map((ap) => ap.value);
+        const isAllowed = mappedAllowedPostVals.includes(postVal);
+        if (isAllowed) {
+          setEmployee(data);
+          enqueueSnackbar(AppMessages.AUTH_SUCCESSFUL, {
+            variant: 'success',
+            anchorOrigin: { vertical: 'top', horizontal: 'right' },
+          });
+        } else {
+          enqueueSnackbar(`${AppMessages.NOT_ALLOWED_TO_POST}${postVal}`, {
+            variant: 'error',
+            anchorOrigin: { vertical: 'top', horizontal: 'right' },
+          });
+        }
       } else {
         enqueueSnackbar(AppMessages.EMPLOYEE_NOT_FOUND, {
           variant: 'error',

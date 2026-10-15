@@ -18,6 +18,7 @@ describe("Employee Columns", () => {
     banned: false,
     rank_id: 1,
     rank: { id: 1, description: "Разряд 1", val: 1 },
+    allowed_posts: [],
   };
 
   const columns = getEmployeesColumns();

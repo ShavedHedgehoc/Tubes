@@ -91,7 +91,7 @@ export default function RankCombobox({ items }: { items: RankEntity[] }) {
           )}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0" align="start">
+      <PopoverContent className="w-50 p-0" align="start">
         <Command className="bg-background shadow-none">
           <CommandInput placeholder="Поиск..." autoFocus />
           <CommandList>

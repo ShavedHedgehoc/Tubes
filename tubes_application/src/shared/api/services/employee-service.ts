@@ -7,12 +7,19 @@ export interface IRank {
   description: string;
 }
 
+interface IPost {
+  id: number;
+  value: number;
+  name: string;
+}
+
 export interface IEmployee {
   id: number;
   name: string;
   barcode: string;
   banned: boolean;
   rank: IRank | null;
+  allowed_posts: IPost[];
 }
 // employee login
 export default class EmployeeService {

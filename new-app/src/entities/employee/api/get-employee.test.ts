@@ -24,6 +24,7 @@ describe("getEmployee API", () => {
       val: 1,
       description: "Первый разряд",
     },
+    allowed_posts: [],
   };
 
   const mockId = "1";

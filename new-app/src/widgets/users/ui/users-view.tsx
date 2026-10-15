@@ -11,6 +11,7 @@ import { useUserSearchParams } from "@/entities/user";
 import { userApi, UserEntity, UserParams } from "@/entities/user";
 import { RoleEntity } from "@/entities/roles";
 import { EditUserModal } from "@/features/user-actions";
+import { UsersFilter } from "@/features/users-filter";
 
 export default function UsersView({
   roleListItems,
@@ -36,7 +37,7 @@ export default function UsersView({
     total: data?.total ?? 0,
     totalPages: data?.totalPages ?? 0,
     picture: <UserIcon />,
-    filter: <></>,
+    filter: <UsersFilter roleListItems={roleListItems} />,
     params: params,
     setParams: setParams,
     isFetching: isFetching || isPlaceholderData,

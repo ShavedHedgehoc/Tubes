@@ -33,10 +33,7 @@ export default function OperationsView({
     placeholderData: keepPreviousData,
   });
 
-  const {
-    data: existingIds,
-    // isFetching: idsFetching
-  } = useQuery({
+  const { data: existingIds } = useQuery({
     ...operationApi.operationQueries.picture_id_array(
       galleryUiParams["addGalleryEntityId"],
       { isServer: false },

@@ -9,7 +9,7 @@ export default function VarnishAuthModal() {
   const open = useVarnishAuthModalStore(useShallow((state) => state.open));
   const setOpen = useVarnishAuthModalStore(useShallow((state) => state.setOpen));
   const setEmployee = useVarnishEmployeeStore(useShallow((state) => state.setVarnishEmployee));
-  const { login } = useEmployeeLogin(setEmployee);
+  const { login } = useEmployeeLogin({ setEmployee, postVal: 2 });
 
   const modalProps: ScanModalProps = {
     title: 'Отсканируйте бейдж',

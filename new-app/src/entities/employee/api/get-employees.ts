@@ -17,6 +17,7 @@ export async function getEmployees({
     EMPLOYEE_ENDPOINTS.LIST,
     params,
   );
+
   return {
     employees: res.employees ?? [],
     total: res.total,

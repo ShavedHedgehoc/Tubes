@@ -4,10 +4,21 @@ import { FormProvider } from "react-hook-form";
 import { FieldGroup, FormLayout } from "@/shared/ui";
 import { RankEntity } from "@/entities/rank/model/types";
 import { useCreateEmployeeForm } from "../model";
-import { BarcodeField, NameField, RankComboboxField } from "./form-fields";
+import {
+  AllowedPostsSelector,
+  BarcodeField,
+  NameField,
+  RankComboboxField,
+} from "./form-fields";
 import { FormFooter } from "./form-footer";
+import { PostEntity } from "@/entities/post";
 
-export function CreateEmployeeForm({ ranks }: { ranks: RankEntity[] }) {
+interface Props {
+  ranks: RankEntity[];
+  posts: PostEntity[];
+}
+
+export function CreateEmployeeForm({ ranks, posts }: Props) {
   const { form, onSubmit, handleClose, ...state } = useCreateEmployeeForm({
     ranks,
   });
@@ -28,6 +39,7 @@ export function CreateEmployeeForm({ ranks }: { ranks: RankEntity[] }) {
                 ranks={ranks}
                 expectedValues={state.expectedValues}
               />
+              <AllowedPostsSelector posts={posts} />
             </div>
           </FieldGroup>
         </form>

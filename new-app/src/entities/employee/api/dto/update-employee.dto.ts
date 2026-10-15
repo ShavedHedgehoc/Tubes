@@ -3,4 +3,5 @@ export type UpdateEmployeeDto = {
   name: string;
   barcode: string;
   rank_id: number;
+  allowed_post_ids: number[];
 };

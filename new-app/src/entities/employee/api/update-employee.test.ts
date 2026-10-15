@@ -17,6 +17,7 @@ describe("updateEmployee API", () => {
     name: "Иван Обновленный",
     barcode: "9876543210987",
     rank_id: 2,
+    allowed_post_ids: [],
   };
 
   beforeEach(() => {
