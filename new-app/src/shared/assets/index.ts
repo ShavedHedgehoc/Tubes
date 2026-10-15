@@ -6,3 +6,4 @@ export { TresholdIcon } from "./treshold-icon";
 export { StampIcon } from "./stamp-icon";
 export { ProductionIcon } from "./production-icon";
 export { UserIcon } from "./users-icon";
+export { StopIcon } from "./stop-icon";

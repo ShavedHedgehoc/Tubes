@@ -15,8 +15,10 @@ import { PostChartModal } from "@/features/post-chart";
 import { PostCloseModal } from "@/features/finish-conveyor-post";
 import { PostTableModalWidget } from "@/widgets/post-table-modal-widget";
 import { LockPostModal } from "@/features/lock-post";
+import { useRoles } from "@/entities/user";
 
 export default function DashView() {
+  const { isLabAssistant, isAllowToConveyorsOperations } = useRoles();
   const { data, isLoading, isError } = useQuery({
     ...conveyorApi.conveyorQueries.view({ isServer: false }),
     refetchInterval: 10 * 1000,
@@ -86,11 +88,11 @@ export default function DashView() {
           </div>
         </div>
       </div>
-      <AvailableSummariesModal />
-      <PostCloseModal />
+      {isAllowToConveyorsOperations && <AvailableSummariesModal />}
+      {isAllowToConveyorsOperations && <PostCloseModal />}
       <PostChartModal />
       <PostTableModalWidget />
-      <LockPostModal />
+      {isLabAssistant && <LockPostModal />}
     </div>
   );
 }
