@@ -45,6 +45,7 @@ export default function BannedSelector({
           "w-30  text-xs rounded-l-none",
           roleListItems.length !== 0 && "rounded-r-none border-r-0",
           "focus:ring-0 focus:ring-offset-0",
+          "shadow-none",
         )}
       >
         <SelectValue>{currentDescription}</SelectValue>

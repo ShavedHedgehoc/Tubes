@@ -13,6 +13,7 @@ interface IExtrusionParameterData {
   membrane_thickness: string;
   tube_diameter: string;
   tube_cylindrical_thickness: string;
+  tube_conical_shoulder_thickness: string;
   tube_rigidity: string;
   tube_cutting_quality: boolean;
   tightness: boolean;
@@ -40,6 +41,7 @@ export const initDataValue: IExtrusionParameterData = {
   membrane_thickness: '0',
   tube_diameter: '0',
   tube_cylindrical_thickness: '0',
+  tube_conical_shoulder_thickness: '0',
   tube_rigidity: '0',
   tube_cutting_quality: false,
   tightness: false,
@@ -57,6 +59,7 @@ export enum ExtrusionInputParams {
   MEMBRANE_THICKNESS = 'membrane_thickness',
   TUBE_DIAMETER = 'tube_diameter',
   TUBE_CYLINDRICAL_THICKNESS = 'tube_cylindrical_thickness',
+  TUBE_CONICAL_SHOULDER_THICKNESS = 'tube_conical_shoulder_thickness',
   TUBE_RIGIDITY = 'tube_rigidity',
   TUBE_CUTTING_QUALITY = 'tube_cutting_quality',
   TIGHTNESS = 'tightness',

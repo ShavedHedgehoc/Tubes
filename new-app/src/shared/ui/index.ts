@@ -41,3 +41,4 @@ export * from "./select-image-card";
 export * from "./picture-modal";
 export * from "./tooltip";
 export * from "./avatar";
+export * from "./filter-input";

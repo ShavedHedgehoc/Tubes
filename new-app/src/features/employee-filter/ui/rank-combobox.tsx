@@ -54,7 +54,7 @@ export default function RankCombobox({ items }: { items: RankEntity[] }) {
         <Button
           variant="outline"
           size="sm"
-          className="py-0 px-3 text-xs  rounded-l-none "
+          className="py-0 px-3 text-xs rounded-l-none shadow-none"
         >
           <PlusCircle className="mr-2 h-4 w-4" />
           Разряды

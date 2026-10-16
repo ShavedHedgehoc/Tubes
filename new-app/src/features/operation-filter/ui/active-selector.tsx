@@ -37,8 +37,9 @@ export default function ActiveSelector() {
       <SelectTrigger
         size="sm"
         className={cn(
-          "w-[120px]  text-xs rounded-l-none",
+          "w-30 text-xs rounded-l-none",
           "focus:ring-0 focus:ring-offset-0",
+          "shadow-none",
         )}
       >
         <SelectValue>{currentDescription}</SelectValue>

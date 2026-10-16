@@ -24,6 +24,9 @@ export const PARAMETER_UNITS = {
   turning_machine_speed: UNITS.PCS_MIN,
   annealing_furnace_temp: UNITS.TEMP,
   tube_cylindrical_section_length: UNITS.MM,
+  // --- ADDED
+  tube_conical_shoulder_thickness: UNITS.MM,
+  //
   membrane_thickness: UNITS.MM,
   tube_diameter: UNITS.MM,
   tube_cylindrical_thickness: UNITS.MM,

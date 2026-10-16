@@ -32,7 +32,12 @@ export default function NameInput() {
 
   return (
     <ButtonGroup className="h-8 ">
-      <Button variant="outline" size="sm" onClick={handleChangeSort}>
+      <Button
+        variant="outline"
+        size="sm"
+        className="shadow-none"
+        onClick={handleChangeSort}
+      >
         {params.name_asc === "true" ? (
           <ArrowDownWideNarrow />
         ) : (
@@ -59,6 +64,7 @@ export default function NameInput() {
         className={cn(
           "rounded-r-none border-l-0 border-r-0 h-8",
           "focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none",
+          "shadow-none",
         )}
       >
         <X />

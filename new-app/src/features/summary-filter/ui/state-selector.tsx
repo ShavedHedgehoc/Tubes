@@ -35,7 +35,7 @@ export default function StateSelector() {
     <Select value={currentValue} onValueChange={onValueChange}>
       <SelectTrigger
         size="sm"
-        className=" w-[150px]  text-xs rounded-l-none  focus:ring-0 focus:ring-offset-0"
+        className=" w-37.5 shadow-none text-xs rounded-l-none  focus:ring-0 focus:ring-offset-0"
       >
         <SelectValue>{currentDescription}</SelectValue>
       </SelectTrigger>

@@ -58,7 +58,7 @@ export default function CrewCombobox({ items }: { items: CrewEntity[] }) {
         <Button
           variant="outline"
           size="sm"
-          className="py-0 px-3 text-xs  rounded-l-none rounded-r-none border-r-0"
+          className="py-0 px-3 text-xs shadow-none rounded-l-none rounded-r-none border-r-0"
         >
           <PlusCircle className="mr-2 h-4 w-4" />
           Бригады
@@ -95,7 +95,7 @@ export default function CrewCombobox({ items }: { items: CrewEntity[] }) {
           )}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0" align="start">
+      <PopoverContent className="w-50 p-0" align="start">
         <Command className="bg-background shadow-none">
           <CommandInput placeholder="Поиск..." autoFocus />
           <CommandList>

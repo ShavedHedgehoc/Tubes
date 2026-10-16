@@ -77,6 +77,14 @@ export default function ExtrusionParameters({ summaryData }: { summaryData: ISum
     unit: PARAMETER_UNITS[ExtrusionInputParams.TUBE_CYLINDRICAL_THICKNESS],
     variant: 'numeric',
   };
+  const tubeConicalShoulderThicknessCardProps: ParameterCardProps = {
+    title: EXTRUSION_PARAMETER_NAMES[ExtrusionInputParams.TUBE_CONICAL_SHOULDER_THICKNESS],
+    value: paramsData?.tube_conical_shoulder_thickness ?? null,
+    minValue: tresholdsData?.extrusion_tube_conical_shoulder_thickness_min ?? null,
+    maxValue: tresholdsData?.extrusion_tube_conical_shoulder_thickness_max ?? null,
+    unit: PARAMETER_UNITS[ExtrusionInputParams.TUBE_CONICAL_SHOULDER_THICKNESS],
+    variant: 'numeric',
+  };
   const tubeRigidityCardProps: ParameterCardProps = {
     title: EXTRUSION_PARAMETER_NAMES[ExtrusionInputParams.TUBE_RIGIDITY],
     value: paramsData?.tube_rigidity ?? null,
@@ -128,6 +136,7 @@ export default function ExtrusionParameters({ summaryData }: { summaryData: ISum
         <ParameterCard {...tubeRigidityCardProps} />
       </HStack>
       <HStack gap={2} h="full" w="full">
+        <ParameterCard {...tubeConicalShoulderThicknessCardProps} />
         <ParameterCard {...tubeCuttingQualityCardProps} />
         <ParameterCard {...tightnessCardProps} />
         <ParameterCard {...tubeMarkingCardProps} />

@@ -1,54 +1,31 @@
 "use client";
 
 import { useUserSearchParams } from "@/entities/user";
-import { cn } from "@/shared/lib";
-import { Button, ButtonGroup, Input } from "@/shared/ui";
-import { X } from "lucide-react";
+import { FilterInput } from "@/shared/ui";
 import { throttle } from "nuqs";
 
 export default function EmailInput() {
   const { params, setParams } = useUserSearchParams();
 
-  const value = params.email || "";
+  const handleReset = () => {
+    setParams({ email: null, page: 1 });
+  };
 
-  const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
+  const handleChangeEmail = (newValue: string) => {
     setParams(
       { email: newValue || null, page: 1 },
       { shallow: false, throttleMs: 500, limitUrlUpdates: throttle(500) },
     );
   };
 
-  const handleReset = () => {
-    setParams({ email: null, page: 1 });
-  };
-
   return (
-    <ButtonGroup className="h-8 ">
-      <Input
-        id="employee-filter-email-input"
-        placeholder="Поиск по email...  "
-        value={value}
-        onChange={handleChangeName}
-        className={cn(
-          "w-48 h-8 border-r-0 rounded-none",
-          "ring-0! ring-offset-0! shadow-none!",
-          "outline-none! focus-visible:outline-none!",
-          "focus:border-input focus-visible:border-input",
-          "relative focus:z-10",
-        )}
-      />
-      <Button
-        variant="outline"
-        size="sm"
-        onClick={handleReset}
-        className={cn(
-          "rounded-r-none border-l-0 border-r-0 h-8",
-          "focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none",
-        )}
-      >
-        <X />
-      </Button>
-    </ButtonGroup>
+    <FilterInput
+      id="employee-filter-email-input"
+      className="w-48"
+      placeholder="Поиск по email...  "
+      value={params.email || ""}
+      onChange={handleChangeEmail}
+      onReset={handleReset}
+    />
   );
 }

@@ -55,7 +55,7 @@ export default function RoleCombobox({ items }: { items: RoleEntity[] }) {
         <Button
           variant="outline"
           size="sm"
-          className="py-0 px-3 text-xs  rounded-l-none rounded-r-none border-r-0"
+          className="py-0 px-3 text-xs rounded-l-none shadow-none"
         >
           <PlusCircle className="mr-2 h-4 w-4" />
           Роли

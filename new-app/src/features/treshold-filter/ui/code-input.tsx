@@ -12,7 +12,6 @@ export default function CodeInput() {
 
   const handleChangeCode = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
-
     setParams(
       { code: newValue || null, page: 1 },
       { shallow: false, throttleMs: 500, limitUrlUpdates: throttle(500) },
@@ -44,6 +43,7 @@ export default function CodeInput() {
         className={cn(
           "rounded-r-none border-l-0 border-r-0 h-8",
           "focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none",
+          "shadow-none",
         )}
       >
         <X />

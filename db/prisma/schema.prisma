@@ -383,7 +383,6 @@ model Summary {
   plan               Int
   isActive           Boolean            @default(false)
   isFinished         Boolean            @default(false)
-  // isLocked           Boolean            @default(false)
   date               DateTime
   shift              Int                @default(1)
   specifications     Specification[]
@@ -525,6 +524,7 @@ model ExtrusionParam {
   membrane_thickness                 Float
   tube_diameter                      Float
   tube_cylindrical_section_thickness Float
+  tube_conical_shoulder_thickness    Float    @default(0)
   tube_rigidity                      Int
   tube_cutting_quality               Boolean  @default(false)
   tightness                          Boolean  @default(false)
@@ -663,6 +663,8 @@ model Treshold {
   extrusion_tube_diameter_max                      Float
   extrusion_tube_cylindrical_section_thickness_min Float
   extrusion_tube_cylindrical_section_thickness_max Float
+  extrusion_tube_conical_shoulder_thickness_min    Float    @default(0)
+  extrusion_tube_conical_shoulder_thickness_max    Float    @default(0)
   extrusion_tube_rigidity_min                      Int
   extrusion_tube_rigidity_max                      Int
   extrusion_external_thread_value                  String

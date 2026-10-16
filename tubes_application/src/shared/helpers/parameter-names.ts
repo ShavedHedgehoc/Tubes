@@ -8,6 +8,9 @@ export const EXTRUSION_PARAMETER_NAMES = {
   membrane_thickness: 'Толщина мембраны',
   tube_diameter: 'Диаметр тубы',
   tube_cylindrical_thickness: 'Толщина цилиндрической части тубы',
+  // added
+  tube_conical_shoulder_thickness: 'Толщина конусного плеча тубы',
+  //
   tube_rigidity: 'Жесткость тубы',
   tube_cutting_quality: 'Качество обрезки тубы',
   tightness: 'Герметичность',
