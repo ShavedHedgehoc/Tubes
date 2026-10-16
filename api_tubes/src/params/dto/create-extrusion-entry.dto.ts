@@ -13,6 +13,7 @@ export class CreateExtrusionEntryDto {
   readonly annealing_furnace_temp: number;
   // readonly rondel_id: number;
   readonly tube_cylindrical_section_length: number;
+  readonly tube_conical_shoulder_thickness: number;
   readonly membrane_thickness: number;
   readonly tube_diameter: number;
   readonly tube_cylindrical_section_thickness: number;

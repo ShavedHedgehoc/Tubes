@@ -117,6 +117,12 @@ const uniqueColumns: Record<string, ColumnDef<TresholdEntity>[]> = {
       180,
     ),
     tresholdGroup(
+      "Толщина конусного плеча тубы, мм",
+      "extrusion_tube_conical_shoulder_thickness_min",
+      "extrusion_tube_conical_shoulder_thickness_max",
+      180,
+    ),
+    tresholdGroup(
       "Жесткость тубы, мм",
       "extrusion_tube_rigidity_min",
       "extrusion_tube_rigidity_max",

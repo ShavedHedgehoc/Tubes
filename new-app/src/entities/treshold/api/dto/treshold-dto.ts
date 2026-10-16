@@ -18,6 +18,10 @@ export type TresholdDto = {
   extrusion_tube_diameter_max: number;
   extrusion_tube_cylindrical_section_thickness_min: number;
   extrusion_tube_cylindrical_section_thickness_max: number;
+  //
+  extrusion_tube_conical_shoulder_thickness_min: number;
+  extrusion_tube_conical_shoulder_thickness_max: number;
+  //
   extrusion_tube_rigidity_min: number;
   extrusion_tube_rigidity_max: number;
   extrusion_external_thread_value: string;

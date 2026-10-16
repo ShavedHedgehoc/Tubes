@@ -29,7 +29,7 @@ export default function makeExtrusionPage({
   });
 
   // document code
-  sheet.mergeCells("A1:P1");
+  sheet.mergeCells("A1:Q1");
   const docCodeCell = sheet.getCell("A1");
   docCodeCell.value = "ЮК.ПР.Ф.ХХХХ";
   docCodeCell.font = { bold: true, size: 8 };
@@ -38,7 +38,7 @@ export default function makeExtrusionPage({
     vertical: "middle",
   };
 
-  sheet.mergeCells("A2:P2");
+  sheet.mergeCells("A2:Q2");
   const titleCell = sheet.getCell("A2");
   titleCell.value = "ТЕХНОЛОГИЧЕСКАЯ КАРТА НА ПРОИЗВОДСТВО ТУБЫ";
   titleCell.font = { bold: true, size: 14 };
@@ -55,10 +55,10 @@ export default function makeExtrusionPage({
   sheet.getCell("I4").value =
     `${data.summary.productMarking} ${data.summary.productName}`;
 
-  sheet.getCell("P4").value = `План: ${data.summary.plan}`;
-  sheet.getCell("P6").value = `Конвейер: ${data.summary.conveyorName}`;
+  sheet.getCell("Q4").value = `План: ${data.summary.plan}`;
+  sheet.getCell("Q6").value = `Конвейер: ${data.summary.conveyorName}`;
 
-  (["B4", "F4", "P4", "P6"] as string[]).forEach((cellName: string) => {
+  (["B4", "F4", "Q4", "Q6"] as string[]).forEach((cellName: string) => {
     const cell = sheet.getCell(cellName as string);
     cell.alignment = {
       horizontal: "right",
@@ -75,12 +75,12 @@ export default function makeExtrusionPage({
   sheet.getCell("A6").font = { bold: true, size: 10 };
 
   sheet.mergeCells("A8:B8");
-  sheet.mergeCells("C8:G8");
+  sheet.mergeCells("C8:F8");
   sheet.getCell("C8").value = "1. Характеристики работы оборудования.";
 
-  sheet.mergeCells("H8:O8");
-  sheet.getCell("H8").value = "2. Операционный контроль.";
-  sheet.getCell("P8").value = "Сотрудник";
+  sheet.mergeCells("G8:P8");
+  sheet.getCell("G8").value = "2. Операционный контроль.";
+  sheet.getCell("Q8").value = "Сотрудник";
 
   const tr = data.extrusionParams[0]?.treshold;
   sheet.getRow(10).values = [
@@ -108,6 +108,10 @@ export default function makeExtrusionPage({
     tr
       ? `${tr.extrusion_tube_cylindrical_section_thickness_min}-${tr.extrusion_tube_cylindrical_section_thickness_max}`
       : "-",
+
+    tr
+      ? `${tr.extrusion_tube_conical_shoulder_thickness_min}-${tr.extrusion_tube_conical_shoulder_thickness_max}`
+      : "-",
     tr
       ? `${tr.extrusion_tube_rigidity_min}-${tr.extrusion_tube_rigidity_max}`
       : "-",
@@ -124,6 +128,7 @@ export default function makeExtrusionPage({
     "мс",
     "шт/мин",
     "°C",
+    "мм",
     "мм",
     "мм",
     "мм",
@@ -171,10 +176,11 @@ export default function makeExtrusionPage({
     { key: "membrane", width: 12 },
     { key: "diameter", width: 10 },
     { key: "cylindricalThickness", width: 10 },
+    { key: "conicalShoulderThickness", width: 10 },
     { key: "rigidity", width: 12 },
     { key: "cutting", width: 10 },
-    { key: "tightness", width: 13 },
-    { key: "marking", width: 12 },
+    { key: "tightness", width: 8 },
+    { key: "marking", width: 8 },
     { key: "thread", width: 8 },
     { key: "employee", width: 18 },
   ];
@@ -190,19 +196,20 @@ export default function makeExtrusionPage({
     "толщина мембраны",
     "диаметр тубы",
     "толщина цил. части",
+    "толщина кон. плеча",
     "жесткость тубы",
     "качество обрезки",
-    "герметичность",
-    "маркировка",
+    "герм-ть",
+    "мар-ка",
     "резьба",
   ];
   sheet.mergeCells("A9:A11");
   sheet.mergeCells("B9:B11");
-  sheet.mergeCells("P8:P11");
-  sheet.mergeCells("L10:L11");
+  sheet.mergeCells("Q8:Q11");
   sheet.mergeCells("M10:M11");
   sheet.mergeCells("N10:N11");
   sheet.mergeCells("O10:O11");
+  sheet.mergeCells("P10:P11");
 
   sheet.getRow(9).eachCell((cell) => {
     cell.fill = {
@@ -238,6 +245,7 @@ export default function makeExtrusionPage({
       membrane: row.membrane_thickness,
       diameter: row.tube_diameter,
       cylindricalThickness: row.tube_cylindrical_section_thickness,
+      conicalShoulderThickness: row.tube_conical_shoulder_thickness,
       rigidity: row.tube_rigidity,
       cutting: row.tube_cutting_quality ? "Ok" : "nOk",
       tightness: row.tightness ? "Ok" : "nOk",
@@ -268,7 +276,7 @@ export default function makeExtrusionPage({
     time: `Брак: ${extrusionDefect} кг`,
   });
 
-  sheet.mergeCells(`A${footerRow.number}:P${footerRow.number}`);
+  sheet.mergeCells(`A${footerRow.number}:Q${footerRow.number}`);
 
   footerRow.eachCell((cell) => {
     cell.font = { size: 12, bold: true };
@@ -278,7 +286,7 @@ export default function makeExtrusionPage({
       left: { style: "thin" },
       right: { style: "thin" },
     };
-    cell.alignment = { horizontal: "left", vertical: "middle" };
+    cell.alignment = { horizontal: "left", vertical: "middle", indent: 1 };
   });
   footerRow.height = 25;
 
@@ -288,7 +296,7 @@ export default function makeExtrusionPage({
   });
 
   sheet.mergeCells(`A${signRow.number}:H${signRow.number}`);
-  sheet.mergeCells(`I${signRow.number}:P${signRow.number}`);
+  sheet.mergeCells(`I${signRow.number}:Q${signRow.number}`);
   signRow.eachCell((cell) => {
     cell.font = { size: 12, bold: true };
     cell.alignment = { horizontal: "left", vertical: "bottom" };

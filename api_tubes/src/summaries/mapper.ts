@@ -29,6 +29,7 @@ export interface IMappedExtrusionParams {
   membrane_thickness: number;
   tube_diameter: number;
   tube_cylindrical_section_thickness: number;
+  tube_conical_shoulder_thickness: number;
   tube_rigidity: number;
   tube_cutting_quality: boolean;
   tightness: boolean;

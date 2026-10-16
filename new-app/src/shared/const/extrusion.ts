@@ -8,6 +8,7 @@ export const EXTRUSION_PARAMETER_NAMES = {
   membrane_thickness: "Толщина мембраны",
   tube_diameter: "Диаметр тубы",
   tube_cylindrical_section_thickness: "Толщина цилиндрической части тубы",
+  tube_conical_shoulder_thickness: "Tолщина конусного плеча тубы",
   tube_rigidity: "Жесткость тубы",
   tube_cutting_quality: "Качество обрезки тубы",
   tightness: "Герметичность",
@@ -26,6 +27,7 @@ export enum ExtrusionInputParams {
   MEMBRANE_THICKNESS = "membrane_thickness",
   TUBE_DIAMETER = "tube_diameter",
   TUBE_CYLINDRICAL_SECTION_THICKNESS = "tube_cylindrical_section_thickness",
+  TUBE_CONICAL_SHOULDER_THICKNESS = "tube_conical_shoulder_thickness",
   TUBE_RIGIDITY = "tube_rigidity",
   TUBE_CUTTING_QUALITY = "tube_cutting_quality",
   TIGHTNESS = "tightness",
@@ -79,6 +81,10 @@ export const EXTRUSION_TRESHOLDS_MAP: Record<
   [ExtrusionInputParams.TUBE_CYLINDRICAL_SECTION_THICKNESS]: {
     min: "extrusion_tube_cylindrical_section_thickness_min",
     max: "extrusion_tube_cylindrical_section_thickness_max",
+  },
+  [ExtrusionInputParams.TUBE_CONICAL_SHOULDER_THICKNESS]: {
+    min: "extrusion_tube_conical_shoulder_thickness_min",
+    max: "extrusion_tube_conical_shoulder_thickness_max",
   },
   [ExtrusionInputParams.TUBE_RIGIDITY]: {
     min: "extrusion_tube_rigidity_min",

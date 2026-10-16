@@ -90,6 +90,7 @@ export default function useExtrusionAddEntryMenu(summaryData: ISummary | null) {
         tightness: data.tightness,
         external_thread_quality: data.external_thread_quality,
         tube_marking: data.tube_marking,
+        tube_conical_shoulder_thickness: Number(data.tube_conical_shoulder_thickness),
       };
       if (alertDialogCondition) {
         setDto(dto);

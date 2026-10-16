@@ -8,6 +8,31 @@ export type GetSummaryReportArgs = {
   options?: { isServer: boolean };
 };
 
+interface ParamWithTresholdInput {
+  createdAt: string | Date;
+  treshold?: Record<string, unknown> | null;
+}
+
+const mapParamsWithTreshold = <T extends ParamWithTresholdInput>(
+  paramsArray: T[],
+) => {
+  return paramsArray.map((i) => {
+    const defaultTreshold = {} as Treshold;
+    return {
+      ...i,
+      treshold: i.treshold
+        ? ({
+            ...i.treshold,
+            createdAt: new Date(
+              (i.treshold as unknown as { createdAt: string }).createdAt,
+            ),
+          } as unknown as Treshold)
+        : defaultTreshold,
+      createdAt: new Date(i.createdAt),
+    };
+  });
+};
+
 export const getSummaryReport = async ({
   options,
   id,
@@ -83,43 +108,11 @@ export const getSummaryReport = async ({
       has_laboratory_lock: !!status.laboratory_lock,
     };
   });
-  console.log(parsedStatuses);
-  const parsedExtrusionParams = extrusionParams.map((i) => {
-    return {
-      ...i,
-      treshold: i.treshold
-        ? { ...i.treshold, createdAt: new Date(i.treshold.createdAt) }
-        : ({} as Treshold),
-      createdAt: new Date(i.createdAt),
-    };
-  });
-  const parsedVarnishParams = varnishParams.map((i) => {
-    return {
-      ...i,
-      treshold: i.treshold
-        ? { ...i.treshold, createdAt: new Date(i.treshold.createdAt) }
-        : ({} as Treshold),
-      createdAt: new Date(i.createdAt),
-    };
-  });
-  const parsedOffsetParams = offsetParams.map((i) => {
-    return {
-      ...i,
-      treshold: i.treshold
-        ? { ...i.treshold, createdAt: new Date(i.treshold.createdAt) }
-        : ({} as Treshold),
-      createdAt: new Date(i.createdAt),
-    };
-  });
-  const parsedSealantParams = sealantParams.map((i) => {
-    return {
-      ...i,
-      treshold: i.treshold
-        ? { ...i.treshold, createdAt: new Date(i.treshold.createdAt) }
-        : ({} as Treshold),
-      createdAt: new Date(i.createdAt),
-    };
-  });
+
+  const parsedExtrusionParams = mapParamsWithTreshold(extrusionParams);
+  const parsedVarnishParams = mapParamsWithTreshold(varnishParams);
+  const parsedOffsetParams = mapParamsWithTreshold(offsetParams);
+  const parsedSealantParams = mapParamsWithTreshold(sealantParams);
 
   const parsedBoxes = boxes.map((i) => {
     return {
