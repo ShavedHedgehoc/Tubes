@@ -12,6 +12,7 @@ export type ExtrusionParamDto = {
   turning_machine_speed: number;
   annealing_furnace_temp: number;
   tube_cylindrical_section_length: number;
+  tube_conical_shoulder_thickness: number;
   membrane_thickness: number;
   tube_diameter: number;
   tube_cylindrical_section_thickness: number;

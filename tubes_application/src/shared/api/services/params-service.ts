@@ -8,11 +8,11 @@ export interface CreateExtrusionEntryDto {
   blow_time: number;
   turning_machine_speed: number;
   annealing_furnace_temp: number;
-  // rondel_id: number;
   tube_cylindrical_section_length: number;
   membrane_thickness: number;
   tube_diameter: number;
   tube_cylindrical_section_thickness: number;
+  tube_conical_shoulder_thickness: number;
   tube_rigidity: number;
   tube_cutting_quality: boolean;
   tightness: boolean;

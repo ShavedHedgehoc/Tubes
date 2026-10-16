@@ -80,6 +80,14 @@ export class CreateTresholdsBulkItem {
 
   @ToNumber()
   @IsNumber({}, { message: "Поле должно быть числом" })
+  extrusion_tube_conical_shoulder_thickness_min: number;
+
+  @ToNumber()
+  @IsNumber({}, { message: "Поле должно быть числом" })
+  extrusion_tube_conical_shoulder_thickness_max: number;
+
+  @ToNumber()
+  @IsNumber({}, { message: "Поле должно быть числом" })
   extrusion_membrane_thickness_min: number;
 
   @ToNumber()
