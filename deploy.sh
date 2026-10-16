@@ -10,13 +10,13 @@ set -e
 # echo "🔑 Логин в GitHub Container Registry..."
 # echo "$GH_PAT" | docker login $REGISTRY -u $GH_USER --password-stdin
 
-echo "📥 Скачивание обновленных образов из GHCR..."
+echo "Скачивание обновленных образов..."
 docker compose -f docker-compose.deploy.yml pull
 
-echo "🚀 Перезапуск 9 контейнеров монорепозитория..."
+echo "Перезапуск контейнеров..."
 docker compose -f docker-compose.deploy.yml up -d --remove-orphans
 
-echo "🧹 Безопасная очистка места от старых версий образов..."
+echo "Очистка места..."
 docker image prune -f
 
-echo "✅ Деплой успешно завершен!"
+echo "Деплой успешно завершен!"
