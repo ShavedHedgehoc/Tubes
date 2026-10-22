@@ -108,6 +108,7 @@ export const updateSummaryFormSchema = z.object({
     .max(99999, "Должно быть меньше 99 999."),
 
   crew_id: z.number().int().nullable().optional(),
+  mode_id: z.number().int(),
 });
 
 export type UpdateSummaryFormValues = z.infer<typeof updateSummaryFormSchema>;

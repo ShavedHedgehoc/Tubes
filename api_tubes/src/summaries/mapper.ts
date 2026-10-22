@@ -10,6 +10,7 @@ export interface IMappedSummary {
   plan: number;
   isActive: boolean;
   isFinished: boolean;
+  isSetup: boolean;
   product_name: string;
   marking: string;
   date: Date;
@@ -143,6 +144,7 @@ export const mappedSummary = ({
     plan: summary.plan,
     isActive: summary.isActive,
     isFinished: summary.isFinished,
+    isSetup: summary.isSetup,
     shift: summary.shift,
     responsible: responsible?.name ?? null,
   };

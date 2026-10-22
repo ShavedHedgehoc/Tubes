@@ -16,6 +16,7 @@ describe("summaryQueries factory", () => {
     limit: 10,
     conveyors: [],
     states: [],
+    modes: [],
     crews: [],
     start_date: format(getMonthBounds().firstDay, "yyyy-MM-dd"),
     end_date: format(getMonthBounds().firstDay, "yyyy-MM-dd"),

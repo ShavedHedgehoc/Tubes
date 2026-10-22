@@ -8,6 +8,7 @@ export type SummaryDetailDto = {
   plan: number;
   isActive: boolean;
   isFinished: boolean;
+  isSetup: boolean;
   date: string;
   batch_name: string;
   product_code: string;

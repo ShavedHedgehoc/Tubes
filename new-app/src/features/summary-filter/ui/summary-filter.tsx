@@ -10,6 +10,7 @@ import ConveyorCombobox from "./conveyor-combobox";
 import { ConveyorEntity } from "@/entities/conveyor";
 import CrewCombobox from "./crew-combobox";
 import { CrewEntity } from "@/entities/crew";
+import ModeSelector from "./mode-selector";
 
 interface Props {
   conveyorListItems: ConveyorEntity[];
@@ -55,6 +56,7 @@ export function SummaryFilter({
           <ConveyorCombobox items={conveyorListItems} />
           <CrewCombobox items={crewListItems} />
           <CodeInput />
+          <ModeSelector />
           <StateSelector />
         </div>
         <TodayButton />

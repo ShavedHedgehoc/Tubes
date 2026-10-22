@@ -30,6 +30,3 @@ export async function getSummaries({
     totalPages: Math.ceil(res.total / (params.limit || DEFAULT_PAGE_LIMIT)),
   };
 }
-
-// SummaryResponse - тип для фронтенда
-// SummariesWithPaginationDto - то, что отдает сервер

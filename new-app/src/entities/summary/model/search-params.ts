@@ -32,6 +32,7 @@ export const summaryParamsSchema = {
     undefined as unknown as string[],
   ),
   states: parseAsArrayOf(parseAsString),
+  modes: parseAsArrayOf(parseAsString),
   limit: parseAsInteger.withDefault(10),
   page: parseAsInteger.withDefault(1),
 };

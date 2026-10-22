@@ -11,6 +11,7 @@ export const conveyorUiSchema = {
   "post-title": parseAsString,
   "conveyor-id": parseAsInteger,
   "crew-id": parseAsArrayOf(parseAsString),
+  "is-setup": parseAsArrayOf(parseAsString),
   "close-post": parseAsBoolean.withDefault(false),
   "select-available": parseAsBoolean.withDefault(false),
 };

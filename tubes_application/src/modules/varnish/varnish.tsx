@@ -51,6 +51,7 @@ export default function Varnish() {
         conveyorName={varnishConveyor.name}
         postName={PostNames.VARNISH}
         postIndicator={<PostIndicator postId={2} data={summaryData ?? null} />}
+        isSetup={summaryData?.data.isSetup ?? false}
       />
     ),
     parameterComponent: <VarnishParameters summaryData={summaryData ?? null} />,

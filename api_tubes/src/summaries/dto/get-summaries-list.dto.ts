@@ -44,6 +44,13 @@ export class GetSummariesListDto {
   @IsInt({ each: true })
   readonly crews?: number[];
 
+  @ApiPropertyOptional({ description: "Режимы" })
+  @IsOptional()
+  @ToNumbersArray()
+  @IsArray()
+  @IsInt({ each: true })
+  readonly modes?: number[];
+
   @ApiPropertyOptional({ description: "Статусы" })
   @IsOptional()
   @ToNumbersArray()
