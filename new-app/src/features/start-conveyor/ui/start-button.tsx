@@ -20,6 +20,7 @@ import { CrewSelector } from "./crew-selector";
 import { useQuery } from "@tanstack/react-query";
 import { crewApi } from "@/entities/crew";
 import { useAppSession } from "@/entities/user";
+import { SetupSelector } from "./setup-selector";
 
 interface Props {
   row: SummaryAvailable;
@@ -38,15 +39,22 @@ export default function StartButton({ row }: Props) {
   const handleStart = () => {
     const crewIdRaw = params["crew-id"]?.[0];
     if (crewIdRaw && user) {
+      const isSetupRaw = params["is-setup"]?.[0] ?? 0;
       const crew_id = Number(crewIdRaw);
       startConveyor(
-        { id: row.id, crew_id: crew_id, user_id: user.id },
+        {
+          id: row.id,
+          crew_id: crew_id,
+          user_id: user.id,
+          isSetup: Number(isSetupRaw),
+        },
         {
           onSuccess: () => {
             setParams({
               "conveyor-id": null,
               "select-available": null,
               "crew-id": null,
+              "is-setup": null,
             });
           },
         },
@@ -73,13 +81,13 @@ export default function StartButton({ row }: Props) {
         </Button>
       </AlertDialogTrigger>
 
-      <AlertDialogContent>
+      <AlertDialogContent className="min-w-150">
         <AlertDialogHeader>
           <div className="flex items-center gap-2 text-amber-500 mb-2">
             <AlertTriangle size={20} />
             <AlertDialogTitle>Подтверждение запуска</AlertDialogTitle>
           </div>
-          <AlertDialogDescription asChild className="space-y-2">
+          <AlertDialogDescription asChild className="space-y-2 w-full">
             <div className="space-y-3 pt-2">
               <p>Вы собираетесь запустить конвейер с продуктом:</p>
               <div className="p-3 bg-muted rounded-lg border text-foreground">
@@ -93,15 +101,24 @@ export default function StartButton({ row }: Props) {
                   ПАРТИЯ: {row.batch.name}
                 </div>
               </div>
-              <p className="text-destructive font-medium text-xs">
-                * Внимательно проверьте данные, ВЫБЕРИТЕ БРИГАДУ и подтвердите.
-              </p>
+              <div className="flex flex-col gap-1 pb-2">
+                <p className="text-destructive font-medium text-xs">
+                  * Внимательно проверьте данные, ВЫБЕРИТЕ БРИГАДУ и
+                  подтвердите.
+                </p>
+                <p className="text-muted-foreground font-medium text-xs">
+                  * Если сводка запускается в режиме перехода - выберите
+                  соответствующий режим.
+                </p>
+              </div>
             </div>
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
+          <SetupSelector />
           <CrewSelector crewItems={data?.crews ?? []} />
           <AlertDialogCancel
+            size="sm"
             onClick={(e) => {
               e.stopPropagation();
               setParams({ "crew-id": null });
@@ -110,6 +127,7 @@ export default function StartButton({ row }: Props) {
             Отмена
           </AlertDialogCancel>
           <AlertDialogAction
+            size="sm"
             disabled={!params["crew-id"]}
             className="bg-emerald-600 hover:bg-emerald-700"
             onClick={(e) => {

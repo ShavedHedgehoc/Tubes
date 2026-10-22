@@ -8,7 +8,7 @@ export default async function Layout({
   return (
     <>
       <AppHeader variant="private" />
-      <main className="flex  flex-col  p-0 flex-1">{children}</main>
+      <main className="flex flex-col p-0 flex-1">{children}</main>
     </>
   );
 }

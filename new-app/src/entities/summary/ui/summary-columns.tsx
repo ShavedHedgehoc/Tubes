@@ -2,8 +2,14 @@ import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { SummaryEntity } from "../model/types";
 import { cn } from "@/shared/lib";
+import { SummaryIsSetupCell } from "./summary-is-setup-cell";
 
 export const baseSummaryColumns: ColumnDef<SummaryEntity>[] = [
+  {
+    accessorKey: "isSetup",
+    header: () => <div className="text-left pl-3"></div>,
+    cell: ({ row }) => <SummaryIsSetupCell summary={row.original} />,
+  },
   {
     accessorKey: "date",
     header: () => <div className="text-center">Дата</div>,
@@ -60,7 +66,7 @@ export const baseSummaryColumns: ColumnDef<SummaryEntity>[] = [
   },
   {
     accessorKey: "marking",
-    header: () => <div className="text-left pl-6">Артикул</div>,
+    header: () => <div className="text-left">Артикул</div>,
     cell: ({ row }) => {
       const summary = row.original;
       return <div className="text-left">{summary.product.marking}</div>;
@@ -68,10 +74,14 @@ export const baseSummaryColumns: ColumnDef<SummaryEntity>[] = [
   },
   {
     accessorKey: "name",
-    header: () => <div className="text-left pl-35">Наименование</div>,
+    header: () => <div className="text-left">Наименование</div>,
     cell: ({ row }) => {
       const summary = row.original;
-      return <div className="text-left">{summary.product.name}</div>;
+      return (
+        <div className="text-left text-xs truncate block w-50">
+          {summary.product.name}
+        </div>
+      );
     },
   },
   {

@@ -118,9 +118,11 @@ export default function MaterialPieChartComponent({
             </Chart.Root>
           </Box>
         ) : (
-          <Text color="fg.subtle" textStyle="md">
-            Спецификация не найдена
-          </Text>
+          <Box mx="auto" my="auto">
+            <Text color="fg.subtle" textStyle="md">
+              Спецификация не найдена
+            </Text>
+          </Box>
         )}
       </VStack>
     </Box>

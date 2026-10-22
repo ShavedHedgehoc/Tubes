@@ -15,6 +15,7 @@ export default function ResetButton() {
     params.code !== null ||
     (params.conveyors && params.conveyors.length > 0) ||
     (params.crews && params.crews.length > 0) ||
+    params.modes !== null ||
     params.states !== null;
 
   const handleReset = () => {

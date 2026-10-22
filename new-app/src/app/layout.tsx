@@ -9,27 +9,13 @@ export const metadata: Metadata = {
   description: "Tubes application",
 };
 
-// import { Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
-
-// const geistSans = Geist({
-//   variable: "--font-sans",
-//   subsets: ["latin", "cyrillic"],
-//   display: "swap",
-// });
-
 const geistSans = localFont({
   src: "./fonts/Geist[wght].woff2",
   variable: "--font-sans",
   weight: "100 900",
   display: "swap",
 });
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-mono",
-//   subsets: ["latin", "cyrillic"],
-//   display: "swap",
-// });
 
 const geistMono = localFont({
   src: "./fonts/GeistMono[wght].woff2",

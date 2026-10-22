@@ -1,5 +1,9 @@
 import { CrewEntity } from "@/entities/crew";
-import { UpdateSummaryFormValues } from "@/entities/summary";
+import {
+  MODE_LIST_ITEMS,
+  SUMMARY_MODE,
+  UpdateSummaryFormValues,
+} from "@/entities/summary";
 import { cn } from "@/shared/lib";
 import {
   Button,
@@ -67,7 +71,7 @@ export function CrewsComboboxField({ crews }: { crews: CrewEntity[] }) {
       control={control}
       render={({ field, fieldState }) => (
         <Field data-invalid={fieldState.invalid}>
-          <FieldLabel htmlFor="edit-summary-form-crew">Разряд</FieldLabel>
+          <FieldLabel htmlFor="edit-summary-form-crew">Бригада</FieldLabel>
           <ButtonGroup className="flex w-full">
             {field.value && (
               <Button
@@ -80,7 +84,6 @@ export function CrewsComboboxField({ crews }: { crews: CrewEntity[] }) {
                 <X className="h-4 w-4 text-muted-foreground" />
               </Button>
             )}
-            {/* <div className="flex-1 min-w-0 bg-yellow-300"> */}
             <Select
               value={field.value?.toString() ?? "none"}
               onValueChange={(val) => {
@@ -110,10 +113,60 @@ export function CrewsComboboxField({ crews }: { crews: CrewEntity[] }) {
                 </SelectGroup>
               </SelectContent>
             </Select>
-            {/* </div> */}
           </ButtonGroup>
         </Field>
       )}
+    />
+  );
+}
+
+export function ModeComboboxField() {
+  const { control } = useFormContext<UpdateSummaryFormValues>();
+  return (
+    <Controller
+      name="mode_id"
+      control={control}
+      render={({ field, fieldState }) => {
+        const stringValue =
+          field.value !== undefined && field.value !== null
+            ? field.value.toString()
+            : String(SUMMARY_MODE.WORK);
+        return (
+          <Field data-invalid={fieldState.invalid}>
+            <FieldLabel htmlFor="edit-summary-form-mode">Режим</FieldLabel>
+
+            <Select
+              value={stringValue}
+              onValueChange={(val) => {
+                field.onChange(Number(val));
+              }}
+            >
+              <SelectTrigger
+                id="edit-summary-form-mode"
+                className={cn(
+                  "w-full",
+                  "ring-0! ring-offset-0! shadow-none!",
+                  "outline-none! focus-visible:outline-none!",
+                  "focus:border-input focus-visible:border-input",
+                )}
+              >
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="bg-background shadow-none ">
+                <SelectGroup>
+                  {MODE_LIST_ITEMS.filter((x) => x.value !== "All").map(
+                    (item) => (
+                      <SelectItem key={item.value} value={item.value}>
+                        {item.description}
+                      </SelectItem>
+                    ),
+                  )}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </Field>
+        );
+      }}
     />
   );
 }

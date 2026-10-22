@@ -29,6 +29,7 @@ export type SummaryDto = {
   plan: number;
   isActive: boolean;
   isFinished: boolean;
+  isSetup: boolean;
   product: ProductEntity;
   batch: BatchEntity;
   conveyor: ConveyorEntity;

@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import {
+  SUMMARY_MODE,
   SummaryDetailEntity,
   updateSummaryFormSchema,
   UpdateSummaryFormValues,
@@ -19,7 +20,14 @@ export const useEditSummaryForm = ({
 
   const form = useForm<UpdateSummaryFormValues>({
     resolver: zodResolver(updateSummaryFormSchema),
-    values: data,
+    values: {
+      ...data,
+      mode_id: data
+        ? data.isSetup
+          ? SUMMARY_MODE.TRANSITION
+          : SUMMARY_MODE.WORK
+        : SUMMARY_MODE.WORK,
+    },
   });
   const { updateSummary, updatePending } = useUpdateSummary();
 
@@ -27,7 +35,7 @@ export const useEditSummaryForm = ({
   async function onSubmit(data: UpdateSummaryFormValues) {
     if (updateId) {
       updateSummary(
-        { id: updateId, ...data },
+        { id: updateId, ...data, mode_id: data.mode_id },
         {
           onSuccess: () => {
             form.reset();

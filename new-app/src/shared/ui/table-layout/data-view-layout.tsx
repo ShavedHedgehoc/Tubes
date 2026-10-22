@@ -45,7 +45,7 @@ export function DataViewLayout<TData, T extends PaginationParams>(
             <CardAction>{props.picture}</CardAction>
           </div>
         </CardHeader>
-        <CardContent className="min-h-[600px] flex flex-col gap-6">
+        <CardContent className="min-h-150 flex flex-col gap-6">
           <div
             className={cn(
               "sticky top-0 z-10 bg-background/95 backdrop-blur pb-4 transition-all",
@@ -105,6 +105,5 @@ export function DataViewLayout<TData, T extends PaginationParams>(
         </CardFooter>
       </Card>
     </div>
-    // </div>
   );
 }

@@ -400,6 +400,7 @@ model Summary {
   laboratory_locks   LaboratoryLock[]
   responsible        User?              @relation(fields: [responsible_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
   responsible_id     Int?
+  isSetup            Boolean            @default(false)
 
   @@index([conveyor_id, isActive])
   @@index([date])

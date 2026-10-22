@@ -32,6 +32,7 @@ export type SummaryBase = {
   plan: number;
   isActive: boolean;
   isFinished: boolean;
+  isSetup: boolean;
   date: Date;
   shift: number;
 };
@@ -48,6 +49,7 @@ type AvailableSummaryRow = {
   plan: number;
   isActive: boolean;
   isFinished: boolean;
+  isSetup: boolean;
   date: Date;
   shift: number;
   product: Product;
@@ -82,6 +84,7 @@ export type SummaryDetailEntity = {
   plan: number;
   isActive: boolean;
   isFinished: boolean;
+  isSetup: boolean;
   date: Date;
   batch_name: string;
   product_code: string;

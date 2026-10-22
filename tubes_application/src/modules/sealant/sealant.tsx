@@ -51,6 +51,7 @@ export default function Sealant() {
         conveyorName={sealantConveyor.name}
         postName={PostNames.SEALANT}
         postIndicator={<PostIndicator postId={4} data={summaryData ?? null} />}
+        isSetup={summaryData?.data.isSetup ?? false}
       />
     ),
     parameterComponent: <SealantParameters summaryData={summaryData ?? null} />,

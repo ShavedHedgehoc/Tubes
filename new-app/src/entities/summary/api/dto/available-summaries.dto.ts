@@ -18,6 +18,7 @@ type SummaryRow = {
   plan: number;
   isActive: boolean;
   isFinished: boolean;
+  isSetup: boolean;
   date: Date;
   shift: number;
   product: Product;

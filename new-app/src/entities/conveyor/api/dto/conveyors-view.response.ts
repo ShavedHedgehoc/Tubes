@@ -16,6 +16,7 @@ type ConveyorSummary = {
   batch_id: number | null;
   batch_name: string | null;
   shift: number | null;
+  isSetup: boolean;
   plan: number;
   extrusion: PostData | null;
   varnish: PostData | null;

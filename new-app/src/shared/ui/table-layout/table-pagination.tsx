@@ -4,7 +4,9 @@ import { Field, FieldLabel } from "@/shared/ui/field";
 import {
   Pagination,
   PaginationContent,
+  PaginationFirst,
   PaginationItem,
+  PaginationLast,
   PaginationNext,
   PaginationPrevious,
 } from "@/shared/ui/pagination";
@@ -80,6 +82,16 @@ export function TablePagination<T extends PaginationParams>({
       <Pagination className="mx-0 w-auto">
         <PaginationContent>
           <PaginationItem>
+            <PaginationFirst
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                if (!isFirstPage) handlePageChange(1);
+              }}
+              className={cn(isFirstPage && "pointer-events-none opacity-50")}
+            />
+          </PaginationItem>
+          <PaginationItem>
             <PaginationPrevious
               href="#"
               onClick={(e) => {
@@ -89,7 +101,7 @@ export function TablePagination<T extends PaginationParams>({
               className={cn(isFirstPage && "pointer-events-none opacity-50")}
             />
           </PaginationItem>
-          <p className="text-muted-foreground text-sm italic select-none min-w-[100px]">
+          <p className="text-muted-foreground text-sm italic select-none min-w-25">
             {totalPages === 0 ? `` : `Страница ${params.page} из ${totalPages}`}
           </p>
           <PaginationItem>
@@ -98,6 +110,16 @@ export function TablePagination<T extends PaginationParams>({
               onClick={(e) => {
                 e.preventDefault();
                 if (!isLastPage) handlePageChange(params.page + 1);
+              }}
+              className={cn(isLastPage && "pointer-events-none opacity-50")}
+            />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLast
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                if (!isLastPage) handlePageChange(totalPages);
               }}
               className={cn(isLastPage && "pointer-events-none opacity-50")}
             />
