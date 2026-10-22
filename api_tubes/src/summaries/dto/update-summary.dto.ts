@@ -25,4 +25,12 @@ export class UpdateSummaryDto {
   @Type(() => Number)
   @IsNumber()
   readonly crew_id?: number | null;
+
+  @ApiProperty({
+    example: 2,
+    description: "Режим работы",
+  })
+  @Type(() => Number)
+  @IsNumber()
+  readonly mode_id: number;
 }

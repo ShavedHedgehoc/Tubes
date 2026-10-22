@@ -19,6 +19,7 @@ describe("Summary Columns", () => {
     plan: 10000,
     isActive: false,
     isFinished: false,
+    isSetup: false,
     production: null,
     productionPerBoxes: null,
     execution: null,

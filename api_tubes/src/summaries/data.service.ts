@@ -51,6 +51,8 @@ export class DataService {
         : undefined,
       ...(query.states?.includes(2) && { isFinished: true }),
       ...(query.states?.includes(1) && { isActive: true }),
+      ...(query.modes?.includes(1) && { isSetup: true }),
+      ...(query.modes?.includes(2) && { isSetup: false }),
     };
 
     const [count, summaries] = await Promise.all([

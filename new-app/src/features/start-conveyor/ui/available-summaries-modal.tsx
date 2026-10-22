@@ -41,7 +41,7 @@ export function AvailableSummariesModal() {
       className="min-w-4xl w-full"
     >
       {isLoading ? (
-        <div className="py-10 flex justify-center">
+        <div className="w-full bg-background shadow-none border rounded-xl flex flex-col max-h-[65vh] overflow-hidden">
           <LoaderCard />
         </div>
       ) : (

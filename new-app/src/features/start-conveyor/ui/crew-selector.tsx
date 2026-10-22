@@ -30,10 +30,7 @@ export function CrewSelector({ crewItems = [] }: Props) {
     <Select value={currentValue} onValueChange={onValueChange}>
       <SelectTrigger
         size="sm"
-        className={cn(
-          "w-[160px]  text-xs rounded-l-none",
-          "focus:ring-0 focus:ring-offset-0",
-        )}
+        className={cn("w-40  text-xs", "focus:ring-0 focus:ring-offset-0")}
       >
         <SelectValue placeholder="Выберите бригаду" />
       </SelectTrigger>

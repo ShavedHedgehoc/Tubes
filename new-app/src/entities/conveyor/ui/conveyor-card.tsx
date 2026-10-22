@@ -3,6 +3,7 @@ import { ConveyorData } from "../model";
 import PostCard from "./post-card";
 import { formatNumber } from "@/shared/lib";
 import { POST_NAMES } from "@/shared/config";
+import { Settings } from "lucide-react";
 type IState = "working" | "idle" | "finished" | "locked" | "no_data";
 type Props = {
   conveyorData: ConveyorData;
@@ -50,13 +51,18 @@ export default function ConveyorCard({
       data: conveyorData.summary?.sealant,
     },
   ];
+  const isSetup = conveyorData.summary?.isSetup ?? false;
   return (
     <Card className="flex flex-col justify-between p-6 gap-6 bg-muted/30 shadow-none border h-full relative">
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-4xl font-black tracking-tight">
-            {conveyorData.name}
-          </h2>
+          <span className="inline-flex items-center gap-2 ">
+            <h2 className="flex text-4xl font-black tracking-tight">
+              {conveyorData.name}
+            </h2>
+            {isSetup && <Settings className="h-6 w-6" />}
+          </span>
+
           {menuPermission && menuActionButton}
         </div>
 

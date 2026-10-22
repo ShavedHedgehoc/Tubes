@@ -53,6 +53,7 @@ export default function Extrusion() {
         conveyorName={extrusionConveyor.name}
         postName={PostNames.EXTRUSION}
         postIndicator={<PostIndicator postId={1} data={summaryData ?? null} />}
+        isSetup={summaryData?.data.isSetup ?? false}
       />
     ),
     parameterComponent: <ExtrusionParameters summaryData={summaryData ?? null} />,

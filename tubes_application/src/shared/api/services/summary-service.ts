@@ -13,6 +13,7 @@ interface ISummaryData {
   plan: number;
   isActive: boolean;
   isFinished: boolean;
+  isSetup: boolean;
   shift: number;
   responsible: string;
 }

@@ -6,7 +6,11 @@ import { FieldGroup, FormLayout } from "@/shared/ui";
 import { CrewEntity } from "@/entities/crew";
 import { FormProvider } from "react-hook-form";
 import { FormFooter } from "./form-footer";
-import { CrewsComboboxField, PlanField } from "./form-fields";
+import {
+  CrewsComboboxField,
+  ModeComboboxField,
+  PlanField,
+} from "./form-fields";
 import { FormHeader } from "./form-header";
 
 interface Props {
@@ -34,6 +38,7 @@ export function EditSummaryForm({ crews, data }: Props) {
             <FieldGroup>
               <PlanField />
               <CrewsComboboxField crews={crews} />
+              <ModeComboboxField />
             </FieldGroup>
           </div>
         </form>

@@ -51,6 +51,7 @@ export default function Offset() {
         conveyorName={offsetConveyor.name}
         postName={PostNames.OFFSET}
         postIndicator={<PostIndicator postId={3} data={summaryData ?? null} />}
+        isSetup={summaryData?.data.isSetup ?? false}
       />
     ),
     parameterComponent: <OffsetParameters summaryData={summaryData ?? null} />,

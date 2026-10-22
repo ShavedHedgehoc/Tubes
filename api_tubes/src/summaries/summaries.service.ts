@@ -172,15 +172,17 @@ export class SummariesService {
           const existsSummary = await tx.summary.findFirst({
             where: {
               date: parsedDate,
+              conveyor: { name: item.conveyor },
               batch: { name: item.batch },
               product: { code: item.code1C },
               shift,
+              isSetup: false,
             },
           });
 
           if (existsSummary)
             throw new HttpException(
-              `Дубликат: ${item.code1C}`,
+              `Дубликат сводки: ${item.code1C}`,
               HttpStatus.BAD_REQUEST,
             );
 
@@ -531,6 +533,7 @@ export class SummariesService {
         conveyor_id: conveyor_id,
         isActive: false,
         isFinished: false,
+        isSetup: false,
         date: { gte: today },
       },
       include: { product: true, batch: true },

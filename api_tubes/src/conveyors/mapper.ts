@@ -18,6 +18,7 @@ export interface IMappedSummary {
   batch_name: string | null;
   plan: number;
   shift: number | null;
+  isSetup: boolean;
   // isActive: bo
   // olean;
   // isFinished: boolean;
@@ -151,6 +152,7 @@ export const mappedConveyors = ({
         product_name: product ? product.name : null,
         plan: summary.plan,
         shift: summary.shift,
+        isSetup: summary.isSetup,
         batch_id: batch ? batch.id : null,
         batch_name: batch ? batch.name : null,
         extrusion: mappedExtrusionStatus,

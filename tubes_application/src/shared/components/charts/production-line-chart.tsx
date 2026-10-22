@@ -204,7 +204,9 @@ export default function ProductionLineChart({
             </Chart.Root>
           </Box>
         ) : (
-          <Text color="fg.subtle">Записи не найдены</Text>
+          <Box mx="auto" my="auto">
+            <Text color="fg.subtle">Записи не найдены</Text>
+          </Box>
         )}
       </VStack>
     </Box>

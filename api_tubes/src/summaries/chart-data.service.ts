@@ -37,6 +37,7 @@ export class ChartDataService {
     const where: SummaryWhere = {
       date: { gte: startDate, lte: endDate },
       isFinished: true,
+      isSetup: false,
     };
 
     const [
