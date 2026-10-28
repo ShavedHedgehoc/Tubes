@@ -96,6 +96,7 @@ export default function PrintModal({ summaryData }: { summaryData: ISummary | nu
         employeeId: number | null;
         shift: number | null;
         responsible: string | null;
+        lab_responsible: string | null;
       } = {
         name: summaryData?.data.product_name ?? '',
         code: summaryData?.data.product_code ?? '',
@@ -108,6 +109,7 @@ export default function PrintModal({ summaryData }: { summaryData: ISummary | nu
         summaryId: summaryData?.data.id ?? null,
         shift: summaryData?.data?.shift ?? null,
         responsible: summaryData?.data?.responsible ?? null,
+        lab_responsible: summaryData?.data?.lab_responsible ?? null,
       };
       const zpl = makeBoxReceipt(zplData);
       const dto: PrintReceiptDto = {
@@ -130,7 +132,6 @@ export default function PrintModal({ summaryData }: { summaryData: ISummary | nu
                 <HStack justify="space-between">
                   <Heading color="fg.muted">Введите количество в коробе</Heading>
                 </HStack>
-
                 <Stack gap={5}>
                   <HStack justify="end" px={4} py={2} rounded="md" borderWidth="1px">
                     <Text textStyle="3xl" color="fg.a">

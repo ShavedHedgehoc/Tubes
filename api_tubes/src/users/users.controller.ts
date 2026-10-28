@@ -31,6 +31,12 @@ export class UsersController {
     return this.userService.getUsersList(query);
   }
 
+  @ApiOperation({ summary: "Получить список инженеров ОТК" })
+  @Get("/lab_assistants")
+  getLabAssistantsList() {
+    return this.userService.getLabAssistantsList();
+  }
+
   @ApiOperation({ summary: "Получить сотрудника по id" })
   @Get("/by_id/:id")
   @UsePipes(new ValidationPipe({ transform: true }))

@@ -24,7 +24,6 @@ import { StartSummaryDto } from "./dto/start-summary.dto";
 import { UpdateSummaryDto } from "./dto/update-summary.dto";
 import { CrewStatExtended } from "./chart-data.service";
 import { GetCrewsStatsDto } from "./dto/get-crews-stats.dto";
-// import { GetDetailDto } from "./dto/get-detail.dto";
 
 //move to dto
 

@@ -199,7 +199,10 @@ model User {
   user_roles      UserRole[]
   laboratoryLocks LaboratoryLock[]
   token           Token?
-  summaries       Summary[]
+
+  production_summaries Summary[] @relation("summary_responsible")
+  laboratory_summaries Summary[] @relation("summary_lab_responsible")
+  summaries            Summary[]
 
   @@map("users")
 }
@@ -398,9 +401,13 @@ model Summary {
   crew               Crew?              @relation(fields: [crew_id], references: [id])
   crew_id            Int?
   laboratory_locks   LaboratoryLock[]
-  responsible        User?              @relation(fields: [responsible_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  responsible        User?              @relation("summary_responsible", fields: [responsible_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
   responsible_id     Int?
+  lab_responsible    User?              @relation("summary_lab_responsible", fields: [lab_responsible_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  lab_responsible_id Int?
   isSetup            Boolean            @default(false)
+  user               User?              @relation(fields: [userId], references: [id])
+  userId             Int?
 
   @@index([conveyor_id, isActive])
   @@index([date])
