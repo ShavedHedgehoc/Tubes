@@ -49,6 +49,7 @@ class ISummaryData {
   isSetup: boolean;
   shift: number;
   responsible: string | null;
+  lab_responsible: string | null;
 }
 
 class IExtrusionParams {

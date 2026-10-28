@@ -75,6 +75,7 @@ const summaryInclude = {
     },
   },
   responsible: true,
+  lab_responsible: true,
 } satisfies Prisma.SummaryInclude;
 type SummaryWithIncludes = Prisma.SummaryGetPayload<{
   include: typeof summaryInclude;
@@ -444,8 +445,8 @@ export class SummariesService {
         batch: activeRecord.batch,
         product: activeRecord.product,
         responsible: activeRecord.responsible,
+        lab_responsible: activeRecord.lab_responsible,
       }),
-      // tresholds: activeRecord.product.tresholds[0] ?? null,
       tresholds: tresholds,
 
       extrusionParams: mapParams<IMappedExtrusionParams>(
