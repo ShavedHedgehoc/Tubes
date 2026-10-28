@@ -5,17 +5,20 @@ export const setActiveSummary = async ({
   id,
   crew_id,
   user_id,
+  lab_assistant_id,
   isSetup,
 }: {
   id: number;
   crew_id: number;
   user_id: number;
+  lab_assistant_id: number;
   isSetup: number;
 }) => {
   await proxyApiClient.patch(SUMMARY_ENDPOINTS.SET_ACTIVE, {
     id: id,
     crew_id: crew_id,
     user_id: user_id,
+    lab_assistant_id: lab_assistant_id,
     isSetup: isSetup,
   });
 };

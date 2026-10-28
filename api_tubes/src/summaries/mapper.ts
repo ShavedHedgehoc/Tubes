@@ -16,6 +16,7 @@ export interface IMappedSummary {
   date: Date;
   shift: number;
   responsible: string | null;
+  lab_responsible: string | null;
 }
 
 export interface IMappedExtrusionParams {
@@ -125,11 +126,13 @@ export const mappedSummary = ({
   batch,
   product,
   responsible,
+  lab_responsible,
 }: {
   summary: Summary;
   batch: Batch;
   product: Product;
   responsible: User | null;
+  lab_responsible: User | null;
 }): IMappedSummary => {
   return {
     id: summary.id,
@@ -147,6 +150,7 @@ export const mappedSummary = ({
     isSetup: summary.isSetup,
     shift: summary.shift,
     responsible: responsible?.name ?? null,
+    lab_responsible: lab_responsible?.name ?? null,
   };
 };
 

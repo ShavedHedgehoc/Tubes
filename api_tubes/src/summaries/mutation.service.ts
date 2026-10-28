@@ -26,6 +26,11 @@ export class MutationService {
     });
     if (!existsUser)
       throw new HttpException("Пользователь не найден", HttpStatus.NOT_FOUND);
+    const existsLabUser = await this.prisma.user.findUnique({
+      where: { id: dto.lab_assistant_id },
+    });
+    if (!existsLabUser)
+      throw new HttpException("Пользователь не найден", HttpStatus.NOT_FOUND);
     if (dto.isSetup && dto.isSetup === 1) {
       return await this.prisma.$transaction(async (tx) => {
         const summaryToCopy = await tx.summary.findUnique({
@@ -49,6 +54,7 @@ export class MutationService {
             isSetup: true,
             crew_id: dto.crew_id,
             responsible_id: dto.user_id,
+            lab_responsible_id: dto.lab_assistant_id,
             specifications: {
               create: summaryToCopy.specifications.map((spec) => ({
                 material_id: spec.material_id,
@@ -65,6 +71,7 @@ export class MutationService {
         isActive: true,
         isFinished: false,
         responsible: { connect: { id: dto.user_id } },
+        lab_responsible: { connect: { id: dto.lab_assistant_id } },
         crew: { connect: { id: dto.crew_id } },
       },
     });

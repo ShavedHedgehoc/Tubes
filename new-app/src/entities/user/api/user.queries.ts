@@ -2,10 +2,17 @@ import { queryOptions } from "@tanstack/react-query";
 import { UserParams } from "../model";
 import { getUsers } from "./get-users";
 import { getUser } from "./get-user";
+import { getLabAssistants } from "./get-lab-assistants";
 
 export const userQueries = {
   all: () => ["users"],
   lists: () => [...userQueries.all(), "list"],
+  labAssistantLists: () => [...userQueries.all(), "labAssistantLists"],
+  labAssistantList: (options?: { isServer: boolean }) =>
+    queryOptions({
+      queryKey: [...userQueries.labAssistantLists()],
+      queryFn: () => getLabAssistants({ options: options }),
+    }),
   list: (params: UserParams, options?: { isServer: boolean }) =>
     queryOptions({
       queryKey: [

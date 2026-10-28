@@ -18,3 +18,12 @@ export type UserResponse = {
   total: number;
   totalPages: number;
 };
+
+export type LabAssistantRow = Omit<
+  UserEntity,
+  "email" | "avatar_url" | "banned" | "roles"
+>;
+
+export type LabAssistantResponse = {
+  labAssistants: LabAssistantRow[];
+};

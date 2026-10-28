@@ -69,6 +69,25 @@ export class UsersService {
     return { users: formattedUsers, total };
   }
 
+  async getLabAssistantsList() {
+    const labAssistants = await this.prisma.user.findMany({
+      select: {
+        id: true,
+        name: true,
+      },
+      where: {
+        user_roles: {
+          some: {
+            role: {
+              value: "LAB_ASSISTANT",
+            },
+          },
+        },
+      },
+    });
+    return { labAssistants };
+  }
+
   async getUserById(id: number) {
     const user = await this.prisma.user.findUnique({
       where: { id },

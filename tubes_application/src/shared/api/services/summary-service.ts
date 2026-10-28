@@ -16,6 +16,7 @@ interface ISummaryData {
   isSetup: boolean;
   shift: number;
   responsible: string;
+  lab_responsible: string;
 }
 
 interface ITreshold {

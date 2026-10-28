@@ -19,8 +19,9 @@ import { useConveyorUiParams } from "@/entities/conveyor";
 import { CrewSelector } from "./crew-selector";
 import { useQuery } from "@tanstack/react-query";
 import { crewApi } from "@/entities/crew";
-import { useAppSession } from "@/entities/user";
+import { useAppSession, userApi } from "@/entities/user";
 import { SetupSelector } from "./setup-selector";
+import { LabAssistantSelector } from "./lab-assistant-selector";
 
 interface Props {
   row: SummaryAvailable;
@@ -32,20 +33,27 @@ export default function StartButton({ row }: Props) {
   const { params, setParams } = useConveyorUiParams();
   const { startConveyor, startPending } = useStartConveyor();
 
-  const { data } = useQuery({
+  const { data: crewData } = useQuery({
     ...crewApi.crewsQueries.list(),
+  });
+
+  const { data: labAssitantData } = useQuery({
+    ...userApi.userQueries.labAssistantList(),
   });
 
   const handleStart = () => {
     const crewIdRaw = params["crew-id"]?.[0];
-    if (crewIdRaw && user) {
+    const labAssistantIdRaw = params["lab-assistant-id"]?.[0];
+    if (crewIdRaw && labAssistantIdRaw && user) {
       const isSetupRaw = params["is-setup"]?.[0] ?? 0;
       const crew_id = Number(crewIdRaw);
+      const lab_assistant_id = Number(labAssistantIdRaw);
       startConveyor(
         {
           id: row.id,
           crew_id: crew_id,
           user_id: user.id,
+          lab_assistant_id: lab_assistant_id,
           isSetup: Number(isSetupRaw),
         },
         {
@@ -54,6 +62,7 @@ export default function StartButton({ row }: Props) {
               "conveyor-id": null,
               "select-available": null,
               "crew-id": null,
+              "lab-assistant-id": null,
               "is-setup": null,
             });
           },
@@ -81,7 +90,7 @@ export default function StartButton({ row }: Props) {
         </Button>
       </AlertDialogTrigger>
 
-      <AlertDialogContent className="min-w-150">
+      <AlertDialogContent className="min-w-200">
         <AlertDialogHeader>
           <div className="flex items-center gap-2 text-amber-500 mb-2">
             <AlertTriangle size={20} />
@@ -103,8 +112,8 @@ export default function StartButton({ row }: Props) {
               </div>
               <div className="flex flex-col gap-1 pb-2">
                 <p className="text-destructive font-medium text-xs">
-                  * Внимательно проверьте данные, ВЫБЕРИТЕ БРИГАДУ и
-                  подтвердите.
+                  * Внимательно проверьте данные, ВЫБЕРИТЕ БРИГАДУ,
+                  ОТВЕТСТВЕТСТВЕННОГО ОТ ОТК и подтвердите.
                 </p>
                 <p className="text-muted-foreground font-medium text-xs">
                   * Если сводка запускается в режиме перехода - выберите
@@ -116,19 +125,22 @@ export default function StartButton({ row }: Props) {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <SetupSelector />
-          <CrewSelector crewItems={data?.crews ?? []} />
+          <CrewSelector crewItems={crewData?.crews ?? []} />
+          <LabAssistantSelector
+            labAssitantItems={labAssitantData?.labAssistants ?? []}
+          />
           <AlertDialogCancel
             size="sm"
             onClick={(e) => {
               e.stopPropagation();
-              setParams({ "crew-id": null });
+              setParams({ "crew-id": null, "lab-assistant-id": null });
             }}
           >
             Отмена
           </AlertDialogCancel>
           <AlertDialogAction
             size="sm"
-            disabled={!params["crew-id"]}
+            disabled={!params["crew-id"] || !params["lab-assistant-id"]}
             className="bg-emerald-600 hover:bg-emerald-700"
             onClick={(e) => {
               e.stopPropagation();
