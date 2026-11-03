@@ -47,11 +47,14 @@ export const summaryCrewsStatsParamsSchema = {
 };
 
 export const summaryCrewsStatsUiSchema = {
-  // isDefect: parseAsBoolean.withDefault(false),
   mode: parseAsStringLiteral(["plan", "defect", "idle"]).withDefault("plan"),
 };
 
 export const summaryDetailParamsSchema = {
+  summary_id: parseAsString,
+};
+
+export const summarySpecificationsParamsSchema = {
   summary_id: parseAsString,
 };
 
@@ -68,4 +71,10 @@ export type SummaryCrewsStatsParams = inferParserType<
 >;
 export const summaryCrewsStatsParamsCache = createSearchParamsCache(
   summaryCrewsStatsParamsSchema,
+);
+export type SummarySpecificationsParams = inferParserType<
+  typeof summarySpecificationsParamsSchema
+>;
+export const summarySpecificationsParamsCache = createSearchParamsCache(
+  summarySpecificationsParamsSchema,
 );

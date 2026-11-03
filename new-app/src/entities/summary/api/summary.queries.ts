@@ -11,6 +11,7 @@ import { getSummaryStatuses } from "./get-summary-statuses";
 import { getSummaryReport } from "./get-summary-report";
 import { getCrewsStats } from "./get-crews-stats";
 import { getProductionReport } from "./get-production-report";
+import { getSummarySpecifications } from "./get-summary-specifications";
 
 export const summaryQueries = {
   all: () => ["summaries"],
@@ -58,6 +59,16 @@ export const summaryQueries = {
     queryOptions({
       queryKey: [...summaryQueries.statuses(), { ...params }],
       queryFn: () => getSummaryStatuses({ ...params, options }),
+      staleTime: 30 * 1000,
+    }),
+  specifications: () => [...summaryQueries.all(), "specifications"],
+  specification: (
+    params: SummaryDetailParams,
+    options?: { isServer: boolean },
+  ) =>
+    queryOptions({
+      queryKey: [...summaryQueries.specifications(), { ...params }],
+      queryFn: () => getSummarySpecifications({ ...params, options }),
       staleTime: 30 * 1000,
     }),
   reports: () => [...summaryQueries.all(), "reports"],
