@@ -5,7 +5,10 @@ import { useRouter } from "next/navigation";
 import { format } from "date-fns";
 import { ChevronLeft } from "lucide-react";
 
-import { SummaryStatusesResponse } from "@/entities/summary";
+import {
+  SummarySpecificationsResponse,
+  SummaryStatusesResponse,
+} from "@/entities/summary";
 import { formatNumber } from "@/shared/lib";
 import { Button } from "@/shared/ui";
 import { SummaryHeaderSkeleton } from "./summary-header-skeleton";
@@ -13,7 +16,7 @@ import { SummaryHeaderSkeleton } from "./summary-header-skeleton";
 export function SummaryHeader({
   data,
 }: {
-  data: SummaryStatusesResponse | undefined;
+  data: SummaryStatusesResponse | SummarySpecificationsResponse | undefined;
 }) {
   const router = useRouter();
   const [isClient, setIsClient] = useState(false);
@@ -61,6 +64,10 @@ export function SummaryHeader({
             <span className="text-foreground">
               {format(new Date(data.date), "dd-MM-yyyy")}
             </span>
+          </p>
+          <p>
+            Конвейер:{" "}
+            <span className="text-foreground">{data.conveyorName ?? "-"}</span>
           </p>
           <p>
             Смена:{" "}

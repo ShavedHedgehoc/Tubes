@@ -1,6 +1,6 @@
 "use client";
 import { summaryApi, SummaryHeader } from "@/entities/summary";
-import { PostChartCard } from "@/features/post-chart/ui/post-chart-card";
+import { PostChartCard } from "@/features/post-chart";
 import { cn } from "@/shared/lib";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 

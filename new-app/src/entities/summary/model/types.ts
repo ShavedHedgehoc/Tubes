@@ -179,6 +179,7 @@ export type StatusRow = {
 export type SummaryStatusesResponse = SummaryWithStatusesBase & {
   statuses: StatusRow[];
 };
+
 type SummaryReportBase = SummaryBase & {
   conveyorName: string;
   productCode: string;
@@ -455,6 +456,33 @@ export type SummaryReportEntity = {
   offsetParams: OffsetParamsRow[];
   sealantParams: SealantParamsRow[];
   boxes: BoxRow[];
+};
+
+type SummarySpecificationBase = SummaryBase & {
+  conveyorName: string;
+  productCode: string;
+  productName: string;
+  productMarking: string;
+  batchName: string;
+};
+
+type Post = {
+  id: number;
+  value: number;
+  name: string;
+};
+
+export type SpecificationRow = {
+  materialId: number;
+  materialCode1C: string;
+  materialName: string;
+  currentLotId: number | null;
+  currentLot: string | null;
+  post: Post | null;
+};
+
+export type SummarySpecificationsResponse = SummarySpecificationBase & {
+  specifications: SpecificationRow[];
 };
 
 export type PostIdle = Record<string, number>;

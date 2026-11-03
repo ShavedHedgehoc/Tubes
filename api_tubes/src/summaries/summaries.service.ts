@@ -29,6 +29,11 @@ import { ChartDataService } from "./chart-data.service";
 import { GetCrewsStatsDto } from "./dto/get-crews-stats.dto";
 import { Prisma, Treshold } from "db";
 import { PostStatusesResponse, StatusRow } from "./dto/post-statuses.response";
+import { GetSummarySpecificationsDto } from "./dto/get-summary-specifications.dto";
+import {
+  SpecificationRow,
+  SummarySpecificationsResponse,
+} from "./dto/summary-specifications.response";
 
 type FullSpecification = Prisma.SpecificationGetPayload<{
   include: { material: { include: { consumed_materials: true } } };
@@ -632,6 +637,59 @@ export class SummariesService {
     ]);
 
     return { summary, statuses };
+  }
+
+  async getSummarySpecificationsWithData(
+    query: GetSummarySpecificationsDto,
+  ): Promise<SummarySpecificationsResponse> {
+    const [summary, specificationsData] = await Promise.all([
+      this.prisma.summary.findUnique({
+        where: { id: query.summary_id },
+        include: { conveyor: true, batch: true, product: true },
+      }),
+
+      this.prisma.specification.findMany({
+        where: {
+          summary_id: query.summary_id,
+        },
+        include: {
+          material: {
+            include: {
+              consumed_materials: {
+                where: { summary_id: query.summary_id },
+                include: { lot: true },
+                orderBy: { createdAt: "desc" },
+                take: 1,
+              },
+            },
+          },
+        },
+        orderBy: [{ id: "asc" }],
+      }),
+    ]);
+    if (!summary)
+      throw new HttpException("Сводка не найдена", HttpStatus.NOT_FOUND);
+
+    const posts = await this.prisma.post.findMany({});
+    const mappedSpecifications = specificationsData.map(
+      (s): SpecificationRow => {
+        const materialPostNumber = s.material?.post_number;
+        const post = posts.find((x) => x.value === materialPostNumber);
+        const lot =
+          s.material?.consumed_materials?.length > 0
+            ? s.material?.consumed_materials?.[0].lot
+            : null;
+        return {
+          materialId: s.material_id ?? "-",
+          materialCode1C: s.material?.code ?? "-",
+          materialName: s.material?.name ?? "-",
+          currentLotId: lot?.id ?? null,
+          currentLot: lot?.value ?? null,
+          post: post ?? null,
+        } as SpecificationRow;
+      },
+    );
+    return { summary, specifications: mappedSpecifications };
   }
 
   async getSummaryDetail(id: number) {
