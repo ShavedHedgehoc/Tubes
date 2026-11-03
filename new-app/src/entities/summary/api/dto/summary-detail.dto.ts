@@ -17,10 +17,4 @@ export type SummaryDetailDto = {
   conveyor_name: string;
   shift: number;
   crew_id: number | null;
-
-  // production,
-  // execution,
-  // defectPercent:number,
-  // unitWeight:number|null,
-  // crewName:string|null
 };

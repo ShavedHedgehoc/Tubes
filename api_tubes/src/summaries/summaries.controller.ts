@@ -24,6 +24,7 @@ import { StartSummaryDto } from "./dto/start-summary.dto";
 import { UpdateSummaryDto } from "./dto/update-summary.dto";
 import { CrewStatExtended } from "./chart-data.service";
 import { GetCrewsStatsDto } from "./dto/get-crews-stats.dto";
+import { GetSummarySpecificationsDto } from "./dto/get-summary-specifications.dto";
 
 //move to dto
 
@@ -78,6 +79,15 @@ export class SummariesController {
     @Query(new ValidationPipe({ transform: true })) query: GetStatusesDto,
   ) {
     return this.summaryService.getPostStatusesWithData(query);
+  }
+
+  @ApiOperation({ summary: "Получить спецификации сводки" })
+  @Get("/specifications")
+  getSummarySpecifications(
+    @Query(new ValidationPipe({ transform: true }))
+    query: GetSummarySpecificationsDto,
+  ) {
+    return this.summaryService.getSummarySpecificationsWithData(query);
   }
 
   @ApiOperation({ summary: "Обновить данные сводки" })

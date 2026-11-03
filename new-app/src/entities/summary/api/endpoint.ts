@@ -11,4 +11,5 @@ export const SUMMARY_ENDPOINTS = {
   AVAILABLE: "/summaries/available?conveyor_id=",
   SET_ACTIVE: "/summaries/set_active",
   SET_FINISH: "/summaries/set_finish",
+  SPECIFICATIONS: "/summaries/specifications",
 } as const;

@@ -16,7 +16,7 @@ export class GetStatusesDto {
   @IsNumber()
   readonly summary_id: number;
 
-  @ApiPropertyOptional({ description: "Разряды" })
+  @ApiPropertyOptional({ description: "Посты" })
   @IsOptional()
   @ToNumbersArray()
   @IsArray()

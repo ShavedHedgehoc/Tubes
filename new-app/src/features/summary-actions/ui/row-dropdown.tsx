@@ -10,6 +10,7 @@ import {
   DropdownMenuSeparator,
 } from "@/shared/ui";
 import {
+  Layers,
   List,
   MoreHorizontal,
   Pencil,
@@ -52,6 +53,10 @@ export function RowDropdown({
     router.push(`/summaries/statuses/${id}`);
   };
 
+  const handleNavigateToSpecifications = () => {
+    router.push(`/summaries/specifications/${id}`);
+  };
+
   const handleMakeXLSX = async () => {
     const { data } = await refetch();
     if (data) {
@@ -90,6 +95,10 @@ export function RowDropdown({
         >
           <List />
           Статусы
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={handleNavigateToSpecifications}>
+          <Layers />
+          Спецификации
         </DropdownMenuItem>
         {isAllowSummaryEdit && (
           <DropdownMenuItem onClick={handleEditClick}>
