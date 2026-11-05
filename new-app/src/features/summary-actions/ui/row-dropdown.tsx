@@ -24,7 +24,6 @@ import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { makeXLSX } from "../lib/make-xlsx";
 import { useRoles } from "@/entities/user";
-// import { useRoles } from "@/features/auth/hooks";
 
 export function RowDropdown({
   id,
@@ -43,8 +42,20 @@ export function RowDropdown({
   const { setParams } = useSummaryUiParams();
   const { deleteSummary } = useDeleteSummary();
   const router = useRouter();
-  const handleDeleteClick = () => deleteSummary(id);
-  const handleEditClick = () => setParams({ "edit-summary": id.toString() });
+
+  const handleDeleteClick = () => {
+    if (!isPlanner) {
+      return;
+    }
+    deleteSummary(id);
+  };
+
+  const handleEditClick = () => {
+    if (!isAllowSummaryEdit) {
+      return;
+    }
+    setParams({ "edit-summary": id.toString() });
+  };
   const handleNavigateToCharts = () => {
     router.push(`/summaries/charts/${id}`);
   };
@@ -58,6 +69,9 @@ export function RowDropdown({
   };
 
   const handleMakeXLSX = async () => {
+    if (!isReportAvailable) {
+      return;
+    }
     const { data } = await refetch();
     if (data) {
       makeXLSX(data);
