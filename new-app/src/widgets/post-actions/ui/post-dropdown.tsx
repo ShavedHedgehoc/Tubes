@@ -44,9 +44,12 @@ export function PostDropdown({
   const { setParams } = useConveyorUiParams();
   const { setParams: setStatusParams } = useStatusUiParams();
   const { setParams: setLabLocksParams } = useLabLockUIParams();
-  const { isLabAssistant } = useRoles();
+  const { isLabAssistant, isAllowToConveyorsOperations } = useRoles();
 
   const handleClosePost = () => {
+    if (!isAllowToConveyorsOperations) {
+      return;
+    }
     setParams({
       "summary-id": summaryId,
       "post-val": postId,
@@ -76,6 +79,9 @@ export function PostDropdown({
   };
 
   const handleChangeLabLock = () => {
+    if (!isLabAssistant) {
+      return;
+    }
     setLabLocksParams({
       summary_id: summaryId,
       post_val: postId,
@@ -139,9 +145,10 @@ export function PostDropdown({
           variant={"destructive"}
           onClick={handleClosePost}
           disabled={
-            postState !== "working" &&
-            postState !== "idle" &&
-            postState !== "locked"
+            !isAllowToConveyorsOperations ||
+            (postState !== "working" &&
+              postState !== "idle" &&
+              postState !== "locked")
           }
         >
           <StopCircle />

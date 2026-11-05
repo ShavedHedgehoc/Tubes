@@ -37,13 +37,6 @@ export function FinishButton({ conveyorData }: { conveyorData: ConveyorData }) {
           disabled={disableCondition || finishPending}
           onClick={(e) => e.stopPropagation()}
           className={cn(
-            // "p-2 rounded-xl transition-all duration-200",
-            // "text-muted-foreground hover:text-foreground",
-            // "bg-background/80 backdrop-blur-sm",
-            // !disableCondition && "hover:bg-background",
-            // "border shadow-sm active:scale-95",
-            // "group-hover:border-primary/30",
-            // "absolute top-4 right-3 z-10",
             "p-2 rounded-xl transition-all duration-200 border absolute top-4 right-3 z-10",
             "bg-background/80 backdrop-blur-sm",
             !disableCondition
@@ -73,7 +66,6 @@ export function FinishButton({ conveyorData }: { conveyorData: ConveyorData }) {
                   {conveyorData.summary?.product_name}
                 </div>
                 <div className="text-xs opacity-70 uppercase">
-                  {/* ДАТА: {new Date(conveyorData.summary?.date).toLocaleDateString('ru-RU')} |  */}
                   СМЕНА: {conveyorData.summary?.shift} | ПАРТИЯ:{" "}
                   {conveyorData.summary?.batch_name}
                 </div>
